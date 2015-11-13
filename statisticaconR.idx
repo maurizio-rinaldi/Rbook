@@ -1,0 +1,48 @@
+\indexentry{\texttt{console}|hyperpage}{3}
+\indexentry{\texttt{history}|hyperpage}{3}
+\indexentry{\texttt{help}|hyperpage}{4}
+\indexentry{\texttt{\#}|hyperpage}{4}
+\indexentry{\texttt{getwd()}|hyperpage}{6}
+\indexentry{\texttt{setwd()}|hyperpage}{6}
+\indexentry{\texttt{rm()}|hyperpage}{8}
+\indexentry{\texttt{pi}|hyperpage}{9}
+\indexentry{\texttt{c}|hyperpage}{10}
+\indexentry{\texttt{length}|hyperpage}{11}
+\indexentry{\texttt{seq}|hyperpage}{12}
+\indexentry{\texttt{chisq.tst},test $\chi^2$|hyperpage}{82}
+\indexentry{\texttt{dbinom}|hyperpage}{83}
+\indexentry{\texttt{str}|hyperpage}{86}
+\indexentry{stringa|hyperpage}{86}
+\indexentry{\texttt{nchar}|hyperpage}{87}
+\indexentry{\emph{escape}|hyperpage}{87}
+\indexentry{\texttt{abbreviate}|hyperpage}{87}
+\indexentry{\texttt{letters}|hyperpage}{88}
+\indexentry{\texttt{LETTERS}|hyperpage}{88}
+\indexentry{\texttt{month.abb}|hyperpage}{88}
+\indexentry{\texttt{paste}|hyperpage}{88}
+\indexentry{\texttt{colnames}|hyperpage}{91}
+\indexentry{\texttt{rownames}|hyperpage}{91}
+\indexentry{trasposto|hyperpage}{92}
+\indexentry{\texttt{t}, trasposto|hyperpage}{92}
+\indexentry{\texttt{\%*\%}, prodotto di matrici|hyperpage}{93}
+\indexentry{autovalore|hyperpage}{93}
+\indexentry{\texttt{level}|hyperpage}{96}
+\indexentry{detach|hyperpage}{97}
+\indexentry{\texttt{rbind}|hyperpage}{97}
+\indexentry{\texttt{cbind}|hyperpage}{97}
+\indexentry{\texttt{list}|hyperpage}{101}
+\indexentry{\texttt{tapply}|hyperpage}{103}
+\indexentry{\texttt{replicates}|hyperpage}{113}
+\indexentry{\texttt{chisq.tst},test $\chi^2$|hyperpage}{116}
+\indexentry{\texttt{dbinom}|hyperpage}{117}
+\indexentry{\texttt{grid}|hyperpage}{129}
+\indexentry{\texttt{plot}|hyperpage}{133}
+\indexentry{\texttt{diff}|hyperpage}{134}
+\indexentry{pairs|hyperpage}{138}
+\indexentry{browseURL|hyperpage}{153}
+\indexentry{\texttt{surface3d}|hyperpage}{155}
+\indexentry{\texttt{par3D}|hyperpage}{155}
+\indexentry{\texttt{cloud}|hyperpage}{161}
+\indexentry{\texttt{strip}|hyperpage}{161}
+\indexentry{\texttt{las}|hyperpage}{169}
+\indexentry{\texttt{locator}|hyperpage}{171}

@@ -1,0 +1,4257 @@
+%!TEX encoding = UTF-8 Unicode
+\documentclass[onecolumn,11pt]{book}
+\usepackage[english,italian]{babel}
+%\usepackage{color}
+%\usepackage[utf8]{inputenc}
+\usepackage{a4wide,Sweave,url}
+\usepackage{verbatim}
+\usepackage{makeidx}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{framed}
+\usepackage{lipsum}
+\usepackage[dvipsnames]{color}
+\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\usepackage{graphicx} 
+\usepackage{fancyvrb}
+
+\usepackage{amsmath} 
+\usepackage{Sweave}
+\usepackage{hyperref}
+\newenvironment{question}{\item \textbf{Esercizio}\newline}{}
+\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+\newenvironment{answerlist}{\renewcommand{\labelenumi}{(\alph{enumi})}\begin{enumerate}}{\end{enumerate}}
+\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+\lhead[\thepage]{\today} 
+%\usepackage{draftwatermark}
+\usepackage{wrapfig}
+\pagestyle{fancy}
+\newcounter{fnotes}\setcounter{fnotes}{1}
+\newcounter{Raction}\setcounter{Raction}{1}
+\newcommand{\varia}[1]{\textsl{\textsf{#1}}} 
+\newcommand{\mytilde}{$\sim$}
+\newcommand{\maurizio}[1]{\color{red}#1 \color{black}} 
+\newcommand{\federico}[1]{\color{green}#1 \color{black}} 
+ %\newenvironment{question}{\item \textbf{Problema}\newline}{}
+%\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+
+ \newenvironment{ese} [1]{\vskip10pt
+%\begin{center}
+%\begin{minipage}{12cm}
+ \markright{\today}
+\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
+\colorbox{grigetto}{\parbox{\linewidth}{#1}}}
+                          {
+                         % \end{minipage}
+                          %\end{center}
+                          \medskip}                           
+ \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
+ \frontmatter\title{Matematica e Statistica con \textsf{R}}
+\author{Federico Comoglio e  Maurizio Rinaldi}
+\markright{\today}
+\lhead{\today} 
+\renewcommand{\chaptermark}[1]{%
+ \markboth{\chaptername
+ \ \thechapter.\ #1}{}}
+%\renewcommand{\sectionmark}[1]{%
+% \markboth{\sectionname
+% \ \thesection.\ #1}{}}
+\makeindex
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\markright{\today}
+\thispagestyle{empty} 
+\maketitle
+\newpage
+\thispagestyle{empty} 
+\tableofcontents
+\newpage
+\thispagestyle{empty} 
+ \mainmatter
+%\usepackage{draft}
+\section*{Prefazione}
+
+ \addcontentsline{toc}{chapter}{\numberline{}Prefazione}
+\markright{Prefazione}
+ %\thispagestyle{plain}
+\rhead{}
+Queste dispense devono la loro  esistenza al corso di \textsf{R} che ormai da alcuni anni accompagna il corso di Matematica e Statistica. Esse seguono i principali temi del corso e fanno uso consistente di esempi. La maggior parte degli esempi sono stati pensati da noi, ma non rivendichiamo che essi siano esclusivi o abbiano una rilevanza particolare.\\
+Inoltre, numerosi punti sono ancora carenti di adeguate referenze, che verranno aggiunte in maniera esauriente nelle prossime versioni.\\
+Queste dispense sono state realizzate in \LaTeX, con praticamente tutte le figure generate \textit{on the fly} in \textsf{R} e incluse nel testo utilizzando \texttt{Sweave}.\\
+Nonostante abbiamo speso tempo nel pensare ai concetti da includere ed organizzarne il contenuto, ci assumiamo le nostre responsabilit\`a per errori che sono ancora presenti nel testo, figure o codice. A questo proposito ma non solo, ogni vostro suggerimento \`e ben accetto e potenzialmente molto prezioso.\\
+\begin{flushright}
+Grazie,\\
+Novara, \today \\ 
+Maurizio e Federico
+\end{flushright}
+\vfill\eject
+ \thispagestyle{empty} 
+\chapter{Introduzione ad \textsf{R}}
+{\textsf R} \`e un programma \textit{freeware} (di distribuzione gratuita) e \textit{open-source} (il cui codice sorgente pu\`o essere modificato e redistribuito) distribuito dalla ``\textsf{R} foundation'', utilizzato per il calcolo statistico ed in grado di svolgere calcoli matematici ed algebrici (sicuramente di livello superiore ad una normale calcolatrice tascabile) ma che non rientrano nello scopo primario di \textsf{R}. 
+La versione cui sono riferite queste dispense \`e la  
+\Sexpr{paste(R.Version()$major,R.Version()$minor)}.
+ Assumiamo che lo studioso abbia scaricato dal sito  \texttt{http://www.r-project.org/} tale versione di  \textsf{R} e la abbia installata sul suo computer.
+\section{Introduzione}
+Il programma si presenta all'utente con una interfaccia per l'inserimento dei dati, una finestra chiamata ``\textsf{R} console''. Per esempio digitando a console (dopo il \textit{prompt} $>$) il comando
+<<echo=TRUE, eval = FALSE>>=
+1+1
+@
+e premendo il tasto di invio appare come risposta
+<<echo=FALSE, eval = TRUE>>=
+1+1
+@ 
+Oltre alla console
+\index{\texttt{console}}  
+\textsf{R} dispone di finestre di altra natura, per esempio finestre grafiche e finestre di {\it help}. 
+
+\section{R basic}
+Iniziamo a descrivere alcune peculiarit\`a di \textsf{R}.\\
+L'insieme dei comandi eseguiti costituisce la storia o \textit{cronologia} (\textit{history}) \index{\texttt{history}}
+ di una sessione di lavoro. \`E possibile muoversi all'interno della cronologia, cio\`e richiamare i comandi precedenti e successivi utilizzando le frecce $\uparrow$ e $\downarrow$ della tastiera.\\
+\begin{wrapfigure}{r}{1in}
+     \includegraphics[height=20mm,width=20mm]{grafici/Tastisugiu.png}
+ \vspace{-20pt}  
+  %\caption{A gull}
+\end{wrapfigure}Possiamo scrivere diversi comandi prima di eseguirli (tasto di invio): basta separarli con un  ``;''.\\
+Si ricordi sempre che \textsf{R} \`e {\emph case sensitive} ossia vi \`e differenza tra lettere minuscole e maiuscole.  Questo \`e particolarmente importante in quanto ad esempio le variabili \texttt{a} ed \texttt{A} rappresentano entit\`a distinte.
+
+ \subsection*{Help e guida on-line}
+Una qualunque richiesta di informazioni pu\`o essere effettuata digitando il comando:
+$?\varia{argomento}$   (o $\texttt{help}(\varia{argomento}))$.
+\index{\texttt{help}} 
+Ad esempio $?\texttt{sin}$  consente di ottenere informazioni sulla funzione seno e altre funzioni trigonometriche in quanto la guida \`e completamente indicizzata. \`E anche possibile utilizzare il menu a tendina ({\it help}), con modalit\`a diverse a seconda del sistema operativo.\\
+Infine, il comando \texttt{help.start()} consente di aprire l'\textit{help} HTML di \textsf{R} da cui \`e poi possibile consultare la documentazione.
+
+\subsection*{Inserire i commenti}  
+I commenti sono frasi, annotazioni o codice da non eseguire momentaneamente molto utilizzati in programmazione. L'introduzione di un commento in \textsf{R} \`e possibile mediante il simbolo \texttt{\#} (cancelletto singolo). Per evitare che un commento venga cancellato durante il normale \textit{editing} del testo e che esso venga eseguito si consiglia di raddoppiare i simboli (\texttt{\#\#}). Ad esempio:
+\index{\texttt{\#}} 
+<<ECHO=TRUE,keep.source=TRUE>>=
+1+1 # e  uguale a 2
+@
+non produrr\`a errore perch\'e riconoscer\`a la stringa scritta dopo \texttt{\#} come commento.
+
+\subsubsection{Quando un commento \`e utile e quando \`e superfluo?}
+A prescindere dalle preferenze personali, un commento dovrebbe essere inserito quando la porzione di codice che si sta considerando risulta a noi non ovvia, quando le dimensioni, tipo e ruolo delle variabili coinvolte non sono ovvie o semplicemente quando si ha bisogno di introdurre una annotazione che renda pi\`u facile la lettura del codice non solo a noi stessi ma anche ad altri. Quest'ultimo punto \`e di fondamentale importanza quando si vuole condividere il codice con altri membri della comunit\`a scientifica. Per capire se i commenti che inserite sono superflui o mancanti:
+\begin{shaded}
+Ad un certo punto del corso salvate una porzione di codice (o una funzione) commentata in un file \texttt{.R}, lunga almeno 25 righe di codice. Aggiungete la data corrente al nome del file e in un periodo compreso tra 6 e 12 mesi semplicemente aprite il file e rileggetene il codice. Se siete in grado di capirne il contenuto, avete probabilmente fatto buon uso dei commenti.
+ \end{shaded} 
+
+\subsection*{Working directory}
+Il comando \index{\texttt{getwd()}} 
+%codechunk
+<<echo=TRUE,eval=FALSE>>=
+getwd()
+@
+indica la directory di lavoro mentre il comando 
+%codechunk
+<<echo=TRUE,eval=FALSE>>=
+setwd("indirizzo")
+@  
+\index{\texttt{setwd()}} 
+ imposta la {\it working directory}  nella posizione specificata da \texttt{"indirizzo"}. Lavorando con \textsf{RStudio} per impostare la directory si pu\`o usare il menu a tendina
+\texttt{Session} e in particolare  posizionare la working directory in corrispondenza al file di codice sorgente.  \newpage
+\thispagestyle{empty}
+
+
+\subsection*{Pacchetti  }
+\subsection{Pacchetti}
+Oltre all'aggiornamento costante del programma, lo sviluppo di \textsf{R} consiste nello creazione e aggiornamento continui da parte della comunit\`a  mondiale di una serie di pacchetti addizionali. Un pacchetto contiene in particolare un insieme di comandi finalizzati alla  realizzazione di un determinato compito: esistono per esempio pacchetti per la risoluzione di equazioni differenziali, pacchetti per l'analisi statistica di {\it microarray}, pacchetti per il {\it clustering} di dati.  Per non appesantire \textsf{R} i pacchetti (con poche eccezioni) vengono caricati solo se richiesto dalle esigenze dell'utente. 
+L'utente deve quindi inizialmente localizzare (per esempio via web) il pacchetto che lo interessa e scaricarlo localmente.  
+Per fare questo deve selezionare il sito CRAN da cui scaricarlo e poi (direttamente dal menu a tendina di \textsf{R}) scaricarlo (con annesse eventuali {\it dependencies}). Una volta scaricato in locale il pacchetto pu\`o essere messo a disposizione dell'utente con il comando  
+%codechunk
+<<echo=TRUE,eval=FALSE>>=
+library("nome.pacchetto")
+@
+
+
+\subsection*{Editori esterni}
+E' molto comodo scrivere le porzioni di codice che si intendono eseguire in \textsf{R} su un file di testo esterno in modo da disporre a fine sessione di un listato dei comandi usati (con eventuali commenti), scevro da errori e da operazioni superflue o ripetute.  Gli editor esterni hanno in particolare  la propriet\`a di
+\begin{itemize}
+\item Riconoscere la sintassi di R 
+\item Interagire con R, consentendo l'esecuzione di comandi direttamente dall'editor. 
+\end{itemize}
+Ne menzioniamo quattro di semplice utilizzo: \textsf{Rstudio}, \textsf{Tinn-R}, \textsf{Komodo Edit} e \textsf{TextWrangler}, i cui dettagli sono presenti in tabella~\ref{editor}.\\
+\begin{table}[htp]
+\scriptsize
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Editor & Sistema Operativo & Website\\
+\hline
+\textsf{RStudio} & Mutlipiattaforma & \url{http://www.Rstudio.org} \\
+\textsf{Tinn-R} & Windows & \url{http://www.sciviews.org/Tinn-R} \\
+\textsf{Komodo Edit} & Multipiattaforma & \url{http://www.activestate.com/komodo-edit}  \\
+\textsf{TextWrangler} & Mac OSX & \url{http://www.barebones.com/products/textwrangler/}  \\ 
+\hline
+\end{tabular}
+\end{center}
+\caption{Alcune informazioni sugli editor citati nel testo (IDE)}
+\label{editor}
+\end{table}%
+A parte \textsf{Tinn-R} e \textsf{RStudio}, gli altri due editori necessitano di estensioni (\textit{plug-in}) dedicate per riconoscere la sintassi di \textsf{R}, segnalare errori, fornire suggerimenti ed eseguire comandi in \textsf{R} direttamente dall'editor. Il \textit{plug-in} per \textsf{Komodo Edit} si chiama \textsf{SciViews-K} (\url{http://www.sciviews.org}), mentre il \textit{plug-in} per \textsf{TextWrangler} \`e scaricabile dal sito \url{http://www.smalltime.com/gene/R.plist}. Quest'ultimo deve essere poi inserito nella directory (librerie globali): \texttt{\~{}/Library/Application Support/TextWrangler/Language Modules/}.\\
+A livello di sviluppo sono invece disponibili editori dedicati, che forniscono numerose funzioni di diagnostica e \emph{debug} del codice. Senza qui addentrarci nei dettagli, \textsf{Emacs} (\url{http://www.gnu.org/software/emacs/}) con il \textit{plug-in} ESS (\textsf{Emacs} \textit{Speak Statistics}, \url{http://ess.r-project.org/}) ha trovato negli ultimi anni largo impiego anche come editor per \textsf{R}.
+
+%%\footnote{per \textsf{Windows}, scaricabile  all'indirizzo \texttt{http://www.sciviews.org/Tinn-R/Tinn-R }}
+%%, \footnote{Multipiattaforma, scaricabile all'indirizzo
+%%\texttt{http://www.activestate.com/komodo-edit} che possiede estensioni per lavorare con  \textsf{R} scaricabili anche esse all'indirizzo \texttt{http://www.sciviews.org }}.
+
+Un discorso pi\`u esteso spetta ad \textsf{RStudio} che presenta un ambiente di sviluppo integrato particolarmente adatto a fini didattici e come  gi\`a detto \`e \emph{free} e multipiattaforma.  
+
+ 
+ 
+
+
+%Per affiancare verticalmente due o pi\`u finestre in ambiente {\textsf Windows} si seleziona l'opzione ${\it finestre} \rightarrow {\it affianca}$ dal menu a tendina
+%oppure per installazione in lingua inglese:  ${\it windows} \rightarrow{\it  tile}$. 
+Adotteremo in questo libro RStudio per la facilit\`a d'uso e per il fatto che consente una visualizzazione completa contestuale di diversi aspetti di una sessione di lavoro.
+Se si lavora all'interno di RStudio il caricamento dei pacchetti \`e pi\`u semplice: in uno dei pannelli \`e presente il menu \texttt{Packages} dal quale l'utente pu\`o scaricare il pacchetto usando il sottomenu \texttt{Install} e caricarlo all'interno di R semplicemente barrandone la casellina relativa.
+
+%\begin{comment}
+\section{Rstudio}
+All'apertura di \textsf{RStudio} appaiono diversi pannelli.
+ 
+  \begin{figure} 
+\includegraphics[width=0.8\textwidth]{grafici/menubar.png}
+\caption{RStudio menubar }
+ \end{figure}
+ 
+\begin{figure} 
+\includegraphics[height=80mm,width=160mm]{grafici/RStudio}
+\caption{RStudio Screenshot}
+\end{figure}
+
+ \begin{figure} 
+\includegraphics[width=0.8\textwidth]{grafici/Rstudioambiente.png}
+
+\includegraphics[width=0.8\textwidth]{grafici/Rstudiofiles.png}
+\includegraphics[width=0.8\textwidth]{grafici/Rstudiofiles.png}\caption{RStudio menubar }
+ 
+  \end{figure}
+ 
+
+
+
+Il pannello  fondamentale che appare aprendo \textsf{RStudio} è la classica console di R.
+Ci sono poi 2 altre finestre (bipartite) una con 2 linguette  \texttt{Environment} e \texttt{History} la seconda con 5 linguette mostrate nella figura che segue.
+
+
+\subsection{Script di codice in R e RStudio}
+Ad esempio deve essere possibile inviare ad R  porzioni di codice per la loro esecuzione 
+R stesso include un editor (basta selezionare New document nel menu a tendina presente sotto File, in Rstudio invece sotto FIle basta selezionare NewScript.
+
+\end{document}
+\section{Numeri, operazioni aritmetiche e variabili}
+\subsection{I numeri}
+Se scriviamo in \textsf{R} qualunque numero la rappresentazione che ne abbiamo \`e quella di un numero reale dove  il punto viene usato come separatore decimale. Inoltre per numeri molto grandi o molto piccoli \textsf{R} ricorre alla notazione scientifica. Un numero  ``grande''  viene scritto come
+\varia{ae + b} (senza spazi) mentre un numero  ``piccolo'' viene scritto come
+\varia{ae - b} (senza spazi) 
+dove $a$ varia tra 1 e 9 e $b$  \`e l'esponente opportuno. Ad esempio:
+<<echo=TRUE>>=
+0.0001
+5.4e3
+@
+Si abbia cura di utilizzare il punto `.' invece della virgola `,'  come separatore decimale.  Il comando \texttt{class()} fornisce la natura di un oggetto.
+Se scriviamo
+<<>>=
+class(5)
+@
+ci accorgiamo che il numero intero 5 \`e stato interpretato come un numero reale.
+Se desideriamo espressamente ricordarci che  \`e  un  intero possiamo scrivere
+<<>>=
+class(5L)
+@
+
+Per quanto riguarda le operazioni aritmetiche fondamentali si usano i simboli:
+`$+$', `$-$',`$*$', `$/$'. Per l'elevamento a potenza il simbolo  \`e `\texttt{\^}'.
+
+Possiamo inoltre lavorare con le frazioni caricando il pacchetto \texttt{MASS}
+<<>>=
+library(MASS)
+fractions(1/4)+fractions(2/3)
+@
+<<echo=FALSE, results=hide>>=
+library(exams)
+## DATA GENERATION
+seme=sample(1:10,1)
+## QUESTION/ANSWER GENERATION
+set.seed(seme)
+p <- sample(2:10, 1)
+q<- sample(1:(p-1), 1)
+r<-sample(2:10,1)
+s<-sample(1:(r-1),1)
+library(pracma)
+@
+\begin{itemize}
+\begin{question}
+ Si calcoli la frazione
+\Sexpr{fractions(q/p)}+\Sexpr{fractions(s/r)}
+\end{question}
+\\
+\begin{solution}
+ 
+Si determina il denominatore comune
+prendendo il minimo comune multiplo di \Sexpr{p} e \Sexpr{r}.
+ \end{solution}
+\end{itemize}
+%% META-INFORMATION
+%% \extype{string}
+%% \exsolution{\Sexpr{fractions(q/p+s/r)}}
+%% \exname{meaniris}
+%% \extol{0.01}
+ 
+
+\subsection{Variabili}
+Una variabile \`e una porzione di memoria caratterizzata da un nome che contiene dati che possono essere modificati durante l'esecuzione del programma.\\ \`E  possibile definire una qualunque variabile mediante l'assegnazione di un valore ad essa.\\
+Sono valide entrambe le notazioni seguenti:
+$ \varia{variabile}\leftarrow\varia{ valore}$ e
+$\varia{valore} \to  \varia{variabile}$;
+ad esempio:
+<<echo=TRUE>>=
+a<-2 
+@
+associa il valore $2$ alla variabile \texttt{a}. Per comporre le frecce si usano i segni ``meno'' ``maggiore''  \texttt{->}(freccia a destra) o ``minore'' ``meno''  \texttt{<-}(freccia a sinistra).
+Si abbia cura di evitare di inserire spazi tra il nome della variabile e la freccia, cos\`\i \; come tra la freccia ed il valore assegnato. Il programma per assegnazioni semplici non invia  alcun messaggio di errore, ma si possono verificare problemi quando vi siano pi\`u membri costituenti il valore assegnato.
+Rivolgere {\bf sempre} la freccia dal valore alla variabile, infatti essa \`e una scatola in grado di contenere il valore voluto. Ad esempio non \`e valida la stringa:
+$variabile\rightarrow valore $ o $ valore\leftarrow variabile$.
+{\bf Non} lasciare spazi vuoti nel definire il nome della variabile, \`e possibile invece utilizzare  il sottotratto (\textit{underscore}) $\_$  ad esempio definendo: \texttt{variabile\_uno}, {\bf non} \texttt{variabile uno}. Si pu\`o anche usare il punto e scrivere  \texttt{variabile.uno}.
+I nomi delle variabili sottostanno ad alcune regole. Per esempio \texttt{variabile1} \`e un moine lecito mentre non lo \`e  \texttt{1variabile}.\\  L'assegnamento di uno stesso valore a pi\`u variabili (o costanti) in un unico comando \`e possibile con una sintassi del tipo: 
+<<echo=TRUE>>=
+a<-b<-c<-2 
+@
+L'assegnazione pu\`o avvenire anche usando il segno `$=$', ad esempio
+<<echo=TRUE>>=
+a=2 
+@
+o il comando
+<<echo=TRUE>>=
+assign("a",2)
+@
+Ogni variabile \`e richiamabile scrivendo il suo nome.
+Ad esempio:
+\texttt{a} richiama la variabile \texttt{a} appena definita e mostra il valore di \texttt{a} in output, ovvero 2\footnote{Spesso 
+dopo aver scritto un comando ad esempio \texttt{a<-2} ci si interroga sull'assenza di output. In realt\`a il comando \`e stato eseguito. Per verificarlo basta scrivere \texttt{a} ed inviare. In modo alternativo il comando  \texttt{(a<-2)} oltre a definire l'associazione di 2 ad \texttt{a} ne stampa il valore.},
+Per rimuovere una variabile o un generico oggetto si utilizza il comando:
+$$\texttt{rm}(\varia{name}),$$
+ ossia {\it remove memory}, \varia{name} \`e il nome della variabile da cancellare. Ad \index{\texttt{rm()}} esempio: 
+<<echo=TRUE>>=
+rm(a)
+a=2;a
+@
+svuota il contenuto della memoria \texttt{a}. Per conoscere gli oggetti presenti nella sessione corrente basta il comando
+<<echo=TRUE>>=
+ls()
+@
+o in modo equivalente
+<<echo=TRUE>>=
+objects()
+@
+L'insieme degli oggetti presenti costituisce l'\textsl{environment} (ambiente di lavoro). 
+Si noti  che il numero di cifre di cui \textsf{R} dispone  è  superiore al numero di cifre visualizzate
+<<>>=
+a=4/3
+a
+a*3
+1.333333*3
+@
+\subsection{Costanti fondamentali}
+Per costante ci si riferisce ad un valore non modificabile. Ogni linguaggio permette di utilizzare diversi tipi di costanti: numeri, caratteri e stringhe.\\  Tra le costanti definite in \textsf{R} di interesse generale abbiamo
+\index{\texttt{pi}}
+\begin{itemize}
+\item{}$\pi$ definito come \texttt{pi}.
+\item{}\texttt{e}: numero di Nepero 
+definito come il  valore  in $x=1$ della funzione esponenziale \texttt{exp(1)}. La notazione \`e equivalente ad $e^1$.
+Non \`e possibile definire \texttt{e} solo con la stringa \texttt{exp} senza assegnare l'esponente, in quanto esso \`e definito come una funzione di $x$.  
+Ovviamente le costanti sono utilizzabili in qualsiasi calcolo:
+<<echo=TRUE>>=
+duepi<-2*pi
+duepi
+@
+Abbiamo assegnato alla variabile \texttt{duepi}  valore $2*\pi$  e l'abbiamo richiamata per visualizzare il risultato.\\
+Nota bene: se si intende visualizzare il valore e non ad utilizzarlo in calcoli successivi \`e pi\`u comodo ricorrere alla visualizzazione a \emph{console}, come nell'esempio:
+<<echo=TRUE>>= 
+2*pi
+@
+in output si ottiene direttamente il risultato del calcolo.  
+\end{itemize}
+ 
+\subsection{Costruzione di vettori}  Un vettore (o \textit{array} monodimensionale) 
+pu\`o essere visto come un casellario, le cui caselle sono dette celle (\emph{slots}) del vettore stesso. Tutte le celle sono variabili di uno stesso tipo, detto tipo base del vettore. Si possono cos\`\i\  definire vettori di numeri, di caratteri e vettori logici. 
+%In alcuni linguaggi una stringa \`e vista come un vettore di caratteri. 
+%Spesso inoltre la dimensione di un vettore (il numero celle di cui esso \`e composto) viene considerato parte della definizione,
+In \textsf{R} l'assegnamento della dimensione di un vettore non \`e obbligatorio. %Nel testo ci riferiremo ad un vettore utilizzando anche il termine elenco, che per comodit\`a consideriamo analogo. 
+Un vettore pu\`o  essere definito utilizzando il comando \texttt{c} di sintassi generale:  
+\index{\texttt{c}}
+\begin{equation*}
+\texttt{c}(\varia{valore}_1, \varia{valore}_2, \ldots,\varia{valore}_n)
+\end{equation*}
+Ad esempio
+<<echo=TRUE>>=
+ c(1,5,9,11,17,34)
+@
+Si pu\`o associare il vettore ad una variabile con la notazione:
+\begin{equation*}
+\texttt{c}(\varia{valore}_1, \varia{valore}_2, \varia{valore}_n)\rightarrow \varia{variabile}
+\end{equation*}
+Per esempio:
+<<echo=TRUE>>=
+c(1,5,9,11,17,34)->vettore
+@
+Due operazioni fondamentali sono l'estrazione di una cella
+<<echo=TRUE>>=
+i=4;vettore[i]
+@
+e la sostituzione
+<<echo=TRUE>>=
+vettore[i]<-5
+@
+Si noti anche che se scriviamo
+<<echo=TRUE>>=
+vettore[i]<-"testo"
+vettore
+@
+abbiamo anche cambiato il tipo di base del vettore mentre, se scriviamo
+<<echo=TRUE>>=> 
+vettore[i]<-11
+vettore
+@ 
+il vettore non viene restaurato. Per farlo occorre in questo caso scrivere
+<<echo=TRUE>>=
+as.numeric(vettore)->vettore 
+@
+Possiamo anche definire celle con indice superiore alla lunghezza
+<<echo=TRUE>>=
+vettore[10]<-3
+vettore
+@
+ il vettore viene prolungato fino a comprendere 10 celle. Le celle non assegnate vengono etichettate con \texttt{NA} (not assigned).
+ Se invece si scrive
+<<echo=TRUE>>=
+vettore[-3]
+@
+la cella di posizione 3 viene eliminata.
+Possiamo determinare la lunghezza di un vettore con la funzione \texttt{length}:
+\index{\texttt{length}}
+<<echo=TRUE>>= 
+length(vettore)
+@
+ Possiamo poi ovviamente eseguire operazioni sui vettori
+<<echo=TRUE>>=
+3*vettore
+@
+ 
+Il vettore di nome \texttt{vettore}, viene moltiplicato per 3, ovvero ciascuna cella viene moltiplicata per 3.
+\subsection{Generazione di sequenze: $\texttt{rep}$ e $\texttt{seq}$} 
+\`E possibile definire sequenze di numeri consecutivi come  \varia{n:m}.
+Ad esempio:
+<<echo=TRUE>>=
+1:11 
+@
+consente di ottenere la sequenza dei numeri interi da 1 a 11. \`E anche possibile aggiungere un numero alla sequenza con il comando: 
+$\texttt{c}(\varia{n:m},\varia{numero \; aggiunto})$.
+Per esempio se vogliamo aggiungere il numero 100 alla lista precedente scriveremo:
+<<echo=TRUE>>=
+c(1:11,100)
+@
+Nota: l'aggiunta \`e posizionale, cio\`e rispetta l'ordine con cui compaiono gli elementi. 
+
+\`E inoltre possibile generare liste costanti di valore $k$ con il comando:
+$\texttt{rep} (\varia{k,n})$
+Se vogliamo una lista i cui elementi sono tutti 3 per un totale di 10 elementi scriveremo:
+<<echo=TRUE>>=
+rep(3,10)
+@  
+Infine il parametro \texttt{each=}\varia{n} consente di ripetere ciascun elemento della sequenza \varia{n} volte. Ad esempio:
+<<echo=TRUE>>=
+rep(c(3,2,1),each=3)
+@
+Ripete 3 volte il numero 3, 3 volte il numero 2 e 3 volte il numero 1. 
+Diverso \`e il risultato con il comando 
+<<echo=TRUE>>=
+rep(c(3,2,1),times=5)
+@ 
+dove si ha la ripetizione \texttt{times} volte dell'intero vettore.
+Cosa succede se 2 vettori hanno lunghezza diversa? In matematica in questo caso la somma non \`e definita. In \textsf{R} invece vale la regola del riciclaggio (\textit{recycling rule}. Ad esempio
+<<echo=TRUE>>=
+1:10+1:3
+1:10+1:2
+@
+In pratica il vettore pi\`u corto viene riciclato tante volte quanto serve per raggiungere la lunghezza del vettore pi\`u lungo. Se la ripetizione non occorre un numero intero di volte allora viene emesso un messaggio di \textit{Warning}.
+
+Il comando \texttt{seq} consente di generare una sequenza (vettore) i cui elementi sono collegati da una propriet\`a caratteristica: sono tutti numeri pari, dispari, di passo $n$, ecc.\\
+Si definisce una sequenza come: $\texttt{seq}(\varia{n,m})$\\ %%
+Ad esempio per generare la sequenza dei numeri da 0 a 100 a passo 1 (default) si scriver\`a:
+\index{\texttt{seq}}
+<<echo=FALSE>>=
+options(width=60)
+<<echo=TRUE, keep.source=TRUE>>=
+seq(0,100,1) ##analogo di seq(0,100)
+@
+Possiamo ottenere la sequenza di tutti i numeri dispari da $n$ a $m$ utilizzando il parametro \texttt{by},che consente di impostare il passo nella sequenza.
+Il comando:  
+<<echo=FALSE>>=
+options(width=60)
+<<echo=TRUE>>=
+seq(1,100,by=2)
+@
+restituisce tutti i numeri tra 1 e 100 a passo 2, ovvero tutti i numeri dispari compresi nell'intervallo. 
+Per ottenere i numeri pari compresi nell'intervallo possiamo reiterare il comando precedente ma partendo da 0 (e volendo possiamo sottintendere la specifica \texttt{by=})
+<<echo=TRUE>>=
+seq(0,100,2)
+@
+il parametro \texttt{length.out}  (brevemente \texttt{len} o \texttt{length} consente di definire il numero totale di elementi della sequenza, ovvero divide l'intervallo  da $m$ a $n$ utilizzando un numero di punti pari alla lunghezza assegnata.
+Ad esempio se nella  sequenza di numeri da 1 a 100 volessimo avere in totale 10 numeri scriveremo: 
+<<echo=TRUE>>=
+seq(1,100,length=10)
+@
+In effetti l'intevallo da 1 a 100  di lunghezza 99 viene diviso da 10 punti in 9 parti di ampiezza 11. Useremo tale parametro per il calcolo degli integrali con il metodo dei rettangoli.\\
+  \begin{shaded}
+  \begin{description}
+\item{1.} Costruire un vettore contenente i numeri da 1 a 15. Identificare almeno due modi per invertire l'ordine degli elementi. Scambiare poi  il $5^o$  e il $6^o$ ingresso del vettore e stampare a video il risultato.
+\item{2.} Calcolare $23+37/10-2^3$
+\item{3.} Scrivere il vettore 
+$x =(1,1,2,3,5,8)$.
+Stampare il $3^o$  elemento di $x$. Determinare la lunghezza di $x$. 
+Costruire un vettore i cui elementi siano la radice quadrata degli elementi di $x$.
+\item{4.} Si consideri la funzione $f(x)=x*\sin(x)$. Si determinino i valori di $f$ negli estremi della suddivisione dell'intervallo $[2,5]$  in 20 sotto-intervalli di ugual ampiezza.
+\end{description}
+\end{shaded}
+\section{Matematica di base}
+\subsection{Equazioni e disequazioni}
+Consideriamo semplici equazioni lineari del tipo
+$$ a x +b =cx+d$$
+Per risolvere si portano i termini con la variabile $x$ da una parte e i termini noti dall'altra
+$$(a-c) x=d-b$$
+e la soluzione unica \`e  (se $a-c$ \`e diverso da 0)
+$x=\dfrac{d-b}{a-c}$.
+ \section{Funzioni e grafici}
+\subsection{Definizione di funzioni}
+Per definire una funzione $f$ di una variabile \varia{variabile}  si utilizza il comando:
+$$f\leftarrow \texttt{function}(\varia{variabile})\; \varia{espressione}$$
+Ad esempio per definire la funzione $$f(x)=x^2$$ scriveremo:  
+<<echo=TRUE>>=
+f<-function(x) x^2
+@
+Possiamo calcolare il valore della funzione in un qualunque valore di $x$  con il comando:
+\texttt{f}(\varia{valore})
+ad esempio in $x=6$ si avr\`a 
+<<echo=TRUE>>=
+f(6)
+@
+Attenzione: nell'esempio che segue viene richiesto il valore di $f(x)$ in $x=0$:
+<<echo=TRUE>>=
+f<-function(x)  1/x 
+f(0)
+@
+La dicitura \texttt{Inf} corrisponde ad $\infty$, infatti la funzione esplode in $x=0$.
+
+\subsection{Funzioni predefinite}  
+\textsf{R} consente l'utilizzo di funzioni matematiche gi\`a definite, come seno, coseno, tangente, le funzioni trigonometriche inverse, esponenziali, logaritmi, radici,ecc.
+Ecco di seguito le principali, la cui sintassi pu\`o essere visualizzata utilizzando l'\emph {help} di \textsf{R} inserendo la parola chiave corretta (ad esempio \texttt{?sin}) per ottenere informazioni sul formalismo corretto:  
+\begin{itemize}
+ \item{}
+ Funzioni trigonometriche\hfill\vskip10pt
+ \begin{tabular}{|r r |}\hline
+\texttt{cos}&  coseno\\
+\texttt{sin}& seno\\
+\texttt{tan}&   tangente\\
+\texttt{acos}&   arcocoseno\\
+\texttt{asin}&   arcoseno\\
+\texttt{atan} &  arcotangente\\
+\hline
+\end{tabular}
+\item{}Logaritmi.\vskip10pt
+\texttt{log} \`e il  logaritmo naturale. Ad esempio:
+<<echo=TRUE>>=
+log(3)
+@
+\texttt{log2} \`e il logaritmo di base 2 
+<<echo=TRUE>>=
+log2(3)
+@
+Controlliamo:  
+<<echo=TRUE>>=
+log2(3)->a
+2^a
+@
+ Sullo stesso principio il logaritmo in base 10 sar\`a
+\texttt{log10}. Ad
+esempio:
+<<echo=TRUE>>=
+log10(100)
+@
+Per basi diverse si usa il parametro \texttt{base} per specificare la base (si noti che il nome del parametro pu\`o anche essere omesso).
+<<echo=TRUE>>=
+log(64,base=4)
+log(64,4)
+@
+
+\item{}Esponenziali.\vskip10pt
+La funzione esponenziale (come gi\`a visto) \`e denotata da
+\texttt{exp}, si abbia cura di indicare \texttt{exp} tutto minuscolo.
+Ad esempio per ottenere il valore numerico dell'espressione $e^4$ si scrive:
+<<echo=TRUE>>=
+exp(4)
+@
+\item{}Radice quadrata.\vskip10pt
+Si indica come \texttt{sqrt} (\textit{square root}), ad esempio per ottenere la radice quadrata di 225 scriveremo: 
+<<echo=TRUE>>=
+sqrt(225)
+@
+Ovviamente la radice quadrata equivale ad elevare a potenza $1/2$ per cui la radice precedente pu\`o essere espressa anche come\footnote{Nel comando che segue non si dimentichino le parentesi.}:
+<<echo=TRUE>>=
+225^(1/2)
+@
+Tale procedura pu\`o essere utilizzata per radici di indice qualunque, ad esempio:  
+<<echo=TRUE>>=
+16384^(1/7)
+@
+
+\subsection{Grafici}
+Il comando $\texttt{curve}$, consente di tracciare il grafico di una funzione; $\texttt{curve}({\varia{funzione}})$, automaticamente assegna estremi sull'asse $x$ da 0 ad 1 (a meno che non siano gi\`a stati definiti). %%funzione in varia
+Volendo possiamo specificare gli estremi con il comando: %%due punti
+\begin{eqnarray*}\texttt{curve}(\varia{espressione/nome\; funzione},\\
+\varia{ estremo\; inferiore , estremo \;superiore})\end{eqnarray*}
+Ad esempio volendo tracciare il grafico della funzione $1/x$ nell'intervallo $(0,2)$ possiamo definire la funzione oppure scriverne direttamente l'espressione. %%nuovo pezzo
+La differenza tra le due scelte dipende dall'uso futuro della funzione, se essa sar\`a applicata in seguito conviene assegnarle un nome. 
+I comandi:
+<<echo=TRUE,eval=FALSE>>=
+curve(1/x,0,2)
+@
+oppure:
+<<echo=TRUE,eval=FALSE>>=
+f<-function(x) 1/x
+curve(f,0,2)
+@
+generano  lo stesso risultato, illustrato in Figura~\ref{grafounox}.\vskip5pt
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+f<-function(x) 1/x
+curve(f,0,2)
+@
+\caption{Grafico di $1/x$ nell'intervallo $(0,2)$.}
+\label{grafounox}
+\end{center}
+\end{figure}
+Pu\`o essere utile sovrapporre ad un grafico gi\`a tracciato un ulteriore grafico, tracciando ad esempio l'asse $x$, l'asse $y$, o una ulteriore funzione;  la finestra grafica \`e quella preesistente e non deve essere ridefinita ogni volta (si suggerisce di realizzare per primo il grafico con finestra grafica pi\`u ampia). Il parametro da utilizzare in tale caso \`e \texttt{add} (variabile booleana, pu\`o assumere solo valore \texttt{True} o \texttt{False}, indicabili come \texttt{T}  o \texttt{F} o per esteso come \texttt{TRUE}  o \texttt{FALSE}, consigliato), ovviamente nel caso \texttt{F} l'assegnazione del parametro non \`e richiesta). Ad esempio per aggiungere la retta $y=20\,x$ alla funzione precedente si scriver\`a:%%modif i true e false
+<<echo=FALSE,fig=FALSE>>=
+f<-function(x) 1/x
+curve(f,0,2)
+<<echo=TRUE>>=
+g<-function(x) 20*x
+curve (g,add=T) 
+@
+ottenendo la Figura~\ref{addF}.
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+f<-function(x) 1/x
+curve(f,0,2)
+g<-function(x) 20*x;curve (g,add=T) 
+@
+\caption{Sovrapposizione di 2 grafici}
+\label{addF}
+\end{center}
+\end{figure}
+Vediamo qui di seguito alcune opzioni grafiche:
+\begin{itemize}
+\item{}Definizione della finestra grafica.\vskip0pt
+Possiamo specificare completamente la finestra grafica. 
+Per l'asse delle $x$ si ricorre al parametro \texttt{xlim}: $$\texttt{xlim=c}(\varia{estremo inferiore, estremo superiore})$$ 
+e in modo simile per l'asse delle $y$ il parametro \`e  \texttt{ylim}:$$\texttt{ylim=c}(\varia{estremo inferiore, estremo superiore})$$
+Se ad esempio volessimo tracciare il grafico della funzione precedente  tra -3 e 3 sull'asse $x$ e tra -4 e 4 sull'asse $y$, scriveremo:
+<<echo=TRUE,fig=FALSE>>=
+curve(1/x,xlim=c( -3,3), ylim=c(-4,4)) 
+@
+ed otterremo il grafico della figura~\ref{finestra}.
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+curve(1/x,xlim=c( -3,3), ylim=c(-4,4)) 
+@
+%\includegraphics[scale=0.4]{grafici/Rplot34.pdf}
+\caption{Scelta della finestra grafica}
+\label{finestra}
+\end{center}
+\end{figure}
+\item{}Selezione del colore della curva.\vskip10pt
+Per cambiare il colore predefinito del grafico si deve utilizzare il parametro \texttt{col},  scrivendo  \texttt{col}(\texttt{\virgolette nome colore\virgolette)}.
+Il nome del colore deve essere definito in lingua inglese. Per visualizzare l'elenco completo dei colori disponibili si usa il comando: 
+\texttt{colors()}.
+Tra i principali colori troviamo \par 
+\begin{center}
+\begin{tabular}{|r| p{2cm} |}
+\hline
+rosso & red\\
+blu & blue\\
+bianco & white\\
+rosa	&pink\\
+verde & green\\
+giallo & yellow\\
+viola	&purple\\nero	&black\\  \hline
+\end{tabular}
+\end{center}
+\vskip10pt
+Sono utilizzabili anche i parametri \texttt{light} e \texttt{dark}, esse devono precedere il nome del colore. Possiamo pensare di colorare la curva precedente di blu scuro e scrivere: 
+<<echo=FALSE>>=
+options(width=55)
+<<echo=TRUE>>
+curve(1/x,xlim=c( -3,3), ylim=c(-4,4),col="dark blue")
+@
+Otteniamo la  figura~\ref{colori}.
+\begin{figure}[phtb]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+options(width=55)
+curve(1/x,xlim=c( -3,3), ylim=c(-4,4),col="dark blue")
+@
+\caption{Scelta del colore}
+\label{colori}
+\end{center}
+\end{figure}
+Si noti che la dicitura \texttt{dark blue} e \texttt{darkblue} senza spazi producono lo stesso risultato (sono implementati ambo i colori) %%new.
+\item{}Selezione dello spessore delle linee
+
+Per cambiare lo spessore delle linee \`e possibile utilizzare il parametro \texttt{lwd}, esso pu\`o avere valori in una scala da 0 fino ad un numero qualunque (anche decimale) di {\it pixel}, se vogliamo  visualizzare la curva precedente con spessore della linea pari a 5 pixel, scriveremo: 
+
+<<echo=FALSE>>=
+options(width=55)
+<<echo=TRUE,eval=FALSE>>=
+curve(1/x,xlim=c( -3,3),ylim=c(-4,4),
+col="darkblue", lwd=5)
+@
+
+Otteniamo la figura~\ref{spessore}
+\begin{figure}[ htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+curve(1/x,xlim=c( -3,3),ylim=c(-4,4),col="darkblue", lwd=5)
+@
+\caption{Spessore delle linee}
+\label{spessore}
+\end{center}
+\end{figure}
+\item{}Scelta del tipo di linea.\vskip0pt
+\`E  possibile scegliere un numero di punti da visualizzare ed \`e anche possibile collegarli o meno. Per scegliere il numero di punti si usa il parametro \texttt{n} associandogli un numero intero.
+Per non collegare i punti si usa il parametro \texttt{type}, e si fa assumere valore \texttt{\virgolette p\virgolette}, si scrive quindi: \texttt{type=  \virgolette p\virgolette}.
+Ad esempio se vogliamo un numero di punti pari a 100, non collegati, scriveremo:
+<<echo=FALSE>>=
+options(width=55)
+<<echo=TRUE,fig=FALSE>>=
+curve(1/x,xlim=c(-3,3),ylim=c(-4,4), 
+col="dark blue", lwd=2,n=100,type="p")
+@
+il cui risultato \`e riportato in figura~\ref{graficopunti}.
+\begin{figure}[ htbp]
+\begin{center}
+<<echo=FALSE>>=
+options(width=55)
+<<echo=FALSE,fig=TRUE>>=
+curve(1/x,xlim=c(-3,3),ylim=c(-4,4), 
+col="dark blue", lwd=2,n=100,
+type="p")
+@
+%\includegraphics[scale=0.4]{grafici/RplotAPUNTI.pdf}
+\caption{Grafico a punti}
+\label{graficopunti}
+\end{center}
+\end{figure}
+Altre scelte possibili sono \texttt{type=\virgolette n\virgolette} per il punto non vuoto ma anche \texttt{type=\virgolette l\virgolette} per le linee (scelta di default) e \texttt{type=\virgolette o\virgolette} per punti e linee. 
+ 
+
+ 
+
+\item{} La funzione  \texttt{abline}.
+
+La funzione \texttt{abline}, di sintassi:  
+\texttt{abline}(\varia{b,a})
+consente di tracciare una retta di pendenza \varia{a} e di intercetta \varia{b}. Se scriviamo \texttt{abline(h}=\varia{valore})
+otteniamo una linea orizzontale a quota \varia{valore} mentre con: %%:
+\texttt{abline(v=}\varia{valore}) otteniamo una retta verticale ad ascissa  pari al \varia{valore}. Dopo avere tracciato un grafico si possono quindi aggiungere con i  comandi:%%:
+\texttt{abline(h=0)}
+e \texttt{abline(v=0)}
+cio\`e gli assi di riferimento del sistema cartesiano (utili nel caso ad esempio in cui si debbano individuare le intersezioni con gli assi della funzione). Ad esempio se scriviamo:
+
+<<echo=FALSE>>=
+options(width=55)
+<<echo=TRUE,fig=FALSE>>=
+ curve(1/x,xlim=c( -3,3),
+ ylim=c(-4,4),col="darkblue",lwd=5);
+ abline(h=0);abline(v=0);
+@
+
+Otteniamo la figura~\ref{assisb}.
+\begin{figure}[ htbp]
+\begin{center}
+<<echo=FALSE>>=
+options(width=55)
+<<echo=FALSE,fig=TRUE>>=
+ curve(1/x,xlim=c( -3,3),
+ ylim=c(-4,4),col="darkblue",lwd=5);
+ abline(h=0);abline(v=0);
+@
+\caption{Iperbole con assi}
+\label{assisb}
+\end{center}
+\end{figure} 
+Notiamo che cambiando di poco la finestra grafica
+<<echo=FALSE>>=
+options(width=55)
+<<echo=TRUE,fig=FALSE>>=
+ curve(1/x,xlim=c( -3,3.1),
+ ylim=c(-4,4),col="darkblue",lwd=5);
+ abline(h=0);abline(v=0);
+@
+Otteniamo la figura~\ref{assisb2}.
+\begin{figure}[ htbp]
+\begin{center}
+<<echo=FALSE>>=
+options(width=55)
+<<echo=FALSE,fig=TRUE>>=
+ curve(1/x,xlim=c( -3,3.1),
+ ylim=c(-4,4),col="darkblue",lwd=5);
+ abline(h=0);abline(v=0);
+@
+ \caption{Problemi grafici}
+\label{assisb2}
+\end{center}
+\end{figure} 
+
+In questa figura una porzione del grafico \`e stata sovraimpressa all'asse verticale.  In effetti uno \`e fittizio determinato dal fatto che la funzione non \`e definita in $x=0$ e che \textsf{R} nel tracciare il grafico cerca di congiungere l'ultimo punto a sinistra dello zero ed il primo a destra. Per eliminare questo problema si pu\`o ricorrere ai comandi che seguono, che generano la figura~\ref{fig:noasint}:.
+<<echo=TRUE, fig=FALSE>>=
+ curve(1/x,xlim=c( -3,3.1),ylim=c(-4,4),type="n")
+ curve(1/x,xlim=c(-3,0), ylim=c(-4,4), col="darkblue",lwd=5,add=T); 
+ curve(1/x,xlim=c(0,3.1),  ylim=c(-4,4),col="darkblue", lwd=5,add=T)
+ abline(h=0,col="red"); abline(v=0,col="red")
+@
+\begin{figure}[ htbp]
+\begin{center}
+<<echo=FALSE, fig=TRUE>>=
+ curve(1/x,xlim=c( -3,3),
+ ylim=c(-4,4),type="n")
+ curve(1/x,xlim=c(-3,0), 
+ylim=c(-4,4), col="darkblue",
+lwd=5,add=T); 
+ curve(1/x,xlim=c(0,3), 
+ ylim=c(-4,4),col="darkblue",
+ lwd=5,add=T); abline(h=0,
+col="red"); abline(v=0,col="red")
+@
+%\includegraphics[scale=0.4]{grafici/Rplotsenzaasintoto.pdf}
+\caption{Grafico con assi e senza asintoto}
+\label{fig:noasint}
+\end{center}
+\end{figure}
+\end{itemize}
+ 
+\section{Derivate di funzioni}
+Richiamiamo il significato geometrico della derivata: se una funzione $f$ \`e derivabile in un punto $x_0$ allora il grafico si linearizza con un numero sufficiente di ingrandimenti attorno al punto $(x_0,f(x_0))$. 
+Come illustrazione di questo processo consideriamo l'iperbole
+<<>>=
+ f<-function(x) 4*x/(2+x)  
+@ 
+e disegniamo il suo grafico nella regione definita dalle condizioni $-d<x<d$ e $-d<y<d$, dove $d$ \`e inizialmente pari a 8.
+\begin{figure}
+<<fig=TRUE>>=
+d=8;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="iperbole"); abline(h=0);abline(v=0)
+@
+\end{figure}
+\\
+Consideriamo ora l'ingrandimento di tale grafico con fattore di zoom \texttt{xf}=2 attorno al punto $(0,0)$: in altre parole dimezziamo il valore di $d$:
+<<eval=FALSE>>=
+d=d/2;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="zoom 2"); abline(h=0);abline(v=0)
+@
+Iterando tale comando un certo numero di volte si assiste alla linearizzazione progressiva del grafico come in figura~\ref{fig:lin3}. 
+\begin{center}
+\begin{figure}
+<<echo=FALSE,fig=TRUE>>=
+par(mfrow=c(2,2))
+d=d/2;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf: 2"); abline(h=0);abline(v=0)
+d=d/2;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf: 2^2"); abline(h=0);abline(v=0)
+d=d/2;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf:  2^3"); abline(h=0);abline(v=0)
+d=d/2;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf: 2^4"); abline(h=0);abline(v=0)
+@
+\caption{Linearizzazione di un grafico ottenuta attraverso una serie di ingrandimenti}
+\label{fig:lin3}
+\end{figure}
+\end{center}
+ 
+Consideriamo ora una funzione differente che combina un'espressione di quarto grado e una funzione circolare rapidamente oscillante
+<<>>=
+f<-function(x) x^4/500 + sin(100*x)/100;
+@
+Il grafico per $-8<x<8$ come in precedenza  suggerisce che la  retta tangente  in $x=0$ sia orizzontale.   
+Effettuando un certo numero di zoom con fattore di zoom 2 questa prima impressione sembra confermata, anche se possiamo iniziare a notare delle piccole oscillazioni nell'ultima figura del pannello~\ref{fig:linear2}.
+\begin{figure}
+<<echo=FALSE,fig=TRUE>>=
+par(mfrow=c(2,2))
+d<-8;curve(f,xlim=c(-d,d),ylim=c(-d,d))
+abline(h=0);abline(v=0)
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf: 2"); abline(h=0);abline(v=0)
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf: 2^2"); abline(h=0);abline(v=0)
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf:  2^3"); abline(h=0);abline(v=0)
+@
+\caption{Linearizzazione progressiva di un grafico: prima fase}
+\label{fig:linear2}
+\end{figure}
+
+Se procediamo con gli ingrandimenti  questa sensazione viene confermata.
+Non ci saranno ulteriori sorprese da un certo punto in poi. 
+Per quanto si prosegua la retta trovata in ultimo verr\`a confermata~\ref{fig:linearizzazione4}
+
+\begin{figure}[h]
+<<echo=FALSE,fig=TRUE>>=
+par(mfrow=c(2,4))
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf: 2^4"); abline(h=0);abline(v=0)
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf: 2^5"); abline(h=0);abline(v=0)
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf: 2^6"); abline(h=0);abline(v=0)
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf:  2^7"); abline(h=0);abline(v=0)
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf: 2^8"); abline(h=0);abline(v=0)
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
+main="xf: 2^9"); abline(h=0);abline(v=0)
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d), 
+main="xf: 2^10"); abline(h=0);abline(v=0)
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d), 
+main="xf: 2^11"); abline(h=0);abline(v=0)
+
+@
+\caption{Linearizzazione progressiva di un grafico: seconda fase}
+\label{fig:linearizzazione4}
+\end{figure}
+ \subsection{Regola dei tre punti}
+Possiamo stimare la derivata di una funzione $f$ in $x$ con la regola dei tre punti nel punto $x$ con incremento $h$
+$$
+\texttt{trepunti}(f,x,h)=\frac{f(x+h)-f(x-h)}{2h}
+$$
+Ora \`e sufficiente definire la funzione di cui vogliamo stimare la derivata, per poi richiamare la funzione \texttt{trepunti} fornendo il valore di $x$ ed il valore dell'incremento $h$.
+
+Approssimiamo ad esempio la derivata di $x\rightarrow {\rm sin}(x)$
+Definiamo la funzione e la regola della differenza centrale
+<<echo=TRUE>>=
+f<-function(x) sin(x)
+trepunti<-function(f,x,h) (f(x+h)-f(x-h))/(2*h)
+@
+Per esempio assegnando  
+<<>>=
+h=0.001
+x=1
+@
+Si ha 
+<<echo=TRUE>>=
+trepunti(f,x,h)
+@
+Otteniamo cos\`\i\; la stima della derivata nel punto \Sexpr{x} con incremento \Sexpr{h}.
+Possiamo anche rappresentare graficamente la funzione derivata (insieme alla funzione di \texttt{sin}) scrivendo:
+<<echo=TRUE,fig=FALSE>>=
+curve(trepunti(f,x,0.001),0,2*pi,col="blue")
+curve(f,add=T,col="red")
+@
+e ottenendo il grafico~\ref{sincos} da cui si evince che  $D\rm{sin}(x)={\rm cos}(x)$. In modo simile si pu\`o mostrare che 
+$D{\rm cos}(x)=-{\rm sin}(x)$.
+\begin{figure}[ htbp]
+\begin{center}
+<<echo=false,fig=TRUE>>=
+curve(trepunti(f,x,0.001),0,2*pi,col="blue")
+curve(f,add=T,col="red")
+@
+\caption{Grafico delle funzioni $sin(x)$ e della sua derivata calcolata numericamente}
+\label{sincos}
+\end{center}
+\end{figure}
+Analizziamo ancora la derivata delle funzioni esponenziali. Consideriamo inizialmente
+la funzione
+$$f(x)=2^x$$ 
+In questo caso
+<<echo=TRUE>>=
+f<-function(x) 2^x
+curve(trepunti(f,x,0.001),-2,2,
+col="blue")
+curve(f,add=T,col="red")
+curve(trepunti(f,x,0.001)/f(x),add=T,
+col="dark green")
+@	
+sembra che  la funzione (in rosso) e la sua derivata (in blu, approssimata con la regola dei 3 punti)   siano proporzionali.
+\begin{figure}[ htbp]
+\begin{center}
+<<fig=TRUE,echo=FALSE>>=
+f<-function(x) 2^x
+curve(trepunti(f,x,0.001),-2,2,
+col="blue")
+curve(f,add=T,col="red")
+curve(trepunti(f,x,0.001)/f(x),add=T,
+col="dark green")
+@
+\caption{Grafico di $2^x$ e derivata}
+\label{fig:der2x}
+\end{center}
+\end{figure}
+Per verificarlo abbiamo tracciato anche il grafico di $f'(x)/f(x)$ che \`e una retta orizzontale a quota
+<<echo=TRUE>>=
+ trepunti(f,0,0.001)/f(0)
+@
+In modo simile possiamo considerare con la funzione $3^x$:
+<<echo=TRUE,eval=FALSE>>=
+f<-function(x) 3^x
+curve(trepunti(f,x,0.001),-2,2,col="blue")
+curve(f,add=T,col="red")
+curve(trepunti(f,x,0.001)/f(x),add=T,col="dark green")
+@	
+e anche qui  le funzioni sembrano proporzionali. In questo caso per\`o il rapporto derivata diviso funzione \`e  maggiore di 1 e quindi la derivata \`e maggiore della funzione
+\begin{figure}[ htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+f<-function(x) 3^x
+curve(trepunti(f,x,0.001),-2,2,col="blue")
+curve(f,add=T,col="red")
+curve(trepunti(f,x,0.001)/f(x),add=T,col="dark green")
+@
+\caption{Grafico di $3^x$ e derivata}
+\label{fig:der3x}
+\end{center}
+\end{figure}
+
+Per verificarlo abbiamo tracciato anche il grafico di $f'(x)/f(x)$ che \`e una retta orizzontale a quota
+<<echo=TRUE>>=
+trepunti(f,0,0.001)/f(0)
+@
+
+Ci si pu\`o chiedere se esista un valore intermedio tra 2 e 3 per cui derivata e funzione coincidano esattamente. La risposta \`e precisamente il numero di Nepero \texttt{exp(1)}. Infatti abbiamo
+<<echo=TRUE, eval=FALSE>>=
+ f<-function(x) exp(x)
+ curve(trepunti(f,x,0.001),-2,2, col="blue")
+ curve(f,add=T,col="red")
+ curve(trepunti(f,x,0.001)/f(x),add=T, col="dark green")
+ trepunti(f,0,0.001)/f(0)
+@
+\begin{figure}[ htbp]
+\begin{center}
+<<echo=FALSE, fig=TRUE>>=
+f<-function(x) exp(x)
+curve(trepunti(f,x,0.001),-2,2, col="blue")
+curve(f,add=T,col="red")
+curve(trepunti(f,x,0.001)/f(x),add=T, col="dark green")
+@\caption{Grafico di $e^x$ e derivata}
+\label{fig:grafexp}
+\end{center}
+\end{figure}
+\end{itemize}
+Anche qui
+<<>>=
+trepunti(f,0,0.001)/f(0)
+@
+mostra il valore del rapporto.
+
+\begin{shaded}
+\begin{enumerate}
+ \item{ }Ripeti le considerazioni precedenti usando il quoziente di Newton a destra.
+\item{} Calcola il valore della approssimazione della derivata con la regola dei tre punti per la funzione $x^2*sin(x)$ in $x=\pi$ con $h=\pi/6$.
+\end{enumerate}
+\end{shaded}  
+\subsection{Derivate ``formali''}
+Per calcolare la derivata di una qualunque espressione possiamo scrivere:
+\begin{equation*}\texttt{D(expression}(\varia{funzione),variabile})
+\end{equation*}
+Ad esempio
+<<echo=TRUE>>=
+D(expression(x^4),"x")
+@
+Un utile comando per valutare una derivata in un punto o per  ricavare una funzione da una derivata \`e il comando \texttt{eval}, ovvero {\it evaluate}. Scriveremo \texttt{eval}(\varia{nome derivata}).
+
+<<echo=TRUE>>=
+x<-4
+eval(D(expression(x^4),"x"))
+@
+
+<<echo=TRUE,fig=TRUE>>=
+g<-function(x) eval(D(expression(sin(x)),"x"))
+curve(g,0,2*pi)
+@
+\begin{shaded}
+\begin{enumerate}
+ \item{} Calcola la derivata prima e seconda della funzione $x^2*sin(x)$ in $x=\pi$.
+ \item{} Determina l'equazione della retta tangente al grafico della funzione precedente e traccia grafico e retta in una finestra grafica opportuna.
+\end{enumerate}
+\end{shaded} 
+ \subsection{Metodo delle tangenti di Newton}
+ Consideriamo ora una funzione generica $f$ il cui grafico presenti delle intersezioni con l'asse delle x
+<<echo=FALSE,fig=TRUE>>=
+f=function(x) x^3-5
+curve (f,1,4,col="blue",xaxt="n",yaxt="n");abline(h=0)
+testo=expression("x"["*"])
+text( 1.8,-2,testo)
+@
+Nel metodo delle tangenti di Newton si parte da un'approssimazione iniziale $x_0$, che nel grafico illustrato si situa alla destra di $x_*$.
+<<echo=FALSE,fig=TRUE>>=
+f=function(x) x^3-5
+curve (f,1,4,col="blue",xaxt="n",yaxt="n");abline(h=0)
+testo=expression("x"["*"])
+text( 1.8,-2,testo)
+testo=expression("x"[0])
+text( 4,-2,testo)
+segments(3.5,0,3.5,f(3.5),col="brown")
+@
+Utilizziamo ora il metodo delle tangenti di Newton per determinare gli zeri di una funzione $f$. Prima di iniziare vediamo come possiamo procedere a livello grafico. 
+Consideriamo una semplice funzione  $$ f(x)= x^5-3x+1$$
+Iniziamo a selezionare una finestra grafica abbastanza ampia. Restringendola man mano vediamo meglio cosa succede.
+<<echo=TRUE,eval=FALSE>>=
+f<-function(x) x^5-3*x+1
+curve(f,-10,10) 
+abline(h=0)
+curve(f,-2,2)
+abline(h=0)
+@
+
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+par(mfrow=c(1,2))
+f<-function(x) x^5-3*x+1
+curve(f,-10,10) 
+abline(h=0)
+curve(f,-2,2)
+abline(h=0)
+@
+\caption{Intersezione con l'asse $x$ }
+\label{fig:newton}
+\end{center}
+\end{figure}
+
+Dal grafico~\ref{fig:newton}  \`e evidente che ci sono 3 intersezioni con l'asse delle $x$ che ci proponiamo di determinare usando il metodo delle tangenti di Newton. Ricordiamo che nel metodo delle tangenti di Newton si deve scegliere un punto iniziale $x_0$  ed il numero di iterazioni (o un criterio di arresto).  Il passo iterativo \`e descritto dalla funzione:
+$$g(x)=x-\frac{f(x)}{f'(x)}$$
+In assenza della derivata esatta possiamo anche usare la regola dei 3 punti.
+In quanto segue ipotizzeremo di avere scelto un 10 iterazioni a partire dal valore $x_0=2$.
+
+<<echo=TRUE>>=
+x<-2
+@
+Scegliamo un incremento
+$h=10^{-3}$ ed 
+iteriamo il processo attraverso un ciclo \texttt{for}\footnote{Il comando   \texttt{for(k in set) comando} esegue il \texttt{comando} (eventualmente dipendente da \texttt{k} per tutti i valori di \texttt{k} in \texttt{set}. }:
+
+<<echo=TRUE>>=
+h<-0.001
+for(k in 1:9) x[k+1]<-x[k]-f(x[k])/trepunti(f,x[k],h)
+x
+@
+Si genera la lista di 10 passi iterativi, il fatto che la lista si stabilizzi \`e indice del fatto che la lista converge all'intersezione cercata.  Ricerchiamo anche un altro valore della {\it radice}:
+<<echo=TRUE>>=
+x<- -2; iterazioni=10;
+for(k in seq(length=iterazioni)) x[k+1]<-x[k]-f(x[k])/
+trepunti(f,x[k],h)
+x
+@
+Per determinare la terza ed ultima intersezione partiamo da $x_0=0.5$
+<<echo=TRUE>>=
+x<-0.5
+for(k in 1:10) x[k+1]<-x[k]-
+f(x[k])/trepunti(f,x[k],h);x
+@
+Le radici sono 0.3347341, -1.388792, 1.214648.
+\section{Integrali definiti}
+Ci occupiamo ora del calcolo di integrali definiti
+\begin{eqnarray*}
+\int_a^b f(x)dx
+\end{eqnarray*}
+
+\subsection{Metodi numerici di integrazione di \textsf{R}}
+Per il calcolo di integrali definiti si scrive il comando
+\begin{eqnarray*}
+\texttt{integrate}(\varia{funzione},
+\varia{estremo inferiore}, \varia{estremo superiore})
+\end{eqnarray*}
+Ad esempio per $x$ tra -1 e 2
+<<echo=TRUE>>=
+integrate(function(x) x^4,-1,2) 
+@
+Il risultato \`e un numero e di tale numero viene fornito l'errore assoluto, molto basso (la tecnica utilizzata \`e buona).
+\subsection{Metodi di integrazione: metodo dei rettangoli e metodo dei trapezi}
+Ci proponiamo di calcolare $$\int_a^b f(x)dx$$ suddividendo $[a,b]$ in $n$ sottointervalli di eguale ampiezza. Richiamiamo la procedura:  si suddivide l'intervallo $[a,b]$ in $n$ sottointervalli di egual ampiezza determinando il passo del metodo
+$h=\dfrac{b-a}{n}$
+e gli estremi degli intervalli 
+$x_k=a+ k\, h$ con $k=0,\ldots,n$. Si calcolano poi i corrispondenti valori  $y_k=f(x_k)$ e si applicano poi le formule
+\begin{eqnarray*}
+L_n=h \sum_{i=0}^{n-1} y_k\\
+R_n=h \sum_{i=1}^{n} y_k\\
+T_n=\frac{L_n+R_n}{2}\end{eqnarray*}
+che forniscono rispettivamente le stime a sinistra e a destra (metodo dei rettangoli) e la stima con il metodo dei trapezi.
+Integriamo per esempio  una funzione $f(x)=x\, cos(x)$ con $n=10$, tra $a=1$ e $b=4$. Per prima cosa occorre determinare  il valore del passo.
+<<echo=TRUE,keep.source=TRUE>>=
+10->n
+1->a
+4->b
+(b-a)/n->h
+@
+Con il comando   
+<<>>=
+a+(0:n)*h->x;x
+@
+o anche con il comando
+<<>>=
+x=seq(a,b,length=n+1)
+@
+si ottengono gli estremi degli intervalli. Si calcolano poi i valori corrispondenti della funzione e li si sostituiscono nelle formule di approssimazione
+<<>>=
+f<-function(x) cos(x)*x
+f(x)
+y<-f(x)
+ln<-h*sum(y[1:n] )
+rn<-h*sum(y[2:(n+1)])
+tn<-(ln+rn)/2
+tn
+@
+Il confronto con il valore dell'integrale
+<<>>=
+integrate(f,1,4)
+@
+\`e abbastanza buono. Aumentando il numero di punti della suddivisione la stima migliora.
+<<>>=
+100->n
+(b-a)/n->h
+seq(a,b,length=(n+1))->x
+y<-f(x)
+ln<-h*sum(y[1:n])
+rn<-h*sum(y[2:(n+1)])
+tn<-(ln+rn)/2
+tn
+rn
+ln
+@
+ 
+
+\subsection{Metodo Montecarlo}
+Supponiamo di voler applicare il metodo Montecarlo alla determinazione dell'integrale
+\begin{equation*}
+\int_1^4{ (x^3+3x)dx}
+\end{equation*}
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+f<-function(x) x^3+3*x
+curve(f,1,4)
+@
+\caption{Determinazione del bersaglio }
+\label{fig:dgefault}
+\end{center}
+\end{figure}
+
+Occorre determinare la finestra grafica da utilizzare come bersaglio. Nell'esempio $x$ varia tra 1 e 4. 
+Per quanto riguarda la  $y$  tracciamo il grafico della funzione 
+
+<<echo=TRUE>>=
+curve(x^3+3*x,1,4)
+@
+Questa \`e una funzione crescente (fatto che avrei potuto determinare anche dallo studio del segno della derivata) e nell'intervallo in esame ha un minimo  in $x=1$ e un massimo in $x=4$. I corrispondenti valori sono $m=4$ e $M=76$.
+<<echo=TRUE>>=
+f<-function(x) x^3+3*x
+f(4)
+f(1)
+@
+
+
+Possiamo quindi definire il bersaglio come
+$$[1,4]\times [0,76]$$
+Dobbiamo definire il numero di tiri. 
+Il comando $\texttt{runif}(n,a,b)$, ({\it r}andom-{\it unif}orm), permette di generare $n$ numeri nell'intervallo $(a,b)$ distribuiti uniformemente. Se l'intervallo non \`e specificato i numeri appartengono all'intervallo $(0,1)$.
+Useremo il comando  \texttt{runif} per effettuare i tiri.
+
+\par
+<<echo=TRUE,fig=FALSE>>=
+1000->tiri;
+x<-runif(tiri,1,4)		 
+y<-runif(tiri,0,76)
+centri<-which(y<f(x))	 
+successi<-length(centri)
+successi/tiri*76*3                    
+integrate(f,1,4)
+plot(x[centri],y[centri],
+col="red",cex=0.3)   
+points(x[-centri],y[-centri],
+col="blue",cex=0.3)  
+curve(f,add=T)		
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+1000->tiri;
+x<-runif(tiri,1,4)		 
+y<-runif(tiri,0,76)
+centri<-which(y<f(x))	 
+successi<-length(centri)
+successi/tiri*76*3                    
+integrate(f,1,4)
+plot(x[centri],y[centri],
+col="red",cex=0.3)   
+points(x[-centri],y[-centri],
+col="blue",cex=0.3)  
+curve(f,add=T)		
+@
+\caption{Metodo Montecarlo }
+\label{fig:Montec1}
+\end{center}
+\end{figure}
+In modo simile possiamo considerare la determinazione di $\pi$. Immaginiamo di dover determinare l'area del cerchio di raggio 1 che \`e racchiuso nel quadrato $[-1,1]]\times[-1,1]$ del piano cartesiano.
+In tal caso i comandi sono
+<<echo=TRUE,eval=FALSE>>=
+10000->tiri;
+x<-runif(tiri,-1,1)		 
+y<-runif(tiri,-1,1)
+centri<-which(x^2+y^2<1)	 
+successi<-length(centri)
+successi/tiri*4                    
+plot(x[centri],y[centri],col="red",cex=0.4)   
+points(x[-centri],y[-centri], col="blue",cex=0.4)  
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+10000->tiri;
+x<-runif(tiri,-1,1)		 
+y<-runif(tiri,-1,1)
+centri<-which(x^2+y^2<1)	 
+successi<-length(centri)
+successi/tiri*4                    
+plot(x[centri],y[centri],col="red",cex=0.4)   
+points(x[-centri],y[-centri], col="blue",cex=0.4)  
+@
+\caption{Metodo Montecarlo per il disco}
+\label{fig:newton}
+\end{center}
+\end{figure}
+ SI noti che per ridurre la dimensione dei punti abbiamo usato l'opzione \texttt{cex}.
+\section{Numeri complessi}
+Un numero complesso viene indicato come $$z=a +ib$$ dove $a$  \`e la parte reale del numero complesso e $b$ il coefficiente della parte immaginaria $ib$.
+In \textsf{R} un numero complesso viene scritto come
+<<echo=TRUE>>=
+z<-3 +4i
+@
+La componente immaginaria di un numero complesso contiene la lettera \texttt{\i} minuscola.  \`E possibile effettuare somme, sottrazioni, moltiplicazioni e divisioni usando i soliti simboli
+<<echo=TRUE>>=
+2i+(4+5i)
+(3+2i)*(3-1i)
+(3+5i)/(4+2i)
+@
+ Alcune semplici operazioni con i numeri complessi
+\begin{itemize}
+\item{} La parte reale del numero complesso \varia{z} si indica con \texttt{Re}(\varia{z})
+<<echo=TRUE>>=
+z<-3+4i
+Re(z)
+@
+
+\item{} Il coefficiente della parte immaginaria di \varia{z} si indica con
+ \texttt{Im}(\varia{z})
+<<echo=TRUE>>=
+ Im(z)
+@
+\item{}Il coniugato del numero complesso $z=a +ib$ \`e $\overline{z}=a-ib$. In \textsf{R} si usa la funzione \text{Conj}:
+
+<<echo=TRUE>>=
+Conj(z)
+@
+\item{}L'argomento \texttt{arg} di un numero complesso $z=a +i b$ \`e definito come 
+$\texttt{arg}(z) =\texttt{arctan}(b/a)$. In  \textsf{R} si usa
+\texttt{Arg}(\varia{z})
+e per esempio
+<<echo=TRUE>>=
+ Arg(z)
+atan(4/3)
+@
+\item{}Il modulo di  un numero complesso \`e semplicemente $\sqrt(z*\overline{z})$ ed \`e indicato in \textsf{R} con  \text{Mod}(\varia{z})
+<<echo=TRUE>>=
+Mod(z)
+@
+\item{}L'esponenziale con esponente complesso si indica come al solito con
+\texttt{exp}(\varia{z}) 
+<<echo=TRUE>>=
+exp(z)
+exp(z)*exp(Conj(z))   		
+@
+\end{itemize}
+%\end{comment}
+\chapter{Statistica con \textsf{R}}
+\section{Variabili aleatorie}
+Una variabile aleatoria (\emph{random variabile}) \`e
+ una variabile i cui valori sono soggetti a variazioni casuali. Quando i valori possibili di una variabile aleatoria  possono essere elencati parliamo di variabile aleatoria discreta. Quando i valori non possono essere elencati parliamo di variabile aleatoria continua.
+
+ \section{Variabili aleatorie discrete}
+Le variabili aleatorie  discrete che   assumono un numero limitato di valori si dicono anche \emph{finite}.  I valori di una variabile aleatoria discreta possono essere numerici o nominali. 
+ Supponiamo di avere una variabile aleatoria che possa assumere un insieme di valori in  un \emph{alfabeto} assegnato costituito da lettere, parole o numeri. Per esempio un alfabeto pu\`o essere del tipo che segue
+\begin{itemize}
+\item{}(Femmina, Maschio)
+\item{}(A,C,T,G)
+\item{} (0,1) 
+\item{}(Ottimo, Buono, Discreto, Sufficiente, Insufficiente)
+\item{} (Testa, Croce). 
+\item{} I numeri interi
+\end{itemize}
+Per caratterizzare completamente una variabile aleatoria discreta oltre ai valori che questa pu? assumere occorre conoscere la probabilit? di questi valori.
+
+
+
+
+
+
+
+
+
+
+
+
+ Per semplicit\`a considereremo variabili aleatorie finite.\\
+Come possiamo simulare variabili aventi valore nell'alfabeto assegnato?
+In effetti qualunque comando di generazione su un computer non \`e perfettamente casuale; infatti
+la generazione avviene in effetti in modo pseudo-casuale e  secondo un meccanismo che dipende dallo stato interno del computer codificato in una variabile indicata con \texttt{.Random.seed}. Se il {\it seme} iniziale \`e lo stesso i numeri generati saranno uguali. Spesso conviene che i calcoli (ad esempio a fine didattico) siano riproducibili. Ad esempio mettendo in una variabile \texttt{seme} il valore corrente di \texttt{.Random.seed} e richiamandolo o generandolo all'occorrenza. Scegliamo per la riproducibilit\`a dei risultati
+
+<<echo=TRUE>>=
+seme=as.integer(c(0,1,2,3))
+@
+A questo punto possiamo simulare le variabili richieste usando la struttura
+\begin{equation}\texttt{sample}(\varia{alfabeto},\varia{n})\end{equation}
+Se l'alfabeto consiste di tutte le lettere minuscole dell'alfabeto ordinario e ne vogliamo selezionare $n=8$  (in modo che ciascun uscita abbia la stessa probabilit\`a)  basta scrivere
+<<echo=TRUE,>>=
+sample(letters,8)
+@
+  Se invece l'alfabeto consiste delle basi del DNA
+<<echo=TRUE>>=
+alfabeto=c("A","C","G","T")
+sample(alfabeto,2)
+
+@
+Notiamo che  
+<<echo=TRUE>>=
+ sample(alfabeto)
+@
+restituisce una permutazione dell'alfabeto, mentre chiedendo un campione di lunghezza superiore alla lunghezza dell'alfabeto otteniamo un messaggio di errore. Possiamo per\`o immaginare di re-immettere la lettera estratta nell'urna dopo ogni estrazione. In questo caso non c'\`e limite alla sequenza generata.
+Per esempio
+<<echo=TRUE>>=
+alfabeto=c("testa","croce")
+sample(alfabeto,5,replace=T)
+@
+Il precursore  del dado era chiamato astragalo ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
+Gli  astragali sono dei piccoli ossicini di forma irregolare ed hanno 6 facce ma atterranno in  modo stabile solo su 4 di esse numerate 1, 3, 4 e 6  con probabilit\`a all'incirca 0.4 per il 3 e il 4  e di 0.1 per l'1 e il 6.
+Il tiro pi\`u gettonato all'epoca era l'uscita di 4 facce diverse nel lancio di 4 astragali e si chiamava {\it Venus}.
+Il lancio considerato peggiore sul singolo lancio era l'1 chiamato cane o avvoltoio.
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=6cm]{grafici/astragals.jpeg}
+\caption{ Astragalo. }
+\label{fig:daiist}
+\end{center}
+\end{figure}
+Per simulare un astragalo su un computer
+<<echo=TRUE>>=
+sample(c(1,3,4,6),4,replace=T,prob=c(0.1,0.4,0.4,0.1))
+@
+
+Torniamo ora ai classici dadi a 6 facce.
+Supponiamo di lanciare 100 volte un dado equo a 6 facce e di registrare in \texttt{x}
+le uscite rilevate 
+<<echo=FALSE>>=
+options(width=62)
+<<echo=TRUE>>=
+.Random.seed=seme
+dadi100<-sample(1:6,100,replace=T)
+dadi100
+@
+Volendo invece simulare una combinazione da giocare al SuperEnalotto possiamo scrivere
+<<echo=FALSE>>=
+options(width=65)
+<<echo=TRUE>>=
+x<-sample(1:90,6,replace=T);x
+@
+ I numeri usciti sono stati salvati  in una variabile \texttt{x}, per poter effettuare la ricerca di indicatori statistici.
+Il comando che consente di ordinare una lista o un vettore \`e \texttt{sort}, esso pu\`o essere usato in associazione al nome di una variabile o di una lista, ossia:
+\begin{equation}\texttt{sort}(\varia{variabile/lista})\end{equation}
+Volendo ordinare i numeri precedentemente ricavati scriveremo
+<<echo=TRUE>>=
+sort(x)
+@
+
+
+ 
+\section{Statistica descrittiva: singola variabile}
+\subsection{Indicatori statistici}
+\begin{itemize}
+\item{}Media.\vskip0pt
+La media di una serie di numeri si ottiene con la funzione \texttt{mean} scrivendo:
+$\texttt{mean}(\varia{variabile})$.
+Ad esempio, lavorando con la lunghezza del sepalo di 150 piante di iris
+<<echo=TRUE>>=
+mean(x=iris[,1])
+@
+\item{}Varianza campionaria\vskip0pt
+Si ottiene con la funzione predefinita di espressione:
+\texttt{var}(\varia{variabile}).
+Possiamo calcolare la varianza come
+<<echo=TRUE>>=
+var(x)
+@
+\item{}Deviazione Standard campionaria.\vskip0pt
+Non \`e altro che la radice della varianza. Si ottiene con la funzione predefinita di espressione:
+$\texttt{sd}(\varia{variabile})$.
+Sempre basandosi sull'esempio precedente scriveremo
+<<echo=TRUE>>=
+sd(x)
+@
+
+\item{}Quantili. La notazione standard \`e semplicemente: \texttt{quantile}(\varia{variabile}) che determina i quartili e ci fornisce in uscita la statistica dei 5 numeri
+ 
+<<echo=TRUE>>=
+quantile(x)
+@
+ Volendo ricavare i decili dovremo scrivere:
+$$\texttt{quantile}(\varia{variabile},\texttt{seq(0,1,by=0.1)})$$
+in quanto vogliamo dividere l'intervallo $[0,1]$ a passo $0.1$
+
+Nell'esempio:
+<<echo=TRUE>>=
+quantile(x,seq(0,1,by=0.1))
+@
+Si noti che \texttt{quantile} ammette 9 varianti specificabili con l'opzione $\texttt{type}=n$ dove $n$ va da 1 a 9.
+Per esempio
+<<echo=TRUE>>=
+quantile(x,type=4)
+@
+Sui dati in esame le 9 varianti coincidono.
+\end{itemize}
+Per quanto riguarda gli indicatori statistici nel caso di dati ripetuti basta notare che se la lista $x$ contiene i valori e la lista $f$ le frequenze assolute il comando 
+$$\varia{rep}(x,f)$$ costruisce un'unica lista dei dati inclusiva delle ripetizioni.
+Per esempio 
+
+<<echo=TRUE>>=
+x=1:6
+f=c(9,7,9,7,8,10)
+y=rep(x,f)
+y
+@
+Ovviamente senza bisogno di visualizzare \texttt{y} possiamo calcolarne tutti gli indicatori statistici.
+Il comando 
+<<echo=TRUE>>=
+cumsum(f)
+@
+restituisce le frequenze cumulate, dalle quali si possono ricavare facilmente la mediana 
+i quantili.
+
+\subsection{Raggruppamenti in classi}
+
+Consideriamo la rilevazione della temperatura media giornaliera di Milano nel mese di settembre 2010. 
+<<echo=TRUE,eval=FALSE>>=
+sito="http://www.ilmeteo.it/portale/archivio-meteo/"
+indirizzo=paste(sito,"Milano/2010/Settembre?format=csv",sep="")
+meteo=read.table(indirizzo,sep=";")
+<<echo=FALSE,eval=FALSE>>=
+write.table(meteo,file="meteo.txt",sep=";")
+<<echo=FALSE,eval=TRUE>>=
+meteo=read.table("filedati/meteo.txt",sep=";")
+<<echo=TRUE>>=meteo[1,]
+dim(meteo)
+meteo[-1,3]
+@
+A questo punto eliminiamo i livelli di \texttt{meteo} con il comando \texttt{as.vector} e consideriamo il risultato come numerico con
+<<echo=TRUE>>=
+as.numeric(as.vector(meteo[-1,3]))->Milano;
+Milano
+quantile(Milano)
+@
+L'ultimo comando in particolare ci fornisce minimo e massimo dei dati.
+Possiamo esaminare la serie temporale dei dati con i comandi
+<<echo=TRUE,fig=FALSE>>=
+plot(Milano,type="l",xlab="settembre 2010 a milano",ylab="temperatura media")
+@
+ottenendo la figura~\ref{datiist}
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+plot(Milano,type="l",xlab="settembre 2010 a milano",ylab="temperatura media")
+@
+\caption{ Andamento della temperatura a settembre 2010. }
+\label{fig:datiist}
+\end{center}
+\end{figure}
+
+Raggruppiamo ora i dati in classi comprese  tra due estremi che comprendano certamente tutti i dati, per esempio 13 e 23, decidendo di applicare un passo di 2 e vedere come si distribuiscono. Il comando \texttt{cut} associa a ciascun dato la classe di appartenenza selezionata in base ai punti di taglio.
+
+<<echo=TRUE>>=
+cut(Milano,breaks=seq(13.,23.,by=2))
+@
+
+Il comando \texttt{table} conta i dati di ciascuna classe
+
+<<echo=TRUE>>=
+table(cut(Milano,breaks=seq(13.,23.,by=2)))
+@
+Si noti che la suddivisione in classi prevede intervalli aperti a sinistra e chiusi a destra.  
+Per suddividere in modo che gli intervalli siano chiusi a sinistra e aperti a destra si specifica il parametro \texttt{right=FALSE}.
+Possiamo anche usare il comando \texttt{seq} per specificare i tagli.
+ \begin{eqnarray*}
+\texttt{table(cut}( \varia{variabile},\texttt{breaks=seq}(\varia{estremo inf},\\
+\varia{estremo sup},\texttt{by}=\varia{passo}),\texttt{right=FALSE}))
+\end{eqnarray*}
+o in modo  pi\`u generale   
+\begin{eqnarray*}
+&\texttt{table(cut}(\varia{ variabile},\\
+&\texttt{breaks=c}(\varia{estremo\; inferiore}, \ldots,\varia{estremo superiore})) 
+\end{eqnarray*}
+estremamente utile in quanto consente di raggruppare i dati in classi non necessariamente di ugual ampiezza.
+<<echo=TRUE>>=
+table(cut(Milano,breaks=c(12.5,14,15,16, 18,20,22.5),
+right=F))
+@ 
+Volendo raggruppare in classi i dati delle precedenti uscite del dado possiamo scrivere  
+<<echo=TRUE>>=
+table(cut(dadi100,breaks=0:6))
+@
+Se scegliamo di chiudere a sinistra gli intervalli
+<<echo=TRUE>>=
+table(cut(dadi100,breaks= 1:7,right=FALSE))
+@ 
+In questo caso la occorre prestare attenzione alla chiusura agli estremi degli intervalli\subsection{Areogrammi}
+Il comando generico per generare un istogramma \`e:
+\begin{equation*}
+\texttt{hist}(\varia{variabile})
+\end{equation*}
+che segue per\`o la struttura del comando \texttt{cut}. L'ampiezza di ciascuna classe salvo diversamente indicato \`e costante e decisa da \textsf{R}.
+\`E  possibile variare tale condizione definendo una lista con i punti di taglio ({\it cutoff}) delle classi volute:
+\begin{equation} \texttt{hist}(\varia{variabile},\texttt{c}(\varia{valore}_1, \varia{valore}_2, \ldots))
+\end{equation}
+Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del dado, il comando 
+<<echo=TRUE,fig=FALSE>>=
+par(mfrow=c(1,2))
+hist(dadi100,breaks=seq(0.5,6.5,1),col="red")
+hist(dadi100,freq=FALSE,breaks=seq(0.5,6.5,1),col="blue")
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+par(mfrow=c(1,2))
+hist(dadi100,breaks=seq(0.5,6.5,1),col="red")
+hist(dadi100,freq=FALSE,breaks=seq(0.5,6.5,1),col="blue")
+@
+\caption{ Diagramma a colonne e areogramma per il lancio di un dado.}
+\label{fig:datiiist}
+\end{center}
+\end{figure}
+genera l'istogramma (in rosso, a sinistra Figura~\ref{fig:datiist}) con le frequenze assolute delle classi in ordinata. La sequenza dei punti di taglio \`e stata scelta in modo che i numeri interi da 1 a 6 siano al centro delle classi corrispondenti. Se invece volessimo creare un areogramma  (ossia avere un tracciato per cui le aree siano pari alle frequenze relative) a partire dalle stesse uscite dovremo imporre il parametro \texttt{freq=FALSE} otterremo il pannello a destra (in blu) della figura~(\ref{fig:datiist}). Avendo scelto classi di ampiezza costante i 2 grafici differiscono semplicemente per un cambio di scala sull'asse $y$.
+ 
+In modo simile possiamo tracciare un areogramma  dei dati nella variabile \texttt{milano}  
+<<echo=TRUE,eval=FALSE>>=
+par(mfrow=c(1,2))
+hist(Milano, col="green",freq=FALSE,right=FALSE,
+main="Cutoff automatici")
+@
+lasciando \textsf{R} libero di scegliere i punti di taglio (pannelli a sinistra della figura \ref{fig:datiistmilano}) o scegliendoli a nostra volta (pannelli a destra della stessa figura  \ref{fig:datiistmilano})
+<<echo=FALSE>>=
+options(width=55)
+<<echo=TRUE>>=
+hist(Milano,col="red",freq=FALSE,
+breaks=c(12.5,15,17,18,20,22.5),right=FALSE, 
+main="Cutoff personalizzati")
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+par(mfrow=c(1,2))
+hist(Milano, col="green",freq=FALSE,right=FALSE,main="Cutoff automatici")
+hist(Milano,col="red",freq=FALSE,breaks=c(12.5,15,17,18,20,22.5),
+right=FALSE,main="Cutoff personalizzati")
+@
+\caption{ Areogramma dei dati della temperatura. Scelta automatica dei punti di taglio.}
+\label{fig:datiistmilano}
+\end{center}
+\end{figure}
+Si noti la stabilit\`a degli areogrammi rispetto ai cambi nella suddivisione.
+\subsection{Generazione di boxplot}
+
+Il \texttt{boxplot}  \`e una rappresentazione grafica immediata della statistica dei 5 numeri e simultaneamente ci  segnala eventuali punti discordanti o anomali, {\it outlier}.
+Il comando generico \`e: \begin{equation}\texttt{boxplot}(\varia{variabile})\end{equation}
+prendendo il vettore $x$ contenente i risultati di 100 lanci
+otteniamo la figura~\ref{fig:boxplotdado}
+\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE,fig=TRUE,height=4,width=4>>=
+boxplot(dadi100)
+@
+\caption{Boxplot dei risultati del lancio di un dado}\label{fig:boxplotdado}
+\end{center}
+\end{figure}
+da cui si evince che il valore massimo dei dati \`e 6, il minimo \`e 1 e non ci sono punti anomali, per cui non vi sono dati anomali, altrimenti evidenziati da un pallino. Si legge inoltre il valore di mediana (4) primo quartile (2) e terzo quartile (5).
+
+\subsection{Creazione di grafici a torta}
+
+Il comando \texttt{pie} consente, partendo da una tabella, di tracciare il diagramma a torta per una variabile nominale raggruppata in classi. Il comando \`e
+
+\begin{equation*}\texttt{pie(table}(\varia{variabile} ))
+\end{equation*}
+ad esempio (facendo riferimento ai precedenti dati):
+<<echo=TRUE,fig=FALSE>>=
+pie(table(dadi100))
+@
+fornisce in uscita  la Figura~\ref{fig:pie}
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+pie(table(dadi100))
+@
+\caption{Diagramma a torta per il lancio di un dado equo.}
+\label{fig:pie}
+\end{center}
+\end{figure}
+\begin{shaded}{Costruire una matrice contenente le coordinate di 50 punti nel rettangolo $[0,4]\times [0,2]$ in due dimensioni (generate utilizzando il generatore di numeri pseudocasuali). Produrre un grafico con due pannelli, dove il primo pannello \`e uno scatter-plot}
+\end{shaded}
+\section{Variabili doppie e rette di regressione} 
+Supponiamo di misurare la concentrazione di acido lattico muscolare durante uno sforzo di 10 minuti,  
+<<echo=TRUE>>=
+x<-tempo<-c(1,2,3,4,5,6,7,8,9,10)
+y<-concentrazione<-c(0.3,0.65,0.7,0.8,0.95,1.05,1.3,1.7,1.9,
+2.5)
+@
+Per analizzare questi dati conviene preliminarmente tracciarne un diagramma a dispersione. 
+\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE,fig=TRUE>>=
+plot(x,y)
+@
+\caption{Diagramma a dispersione tempo/concentrazione. }
+\label{fig:scatte}
+\end{center}
+\end{figure}
+Possiamo inoltre determinare il coefficiente di correlazione lineare
+<<echo=TRUE>>=
+cor(x,y)
+@
+Per definire un modello di relazione lineare occorre usare il comando \texttt{lm} (\varia{linear model}).
+Nella sua generica forma il comando \`e espresso come\footnote{ Per digitare la tilde  \mytilde\;  su Mac premere ALT 5 su PC invece il tasto Alt Gr (attivazione del codice ASCII) e sul tastierino numerico digitare il numero 126. Lavorando su un portatile il tastierino numerico \`e spesso incorporato nella tastiera con colorazione blue dei tasti.}
+$$\texttt{lm}(\varia{y} \sim  \varia{x})$$
+Otteniamo i valori di pendenza e intercetta. 
+
+Possiamo tracciare la retta di regressione con il comando \texttt{abline}.
+<<echo=TRUE,fig=FALSE>>=
+plot(x,y,pch=19,col="red") 
+abline(lm(y~x),col="blue")
+@
+Per determinare  la retta di regressione sulle $y$ dobbiamo invertire $x$ e $y$. 
+<<echo=TRUE,fig=FALSE>>=
+lm(x~y)
+lm(x~y)$coefficients->coeff
+a=1/coeff[2];a;
+b=-coeff[1]/coeff[2];
+abline(b,a,col="green")
+@
+In tal modo otteniamo il grafico~\ref{fig:duerettex}.
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+plot(x,y,col="red")
+abline(lm(y~x),col="blue")
+abline(b,a,col="green")
+@
+\caption{Rette di regressione. In blu $R_x$, in verde $R_y$.}
+\label{fig:duerettex}
+\end{center}
+\end{figure}
+Consideriamo ora il seguente \emph{dataset} di mammiferi  in cui le 2 variabili rappresentano  le dimensioni del corpo e del cervello.
+<<echo=TRUE>>= 
+library(MASS)
+mammals
+@
+Per prima cosa tracciamo il grafico dei punti  in scala non trasformata e, visto la compresenza di dati molto prossimi all'origine e di dati molto distanti in scala logaritmica (sia le $x$ che le $y$ vengono trasformate prendendone i logaritmi)
+<<echo=TRUE,fig=FALSE>>=
+par(mfrow=c(1,2))
+plot(mammals)
+plot(mammals,log="xy")
+@
+come in Figura~\ref{fig:duemammals}.\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE,fig=TRUE>>=
+par(mfrow=c(1,2))
+plot(mammals)
+plot(mammals,log="xy")
+@
+\caption{Diagramma a dispersione massa corporea/massa del cervello in scala normale ed in scala logaritmica. }
+\label{fig:duemammals}
+\end{center}
+\end{figure}
+Visti i  risultati ottenuti usando la scala logaritmica tracciamo anche la corrispondente retta di regressione 
+<<echo=TRUE,fig=FALSE>>=
+plot(log(mammals$brain)~log(mammals$body),col="BLUE",pch=19,type="p")
+abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3); 
+uomo=which(rownames(mammals)=="Human")
+text(log(mammals[uomo ,1]),log(mammals[uomo ,2]),rownames(mammals)[uomo])
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+plot(log(mammals$brain)~log(mammals$body),col="BLUE",pch=19,type="p")
+abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3 ); 
+uomo=which(rownames(mammals)=="Human")
+text( log(mammals[uomo ,1]),log(mammals[uomo ,2]),rownames(mammals)[uomo])
+@
+\caption{ Retta di regressione. Dimensione del corpo e del cervello. Si noti la posizione dell'uomo.}
+\label{duerette}
+\end{center}
+\end{figure}
+Si noti il comando \texttt{text(\varia{x},\varia{y}, \varia{testo})}
+dove    $\varia{x}$ e $\varia{y}$  e $\varia{testo}$ sono vettori di arbitraria lunghezza contenenti ascisse, ordinate e testo da inserire.
+\section{Distribuzioni in \textsf{R}}
+I nomi delle principali distribuzioni in \textsf{R} sono\vskip10pt
+\begin{tabular}{|r|c |}
+\hline
+\texttt{norm}&normale\\
+\texttt{t}  &Student\\
+\texttt{chisq}& chi quadro\\
+\texttt{f}&Fisher\\
+\texttt{binom }&binomiale\\
+\hline
+\end{tabular}\vskip10pt
+A questi nomi possiamo aggiungere diversi prefissi\vskip10pt
+\begin{tabular}{|r|c |}
+\hline
+\texttt{d}&densit\`a\\
+\texttt{p}  &primitiva\\
+\texttt{q}& quantile\\
+\texttt{r}&random\\
+  \hline
+\end{tabular}
+\vskip10pt
+per caratterizzare diversi aspetti.
+
+<<echo=FALSE, results=hide>>=
+library(exams)
+## DATA GENERATION
+r <- sample(1:10)
+if(runif(1) < 1/3) {
+  mx <- my <- 0
+  sx <- sy <- 1
+} else {
+  mx <- sample(10 * -5:5, 1)
+  my <- sample(20 * 0:5, 1)
+  sx <- sample(c(1, 10, 20), 1)
+  sy <- sample(c(1, 10, 20), 1)
+}
+
+b <- r * sy/sx
+a <- my - b*mx
+x <- rnorm(200, mx, sx)
+y <- b * x + rnorm(200, a, sy * sqrt(1- r^2))
+
+## QUESTION/ANSWER GENERATION
+questions <- character(5)
+solutions <- logical(5)
+explanations <- character(5)
+
+if (runif(1) < 0.5) {
+  questions[1] <- "The scatterplot is standardized."
+  solutions[1] <- mx == 0 & my == 0 & sx == 1 & sy == 1
+  explanations[1] <- if (solutions[1]) "$X$ and $Y$ have both mean $0$ and variance $1$." else 
+  "The scatterplot is not standardized, because $X$ and $Y$ do not both have mean $0$ and variance $1$."
+} else {
+  questions[1] <- "La pendenza della retta di regressione ? circa $1$."
+  solutions[1] <- abs(b - 1) < 0.1
+  explanations[1] <- paste("The slope of the regression line is given by $r \\\\cdot s_y/s_x$ and hence",
+                           ifelse(abs(b - 1) < 0.1, "", "not"), "about equal to $1$.")
+}
+
+if (runif(1) < 0.5) {
+  questions[2] <- "The absolute value of the correlation coefficient is at least $0.8$."
+  solutions[2] <- abs(r) >= 0.8
+} else {
+  questions[2] <- "The absolute value of the correlation coefficient is at most $0.8$."
+  solutions[2] <- abs(r) <= 0.8
+}
+explanations[2] <- if(abs(r) >= 0.9) {
+  paste("A strong association between the variables is given in the scatterplot.",
+        "Hence the absolute value of the correlation coefficient is close to $1$",
+        "and therefore larger than $0.8$.") 
+  } else if (abs(r) == 0) {
+    paste("No association between the variables is observed in the scatterplot.",
+          "This implies a correlation coefficient close to $0$.") 
+  } else paste("Only a slightly positive association between the variables is observable in the scatterplot.",
+               "This implies a correlation coefficient with an absolute value smaller than $0.8$.")
+
+if (runif(1) < 0.5) {
+  questions[3] <- "The standard deviation of $X$ is at least $6$."
+  solutions[3] <- sx >= 6
+  explanations[3] <- paste("The standard deviation of $X$ is about equal to $", sx, "$ and is therefore",
+                           ifelse(sx < 6, "smaller", "larger"), "than $6$.")
+} else {
+  questions[3] <- "The standard deviation of $Y$ is at least $6$."
+  solutions[3] <- sy >= 6
+  explanations[3] <- paste("The standard deviation of $Y$ is about equal to $", sy, "$ and is therefore",
+                           ifelse(sy < 6, "smaller", "larger"), "than $6$.")
+}
+
+if (runif(1) < 0.5) {
+  questions[4] <- "The mean of $X$ is at most $5$."
+  solutions[4] <- mx <= 5
+  explanations[4] <- paste("The mean of $X$ is about equal to $", mx, 
+                           "$ and hence is", ifelse(mx < 5, "smaller", "larger"), "than $5$.")
+} else {
+  questions[4] <- "The mean of $Y$ is at least $30$."
+  solutions[4] <- my >= 30
+  explanations[4] <- paste("The mean of $Y$ is about equal to $", my, 
+                           "$ and hence is", ifelse(my < 30, "smaller", "larger"), "than $30$.")
+}
+
+xh <- round(runif(1, -1, 1)*sx + mx, 1)
+yhr <- round(a + b*xh, 1)
+alpha <- if (abs(r) > 0 & abs(mx - xh) > 0) sign(mx - xh) * sign(r) else 1
+yhf <- round(yhr + 2 * sy * alpha, 1)
+yh <- sample(c(yhr, yhf), 1)
+questions[5] <- paste("For $X = ", as.character(xh), "$, $Y$ can be expected to be about ", 
+                      as.character(yh), ".", collapse="")
+solutions[5] <- abs(yh - yhr) < 0.01 * sy
+explanations[5] <- paste("The regression line at $X=", xh, 
+                         "$ implies a value of about $Y = ", yhr, "$.", sep="")         
+           
+## permute order of solutions/questions
+o <- sample(1:5)
+questions <- questions[o]
+solutions <- solutions[o]
+explanations <- explanations[o]  
+@
+\begin{itemize}
+\begin{question}
+  Figure~\ref{fig:scatterplot} shows a scatterplot. Which of the
+  following statements are correct?
+
+\setkeys{Gin}{width=0.7\textwidth}
+\begin{figure}[htb!]
+\begin{center}
+<<fig=TRUE, height = 5, width = 6, echo=FALSE, eps=FALSE, results=hide>>=
+plot(x, y)
+@
+\caption{\label{fig:scatterplot} Scatterplot}
+\end{center}
+\end{figure}
+
+\begin{answerlist}
+  \item \Sexpr{questions[1]}
+  \item \Sexpr{questions[2]}
+  \item \Sexpr{questions[3]}
+  \item \Sexpr{questions[4]}
+  \item \Sexpr{questions[5]}
+\end{answerlist}
+\end{question}
+
+%% SOLUTIONS
+\begin{solution}
+\begin{answerlist}
+  \item \Sexpr{mchoice2text(solutions[1])}: \Sexpr{explanations[1]}
+  \item \Sexpr{mchoice2text(solutions[2])}: \Sexpr{explanations[2]}
+  \item \Sexpr{mchoice2text(solutions[3])}: \Sexpr{explanations[3]}
+  \item \Sexpr{mchoice2text(solutions[4])}: \Sexpr{explanations[4]}
+  \item \Sexpr{mchoice2text(solutions[5])}: \Sexpr{explanations[5]}
+\end{answerlist}
+\end{solution}
+\end{itemize}
+%% META-INFORMATION
+%% \extype{mchoice}
+%% \exsolution{\Sexpr{mchoice2string(solutions)}}
+%% \exname{Multiple choice}
+
+
+\subsection{Distribuzione normale}
+\subsubsection{La funzione \texttt{dnorm}}
+Come appena visto \textsf{R }indica con il nome \texttt{dnorm}, la densit\`a normale o gaussiana. Essa accetta come parametri sia la media $\mu$ che la deviazione standard $\sigma$ come \`e possibile verificare con il comando \texttt{formals} che ci fornisce gli argomenti di una funzione e gli eventuali valori preassegnati.
+<<echo=TRUE>>=
+formals(dnorm)
+@
+Se i parametri sono omessi \texttt{dnorm} rappresenta la densit\`a normale standard con $\mu=0$ e $\sigma=1$. 
+Il grafico~(\ref{normalesta}) della gaussiana
+ tra due estremi, ad esempio -2.5 e 2.5 si ottiene con il solito comando
+<<echo=TRUE,fig=FALSE>>=
+curve(dnorm,-2.5,2.5)
+@
+
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+curve(dnorm,-2.5,2.5)
+@
+\caption{ Grafico della normale standard nell'intervallo $[-2.5,2.5]$. }
+\label{normalesta}
+\end{center}
+\end{figure}
+Per  visualizzare una gaussiana non standard, ad esempio con media $\mu=1$,  deviazione standard $\sigma=1.5$, tra -3 e 3. scriveremo invece
+<<echo=TRUE>>=
+curve(dnorm(x,mean=1,sd=1.5),-3,3)
+@
+\subsubsection{La funzione \texttt{pnorm}}
+La funzione \texttt{pnorm}(\varia{x})  \`e definita come 
+\begin{equation*}\texttt{pnorm}(\varia{x}) =\int_{-\infty}^x  \texttt{dnorm}(s)ds
+\end{equation*}
+Ovviamente 
+$$\int_a^b \texttt{dnorm}(x)dx=\texttt{pnorm}(b)-\texttt{pnorm}(a)$$
+e per avere l'area sottesa tra $3$ e $5$  basta scrivere:
+<<echo=TRUE>>=
+pnorm(5)-pnorm(3) 
+@
+
+Per ottenere il valore dell'area tra 0 e $x$ bisogna allora sottrarre \texttt{pnorm}(0)=0.5 all'area fornita dalla funzione.
+Per cui possiamo scrivere:
+<<echo=TRUE>>=
+pnorm(1)-0.5
+@
+
+
+ \subsubsection{La funzione \texttt{qnorm} e la tabella della densit\`a di Gauss}
+
+Notiamo preliminarmente che 
+se $$ \int_{-x}^x \texttt{dnorm}(s)ds= y$$ allora
+$$\texttt{pnorm}(x)=\int_{-\infty}^x \texttt{dnorm}(s)ds=1-\frac{1-y}{2}=\frac{1+y}{2}$$
+ La funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}  quindi
+$$x=\texttt{qnorm}\left(\frac{1+y}{2}\right)$$
+In termini pratici possiamo introdurre la funzione
+<<echo=TRUE>>=
+u<-function(area) qnorm((1+area)/2)
+@
+fornisce fissato il livello di fiducia l'ascissa $x$  tale che l'intervallo simmetrico $[-x,x]$ racchiuda un'area pari al lvello di fiducia. Per esempio
+<<echo=TRUE>>=
+u(0.95)
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+f=dnorm
+axis(1,c(-3,-1,0,1,3),c("",expression(-u[1-epsilon]),0,expression(u[1-epsilon]),""))
+xmin<-1;xmax<-3; npunti<-200
+vals<-seq(xmin,xmax,length=npunti) 
+x<-c(xmin,vals,xmax,xmin)
+y<-c(0,f(vals),0,0);
+<<echo=FALSE,fig=TRUE>>=
+curve(f,-3,3,axes=FALSE,ylab="",xlab="",ylim=c(0,0.5))
+axis(1,c(-3,-1,0,1,3),c("",expression(-u[1-epsilon]),0,expression(u[1-epsilon]),""))
+points(x,y,pch=20,col="red",cex=0.2)
+polygon(x,y,density=20,angle=45,col="RED")
+ x<--x
+ y<-c(0,dnorm(-vals),0,0)
+polygon(x,y,density=20,angle=45,col="RED")
+abline(h=min(y))
+text(0,0.45,expression("code della gaussiana"))
+ text(-1.6,0.03,expression(epsilon/2))
+ text(1.6,0.03,expression(epsilon/2))
+ lines(c(0,0),c(0,dnorm(0))) 
+@
+\caption{ Code della distribuzione normale}
+\label{normaletratto}
+\end{center}
+\end{figure}
+
+ \subsubsection{La funzione \texttt{rnorm}}
+\`E possibile generare dei valori standardizzati casuali (media uguale a 0, deviazione standard pari a 1) che seguono la distribuzione normale standard. Basta semplicemente definire il numero di valori desiderati.
+Il comando nella sua espressione generale \`e:
+\begin{equation}\texttt{rnorm}(n,\texttt{mean}=\varia{valore}_1,\texttt{sd}=\varia{valore}_2)\end{equation}
+Nel caso in cui volessimo una lista di 20 valori di una variabile normale con media assegnata 5 e deviazione standard 1 scriveremo :
+
+<<echo=TRUE,eval=FALSE>>=
+rnorm(20,mean=5,sd=1)
+@
+\subsection{La distribuzione $t$ di Student}
+In \textsf{R} la distribuzione di Student \`e indicata con la lettera  \texttt{t}.  Come per le altre densit\`a  si possono considerare le funzioni\vskip5pt
+\begin{tabular}{|r|r |}
+\hline
+dt  &densit\`a\\
+pt  &primitiva\\
+qt & quantili\\
+rt  &generatore random\\
+\hline
+\end{tabular}
+\vskip10pt
+Il grafico della distribuzione di Student ad un certo numero \texttt{df} di gradi di libert\`a  si ottiene con il comando
+\begin{equation*}
+\texttt{curve(dt(x},\texttt{df}),\varia{a},\varia{b})
+\end{equation*}
+Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di libert\`a (vedi figura ~(\ref{fig:graficostudent1})):
+
+\begin{figure}[htbp] 
+\begin{center}
+<<echo=TRUE,fig=TRUE>>=
+curve(dt(x,10),-2,2)
+@
+\caption{ Grafico della distribuzione di Student a 10 gradi di libert\`a. }
+\label{fig:graficostudent1}
+\end{center}
+\end{figure}
+Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cui  la deviazione standard della popolazione $\sigma$  non \`e conosciuta e viene rimpiazzata  dalla deviazione standard campionaria  $S$, calcolata con un numero $N$ di dati e quindi con $N-1$ gradi di libert\`a. Quando per\`o il numero di dati si avvicina a 30 la curva di Student \`e praticamente sovrapposta a quella della distribuzione normale, come mostra il grafico~(\ref{fig:graficostudent}):
+ 
+\begin{figure}[htbp] 
+\begin{center}
+<<echo=TRUE,fig=TRUE>>=
+curve(dnorm(x),-2,2,col=3)
+curve(dt(x,2),-2,2,col=1,add=T)
+curve(dt(x,25),-2,2,col=2,add=T)
+legend("topleft", c("df=2","df=25","normale"),pch=15,col=1:3);
+@
+\caption{Grafico della distribuzione di Student a 10 gradi di libert. }
+\label{fig:graficostudent}
+\end{center}
+\end{figure}
+ \subsection
+{Intervalli di confidenza e test di Student (dati non appaiati)}
+La funzione di 
+\textsf{R} che esegue il test di Student nelle sue diverse forme \`e  \texttt{t.test}   Nella sua forma pi\`u semplice 
+
+<<echo=TRUE>>=
+x=1:20;  t.test(x)
+@
+In assenza di ipotesi  \textsf{R} calcola il consuntivo $$t=\dfrac{M_N(X)-\mu}{S_X}\sqrt {N}$$
+assumendo che sia $\mu=0$. 
+Possiamo anche eseguire specificare l'ipotesi sul valore di $\mu$:
+<<echo=TRUE>>=
+t.test(x,mu=7)
+@
+Possiamo infine specificare l'ipotesi alternativa. Per esempio se l'ipotesi alternativa \`e
+\texttt{\virgolette less\virgolette}  il risultato del test cambia completamente. 
+<<echo=TRUE>>=
+t.test(x,mu=7, alternative="less")
+@
+
+In pratica ci viene fornito come $p$-value il valore dell'area sottesa dalla distribuzione di Student da $-\infty$ al valore di $t$ se l'ipotesi alternativa \`e  \texttt{\virgolette less\virgolette} e il valore dell'area sottesa dalla distribuzione di Student dal valore di $t$ a $+\infty$ se l'ipotesi alternativa \`e     \texttt{\virgolette greater\virgolette}  \subsection{Test di Student per dati appaiati}
+Il test di Student per dati appaiati non \`e altro che un test di Student sulla differenza di 2 liste di dati di ugual lunghezza. Consideriamo ad esempio il confronto di 2 tecniche di misura applicate agli stessi campioni 
+<<echo=TRUE>>=
+x<-c(1.46,2.22,2.84,1.97,1.13,2.35)
+y<-c(1.42,2.38,2.67,1.8,1.09,2.25)
+@
+
+Possiamo calcolare la differenza \texttt{x-y} ed applicare il test di Student oppure ottenere lo stesso risultato specificando l'opzione \texttt{paired=TRUE}
+<<echo=TRUE>>=
+ t.test(x,y,paired=TRUE)
+@
+
+Il consuntivo   \texttt{t} cade entro la regione di accettazione del test.
+\`E  possibile specificare il livello di fiducia da utilizzare per il test di Student come: 
+
+$$\texttt{conf.level}=\varia{numero}$$
+
+Il comando completo di tutti i parametri  \`e quindi:
+\begin{eqnarray*}
+\texttt{t.test}(\varia{dati}_1,\varia{dati}_2,
+\\
+\texttt{paired=TRUE,conf.level}=\varia{valore})
+\end{eqnarray*}
+Ad esempio eseguiamo un $t$-test per dati appaiati, tra $x=(1,2,3,4)$ e $y=(3,2,4,5)$ con {\it confidence level} di 0.85. Scriveremo
+<<echo=TRUE,eval=FALSE>>=
+t.test(1:4,5:2,paired=TRUE,conf.level=0.85)
+@
+ Il consuntivo $t$ cade fuori dalla regione di accettazione proposta. 
+ 
+ \section{Test $\chi^2$  di indipendenza}
+
+%code chunk
+Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani   
+<<eval=FALSE,keep.source=TRUE>>=
+read.table("http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html",
+skip=39,header=T,nrow=478,sep="\t")->kidinterest
+<<echo=FALSE,eval=TRUE>>=
+read.table("filedati/PopularKids.html",
+skip=39,header=T,nrow=478,sep="\t")->kidinterest
+head(kidinterest)
+@
+Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
+%codechunk
+\end{document}
+<<>>=
+colnames(kidinterest)
+interessi=kidinterest[,c(1,5,7)]
+head(interessi)
+table(interessi)
+@
+Consideriamo per esempio le variabili provenienza e traguardi
+<<>>=
+interessi2=kidinterest[,c(5,7)]
+tabella=table(interessi2)
+tabella
+@
+<<echo=FALSE>>=
+save.image(file="Rdata/cap02.Rdata")
+@ 
+Il test $\chi^2$  di indipendenza consente di  verificare se  due variabili sono indipendenti. 
+Se consideriamo le due variabili precedenti sesso e interessi.
+\textsf{R}  dispone del comando \texttt{chisq.test},\index{\texttt{chisq.tst},test $\chi^2$} 
+dalla sintassi generale:$$\texttt{chisq.test}(\varia{tabella})$$
+
+Nell'esempio
+%code chunk
+<<echo=TRUE>>=
+studenti<-read.csv("http://www.pharm.unipmn.it/rinaldi/file_corso/studenti.csv")
+head(studenti)
+tabellaEH=table(studenti$Eyes,studenti$Hair)
+chisq.test(tabellaEH)
+@  
+L'intervallo di accettazione dell'ipotesi (che ricordiamo \`e l'indipendenza) al 95\% di fiducia e 1 gradi di libert\`a \`e  $[0, 3.841]$, il consuntivo cade dentro, per cui l'ipotesi \`e accettata.
+Per eliminare la correzione di Pearson si utilizza il parametro  \texttt{correct=FALSE}.
+Ad esempio scriveremo:
+%code chunk
+<<echo=TRUE,eval=FALSE>>=
+chisq.test(tabellaEH,correct=FALSE)
+@
+  
+\subsection{Test $\chi^2$  di adeguamento}
+Consideriamo una variabile aleatoria discreta con frequenza assoluta delle uscite racchiuse in una lista \texttt{data}. Ci si pone il problema di stabilire se tali frequenze sono compatibili con le probabilit\`a (riportate nella lista $p$).
+<<echo=TRUE,eval=FALSE>>=
+data<-c(2,3,4,5,6,7,8,9,10,11)
+prob<-c(5,20,5,10,5,15,5,10,10,15)
+sum(prob)  
+chisq.test(data,p=prob,rescale.p=TRUE)
+@
+Si \`e usata qui la scelta \texttt{rescale.p=TRUE} in quanto la somma delle  probabilit\`a non era 1. 
+L'uscita del test riporta il valore del consuntivo $\chi^2$ i gradi di libert\`a ed il valore $p$.   
+
+\section{Distribuzione Binomiale}
+Il coefficiente binomiale \`e definito come 
+\begin{equation*} \texttt{choose}(\varia{n},\varia{m})={n \choose m}=\dfrac{n!}{m!\times (n-m)!}\end{equation*}
+Ad esempio  
+<<echo=TRUE>>=
+choose(6,3)
+@
+La distribuzione binomiale in \textsf{R} ha la sintassi $$\texttt{dbinom}(\varia{successi},\varia{prove},
+\varia{probabilit\`a successo})$$ e fornisce la  probabilit\`a di ottenere nel corso di un certo numero di prove  il numero di successi indicato.\index{\texttt{dbinom}}
+Ad esempio, nel lancio di un dado 10 volte, vogliamo determinare la  probabilit\`a che esca  \emph{esattamente} due volte il numero 4:
+%codechunk
+<<echo=TRUE>>=
+dbinom(2,10,1/6)
+@
+
+La  probabilit\`a \`e circa del 29\%.
+
+ 
+\begin{shaded}
+\begin{description}
+ \item{}conta i caratteri del tuo nome
+\item{} vettore che contenga il quadrato dei primi 8 numeri pari
+\item{}vettore che contenga la radice cubica dei primi 10 numeri naturali.
+\item{}inserire in una matrice le coordinate 2D dei punti di un pentagono. Plot dei punti, come punti, come linee e come linee tratteggiate. Pi\`u arduo: riempimento della superficie
+\item{}derivata di $x^3+x^2+2x+1$, plot della funzione e plot della derivata come due pannelli distinti in un grafico unico. hint: par(mfrow)
+\end{description}
+\end{shaded}  
+ 
+\chapter{Strutture di dati}
+%\section{Aritmetica modulare}
+\section{Visualizzazione di oggetti di \textsf{R}}
+Per visualizzare un oggetto di \textsf{R} si pu\`o usare il comando \texttt{print} ma anche il comando \texttt{cat} che fornisce spesso un risultato migliore. 
+
+Per avere una stampa abbreviata
+%codechunk 
+<<echo=TRUE,eval=T>>=
+head(iris)
+tail(iris)
+@
+Il comando \texttt{str}\index{\texttt{str}} consente una visualizzazione parziale.
+\scriptsize
+<<echo=FALSE,eval=TRUE>>=
+options(width=50)
+<<echo=TRUE>>
+str(iris)
+@
+\normalsize
+\section{Le stringhe}
+\subsection{Stringhe \texttt{print}, \texttt{cat} e caratteri speciali}
+Una stringa\index{stringa} di testo \`e una collezione di caratteri; in genere, una stringa \`e resa riconoscibile dall'essere racchiusa tra virgolette. 
+Oltre alle virgolette, vi sono numerosi altri caratteri speciali che possono apparire in una stringa. 
+I pi\`u comuni sono ``\texttt{\textbackslash t}'' per \texttt{TAB}, `` \texttt{\textbackslash n}'' per una nuova linea e ``\texttt{\textbackslash }'' per un singolo {\it backslash}. 
+Quest'ultimo carattere \`e un carattere di \emph{escape} e consente una lettura diversa di quanto lo segue.  Per esempio
+<<>>=
+cat("\"sin\"")
+nchar("\"sin\"")
+cat("\\")
+cat("ora a capo\nsono a capo?")
+cat("ora spazio\triprendo")
+@
+La funzione \texttt{nchar}, \index{\texttt{nchar}} che conta il numero di caratteri di una stringa, non includer\`a quindi il carattere di \emph{escape}\index{\emph{escape}} nel totale dei caratteri. Ad esempio:
+<<echo=TRUE>>=
+"Tab\t" 
+cat("Tab\t")
+nchar("Tab\t")
+@
+
+\subsection{Operare con le stringhe}
+
+Succede spesso di dover lavorare in modo automatico con stringhe di testo, anche nello scrivere indirizzi di rete o cartelle di lavoro. In  \textsf{R} diversi comandi consentono la  generazione, manipolazione e stampa di una o pi\`u stringhe di testo\footnote{Per un  uso pi\`u specifico si pu\`o consultare il pacchetto \texttt{biostrings}.}. Consideriamo inizialmente una singola frase.
+%codechunk 
+<<echo=TRUE>>=
+x="lavorare con le stringhe"
+@ 
+Possiamo verificarne la classe e determinare il numero di caratteri di \texttt{x}
+%codechunk  
+<<echo=TRUE>>=
+class(x)
+nchar(x)
+@ 
+e anche considerare sottostringhe
+%codechunk
+<<echo=TRUE>>=
+substr(x,3,8)
+@
+o  abbreviazioni ottenibili con il comando \texttt{abbreviate} \index{\texttt{abbreviate}}
+%codechunk
+<<echo=TRUE>>=
+abbreviate("Mario Rossi",4)
+@
+
+Certi oggetti possono essere convertiti a stringhe: per esempio il numero 2 pu\`o essere visto come una stringa e riconvertito a numero.
+%codechunk
+<<echo=TRUE>>=
+ i=2;toString(i) 
+as.numeric(toString(i))
+@   
+Alcune stringhe molto frequenti sono le lettere \index{\texttt{letters}}\index{\texttt{LETTERS}} dell'alfabeto, maiuscole o minuscole
+%codechunk
+<<echo=TRUE>>=
+letters[1:10]
+LETTERS[1:10]
+@ 
+o i mesi dell'anno (per esempio abbreviati in inglese)\index{\texttt{month.abb}}
+%codechunk
+<<echo=FALSE>>=
+options(width=60)
+<<echo=TRUE>>=
+month.abb 
+@ 
+Le stringhe possono poi essere ``incollate'' con il comando\index{\texttt{paste}} 
+%codechunk
+<<echo=TRUE,eval=FALSE>>=
+paste("a","b",sep="")
+@  
+dove \texttt{sep}  indica il separatore usato.
+E tutto insieme
+%codechunk
+<<echo=FALSE>>= 
+options(width=60)
+@
+
+<<echo=TRUE>>=
+for (i in 1:5) cat(paste("a",toString(i),"\t",sep=""))
+@
+Il comando pu\`o anche essere utilizzato su vettori. 
+Per esempio
+%codechunk
+<<echo=TRUE,eval=TRUE>>=
+paste(letters[1:10],1:10,sep="")
+@
+La \textit{recycling rule} continua a valere
+%codechunk
+
+<<echo=TRUE>>=
+paste(letters[1:3],1:10,sep="")
+paste(letters[1:3],1:12,sep="")
+@  
+e giocando con \texttt{rep} si possono ottenere diverse combinazioni.
+<<echo=TRUE,eval=TRUE>>=
+paste(rep(letters[1:3],each=5),1:15,sep="")
+paste(rep(letters[1:3],ntimes=5),1:15,sep="") 
+@
+Con l'opzione \texttt{collapse="x"} le stringhe vengono unite con separatore la stringa "x".
+%codechunk
+<<echo=TRUE,eval=TRUE>>=
+paste(c("X", "Y"), 1:4, sep = "-", collapse = "--")
+@
+Si noti il separatore - dell'operazione \texttt{paste} e  - - dell'operazione \texttt{collapse}.
+ 
+ \begin{shaded}
+ \begin{enumerate}
+ \item{} Inserisci il tuo cognome in una variabile `cognome' ed il tuo nome in una variabile 'nome'. Crea una terza variabile 'nomecognome' che contenga entrambi separati da un TAB. Stampa a console la scritta "Good job" seguita dal valore di nomecognome.
+  \item{} Creare un elenco che contenga mesi e anno dal 2001 al 2010 nel seguente formato "tre lettere iniziali del mese-anno".
+ \item{} Costruire una tabella che contenga tutte le parole di 2 lettere.
+\item{}
+Si consideri 
+<<results=hide>>=
+paste(letters[1:7],1:7,sep="=")
+@ 
+Estendere la corrispondenza a tutto l'alfabeto.
+\item Creare un elenco in cui a ciascun mese corrisponda il suo numero (a partire da gennaio).
+\item Creare un elenco con nomi i mesi e valori il numero di giorni di ciascun mese.
+\item Scrivere un elenco di 5 persone con le relative date di nascita nel formato anno-mese-giorno.
+ \end{enumerate}
+ \end{shaded}
+ 
+\section{Matrici} 
+
+Assegnati $n\times m$ ingressi possiamo costruire una matrice (ossia una tabella) con $n$ righe e $m$ colonne. Occorre solo riempire la matrice per righe o per colonne.
+Ad esempio:
+%code chunk
+<<echo=TRUE>>=
+a<-matrix(letters[1:12],nrow=3,ncol=4)
+a
+class(a)
+@  
+Se i parametri hanno natura diversa vengono resi uniformi
+%code chunk
+<<echo=TRUE>>=
+a<-matrix(c(1:6,letters[1:6]),nrow=3,ncol=4);a
+@  
+Con il parametro \texttt{byrow=T} il riempimento avviene per righe, anzich\`e per colonne.
+%code chunk
+<<echo=TRUE>>=
+ a<-matrix(1:12,nrow=3,ncol=4,byrow=T)
+ a
+@
+Se i numeri sono insufficienti vengono \emph {riciclati}
+%code chunk
+<<echo=TRUE>>=
+a<-matrix(1:4,nrow=3,ncol=4)
+a
+@  
+in modo pacifico se sono un sottomultiplo della dimensione della matrice o con qualche
+\texttt{warning} altrimenti.
+%code chunk
+<<echo=TRUE,eval=FALSE>>=
+a<-matrix(2,nrow=3,ncol=4)
+a
+@  
+Si possono anche definire gli ingressi attraverso opportune funzioni
+%code chunk
+<<echo=TRUE>>=
+<<echo=TRUE,eval=FALSE>>=
+for(j in (1:4)) for(i in (1:3))  a[i,j]<-i^2+j
+@
+Per assegnare nomi alle  righe e alle colonne:\index{\texttt{colnames}} \index{\texttt{rownames}}
+\begin{eqnarray*}
+ \texttt{colnames}(\varia{matrice})=\texttt{c}(\virgolette \varia{  nome}_1\virgolette,\\
+\virgolette \varia{nome}_2\virgolette,\ldots,\virgolette \varia{nome}_n\virgolette )\\
+ \texttt{rownames}(\varia{matrice})=\texttt{c}(\virgolette \varia{nome}_1\virgolette,\\
+\virgolette \varia{nome}_2\virgolette,\ldots,\virgolette \varia{nome}_n\virgolette )
+\end{eqnarray*}
+<<echo=TRUE,eval=FALSE>>=
+colnames(a)=c("c1","c2","c3")
+rownames(a)=c("r1","r2","r3")
+a
+@  
+\subsubsection{Aggiungere righe o colonne}
+Per aggiungere una o pi\`u righe (o colonne)
+ad una matrice si possono usare i comandi (\texttt{rbind} e \texttt{cbind})
+<<>>=
+dim(a)
+rbind(a,letters[1:ncol(a)])
+cbind(a,letters[1:nrow(a)])
+@
+Possiamo anche effettuare semplici operazioni, come somma degli elementi delle righe o delle colonne
+<<>>=
+colSums(a)
+rowSums(a)
+@
+
+\subsection{Operazioni con le matrici}
+\subsubsection{Trasposizione}
+Per invertire righe e colonne di una matrice ossia per ottenere il trasposto \index{trasposto} di una matrice si usa il comando \texttt{t}(\texttt{matrice})\index{\texttt{t}, trasposto}
+%code chunk
+<<echo=TRUE>>=
+t(a)
+@  
+\subsubsection{Prodotto}
+Per la  moltiplicazione di matrici (definita per ingressi numerici) si usa il simbolo \texttt{\%*\%}.
+\index{\texttt{\%*\%}, prodotto di matrici}
+ %code chunk
+<<echo=TRUE>>=
+b<-matrix(2,nrow=3,ncol=3)
+for(j in (1:3)) 
+for(i in (1:3)) b[i,j]<-i+j+i^2
+b
+@ 
+Non \`e infatti possibile moltiplicare una matrice 3x4 con una 3x3. Possiamo per\`o calcolare
+%code chunk
+<<echo=TRUE>>= 
+b%*%a
+@  
+\subsubsection{Determinante} Il determinante di una matrice quadrata si ottiene con il comando
+%\index{\texttt{det},determinante}
+\begin{equation}\texttt{det} (\varia{matrice})\end{equation}
+<<echo=TRUE>>=
+det(b)
+@  
+ 
+Si noti che se eseguendo i calcoli a mano si trovano in alcuni casi risultati diversi da quelli di {\textsf R}. Per esempio la matrice in esame ha determinante 0 e 0 ne \`e anche un autovalore.\index{autovalore}
+\begin{shaded}
+ \begin{enumerate}
+ \item{}Creare una matrice $3\times 2$ che abbia come ingressi i primi 6 numeri pari. Estendere la matrice aggiungendo due colonne contenenti i primi 6 numeri dispari. Calcolare e stampare la somma per riga e la somma per colonna. Modifica la matrice cambiando di segno la prima riga. Moltiplicare la matrice  per 4.  
+ \end{enumerate}
+ \end{shaded}
+ \section{I \emph{dataframe}}
+
+I \emph{datafra me} costituiscono in {\textsf R} la classe di oggetti fondamentali per la collezione di dati per una susseguente analisi statistica.  
+Un \emph{dataframe}  \`e una collezione di vettori aventi egual lunghezza. \`E diverso da una matrice in quanto le colonne sono vettori eventualmente di tipi diversi. Il comando generale per costruire \emph{dataframe} a partire da vettori o liste 
+\`e \texttt{data.frame}.  Esso richiede come parametri i nomi dei vettori (colonna) da affiancare nella tabella. In generale si scrive:
+\begin{equation*}\texttt{data.frame}(\varia{vettore}_1,\varia{vettore}_2, \ldots, \varia{vettore}_n)\end{equation*}
+dove tutti i vettori hanno la stessa lunghezza. 
+Si noti la asimmetria  (rispetto ad una matrice) nel ruolo di righe e colonne. Le colonne sono omogenee, lo stesso non si pu\`o dire per le righe. Le colonne sono le variabili analizzate, le righe le unit\`a statistiche. Anche i vari comandi che vedremo rispettano tale differenza.
+
+Per esempio possiamo considerare il dataframe \texttt{d} definito come segue%code chunk 
+<<echo=TRUE>>=
+L3 <- LETTERS[1:3]
+d <- data.frame(cbind(x=1, y=1:10,
+fac=sample(L3, 10, replace=TRUE)),
+stringsAsFactors=TRUE)
+d
+@  
+Si noti che anche in questo caso si usa la \emph{recycling rule}
+<<echo=TRUE,eval=FALSE>>=
+sito="http://www.pharm.unipmn.it/rinaldi/file_corso/"
+nomefile="australian-crabs.txt"
+indirizzo=paste(sito,nomefile,sep="")
+read.table(indirizzo)->crabs
+dim(crabs)
+<<echo=FALSE,eval=TRUE>>=
+read.table("filedati/australian-crabs.txt",header=T)->crabs
+dim(crabs)
+@
+In quanto segue lavoreremo con il seguente \emph{dataframe} che rappresenta i risultati di un'indagine svolta sugli studenti che nell'Anno Accademico 2007/2008 frequentavano il primo anno del corso di Laurea di Farmacia della Facolt\`a di Farmacia del Piemonte Orientale. Potete scaricarlo dal sito e caricarlo in {\textsf R} con il comando
+%code chunk
+<<echo=FALSE>>=
+options(width=55)
+@
+<<echo=TRUE,eval=FALSE>>=
+sito="http://www.pharm.unipmn.it/rinaldi"
+nomefile="/file_corso/datifarmacia.txt"
+dati=read.table(paste(sito,nomefile,sep=""))
+<<echo=FALSE,eval=TRUE>>=
+farmacia=read.table("filedati/datifarmacia.txt")
+@  
+Il comando \texttt{colnames}  consente di  visualizzare o assegnare il nome alle colonne.
+Per esempio
+%code chunk
+<<echo=TRUE>>=
+colnames(farmacia)
+@  
+Le varie colonne hanno dei nomi di facile interpretazione. Si noti anche che a fianco di variabili numeriche (\texttt{W} e \texttt{H}, peso-altezza ad esempio) sono presenti variabili  \emph {nominali} quali sesso (\texttt{Sex}) e colore degli occhi (\texttt{Eyes}).  
+Per associare i nomi alle colonne  alle varie colonne dobbiamo eseguire una operazione di collegamento con il comando \texttt{attach}, 
+%code chunk
+<<echo=TRUE>>=
+attach(farmacia)
+@
+A questo punto digitando il nome delle colonne appare il contenuto della colonna
+%code chunk
+<<echo=TRUE>>=
+Sex
+@
+Le variabili nominali sono caratterizzate dal fatto che i loro valori (livelli, \texttt{levels}) \index{\texttt{level}} non hanno significato numerico, anche se possono essere codificati con dei numeri.   Ad esempio il sesso di una persona \`e una variabile nominale con due possibili valori, che sono stati  indicati qui con la convenzione  \texttt{"F"}  per le femmine e \texttt{"M"} per i maschi.  Se volessimo eliminare i livelli di una variabile nominale potremmo scrivere
+<<>>=
+Sex=as.vector(Sex)
+Sex
+class(Sex)
+@
+Possiamo anche considerare il processo inverso e cambiare una variabile priva di livelli in una nominale 
+$$\texttt{factor}(\varia{variabile})\rightarrow\varia{ variabile}$$
+Per definire i suoi livelli (ad esempio $n$) scriveremo:
+$$\texttt{levels}(\varia{variabile})\leftarrow\texttt{c}(\varia{nome}_1,\varia{nome}_2,\ldots,\varia{nome}_n)$$
+Per rendere la variabilie \texttt{Sex} nominale con nomi dei livelli 
+\texttt{F} e \texttt{M})  scriveremo:
+<<>>=
+Sex=factor(Sex)
+Sex
+@
+Con il comando 
+\texttt{detach} \index{detach}  si pu\`o eliminare l'associazione creata tra colonne e nomi delle colonne.
+Consideriamo ora un \emph{dataset} simile raccolto dagli studenti di Biotecnologie dello stesso anno
+%code chunk
+<<echo=TRUE,eval=FALSE>>=
+sito="http://www.pharm.unipmn.it/rinaldi"
+nomefile="/file_corso/datibiotec.csv"
+biotec=read.table(paste(sito,nomefile,sep=""),sep=";",dec=",",header=T)
+<<echo=FALSE,eval=TRUE>>=
+biotec=read.table("filedati/datibiotec.txt",sep=";",dec=",",header=T)
+@  
+Scrivendo
+<<echo=TRUE>>=
+class(biotec)
+@
+vediamo che anche \texttt{biotec} \`e un \emph{dataframe}.  Inoltre confrontando i nomi delle colonne di \texttt{farmacia} e di \texttt{biotec} possiamo verificare che sono essenzialmente uguali a meno di traduzione e eventuale abbreviazione.
+Possiamo creare un \emph{dataframe} unico che raggruppi \texttt{biotec} e \texttt{farmacia}. Per farlo  vorremmo incollare un \emph{dataframe} sopra all'altro. 
+A tal fine occorre uniformare i nomi delle colonne scrivendo per esempio
+<<echo=TRUE>>=
+colnames(biotec)=colnames(farmacia)
+studenti=rbind(farmacia,biotec)
+head(studenti)
+@
+Si noti che il comando \texttt{rbind} \index{\texttt{rbind}} incolla per riga, mentre l'analogo comando \texttt{cbind}
+\index{\texttt{cbind}} incolla le colonne.
+Le intestazioni di riga di dati sono
+<<echo=TRUE>>=
+rownames(studenti)
+@
+Per correggere la strana numerazione possiamo scrivere
+<<echo=TRUE>>=
+rownames(studenti)=seq(length=nrow(studenti))
+@
+
+Giunti a  questo punto la tabella \texttt{dati} presenta ancora alcuni problemi; per esempio se scriviamo 
+ %code chunk
+<<echo=TRUE>>=
+levels(studenti$Eyes)
+levels(studenti$Hair)
+@
+Ci incuriosisce   il dato con gli occhi neri. Verifichiamo:
+<<echo=TRUE>>=
+studenti[which(studenti$Eyes=="NERI"),]
+@
+Possiamo ritenere che sia un errore e che in  realt\`a gli occhi siano marroni molto scuri.
+Risulta evidente che nel riportare i colori degli  occhi si sono usate dizioni diverse per colori essenzialmente uguali, per esempio i livelli \texttt{"CASTANI"}, \texttt{"NOCCIOLA"}, 
+\texttt{"MARRONI"} possono esser fatti confluire in un unico livello  \texttt{"castani"} e possiamo rendere minuscoli i nomi degli altri livelli con il comando
+<<echo=TRUE>>=
+levels(studenti$Eyes)=c("azzurri","castani","castani", "castani", "castani","verdi","azzurri","castani","castani","verdi")
+@
+A questo punto
+<<echo=TRUE>>=
+levels(studenti$Eyes) 
+@
+Facciamo lo stesso con i capelli
+<<echo=TRUE>>=
+levels(studenti$Hair)=c("biondi","castani","neri", "biondi", "castani","castani","castani","neri")
+levels(studenti$Hair) 
+@
+\subsubsection{Selezione in base a criteri}
+Supponiamo di voler selezionare gli studenti con gli occhi castani.
+Basta scrivere
+%code chunk
+<<echo=TRUE>>= 
+subset(studenti,studenti$Eyes=="verdi")
+@  
+Se siamo invece interessati al colore dei capelli degli studenti con occhi castani
+<<echo=TRUE,eval=TRUE>>= 
+subset(studenti,studenti$Eyes=="verdi",select="Hair")
+@  
+
+
+\section{Gli \emph{array}}
+Un \emph{array}  \`e una generalizzazione multidimensionale di una matrice. Gli \emph{array} sono caratterizzati dal numero di dimensioni  (se le dimensioni sono 2 un \emph{array} si identifica con una  matrice) e dal nome dei vari livelli
+%code chunk
+<<echo=TRUE>>=
+array(LETTERS[1:24],
+dim=c(2,3,4))
+array(sample(1:100,24), dim=c(3,4,2),dimnames=list(LETTERS[1:3],LETTERS[11:14],letters[1:2]))->x
+x[,,"b"]
+@
+\section{Liste}
+Una lista (in \textsf{R} \texttt{list}) \`e un vettore di oggetti.  Gli oggetti possono avere un nome ed avere natura diversa fra di loro. \index{\texttt{list}}
+Per esempio
+%code chunk
+<<echo=TRUE>>=
+x=list(a=month.abb , b=array(rep(0,20), dim=c(4,5)),c="your name")
+x
+@   
+Possiamo annidare anche liste entro liste
+%code chunk
+<<echo=TRUE>>=
+x=list(a=1:10,b=array(rep(0,20),dim=c(4,5)),
+c="testo",d=list(g="h",r=1:10) )
+x
+@  
+\subsection{Funzioni applicate a oggetti}
+\subsubsection{La funzione \texttt{apply}}
+Quando abbiamo una struttura di dati a pi\`u dimensioni ad esempio un \emph{array}
+<<>>=
+array(1:30,dim=c(2,5,3))->x
+x
+@
+possiamo applicare una funzione selezionando il livello escluso: 
+<<>>=
+apply(x,2,mean)
+apply(x,c(1,3),mean)
+@
+
+In un \emph{dataframe} possiamo considerare diverse operazioni che coinvolgano due o pi\`u colonne. Per esempio possiamo considerare la tabella \texttt{farmacia} e proporci di calcolare la media del peso dei maschi e la media del peso delle femmine. Il comando \texttt{tapply} \index{\texttt{tapply}} consente di applicare una funzione ad una colonna di una tabella ripartita in gruppi in accordo ad un criterio specificato da un'altra colonna (nominale) della stessa tabella 
+\begin{eqnarray*}
+\texttt{tapply}(\varia{vettore},\varia{criterio} ,\varia{funzione})\end{eqnarray*}
+L'esempio sopra riportato si risolve con la scrittura:
+%code chunk 
+<<echo=TRUE>>=
+tapply(studenti$W, studenti$Sex,mean)->Wmean
+Wmean
+@  
+Possiamo anche chiedere di calcolare altri indicatori sempre basandoci  su questa ripartizione maschi/femmine.
+Ad esempio possiamo ottenere la deviazione standard(\texttt{sd}) di maschi e femmine:
+%code chunk 
+<<echo=TRUE>>=
+tapply(studenti$W, studenti$Sex,sd)->Wsd
+Wsd
+@  
+
+\subsubsection{Il comando \texttt{table} applicato a diverse variabili nominali e le tabelle di contingenza}
+Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani   
+<<eval=FALSE,keep.source=TRUE>>=
+read.table("http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html",
+skip=39,header=T,nrow=478,sep="\t")->kidinterest
+<<echo=FALSE,eval=TRUE>>=
+read.table("filedati/PopularKids.html",
+skip=39,header=T,nrow=478,sep="\t")->kidinterest
+head(kidinterest)
+@
+Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
+%codechunk
+<<>>=
+colnames(kidinterest)
+interessi=kidinterest[,c(1,5,7)]
+head(interessi)
+table(interessi)
+@
+ Consideriamo per esempio le variabili provenienza e traguardi
+<<>>=
+interessi2=kidinterest[,c(5,7)]
+tabella=table(interessi2)
+tabella
+save.image(file="Rdata/cap02.Rdata")
+@ 
+
+La tabella di contingenza delle due variabili (in questo caso a 3  livelli ciascuna) si realizza con il comando 
+\texttt{table}. 
+\texttt{table}(\varia(lista)) 
+applicato ad una singola variabile nominale conta le frequenze di ciascuna classe, se le variabili sono $n$ esamina tutte le combinazioni possibili ($2^n$ se le variabili sono dicotomiche) e ne conta tutte le occorrenze
+  
+Allo stesso modo possiamo creare una tabella dei colori degli occhi e dei capelli
+%code chunk 
+<<echo=TRUE>>=
+tabellaEH=table(studenti$Eyes,studenti$Hair)
+@
+ %code chunk  
+O ripartirne il peso in base al colore degli occhi
+<<echo=TRUE,fig=TRUE>>=
+stEyeW=split(studenti$W,studenti$Eyes)
+boxplot(stEyeW)
+@
+
+ 
+\begin{enumerate}
+\item{} Costruire una funzione \texttt{inserisci} tale che il comando
+$\texttt{inserisci}(\varia{x}, \varia{dove},\varia{cosa})$ inserisca nel vettore $\varia{x}$ l'elemento $\varia{cosa}$ nella posizione $\varia{dove}$. 
+Per esempio
+<<echo=TRUE>>=
+y <-letters[1:10] 
+y
+<<eval=FALSE>>=
+inserisci(x, 5, 0)
+<<echo=FALSE>>=
+c(letters[1:4],0,letters[5:10])  
+@
+Generalizzare  al caso di inserimento di righe in \emph{dataframe}.
+\item{}
+Come si pu\`o verificare l'uguaglianza di 2 vettori includendo gli ingressi \texttt{NA}
+<<eval=FALSE>>=
+NA==NA
+@
+Aiuto: usare \texttt{is.na}
+\item{}\cite{dalgaard}
+Carichiamo il \emph{dataset} \texttt{juul} dal pacchetto \texttt{ISwR}. Ricavare il sottoinsieme di dati che corrispondono a ragazze tra i 7 e i 14 anni. Plottare \texttt{igf1} versus et\`a per ragazzi e ragazze separatamente. Conclusioni?
+\end{enumerate}
+ 
+ 
+\chapter{Operatori logici e selezione di elementi}
+Consideriamo la selezione di elementi di un oggetto di \textsf{R}, per esempio \texttt{crabs}.
+Selezioniamo per esempio tra i primi  50 i granchi con carapaci di lunghezza (sesta colonna) maggiore di 42:
+<<echo=TRUE>>=
+crabs[1:50,6]>42
+@
+Ciascun elemento del vettore viene confrontato con la soglia scelta (42) e quando supera la soglia la risposta \`e \texttt{TRUE} altrimenti \texttt{FALSE}. 
+\vskip20pt
+%\begin{table}
+\begin{tabular}
+{|r r |}\hline
+ \texttt{operatore}&  significato\\
+\hline
+\texttt{$>$}&  maggiore\\
+\texttt{>=}& maggiore o uguale\\
+\texttt{<}&   minore\\
+\texttt{<=}&   minore o uguale\\
+\texttt{==}&   uguale\\
+\texttt{!=}&   diverso\\
+\texttt{\&}&   and (e)\\
+\texttt{|} & or (o)\\
+\hline
+\end{tabular}
+\vskip20pt
+%\end{table}
+Gli ultimi due operatori combinano gli operatori precedenti. Per esempio
+%code chunk
+<<echo=TRUE,eval=FALSE>>=
+crabs[crabs$sex == "F" | crabs$sp == "O",]
+dim(crabs[crabs$sex == "F" & crabs$sp == "O",])
+@
+%code chunk
+
+\subsection{I valori non assegnati}
+Capita frequentemente che un oggetto contenga valori non assegnati.
+Per esempio
+<<>>=
+x=1;x[10]=4;x
+@
+<<echo=TRUE>>=
+x[!is.na(x)]
+class(x)
+class(unclass(x))
+
+is.na(x)
+ DF <- data.frame(x = c(1, 2, 3), y = c(0, 10, NA))
+na.omit(DF)
+complete.cases(x)
+@
+\section{Operatori condizionali e cicli}
+with(rainforest, table(complete.cases(root), species))
+
+Gli operatori condizionali valutano una condizione e in base alle risultanze assegnano valore ad una espressione
+
+<<echo=TRUE, eval=TRUE>>=
+b=1
+if (b==1) {print ("b vale 1");b=b+1}  else print(b);
+@
+ 
+Abbiamo poi i cicli \texttt{for} con la struttura 
+\begin{equation*}
+\texttt{for} (i \texttt{it} \varia{sequenza}) \varia{esegui} B
+\end{equation*}
+
+<<echo=TRUE,eval=FALSE,keep.source=TRUE>>=
+for (i in 1:10) print(i)#Somma di interi
+somma<-0
+for (i in  1:10) somma<-somma+i;somma
+#o anche come funzione
+somma<-function(n)
+{somma<-0
+for (i in  1:n) somma<-somma+i;somma
+return(somma)}
+@
+
+ 
+\section{Funzioni di pi\`u variabili}
+Finora abbiamo considerato funzioni di singola variabile. Una generalizzazione estremamente naturale consiste nel considerare funzioni di due o pi\`u variabili. Diamo alcuni esempi
+\begin{enumerate}
+\item{}
+Calcolare la lunghezza del segmento che congiunge  due punti nel piano (distanza euclidea). Possiamo procedere con  una funzione di 4 numeri (le 2 coordinate dei 2 punti)
+<<echo=TRUE,eval=TRUE>>= 
+dist<-function(x1,y1,x2,y2) 
+{dx<-(x2-x1)^2;dy<-(y2-y1)^2;return (sqrt(dx+dy))}
+dist(0,0,3,4)
+@ 
+oppure possiamo generalizzare con una funzione che dipenda dai 2 vettori (e non direttamente dalle loro coordinate)
+<<echo=TRUE,eval=FALSE>>=
+dist<-function(x,y) 
+{return (sqrt(sum((x-y)^2)))}
+@
+\item{}: il massimo di due numeri 
+<<echo=TRUE,eval=FALSE>>= 
+massimo<-function(a,b)
+if (a>b) return(a) else return(b)
+@
+Si noti che la condizione viene messa tra parentesi tonde.
+\item{}: Il valore assoluto
+<<echo=TRUE>>= 
+valoreassoluto<-function(a) if (a>0) return(a)  else return(-a)
+@
+
+
+\item{} Somma sino a $n$
+
+<<echo=TRUE,eval=FALSE>>=
+n=0;while (somma(n)<10000) 
+n=n+1
+sommasinoa<-function(b) {i<-1;somma<-i;while (somma<=b) 
+{i=i+1;somma=somma+i}; return(i)}
+@
+\end{enumerate}
+
+
+Generazione ricorsiva di successioni (successione di Fibonacci)
+%code chunk
+<<echo=TRUE>>= 
+fibonacci<-function(n) 
+{f=0;f[1]<-1;f[2]<-1;for (i in 3:n) {f[i]<-f[i-1]+f[i-2]};return(f[n])}
+@
+
+\section{R  Output su file}
+
+<<echo=TRUE,eval=FALSE>>=
+cat("TITLE extra line", "2 4 5 7", "11 13 17", file="ex.data", sep="\n",append=T)
+cat("TITLE extra line", "2 4 5 7", "11 13 17", sep="\n")
+@
+<<eval=FALSE>>=
+print()
+read.delim
+ aggregate
+ 
+@
+
+\chapter{Statistica II parte}
+%\section{Simulazioni e statistica Bayesiana}
+Uno degli usi rilevanti a fini statistici dei computer  \`e la possibilit\`a di stimare attraverso simulazioni probabilit\`a difficili da calcolare teoricamente.  
+\begin{shaded}\begin{description}
+\item{\bf Estrazioni da un'urna. }Supponiamo 2 palle siano estratte da un'urna contenente 6 palle rosse e 2 verdi. 
+Simuliamo due estrazioni e consideriamo gli eventi:  
+\begin{itemize}
+\item{}$A$ = {la prima palla  \`e rossa}
+\item{}$B$ = {la seconda palla \`e rossa}
+\end{itemize}
+Determinare le probabilit\`a
+$P(A)$, $P(B)$,
+$P(A\wedge B)$, $P(A \mid B)$,
+$P(B \mid A)$.
+Eseguire poi la simulazione 1000 volte e verificare che le stime frequentiste si avvicinano ai valori teorici. Si usi la funzione \texttt{replicates}.\index{\texttt{replicates}}
+Gli ultimi due punti richiedono opportuni accorgimenti.
+\item{\bf Simulazione del problema di  Monthy Hall.}
+Il problema di Monthy Hall ricalca una trasmissione televisiva americana. Immaginate di avere tre porte chiuse dietro alle quali si nascondono 2 capre e un premio, una Ferrari per esempio. L'ospite deve scegliere una porta; effettuata tale scelta il presentatore (che conosce cosa si nasconde dietro alle 3 porte) apre una porta mostrando una capra e d\`a all'ospite la scelta se attenersi alla scelta originale o cambiare porta. Cosa fareste se foste voi l'ospite?
+\end{description} 
+\end{shaded}
+Come si pu\`o simulare il problema di Monthy Hall?
+Iniziamo a disporre gli oggetti e a fare la nostra scelta
+%code chunk
+<<ECHO=TRUE,keep.source=TRUE>>=
+set.seed(12)
+(sample(c("capra","capra","ferrari"))->posizione)
+(scelta<-sample(1:3,1))
+@
+A questo punto  il presentatore deve aprire una porta, 
+<<>>=
+(ammessa<-(1:3)[-unique(c(scelta,which(posizione=="ferrari")))])
+if(length(ammessa)==1) 
+presentatore<-ammessa else presentatore=sample(ammessa,1)
+@
+Ripetiamolo ora 1000 volte
+<<ECHO=TRUE,results=hide>>=
+replicate(1000,{
+sample(c("capra","capra","ferrari"))->dietro;
+scelta=sample(1:3,1);  
+ammessi=(1:3)[-unique(c(scelta,which(
+dietro=="ferrari")))];
+if(length(ammessi)==1) {presentatore=ammessi} else {presentatore=sample(ammessi,1)};
+c(dietro[scelta],dietro[-c(scelta,presentatore)])})->risultato
+table(risultato[1,]);table(risultato[2,]);
+@
+
+\section{Analisi della Varianza (ANOVA)}
+L'analisi della varianza diviene estremamente semplice da eseguire con \textsf{R}  a patto di \emph{preparare} i dati in modo opportuno.
+Consideriamo il seguente esempio tratto dal libro di Snedecor \cite{snedecor} in cui si considera l'assorbimento di grasso durante la cottura di 24 \emph{donuts}. Si esaminano 4 tipi di grasso di cottura 4 e la cottura di 6 \emph{donuts} per ciascun tipo. Inseriamo nella lista  $x$ il gruppo di appartenenza e nella lista $y$ le quantit\`a di grasso assorbito.
+<<echo=TRUE>>=
+x<-rep(1:4,each=6)
+factor(x)->x
+x<-gl(4,6);x
+y<-c(15,20,22,23,25,26,80,90,76,56,5,
+43,23,45,67,89,87,65,43,23,45,10,11,23)
+tabelladati=data.frame(y,x)
+tabelladati
+@
+Il comando  \texttt{tapply} consente di applicare una funzione (in questo caso la media) alla lista  $y$ in base alla ripartizione indicata da $x$. 
+$$\texttt{tapply}(y,x,\texttt{mean})$$ 
+In questo caso
+<<echo=TRUE>>=
+tapply(y,x,mean) 
+@
+In modo simile all'uso del simbolo $\sim$ visto nei comandi per la regressione lineare il comando
+$$\texttt{boxplot}(y\sim x,data=tabella)$$
+consente il tracciamento di un \emph{boxplot} comparativo.
+<<echo=TRUE,fig=FALSE,eval=FALSE>>=
+boxplot(y~x,data=tabelladati)
+@
+\begin{figure}[htbp]
+\begin{center}\caption{Boxplot comparativo di 4 tipi di grasso di cottura.}
+\label{datiist}
+\end{center}
+\end{figure}
+In modo analogo 
+ <<echo=TRUE>>=
+anova(lm(y~x))  
+@
+   
+fornisce il risultato dell'analisi della varianza.
+
+ 
+
+\section{Test $\chi^2$  di indipendenza}
+
+%code chunk
+<<>>=
+read.table("filedati/PopularKids.html",skip=39,header=T,nrow=478,sep="\t")->kidinterest
+@
+Il test $\chi^2$  di indipendenza consente di  verificare se  due variabili sono indipendenti. 
+Se consideriamo le due variabili precedenti sesso e interessi.
+\textsf{R}  dispone del comando \texttt{chisq.test},\index{\texttt{chisq.tst},test $\chi^2$} dalla sintassi generale:$$\texttt{chisq.test}(\varia{tabella})$$
+
+Nell'esempio
+%code chunk
+<<echo=TRUE>>=
+load("Rdata/cap02.Rdata")
+tabellaEH=table(studenti$Eyes,studenti$Hair)
+chisq.test(tabellaEH)
+@  
+L'intervallo di accettazione dell'ipotesi (che ricordiamo \`e l'indipendenza) al 95\% di fiducia e 1 gradi di libert\`a \`e  $[0, 3.841]$, il consuntivo cade dentro, per cui l'ipotesi \`e accettata.
+Per eliminare la correzione di Pearson si utilizza il parametro  \texttt{correct=FALSE}.
+Ad esempio scriveremo:
+%code chunk
+<<echo=TRUE,eval=FALSE>>=
+chisq.test(tabellaEH,correct=FALSE)
+@
+  
+\subsection{Test $\chi^2$  di adeguamento}
+Consideriamo una variabile aleatoria discreta con frequenza assoluta delle uscite racchiuse in una lista \texttt{data}. Ci si pone il problema di stabilire se tali frequenze sono compatibili con le probabilit\`a (riportate nella lista $p$).
+<<echo=TRUE,eval=FALSE>>=
+data<-c(2,3,4,5,6,7,8,9,10,11)
+prob<-c(5,20,5,10,5,15,5,10,10,15)
+sum(prob)  
+chisq.test(data,p=prob,rescale.p=TRUE)
+@
+Si \`e usata qui la scelta \texttt{rescale.p=TRUE} in quanto la somma delle  probabilit\`a non era 1. 
+L'uscita del test riporta il valore del consuntivo $\chi^2$ i gradi di libert\`a ed il valore $p$.   
+
+\section{Distribuzione Binomiale}
+Il coefficiente binomiale \`e definito come 
+\begin{equation*} \texttt{choose}(\varia{n},\varia{m})={n \choose m}=\dfrac{n!}{m!\times (n-m)!}\end{equation*}
+Ad esempio  
+<<echo=TRUE>>=
+choose(6,3)
+@
+La distribuzione binomiale in \textsf{R} ha la sintassi $$\texttt{dbinom}(\varia{successi},\varia{prove},
+\varia{probabilit\`a successo})$$ e fornisce la  probabilit\`a di ottenere nel corso di un certo numero di prove  il numero di successi indicato.\index{\texttt{dbinom}}
+Ad esempio, nel lancio di un dado 10 volte, vogliamo determinare la  probabilit\`a che esca  \emph{esattamente} due volte il numero 4:
+%codechunk
+<<echo=TRUE>>=
+dbinom(2,10,1/6)
+@
+
+La  probabilit\`a \`e circa del 29\%.
+
+ 
+\section{Distribuzione di Fisher} 
+
+La distribuzione di Fisher \`e indicata in \textsf{R} con la lettera \texttt{f}. Per tracciare il grafico della densit\`a con gradi di libert\`a $\nu_1$ e $\nu_2$ basta scrivere  
+<<echo=TRUE,fig=TRUE>>=
+curve(df(x,3,10),0,5)
+@  
+ottenendo il grafico
+\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE,fig=TRUE,width=6,height=5>>=
+curve(df(x,3,10),0,5)
+@  
+\caption{Distribuzione di Fisher.}
+\label{datiist}
+\end{center}
+\end{figure}.
+
+Dobbiamo solo definire $x$, $df1$ e $df2$, gradi di libert\`a per poi applicare \texttt{df},\texttt{qf}, \texttt{rf} come visto per le distribuzioni precedenti.
+Per esempio per ottenere il valore della funzione inversa  per $x=0.9$ e $df1=3$ e $df2=4$ scriveremo:
+<<echo=TRUE>>=
+qf(0.9,3,4)
+@  
+
+
+\section{Tabelle di contingenza}
+<<echo=FALSE>>=
+load("Rdata/cap02.Rdata") 
+tabellaEH=table(studenti$Eyes,studenti$Hair)
+@ 
+Il comando 
+$\texttt{table}$ applicato ad un lista contenente valori di una singola variabile nominale conta le frequenze di ciascuna livello, se applicato ad un \emph{dataframe} di $n$  variabili conta le occorrenze di  ciascuna combinazione di livelli possibile ($2^n$ se le variabili sono dicotomiche). Per esempio se consideriamo il \emph{dataframe}  \texttt{studenti}  possiamo creare una tabella dei colori degli occhi e dei capelli
+%code chunk 
+<<echo=TRUE>>=
+tabellaEH=table(studenti$Eyes,studenti$Hair)
+@ 
+ 
+ 
+
+ 
+  
+
+\section{Farmacocinetica e modelli non lineari}
+
+Dopo la somministrazione, un farmaco viene distribuito alle regioni del corpo accessibili. 
+Se consideriamo questo evento istantaneo, il corpo pu\`o qui essere considerato un contenitore omogeneo del farmaco, e la cinetica di diffusione pu\`o essere modellata con un modello a singolo compartimento aperto. 
+Quest'ultimo termine significa che il contenuto del compartimento non \`e confinato nel compartimento.
+Se invece la diffusione non \`e istantanea e il contenuto arriva al siero secondo un modello di decrescita malthusiana,  il sistema  pu\`o essere modellato come un sistema a due compartimenti aperti.  
+
+Il dataset \texttt{Theoph} contiene 11 misure di concentrazione (a diversa tempistica) per ciascuno dei 12 soggetti sottoposti a somministrazione orale di teofillina.
+<<echo=TRUE>>=
+head(Theoph)
+@ 
+Diamo una prima occhiata ai dati con il comando \texttt{coplot}, ovvero {\it conditioning plot}.  Il comando richiede un modello/formula, del tipo $(x y|a)$, che significa $x$ versus $y$ dato $a$ (ecco perch? conditioning). Se le variabili rispetto alle quali riportare il grafico sono pi\`u di una, basta aggiungere tra esse un segno $+$.
+<<echo=TRUE,fig=TRUE>>=
+require(graphics)
+coplot(conc ~ Time | Subject, data = Theoph, show.given = FALSE)
+@
+
+Selezioniamo ora il paziente 4, lo possiamo fare note le righe che esso occupa nel dataframe oppure selezionando per un preciso valore della variabile Subject.
+
+<<echo=TRUE>>=
+Theoph.4 <- subset(Theoph, Subject == 4)
+@
+\subsection{Regressione non lineare}
+In statistica, una regressione non lineare \`e una forma di regressione in cui i dati osservati sono modellati da una funzione che non \`e una combinazione lineare dei parametri e che dipende da una o pi\`u  variabili indipendenti.  
+
+Il comando \texttt{nls} determina le stime dei parametri di un modello non lineare con il metodo dei minimi quadrati (ponderati).
+Se consideriamo un modello a 2 compartimenti aperti del primo ordine descritto da sistema di equazioni differenziali
+\begin{equation}\begin{cases}
+x'(t)&= -k_a x(t)\\
+y'(t)&= k_a x(t)-k_e y(t)
+\end{cases}
+\end{equation}
+troviamo la soluzione
+\begin{equation}
+\begin{cases}
+x(t)=&x_0 e^{-k_a t}\\
+y(t) =&x_0 k_a  \frac{e^{-k_e t} - e^{-k_a t}}{k_a-k_e}
+\end{cases}
+ \end{equation}
+In particolare la funzione \texttt{SSfol} in \textsf{R} consente di descrivere una cinetica del primo ordine per il modello a proposto. Essa infatti restituisce i logaritmi dei parametri di eliminazione, assorbimento e  \emph{clearance} (\texttt{lKe, lKa, lCl}).
+L'uso \`e il seguente
+\begin{equation*}\texttt{SSfol(Dose, input, lKe, lKa, lCl})  
+\end{equation*}
+dove \texttt{Dose}  rappresenta la dose iniziale,  \texttt{input} \`e un vettore numerico con il quale valutiamo il modello. \texttt{lKe} \`e un parametro numerico che rappresenta il logaritmo naturale della costante velocit\`a di eliminazione. \texttt{lKa} \`e un parametro numerico che rappresenta il logaritmo naturale della costante velocit\`a di assorbimento mentre  \texttt{lCl} \`e un parametro numerico che rappresenta il logaritmo naturale  della \emph{clearance}. 
+Proviamo ad utilizzare il comando \texttt{SSfol}, e inseriamo il risultato della regressione nella variabile \texttt{fm1} (modello 1).
+%code chunk
+<<echo=TRUE>>=
+fm1 <- nls(conc ~ SSfol(Dose, Time, lKe, lKa, lCl), data = Theoph.4)
+@
+Osserviamo \texttt{fm1},  con il comando \texttt{summary}  
+<<echo=TRUE>>=
+summary(fm1)
+@
+
+Ora riportiamo il grafico delle osservazioni per il soggetto 4 su un grafico singolo:
+
+<<echo=TRUE,fig=TRUE>>=
+options(width=40)
+plot(conc ~ Time, data = Theoph.4,
+xlab = "tempo dalla somministazione (ore)",
+ ylab = "Concentrazione di Teofillina(mg/L)", 
+main = "Concentrazioni osservate e modello", sub = "Soggetto 4",
+las = 1, col = 4)
+@
+
+Si pu\`o ora sovrapporre la curva ottenuta con il modello al grafico attuale. 
+Per prima cosa definiamo i possibili valori di $x$.
+
+<<echo=TRUE>>=
+xvals <- seq(0, par("usr")[2], length.out = 55)
+@
+
+dove \texttt{par(usr)}  \`e un ottimo modo per conoscere l'estensione di una delle dimensioni della finestra grafica. A tali valori di $x$ vengono associati i corrispettivi valori $y$ della curva, ottenuti con il comando \texttt{predict}, che utilizza diversi metodi predittivi noti i valori delle costanti del modello ed i valori di $x$. In questo caso il tempo (la nostra $x$)  \`e  uguale ai valori \texttt{xvars} appena calcolati.
+
+<<echo=TRUE,fig=TRUE>>=
+plot(conc ~ Time, data = Theoph.4,
+xlab = "tempo dalla somministazione (ore)",
+ylab = "Concentrazione di Teofillina(mg/L)", 
+main = "Concentrazioni osservate e modello", sub = "Soggetto 4",
+las = 1, col = 4)
+lines(xvals, predict(fm1, newdata = list(Time = xvals)), col = 4)
+@
+
+\subsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
+Sempre da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui dei ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese. 
+<<echo=TRUE>>=
+age=18:29 
+height=c(76.1,77,78.1,78.2,78.8,79.7,79.9,81.1,81.2,81.8,82.8,83.5)
+@
+Possiamo quindi costruire il \texttt{data.frame}
+<<echo=TRUE>>=
+village=data.frame(age=age,height=height)
+@
+Ora diamo una prima occhiata ai dati:
+ %code chunk
+\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE,fig=TRUE>>=
+plot(age,height)
+@
+\caption{I bambini di Kalama}
+\label{kalama}
+\end{center}
+\end{figure}
+L'andamento \`e lineare. Determiniamo la retta di regressione 
+per predire l?altezza media nota l'et\`a in mesi. 
+%code chunk
+<<echo=TRUE>>=
+ris=lm(height~age) 
+ris
+plot(ris)
+@ 
+
+La retta di regressione cercata ha formula:
+$$h(\texttt{age})=\Sexpr{1/100*round(100*ris$coefficients[1])}+ \Sexpr{1/100*round(100*ris$coefficients[2])}\, \texttt{age}$$
+
+Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l?altezza a 27.5 mesi di et\`a:
+oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione  
+\texttt{predict}:
+%codechunk
+<<echo=TRUE>>=
+predict(ris,data.frame(age=27.5))
+@
+ 
+fornendo in input i parametri della retta ed un preciso valore della variabile indipendente (richiamata col proprio nome).
+Molti comandi di \textsf{R} sono in grado di manipolare dataframe  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
+Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt{village} direttamente al comando:
+<<echo=TRUE>>=
+res=lm(height~age,data=village) 
+res
+@
+con la formula $lm(y ~x,data=dataset)$. 
+Inoltre possiammo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
+<<fig=TRUE>>=
+oldpar<-par(mfrow=c(2,2))
+par(ask=FALSE);plot(lm(height~age))
+oldpar
+@
+\section{QQPlot
+normality test}
+\chapter{Grafica}
+Il sistema grafico di \textsf{R} si compone di 3 parti: grafica di alto livello che produce grafici completi (per esempio \texttt{plot}, \texttt{curve}), grafica di basso livello che aggiunge elementi a grafici preesistenti (\texttt{text}, \texttt{abline}) e funzioni che lavorano interattivamente con grafici (ad esempio \texttt{locator()} e \texttt{identify()}).
+\cite{murrell}. 
+A fianco della grafica tradizionale (gestita dal pacchetto \texttt{graphics}) esistono sistemi non tradizionali cui si pu\`o accedere attraverso il pacchetto \texttt{grid}. \index{\texttt{grid}}
+In questo capitolo ci dedicheremo essenzialmente ad inquadrare la grafica tradizionale e daremo alcuni cenni sulla grafica non tradizionale.
+\section{Le \emph{device} grafiche}
+Le \emph{device} grafiche consentono di realizzare grafici di \textsf{R} su file di diversi formati (per esempio \texttt{.pdf}, \texttt{.ps}, \texttt{.bmp},\texttt{ .jpeg}, \texttt{.tiff}).
+Il grafico anzich\'e essere  visualizzato a schermo, pu\`o quindi essere salvato direttamente in diversi formati. Per esempio il comando
+<<echo=TRUE,eval=FALSE>>=
+pdf(file = "miografico.pdf")
+plot(1:10)
+dev.off()
+@
+genera un file \texttt{.pdf} di nome \texttt{miografico} nella \emph{working directory}.
+Se omettiamo il nome avremo il nome di defaults \texttt{Rplots}.
+Per particolari \emph{device}  (per esempio \text{pdf}) la stampa su \emph{file} pu\`o occupare diverse pagine e quindi si possono inserire in un unico file diversi grafici.
+Occorre ricordarsi di chiudere la \emph{device} al termine della produzione grafica con il comando \texttt{dev.off()}.
+Il grafico sar\`a direttamente prodotto nel file indicato, dunque non si vedranno finestre grafiche e  apparir\`a  a schermo solo  un messaggio di avvenuta realizzazione del file una volta che la
+\emph{device} viene chiusa. 
+La sintassi generica richiede dunque
+\begin{enumerate}
+\item{}Apertura della \emph{device} (definendone il nome, la dimensione
+ed altri parametri non obbligatori, come la risoluzione)
+\item{} Comandi grafici.
+\item{} Chiusura della \emph{device}.
+\end{enumerate}
+Nota: le \emph{device} possono presentare piccole variazioni nei parametri, in particolare nei loro nomi. Un esempio: il nome del file in \texttt{png} \`e  definito dal parametro \texttt{filename=}, mentre nella device pdf \`e definito dal parametro \texttt{file=}. Consultare l'\emph{help} prima di utilizzarle non \`e  una cattiva idea. Tutti i parametri grafici visti valgono allo stesso modo per le \emph{device}.
+
+\section{Lo stato grafico}
+Ogni \emph{device} grafica mantiene uno stato grafico che viene consultato da \textsf{R} ogni volta che la \emph{device} viene usata. Lo stato grafico consiste in una serie di parametri specificabili con il comando \texttt{par}, nella forma
+\begin{equation*}\texttt{par}(\varia{parametro}_1=\texttt{val}_1,\ldots)
+\end{equation*}
+Tecnicamente \texttt{par()} \`e una funzione  che restituisce una lista.
+I parametri grafici specificabili con \texttt{par} sono ottenibili con il comando 
+<<echo=TRUE>>=
+options(width=55)
+class(par())
+names(par())
+@
+Per verificare lo stato grafico corrente basta scrivere \texttt{par()}. Per conoscere lo stato grafico di un particolare parametro basta scrivere $\texttt{par("\varia{nome parametro})"}$.
+Ad esempio il parametro \texttt{bg} si riferisce al colore dello sfondo del grafico di default trasparente, mentre il parametro \texttt{lwd} si riferisce allo spessore delle linee.
+Per cambiare i default dei due parametri
+<<echo=TRUE, results=hide>>=
+oldpar<-par(bg="seashell1","lwd"=5)
+plot(sin)
+@
+Qui contestualmente alla ridefinizione abbiamo salvato (con il nome \texttt{oldpar}) la versione corrente dei parametri per poterli eventualmente ripristinare in seguito.
+\begin{figure}\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+oldpar<-par(bg="seashell1","lwd"=5)
+plot(sin)
+@ 
+\caption{esempio di utilizzo di \texttt{par()}
+}
+\label{parbg}
+\end{center}
+\end{figure}
+ottenendo la figura~\ref{parbg}.
+Si noti che si possono riesumare i valori precedenti 
+<<echo=TRUE>>=
+par("bg")
+par(oldpar)
+par("bg")
+@ 
+\section{Elementi grafici di base}
+\subsection{Costruzione di grafici multipli}
+In questo capitolo disegneremo diversi grafici;  consideriamo preliminarmente la possibilit\`a di affiancarli in riga e in colonna, sia per ragioni di spazio che di chiarezza.
+Per costruire tabelle di grafici in una finestra unica si usa il comando
+\begin{equation*}
+\texttt{par(mfrow=c}(\varia{nrighe},\varia{ncolonne}))
+\end{equation*}
+Per esempio  con una riga e due colonne  
+<<echo=TRUE,fig=FALSE>>=
+par(mfrow=c(1,2))
+plot(iris[,1],iris[,2])
+plot(iris[,3],iris[,4])
+@
+otteniamo i grafici affiancati della figura \ref{graficiaffiancati}.
+\begin{figure}
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+par(mfrow=c(1,2))
+plot(iris[,1],iris[,2])
+plot(iris[,3],iris[,4])
+@
+\caption{Grafici affiancati con \texttt{mfrow=c(1,2)}}
+\label{graficiaffiancati}
+\end{center}
+\end{figure} 
+
+\subsection{Diagrammi a dispersione}
+La sintassi di riferimento della funzione \texttt{plot} \index{\texttt{plot}} \`e
+\begin{equation*}
+\texttt{plot}(\varia{dati},\varia{opzione}_1=val_1, \varia{opzione}_2=val_2,\ldots,\varia{opzione}_n=val_n)\end{equation*}
+Scarichiamo da \cite{dasl} il \emph{dataset} che chiameremo \texttt{Gompertz} in cui si studia la mortalit\`a di una popolazione di moscerini al variare dell'et\`a 
+%code chunk
+<<echo=FALSE,eval=TRUE>>=
+options(width=55)
+read.table("filedati/Medflies.html",skip=25,nrow=173,header=T)->gompertz
+read.table("filedati/Medflies.html",skip=25,nrow=173,header=T,as.is=TRUE)->gompertz
+<<echo=TRUE,eval=FALSE>>=
+url="http://lib.stat.cmu.edu/DASL/Datafiles/Medflies.html"
+gompertz<-read.table(url,skip=25,nrow=173,header=T) 
+@
+<<echo=TRUE,eval=TRUE>>=
+class(gompertz)
+head(gompertz)
+par(mfrow=c(1,2))
+plot(gompertz[,1],gompertz[,2])
+plot(gompertz[,1],gompertz[,3])
+@
+ 
+\begin{figure}\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+par(mfrow=c(1,2))
+plot(gompertz[,1],gompertz[,2])
+plot(gompertz[,1],gompertz[,3])
+@
+\caption{Mortalit\`a dei moscerini. A sinistra la decrescita della popolazione, a destra la mortalit\`a.}
+\label{moscerini}
+\end{center}
+\end{figure}
+Il tasso di mortalit\`a (\texttt{mort.rate}) all'istante $t_1$ \`e definito  come rapporto tra numero di individui deceduti nell'intervallo di tempo  $(t_1,t_1+1)$ e  numero di individui all'istante $t_1$. Il comando \texttt{diff} \index{\texttt{diff}} applicato ad una lista ne calcola le differenze termine a termine.
+Per esempio
+<<>>= 
+diff(2^(1:10))
+@
+Il comando che segue consente quindi di verificare la terza colonna di Gompertz
+<<eval=TRUE>>=
+head(-diff(gompertz[,2])/gompertz[-1,2])
+@
+
+Alcune opzioni che possono perfezionare un grafico sono
+\begin{itemize}
+\item{}\texttt{main}=: assegna il titolo al grafico; 
+\item{}\texttt{xlab}=: assegna l'etichetta all'asse delle $x$; 
+\item{}\texttt{ylab}=: assegna l'etichetta all'asse delle $y$;
+\item{}\texttt{type}=: 
+\begin{itemize}
+\item{} \texttt{p} Disegna solo i punti.
+\item{} \texttt{l} Disegna linee.
+\item{} \texttt{b} Disegna entrambi ma senza
+sovrapporre le linee ai punti.
+\item{} \texttt{o} Disegna linee e punti ma sovrapposti.
+\item{} \texttt{n} Non disegna n\'e linee n\'e punti. Serve talora a impostare la finestra grafica.
+\end{itemize}
+\item{} \texttt{col}=: assegna il colore il cui elenco si ottiene con il comando: \texttt{colors()};
+\item{} \texttt{cex}=: un valore numerico, da 0 (sopprime i punti) a valori numerici consigliati minori di 2, definisce la dimensione dei punti; 
+\item{}\texttt{lty}=: definisce il tipo di linea ({\it line type}), se 1 linea continua, se 2 tratteggiata, se 3 tratteggiata con tratto ridotto, se 4 tratto e punto;  
+\item{}\texttt{lwd}=: definisce lo spessore della linea ({\it line width}), valori suggeriti tra 0.5 e 2;
+\item{} \texttt{pch}=: definisce il \emph{marker} dei punti
+\end{itemize}
+\footnote{Si noti che tali opzioni coincidono in alcuni casi con opzioni specificabili con \texttt{par}.  In questo caso sono per\`o solo locali. }
+ 
+Per esempio
+<<echo=TRUE,eval=FALSE,keep.source=TRUE>>=
+par(mfrow=c(2,2))
+gompertz[,c(1,3)]->dati
+plot(dati,main="La mortalit\uE5 dei moscerini", xlab="t (giorni)",
+ylab="Tasso di mortalit\uE5")
+plot(dati,main="La mortalit\uE5 dei moscerini", xlab="t (giorni)",
+ylab="Tasso di mortalit\uE5",type="l")
+plot(dati,main="La mortalit\uE5 dei moscerini", xlab="t (giorni)",
+ylab="Tasso di mortalit\uE5", col="dark green",cex=0.5)
+plot(dati,main="La mortalit\uE5 dei moscerini", xlab="t (giorni)",
+ylab="Tasso di mortalit\uE5", col="dark green",cex=0.5,
+lty=4,lwd=2)
+@
+Il risultato \`e riportato nella figura~\ref{4moscerini}
+\begin{figure}\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+par(mfrow=c(2,2))
+gompertz[,c(1,3)]->dati
+plot(dati,main="La mortalit\uE5 dei moscerini", xlab="t (giorni)",
+ylab="Tasso di mortalit\uE5")
+plot(dati,main="La mortalit\uE5 dei moscerini", xlab="t (giorni)",
+ylab="Tasso di mortalit\uE5",type="l")
+plot(dati,main="La mortalit\uE5 dei moscerini", xlab="t (giorni)",
+ylab="Tasso di mortalit\uE5", col="dark green",cex=0.5)
+plot(dati,main="La mortalit\uE5 dei moscerini", xlab="t (giorni)",
+ylab="Tasso di mortalit\uE5", col="dark green",cex=0.5,lty=4,lwd=2)
+@ 
+\caption{Utilizzo di diversi parametri grafici}
+\label{4moscerini}
+\end{center}
+\end{figure}
+
+
+
+
+
+\subsection{Grafici multipli e/o sovrapposti}
+
+Analizziamo il {\it dataframe} \texttt{quakes} che riporta numerosi dati sui terremoti che colpiscono la zona delle isole Fiji. 
+Carichiamo i dati e utilizziamo la funzione \texttt{pairs}\index{pairs} per costruire grafici multipli in un'unica finestra:
+<<echo=TRUE,results=hide,fig=FALSE>>=
+quakes
+pairs(quakes, main = "Fiji Earthquakes, N = 1000", cex.main=1.2, pch=".")
+@
+
+\begin{center}
+\begin{figure}
+<<echo=FALSE,results=hide,fig=TRUE>>=
+quakes
+pairs(quakes, main = "Fiji Earthquakes, N = 1000", cex.main=1.2, pch=".")
+@
+\caption{Plot per variabili multiple}
+\label{pairplot}
+\end{figure}
+\end{center}
+In effetti il comando \texttt{plot} funziona anche su \emph{dataframe} come \`e verificabile con 
+<<echo=TRUE>>=
+methods(plot)
+@
+e produce lo stesso risultato.
+Il grafico risulta complesso da comprendere anche per via delle ridotte dimensioni. Selezioniamo solo i dati relativi alla longitudine ed alla latitudine (prime 2 colonne):
+<<echo=TRUE,fig=TRUE,width=7,height=4>>=
+ plot(quakes[,c(1,2)], main = "Fiji Earthquakes, N = 1000", cex.main=1.2, pch=".")
+@
+\ese{Migliorare questi grafici secondo il gusto personale inserendo, titoli, colorazioni, sfondo, tipo di rappresentazione, tipo di punti, etc.}
+\subsection{Aggiungere testo al grafico}
+Si pu\`o aggiungere testo in qualunque posizione del grafico, in particolare possiamo posizionare commenti, annotazioni, formule, ecc. Si devono solo specificare coordinate e testo, oltre ad altri parametri visualizzabili con \texttt{?text}.
+Nell'esempio seguente generiamo i vertici di un poligono regolare con numero di lati uguali al numero di lettere dell'alfabeto.
+<<echo=TRUE,fig=TRUE,keep.source=TRUE>>=
+set.seed(20)#inizializza il generatore
+nl=length(letters)#numero di lettere
+coord.poli=matrix(c(cos(2* pi *(1:nl)/nl), sin (2*pi*(1:nl)/nl)),
+nc=2,nrow=nl);#vertici del poligono
+coord.random<-matrix(runif(2*nl),nc=2,nrow=nl)#perturbazione
+coord=coord.random+3*coord.poli;#coordinate perturbate
+#plot(coord,col="blue",lwd=4,lty=1,type="l")
+#text(coord,letters,col="red",cex=1.6,adj=2)#inserimento del testo
+plot(coord,col="blue",lwd=4,lty=1,type="n")
+polygon(coord,col="yellow",density=10,angle=30)
+text(coord,letters,col="red")
+@
+
+Il parametro  \texttt{adj} sposta il testo rispetto alle coordinate  
+\subsection{Immagini di un vulcano}
+Vediamo alcune rappresentazioni grafiche 3D.
+<<echo=TRUE>>=
+#require(grDevices);
+#require(graphics)
+filled.contour(volcano, color.palette = terrain.colors, asp = 1)
+title(main = "volcano data: filled contour map")
+@ 
+\begin{figure}[htbp]
+\begin{center}
+
+<<echo=FALSE,fig=TRUE>>=
+#require(grDevices);
+#require(graphics)
+filled.contour(volcano, color.palette = terrain.colors, asp = 1)
+title(main = "volcano data: filled contour map")
+@ 
+\caption{Linee di livello}
+\label{vulcano1}
+\end{center}
+\end{figure}
+ 
+  
+<<echo=TRUE,fig=TRUE>>=
+x<- c(0.00, 0.40, 0.86, 0.85, 0.69, 0.48, 0.54, 1.09, 1.11, 1.73, 2.05, 2.02)
+par(bg="lightgray")
+plot(x, type="n", axes=FALSE, ann=FALSE)
+usr <- par("usr")
+rect(usr[1], usr[3], usr[2], usr[4], col="cornsilk", border="black")
+lines(x, col="blue")
+points(x, pch=21, bg="lightcyan", cex=1.25)
+axis(2, col.axis="blue", las=1)
+axis(1, at=1:12, lab=month.abb, col.axis="blue")
+box()
+title(main="Interesse per R", font.main=4, col.main="red")
+title(xlab="1996", col.lab="red")
+@
+
+Un esempio:
+<<echo=FALSE>>=
+options(width=65)
+<<echo=TRUE,fig=TRUE>>=
+boxplot(len~dose, data = ToothGrowth, 
+boxwex = 0.25, at = 1:3 - 0.2,
+subset = supp == "VC", col = "yellow",
+main = "Guinea Pigs' Tooth Growth",
+xlab = "Vitamin C dose mg",
+ylab = "tooth length")
+@
+
+\subsection{I rettangoli }
+\textsf{R} consente di disegnare forme (dette primitive) come rettangoli o poligoni. I rettangoli in particolare sono molto utili e versatili, consentendo di realizzare riquadri, evidenziare regioni grafiche, ecc.
+%code chunk
+<<echo=TRUE,fig=TRUE,keep.source=TRUE>>=
+plot(c(100, 200), c(300, 450), type= "n", xlab="", ylab="")
+rect(100, 300, 125, 350) # transparent
+rect(100, 400, 125, 450, col="green", border="blue") # coloured
+rect(115, 375, 150, 425, col=par("bg"), border="transparent")
+rect(150, 300, 175, 350, density=10, border="red")
+rect(150, 400, 175, 450, density=30, col="blue", angle=-30, border="transparent")
+legend(180, 450, legend=1:4, fill=c(NA, "green", par("fg"), "blue"),
+density=c(NA, NA, 10, 30), angle=c(NA, NA, 30, -30))
+@
+
+\section{Grafici professionali: legenda, annotazioni e formule}
+Ricordiamo che una volta che sia  assegnato il livello di fiducia $1-\epsilon$, il numero $u_{1-\epsilon}$ che leggiamo nelle tabelle  distribuzione normale \`e il valore dell'ascissa tale che nell'intervallo $[-u_{1-\epsilon},u_{1-\epsilon}]$  cada un'area pari al livello di fiducia; in altre parole le 2 code della distribuzione vengono rimosse. 
+Vogliamo ora creare un grafico illustrativo di questa definizione.
+
+Tracceremo inizialmente un grafico della normale tra $[-3,3]$ scegliendo come valore dell'ascissa 
+$u_{1-\epsilon}$  il numero  1.  Vogliamo quindi scrivere l'espressione $u_{1-\epsilon}$ nel punto di ascissa  1 e il suo opposto nel punto di ascissa -1 dell'asse $x$. 
+Per disegnare delle tacche sugli assi e assegnare valori alfanumerici alle stesse
+si pu\`o utilizzare Il comando\selectlanguage{english}
+\begin{eqnarray*}
+\texttt{axis}(\varia{num},\texttt{c}(\varia{tacca}_1,\varia{tacca}_2,\ldots,\varia{tacca}_\varia{n}),\\ 
+\texttt{c("}\varia{nome}_1, \texttt{"}\varia{nome}_2 \texttt{"},\ldots,\texttt{"}\varia{nome}_\varia{n}\texttt{"}))
+\end{eqnarray*}
+\selectlanguage{italian}
+Qui $\varia{tacca}$ rappresenta il valore della coordinata mentre $\varia{num}$ \`e un indice che rappresenta  l'asse in esame  come segue 1=sotto, 2=sinistra, 3=sopra and 4=destra.
+
+Possiamo  procedere con
+<<echo=TRUE,fig=FALSE>>=
+curve(dnorm(x),-3,3,axes=FALSE,ylab="",xlab="",ylim=c(0,0.5))
+axis(1,c(-3,-1,0,1,3),c("",expression(-u[1-epsilon]),0,expression(u[1-epsilon]),""))
+@
+
+\begin{figure}\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+curve(dnorm(x),-3,3,axes=FALSE,ylab="",xlab="",ylim=c(0,0.5))
+axis(1,c(-3,-1,0,1,3),c("",expression(-u[1-epsilon]),0,expression(u[1-epsilon]),""))
+@
+\caption{Selezione delle etichette sull'asse $x$. }
+\label{normale13}
+\end{center}
+\end{figure}
+
+Il comando \texttt{expression} consente di scrivere simboli e anche lettere greche. 
+Come uscita di questo primo comando troviamo il grafico~(\ref{normale13})
+Per evidenziare le 2 code tratteggiamo l'area sottesa dalla normale tra 1 e 3  (e in seguito da  -3 a -1). Per operare questo tratteggio si approssima
+la regione da tratteggiare con un poligono con un numero molto elevato (200) di vertici definiti come segue
+%code chunk
+<<echo=TRUE,keep.source=TRUE>>=
+xmin<-1;xmax<-3; 
+npunti<-200
+f=dnorm#selezione degli  estremi 
+#e del numero di punti base del poligono
+vals<-seq(xmin,xmax,length=npunti) 
+x<-c(xmin,vals,xmax,xmin)
+y<-c(0,f(vals),0,0);
+@
+
+La sintassi di \texttt{polygon}?\`e
+\begin{eqnarray*}
+\texttt{polygon}(\varia{x,y},\texttt{density}=\varia{val1},
+\texttt{angle}=\varia{val2},
+\\
+\texttt{col=\virgolette col\virgolette
+})
+\end{eqnarray*}
+
+Il comando 
+<<echo=TRUE,fig=FALSE>>=
+curve(dnorm(x),-3,3,axes=FALSE,ylab="",xlab="",ylim=c(0,0.5))
+axis(1,c(-3,-1,0,1,3),c("",expression(-u[1-epsilon]),0,expression(u[1-epsilon]),""))
+points(x,y,pch=20,col="red",cex=0.2)
+@
+consente la visualizzazione dei punti ottenuti (come in figura~(\ref{normale200punti})).
+
+\begin{figure}\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+curve(dnorm(x),-3,3,axes=FALSE,ylab="",xlab="",ylim=c(0,0.5))
+axis(1,c(-3,-1,0,1,3),c("",expression(-u[1-epsilon]),0,expression(u[1-epsilon]),""))
+points(x,y,pch=20,col="red",cex=0.2)
+@
+\caption{ Selezione dei punti per l'ombreggiamento di una regione poligonale}
+\label{normale200punti}
+\end{center}
+\end{figure}
+
+Questi punti  possono poi essere uniti con una curva poligonale  
+<<a>>=
+curve(dnorm(x),-3,3,axes=FALSE,ylab="",xlab="",ylim=c(0,0.5))
+axis(1,c(-3,-1,0,1,3),c("",expression(-u[1-epsilon]),0,expression(u[1-epsilon]),""))
+points(x,y,pch=20,col="red",cex=0.2)
+polygon(x,y,density=20,angle=45,col="RED")
+x<--x
+y<-c(0,dnorm(-vals),0,0)
+polygon(x,y,density=20,angle=45,col="RED")
+@
+
+Infine possiamo riportare i valori delle aree delle 2 code, evidenziare l'asse di simmetria  e dare un titolo al grafico
+
+
+<<echo=TRUE,fig=TRUE>>=
+<<a>>
+polygon(x,y,density=20,angle=45,col="RED")
+abline(h=min(y))
+text(0,0.45,expression("code della gaussiana"))
+text(-1.6,0.03,expression(epsilon/2))
+text(1.6,0.03,expression(epsilon/2))
+lines(c(0,0),c(0,dnorm(0))) 
+@
+
+\begin{figure}\begin{center}
+<<echo=TRUE,fig=TRUE>>=
+curve(dnorm(x),-3,3,axes=FALSE,ylab="",xlab="",ylim=c(0,0.5))
+polygon(x,y,density=20,angle=45,col="RED")
+abline(h=min(y))
+text(0,0.45,expression("code della gaussiana"))
+text(-1.6,0.03,expression(epsilon/2))
+text(1.6,0.03,expression(epsilon/2))
+lines(c(0,0),c(0,dnorm(0))) 
+@
+\caption{ Area delle code della distribuzione normale. Il valore di $u_{1-\epsilon}$ \`e quello riportato nella  tabella della distribuzione normale. }
+\label{normaletratto}
+\end{center}
+\end{figure}
+
+\section{Pittura virtuale}
+Iniziamo a disegnare dei rettangoli, di coordinate casuali ma entro un dato range, di colore casuale, con spessore del bordo casuale.
+<<echo=TRUE,fig=TRUE>>=
+par(bg="skyblue");
+plot(0,xlim=c(0.3,1),ylim=c(0.3,1),axes=F, xlab="",ylab="")
+for(i in 1:100)
+{ Sys.sleep(0.01);
+runif(1)->sotto;
+runif(1)->sinistra;
+runif(1)+sotto->sopra;
+runif(1)+sinistra->destra;
+bordi<-0;for(i in 1:100) bordi[i]<-floor(runif(1,1,10))
+spess<-0;for(i in 1:100) spess[i]<-floor(runif(1,1,10))
+rect(sinistra,sotto,destra,sopra,col=rgb(runif(1),runif(1),runif(1)),border=bordi[i],lwd=spess)}
+@
+\section{Grafica 3D, il vulcano Maunga Whau}
+Con il codice che segue 
+ 
+<<echo=TRUE,eval=FALSE>>=
+z<- 2 * volcano
+x<- 10 * (1:nrow(z))
+y<- 10 * (1:ncol(z))
+z0<- min(z) - 20
+z<- rbind(z0, cbind(z0, z, z0), z0)
+x<- c(min(x) - 1e-10, x, max(x) + 1e-10)
+y<- c(min(y) - 1e-10, y, max(y) + 1e-10)
+fill <- matrix("green3", nr = nrow(z)-1, nc = ncol(z)-1)
+fill[ , i2 <- c(1,ncol(fill))] <- "gray"
+fill[i1 <- c(1,nrow(fill)) , ] <- "gray"
+fcol <- fill
+zi <- volcano[ -1,-1] + volcano[ -1,-61] +
+volcano[-87,-1] + volcano[-87,-61] ## / 4
+fcol[-i1,-i2] <- terrain.colors(20)[cut(zi, quantile(zi, seq(0,1, len = 21)),
+include.lowest = TRUE)]
+par(mar=rep(.5,4))
+persp(x, y, 2*z, theta = 110, phi = 40, col = fcol, scale = FALSE,
+ltheta = -120, shade = 0.4, border = NA, box = FALSE)
+@
+otteniamo la figura~\ref{vulcano3D}. Il comando di base \`e \texttt{persp} che richiede una griglia di valori di $(x,y)$ e il corrispondente valore di quota.
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+z<- 2 * volcano
+x<- 10 * (1:nrow(z))
+y<- 10 * (1:ncol(z))
+z0<- min(z) - 20
+z<- rbind(z0, cbind(z0, z, z0), z0)
+x<- c(min(x) - 1e-10, x, max(x) + 1e-10)
+y<- c(min(y) - 1e-10, y, max(y) + 1e-10)
+fill <- matrix("green3", nr = nrow(z)-1, nc = ncol(z)-1)
+fill[ , i2 <- c(1,ncol(fill))] <- "gray"
+fill[i1 <- c(1,nrow(fill)) , ] <- "gray"
+fcol <- fill
+zi <- volcano[ -1,-1] + volcano[ -1,-61] +
+volcano[-87,-1] + volcano[-87,-61] ## / 4
+fcol[-i1,-i2] <- terrain.colors(20)[cut(zi, quantile(zi, seq(0,1, len = 21)),
+include.lowest = TRUE)]
+par(mar=rep(.5,4))
+persp(x, y, 2*z, theta = 110, phi = 40, col = fcol, scale = FALSE,
+ltheta = -120, shade = 0.4, border = NA, box = FALSE)
+@
+
+\caption{Grafica 3 dimensionale, ottenuta con il comando \texttt{persp}}
+\label{vulcano3D}
+\end{center}
+\end{figure}
+
+ Costruiamo due curve che rappresentano due distribuzioni normali, in particolare al posto della funzione \texttt{dnorm} andremo a calcolare i singoli valori di $y$ associati ad un set di valori di
+$x$, essendo poi liberi di utilizzare la funzione \texttt{plot}
+ 
+
+<<echo=TRUE,fig=TRUE>>=
+options(width=60)
+x<-seq(-10,10,length=400)
+y1<-dnorm(x)
+y2<-dnorm(x,m=3)
+par(mar=c(5,4,2,1))  
+plot(x, y2, xlim=c(-3,8), type="n", xlab=quote(Z==frac(mu[1]-mu[2],
+sigma/sqrt(n))), ylab="Density")
+polygon(c(1.96,1.96,x[240:400],10), c(0,dnorm(1.96,m=3),y2[240:400],0),
+col="grey80", lty=0)  
+lines(x, y1)
+polygon(c(-1.96,-1.96,x[161:1],-10), c(0,dnorm(-1.96,m=0), y1[161:1],0),
+col="grey30", lty=0)
+polygon(c(1.96, 1.96, x[240:400], 10), c(0,dnorm(1.96,m=0),
+y1[240:400],0), col="grey30")
+legend(4.2, .4, fill=c("grey80","grey30"),
+legend=expression(P(abs(Z)>1.96, H[1])==0.85,
+P(abs(Z)>1.96,H[0])==0.05), bty="n")
+text(0, .2, quote(H[0]:~~mu[1]==mu[2]))
+text(3, .2, quote(H[1]:~~mu[1]==mu[2]+delta))
+@
+
+
+\section{Web}
+In questa sezione vedremo come collegarsi al \emph{web}, come leggere il contenuto di file \texttt{.html}, come aprire indirizzi web nel browser.
+La funzione \texttt{readLines} consente di leggere il codice sorgente \texttt{(.html)} di un determinato sito web. Il numero che segue l'indirizzo definisce il numero di righe che si vogliono leggere.
+Se invece vogliamo aprire una pagina web direttamente nel browser utilizziamo \texttt{browseURL},\index{browseURL}
+definendo il browser (il default \`e dipendente dalle preferenze dell'utente e soprattutto dal sistema operativo).
+
+<<echo=TRUE,eval=FALSE>>=
+readLines("http://www.r-project.org/",4)
+@
+%http://www.youtube.com/watch?v=ZwYQPtU2Pa0
+<<echo=TRUE,eval=FALSE>>=
+channel="http://www.youtube.com/watch?v=W2GZFeYGU3s&feature=related"
+<<echo=TRUE,eval=FALSE>>=
+browseURL(channel,browser=getOption("browser"))
+@
+
+\subsection{Colori}
+
+\subsection{Costruire una funzione per realizzare grafica su {\it device}}
+Lo scopo di questa procedura \`e quello di  realizzare una funzione, che chiameremo \texttt{mondrian}, che ci consentir\`a di contenere ed eseguire il codice necessario per disegnare la riproduzione  del quadro che alcuni di voi hanno manualmente digitato la scorsa lezione. Gli step necessari
+per realizzare ci\`o sono i seguenti:
+\begin{itemize}
+\item{1.} Copiare in locale il codice per realizzare la figura su \emph{device};
+\item{2.} Inserire questo codice nella funzione mondrian, che realizziamo con il comando fix(mondrian);
+\item{3.} Richiamare la funzione con il comando: mondrian()
+\item{4.} Verificare che sia stato prodotto il file mondrian.png e sua apertura. Se non specifichiamo l'indirizzo del file esso si trover\`a nella cartella di lavoro di \textsf{R}, ottenibile con il comando getwd().
+\end{itemize}
+\section{Grafica 3D, grafico di una funzione di due variabili}
+La funzione di base in \textsf{R} per realizzare grafica 3D statica \`e \texttt{persp}. 
+Gli input richiesti sono due vettori (coordinate sulle $x$ e sulle $y$) ed una matrice (di ingressi ingressi $x$ e $y$, contenente
+all'incrocio $z$).
+
+
+<<echo=TRUE,results=hide,fig=FALSE>>=
+f<-function(x,y)  y^2+ x^2
+xset<-seq(-1,1,length=101)
+yset<-seq(-1,1,length=101)
+zmatr<-matrix(0,length(xset),length(yset))
+for(i in 1:length(xset)) for(j in 1:length(yset)) zmatr[i,j]<-f(xset[i],xset[j]);
+persp(xset,yset,zmatr)##persp possiede parametri di rotazione, colorazione, ombreggiatura, ecc.
+persp(xset,yset,zmatr,theta = 30, phi = 60, r = 10, d = 10)
+@
+
+ 
+\subsection{Il pacchetto \texttt{rgl}}
+
+Il pacchetto \texttt{rgl} si compone di funzioni per la grafica 3D dinamica e consente di realizzare grafici ruotabili, eventualmente animati e sicuramente di grande impatto e potenzialit\`a.
+Il comando base per aprire una \emph{device} grafica di \texttt{rgl} \`e \texttt{open3d()}.
+Cominciamo con il disegnare un solido, in particolare un cubo, mediante il comando \texttt{shade3d},
+Prestiamo attenzione alla  generazione della lista dei   colori (\texttt  {rep} \`e un comando molto potente):
+
+<<echo=TRUE,eval=FALSE>>=
+library(rgl)
+rgl.postscript(file="cubo.eps")
+shade3d(cube3d(color=rep(rainbow(6),rep(4,6))))
+@
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[height=2.in]{grafici/cubo.pdf}
+\caption{{\bf default}}
+\label{default}
+\end{center}
+\end{figure}
+
+II comando \texttt{plot3d} \`e  il pi\`u semplice ed immediato comando per realizzare un grafico tridimensionale. Esso richiede come input le coordinate $(x,y,z)$ dei punti da rappresentare.
+Nell'esempio generiamo 1000 punti, notate la colorazione ed il grafico rotabile (mentre con il tasto destro del mouse si esegue lo zoom).
+%code chunk
+<<echo=TRUE,eval=FALSE>>=
+rgl.postscript(file="1000punti.eps")
+open3d()
+x <- sort(rnorm(1000))
+y <- rnorm(1000)
+z <- rnorm(1000)
+plot3d(x, y, z, col=rainbow(1000), size=2)
+dev.off()
+@
+otteniamo cos? la figura
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.8]{grafici/1000punti.pdf}
+\caption{Risultato \texttt{plot3D}}
+\label{defaue}
+\end{center}
+\end{figure}
+
+Ora riprendiamo le coordinate del Maunga Whau e rappresentiamolo con il comando \index{\texttt{surface3d}}, il quale possiede numerosi parametri di ombreggiatura, tonalit\`a e sfumature di colorazioni, tutte ottenibili dal comando \texttt{par3d}\index{\texttt{par3D}}. Il vulcano:
+<<echo=TRUE,eval=FALSE>>=
+library(rgl)
+rgl.postscript(file="grafici/vulcano.eps")
+data(volcano)
+z <- 2 * volcano
+x <- 10 * (1:nrow(z))
+y <- 10 * (1:ncol(z))
+zlim <- range(y)
+zlen <- zlim[2] - zlim[1] + 1
+colorlut <- terrain.colors(zlen)
+col <- colorlut[ z-zlim[1]+1 ]
+open3d()
+surface3d(x, y, z, color=col, back="lines")
+@
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.8]{grafici/vulcano.pdf}
+\caption{Il vulcano realizzato con \texttt{surface3D}}
+\label{default}
+\end{center}
+\end{figure}
+
+
+Il grafico realizzato con il comando precedente in modo automatico, usando il comando \texttt{rgl.viewpoint}:
+
+<<echo=TRUE,eval=FALSE>>=
+example(rgl.surface)
+for(i in 1:360) {rgl.viewpoint(i, i*(60/360), interactive=F)}
+@
+ \subsubsection{Creare piccole animazione grafiche: \texttt{play3d}}
+
+<<echo=TRUE, eval=FALSE>>=
+open3d()
+plot3d( cube3d(col="green") )
+M <-  par3d("userMatrix")
+play3d( par3dinterp( userMatrix=list(M,rotate3d(M, pi/2, 1, 0, 0),
+rotate3d(M, pi/2, 0, 1, 0) ) ), duration=1 )
+@
+
+\subsection{Personalizzare la regione di plot}
+Il comando \texttt{plot.new()} crea una finestra che contiene la regione di plot vera e propria, fiancheggiata dalle regioni di margine che sono predisposte per contenere le annotazioni. La finestra complessiva di default  \`e  mostrata in figura
+
+A volte \`e necessario personalizzare i margini, ad esempio se le annotazioni dei due assi sono molto ingombranti oppure nel caso di plot multipli in un'unica finestra (in tal caso, i grafici diventano molto piccoli ed \`e possibile guadagnare spazio eliminando i margini inutilizzati). 
+
+<<echo=TRUE,fig=TRUE>>=
+plot.new()
+rect(par("usr")[1],par("usr")[3],par("usr")[2],par("usr")[4],col=gray(0.9))
+rect(0.1,0.1,0.9,0.9,col=gray(0.8))
+rect(0.25,0.25,0.8,0.7,col="red")
+text(0,0,"margini")
+@
+
+Tale modifica si opera con il comando \texttt{mar}.
+\begin{equation}\texttt{par}(\texttt{mar=c}(l_1, l_2, l_3, l_4))
+\end{equation}
+dove $l_1$,$ l_2$, $l_3$,$ l_4$ sono le linee di testo da lasciare libere per annotazioni su ciascun lato come in figura. 
+Un comando analogo \`e \texttt{mai}, che consente di definire gli spazi in {\it inch} (pollici):
+\begin{equation}\texttt{par}(\texttt{mai=c}(i_1, i_2, i_3, i_4))\end{equation}
+Infine, \`e possibile definire direttamente la regione di plot utilizzando \texttt{pin}, di sintassi:
+\begin{equation*}
+\texttt{par(pin=c}(w,h))\end{equation*}
+dove $w$ \`e la larghezza e $h$ l'altezza della regione di plot.
+Proviamo i comandi:
+
+
+<<echo=TRUE,fig=TRUE,keep.source=TRUE>>=
+par(mar=c(1,1,1,1))
+plot(1:10)
+par(mai=c(1,1,1,1))
+plot(1:10)
+par(fin=c(5,3)) ##notare come questa sia centrata
+plot(1:10)
+@
+
+\subsection{Il pacchetto  \texttt{lattice}}
+Il pacchetto \texttt{lattice} consente di utilizzare funzioni avanzate di grafica, tra cui alcune che sono in grado di lavorare con \emph{data.frame} anche molto complessi.
+\subsubsection{Grafica 3D, il vulcano con la grafica non tradizionale del pacchetto \texttt{lattice}}
+Una prima funzione in particolare  \`e la funzione \texttt{wireframe}, parente stretta di \texttt{persp3D} e delle funzioni 3D di \texttt{rgl}.
+Possiamo utilizzarla per realizzare il plot del solito vulcano, in particolare abilitando la colorazione (\texttt{shade=F} evita  il riempimento), dandone un aspetto pieno (rapporto larghezza/altezza, dipendente da \texttt{ratio}) e definendo una sorgente di luce particolare:
+%codechunk
+<<echo=TRUE,eval=FALSE>>=
+library(datasets)
+library(lattice)
+pdf(file="provawire.pdf")
+wireframe(volcano, shade = TRUE,
+aspect = c(61/87, 0.4),
+light.source = c(10,0,10))
+dev.off()
+@
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{grafici/wire.pdf}
+\caption{Grafico wireframe.}
+\label{wirex}
+\end{center}
+\end{figure}
+
+ 
+Una seconda funzione importante, che consente di realizzare dei plot in tre dimensioni \`e \texttt{cloud}.  \index{\texttt{cloud}}
+Se ad esempio disponiamo di una tabella come \texttt{Titanic} (riporta il numero di passeggeri sopravvissuti o meno al naufragio ripartiti per et\`a, classe di viaggio e sesso) e voletssimo ottenere invece una tabella che ne riporti la proporzione  sul totale possiamo usare la funzione \texttt{prop.table()}.
+Disegnamo ora con \texttt{cloud} la situazione dopo il naufragio, con 
+\texttt{strip}\index{\texttt{strip}} definiamo le due righe di titolo (in cui sono ripartiti i dati), e con la quadra [,1:2]  finale disegniamo entrambe le classi (sopravvissuti e non sopravvissuti).
+<<echo=TRUE,eval=FALSE>>=
+pdf(file="grafici/Titanic.pdf")
+library(lattice)
+cloud(prop.table(Titanic),
+type = c("p", "h"), strip = strip.custom(strip.names = TRUE),
+scales = list(arrows = FALSE, distance = 2), panel.aspect = 0.7,
+zlab = "Proportion")[,1:2]
+dev.off()
+@
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.8]{grafici/Titanic.pdf}
+\caption{default}
+\label{default}
+\end{center}
+\end{figure}
+
+
+Oppure rappresentiamo il \emph{dataset} colore occhi/capelli degli studenti ripartito in base al sesso
+<<echo=TRUE,eval=TRUE>>=
+pdf(file="grafici/cloudgraph.pdf")
+library(lattice)
+cloud(prop.table(HairEyeColor),
+type = c("p", "h"),
+strip = strip.custom(strip.names = TRUE))
+dev.off()
+@
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.8]{grafici/cloudgraph.pdf}
+\caption{Cloud graph}
+\label{default}
+\end{center}
+\end{figure} 
+\subsection{Il \texttt{parallel plot}}
+Un plot di questo tipo parte da una matrice o da un \emph{dataframe}, rappresentando graficamente ogni riga dello stesso (ingresso) con le sue coordinate (il cui numero dipende dal numero dei parametri). I punti ottenuti vengono cos? congiunti da segmenti (attribuendo un colore automatico ad ogni campione, ridefinibile). L'idea di fondo \`e quella di valutare se campioni ad esempio di specie o fenotipi differenti presentano profilo simile (e se diverso lo scopo \`e quello di identificare le variabili/colonne discriminanti). 
+Nell'esempio vogliamo rappresentare larghezza e lunghezza dei petali e del sepalo dei fiori Iris, volendone poi valutare i profili tra le tre differenti specie. I dati che ci interessano sono cos? le prime 4 colonne (diremo iris[1:4 perch\'e il modello della funzione  lo richiede) mentre le intestazioni saranno le specie di iris, definite da Species, iris.
+%code chunk
+<<echo=TRUE,eval=TRUE>>=
+pdf(file="grafici/parallelplot.pdf")
+parallelplot(~iris[1:4] | Species, iris)
+dev.off()
+@
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{grafici/parallelplot.pdf}
+\caption{Cloud graph}
+\label{default}
+\end{center}
+\end{figure} 
+
+Oppure valutiamo due diversi trattamenti con vitamina C per la crescita dei denti suini,
+ricordate?
+%code chunk
+
+<<echo=TRUE,eval=TRUE>>=
+library(lattice)
+pdf(file="grafici/parplot2.pdf")
+parallelplot(~ToothGrowth[c(1,3)] | supp,ToothGrowth)
+dev.off()
+@
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{grafici/parplot2.pdf}
+\caption{Cloud graph}
+\label{default}
+\end{center}
+\end{figure} 
+
+
+\subsection{Applicazione in campo geografico}
+Proveremo ora a rappresentare gli Stati Uniti d'America sfruttando un \emph{dataset} predisposto e due nuovi pacchetti che sono spesso utilizzati per studi geografici e rappresentazione di cartine topologiche.  Esse sono in particolare \texttt{sp} ({\it spatial graphs}, con numerosi comandi di grafica) e \texttt{maptools}, che si compone sostanzialmente di funzioni in grado di lavorare con dei poligoni.
+Scaricate (dal menu installazione pacchetti) e caricate i due pacchetti:
+%code chunks
+<<echo=TRUE,eval=FALSE>>=
+library(sp)
+library(maptools)
+#gpclibPermitt()
+@
+Fatto ci\`o, la prima cosa da fare \`e leggere il contenuto del file {\it sids.shp}, il quale contiene le informazioni sui poligoni (i vari stati componenti),  i confini e le annotazioni letterarie (ad es. file capitali). Il file risiede nelle {\it library} di sistema di \textsf{R} (indirizzo visibile col comando: system.file(-shapes/sids.shp)).
+Costruiamo l'oggetto base (\texttt{nc}) e trattiamo le coordinate con CRS:
+<<echo=TRUE,eval=FALSE>>=tt
+options(width=55)
+nc <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1],
+proj4string=CRS("+proj=longlat +datum=NAD27"))
+names(nc)
+@
+ 
+Poi creiamo i due pannelli \texttt{pannello1} e \texttt{pannello2} con il comando \texttt{sample} (sceglie un campione di 100 numeri a caso tra 1 a 5), con etichette le prime 5 lettere dell'alfabeto.
+<<echo=TRUE, keep.source=TRUE,eval=FALSE>>=
+set.seed(31) #fissiamo il random seed per il sample
+nc$pannello1 = factor(sample(1:5,100,replace=T),labels=letters[1:5])
+nc$pannello2 = factor(sample(1:5,100,replace=T),labels=letters[1:5])
+@
+Ora carichiamo la grafica di \texttt{RColorBrewer}:
+
+<<echo=TRUE>>=
+library(RColorBrewer)
+@
+e utilizziamo \texttt{spplot}, la funzione costruita appositamente per lavorare con dati spaziali aventi
+attributi. Essa pendere come ingressi \texttt{nc}, gli attributi f, g e colorer\`a le regioni con la paletta
+brewer.pal(5,Set3). Potrete poi provare anche Set1 e Set2.
+
+<<echo=TRUE,eval=FALSE>>=
+pdf("grafici/SPPLOT.pdf")
+spplot(nc, c("pannello1","pannello2"), 
+col.regions=brewer.pal(5, "Set3"), scales=list(draw=TRUE))
+dev.off()
+@
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{grafici/SPPLOT.pdf}
+\caption{maptool}
+\label{default}
+\end{center}
+\end{figure}
+
+%\includegraphics{"grafici/mioSPPLOT.pdf"}
+
+<<echo=FALSE,keep.source=TRUE>>=
+options(width=55)
+<<echo=TRUE,fig=TRUE>>=
+library(datasets) #eurodist
+require(stats); require(graphics)
+plot(rate ~ conc, data = Puromycin, las = 1,
+xlab = "Substrate concentration (ppm)",
+ylab = "Reaction velocity (counts/min/min)",
+pch = as.integer(Puromycin$state),
+col = as.integer(Puromycin$state),
+main = "Puromycin data and fitted Michaelis-Menten curves")
+@
+
+Sarebbe poi meglio sostituire con il reale valore degli anni le etichette presenti sull'asse $x$ originale. Questo si pu\`o ottenere in diversi modi (vedi \texttt{axis}), ma perch\'e non sfruttare l'attributo \texttt{names} della struttura dati?
+
+ <<echo=TRUE,eval=FALSE>>=
+names(dati)<-as.character(floor(seq(1860,1959,length=length(dati))))
+ plot(as.vector(names(dati)),dati,main="Andamento delle scoperte scientifiche 1860-1959",
+xlab="Anni, dal 1860 al 1959",ylab="Numero di scoperte",type="o",
+col="dark green",cex=0.5,lty=4)
+@
+
+Possiamo poi anche orientare diversamente il grafico, scambiando l'asse \texttt{x} con l'asse \texttt{y}, la
+rappresentazione dei dati specie nell'insieme pu\`o apparire pi\`u appropriata, oppure peggiore:
+%code chink
+<<echo=TRUE,eval=FALSE>>=
+plot(dati,as.vector(names(dati)),main="Andamento delle scoperte scientifiche 1860-1959",
+xlab="Anni, dal 1860 al 1959",ylab="Numero di scoperte",type="o",
+col="dark green",cex=0.5,lty=4,lwd=2)
+@
+
+
+\subsection{Il parametro \texttt{las}}
+L'orientamento delle etichette degli assi \`e molto importante, il parametro \texttt{las} \index{\texttt{las}} , che assume valori interi tra 0 e 3 pu\`o essere usato a questo scopo. Provate a capire cosa succede al comando precedente aggiungendo nei parametri \texttt{las=2} e altri possibili valori.
+
+
+\section{I rettangoli}
+\textsf{R} consente di disegnare forme (dette primitive) come rettangoli o poligoni. I rettangoli in particolare sono molto utili e versatili, consentendo di realizzare riquadri, evidenziare regioni grafiche, ecc.
+<<echo=TRUE,fig=TRUE>>=
+plot(c(100, 200), c(300, 450), type= "n", xlab="", ylab="") 
+rect(100, 300, 125, 350) 
+rect(100, 400, 125, 450, col="green", border="blue")  
+rect(115, 375, 150, 425, col=par("bg"), border="transparent") 
+rect(150, 300, 175, 350, density=10, border="red")
+rect(150, 400, 175, 450, density=30, col="blue", angle=-30, border="transparent")
+legend(180, 450, legend=1:4, fill=c(NA, "green", par("fg"), "blue"), density=c(NA, NA, 10, 30), angle=c(NA, NA, 30, -30))
+@
+Ed ora, riproduciamo un Mondrian:
+<<echo=TRUE,fig=TRUE>>=
+par(bg=rgb(0.95,0.96,0.9))
+plot(NA,xlim=c(0,1),ylim=c(0,1),axes=F,xlab="",ylab="",main="Mondrian Virtuale")
+rect(0,0,1,1,col=rgb(0.95,0.96,0.9),lwd=1)
+rect(0.1,0.35,0.6,0.9,col=rgb(0.973,0.09,0.047),lwd=8) 
+rect(0.6,0.625,0.95,0.9,col=rgb(1,0.87,0.34),lwd=8)  
+rect(0.6,0.35,0.95,0.625,lwd=8) ##bianco
+rect(0.775,0.35,0.95,0.625,lwd=8) ##bianco 2
+rect(0.6,0.225,0.95,0.35,lwd=8) ##bianco 3
+rect(0.6,0.05,0.95,0.225,lwd=8,col=rgb(0.063,0.008,0.58))  
+rect(0.35,0.225,0.6,0.35,lwd=8) #bianco sx 1
+rect(0.35,0.1,0.6,0.225,lwd=8) #bianco sx basso
+rect(0.35,0.05,0.6,0.1,lwd=8,col="black") ##nero sx basso
+rect(0.1,0.1,0.35,0.35,lwd=8,col="black") ##nero sx grande
+rect(0.6,0.908,0.95,1,lwd=NA,col=rgb(1,0.87,0.34)) #giallo alto dx
+rect(0.9575,0,1,0.2,lwd=NA,col=rgb(0.973,0.09,0.047)) #rosso basso dx
+rect(0,0,0.092,0.225,lwd=NA,col=rgb(1,0.87,0.34)) #giallo basso sx
+lines(c(0.02,0.1),c(0.225,0.225),lwd=8,lend="square")
+lines(c(0.02,0.1),c(0.625,0.625),lwd=8,lend="square")
+lines(c(0.02,0.1),c(0.9,0.9),lwd=8,lend="square")
+lines(c(0.2,0.2),c(0.9,0.98),lwd=8,lend="square")
+lines(c(0.95,0.95),c(0.9,0.98),lwd=8,lend="square")
+lines(c(0.6,0.6),c(0.9,0.99),lwd=8,lend="square")
+lines(c(0.95,0.992),c(0.2,0.2),lwd=8,lend="square")
+lines(c(0.95,0.95),c(0.05,0.02),lwd=8,lend="square")
+lines(c(0.35,0.35),c(0.05,0.02),lwd=8,lend="square")
+lines(c(0.1,0.1),c(0.1,0.02),lwd=8,lend="square")
+text(0.45,0.02,"Mondrian Review",cex=0.5)
+@
+
+Provate a confrontarlo con l'originale, cercatelo tra le immagini di Google (url{http:/images.google.com})
+ 
+ 
+Il comando  $\texttt{locator}(n)$ \index{\texttt{locator}}
+consente di selezionare con il puntatore $n$ punti in un grafico.
+Selezioniamo 1 punto cliccando  sul punto che riteniamo il massimo del grafico
+
+<<echo=TRUE, eval=FALSE>>=
+locator(1)->coord
+@
+ ora clicchiamo sul massimo del grafico
+
+<<echo=TRUE,fig=TRUE>>=
+library(datasets)
+plot(as.vector(discoveries))
+coord= c(12,26)
+points(coord[2],coord[1], cex=3, col="red") 
+@
+\section{File Rmd}
+\section{ggplot}
+\section*{Tabelle delle distribuzioni statistiche}
+Per generare la tabella delle aree sottese dalla distribuzione normale da 0 ad $x$ si deve per prima cosa tenere conto del fatto che \texttt{pnorm} ???? la cumulativa ad una sola coda. Si sceglie l'intervallo di tabulazione, il numero di colonne ed il numero di cifre.
+<<echo=TRUE>>=
+start=0.01
+stop=3.00
+step=0.01;
+nc=6;
+cifre=5;
+correzione<-function(x)  round(10^cifre* (pnorm(x)-0.5))/10^cifre
+ tabnormale<-cbind(matrix(correzione(seq(start,stop,by=step)),nc=nc),
+ matrix(seq(start,stop,by=step),nc=nc))
+as.vector(t(matrix(c(nc+1:nc,1:nc),nc=2)))->ordinecol
+colnames( tabnormale)= rep(c( "P=A","x"),each=6)
+rownames( tabnormale)=rep("",nrow( tabnormale))
+@
+In modo simile per generare la tabella della distribuzione $t$ di Student si selezionano i livelli di fiducia di interesse e  i gradi di libert\`a
+%code chunk
+<<echo=TRUE>>=
+gradi=c(1:40,50,60,70,80,90,100,150,200,Inf)
+fiducia=c(0.8,0.85,0.9,0.95,0.98,0.99,0.999);
+ncol=length(fiducia);
+nrow=length(gradi);
+cifre=5;
+tstud<-function(x,gradi,cifre)  
+round(10^cifre*qt((1+x)/2,gradi))/10^cifre
+tabstudent=matrix(0,ncol=ncol,nrow=nrow)
+ for (i in 1:length(fiducia)) 
+ tabstudent[,i]= tstud(fiducia[i],gradi,5)
+ rownames(tabstudent)=gradi
+colnames(tabstudent)=fiducia
+@
+ Per la distribuzione $\chi^2$ si procede esattamente come sopra
+ 
+<<echo=TRUE>>=
+gradi=c(1:40,50,60,70,80,90,100,150,200)
+fiducia=c(0.8,0.85,0.9,0.95,0.98,0.99,0.999);
+ncol=length(fiducia);
+nrow=length(gradi);
+cifre=4;
+chiqua<-function(x,gradi,cifre)  
+round(10^cifre*qchisq(x,gradi))/10^cifre
+tabchi=matrix(0,ncol=ncol,nrow=nrow)
+for (i in 1:length(fiducia)) 
+tabchi[,i]=chiqua(fiducia[i],gradi,5)
+rownames(tabchi)=gradi
+colnames(tabchi)=fiducia
+@
+
+Per la  distribuzione di Fisher occorre specificare il numero di gradi di libertà del numeratore e del denominatore e fissare i valori di significatività (0.05 e 0.01)
+
+<<echo=TRUE>>=
+gradinum=1:10
+gradiden=c(1:40,50,60,70,80,90,100,150,200)
+fiducia=c(0.95,0.99);
+ncol=length(gradinum);
+nrow=length(gradiden);
+cifre=3;
+fisher95<-function(gradinum,gradiden,cifre)  
+round(10^cifre*qf(fiducia[1],gradinum,gradiden))/10^cifre
+fisher095=matrix(0,ncol=ncol,nrow=nrow);
+for (i in 1:length(gradinum))  
+fisher095[,i]= fisher95(gradinum[i],gradiden,cifre)
+ rownames(fisher095)=gradiden
+colnames(fisher095)=gradinum
+fisher099=fisher095;
+fisher99<-function(gradinum,gradiden,cifre)  
+round(10^cifre*qf(fiducia
+[2],gradinum,gradiden))/10^cifre;for (i in 1:length(gradinum)) 
+fisher099[,i]= fisher99(gradinum[i],gradiden,cifre)
+@
+ \setlength\textheight{9in}
+\vfill\eject
+\section*{Aree $A$  della distribuzione normale da 0 ad $x$}
+\oddsidemargin  0.0in
+\evensidemargin 0.0in
+\topmargin -0.4in
+\small
+<<echo=FALSE>>=
+options(width=80)
+<<echo=FALSE>>=
+tabnormale[,ordinecol]
+@
+\vfill\eject
+\section*{Distribuzione di Student}
+\oddsidemargin 0.0in
+\evensidemargin 0.0in
+\topmargin -0.4in
+<<echo=TRUE>>=
+ tabstudent
+@
+  \normalsize
+\section*{Distribuzione $\chi^2$}
+\oddsidemargin 0.0in
+\evensidemargin 0.0in
+\topmargin -0.4in
+\small
+<<echo=TRUE>>=
+tabchi
+@
+\normalsize\section*{Tabella della distribuzione di Fisher $95\%$}
+\oddsidemargin 0.0in
+\evensidemargin 0.0in
+\topmargin -0.4in
+\small
+<<echo=TRUE>>=
+fisher095
+ 
+@
+ \vfill
+\eject
+\section*{Tabella della distribuzione di Fisher $99\%$}
+\oddsidemargin 0.0in
+\evensidemargin 0.0in
+\topmargin -0.4in
+<<echo=TRUE>>=
+fisher099
+@
+\vfill
+\eject
+
+\input{../biblio.tex}
+ 
+Per esempio, consideriamo la serie temporale (oggetto di classe \texttt{ts}) \texttt{discoveries} che mostra l'andamento annuale del numero di scoperte scientifiche. Rappresentiamo graficamente tale serie trascurando  prima e ricordandoci poi della sua struttura  addizionale
+\printindex
+\begin{thebibliography}{}
+\bibliographystyle{plain}
+\bibitem[DASL]{dasl}
+	{The data and Stories Library). {\url{http://lib.stat.cmu.edu/DASL}} }
+\bibitem[Dalgaard]{dalgaard}
+	{P.Daalgaard). {\it  Introductory Statistics with R }, {\bf Springer}, }
+\bibitem[Snedecor-Cochran]{snedecor}
+	{George W. Snedecor , William G. Cochran,Statistical Methods }Iowa State University Press; 8 edition (January 15, 1989)
+\bibitem[david]{david}
+	{David F. M., (1955), Studies in the History of Probability and Statistics I. Dicing and Gaming (A Note on the History of Probability).} {\it Biometrika Trust}, {\bf 42}, 1--15.
+\bibitem[Murrell]{murrell}{Paul Murrell,  {\it R graphics}, Chapman\& Hall/CRC}
+\end{thebibliography}	 
+\printindex
+\end{document}

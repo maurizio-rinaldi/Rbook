@@ -1,0 +1,15 @@
+\begin{theindex}
+
+  \item \texttt{\#}, \hyperpage{5}
+  \item \texttt{console}, \hyperpage{3}
+  \item \texttt{c}, \hyperpage{10}
+  \item \texttt{getwd()}, \hyperpage{7}
+  \item \texttt{help}, \hyperpage{5}
+  \item \texttt{history}, \hyperpage{3}
+  \item \texttt{length}, \hyperpage{11}
+  \item \texttt{pi}, \hyperpage{16}
+  \item \texttt{rm()}, \hyperpage{10}
+  \item \texttt{seq}, \hyperpage{13}
+  \item \texttt{setwd()}, \hyperpage{7}
+
+\end{theindex}
