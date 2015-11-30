@@ -721,27 +721,27 @@ Possiamo inoltre lavorare con le frazioni caricando il pacchetto \texttt{MASS} e
 \end{Schunk}
 
 
+\begin{comment}
+\end{comment}
 
-\begin{itemize}
-\begin{question}
 Si calcoli la frazione
-17/5+20/7
-\end{question}
+\begin{enumerate}
 
-\begin{solution}
-Si determina il denominatore comune prendendo il minimo comune multiplo di 5 e 7.
-\end{solution}
-\begin{question}
-Si calcoli la frazione
-1/2+7/8
-\end{question}
-\\
-\begin{question}
-2/5+6/5
-\end{question}
+\item  3/2 + 19/12
+\item  1 + 7/3
+\item  19/13 + 3/2
+\item  2/5 + 6/5
+\item  3 + 7/19
+\item  15/4 + 5/12
+\item  7/11 + 5/3
+\item  3/2 + 19/12
+\item  1 + 7/3
+\item  19/13 + 3/2
+\end{enumerate}
 
-\end{itemize}
-\begin{comment}\subsection{Equazioni lineari}
+ 
+\begin{comment}
+\subsection{Equazioni lineari}
 %Consideriamo semplici equazioni lineari del tipo
 $$ a x +b =cx+d$$
 Per risolvere si portano i termini con la variabile $x$ da una parte e i termini noti dall'altra
@@ -939,7 +939,7 @@ o anche
 generano  lo stesso risultato, illustrato in Figura~\ref{grafounox}.\vskip5pt
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{Rmatematica-062}
+\includegraphics{Rmatematica-063}
 \caption{Grafico di $1/x$ nell'intervallo $(0,2)$.}
 \label{grafounox}
 \end{center}
@@ -955,7 +955,7 @@ Pu\`o essere utile sovrapporre ad un grafico gi\`a tracciato un ulteriore grafic
 ottenendo la Figura~\ref{addF}.
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{Rmatematica-065}
+\includegraphics{Rmatematica-066}
 \caption{Sovrapposizione di 2 grafici}
 \label{addF}
 \end{center}
@@ -975,7 +975,7 @@ Se ad esempio volessimo tracciare il grafico della funzione precedente  tra -3 e
 ed otterremo il grafico della figura~\ref{finestra}.
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{Rmatematica-067}
+\includegraphics{Rmatematica-068}
 %\includegraphics[scale=0.4]{grafici/Rplot34.pdf}
 \caption{Scelta della finestra grafica}
 \label{finestra}
@@ -990,7 +990,7 @@ Se vogliamo restringere il grafico  tra -2, e 2 della finiestra grafica preceden
 ed otterremo il grafico della figura~\ref{finestra2}.
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{Rmatematica-069}
+\includegraphics{Rmatematica-070}
 %\includegraphics[scale=0.4]{grafici/Rplot34.pdf}
 \caption{Scelta della finestra grafica: grafico con dominio ristretto}
 \label{finestr2}
@@ -1018,7 +1018,7 @@ Sono utilizzabili anche i parametri \texttt{light} e \texttt{dark}, esse devono 
 Otteniamo la  figura~\ref{colori}.
 \begin{figure}[phtb]
 \begin{center}
-\includegraphics{Rmatematica-071}
+\includegraphics{Rmatematica-072}
 \caption{Scelta del colore}
 \label{colori}
 \end{center}
@@ -1037,7 +1037,7 @@ Per cambiare lo spessore delle linee \`e possibile utilizzare il parametro \text
 Otteniamo la figura~\ref{spessore}
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-074}
+\includegraphics{Rmatematica-075}
 \caption{Spessore delle linee}
 \label{spessore}
 \end{center}
@@ -1055,7 +1055,7 @@ Ad esempio se vogliamo un numero di punti pari a 100, non collegati, scriveremo:
 il cui risultato \`e riportato in figura~\ref{graficopunti}.
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-078}
+\includegraphics{Rmatematica-079}
 %\includegraphics[scale=0.4]{grafici/RplotAPUNTI.pdf}
 \caption{Grafico a punti}
 \label{graficopunti}
@@ -1088,7 +1088,7 @@ cio\`e gli assi di riferimento del sistema cartesiano (utili nel caso ad esempio
 Otteniamo la figura~\ref{assisb}.
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-082}
+\includegraphics{Rmatematica-083}
 \caption{Iperbole con assi}
 \label{assisb}
 \end{center}
@@ -1104,7 +1104,7 @@ Notiamo che cambiando di poco la finestra grafica
 Otteniamo la figura~\ref{assisb2}.
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-086}
+\includegraphics{Rmatematica-087}
  \caption{Problemi grafici}
 \label{assisb2}
 \end{center}
@@ -1119,11 +1119,19 @@ In questa figura una porzione del grafico \`e stata sovraimpressa all'asse verti
 >  abline(h=0,col="red"); abline(v=0,col="red")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{Rmatematica-088}
+o anche a
+\begin{Schunk}
+\begin{Sinput}
+>  curve(1/x, -3,0,xlim=c( -3,3.1),ylim=c(-4,4), col="darkblue",lwd=5)
+>  curve(1/x,0,3.1,  ylim=c(-4,4),col="darkblue", lwd=5,add=T)
+>   abline(h=0,col="red"); abline(v=0,col="red")
+\end{Sinput}
+\end{Schunk}
+\includegraphics{Rmatematica-089}
 \begin{figure}[ htbp]
 \begin{center}
 
-\includegraphics{Rmatematica-089}
+\includegraphics{Rmatematica-090}
 %\includegraphics[scale=0.4]{grafici/Rplotsenzaasintoto.pdf}
 \caption{Grafico con assi e senza asintoto}
 \label{fig:noasint}
@@ -1143,8 +1151,8 @@ qualora i valori nell'immagine di $f$ siano nel dominio di $g$  (se $\mathrm{Im(
  La funzione cos\'\i~costruita si chiama funzione composta di $f$ e $g$ e viene indicata come
  $g\circ f$. 
  Abbiamo quindi
- \begin{align} g\circ f&\colon D_X\rightarrow D_Z\\
- &x\mapsto y=g(f(x))\end{align}
+ \begin{align*} g\circ f&\colon D_X\rightarrow D_Z\\
+ &x\mapsto y=g(f(x))\end{align*}
  
  
 \subsection{Esempi}
@@ -1168,9 +1176,9 @@ Ricordiamo che una funzione $f\colon D_X\rightarrow D_Y$
 nella variabile $x$ esiste ed \`e unica. 
 \\
 In tale situazione la funzione inversa esiste \`e denotata con $f^{-1}$ ed  \`e definita come
-\begin{align}     f^{-1}&\colon D_Y\rightarrow D_X
+\begin{align*}     f^{-1}&\colon D_Y\rightarrow D_X
 \\
-&y\mapsto x=f^{-1}(y) \hbox{ $\mid x$ soluzione unica di } f(x)=y\end{align}
+&y\mapsto x=f^{-1}(y) \hbox{ $\mid x$ soluzione unica di } f(x)=y\end{align*}
 \\
 Ne segue che ad un arbitrario $y\in D_Y$  possiamo associare in modo unico $x\in D_X$ tale che $f(x)=y$  e quindi
 $(f\circ f^{-1})(y)=f(f^{-1}(y))=f(x)=y$  mentre se $x \in D_X$ $(f^{-1}\circ f)(x)= f^{-1}(f(x))=f^{-1}(y)=x$.  Quindi
@@ -1178,9 +1186,9 @@ $(f\circ f^{-1})(y)=f(f^{-1}(y))=f(x)=y$  mentre se $x \in D_X$ $(f^{-1}\circ f)
 \\
 &x\mapsto f(f^{-1}(y))=y\end{align}
  e
-\begin{align} f^{-1} \circ f&\colon D_X\rightarrow D_X
+\begin{align*} f^{-1} \circ f&\colon D_X\rightarrow D_X
 \\
-&x\mapsto f^{-1}(f(x))=x\end{align}
+&x\mapsto f^{-1}(f(x))=x\end{align*}
 sono le funzioni identiche di dominio e codominio rispettivamente.
 \begin{itemize}
 \item Si calcoli 
@@ -1198,7 +1206,7 @@ ma poich\'e l'equazione $f(x)=y$ ha una e una sola soluzione $x\in D_X$
 
 Per ottenere il grafico della funzione inversa a partire dal grafico basta quindi trovare una trasformazione del piano che trasformi l'asse $x$ nell'asse $y$ e viceversa. Una possibile realizzazione di tutto questo \`e ripostato nella figura \ref{fig::simmetria}
 \begin{figure}
-\includegraphics{Rmatematica-091}
+\includegraphics{Rmatematica-092}
 
 \caption{Trasformazione che consente di passare dal grafico di una funzione al grafico della sua funzione inversa}
 \label{fig::simmetria}
@@ -1207,13 +1215,13 @@ Come si pu\`o realizzare concretamente questa trasformazione?
 \\
 Partiamo per esempio dal grafico riportato in Figura~\ref{fig::funzionestart}
 \begin{figure}
-\includegraphics{Rmatematica-092}
+\includegraphics{Rmatematica-093}
 \caption{Grafico di una funzione invertibile (esponenziale)}
 \label{fig::funzionestart}
 \end{figure}
 \begin{figure}
 
-\includegraphics{Rmatematica-093}
+\includegraphics{Rmatematica-094}
 \end{figure}
 possiamo partire da una sequenza regolare di punti del dominio  di $f$ ed eseguire le trasformazioni  
 \begin{itemize}
@@ -1235,49 +1243,83 @@ Nell'esempio abbiamo scelto come dominio l'intervallo $[-4,4]$. Abbiamo quindi c
 Qui il comando \texttt{plot(x,y)} rappresenta i punti di coordinate $(x,y)$ nel piano.
 \section{Funzioni inverse delle funzioni circolari}
 
-Come visto a lezione le funzioni seno, coseno e tangente non sono invertibili; se per\`o consideriamo opportune restrizioni di tali funzioni, possiamo costruire le funzioni arcoseno, arcocoseno e arcotangente. Pi\`u precisamente
+Le funzioni seno, coseno e tangente non sono invertibili; infatti assumono infinite volte qualcunque valore nell'intervallo $[-1,1]$.
+Opportune restrizioni di tali funzioni consentono di  definire le funzioni inverse che chiameremo arcoseno, arcocoseno e arcotangente. Pi\`u precisamente
 la restrizione della funzione \texttt{sin}
 $$\sin\colon [-\frac{\pi}{2},\frac{\pi}{2}]\rightarrow [-1,1]$$
 \`e invertibile e la sua funzione inversa \`e  la funzione arcoseno, che indicheremo con \texttt{asin}
 $$\texttt{asin}\colon  [-1,1]\rightarrow [-\frac{\pi}{2},\frac{\pi}{2}]$$
-\begin{figure}
-
 \begin{Schunk}
 \begin{Sinput}
-> par(mfrow=c(1,2))
 > x=seq(-pi/2,pi/2,0.01)
-> plot(x,sin(x))
-> plot(sin(x),x)
+> plot(x,sin(x),type="l")
+> plot(sin(x),x,type="l")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{Rmatematica-095}
+\begin{center}\begin{figure}
+
+\includegraphics{Rmatematica-097}
+\caption{Grafico del seno e dell'arcoseno}
 \end{figure}
+
+\end{center}
 In modo simile la funzione
-$$\cos\colon [0,\pi]-\rightarrow [-1,1]$$
+$$\cos\colon [0,\pi]\rightarrow [-1,1]$$
  \`e invertibile e la sua funzione inversa \`e  la funzione arcocoseno, che indicheremo con \texttt{acos}
 $$\texttt{acos}\colon  [-1,1]\rightarrow [0,\pi]$$
 \begin{Schunk}
 \begin{Sinput}
-> par(mfrow=c(1,2))
 > x=seq(0,pi,0.01)
-> plot(x,cos(x))
-> plot(cos(x),x)
+> plot(x,cos(x),type="l")
+> plot(cos(x),x,type="l")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{Rmatematica-096}
+\begin{center}\begin{figure}
+
+\includegraphics{Rmatematica-099}
+\caption{Grafico del coseno e dell'arcocoseno}
+\end{figure}
+
+\end{center}
+
 e lo \`e pure la funzione
 $$\tan\colon (-\frac{\pi}2 ,\frac{\pi}2)\rightarrow \mathbb{R}.$$
 La sua funzione inversa \`e  la funzione arcotangente che indicheremo con \texttt{atan}
 $$\texttt{atan}\colon  \mathbb R \rightarrow (-\frac{\pi}{2},\frac{\pi}{2})$$
+Per tracciare il grafico conviene limitare per il primo grafico la finestra grafica in verticale e per il secondo in orizzontale.
 \begin{Schunk}
 \begin{Sinput}
-> par(mfrow=c(1,2))
 > x=seq(-pi/2,pi/2,0.01)
-> plot(x,tan(x),ylim=c(-10,10),type="l")
-> plot(tan(x),x,type="l",xlim=c(-10,10));abline(h=0);abline(v=0)
+> plot(x,tan(x),type="l",ylim=c(-10,10))
+> plot(tan(x),x,type="l",xlim=c(-10,10))
 \end{Sinput}
 \end{Schunk}
-\includegraphics{Rmatematica-097}
+\begin{center}\begin{figure}
+
+\includegraphics{Rmatematica-101}
+\caption{Grafico della tangente e dell'arcotangente. La finestra grafica <U+00E8> stata limitata all'intervallo a $-10\leq y\leq 10$  (sopra) e 
+$-10\leq x\leq 10 $(sotto)}
+\end{figure}
+
+\end{center}
+\section{Applicazioni delle funzioni inverse: equazioni logaritmiche ed esponenziali}
+Si consideri ad esempio l'equazione
+\[ 5^{x}=12\]
+nella incognita $x$.
+Per determinare una soluzione di tale equazione si pu\`o procedere in diversi modi.
+\begin{itemize}
+\item Si riconosce che il risultato segue immedaitamente dalla definizione di $\log_5$: 
+$x=\log_5(12)$
+\item Si applica il logaritmo nella base preferita (per esempio il logaritmo naturale)  ad ambo i membri ottenendo
+$x\log(5)=\log(12)$ e pertanto $x=\frac{\log(12)}{\log(5)}$
+\end{itemize}
+
+
+
+Indicare il valore numerico con 3 cifre decimali.Si determini la soluzione $x$ delle seguenti equazioni
+\begin{enumerate}
+ \item  $\log_ 5 ( -5 x + 7 )= 10 $ \item  $\log_ 2 ( -3 x + 8 )= 4 $ \item  $\log_ 5 ( 3 x + 2 )= 8 $ \item  $\log_ 7 ( 4 x + 2 )= 4 $ \item  $\log_ 6 ( -3 x + 4 )= 10 $ \item  $\log_ 3 ( -2 x + 6 )= 3 $ \item  $\log_ 7 ( 3 x + 2 )= 10 $ \item  $\log_ 4 ( -5 x + 10 )= 8 $ \item  $\log_ 6 ( 3 x + 1 )= 10 $ \item  $\log_ 7 ( 4 x + 2 )= 5 $
+\end{enumerate}
 
 \section{Derivate}
 Richiamiamo il significato geometrico della derivata: se una funzione $f$ \`e derivabile in un punto $x_0$ allora il grafico si linearizza con un numero sufficiente di ingrandimenti attorno al punto $(x_0,f(x_0))$. 
@@ -1300,7 +1342,7 @@ e disegniamo il suo grafico nella regione definita dalle condizioni $-d<x<d$ e $
 > main="iperbole"); abline(h=0);abline(v=0)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{Rmatematica-100}
+\includegraphics{Rmatematica-106}
 \end{figure}
 
 Consideriamo ora l'ingrandimento di tale grafico con fattore di zoom \texttt{xf}=2 attorno al punto $(0,0)$: in altre parole dimezziamo il valore di $d$:
@@ -1313,7 +1355,7 @@ Consideriamo ora l'ingrandimento di tale grafico con fattore di zoom \texttt{xf}
 Iterando tale comando un certo numero di volte si assiste alla linearizzazione progressiva del grafico come in figura~\ref{fig:lin3}. 
 \begin{center}
 \begin{figure}
-\includegraphics{Rmatematica-102}
+\includegraphics{Rmatematica-108}
 \caption{Linearizzazione di un grafico ottenuta attraverso una serie di ingrandimenti}
 \label{fig:lin3}
 \end{figure}
@@ -1328,7 +1370,7 @@ Consideriamo ora una funzione differente che combina un'espressione di quarto gr
 Il grafico per $-8<x<8$ come in precedenza  suggerisce che la  retta tangente  in $x=0$ sia orizzontale.   
 Effettuando un certo numero di zoom con fattore di zoom 2 questa prima impressione sembra confermata, anche se possiamo iniziare a notare delle piccole oscillazioni nell'ultima figura del pannello~\ref{fig:linear2}.
 \begin{figure}
-\includegraphics{Rmatematica-104}
+\includegraphics{Rmatematica-110}
 \caption{Linearizzazione progressiva di un grafico: prima fase}
 \label{fig:linear2}
 \end{figure}
@@ -1338,7 +1380,7 @@ Non ci saranno ulteriori sorprese da un certo punto in poi.
 Per quanto si prosegua la retta trovata in ultimo verr\`a confermata~\ref{fig:linearizzazione4}
 
 \begin{figure}[h]
-\includegraphics{Rmatematica-105}
+\includegraphics{Rmatematica-111}
 \caption{Linearizzazione progressiva di un grafico: seconda fase}
 \label{fig:linearizzazione4}
 \end{figure}
@@ -1385,7 +1427,7 @@ e ottenendo il grafico~\ref{sincos} da cui si evince che  $D\rm{sin}(x)={\rm cos
 $D{\rm cos}(x)=-{\rm sin}(x)$.
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-110}
+\includegraphics{Rmatematica-116}
 \caption{Grafico delle funzioni $sin(x)$ e della sua derivata calcolata numericamente}
 \label{sincos}
 \end{center}
@@ -1407,7 +1449,7 @@ In questo caso
 sembra che  la funzione (in rosso) e la sua derivata (in blu, approssimata con la regola dei 3 punti)   siano proporzionali.
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-112}
+\includegraphics{Rmatematica-118}
 \caption{Grafico di $2^x$ e derivata}
 \label{fig:der2x}
 \end{center}
@@ -1433,7 +1475,7 @@ In modo simile possiamo considerare con la funzione $3^x$:
 e anche qui  le funzioni sembrano proporzionali. In questo caso per\`o il rapporto derivata diviso funzione \`e  maggiore di 1 e quindi la derivata \`e maggiore della funzione
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-115}
+\includegraphics{Rmatematica-121}
 \caption{Grafico di $3^x$ e derivata}
 \label{fig:der3x}
 \end{center}
@@ -1462,7 +1504,7 @@ Ci si pu\`o chiedere se esista un valore intermedio tra 2 e 3 per cui derivata e
 
 \begin{figure}
 \begin{center}
-\includegraphics{Rmatematica-118}
+\includegraphics{Rmatematica-124}
 \end{center}
 \end{figure}
 
@@ -1480,7 +1522,7 @@ mostra il valore del rapporto.
 \begin{shaded}
 \begin{enumerate}
  \item{ }Ripeti le considerazioni precedenti usando il quoziente di Newton a destra.
-\item{} Calcola il valore della approssimazione della derivata con la regola dei tre punti per la funzione $x^2*sin(x)$ in $x=\pi$ con $h=\pi/6$.
+\item{} Calcola il valore della approssimazione della derivata con la regola dei tre punti per la funzione $x^2*\sin(x)$ in $x=\pi$ con $h=\pi/6$.
 \end{enumerate}
 \end{shaded}  
 \subsection{Derivate ``formali''}
@@ -1515,18 +1557,19 @@ Un utile comando per valutare una derivata in un punto o per  ricavare una funzi
 > curve(g,0,2*pi)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{Rmatematica-122}
+\includegraphics{Rmatematica-128}
 \begin{shaded}
 \begin{enumerate}
- \item{} Calcola la derivata prima e seconda della funzione $x^2*sin(x)$ in $x=\pi$.
+ \item{} Calcola la derivata prima e seconda della funzione $x^2*\sin(x)$ in $x=\pi$.
  \item{} Determina l'equazione della retta tangente al grafico della funzione precedente e traccia grafico e retta in una finestra grafica opportuna.
 \end{enumerate}
 \end{shaded} 
  \subsection{Metodo delle tangenti di Newton}
  Consideriamo ora una funzione generica $f$ il cui grafico presenti delle intersezioni con l'asse delle x
-\includegraphics{Rmatematica-123}
+\includegraphics{Rmatematica-129}
+
 Nel metodo delle tangenti di Newton si parte da un'approssimazione iniziale $x_0$, che nel grafico illustrato si situa alla destra di $x_*$.
-\includegraphics{Rmatematica-124}
+\includegraphics{Rmatematica-130}
 Utilizziamo ora il metodo delle tangenti di Newton per determinare gli zeri di una funzione $f$. Prima di iniziare vediamo come possiamo procedere a livello grafico. 
 Consideriamo una semplice funzione  $$ f(x)= x^5-3x+1$$
 Iniziamo a selezionare una finestra grafica abbastanza ampia. Restringendola man mano vediamo meglio cosa succede.
@@ -1542,7 +1585,7 @@ Iniziamo a selezionare una finestra grafica abbastanza ampia. Restringendola man
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{Rmatematica-126}
+\includegraphics{Rmatematica-132}
 \caption{Intersezione con l'asse $x$ }
 \label{fig:newton}
 \end{center}
@@ -1724,13 +1767,14 @@ Supponiamo di voler applicare il metodo Montecarlo alla determinazione dell'inte
 \end{equation*}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{Rmatematica-138}
-\caption{Determinazione del bersaglio }
+\includegraphics{Rmatematica-144}
+\caption{Determinazione del bersaglio}
 \label{fig:dgefault}
 \end{center}
 \end{figure}
 
-Occorre determinare la finestra grafica da utilizzare come bersaglio. Nell'esempio $x$ varia tra 1 e 4. 
+Occorre determinare la finestra grafica da utilizzare come bersaglio. 
+Nell'esempio $x$ varia tra 1 e 4. 
 Per quanto riguarda la  $y$  tracciamo il grafico della funzione 
 
 \begin{Schunk}
@@ -1773,7 +1817,7 @@ Useremo il comando  \texttt{runif} per effettuare i tiri.
 > successi/tiri*76*3                    
 \end{Sinput}
 \begin{Soutput}
-[1] 83.22
+[1] 87.096
 \end{Soutput}
 \begin{Sinput}
 > integrate(f,1,4)
@@ -1793,18 +1837,18 @@ Useremo il comando  \texttt{runif} per effettuare i tiri.
 \begin{center}
 \begin{Schunk}
 \begin{Soutput}
-[1] 80.712
+[1] 83.676
 \end{Soutput}
 \begin{Soutput}
 86.25 with absolute error < 9.6e-13
 \end{Soutput}
 \end{Schunk}
-\includegraphics{Rmatematica-142}
+\includegraphics{Rmatematica-148}
 \caption{Metodo Montecarlo }
 \label{fig:Montec1}
 \end{center}
 \end{figure}
-\end{document}
+
 In modo simile possiamo considerare la determinazione di $\pi$. Immaginiamo di dover determinare l'area del cerchio di raggio 1 che \`e racchiuso nel quadrato $[-1,1]]\times[-1,1]$ del piano cartesiano.
 In tal caso i comandi sono
 \begin{Schunk}
@@ -1824,18 +1868,91 @@ In tal caso i comandi sono
 \begin{center}
 \begin{Schunk}
 \begin{Soutput}
-[1] 3.1268
+[1] 3.1372
 \end{Soutput}
 \end{Schunk}
-\includegraphics{Rmatematica-144}
+\includegraphics{Rmatematica-150}
 \caption{Metodo Montecarlo per il disco}
 \label{fig:newton}
 \end{center}
 \end{figure}
- SI noti che per ridurre la dimensione dei punti abbiamo usato l'opzione \texttt{cex}.
+ Si noti che per ridurre la dimensione dei punti abbiamo usato l'opzione \texttt{cex}.
+\section{Cenni di calcolo simbolico in \rpr}
+Se si volesse ricorrere alla possibilit\`a di calcolo simbolico in \rpr\ si pu\`o usare il pacchetto \texttt{rSymPy}. Ad esempio
+
+\begin{Schunk}
+\begin{Sinput}
+> library(rSymPy)  
+> x <- Var("x")
+> x+x
+\end{Sinput}
+\begin{Soutput}
+[1] "2*x"
+\end{Soutput}
+\begin{Sinput}
+> sympy("solve(x**3 - 2*x+1, x)") 
+\end{Sinput}
+\begin{Soutput}
+[1] "[-1/2 + 5**(1/2)/2, -1/2 - 5**(1/2)/2, 1]"
+\end{Soutput}
+\begin{Sinput}
+> sympy("limit(1/x, x, oo)")
+\end{Sinput}
+\begin{Soutput}
+[1] "0"
+\end{Soutput}
+\begin{Sinput}
+> a=sympy("integrate(exp(-x))") # integrale indefinito
+>  f<-function(x)  eval(parse(text=a))
+> sympy("diff(log(x,2), x, 1)")
+\end{Sinput}
+\begin{Soutput}
+[1] "1/(x*log(2))"
+\end{Soutput}
+\begin{Sinput}
+> sympy("diff(log(x,2), x, 10)")
+\end{Sinput}
+\begin{Soutput}
+[1] "-362880/(x**10*log(2))"
+\end{Soutput}
+\end{Schunk}
+\section{soluzioni}
+
+Le soluzioni sono
+\begin{enumerate}
+
+\item  37/12
+\item  10/3
+\item  77/26
+\item  8/5
+\item  64/19
+\item  25/6
+\item  76/33
+\item  37/12
+\item  10/3
+\item  77/26
+\end{enumerate}
+ 
+
+Le soluzioni sono
+\begin{enumerate}
+ \item 
+-1953123.6 \item 
+-2.66666666666667 \item 
+130207.666666667 \item 
+599.75 \item 
+-20155390.6666667 \item 
+-10.5 \item 
+94158415.6666667 \item 
+-13105.2 \item 
+20155391.6666667 \item 
+4201.25
+\end{enumerate}
+\end{document}
+
 \section{Numeri complessi}
 Un numero complesso viene indicato come $$z=a +ib$$ dove $a$  \`e la parte reale del numero complesso e $b$ il coefficiente della parte immaginaria $ib$.
-In \textsf{R} un numero complesso viene scritto come
+In \rpr un numero complesso viene scritto come
 \begin{Schunk}
 \begin{Sinput}
 > z<-3 +4i

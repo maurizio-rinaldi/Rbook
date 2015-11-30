@@ -20,11 +20,14 @@
 \BOOKMARK [1][-]{section.3.4}{Funzioni inverse}{chapter.3}% 20
 \BOOKMARK [2][-]{subsection.3.4.1}{Grafico delle funzioni inverse}{section.3.4}% 21
 \BOOKMARK [1][-]{section.3.5}{Funzioni inverse delle funzioni circolari}{chapter.3}% 22
-\BOOKMARK [1][-]{section.3.6}{Derivate}{chapter.3}% 23
-\BOOKMARK [2][-]{subsection.3.6.1}{Regola dei tre punti}{section.3.6}% 24
-\BOOKMARK [2][-]{subsection.3.6.2}{Derivate ``formali''}{section.3.6}% 25
-\BOOKMARK [2][-]{subsection.3.6.3}{Metodo delle tangenti di Newton}{section.3.6}% 26
-\BOOKMARK [1][-]{section.3.7}{Integrali definiti}{chapter.3}% 27
-\BOOKMARK [2][-]{subsection.3.7.1}{Metodi numerici di integrazione di R}{section.3.7}% 28
-\BOOKMARK [2][-]{subsection.3.7.2}{Metodi di integrazione: metodo dei rettangoli e metodo dei trapezi}{section.3.7}% 29
-\BOOKMARK [2][-]{subsection.3.7.3}{Metodo Montecarlo}{section.3.7}% 30
+\BOOKMARK [1][-]{section.3.6}{Applicazioni delle funzioni inverse: equazioni logaritmiche ed esponenziali}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.7}{Derivate}{chapter.3}% 24
+\BOOKMARK [2][-]{subsection.3.7.1}{Regola dei tre punti}{section.3.7}% 25
+\BOOKMARK [2][-]{subsection.3.7.2}{Derivate ``formali''}{section.3.7}% 26
+\BOOKMARK [2][-]{subsection.3.7.3}{Metodo delle tangenti di Newton}{section.3.7}% 27
+\BOOKMARK [1][-]{section.3.8}{Integrali definiti}{chapter.3}% 28
+\BOOKMARK [2][-]{subsection.3.8.1}{Metodi numerici di integrazione di R}{section.3.8}% 29
+\BOOKMARK [2][-]{subsection.3.8.2}{Metodi di integrazione: metodo dei rettangoli e metodo dei trapezi}{section.3.8}% 30
+\BOOKMARK [2][-]{subsection.3.8.3}{Metodo Montecarlo}{section.3.8}% 31
+\BOOKMARK [1][-]{section.3.9}{Cenni di calcolo simbolico in R }{chapter.3}% 32
+\BOOKMARK [1][-]{section.3.10}{soluzioni}{chapter.3}% 33

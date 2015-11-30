@@ -10,7 +10,7 @@
 \usepackage{makeidx}
 \usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{input,enc}
+\usepackage[utf8]{inputenc}
 \usepackage{framed}
 \usepackage{lipsum}
 \usepackage[dvipsnames]{color}
@@ -524,10 +524,11 @@ fractions(1/4)+fractions(2/3)
 @
 
 
-<<echo=FALSE, results=hide>>=
+<<chunk1,echo=FALSE, results=hide>>=
 library(exams)
+library(MASS)
 seme=sample(1:10,1)
-seme=14
+#seme=14
 r=1
 s=1
 set.seed(seme)
@@ -547,8 +548,8 @@ library(pracma)
  fractions(q/p)
 fractions(s/r)
 @
+\begin{comment}
 <<echo=FALSE, results=hide>>=
-library(exams)
 seme=sample(1:10,1)
 P=Q=R=S=c()
 for (seme in 1:5)
@@ -573,29 +574,29 @@ Q[i]=q
 R[i]=r
 S[i]=s
 }}
-
 @
+\end{comment}
 
-\begin{itemize}
-\begin{question}
+<<chunk2,echo=FALSE>>=
+testo=c()
+soluzioni=c()
+for (i in 1:10){
+<<chunk1>>
+testo=paste(testo,paste("\\\\item ",fractions(q/p),"+",
+fractions(s/r)),sep="\n")
+soluzioni=paste(soluzioni,paste("\\\\item ",fractions(q/p)+
+fractions(s/r)),sep="\n")
+}
+frazionisol=soluzioni
+@
 Si calcoli la frazione
-\Sexpr{fractions(Q[1]/P[1])}+\Sexpr{fractions(S[1]/R[1])}
-\end{question}
+\begin{enumerate}
+\Sexpr{testo}
+\end{enumerate}
 
-\begin{solution}
-Si determina il denominatore comune prendendo il minimo comune multiplo di \Sexpr{P[1]} e \Sexpr{R[1]}.
-\end{solution}
-\begin{question}
-Si calcoli la frazione
-\Sexpr{fractions(Q[2]/P[2])}+\Sexpr{fractions(S[2]/R[2])}
-\end{question}
-\\
-\begin{question}
-\Sexpr{fractions(Q[3]/P[3])}+\Sexpr{fractions(S[3]/R[3])}
-\end{question}
-
-\end{itemize}
-\begin{comment}\subsection{Equazioni lineari}
+ 
+\begin{comment}
+\subsection{Equazioni lineari}
 %Consideriamo semplici equazioni lineari del tipo
 $$ a x +b =cx+d$$
 Per risolvere si portano i termini con la variabile $x$ da una parte e i termini noti dall'altra
@@ -918,9 +919,9 @@ Otteniamo la figura~\ref{assisb2}.
 <<echo=FALSE>>=
 options(width=55)
 <<echo=FALSE,fig=TRUE>>=
- curve(1/x,xlim=c( -3,3.1),
- ylim=c(-4,4),col="darkblue",lwd=5);
- abline(h=0);abline(v=0);
+curve(1/x,xlim=c( -3,3.1),
+ylim=c(-4,4),col="darkblue",lwd=5);
+abline(h=0);abline(v=0);
 @
  \caption{Problemi grafici}
 \label{assisb2}
@@ -933,8 +934,9 @@ In questa figura una porzione del grafico \`e stata sovraimpressa all'asse verti
  curve(1/x,xlim=c(-3,0), ylim=c(-4,4), col="darkblue",lwd=5,add=T)
  curve(1/x,xlim=c(0,3.1),  ylim=c(-4,4),col="darkblue", lwd=5,add=T)
  abline(h=0,col="red"); abline(v=0,col="red")
-@ o anche a
-<<echo=FALSE, fig=TRUE>>=
+@ 
+o anche a
+<<echo=TRUE, fig=TRUE>>=
  curve(1/x, -3,0,xlim=c( -3,3.1),ylim=c(-4,4), col="darkblue",lwd=5)
  curve(1/x,0,3.1,  ylim=c(-4,4),col="darkblue", lwd=5,add=T)
   abline(h=0,col="red"); abline(v=0,col="red")
@@ -966,8 +968,8 @@ qualora i valori nell'immagine di $f$ siano nel dominio di $g$  (se $\mathrm{Im(
  La funzione cos\'\i~costruita si chiama funzione composta di $f$ e $g$ e viene indicata come
  $g\circ f$. 
  Abbiamo quindi
- \begin{align} g\circ f&\colon D_X\rightarrow D_Z\\
- &x\mapsto y=g(f(x))\end{align}
+ \begin{align*} g\circ f&\colon D_X\rightarrow D_Z\\
+ &x\mapsto y=g(f(x))\end{align*}
  
  
 \subsection{Esempi}
@@ -986,9 +988,9 @@ Ricordiamo che una funzione $f\colon D_X\rightarrow D_Y$
 nella variabile $x$ esiste ed \`e unica. 
 \\
 In tale situazione la funzione inversa esiste \`e denotata con $f^{-1}$ ed  \`e definita come
-\begin{align}     f^{-1}&\colon D_Y\rightarrow D_X
+\begin{align*}     f^{-1}&\colon D_Y\rightarrow D_X
 \\
-&y\mapsto x=f^{-1}(y) \hbox{ $\mid x$ soluzione unica di } f(x)=y\end{align}
+&y\mapsto x=f^{-1}(y) \hbox{ $\mid x$ soluzione unica di } f(x)=y\end{align*}
 \\
 Ne segue che ad un arbitrario $y\in D_Y$  possiamo associare in modo unico $x\in D_X$ tale che $f(x)=y$  e quindi
 $(f\circ f^{-1})(y)=f(f^{-1}(y))=f(x)=y$  mentre se $x \in D_X$ $(f^{-1}\circ f)(x)= f^{-1}(f(x))=f^{-1}(y)=x$.  Quindi
@@ -996,9 +998,9 @@ $(f\circ f^{-1})(y)=f(f^{-1}(y))=f(x)=y$  mentre se $x \in D_X$ $(f^{-1}\circ f)
 \\
 &x\mapsto f(f^{-1}(y))=y\end{align}
  e
-\begin{align} f^{-1} \circ f&\colon D_X\rightarrow D_X
+\begin{align*} f^{-1} \circ f&\colon D_X\rightarrow D_X
 \\
-&x\mapsto f^{-1}(f(x))=x\end{align}
+&x\mapsto f^{-1}(f(x))=x\end{align*}
 sono le funzioni identiche di dominio e codominio rispettivamente.
 \begin{itemize}
 \item Si calcoli 
@@ -1082,41 +1084,119 @@ par(mfrow=c(1,1))
 Qui il comando \texttt{plot(x,y)} rappresenta i punti di coordinate $(x,y)$ nel piano.
 \section{Funzioni inverse delle funzioni circolari}
 
-Come visto a lezione le funzioni seno, coseno e tangente non sono invertibili; se per\`o consideriamo opportune restrizioni di tali funzioni, possiamo costruire le funzioni arcoseno, arcocoseno e arcotangente. Pi\`u precisamente
+Le funzioni seno, coseno e tangente non sono invertibili; infatti assumono infinite volte qualcunque valore nell'intervallo $[-1,1]$.
+Opportune restrizioni di tali funzioni consentono di  definire le funzioni inverse che chiameremo arcoseno, arcocoseno e arcotangente. Pi\`u precisamente
 la restrizione della funzione \texttt{sin}
 $$\sin\colon [-\frac{\pi}{2},\frac{\pi}{2}]\rightarrow [-1,1]$$
 \`e invertibile e la sua funzione inversa \`e  la funzione arcoseno, che indicheremo con \texttt{asin}
 $$\texttt{asin}\colon  [-1,1]\rightarrow [-\frac{\pi}{2},\frac{\pi}{2}]$$
-\begin{figure}
-
-<<fig=TRUE>>=
-par(mfrow=c(1,2))
+<<fig=FALSE,echo=TRUE>>=
 x=seq(-pi/2,pi/2,0.01)
-plot(x,sin(x))
-plot(sin(x),x)
+plot(x,sin(x),type="l")
+plot(sin(x),x,type="l")
 @
+\begin{center}\begin{figure}
+
+<<fig=TRUE,echo=FALSE>>=
+par(mfrow=c(2,1))#genera un pannello di 2 grafici 
+par(mai=c(0.3,1,0.4,0.5))
+par(mgp = c(1.7,0.5, 0))
+x=seq(-pi/2,pi/2,0.01)
+plot(x,sin(x),type="l")
+plot(sin(x),x,type="l")
+@
+\caption{Grafico del seno e dell'arcoseno}
 \end{figure}
+
+\end{center}
 In modo simile la funzione
-$$\cos\colon [0,\pi]-\rightarrow [-1,1]$$
+$$\cos\colon [0,\pi]\rightarrow [-1,1]$$
  \`e invertibile e la sua funzione inversa \`e  la funzione arcocoseno, che indicheremo con \texttt{acos}
 $$\texttt{acos}\colon  [-1,1]\rightarrow [0,\pi]$$
-<<fig=TRUE>>=
-par(mfrow=c(1,2))
+<<fig=FALSE,echo=TRUE>>=
 x=seq(0,pi,0.01)
-plot(x,cos(x))
-plot(cos(x),x)
+plot(x,cos(x),type="l")
+plot(cos(x),x,type="l")
 @
+\begin{center}\begin{figure}
+
+<<fig=TRUE,echo=FALSE>>=
+par(mfrow=c(2,1))#genera un pannello di 2 grafici 
+par(mai=c(0.3,1,0.4,0.5))
+par(mgp = c(1.7,0.5, 0))
+x=seq(0,pi,0.01)
+plot(x,cos(x),type="l")
+plot(cos(x),x,type="l")
+@
+\caption{Grafico del coseno e dell'arcocoseno}
+\end{figure}
+
+\end{center}
 
 e lo \`e pure la funzione
 $$\tan\colon (-\frac{\pi}2 ,\frac{\pi}2)\rightarrow \mathbb{R}.$$
 La sua funzione inversa \`e  la funzione arcotangente che indicheremo con \texttt{atan}
 $$\texttt{atan}\colon  \mathbb R \rightarrow (-\frac{\pi}{2},\frac{\pi}{2})$$
-<<fig=TRUE>>=
-par(mfrow=c(1,2))
+Per tracciare il grafico conviene limitare per il primo grafico la finestra grafica in verticale e per il secondo in orizzontale.
+<<fig=FALSE,echo=TRUE>>=
 x=seq(-pi/2,pi/2,0.01)
-plot(x,tan(x),ylim=c(-10,10),type="l")
-plot(tan(x),x,type="l",xlim=c(-10,10));abline(h=0);abline(v=0)
+plot(x,tan(x),type="l",ylim=c(-10,10))
+plot(tan(x),x,type="l",xlim=c(-10,10))
 @
+\begin{center}\begin{figure}
+
+<<fig=TRUE,echo=FALSE>>=
+par(mfrow=c(2,1))#genera un pannello di 2 grafici 
+par(mai=c(0.3,1,0.4,0.5))
+par(mgp = c(1.7,0.5, 0))
+x=seq(-pi/2,pi/2,0.01)
+plot(x,tan(x),type="l",ylim=c(-10,10))
+plot(tan(x),x,type="l",xlim=c(-10,10))
+@
+\caption{Grafico della tangente e dell'arcotangente. La finestra grafica è stata limitata all'intervallo a $-10\leq y\leq 10$  (sopra) e 
+$-10\leq x\leq 10 $(sotto)}
+\end{figure}
+
+\end{center}
+\section{Applicazioni delle funzioni inverse: equazioni logaritmiche ed esponenziali}
+\subsection{Equazioni esponenziali} Si consideri ad esempio l'equazione
+\[ 5^{x}=12\]
+nella incognita $x$.
+Per determinare una soluzione di tale equazione si pu\`o procedere in diversi modi.
+\begin{itemize}
+\item Si riconosce che il risultato segue immedaitamente dalla definizione di $\log_5$: 
+$x=\log_5(12)$
+\item Si applica il logaritmo nella base preferita (per esempio il logaritmo naturale)  ad ambo i membri ottenendo
+$x\log(5)=\log(12)$ e pertanto $x=\frac{\log(12)}{\log(5)}$
+\end{itemize}
+
+\subsection{Equazioni logaritmiche}
+In modo simile equazioni del tipo
+
+<<logeq,echo=FALSE, results=hide>>=
+## DATA GENERATION
+a <- sample(2:7, 1)
+b <- sample((-5:5)[-(5:6)],1)
+k=sample(1:10,1)
+c=sample(2:10,1)
+## QUESTION/ANSWER GENERATION
+ x <- (a^c-k)/b
+@
+
+
+<<logeq1,echo=FALSE>>=
+testo=c()
+soluzioni=c()
+for (i in 1:10){
+<<logeq>>
+testo=paste(testo,paste("\\\\item ","$\\\\log_",a,"(",b, "x","+", k,")=",c,"$"))
+soluzioni=paste(soluzioni,paste("\\\\item ",x,sep="\n"))
+logeqsol=soluzioni}
+@
+Indicare il valore numerico con 3 cifre decimali. Si determini la soluzione $x$ delle seguenti equazioni
+\begin{enumerate}
+\Sexpr{testo}
+\end{enumerate}
 
 \section{Derivate}
 Richiamiamo il significato geometrico della derivata: se una funzione $f$ \`e derivabile in un punto $x_0$ allora il grafico si linearizza con un numero sufficiente di ingrandimenti attorno al punto $(x_0,f(x_0))$. 
@@ -1335,7 +1415,7 @@ mostra il valore del rapporto.
 \begin{shaded}
 \begin{enumerate}
  \item{ }Ripeti le considerazioni precedenti usando il quoziente di Newton a destra.
-\item{} Calcola il valore della approssimazione della derivata con la regola dei tre punti per la funzione $x^2*sin(x)$ in $x=\pi$ con $h=\pi/6$.
+\item{} Calcola il valore della approssimazione della derivata con la regola dei tre punti per la funzione $x^2*\sin(x)$ in $x=\pi$ con $h=\pi/6$.
 \end{enumerate}
 \end{shaded}  
 \subsection{Derivate ``formali''}
@@ -1360,7 +1440,7 @@ curve(g,0,2*pi)
 @
 \begin{shaded}
 \begin{enumerate}
- \item{} Calcola la derivata prima e seconda della funzione $x^2*sin(x)$ in $x=\pi$.
+ \item{} Calcola la derivata prima e seconda della funzione $x^2*\sin(x)$ in $x=\pi$.
  \item{} Determina l'equazione della retta tangente al grafico della funzione precedente e traccia grafico e retta in una finestra grafica opportuna.
 \end{enumerate}
 \end{shaded} 
@@ -1372,6 +1452,7 @@ curve (f,1,4,col="blue",xaxt="n",yaxt="n");abline(h=0)
 testo=expression("x"["*"])
 text( 1.8,-2,testo)
 @
+
 Nel metodo delle tangenti di Newton si parte da un'approssimazione iniziale $x_0$, che nel grafico illustrato si situa alla destra di $x_*$.
 <<echo=FALSE,fig=TRUE>>=
 f=function(x) x^3-5
@@ -1520,12 +1601,13 @@ Supponiamo di voler applicare il metodo Montecarlo alla determinazione dell'inte
 f<-function(x) x^3+3*x
 curve(f,1,4)
 @
-\caption{Determinazione del bersaglio }
+\caption{Determinazione del bersaglio}
 \label{fig:dgefault}
 \end{center}
 \end{figure}
 
-Occorre determinare la finestra grafica da utilizzare come bersaglio. Nell'esempio $x$ varia tra 1 e 4. 
+Occorre determinare la finestra grafica da utilizzare come bersaglio. 
+Nell'esempio $x$ varia tra 1 e 4. 
 Per quanto riguarda la  $y$  tracciamo il grafico della funzione 
 
 <<echo=TRUE>>=
@@ -1580,7 +1662,7 @@ curve(f,add=T)
 \label{fig:Montec1}
 \end{center}
 \end{figure}
-\end{document}
+
 In modo simile possiamo considerare la determinazione di $\pi$. Immaginiamo di dover determinare l'area del cerchio di raggio 1 che \`e racchiuso nel quadrato $[-1,1]]\times[-1,1]$ del piano cartesiano.
 In tal caso i comandi sono
 <<echo=TRUE,eval=FALSE>>=
@@ -1610,10 +1692,38 @@ points(x[-centri],y[-centri], col="blue",cex=0.4)
 \label{fig:newton}
 \end{center}
 \end{figure}
- SI noti che per ridurre la dimensione dei punti abbiamo usato l'opzione \texttt{cex}.
+ Si noti che per ridurre la dimensione dei punti abbiamo usato l'opzione \texttt{cex}.
+\section{Cenni di calcolo simbolico in \rpr}
+Se si volesse ricorrere alla possibilit\`a di calcolo simbolico in \rpr\ si pu\`o usare il pacchetto \texttt{rSymPy}. Ad esempio
+
+<<>>=
+library(rSymPy)  
+x <- Var("x")
+x+x
+sympy("solve(x**3 - 2*x+1, x)") 
+sympy("limit(1/x, x, oo)")
+a=sympy("integrate(exp(-x))") # integrale indefinito
+ f<-function(x)  eval(parse(text=a))
+sympy("diff(log(x,2), x, 1)")
+sympy("diff(log(x,2), x, 10)")
+@
+\section{soluzioni}
+
+Le soluzioni sono
+\begin{enumerate}
+\Sexpr{frazionisol}
+\end{enumerate}
+ 
+
+Le soluzioni sono
+\begin{enumerate}
+\Sexpr{logeqsol}
+\end{enumerate}
+\end{document}
+
 \section{Numeri complessi}
 Un numero complesso viene indicato come $$z=a +ib$$ dove $a$  \`e la parte reale del numero complesso e $b$ il coefficiente della parte immaginaria $ib$.
-In \textsf{R} un numero complesso viene scritto come
+In \rpr un numero complesso viene scritto come
 <<echo=TRUE>>=
 z<-3 +4i
 @

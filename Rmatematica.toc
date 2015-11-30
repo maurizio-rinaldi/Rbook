@@ -16,7 +16,7 @@
 \contentsline {subsection}{\numberline {3.1.3}Interi e frazioni}{16}{subsection.3.1.3}
 \contentsline {section}{\numberline {3.2}Funzioni e grafici}{17}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Definizione di funzioni}{17}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Funzioni predefinite}{17}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.2}Funzioni predefinite}{18}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}Grafici}{19}{subsection.3.2.3}
 \select@language {english}
 \select@language {italian}
@@ -69,13 +69,16 @@
 \contentsline {section}{\numberline {3.3}Composizione di funzioni}{29}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Esempi}{31}{subsection.3.3.1}
 \contentsline {section}{\numberline {3.4}Funzioni inverse}{31}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Grafico delle funzioni inverse}{31}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.1}Grafico delle funzioni inverse}{32}{subsection.3.4.1}
 \contentsline {section}{\numberline {3.5}Funzioni inverse delle funzioni circolari}{35}{section.3.5}
-\contentsline {section}{\numberline {3.6}Derivate}{38}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Regola dei tre punti}{41}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Derivate ``formali''}{47}{subsection.3.6.2}
-\contentsline {subsection}{\numberline {3.6.3}Metodo delle tangenti di Newton}{48}{subsection.3.6.3}
-\contentsline {section}{\numberline {3.7}Integrali definiti}{51}{section.3.7}
-\contentsline {subsection}{\numberline {3.7.1}Metodi numerici di integrazione di \textsf {R}}{51}{subsection.3.7.1}
-\contentsline {subsection}{\numberline {3.7.2}Metodi di integrazione: metodo dei rettangoli e metodo dei trapezi}{52}{subsection.3.7.2}
-\contentsline {subsection}{\numberline {3.7.3}Metodo Montecarlo}{53}{subsection.3.7.3}
+\contentsline {section}{\numberline {3.6}Applicazioni delle funzioni inverse: equazioni logaritmiche ed esponenziali}{39}{section.3.6}
+\contentsline {section}{\numberline {3.7}Derivate}{39}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}Regola dei tre punti}{43}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.2}Derivate ``formali''}{48}{subsection.3.7.2}
+\contentsline {subsection}{\numberline {3.7.3}Metodo delle tangenti di Newton}{50}{subsection.3.7.3}
+\contentsline {section}{\numberline {3.8}Integrali definiti}{53}{section.3.8}
+\contentsline {subsection}{\numberline {3.8.1}Metodi numerici di integrazione di \textsf {R}}{53}{subsection.3.8.1}
+\contentsline {subsection}{\numberline {3.8.2}Metodi di integrazione: metodo dei rettangoli e metodo dei trapezi}{54}{subsection.3.8.2}
+\contentsline {subsection}{\numberline {3.8.3}Metodo Montecarlo}{55}{subsection.3.8.3}
+\contentsline {section}{\numberline {3.9}Cenni di calcolo simbolico in \textsf {R}~}{60}{section.3.9}
+\contentsline {section}{\numberline {3.10}soluzioni}{60}{section.3.10}
