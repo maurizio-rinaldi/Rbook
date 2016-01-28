@@ -1,0 +1,90 @@
+\BOOKMARK [0][-]{section*.2}{Prefazione}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Introduzione ad R}{}% 2
+\BOOKMARK [1][-]{section.1.1}{Introduzione}{chapter.1}% 3
+\BOOKMARK [0][-]{chapter.2}{Matematica con R}{}% 4
+\BOOKMARK [1][-]{section.2.1}{Numeri, operazioni aritmetiche e variabili}{chapter.2}% 5
+\BOOKMARK [2][-]{subsection.2.1.1}{I numeri}{section.2.1}% 6
+\BOOKMARK [2][-]{subsection.2.1.2}{Variabili}{section.2.1}% 7
+\BOOKMARK [2][-]{subsection.2.1.3}{Costanti fondamentali}{section.2.1}% 8
+\BOOKMARK [2][-]{subsection.2.1.4}{Costruzione di vettori}{section.2.1}% 9
+\BOOKMARK [2][-]{subsection.2.1.5}{Generazione di sequenze: rep e seq}{section.2.1}% 10
+\BOOKMARK [1][-]{section.2.2}{Funzioni e grafici}{chapter.2}% 11
+\BOOKMARK [2][-]{subsection.2.2.1}{Definizione di funzioni}{section.2.2}% 12
+\BOOKMARK [2][-]{subsection.2.2.2}{Funzioni predefinite}{section.2.2}% 13
+\BOOKMARK [2][-]{subsection.2.2.3}{Grafici}{section.2.2}% 14
+\BOOKMARK [1][-]{section.2.3}{Derivate di funzioni}{chapter.2}% 15
+\BOOKMARK [2][-]{subsection.2.3.1}{Regola dei tre punti}{section.2.3}% 16
+\BOOKMARK [2][-]{subsection.2.3.2}{Derivate ``formali''}{section.2.3}% 17
+\BOOKMARK [2][-]{subsection.2.3.3}{Metodo delle tangenti di Newton}{section.2.3}% 18
+\BOOKMARK [1][-]{section.2.4}{Integrali definiti}{chapter.2}% 19
+\BOOKMARK [2][-]{subsection.2.4.1}{Metodi numerici di integrazione di R}{section.2.4}% 20
+\BOOKMARK [2][-]{subsection.2.4.2}{Metodi di integrazione: metodo dei rettangoli e metodo dei trapezi}{section.2.4}% 21
+\BOOKMARK [2][-]{subsection.2.4.3}{Metodo Montecarlo}{section.2.4}% 22
+\BOOKMARK [1][-]{section.2.5}{Numeri complessi}{chapter.2}% 23
+\BOOKMARK [1][-]{section.2.6}{Variabili aleatorie discrete}{chapter.2}% 24
+\BOOKMARK [1][-]{section.2.7}{Statistica descrittiva: singola variabile}{chapter.2}% 25
+\BOOKMARK [2][-]{subsection.2.7.1}{Indicatori statistici}{section.2.7}% 26
+\BOOKMARK [2][-]{subsection.2.7.2}{Raggruppamenti in classi}{section.2.7}% 27
+\BOOKMARK [2][-]{subsection.2.7.3}{Areogrammi}{section.2.7}% 28
+\BOOKMARK [2][-]{subsection.2.7.4}{Generazione di boxplot}{section.2.7}% 29
+\BOOKMARK [2][-]{subsection.2.7.5}{Creazione di grafici a torta}{section.2.7}% 30
+\BOOKMARK [1][-]{section.2.8}{Variabili doppie e rette di regressione}{chapter.2}% 31
+\BOOKMARK [1][-]{section.2.9}{Distribuzioni in R}{chapter.2}% 32
+\BOOKMARK [2][-]{subsection.2.9.1}{Distribuzione normale}{section.2.9}% 33
+\BOOKMARK [2][-]{subsection.2.9.2}{La distribuzione t di Student}{section.2.9}% 34
+\BOOKMARK [2][-]{subsection.2.9.3}{Intervalli di confidenza e test di Student \(dati non appaiati\)}{section.2.9}% 35
+\BOOKMARK [2][-]{subsection.2.9.4}{Test di Student per dati appaiati}{section.2.9}% 36
+\BOOKMARK [1][-]{section.2.10}{Test 2 di indipendenza}{chapter.2}% 37
+\BOOKMARK [2][-]{subsection.2.10.1}{Test 2 di adeguamento}{section.2.10}% 38
+\BOOKMARK [1][-]{section.2.11}{Distribuzione Binomiale}{chapter.2}% 39
+\BOOKMARK [0][-]{chapter.3}{Strutture di dati}{}% 40
+\BOOKMARK [1][-]{section.3.1}{Visualizzazione di oggetti di R}{chapter.3}% 41
+\BOOKMARK [1][-]{section.3.2}{Le stringhe}{chapter.3}% 42
+\BOOKMARK [2][-]{subsection.3.2.1}{Stringhe print, cat e caratteri speciali}{section.3.2}% 43
+\BOOKMARK [2][-]{subsection.3.2.2}{Operare con le stringhe}{section.3.2}% 44
+\BOOKMARK [1][-]{section.3.3}{Matrici}{chapter.3}% 45
+\BOOKMARK [2][-]{subsection.3.3.1}{Operazioni con le matrici}{section.3.3}% 46
+\BOOKMARK [1][-]{section.3.4}{I dataframe}{chapter.3}% 47
+\BOOKMARK [1][-]{section.3.5}{Gli array}{chapter.3}% 48
+\BOOKMARK [1][-]{section.3.6}{Liste}{chapter.3}% 49
+\BOOKMARK [2][-]{subsection.3.6.1}{Funzioni applicate a oggetti}{section.3.6}% 50
+\BOOKMARK [0][-]{chapter.4}{Operatori logici e selezione di elementi}{}% 51
+\BOOKMARK [1][-]{subsection.4.0.1}{I valori non assegnati}{chapter.4}% 52
+\BOOKMARK [1][-]{section.4.1}{Operatori condizionali e cicli}{chapter.4}% 53
+\BOOKMARK [1][-]{section.4.2}{Funzioni di pi\371 variabili}{chapter.4}% 54
+\BOOKMARK [1][-]{section.4.3}{R Output su file}{chapter.4}% 55
+\BOOKMARK [0][-]{chapter.5}{Statistica II parte}{}% 56
+\BOOKMARK [1][-]{section.5.1}{Analisi della Varianza \(ANOVA\)}{chapter.5}% 57
+\BOOKMARK [1][-]{section.5.2}{Test 2 di indipendenza}{chapter.5}% 58
+\BOOKMARK [2][-]{subsection.5.2.1}{Test 2 di adeguamento}{section.5.2}% 59
+\BOOKMARK [1][-]{section.5.3}{Distribuzione Binomiale}{chapter.5}% 60
+\BOOKMARK [1][-]{section.5.4}{Distribuzione di Fisher}{chapter.5}% 61
+\BOOKMARK [1][-]{section.5.5}{Tabelle di contingenza}{chapter.5}% 62
+\BOOKMARK [1][-]{section.5.6}{Farmacocinetica e modelli non lineari}{chapter.5}% 63
+\BOOKMARK [2][-]{subsection.5.6.1}{Regressione non lineare}{section.5.6}% 64
+\BOOKMARK [2][-]{subsection.5.6.2}{I bambini di Kalama \(Egitto\). Ancora retta di regressione}{section.5.6}% 65
+\BOOKMARK [1][-]{section.5.7}{QQPlot normality test}{chapter.5}% 66
+\BOOKMARK [0][-]{chapter.6}{Grafica}{}% 67
+\BOOKMARK [1][-]{section.6.1}{Le device grafiche}{chapter.6}% 68
+\BOOKMARK [1][-]{section.6.2}{Lo stato grafico}{chapter.6}% 69
+\BOOKMARK [1][-]{section.6.3}{Elementi grafici di base}{chapter.6}% 70
+\BOOKMARK [2][-]{subsection.6.3.1}{Costruzione di grafici multipli}{section.6.3}% 71
+\BOOKMARK [2][-]{subsection.6.3.2}{Diagrammi a dispersione}{section.6.3}% 72
+\BOOKMARK [2][-]{subsection.6.3.3}{Grafici multipli e/o sovrapposti}{section.6.3}% 73
+\BOOKMARK [2][-]{subsection.6.3.4}{Aggiungere testo al grafico}{section.6.3}% 74
+\BOOKMARK [2][-]{subsection.6.3.5}{Immagini di un vulcano}{section.6.3}% 75
+\BOOKMARK [2][-]{subsection.6.3.6}{I rettangoli }{section.6.3}% 76
+\BOOKMARK [1][-]{section.6.4}{Grafici professionali: legenda, annotazioni e formule}{chapter.6}% 77
+\BOOKMARK [1][-]{section.6.5}{Pittura virtuale}{chapter.6}% 78
+\BOOKMARK [1][-]{section.6.6}{Grafica 3D, il vulcano Maunga Whau}{chapter.6}% 79
+\BOOKMARK [1][-]{section.6.7}{Web}{chapter.6}% 80
+\BOOKMARK [2][-]{subsection.6.7.1}{Colori}{section.6.7}% 81
+\BOOKMARK [2][-]{subsection.6.7.2}{Costruire una funzione per realizzare grafica su device}{section.6.7}% 82
+\BOOKMARK [1][-]{section.6.8}{Grafica 3D, grafico di una funzione di due variabili}{chapter.6}% 83
+\BOOKMARK [2][-]{subsection.6.8.1}{Il pacchetto rgl}{section.6.8}% 84
+\BOOKMARK [2][-]{subsection.6.8.2}{Personalizzare la regione di plot}{section.6.8}% 85
+\BOOKMARK [2][-]{subsection.6.8.3}{Il pacchetto lattice}{section.6.8}% 86
+\BOOKMARK [2][-]{subsection.6.8.4}{Il parallel plot}{section.6.8}% 87
+\BOOKMARK [2][-]{subsection.6.8.5}{Applicazione in campo geografico}{section.6.8}% 88
+\BOOKMARK [2][-]{subsection.6.8.6}{Il parametro las}{section.6.8}% 89
+\BOOKMARK [1][-]{section.6.9}{I rettangoli}{chapter.6}% 90

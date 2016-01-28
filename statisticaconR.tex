@@ -6,7 +6,7 @@
 \usepackage{verbatim}
 \usepackage{makeidx}
 \usepackage{fancyhdr}
-%\usepackage[applemac]{inputenc} 
+%\usepackage[applemac]{inputen142c} 
 \usepackage[T1]{fontenc}
 \usepackage{framed}
 \usepackage{lipsum}
@@ -1401,7 +1401,7 @@ Useremo il comando  \texttt{runif} per effettuare i tiri.
 > successi/tiri*76*3                    
 \end{Sinput}
 \begin{Soutput}
-[1] 82.308
+[1] 85.272
 \end{Soutput}
 \begin{Sinput}
 > integrate(f,1,4)
@@ -1421,7 +1421,7 @@ Useremo il comando  \texttt{runif} per effettuare i tiri.
 \begin{center}
 \begin{Schunk}
 \begin{Soutput}
-[1] 89.376
+[1] 84.816
 \end{Soutput}
 \begin{Soutput}
 86.25 with absolute error < 9.6e-13
@@ -1450,7 +1450,7 @@ In tal caso i comandi sono
 \begin{center}
 \begin{Schunk}
 \begin{Soutput}
-[1] 3.1164
+[1] 3.1404
 \end{Soutput}
 \end{Schunk}
 \includegraphics{statisticaconR-122}
@@ -1615,7 +1615,7 @@ Se l'alfabeto consiste di tutte le lettere minuscole dell'alfabeto ordinario e n
 > sample(letters,8)
 \end{Sinput}
 \begin{Soutput}
-[1] "o" "a" "t" "w" "s" "d" "p" "j"
+[1] "u" "c" "n" "z" "w" "i" "m" "h"
 \end{Soutput}
 \end{Schunk}
   Se invece l'alfabeto consiste delle basi del DNA
@@ -1625,7 +1625,7 @@ Se l'alfabeto consiste di tutte le lettere minuscole dell'alfabeto ordinario e n
 > sample(alfabeto,2)
 \end{Sinput}
 \begin{Soutput}
-[1] "A" "G"
+[1] "C" "A"
 \end{Soutput}
 \begin{Sinput}
 > 
@@ -1648,7 +1648,7 @@ Per esempio
 > sample(alfabeto,5,replace=T)
 \end{Sinput}
 \begin{Soutput}
-[1] "testa" "croce" "testa" "croce" "testa"
+[1] "croce" "testa" "croce" "croce" "testa"
 \end{Soutput}
 \end{Schunk}
 
@@ -1820,5 +1820,719 @@ Consideriamo la rilevazione della temperatura media giornaliera di Milano nel me
 > sito="http://www.ilmeteo.it/portale/archivio-meteo/"
 > indirizzo=paste(sito,"Milano/2010/Settembre?format=csv",sep="")
 > meteo=read.table(indirizzo,sep=";")
+\end{Sinput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> meteo[1,]
+\end{Sinput}
+\begin{Soutput}
+        V1   V2           V3         V4         V5
+1 LOCALITA DATA TMEDIA \xb0C TMIN \xb0C TMAX \xb0C
+                  V6        V7            V8              V9
+1 PUNTORUGIADA \xb0C UMIDITA % VISIBILITA km VENTOMEDIA km/h
+            V10          V11             V12               V13
+1 VENTOMAX km/h RAFFICA km/h PRESSIONESLM mb PRESSIONEMEDIA mb
+         V14      V15
+1 PIOGGIA mm FENOMENI
+\end{Soutput}
+\begin{Sinput}
+> dim(meteo)
+\end{Sinput}
+\begin{Soutput}
+[1] 31 15
+\end{Soutput}
+\begin{Sinput}
+> meteo[-1,3]
+\end{Sinput}
+\begin{Soutput}
+ [1] 18 19 21 22 22 20 17 19 18 20 19 20 20 19 20 22 22 18 18 18
+[21] 18 19 19 17 14 15 15 15 15 15
+Levels: 14 15 17 18 19 20 21 22 TMEDIA \xb0C
+\end{Soutput}
+\end{Schunk}
+A questo punto eliminiamo i livelli di \texttt{meteo} con il comando \texttt{as.vector} e consideriamo il risultato come numerico con
+\begin{Schunk}
+\begin{Sinput}
+> as.numeric(as.vector(meteo[-1,3]))->Milano;
+> Milano
+\end{Sinput}
+\begin{Soutput}
+ [1] 18 19 21 22 22 20 17 19 18 20 19 20 20 19 20 22 22 18 18 18
+[21] 18 19 19 17 14 15 15 15 15 15
+\end{Soutput}
+\begin{Sinput}
+> quantile(Milano)
+\end{Sinput}
+\begin{Soutput}
+   0%   25%   50%   75%  100% 
+14.00 17.25 19.00 20.00 22.00 
+\end{Soutput}
+\end{Schunk}
+L'ultimo comando in particolare ci fornisce minimo e massimo dei dati.
+Possiamo esaminare la serie temporale dei dati con i comandi
+\begin{Schunk}
+\begin{Sinput}
+> plot(Milano,type="l",xlab="settembre 2010 a milano",ylab="temperatura media")
+\end{Sinput}
+\end{Schunk}
+ottenendo la figura~\ref{datiist}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{statisticaconR-155}
+\caption{ Andamento della temperatura a settembre 2010. }
+\label{fig:datiist}
+\end{center}
+\end{figure}
+
+Raggruppiamo ora i dati in classi comprese  tra due estremi che comprendano certamente tutti i dati, per esempio 13 e 23, decidendo di applicare un passo di 2 e vedere come si distribuiscono. Il comando \texttt{cut} associa a ciascun dato la classe di appartenenza selezionata in base ai punti di taglio.
+
+\begin{Schunk}
+\begin{Sinput}
+> cut(Milano,breaks=seq(13.,23.,by=2))
+\end{Sinput}
+\begin{Soutput}
+ [1] (17,19] (17,19] (19,21] (21,23] (21,23] (19,21] (15,17]
+ [8] (17,19] (17,19] (19,21] (17,19] (19,21] (19,21] (17,19]
+[15] (19,21] (21,23] (21,23] (17,19] (17,19] (17,19] (17,19]
+[22] (17,19] (17,19] (15,17] (13,15] (13,15] (13,15] (13,15]
+[29] (13,15] (13,15]
+Levels: (13,15] (15,17] (17,19] (19,21] (21,23]
+\end{Soutput}
+\end{Schunk}
+
+Il comando \texttt{table} conta i dati di ciascuna classe
+
+\begin{Schunk}
+\begin{Sinput}
+> table(cut(Milano,breaks=seq(13.,23.,by=2)))
+\end{Sinput}
+\begin{Soutput}
+(13,15] (15,17] (17,19] (19,21] (21,23] 
+      6       2      12       6       4 
+\end{Soutput}
+\end{Schunk}
+Si noti che la suddivisione in classi prevede intervalli aperti a sinistra e chiusi a destra.  
+Per suddividere in modo che gli intervalli siano chiusi a sinistra e aperti a destra si specifica il parametro \texttt{right=FALSE}.
+Possiamo anche usare il comando \texttt{seq} per specificare i tagli.
+ \begin{eqnarray*}
+\texttt{table(cut}( \varia{variabile},\texttt{breaks=seq}(\varia{estremo inf},\\
+\varia{estremo sup},\texttt{by}=\varia{passo}),\texttt{right=FALSE}))
+\end{eqnarray*}
+o in modo  pi\`u generale   
+\begin{eqnarray*}
+&\texttt{table(cut}(\varia{ variabile},\\
+&\texttt{breaks=c}(\varia{estremo\; inferiore}, \ldots,\varia{estremo superiore})) 
+\end{eqnarray*}
+estremamente utile in quanto consente di raggruppare i dati in classi non necessariamente di ugual ampiezza.
+\begin{Schunk}
+\begin{Sinput}
+> table(cut(Milano,breaks=c(12.5,14,15,16, 18,20,22.5),
++ right=F))
+\end{Sinput}
+\begin{Soutput}
+[12.5,14)   [14,15)   [15,16)   [16,18)   [18,20) [20,22.5) 
+        0         1         5         2        12        10 
+\end{Soutput}
+\end{Schunk}
+Volendo raggruppare in classi i dati delle precedenti uscite del dado possiamo scrivere  
+\begin{Schunk}
+\begin{Sinput}
+> table(cut(dadi100,breaks=0:6))
+\end{Sinput}
+\begin{Soutput}
+(0,1] (1,2] (2,3] (3,4] (4,5] (5,6] 
+   12    14    22    15    18    19 
+\end{Soutput}
+\end{Schunk}
+Se scegliamo di chiudere a sinistra gli intervalli
+\begin{Schunk}
+\begin{Sinput}
+> table(cut(dadi100,breaks= 1:7,right=FALSE))
+\end{Sinput}
+\begin{Soutput}
+[1,2) [2,3) [3,4) [4,5) [5,6) [6,7) 
+   12    14    22    15    18    19 
+\end{Soutput}
+\end{Schunk}
+In questo caso la occorre prestare attenzione alla chiusura agli estremi degli intervalli\subsection{Areogrammi}
+Il comando generico per generare un istogramma \`e:
+\begin{equation*}
+\texttt{hist}(\varia{variabile})
+\end{equation*}
+che segue per\`o la struttura del comando \texttt{cut}. L'ampiezza di ciascuna classe salvo diversamente indicato \`e costante e decisa da \textsf{R}.
+\`E  possibile variare tale condizione definendo una lista con i punti di taglio ({\it cutoff}) delle classi volute:
+\begin{equation} \texttt{hist}(\varia{variabile},\texttt{c}(\varia{valore}_1, \varia{valore}_2, \ldots))
+\end{equation}
+Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del dado, il comando 
+\begin{Schunk}
+\begin{Sinput}
+> par(mfrow=c(1,2))
+> hist(dadi100,breaks=seq(0.5,6.5,1),col="red")
+> hist(dadi100,freq=FALSE,breaks=seq(0.5,6.5,1),col="blue")
+\end{Sinput}
+\end{Schunk}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{statisticaconR-162}
+\caption{ Diagramma a colonne e areogramma per il lancio di un dado.}
+\label{fig:datiiist}
+\end{center}
+\end{figure}
+genera l'istogramma (in rosso, a sinistra Figura~\ref{fig:datiist}) con le frequenze assolute delle classi in ordinata. La sequenza dei punti di taglio \`e stata scelta in modo che i numeri interi da 1 a 6 siano al centro delle classi corrispondenti. Se invece volessimo creare un areogramma  (ossia avere un tracciato per cui le aree siano pari alle frequenze relative) a partire dalle stesse uscite dovremo imporre il parametro \texttt{freq=FALSE} otterremo il pannello a destra (in blu) della figura~(\ref{fig:datiist}). Avendo scelto classi di ampiezza costante i 2 grafici differiscono semplicemente per un cambio di scala sull'asse $y$.
+ 
+In modo simile possiamo tracciare un areogramma  dei dati nella variabile \texttt{milano}  
+\begin{Schunk}
+\begin{Sinput}
+> par(mfrow=c(1,2))
+> hist(Milano, col="green",freq=FALSE,right=FALSE,
++ main="Cutoff automatici")
+\end{Sinput}
+\end{Schunk}
+lasciando \textsf{R} libero di scegliere i punti di taglio (pannelli a sinistra della figura \ref{fig:datiistmilano}) o scegliendoli a nostra volta (pannelli a destra della stessa figura  \ref{fig:datiistmilano})
+\begin{Schunk}
+\begin{Sinput}
+> hist(Milano,col="red",freq=FALSE,
++ breaks=c(12.5,15,17,18,20,22.5),right=FALSE, 
++ main="Cutoff personalizzati")
+\end{Sinput}
+\end{Schunk}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{statisticaconR-166}
+\caption{ Areogramma dei dati della temperatura. Scelta automatica dei punti di taglio.}
+\label{fig:datiistmilano}
+\end{center}
+\end{figure}
+Si noti la stabilit\`a degli areogrammi rispetto ai cambi nella suddivisione.
+\subsection{Generazione di boxplot}
+
+Il \texttt{boxplot}  \`e una rappresentazione grafica immediata della statistica dei 5 numeri e simultaneamente ci  segnala eventuali punti discordanti o anomali, {\it outlier}.
+Il comando generico \`e: \begin{equation}\texttt{boxplot}(\varia{variabile})\end{equation}
+prendendo il vettore $x$ contenente i risultati di 100 lanci
+otteniamo la figura~\ref{fig:boxplotdado}
+\begin{figure}[htbp]
+\begin{center}
+\begin{Schunk}
+\begin{Sinput}
+> boxplot(dadi100)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{statisticaconR-167}
+\caption{Boxplot dei risultati del lancio di un dado}\label{fig:boxplotdado}
+\end{center}
+\end{figure}
+da cui si evince che il valore massimo dei dati \`e 6, il minimo \`e 1 e non ci sono punti anomali, per cui non vi sono dati anomali, altrimenti evidenziati da un pallino. Si legge inoltre il valore di mediana (4) primo quartile (2) e terzo quartile (5).
+
+\subsection{Creazione di grafici a torta}
+
+Il comando \texttt{pie} consente, partendo da una tabella, di tracciare il diagramma a torta per una variabile nominale raggruppata in classi. Il comando \`e
+
+\begin{equation*}\texttt{pie(table}(\varia{variabile} ))
+\end{equation*}
+ad esempio (facendo riferimento ai precedenti dati):
+\begin{Schunk}
+\begin{Sinput}
+> pie(table(dadi100))
+\end{Sinput}
+\end{Schunk}
+fornisce in uscita  la Figura~\ref{fig:pie}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{statisticaconR-169}
+\caption{Diagramma a torta per il lancio di un dado equo.}
+\label{fig:pie}
+\end{center}
+\end{figure}
+\begin{shaded}{Costruire una matrice contenente le coordinate di 50 punti nel rettangolo $[0,4]\times [0,2]$ in due dimensioni (generate utilizzando il generatore di numeri pseudocasuali). Produrre un grafico con due pannelli, dove il primo pannello \`e uno scatter-plot}
+\end{shaded}
+\section{Variabili doppie e rette di regressione} 
+Supponiamo di misurare la concentrazione di acido lattico muscolare durante uno sforzo di 10 minuti,  
+\begin{Schunk}
+\begin{Sinput}
+> x<-tempo<-c(1,2,3,4,5,6,7,8,9,10)
+> y<-concentrazione<-c(0.3,0.65,0.7,0.8,0.95,1.05,1.3,1.7,1.9,
++ 2.5)
+\end{Sinput}
+\end{Schunk}
+Per analizzare questi dati conviene preliminarmente tracciarne un diagramma a dispersione. 
+\begin{figure}[htbp]
+\begin{center}
+\begin{Schunk}
+\begin{Sinput}
+> plot(x,y)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{statisticaconR-171}
+\caption{Diagramma a dispersione tempo/concentrazione. }
+\label{fig:scatte}
+\end{center}
+\end{figure}
+Possiamo inoltre determinare il coefficiente di correlazione lineare
+\begin{Schunk}
+\begin{Sinput}
+> cor(x,y)
+\end{Sinput}
+\begin{Soutput}
+[1] 0.9620456
+\end{Soutput}
+\end{Schunk}
+Per definire un modello di relazione lineare occorre usare il comando \texttt{lm} (\varia{linear model}).
+Nella sua generica forma il comando \`e espresso come\footnote{ Per digitare la tilde  \mytilde\;  su Mac premere ALT 5 su PC invece il tasto Alt Gr (attivazione del codice ASCII) e sul tastierino numerico digitare il numero 126. Lavorando su un portatile il tastierino numerico \`e spesso incorporato nella tastiera con colorazione blue dei tasti.}
+$$\texttt{lm}(\varia{y} \sim  \varia{x})$$
+Otteniamo i valori di pendenza e intercetta. 
+
+Possiamo tracciare la retta di regressione con il comando \texttt{abline}.
+\begin{Schunk}
+\begin{Sinput}
+> plot(x,y,pch=19,col="red") 
+> abline(lm(y~x),col="blue")
+\end{Sinput}
+\end{Schunk}
+Per determinare  la retta di regressione sulle $y$ dobbiamo invertire $x$ e $y$. 
+\begin{Schunk}
+\begin{Sinput}
+> lm(x~y)
+\end{Sinput}
+\begin{Soutput}
+Call:
+lm(formula = x ~ y)
+
+Coefficients:
+(Intercept)            y  
+     0.3516       4.3446  
+\end{Soutput}
+\begin{Sinput}
+> lm(x~y)$coefficients->coeff
+> a=1/coeff[2];a;
+\end{Sinput}
+\begin{Soutput}
+        y 
+0.2301707 
+\end{Soutput}
+\begin{Sinput}
+> b=-coeff[1]/coeff[2];
+> abline(b,a,col="green")
+\end{Sinput}
+\end{Schunk}
+In tal modo otteniamo il grafico~\ref{fig:duerettex}.
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{statisticaconR-175}
+\caption{Rette di regressione. In blu $R_x$, in verde $R_y$.}
+\label{fig:duerettex}
+\end{center}
+\end{figure}
+Consideriamo ora il seguente \emph{dataset} di mammiferi  in cui le 2 variabili rappresentano  le dimensioni del corpo e del cervello.
+\begin{Schunk}
+\begin{Sinput}
+> library(MASS)
+> mammals
+\end{Sinput}
+\begin{Soutput}
+                              body   brain
+Arctic fox                   3.385   44.50
+Owl monkey                   0.480   15.50
+Mountain beaver              1.350    8.10
+Cow                        465.000  423.00
+Grey wolf                   36.330  119.50
+Goat                        27.660  115.00
+Roe deer                    14.830   98.20
+Guinea pig                   1.040    5.50
+Verbet                       4.190   58.00
+Chinchilla                   0.425    6.40
+Ground squirrel              0.101    4.00
+Arctic ground squirrel       0.920    5.70
+African giant pouched rat    1.000    6.60
+Lesser short-tailed shrew    0.005    0.14
+Star-nosed mole              0.060    1.00
+Nine-banded armadillo        3.500   10.80
+Tree hyrax                   2.000   12.30
+N.A. opossum                 1.700    6.30
+Asian elephant            2547.000 4603.00
+Big brown bat                0.023    0.30
+Donkey                     187.100  419.00
+Horse                      521.000  655.00
+European hedgehog            0.785    3.50
+Patas monkey                10.000  115.00
+Cat                          3.300   25.60
+Galago                       0.200    5.00
+Genet                        1.410   17.50
+Giraffe                    529.000  680.00
+Gorilla                    207.000  406.00
+Grey seal                   85.000  325.00
+Rock hyrax-a                 0.750   12.30
+Human                       62.000 1320.00
+African elephant          6654.000 5712.00
+Water opossum                3.500    3.90
+Rhesus monkey                6.800  179.00
+Kangaroo                    35.000   56.00
+Yellow-bellied marmot        4.050   17.00
+Golden hamster               0.120    1.00
+Mouse                        0.023    0.40
+Little brown bat             0.010    0.25
+Slow loris                   1.400   12.50
+Okapi                      250.000  490.00
+Rabbit                       2.500   12.10
+Sheep                       55.500  175.00
+Jaguar                     100.000  157.00
+Chimpanzee                  52.160  440.00
+Baboon                      10.550  179.50
+Desert hedgehog              0.550    2.40
+Giant armadillo             60.000   81.00
+Rock hyrax-b                 3.600   21.00
+Raccoon                      4.288   39.20
+Rat                          0.280    1.90
+E. American mole             0.075    1.20
+Mole rat                     0.122    3.00
+Musk shrew                   0.048    0.33
+Pig                        192.000  180.00
+Echidna                      3.000   25.00
+Brazilian tapir            160.000  169.00
+Tenrec                       0.900    2.60
+Phalanger                    1.620   11.40
+Tree shrew                   0.104    2.50
+Red fox                      4.235   50.40
+\end{Soutput}
+\end{Schunk}
+Per prima cosa tracciamo il grafico dei punti  in scala non trasformata e, visto la compresenza di dati molto prossimi all'origine e di dati molto distanti in scala logaritmica (sia le $x$ che le $y$ vengono trasformate prendendone i logaritmi)
+\begin{Schunk}
+\begin{Sinput}
+> par(mfrow=c(1,2))
+> plot(mammals)
+> plot(mammals,log="xy")
+\end{Sinput}
+\end{Schunk}
+come in Figura~\ref{fig:duemammals}.\begin{figure}[htbp]
+\begin{center}
+\begin{Schunk}
+\begin{Sinput}
+> par(mfrow=c(1,2))
+> plot(mammals)
+> plot(mammals,log="xy")
+\end{Sinput}
+\end{Schunk}
+\includegraphics{statisticaconR-178}
+\caption{Diagramma a dispersione massa corporea/massa del cervello in scala normale ed in scala logaritmica. }
+\label{fig:duemammals}
+\end{center}
+\end{figure}
+Visti i  risultati ottenuti usando la scala logaritmica tracciamo anche la corrispondente retta di regressione 
+\begin{Schunk}
+\begin{Sinput}
+> plot(log(mammals$brain)~log(mammals$body),col="BLUE",pch=19,type="p")
+> abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3); 
+> uomo=which(rownames(mammals)=="Human")
+> text(log(mammals[uomo ,1]),log(mammals[uomo ,2]),rownames(mammals)[uomo])
+\end{Sinput}
+\end{Schunk}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{statisticaconR-180}
+\caption{ Retta di regressione. Dimensione del corpo e del cervello. Si noti la posizione dell'uomo.}
+\label{duerette}
+\end{center}
+\end{figure}
+Si noti il comando \texttt{text(\varia{x},\varia{y}, \varia{testo})}
+dove    $\varia{x}$ e $\varia{y}$  e $\varia{testo}$ sono vettori di arbitraria lunghezza contenenti ascisse, ordinate e testo da inserire.
+\section{Distribuzioni in \textsf{R}}
+I nomi delle principali distribuzioni in \textsf{R} sono\vskip10pt
+\begin{tabular}{|r|c |}
+\hline
+\texttt{norm}&normale\\
+\texttt{t}  &Student\\
+\texttt{chisq}& chi quadro\\
+\texttt{f}&Fisher\\
+\texttt{binom }&binomiale\\
+\hline
+\end{tabular}\vskip10pt
+A questi nomi possiamo aggiungere diversi prefissi\vskip10pt
+\begin{tabular}{|r|c |}
+\hline
+\texttt{d}&densit\`a\\
+\texttt{p}  &primitiva\\
+\texttt{q}& quantile\\
+\texttt{r}&random\\
+  \hline
+\end{tabular}
+\vskip10pt
+per caratterizzare diversi aspetti.
+
+\subsection{Distribuzione normale}
+\subsubsection{La funzione \texttt{dnorm}}
+Come appena visto \textsf{R }indica con il nome \texttt{dnorm}, la densit\`a normale o gaussiana. Essa accetta come parametri sia la media $\mu$ che la deviazione standard $\sigma$ come \`e possibile verificare con il comando \texttt{formals} che ci fornisce gli argomenti di una funzione e gli eventuali valori preassegnati.
+\begin{Schunk}
+\begin{Sinput}
+> formals(dnorm)
+\end{Sinput}
+\begin{Soutput}
+$x
+
+
+$mean
+[1] 0
+
+$sd
+[1] 1
+
+$log
+[1] FALSE
+\end{Soutput}
+\end{Schunk}
+Se i parametri sono omessi \texttt{dnorm} rappresenta la densit\`a normale standard con $\mu=0$ e $\sigma=1$. 
+Il grafico~(\ref{normalesta}) della gaussiana
+ tra due estremi, ad esempio -2.5 e 2.5 si ottiene con il solito comando
+\begin{Schunk}
+\begin{Sinput}
+> curve(dnorm,-2.5,2.5)
+\end{Sinput}
+\end{Schunk}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{statisticaconR-183}
+\caption{ Grafico della normale standard nell'intervallo $[-2.5,2.5]$. }
+\label{normalesta}
+\end{center}
+\end{figure}
+Per  visualizzare una gaussiana non standard, ad esempio con media $\mu=1$,  deviazione standard $\sigma=1.5$, tra -3 e 3. scriveremo invece
+\begin{Schunk}
+\begin{Sinput}
+> curve(dnorm(x,mean=1,sd=1.5),-3,3)
+\end{Sinput}
+\end{Schunk}
+\subsubsection{La funzione \texttt{pnorm}}
+La funzione \texttt{pnorm}(\varia{x})  \`e definita come 
+\begin{equation*}\texttt{pnorm}(\varia{x}) =\int_{-\infty}^x  \texttt{dnorm}(s)ds
+\end{equation*}
+Ovviamente 
+$$\int_a^b \texttt{dnorm}(x)dx=\texttt{pnorm}(b)-\texttt{pnorm}(a)$$
+e per avere l'area sottesa tra $3$ e $5$  basta scrivere:
+\begin{Schunk}
+\begin{Sinput}
+> pnorm(5)-pnorm(3) 
+\end{Sinput}
+\begin{Soutput}
+[1] 0.001349611
+\end{Soutput}
+\end{Schunk}
+
+Per ottenere il valore dell'area tra 0 e $x$ bisogna allora sottrarre \texttt{pnorm}(0)=0.5 all'area fornita dalla funzione.
+Per cui possiamo scrivere:
+\begin{Schunk}
+\begin{Sinput}
+> pnorm(1)-0.5
+\end{Sinput}
+\begin{Soutput}
+[1] 0.3413447
+\end{Soutput}
+\end{Schunk}
+
+
+ \subsubsection{La funzione \texttt{qnorm} e la tabella della densit\`a di Gauss}
+
+Notiamo preliminarmente che 
+se $$ \int_{-x}^x \texttt{dnorm}(s)ds= y$$ allora
+$$\texttt{pnorm}(x)=\int_{-\infty}^x \texttt{dnorm}(s)ds=1-\frac{1-y}{2}=\frac{1+y}{2}$$
+ La funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}  quindi
+$$x=\texttt{qnorm}\left(\frac{1+y}{2}\right)$$
+In termini pratici possiamo introdurre la funzione
+\begin{Schunk}
+\begin{Sinput}
+> u<-function(area) qnorm((1+area)/2)
+\end{Sinput}
+\end{Schunk}
+fornisce fissato il livello di fiducia l'ascissa $x$  tale che l'intervallo simmetrico $[-x,x]$ racchiuda un'area pari al lvello di fiducia. Per esempio
+\begin{Schunk}
+\begin{Sinput}
+> u(0.95)
+\end{Sinput}
+\begin{Soutput}
+[1] 1.959964
+\end{Soutput}
+\end{Schunk}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{statisticaconR-190}
+\caption{ Code della distribuzione normale}
+\label{normaletratto}
+\end{center}
+\end{figure}
+
+ \subsubsection{La funzione \texttt{rnorm}}
+\`E possibile generare dei valori standardizzati casuali (media uguale a 0, deviazione standard pari a 1) che seguono la distribuzione normale standard. Basta semplicemente definire il numero di valori desiderati.
+Il comando nella sua espressione generale \`e:
+\begin{equation}\texttt{rnorm}(n,\texttt{mean}=\varia{valore}_1,\texttt{sd}=\varia{valore}_2)\end{equation}
+Nel caso in cui volessimo una lista di 20 valori di una variabile normale con media assegnata 5 e deviazione standard 1 scriveremo :
+
+\begin{Schunk}
+\begin{Sinput}
+> rnorm(20,mean=5,sd=1)
+\end{Sinput}
+\end{Schunk}
+\subsection{La distribuzione $t$ di Student}
+In \textsf{R} la distribuzione di Student \`e indicata con la lettera  \texttt{t}.  Come per le altre densit\`a  si possono considerare le funzioni\vskip5pt
+\begin{tabular}{|r|r |}
+\hline
+dt  &densit\`a\\
+pt  &primitiva\\
+qt & quantili\\
+rt  &generatore random\\
+\hline
+\end{tabular}
+\vskip10pt
+Il grafico della distribuzione di Student ad un certo numero \texttt{df} di gradi di libert\`a  si ottiene con il comando
+\begin{equation*}
+\texttt{curve(dt(x},\texttt{df}),\varia{a},\varia{b})
+\end{equation*}
+Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di libert\`a (vedi figura ~(\ref{fig:graficostudent1})):
+
+\begin{figure}[htbp] 
+\begin{center}
+\begin{Schunk}
+\begin{Sinput}
+> curve(dt(x,10),-2,2)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{statisticaconR-192}
+\caption{ Grafico della distribuzione di Student a 10 gradi di libert\`a. }
+\label{fig:graficostudent1}
+\end{center}
+\end{figure}
+Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cui  la deviazione standard della popolazione $\sigma$  non \`e conosciuta e viene rimpiazzata  dalla deviazione standard campionaria  $S$, calcolata con un numero $N$ di dati e quindi con $N-1$ gradi di libert\`a. Quando per\`o il numero di dati si avvicina a 30 la curva di Student \`e praticamente sovrapposta a quella della distribuzione normale, come mostra il grafico~(\ref{fig:graficostudent}):
+ 
+\begin{figure}[htbp] 
+\begin{center}
+\begin{Schunk}
+\begin{Sinput}
+> curve(dnorm(x),-2,2,col=3)
+> curve(dt(x,2),-2,2,col=1,add=T)
+> curve(dt(x,25),-2,2,col=2,add=T)
+> legend("topleft", c("df=2","df=25","normale"),pch=15,col=1:3);
+\end{Sinput}
+\end{Schunk}
+\includegraphics{statisticaconR-193}
+\caption{ Grafico della distribuzione di Student a 10 gradi di libert\`a}
+\label{fig:graficostudent}
+\end{center}
+\end{figure}
+ \subsection
+{Intervalli di confidenza e test di Student (dati non appaiati)}
+La funzione di 
+\textsf{R} che esegue il test di Student nelle sue diverse forme \`e  \texttt{t.test}   Nella sua forma pi\`u semplice 
+
+\begin{Schunk}
+\begin{Sinput}
+> x=1:20;  t.test(x)
+\end{Sinput}
+\begin{Soutput}
+	One Sample t-test
+
+data:  x
+t = 7.9373, df = 19, p-value = 1.884e-07
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+  7.731189 13.268811
+sample estimates:
+mean of x 
+     10.5 
+\end{Soutput}
+\end{Schunk}
+In assenza di ipotesi  \textsf{R} calcola il consuntivo $$t=\dfrac{M_N(X)-\mu}{S_X}\sqrt {N}$$
+assumendo che sia $\mu=0$. 
+Possiamo anche eseguire specificare l'ipotesi sul valore di $\mu$:
+\begin{Schunk}
+\begin{Sinput}
+> t.test(x,mu=7)
+\end{Sinput}
+\begin{Soutput}
+	One Sample t-test
+
+data:  x
+t = 2.6458, df = 19, p-value = 0.01595
+alternative hypothesis: true mean is not equal to 7
+95 percent confidence interval:
+  7.731189 13.268811
+sample estimates:
+mean of x 
+     10.5 
+\end{Soutput}
+\end{Schunk}
+Possiamo infine specificare l'ipotesi alternativa. Per esempio se l'ipotesi alternativa \`e
+\texttt{\virgolette less\virgolette}  il risultato del test cambia completamente. 
+\begin{Schunk}
+\begin{Sinput}
+> t.test(x,mu=7, alternative="less")
+\end{Sinput}
+\begin{Soutput}
+	One Sample t-test
+
+data:  x
+t = 2.6458, df = 19, p-value = 0.992
+alternative hypothesis: true mean is less than 7
+95 percent confidence interval:
+     -Inf 12.78743
+sample estimates:
+mean of x 
+     10.5 
+\end{Soutput}
+\end{Schunk}
+
+In pratica ci viene fornito come $p$-value il valore dell'area sottesa dalla distribuzione di Student da $-\infty$ al valore di $t$ se l'ipotesi alternativa \`e  \texttt{\virgolette less\virgolette} e il valore dell'area sottesa dalla distribuzione di Student dal valore di $t$ a $+\infty$ se l'ipotesi alternativa \`e     \texttt{\virgolette greater\virgolette}  \subsection{Test di Student per dati appaiati}
+Il test di Student per dati appaiati non \`e altro che un test di Student sulla differenza di 2 liste di dati di ugual lunghezza. Consideriamo ad esempio il confronto di 2 tecniche di misura applicate agli stessi campioni 
+\begin{Schunk}
+\begin{Sinput}
+> x<-c(1.46,2.22,2.84,1.97,1.13,2.35)
+> y<-c(1.42,2.38,2.67,1.8,1.09,2.25)
+\end{Sinput}
+\end{Schunk}
+
+Possiamo calcolare la differenza \texttt{x-y} ed applicare il test di Student oppure ottenere lo stesso risultato specificando l'opzione \texttt{paired=TRUE}
+\begin{Schunk}
+\begin{Sinput}
+>  t.test(x,y,paired=TRUE)
+\end{Sinput}
+\begin{Soutput}
+	Paired t-test
+
+data:  x and y
+t = 1.2, df = 5, p-value = 0.2839
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.06852909  0.18852909
+sample estimates:
+mean of the differences 
+                   0.06 
+\end{Soutput}
+\end{Schunk}
+
+Il consuntivo   \texttt{t} cade entro la regione di accettazione del test.
+\`E  possibile specificare il livello di fiducia da utilizzare per il test di Student come: 
+
+$$\texttt{conf.level}=\varia{numero}$$
+
+Il comando completo di tutti i parametri  \`e quindi:
+\begin{eqnarray*}
+\texttt{t.test}(\varia{dati}_1,\varia{dati}_2,
+\\
+\texttt{paired=TRUE,conf.level}=\varia{valore})
+\end{eqnarray*}
+Ad esempio eseguiamo un $t$-test per dati appaiati, tra $x=(1,2,3,4)$ e $y=(3,2,4,5)$ con {\it confidence level} di 0.85. Scriveremo
+\begin{Schunk}
+\begin{Sinput}
+> t.test(1:4,5:2,paired=TRUE,conf.level=0.85)
+\end{Sinput}
+\end{Schunk}
+ Il consuntivo $t$ cade fuori dalla regione di accettazione proposta. 
+ 
+ \section{Test $\chi^2$  di indipendenza}
+
+%code chunk
+Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani   
+\begin{Schunk}
+\begin{Sinput}
+> read.table(
++ "http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html",
++ skip=39,header=T,nrow=478,sep="\t")->kidinterest
 \end{Sinput}
 \end{Schunk}

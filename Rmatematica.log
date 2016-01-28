@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.5)  28 JAN 2016 16:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.5)  28 JAN 2016 16:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1198,24 +1198,21 @@ File: Rmatematica-143.pdf Graphic file (type pdf)
 Package pdftex.def Info: Rmatematica-143.pdf used on input line 1767.
 (pdftex.def)             Requested size: 331.99031pt x 332.00934pt.
 
-
-LaTeX Warning: Reference `fig:newton' on page 55 undefined on input line 1772.
-
 [55] [56 <./Rmatematica-143.pdf>] [57] [58]
-<Rmatematica-155.pdf, id=791, 433.62pt x 433.62pt>
+<Rmatematica-155.pdf, id=792, 433.62pt x 433.62pt>
 File: Rmatematica-155.pdf Graphic file (type pdf)
  <use Rmatematica-155.pdf>
 Package pdftex.def Info: Rmatematica-155.pdf used on input line 1949.
 (pdftex.def)             Requested size: 331.99031pt x 332.00934pt.
 
 [59] [60 <./Rmatematica-155.pdf>]
-<Rmatematica-159.pdf, id=806, 433.62pt x 433.62pt>
+<Rmatematica-159.pdf, id=807, 433.62pt x 433.62pt>
 File: Rmatematica-159.pdf Graphic file (type pdf)
  <use Rmatematica-159.pdf>
 Package pdftex.def Info: Rmatematica-159.pdf used on input line 2025.
 (pdftex.def)             Requested size: 331.99031pt x 332.00934pt.
 
-<Rmatematica-161.pdf, id=807, 433.62pt x 433.62pt>
+<Rmatematica-161.pdf, id=808, 433.62pt x 433.62pt>
 File: Rmatematica-161.pdf Graphic file (type pdf)
  <use Rmatematica-161.pdf>
 Package pdftex.def Info: Rmatematica-161.pdf used on input line 2053.
@@ -1241,10 +1238,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 9262 strings out of 493089
- 131690 string characters out of 6134842
+ 9261 strings out of 493089
+ 131678 string characters out of 6134842
  323001 words of memory out of 5000000
- 12232 multiletter control sequences out of 15000+600000
+ 12231 multiletter control sequences out of 15000+600000
  78133 words of font info for 145 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  35i,12n,43p,806b,739s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1276,10 +1273,10 @@ ist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2015/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2015/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2015/texmf-d
 ist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on Rmatematica.pdf (69 pages, 1813263 bytes).
+Output written on Rmatematica.pdf (69 pages, 1813379 bytes).
 PDF statistics:
- 995 PDF objects out of 1000 (max. 8388607)
- 812 compressed objects within 9 object streams
+ 996 PDF objects out of 1000 (max. 8388607)
+ 813 compressed objects within 9 object streams
  207 named destinations out of 1000 (max. 500000)
  491 words of extra memory for PDF output out of 10000 (max. 10000000)
 
