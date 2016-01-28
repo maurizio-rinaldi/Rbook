@@ -94,7 +94,7 @@ Maurizio e Federico
 \chapter{Preambolo}
 {\textsf R} \`e un programma \textit{freeware} (di distribuzione gratuita) e \textit{open-source} (il cui codice sorgente pu\`o essere modificato e redistribuito) distribuito dalla ``\textsf{R} foundation'', utilizzato per il calcolo statistico ed in grado di svolgere calcoli matematici ed algebrici (sicuramente di livello superiore ad una normale calcolatrice tascabile) ma che non rientrano nello scopo primario di \textsf{R}. 
 La versione cui sono riferite queste dispense \`e la  
-3 2.1.
+3 2.3.
  Assumiamo che lo studioso abbia scaricato dal sito  \texttt{http://www.r-project.org/} tale versione di  \textsf{R} e la abbia installata sul suo computer.
 \section{Introduzione}
 Il programma si presenta all'utente con una interfaccia per l'inserimento dei dati, una finestra chiamata ``\textsf{R} console''. Per esempio digitando a console (dopo il \textit{prompt} $>$) il comando
@@ -202,7 +202,7 @@ $?\varia{argomento}$   (o $\texttt{help}(\varia{argomento}))$.
 \index{\texttt{help}} 
 Ad esempio $?\texttt{sin}$  consente di ottenere informazioni sulla funzione seno e altre funzioni trigonometriche in quanto la guida \`e completamente indicizzata. \`E anche possibile utilizzare il menu a tendina ({\it help}), con modalit\`a diverse a seconda del sistema operativo.\\
 %Infine, il comando \texttt{help.start()} consente di aprire l'\textit{help} HTML di \textsf{R} da cui \`e poi possibile consultare %la documentazione.
-In RStudio basta invece clicare sul menu Help selezionare la casellina Home e scrivere il comando al quale si \`e interessati.
+In \rst basta invece clicare sul menu \texttt{help} selezionare la casellina \texttt{Home} e scrivere il comando al quale si \`e interessati.
 \subsection*{Inserire i commenti}  
 I commenti sono frasi, annotazioni o codice da non eseguire momentaneamente molto utilizzati in programmazione. L'introduzione di un commento in \textsf{R} \`e possibile mediante il simbolo \texttt{\#} (cancelletto singolo o \emph{hash}). Per evitare che un commento venga cancellato durante il normale \textit{editing} del testo e che esso venga eseguito si consiglia di raddoppiare i simboli (\texttt{\#\#}). Ad esempio:
 \index{\texttt{\#}} 
@@ -759,12 +759,131 @@ basta scrivere
 > d=7
 > solve(a-c,d-b)
 \end{Sinput}
-\begin{Soutput}
-[1] 0.25
-\end{Soutput}
 \end{Schunk}
 Tale comando non \`e qui particolarmente conveniente ma vedremo che si generalizza alla risoluzione di sistemi lineari.
 \end{comment}
+\section{Rappresentazione decimale dei numeri}
+\subsection{Notazione scientifica e cifre significative}
+Abbiamo gi\`a descritto la notazione scientifica di un numero.  Precisamente  il numero viene scritto nella forma $a*e \,b$ con a nell'intervallo $[1,10)$.
+Il numero di \emph{cifre significative}  di un numero $x$ \`e  il numero di cifre (in inglese \emph{figures}) del coefficiente $a$ di un  numero se questo viene espresso in notazione scientifica. 
+Per esempio consideriamo il numero 
+\begin{Schunk}
+\begin{Sinput}
+> x
+\end{Sinput}
+\begin{Soutput}
+[1] 50.74782
+\end{Soutput}
+\end{Schunk}
+Allora
+\begin{Schunk}
+\begin{Sinput}
+> signif(x,2)
+\end{Sinput}
+\begin{Soutput}
+[1] 51
+\end{Soutput}
+\end{Schunk}
+fornisce la rappresentazione con 2 cifre significative del numero $x$ mentre
+\begin{Schunk}
+\begin{Sinput}
+> round(x,2)
+\end{Sinput}
+\begin{Soutput}
+[1] 50.75
+\end{Soutput}
+\end{Schunk}
+fornisce l'arrotondamento a 2 cifre dopo la virgola. Alcuni aspetti sono da sottolineare: 
+\begin{itemize}
+\item nel caso in cui le ultime cifre nell'arrotondamento  significative fossero 0 questa non vengono scritte 
+\begin{Schunk}
+\begin{Sinput}
+> round(12.000,3)
+\end{Sinput}
+\begin{Soutput}
+[1] 12
+\end{Soutput}
+\begin{Sinput}
+> signif(12.00,4)
+\end{Sinput}
+\begin{Soutput}
+[1] 12
+\end{Soutput}
+\end{Schunk}
+\item
+Si noti che la regola di arrotondamento di \rpr\ nel caso in cui l'ultima cifra prima di quella da arrotondare sia un 5 (senza ulteriori cifre a destra) \`e quella di arrotondare il numero al numero pari  (e questo potrebbe comportare un arrotondamento per eccesso o per difetto). Questo per\`o vale per i numeri interi mentre per numeri decimali la rappresentazione numerica potrebbe comportare arrotondamenti imprevedibili
+\begin{Schunk}
+\begin{Sinput}
+> x=101.5
+> round(x)
+\end{Sinput}
+\begin{Soutput}
+[1] 102
+\end{Soutput}
+\begin{Sinput}
+> x=102.5
+> round(x,1)
+\end{Sinput}
+\begin{Soutput}
+[1] 102.5
+\end{Soutput}
+\begin{Sinput}
+> seq(90:110)+0.15
+\end{Sinput}
+\begin{Soutput}
+ [1]  1.15  2.15  3.15  4.15  5.15  6.15  7.15  8.15  9.15
+[10] 10.15 11.15 12.15 13.15 14.15 15.15 16.15 17.15 18.15
+[19] 19.15 20.15 21.15
+\end{Soutput}
+\begin{Sinput}
+> round(seq(90:110)+0.15,1)
+\end{Sinput}
+\begin{Soutput}
+ [1]  1.1  2.1  3.1  4.2  5.2  6.2  7.2  8.2  9.2 10.2 11.2
+[12] 12.2 13.2 14.2 15.2 16.1 17.1 18.1 19.1 20.1 21.1
+\end{Soutput}
+\end{Schunk}
+\item 
+Si noti che se abbiamo
+\begin{Schunk}
+\begin{Sinput}
+> x=10001.0
+> signif(x,3)
+\end{Sinput}
+\begin{Soutput}
+[1] 10000
+\end{Soutput}
+\begin{Sinput}
+> signif(x,4)
+\end{Sinput}
+\begin{Soutput}
+[1] 10000
+\end{Soutput}
+\begin{Sinput}
+> signif(x,5)
+\end{Sinput}
+\begin{Soutput}
+[1] 10001
+\end{Soutput}
+\end{Schunk}
+\item 
+La rappresentazione standard a video prevede 7 cifre. Si possono modificare con i comandi
+\begin{Schunk}
+\begin{Sinput}
+> options(digits =9)##cambia il default
+> pi
+\end{Sinput}
+\begin{Soutput}
+[1] 3.14159265
+\end{Soutput}
+\begin{Sinput}
+> sprintf("%.48f",pi)
+\end{Sinput}
+\begin{Soutput}
+[1] "3.141592653589793115997963468544185161590576171875"
+\end{Soutput}
+\end{Schunk}
+\end{itemize}                               
 \section{Funzioni e grafici}
 \subsection{Definizione di funzioni}
 Per definire una funzione $f$ di una variabile \varia{variabile}  si utilizza il comando:
@@ -821,7 +940,7 @@ Ecco di seguito le principali, la cui sintassi pu\`o essere visualizzata utilizz
 > log(3)
 \end{Sinput}
 \begin{Soutput}
-[1] 1.098612
+[1] 1.09861229
 \end{Soutput}
 \end{Schunk}
 \texttt{log2} \`e il logaritmo di base 2 
@@ -830,7 +949,7 @@ Ecco di seguito le principali, la cui sintassi pu\`o essere visualizzata utilizz
 > log2(3)
 \end{Sinput}
 \begin{Soutput}
-[1] 1.584963
+[1] 1.5849625
 \end{Soutput}
 \end{Schunk}
 Controlliamo:  
@@ -939,7 +1058,7 @@ o anche
 generano  lo stesso risultato, illustrato in Figura~\ref{grafounox}.\vskip5pt
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{Rmatematica-063}
+\includegraphics{Rmatematica-071}
 \caption{Grafico di $1/x$ nell'intervallo $(0,2)$.}
 \label{grafounox}
 \end{center}
@@ -955,7 +1074,7 @@ Pu\`o essere utile sovrapporre ad un grafico gi\`a tracciato un ulteriore grafic
 ottenendo la Figura~\ref{addF}.
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{Rmatematica-066}
+\includegraphics{Rmatematica-074}
 \caption{Sovrapposizione di 2 grafici}
 \label{addF}
 \end{center}
@@ -975,7 +1094,7 @@ Se ad esempio volessimo tracciare il grafico della funzione precedente  tra -3 e
 ed otterremo il grafico della figura~\ref{finestra}.
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{Rmatematica-068}
+\includegraphics{Rmatematica-076}
 %\includegraphics[scale=0.4]{grafici/Rplot34.pdf}
 \caption{Scelta della finestra grafica}
 \label{finestra}
@@ -990,7 +1109,7 @@ Se vogliamo restringere il grafico  tra -2, e 2 della finiestra grafica preceden
 ed otterremo il grafico della figura~\ref{finestra2}.
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{Rmatematica-070}
+\includegraphics{Rmatematica-078}
 %\includegraphics[scale=0.4]{grafici/Rplot34.pdf}
 \caption{Scelta della finestra grafica: grafico con dominio ristretto}
 \label{finestr2}
@@ -1018,7 +1137,7 @@ Sono utilizzabili anche i parametri \texttt{light} e \texttt{dark}, esse devono 
 Otteniamo la  figura~\ref{colori}.
 \begin{figure}[phtb]
 \begin{center}
-\includegraphics{Rmatematica-072}
+\includegraphics{Rmatematica-080}
 \caption{Scelta del colore}
 \label{colori}
 \end{center}
@@ -1037,7 +1156,7 @@ Per cambiare lo spessore delle linee \`e possibile utilizzare il parametro \text
 Otteniamo la figura~\ref{spessore}
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-075}
+\includegraphics{Rmatematica-083}
 \caption{Spessore delle linee}
 \label{spessore}
 \end{center}
@@ -1055,7 +1174,7 @@ Ad esempio se vogliamo un numero di punti pari a 100, non collegati, scriveremo:
 il cui risultato \`e riportato in figura~\ref{graficopunti}.
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-079}
+\includegraphics{Rmatematica-087}
 %\includegraphics[scale=0.4]{grafici/RplotAPUNTI.pdf}
 \caption{Grafico a punti}
 \label{graficopunti}
@@ -1088,7 +1207,7 @@ cio\`e gli assi di riferimento del sistema cartesiano (utili nel caso ad esempio
 Otteniamo la figura~\ref{assisb}.
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-083}
+\includegraphics{Rmatematica-091}
 \caption{Iperbole con assi}
 \label{assisb}
 \end{center}
@@ -1104,7 +1223,7 @@ Notiamo che cambiando di poco la finestra grafica
 Otteniamo la figura~\ref{assisb2}.
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-087}
+\includegraphics{Rmatematica-095}
  \caption{Problemi grafici}
 \label{assisb2}
 \end{center}
@@ -1127,11 +1246,11 @@ o anche a
 >   abline(h=0,col="red"); abline(v=0,col="red")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{Rmatematica-089}
+\includegraphics{Rmatematica-097}
 \begin{figure}[ htbp]
 \begin{center}
 
-\includegraphics{Rmatematica-090}
+\includegraphics{Rmatematica-098}
 %\includegraphics[scale=0.4]{grafici/Rplotsenzaasintoto.pdf}
 \caption{Grafico con assi e senza asintoto}
 \label{fig:noasint}
@@ -1148,7 +1267,7 @@ e
 \[g\colon D_{Y'}   \rightarrow D_Z\]
 qualora i valori nell'immagine di $f$ siano nel dominio di $g$  (se $\mathrm{Im(f)}  \subseteq D_{Y'}$,cosa garantita se $D_Y=D_{Y'}$ ) possiamo usare l'uscita $y=f(x)$ di $f $ come ingresso della funzione $g$ e possiamo calcolare quindi
  $g(y)=g(f(x))$.
- La funzione cos\'\i~costruita si chiama funzione composta di $f$ e $g$ e viene indicata come
+La funzione cos\'\i~costruita si chiama \emph{funzione composta} di $f$ e $g$ e viene indicata come
  $g\circ f$. 
  Abbiamo quindi
  \begin{align*} g\circ f&\colon D_X\rightarrow D_Z\\
@@ -1166,7 +1285,7 @@ Si calcoli $(g\circ f)(4)$. Con R chiamando gf la funzione $g\circ f$
 > gf(4)
 \end{Sinput}
 \begin{Soutput}
-[1] -30.26858
+[1] -30.2685758
 \end{Soutput}
 \end{Schunk}
 \section{Funzioni inverse}
@@ -1206,7 +1325,7 @@ ma poich\'e l'equazione $f(x)=y$ ha una e una sola soluzione $x\in D_X$
 
 Per ottenere il grafico della funzione inversa a partire dal grafico basta quindi trovare una trasformazione del piano che trasformi l'asse $x$ nell'asse $y$ e viceversa. Una possibile realizzazione di tutto questo \`e ripostato nella figura \ref{fig::simmetria}
 \begin{figure}
-\includegraphics{Rmatematica-092}
+\includegraphics{Rmatematica-100}
 
 \caption{Trasformazione che consente di passare dal grafico di una funzione al grafico della sua funzione inversa}
 \label{fig::simmetria}
@@ -1215,13 +1334,13 @@ Come si pu\`o realizzare concretamente questa trasformazione?
 \\
 Partiamo per esempio dal grafico riportato in Figura~\ref{fig::funzionestart}
 \begin{figure}
-\includegraphics{Rmatematica-093}
+\includegraphics{Rmatematica-101}
 \caption{Grafico di una funzione invertibile (esponenziale)}
 \label{fig::funzionestart}
 \end{figure}
 \begin{figure}
 
-\includegraphics{Rmatematica-094}
+\includegraphics{Rmatematica-102}
 \end{figure}
 possiamo partire da una sequenza regolare di punti del dominio  di $f$ ed eseguire le trasformazioni  
 \begin{itemize}
@@ -1241,10 +1360,24 @@ Nell'esempio abbiamo scelto come dominio l'intervallo $[-4,4]$. Abbiamo quindi c
 \end{Sinput}
 \end{Schunk}
 Qui il comando \texttt{plot(x,y)} rappresenta i punti di coordinate $(x,y)$ nel piano.
+Se considerassimo una funzione non invertibile, per esempio la parabola 
+$f(x)=x^2$
+otterremo
+\begin{Schunk}
+\begin{Sinput}
+> par(mfrow=c(2,1))
+> f<-function(x) x^2
+> x=seq(-4,4,0.1)
+> y=f(x)
+> plot(x,y,type="l");abline(h=0,col="red");abline(v=0,col="red")
+> plot(y,x,type="l");abline(h=0,col="red");abline(v=0,col="red")
+> par(mfrow=c(1,1))
+\end{Sinput}
+\end{Schunk}
 \section{Funzioni inverse delle funzioni circolari}
 
 Le funzioni seno, coseno e tangente non sono invertibili; infatti assumono infinite volte qualcunque valore nell'intervallo $[-1,1]$.
-Opportune restrizioni di tali funzioni consentono di  definire le funzioni inverse che chiameremo arcoseno, arcocoseno e arcotangente. Pi\`u precisamente
+Opportune restrizioni di tali funzioni consentono didefinire le funzioni inverse che chiameremo arcoseno, arcocoseno e arcotangente. Pi\`u precisamente
 la restrizione della funzione \texttt{sin}
 $$\sin\colon [-\frac{\pi}{2},\frac{\pi}{2}]\rightarrow [-1,1]$$
 \`e invertibile e la sua funzione inversa \`e  la funzione arcoseno, che indicheremo con \texttt{asin}
@@ -1258,7 +1391,7 @@ $$\texttt{asin}\colon  [-1,1]\rightarrow [-\frac{\pi}{2},\frac{\pi}{2}]$$
 \end{Schunk}
 \begin{center}\begin{figure}
 
-\includegraphics{Rmatematica-097}
+\includegraphics{Rmatematica-106}
 \caption{Grafico del seno e dell'arcoseno}
 \end{figure}
 
@@ -1276,7 +1409,7 @@ $$\texttt{acos}\colon  [-1,1]\rightarrow [0,\pi]$$
 \end{Schunk}
 \begin{center}\begin{figure}
 
-\includegraphics{Rmatematica-099}
+\includegraphics{Rmatematica-108}
 \caption{Grafico del coseno e dell'arcocoseno}
 \end{figure}
 
@@ -1296,29 +1429,41 @@ Per tracciare il grafico conviene limitare per il primo grafico la finestra graf
 \end{Schunk}
 \begin{center}\begin{figure}
 
-\includegraphics{Rmatematica-101}
-\caption{Grafico della tangente e dell'arcotangente. La finestra grafica <U+00E8> stata limitata all'intervallo a $-10\leq y\leq 10$  (sopra) e 
+\includegraphics{Rmatematica-110}
+\caption{Grafico della tangente e dell'arcotangente. La finestra grafica \`e  stata limitata all'intervallo a $-10\leq y\leq 10$  (sopra) e 
 $-10\leq x\leq 10 $(sotto)}
 \end{figure}
 
 \end{center}
 \section{Applicazioni delle funzioni inverse: equazioni logaritmiche ed esponenziali}
-Si consideri ad esempio l'equazione
+\subsection{Equazioni esponenziali} Si consideri ad esempio l'equazione
 \[ 5^{x}=12\]
 nella incognita $x$.
 Per determinare una soluzione di tale equazione si pu\`o procedere in diversi modi.
 \begin{itemize}
-\item Si riconosce che il risultato segue immedaitamente dalla definizione di $\log_5$: 
+\item Si riconosce che il risultato segue immediatamente dalla definizione di $\log_5$: 
 $x=\log_5(12)$
+e in \rpr
+\begin{Schunk}
+\begin{Sinput}
+> (x=log(12,5))
+\end{Sinput}
+\begin{Soutput}
+[1] 1.54395931
+\end{Soutput}
+\end{Schunk}
 \item Si applica il logaritmo nella base preferita (per esempio il logaritmo naturale)  ad ambo i membri ottenendo
 $x\log(5)=\log(12)$ e pertanto $x=\frac{\log(12)}{\log(5)}$
 \end{itemize}
 
+\subsection{Equazioni logaritmiche}
+In modo simile equazioni del tipo
 
 
-Indicare il valore numerico con 3 cifre decimali.Si determini la soluzione $x$ delle seguenti equazioni
+
+Indicare il valore numerico con 3 cifre decimali. Si determini la soluzione $x$ delle seguenti equazioni
 \begin{enumerate}
- \item  $\log_ 5 ( -5 x + 7 )= 10 $ \item  $\log_ 2 ( -3 x + 8 )= 4 $ \item  $\log_ 5 ( 3 x + 2 )= 8 $ \item  $\log_ 7 ( 4 x + 2 )= 4 $ \item  $\log_ 6 ( -3 x + 4 )= 10 $ \item  $\log_ 3 ( -2 x + 6 )= 3 $ \item  $\log_ 7 ( 3 x + 2 )= 10 $ \item  $\log_ 4 ( -5 x + 10 )= 8 $ \item  $\log_ 6 ( 3 x + 1 )= 10 $ \item  $\log_ 7 ( 4 x + 2 )= 5 $
+ \item  $\log_ 3 ( -3 x + 3 )= 7 $ \item  $\log_ 4 ( 2 x + 6 )= 3 $ \item  $\log_ 5 ( -2 x + 5 )= 2 $ \item  $\log_ 3 ( -2 x + 9 )= 9 $ \item  $\log_ 5 ( 3 x + 4 )= 5 $ \item  $\log_ 6 ( 4 x + 3 )= 8 $ \item  $\log_ 4 ( 1 x + 1 )= 3 $ \item  $\log_ 7 ( -2 x + 8 )= 9 $ \item  $\log_ 7 ( 3 x + 6 )= 4 $ \item  $\log_ 3 ( -5 x + 8 )= 4 $
 \end{enumerate}
 
 \section{Derivate}
@@ -1342,7 +1487,7 @@ e disegniamo il suo grafico nella regione definita dalle condizioni $-d<x<d$ e $
 > main="iperbole"); abline(h=0);abline(v=0)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{Rmatematica-106}
+\includegraphics{Rmatematica-116}
 \end{figure}
 
 Consideriamo ora l'ingrandimento di tale grafico con fattore di zoom \texttt{xf}=2 attorno al punto $(0,0)$: in altre parole dimezziamo il valore di $d$:
@@ -1355,7 +1500,7 @@ Consideriamo ora l'ingrandimento di tale grafico con fattore di zoom \texttt{xf}
 Iterando tale comando un certo numero di volte si assiste alla linearizzazione progressiva del grafico come in figura~\ref{fig:lin3}. 
 \begin{center}
 \begin{figure}
-\includegraphics{Rmatematica-108}
+\includegraphics{Rmatematica-118}
 \caption{Linearizzazione di un grafico ottenuta attraverso una serie di ingrandimenti}
 \label{fig:lin3}
 \end{figure}
@@ -1370,7 +1515,7 @@ Consideriamo ora una funzione differente che combina un'espressione di quarto gr
 Il grafico per $-8<x<8$ come in precedenza  suggerisce che la  retta tangente  in $x=0$ sia orizzontale.   
 Effettuando un certo numero di zoom con fattore di zoom 2 questa prima impressione sembra confermata, anche se possiamo iniziare a notare delle piccole oscillazioni nell'ultima figura del pannello~\ref{fig:linear2}.
 \begin{figure}
-\includegraphics{Rmatematica-110}
+\includegraphics{Rmatematica-120}
 \caption{Linearizzazione progressiva di un grafico: prima fase}
 \label{fig:linear2}
 \end{figure}
@@ -1380,7 +1525,7 @@ Non ci saranno ulteriori sorprese da un certo punto in poi.
 Per quanto si prosegua la retta trovata in ultimo verr\`a confermata~\ref{fig:linearizzazione4}
 
 \begin{figure}[h]
-\includegraphics{Rmatematica-111}
+\includegraphics{Rmatematica-121}
 \caption{Linearizzazione progressiva di un grafico: seconda fase}
 \label{fig:linearizzazione4}
 \end{figure}
@@ -1412,7 +1557,7 @@ Si ha
 > trepunti(f,x,h)
 \end{Sinput}
 \begin{Soutput}
-[1] 0.5403022
+[1] 0.540302216
 \end{Soutput}
 \end{Schunk}
 Otteniamo cos\`\i\; la stima della derivata nel punto 1 con incremento 0.001.
@@ -1427,7 +1572,7 @@ e ottenendo il grafico~\ref{sincos} da cui si evince che  $D\rm{sin}(x)={\rm cos
 $D{\rm cos}(x)=-{\rm sin}(x)$.
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-116}
+\includegraphics{Rmatematica-126}
 \caption{Grafico delle funzioni $sin(x)$ e della sua derivata calcolata numericamente}
 \label{sincos}
 \end{center}
@@ -1449,7 +1594,7 @@ In questo caso
 sembra che  la funzione (in rosso) e la sua derivata (in blu, approssimata con la regola dei 3 punti)   siano proporzionali.
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-118}
+\includegraphics{Rmatematica-128}
 \caption{Grafico di $2^x$ e derivata}
 \label{fig:der2x}
 \end{center}
@@ -1460,7 +1605,7 @@ Per verificarlo abbiamo tracciato anche il grafico di $f'(x)/f(x)$ che \`e una r
 >  trepunti(f,0,0.001)/f(0)
 \end{Sinput}
 \begin{Soutput}
-[1] 0.6931472
+[1] 0.693147236
 \end{Soutput}
 \end{Schunk}
 In modo simile possiamo considerare con la funzione $3^x$:
@@ -1475,7 +1620,7 @@ In modo simile possiamo considerare con la funzione $3^x$:
 e anche qui  le funzioni sembrano proporzionali. In questo caso per\`o il rapporto derivata diviso funzione \`e  maggiore di 1 e quindi la derivata \`e maggiore della funzione
 \begin{figure}[ htbp]
 \begin{center}
-\includegraphics{Rmatematica-121}
+\includegraphics{Rmatematica-131}
 \caption{Grafico di $3^x$ e derivata}
 \label{fig:der3x}
 \end{center}
@@ -1487,7 +1632,7 @@ Per verificarlo abbiamo tracciato anche il grafico di $f'(x)/f(x)$ che \`e una r
 > trepunti(f,0,0.001)/f(0)
 \end{Sinput}
 \begin{Soutput}
-[1] 1.098613
+[1] 1.09861251
 \end{Soutput}
 \end{Schunk}
 
@@ -1504,7 +1649,7 @@ Ci si pu\`o chiedere se esista un valore intermedio tra 2 e 3 per cui derivata e
 
 \begin{figure}
 \begin{center}
-\includegraphics{Rmatematica-124}
+\includegraphics{Rmatematica-134}
 \end{center}
 \end{figure}
 
@@ -1514,7 +1659,7 @@ Anche qui
 > trepunti(f,0,0.001)/f(0)
 \end{Sinput}
 \begin{Soutput}
-[1] 1
+[1] 1.00000017
 \end{Soutput}
 \end{Schunk}
 mostra il valore del rapporto.
@@ -1557,7 +1702,7 @@ Un utile comando per valutare una derivata in un punto o per  ricavare una funzi
 > curve(g,0,2*pi)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{Rmatematica-128}
+\includegraphics{Rmatematica-138}
 \begin{shaded}
 \begin{enumerate}
  \item{} Calcola la derivata prima e seconda della funzione $x^2*\sin(x)$ in $x=\pi$.
@@ -1565,14 +1710,48 @@ Un utile comando per valutare una derivata in un punto o per  ricavare una funzi
 \end{enumerate}
 \end{shaded} 
  \subsection{Metodo delle tangenti di Newton}
- Consideriamo ora una funzione generica $f$ il cui grafico presenti delle intersezioni con l'asse delle x
-\includegraphics{Rmatematica-129}
+ 
+Consideriamo una funzione generica $f$ il cui grafico presenti delle intersezioni con l'asse delle $x$ come mostrato in figura~\ref{newton0} 
+dove si mostra il grafico di $f$ in prossimit\`a di una intersezione $x_*$
+\begin{figure}
+\begin{center}
+\includegraphics{Rmatematica-139}
+\caption{Intersezione del grafico di una funzione con l'asse $x$}
+\label{fig:newton0}
+\end{center}\end{figure}
+Nel metodo delle tangenti di Newton si parte da un'approssimazione iniziale $x_0$, che nel grafico illustrato si situa alla destra di $x_*$;
+configurazioni diverse conducono a figure diverse, ma confrontabili nella sostanza.
+Il metodo si basa sulla \emph{sostituzione} della retta tangente alla funzione:
+si procede  pertanyo  sostituendo alla curva di partenza la sua retta tangente nel punto $x_0$ come in figura~\ref{fig:newton1}
+\begin{figure}
+\begin{center}
+\includegraphics{Rmatematica-step0}
+\end{center}
+\caption{Primo passo iterativo}
+\label{fig:newton1}
+\end{figure}
+Questa retta interseca l'asse $x$ in un punto di ascissa $x_1$ che usiamo come nuovo punto di partenza.
+\begin{figure}\begin{center}
+\includegraphics{Rmatematica-step1}
+\caption{Passi iterativi successivi}
+\label{fig:newton2}
+\end{center}
+\end{figure}
+Procedendo in questo modo (e con le debite avvertenze) si costruisce una successione di punti che approssima $x_*$ con la precisione voluta.
+Analizziamo ora la procedura dal punto di vista analitico. La retta tangente in $x_0$ (punto iniziale del processo) ha pendenza $f'(x_0)$ e passa per il punto $(x_0,f(x_0))$ ed ha quindi ha equazione
+\[ y=f(x_0)+f'(x_0)(x-x_0)\]
+L'intersezione con l'asse $x$ si trova ponendo $y=0$ ed \`e dunque
+\[x_1=x_0-\dfrac{f(x_0)}{f'(x_0)}\]
+In modo simile si passa da $x_1$ e $x_2$ 
+\[x_2=x_1-\dfrac{f(x_1)}{f'(x_1)}\]
+Il processo si ripete e la formula ricorsiva \`e
+\[x_{n+1}=x_n-\dfrac{f(x_n)}{f'(x_n)}\]
+Il passo iterativo \`e descritto dalla funzione:
+\[g(x)=x-\dfrac{f(x)}{f'(x)}\]
+e possiamo quindi scrivere
+\[x_{n+1}=g(x_n)\]
+Vediamo ora un'applicazione concreta, per esempio esaminiamo una semplice funzione. Iniziamo a esaminare la situazione in modo grafico,  selezionando una finestra grafica abbastanza ampia in modo da visulaizzare le intersezioni di nostro interesse; la restringeremo in seguito per localizzare al meglio le intersezioni. 
 
-Nel metodo delle tangenti di Newton si parte da un'approssimazione iniziale $x_0$, che nel grafico illustrato si situa alla destra di $x_*$.
-\includegraphics{Rmatematica-130}
-Utilizziamo ora il metodo delle tangenti di Newton per determinare gli zeri di una funzione $f$. Prima di iniziare vediamo come possiamo procedere a livello grafico. 
-Consideriamo una semplice funzione  $$ f(x)= x^5-3x+1$$
-Iniziamo a selezionare una finestra grafica abbastanza ampia. Restringendola man mano vediamo meglio cosa succede.
 \begin{Schunk}
 \begin{Sinput}
 > f<-function(x) x^5-3*x+1
@@ -1585,65 +1764,61 @@ Iniziamo a selezionare una finestra grafica abbastanza ampia. Restringendola man
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{Rmatematica-132}
+\includegraphics{Rmatematica-143}
 \caption{Intersezione con l'asse $x$ }
-\label{fig:newton}
+\label{fig:tnewton}
 \end{center}
 \end{figure}
-
-Dal grafico~\ref{fig:newton}  \`e evidente che ci sono 3 intersezioni con l'asse delle $x$ che ci proponiamo di determinare usando il metodo delle tangenti di Newton. Ricordiamo che nel metodo delle tangenti di Newton si deve scegliere un punto iniziale $x_0$  ed il numero di iterazioni (o un criterio di arresto).  Il passo iterativo \`e descritto dalla funzione:
-$$g(x)=x-\frac{f(x)}{f'(x)}$$
-In assenza della derivata esatta possiamo anche usare la regola dei 3 punti.
-In quanto segue ipotizzeremo di avere scelto un 10 iterazioni a partire dal valore $x_0=2$.
-
+Dal grafico~\ref{fig:newton} \`e evidente che ci sono 3 intersezioni con l'asse delle $x$ che ci proponiamo di determinare usando il metodo delle tangenti di Newton. Ricordiamo che nel metodo delle tangenti di Newton si deve scegliere un punto iniziale $x_0$  ed il numero di iterazioni (o un criterio di arresto).  
+In assenza della derivata esatta possiamo anche usare la regola dei 3 punti. In questo caso possiamo scrivere la derivata come
 \begin{Schunk}
 \begin{Sinput}
-> x<-2
+> df<-function(x) 5*x^4-3
 \end{Sinput}
 \end{Schunk}
-Scegliamo un incremento
-$h=10^{-3}$ ed 
-iteriamo il processo attraverso un ciclo \texttt{for}\footnote{Il comando   \texttt{for(k in set) comando} esegue il \texttt{comando} (eventualmente dipendente da \texttt{k} per tutti i valori di \texttt{k} in \texttt{set}. }:
+e scegliamo $n=10$ iterazioni che eseguiremo  a partire dal valore $x_0=2$
+
+Iteriamo il processo attraverso un ciclo \texttt{for}\footnote{Il comando   \texttt{for(k in set) comando} esegue il \texttt{comando} (eventualmente dipendente da \texttt{k} per tutti i valori di \texttt{k} in \texttt{set}. }:
 
 \begin{Schunk}
 \begin{Sinput}
-> h<-0.001
-> for(k in 1:9) x[k+1]<-x[k]-f(x[k])/trepunti(f,x[k],h)
+> iterazioni=10
+> x=2
+> for(k in 1:iterazioni) x[k+1]<-x[k]-f(x[k])/df(x[k])
 > x
 \end{Sinput}
 \begin{Soutput}
- [1] 2.000000 1.649351 1.406489 1.268587 1.220370
- [6] 1.214721 1.214648 1.214648 1.214648 1.214648
+ [1] 2.00000000 1.64935065 1.40648909
+ [4] 1.26858660 1.22036938 1.21472124
+ [7] 1.21464805 1.21464804 1.21464804
+[10] 1.21464804 1.21464804
 \end{Soutput}
 \end{Schunk}
-Si genera la lista di 10 passi iterativi, il fatto che la lista si stabilizzi \`e indice del fatto che la lista converge all'intersezione cercata.  Ricerchiamo anche un altro valore della {\it radice}:
+Si genera la lista di $n$ passi iterativi, il fatto che la lista si stabilizzi \`e indice del fatto che la lista converge all'intersezione cercata.  Ricerchiamo anche un altro valore della {\it radice}:
 \begin{Schunk}
 \begin{Sinput}
-> x<- -2; iterazioni=10;
-> for(k in seq(length=iterazioni)) x[k+1]<-x[k]-f(x[k])/
-+ trepunti(f,x[k],h)
+> x= -2
+> iterazioni=10;
+> for(k in 1:iterazioni) x[k+1] = x[k]-f(x[k])/df(x[k])
 > x
 \end{Sinput}
 \begin{Soutput}
- [1] -2.000000 -1.675325 -1.478238 -1.400446 -1.389020
- [6] -1.388792 -1.388792 -1.388792 -1.388792 -1.388792
-[11] -1.388792
+ [1] -2.00000000 -1.67532468 -1.47823803
+ [4] -1.40044537 -1.38901986 -1.38879207
+ [7] -1.38879198 -1.38879198 -1.38879198
+[10] -1.38879198 -1.38879198
 \end{Soutput}
 \end{Schunk}
 Per determinare la terza ed ultima intersezione partiamo da $x_0=0.5$
 \begin{Schunk}
 \begin{Sinput}
-> x<-0.5
-> for(k in 1:10) x[k+1]<-x[k]-
-+ f(x[k])/trepunti(f,x[k],h);x
+> x=0.5
+> for(k in 1:iterazioni) x[k+1]=x[k]-f(x[k])/df(x[k])
 \end{Sinput}
-\begin{Soutput}
- [1] 0.5000000 0.3255812 0.3347240 0.3347341 0.3347341
- [6] 0.3347341 0.3347341 0.3347341 0.3347341 0.3347341
-[11] 0.3347341
-\end{Soutput}
 \end{Schunk}
-Le radici sono 0.3347341, -1.388792, 1.214648.
+Le radici sono dunque 0.3347341, -1.388792, 1.214648.
+
+
 \section{Integrali definiti}
 Ci occupiamo ora del calcolo di integrali definiti
 \begin{eqnarray*}
@@ -1691,7 +1866,8 @@ Con il comando
 > a+(0:n)*h->x;x
 \end{Sinput}
 \begin{Soutput}
- [1] 1.0 1.3 1.6 1.9 2.2 2.5 2.8 3.1 3.4 3.7 4.0
+ [1] 1.0 1.3 1.6 1.9 2.2 2.5 2.8 3.1 3.4
+[10] 3.7 4.0
 \end{Soutput}
 \end{Schunk}
 o anche con il comando
@@ -1707,9 +1883,12 @@ si ottengono gli estremi degli intervalli. Si calcolano poi i valori corrisponde
 > f(x)
 \end{Sinput}
 \begin{Soutput}
- [1]  0.54030231  0.34774848 -0.04671924 -0.61425018
- [5] -1.29470246 -2.00285904 -2.63822255 -3.09731897
- [9] -3.28711385 -3.13797012 -2.61457448
+ [1]  0.5403023059  0.3477484772
+ [3] -0.0467192357 -0.6142501770
+ [5] -1.2947024580 -2.0028590389
+ [7] -2.6382225539 -3.0973189658
+ [9] -3.2871138548 -3.1379701173
+[11] -2.6145744835
 \end{Soutput}
 \begin{Sinput}
 > y<-f(x)
@@ -1719,7 +1898,7 @@ si ottengono gli estremi degli intervalli. Si calcolano poi i valori corrisponde
 > tn
 \end{Sinput}
 \begin{Soutput}
-[1] -5.042563
+[1] -5.0425632
 \end{Soutput}
 \end{Schunk}
 Il confronto con il valore dell'integrale
@@ -1728,7 +1907,7 @@ Il confronto con il valore dell'integrale
 > integrate(f,1,4)
 \end{Sinput}
 \begin{Soutput}
--5.062627 with absolute error < 6e-14
+-5.06262689 with absolute error < 6e-14
 \end{Soutput}
 \end{Schunk}
 \`e abbastanza buono. Aumentando il numero di punti della suddivisione la stima migliora.
@@ -1744,19 +1923,19 @@ Il confronto con il valore dell'integrale
 > tn
 \end{Sinput}
 \begin{Soutput}
-[1] -5.062426
+[1] -5.06242629
 \end{Soutput}
 \begin{Sinput}
 > rn
 \end{Sinput}
 \begin{Soutput}
-[1] -5.109749
+[1] -5.10974944
 \end{Soutput}
 \begin{Sinput}
 > ln
 \end{Sinput}
 \begin{Soutput}
-[1] -5.015103
+[1] -5.01510314
 \end{Soutput}
 \end{Schunk}
   
@@ -1767,7 +1946,7 @@ Supponiamo di voler applicare il metodo Montecarlo alla determinazione dell'inte
 \end{equation*}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{Rmatematica-144}
+\includegraphics{Rmatematica-155}
 \caption{Determinazione del bersaglio}
 \label{fig:dgefault}
 \end{center}
@@ -1817,7 +1996,7 @@ Useremo il comando  \texttt{runif} per effettuare i tiri.
 > successi/tiri*76*3                    
 \end{Sinput}
 \begin{Soutput}
-[1] 87.096
+[1] 88.92
 \end{Soutput}
 \begin{Sinput}
 > integrate(f,1,4)
@@ -1837,13 +2016,13 @@ Useremo il comando  \texttt{runif} per effettuare i tiri.
 \begin{center}
 \begin{Schunk}
 \begin{Soutput}
-[1] 83.676
+[1] 92.568
 \end{Soutput}
 \begin{Soutput}
 86.25 with absolute error < 9.6e-13
 \end{Soutput}
 \end{Schunk}
-\includegraphics{Rmatematica-148}
+\includegraphics{Rmatematica-159}
 \caption{Metodo Montecarlo }
 \label{fig:Montec1}
 \end{center}
@@ -1868,12 +2047,12 @@ In tal caso i comandi sono
 \begin{center}
 \begin{Schunk}
 \begin{Soutput}
-[1] 3.1372
+[1] 3.1496
 \end{Soutput}
 \end{Schunk}
-\includegraphics{Rmatematica-150}
+\includegraphics{Rmatematica-161}
 \caption{Metodo Montecarlo per il disco}
-\label{fig:newton}
+\label{fig:montecarlo}
 \end{center}
 \end{figure}
  Si noti che per ridurre la dimensione dei punti abbiamo usato l'opzione \texttt{cex}.
@@ -1916,6 +2095,8 @@ Se si volesse ricorrere alla possibilit\`a di calcolo simbolico in \rpr\ si pu\`
 [1] "-362880/(x**10*log(2))"
 \end{Soutput}
 \end{Schunk}
+
+Nella notazione che appare sopra il simbolo $**$ sta per elevamento a potenza.
 \section{soluzioni}
 
 Le soluzioni sono
@@ -1937,16 +2118,16 @@ Le soluzioni sono
 Le soluzioni sono
 \begin{enumerate}
  \item 
--1953123.6 \item 
--2.66666666666667 \item 
-130207.666666667 \item 
-599.75 \item 
--20155390.6666667 \item 
--10.5 \item 
-94158415.6666667 \item 
--13105.2 \item 
-20155391.6666667 \item 
-4201.25
+-728 \item 
+29 \item 
+-10 \item 
+-9837 \item 
+1040.33333333333 \item 
+419903.25 \item 
+63 \item 
+-20176799.5 \item 
+798.333333333333 \item 
+-14.6
 \end{enumerate}
 \end{document}
 
@@ -2021,13 +2202,13 @@ e per esempio
 >  Arg(z)
 \end{Sinput}
 \begin{Soutput}
-[1] 0.9272952
+[1] 0.927295218
 \end{Soutput}
 \begin{Sinput}
 > atan(4/3)
 \end{Sinput}
 \begin{Soutput}
-[1] 0.9272952
+[1] 0.927295218
 \end{Soutput}
 \end{Schunk}
 \item{}Il modulo di  un numero complesso \`e semplicemente $\sqrt(z*\overline{z})$ ed \`e indicato in \textsf{R} con  \text{Mod}(\varia{z})
@@ -2046,13 +2227,13 @@ e per esempio
 > exp(z)
 \end{Sinput}
 \begin{Soutput}
-[1] -13.12878-15.20078i
+[1] -13.1287831-15.2007845i
 \end{Soutput}
 \begin{Sinput}
 > exp(z)*exp(Conj(z))   		
 \end{Sinput}
 \begin{Soutput}
-[1] 403.4288+0i
+[1] 403.428793+0i
 \end{Soutput}
 \end{Schunk}
 \end{itemize}

@@ -198,7 +198,7 @@ $?\varia{argomento}$   (o $\texttt{help}(\varia{argomento}))$.
 \index{\texttt{help}} 
 Ad esempio $?\texttt{sin}$  consente di ottenere informazioni sulla funzione seno e altre funzioni trigonometriche in quanto la guida \`e completamente indicizzata. \`E anche possibile utilizzare il menu a tendina ({\it help}), con modalit\`a diverse a seconda del sistema operativo.\\
 %Infine, il comando \texttt{help.start()} consente di aprire l'\textit{help} HTML di \textsf{R} da cui \`e poi possibile consultare %la documentazione.
-In RStudio basta invece clicare sul menu Help selezionare la casellina Home e scrivere il comando al quale si \`e interessati.
+In \rst basta invece clicare sul menu \texttt{help} selezionare la casellina \texttt{Home} e scrivere il comando al quale si \`e interessati.
 \subsection*{Inserire i commenti}  
 I commenti sono frasi, annotazioni o codice da non eseguire momentaneamente molto utilizzati in programmazione. L'introduzione di un commento in \textsf{R} \`e possibile mediante il simbolo \texttt{\#} (cancelletto singolo o \emph{hash}). Per evitare che un commento venga cancellato durante il normale \textit{editing} del testo e che esso venga eseguito si consiglia di raddoppiare i simboli (\texttt{\#\#}). Ad esempio:
 \index{\texttt{\#}} 
@@ -606,7 +606,7 @@ $x=\dfrac{d-b}{a-c}$.
 In \rpr  per risolvere 
 $$ 10 x+ 5=2 x+7$$
 basta scrivere
-<<echo=TRUE,evasl=FALSE>>=
+<<echo=TRUE,eval=FALSE>>=
 a=10
 b=5
 c=2
@@ -615,6 +615,58 @@ solve(a-c,d-b)
 @
 Tale comando non \`e qui particolarmente conveniente ma vedremo che si generalizza alla risoluzione di sistemi lineari.
 \end{comment}
+\section{Rappresentazione decimale dei numeri}
+\subsection{Notazione scientifica e cifre significative}
+Abbiamo gi\`a descritto la notazione scientifica di un numero.  Precisamente  il numero viene scritto nella forma $a*e \,b$ con a nell'intervallo $[1,10)$.
+Il numero di \emph{cifre significative}  di un numero $x$ \`e  il numero di cifre (in inglese \emph{figures}) del coefficiente $a$ di un  numero se questo viene espresso in notazione scientifica. 
+Per esempio consideriamo il numero 
+<<echo=FALSE,eval=TRUE>>=
+set.seed( 10)
+x=runif(1,0,100)
+<<echo=TRUE,eval=TRUE>>=
+x
+@
+Allora
+<<echo=TRUE>>=
+signif(x,2)
+@
+fornisce la rappresentazione con 2 cifre significative del numero $x$ mentre
+<<echo=TRUE>>=
+round(x,2)
+@
+fornisce l'arrotondamento a 2 cifre dopo la virgola. Alcuni aspetti sono da sottolineare: 
+\begin{itemize}
+\item nel caso in cui le ultime cifre nell'arrotondamento  significative fossero 0 questa non vengono scritte 
+<<echo=TRUE>>=
+round(12.000,3)
+signif(12.00,4)
+@
+\item
+Si noti che la regola di arrotondamento di \rpr\ nel caso in cui l'ultima cifra prima di quella da arrotondare sia un 5 (senza ulteriori cifre a destra) \`e quella di arrotondare il numero al numero pari  (e questo potrebbe comportare un arrotondamento per eccesso o per difetto). Questo per\`o vale per i numeri interi mentre per numeri decimali la rappresentazione numerica potrebbe comportare arrotondamenti imprevedibili
+<<echo=TRUE>>=
+x=101.5
+round(x)
+x=102.5
+round(x,1)
+seq(90:110)+0.15
+round(seq(90:110)+0.15,1)
+@
+\item 
+Si noti che se abbiamo
+<<echo=TRUE>>=
+x=10001.0
+signif(x,3)
+signif(x,4)
+signif(x,5)
+@
+\item 
+La rappresentazione standard a video prevede 7 cifre. Si possono modificare con i comandi
+<<echo=TRUE>>=
+options(digits =9)##cambia il default
+pi
+sprintf("%.48f",pi)
+@
+\end{itemize}                               
 \section{Funzioni e grafici}
 \subsection{Definizione di funzioni}
 Per definire una funzione $f$ di una variabile \varia{variabile}  si utilizza il comando:
@@ -965,7 +1017,7 @@ e
 \[g\colon D_{Y'}   \rightarrow D_Z\]
 qualora i valori nell'immagine di $f$ siano nel dominio di $g$  (se $\mathrm{Im(f)}  \subseteq D_{Y'}$,cosa garantita se $D_Y=D_{Y'}$ ) possiamo usare l'uscita $y=f(x)$ di $f $ come ingresso della funzione $g$ e possiamo calcolare quindi
  $g(y)=g(f(x))$.
- La funzione cos\'\i~costruita si chiama funzione composta di $f$ e $g$ e viene indicata come
+La funzione cos\'\i~costruita si chiama \emph{funzione composta} di $f$ e $g$ e viene indicata come
  $g\circ f$. 
  Abbiamo quindi
  \begin{align*} g\circ f&\colon D_X\rightarrow D_Z\\
@@ -1082,10 +1134,23 @@ plot(y,x,type="l");abline(h=0,col="red");abline(v=0,col="red")
 par(mfrow=c(1,1))
 @
 Qui il comando \texttt{plot(x,y)} rappresenta i punti di coordinate $(x,y)$ nel piano.
+Se considerassimo una funzione non invertibile, per esempio la parabola 
+$f(x)=x^2$
+otterremo
+<<echo=TRUE, fig=FALSE>>=
+par(mfrow=c(2,1))
+f<-function(x) x^2
+x=seq(-4,4,0.1)
+y=f(x)
+plot(x,y,type="l");abline(h=0,col="red");abline(v=0,col="red")
+
+plot(y,x,type="l");abline(h=0,col="red");abline(v=0,col="red")
+par(mfrow=c(1,1))
+@
 \section{Funzioni inverse delle funzioni circolari}
 
 Le funzioni seno, coseno e tangente non sono invertibili; infatti assumono infinite volte qualcunque valore nell'intervallo $[-1,1]$.
-Opportune restrizioni di tali funzioni consentono di  definire le funzioni inverse che chiameremo arcoseno, arcocoseno e arcotangente. Pi\`u precisamente
+Opportune restrizioni di tali funzioni consentono didefinire le funzioni inverse che chiameremo arcoseno, arcocoseno e arcotangente. Pi\`u precisamente
 la restrizione della funzione \texttt{sin}
 $$\sin\colon [-\frac{\pi}{2},\frac{\pi}{2}]\rightarrow [-1,1]$$
 \`e invertibile e la sua funzione inversa \`e  la funzione arcoseno, che indicheremo con \texttt{asin}
@@ -1153,7 +1218,7 @@ x=seq(-pi/2,pi/2,0.01)
 plot(x,tan(x),type="l",ylim=c(-10,10))
 plot(tan(x),x,type="l",xlim=c(-10,10))
 @
-\caption{Grafico della tangente e dell'arcotangente. La finestra grafica è stata limitata all'intervallo a $-10\leq y\leq 10$  (sopra) e 
+\caption{Grafico della tangente e dell'arcotangente. La finestra grafica \`e  stata limitata all'intervallo a $-10\leq y\leq 10$  (sopra) e 
 $-10\leq x\leq 10 $(sotto)}
 \end{figure}
 
@@ -1164,8 +1229,12 @@ $-10\leq x\leq 10 $(sotto)}
 nella incognita $x$.
 Per determinare una soluzione di tale equazione si pu\`o procedere in diversi modi.
 \begin{itemize}
-\item Si riconosce che il risultato segue immedaitamente dalla definizione di $\log_5$: 
+\item Si riconosce che il risultato segue immediatamente dalla definizione di $\log_5$: 
 $x=\log_5(12)$
+e in \rpr
+<<>>=
+(x=log(12,5))
+@
 \item Si applica il logaritmo nella base preferita (per esempio il logaritmo naturale)  ad ambo i membri ottenendo
 $x\log(5)=\log(12)$ e pertanto $x=\frac{\log(12)}{\log(5)}$
 \end{itemize}
@@ -1445,27 +1514,99 @@ curve(g,0,2*pi)
 \end{enumerate}
 \end{shaded} 
  \subsection{Metodo delle tangenti di Newton}
- Consideriamo ora una funzione generica $f$ il cui grafico presenti delle intersezioni con l'asse delle x
+ 
+Consideriamo una funzione generica $f$ il cui grafico presenti delle intersezioni con l'asse delle $x$ come mostrato in figura~\ref{newton0} 
+dove si mostra il grafico di $f$ in prossimit\`a di una intersezione $x_*$
+\begin{figure}
+\begin{center}
 <<echo=FALSE,fig=TRUE>>=
 f=function(x) x^3-5
 curve (f,1,4,col="blue",xaxt="n",yaxt="n");abline(h=0)
 testo=expression("x"["*"])
-text( 1.8,-2,testo)
+text( 1.6,1,testo)
 @
-
-Nel metodo delle tangenti di Newton si parte da un'approssimazione iniziale $x_0$, che nel grafico illustrato si situa alla destra di $x_*$.
-<<echo=FALSE,fig=TRUE>>=
+\caption{Intersezione del grafico di una funzione con l'asse $x$}
+\label{fig:newton0}
+\end{center}\end{figure}
+Nel metodo delle tangenti di Newton si parte da un'approssimazione iniziale $x_0$, che nel grafico illustrato si situa alla destra di $x_*$;
+configurazioni diverse conducono a figure diverse, ma confrontabili nella sostanza.
+Il metodo si basa sulla \emph{sostituzione} della retta tangente alla funzione:
+si procede  pertanyo  sostituendo alla curva di partenza la sua retta tangente nel punto $x_0$ come in figura~\ref{fig:newton1}
+\begin{figure}
+\begin{center}
+<<step0,echo=FALSE,fig=TRUE>>=
 f=function(x) x^3-5
+df=function(x) 3*x^2
+x0=3.8
 curve (f,1,4,col="blue",xaxt="n",yaxt="n");abline(h=0)
 testo=expression("x"["*"])
-text( 1.8,-2,testo)
+text( 1.6,1,testo)
+points(x0,f(x0),cex=1,pch=19)
+m=df(x0)
+q=f(x0)-m*x0
+x1=x0-f(x0)/m
+curve(m*x+q,add=T,from=x1,to=x0)
+segments(x0,0,x0,f(x0),col="brown")
 testo=expression("x"[0])
-text( 4,-2,testo)
-segments(3.5,0,3.5,f(3.5),col="brown")
+text( x0,-1,testo)
+testo1=expression("x"[1])
+text( x1,-1,testo1)
 @
-Utilizziamo ora il metodo delle tangenti di Newton per determinare gli zeri di una funzione $f$. Prima di iniziare vediamo come possiamo procedere a livello grafico. 
-Consideriamo una semplice funzione  $$ f(x)= x^5-3x+1$$
-Iniziamo a selezionare una finestra grafica abbastanza ampia. Restringendola man mano vediamo meglio cosa succede.
+\end{center}
+\caption{Primo passo iterativo}
+\label{fig:newton1}
+\end{figure}
+Questa retta interseca l'asse $x$ in un punto di ascissa $x_1$ che usiamo come nuovo punto di partenza.
+\begin{figure}\begin{center}
+<<step1,echo=FALSE,fig=TRUE>>=
+par(mfrow=c(1,2))
+<<step0>>
+testo1=expression("x"[1])
+text( x1,-1,testo1)
+m=df(x1)
+q=f(x1)-m*x1
+x2=x1-f(x1)/m
+curve(m*x+q,add=T,from=x2,to=x1,col="red")
+testo2=expression("x"["2"])
+text( x2,-2,testo2) 
+segments(x1,0,x1,f(x1),col="brown")
+<<step0>>
+testo1=expression("x"[1])
+text( x1,-1,testo1)
+m=df(x1)
+q=f(x1)-m*x1
+x2=x1-f(x1)/m
+curve(m*x+q,add=T,from=x2,to=x1,col="red")
+testo2=expression("x"["2"])
+text( x2,-2,testo2) 
+segments(x1,0,x1,f(x1),col="brown")
+m=df(x2)
+q=f(x2)-m*x2
+x3=x2-f(x2)/m
+curve(m*x+q,col="red",from=x2,to=x3,add=T)
+testo3=expression("x"["3"])
+text( x3,-2,testo3) 
+segments(x2,0,x2,f(x2),col="brown")
+@
+\caption{Passi iterativi successivi}
+\label{fig:newton2}
+\end{center}
+\end{figure}
+Procedendo in questo modo (e con le debite avvertenze) si costruisce una successione di punti che approssima $x_*$ con la precisione voluta.
+Analizziamo ora la procedura dal punto di vista analitico. La retta tangente in $x_0$ (punto iniziale del processo) ha pendenza $f'(x_0)$ e passa per il punto $(x_0,f(x_0))$ ed ha quindi ha equazione
+\[ y=f(x_0)+f'(x_0)(x-x_0)\]
+L'intersezione con l'asse $x$ si trova ponendo $y=0$ ed \`e dunque
+\[x_1=x_0-\dfrac{f(x_0)}{f'(x_0)}\]
+In modo simile si passa da $x_1$ e $x_2$ 
+\[x_2=x_1-\dfrac{f(x_1)}{f'(x_1)}\]
+Il processo si ripete e la formula ricorsiva \`e
+\[x_{n+1}=x_n-\dfrac{f(x_n)}{f'(x_n)}\]
+Il passo iterativo \`e descritto dalla funzione:
+\[g(x)=x-\dfrac{f(x)}{f'(x)}\]
+e possiamo quindi scrivere
+\[x_{n+1}=g(x_n)\]
+Vediamo ora un'applicazione concreta, per esempio esaminiamo una semplice funzione. Iniziamo a esaminare la situazione in modo grafico,  selezionando una finestra grafica abbastanza ampia in modo da visulaizzare le intersezioni di nostro interesse; la restringeremo in seguito per localizzare al meglio le intersezioni. 
+
 <<echo=TRUE,eval=FALSE>>=
 f<-function(x) x^5-3*x+1
 curve(f,-10,10) 
@@ -1477,6 +1618,7 @@ abline(h=0)
 \begin{figure}[htbp]
 \begin{center}
 <<echo=FALSE,fig=TRUE>>=
+options(width=40)
 par(mfrow=c(1,2))
 f<-function(x) x^5-3*x+1
 curve(f,-10,10) 
@@ -1485,41 +1627,39 @@ curve(f,-2,2)
 abline(h=0)
 @
 \caption{Intersezione con l'asse $x$ }
-\label{fig:newton}
+\label{fig:tnewton}
 \end{center}
 \end{figure}
-
-Dal grafico~\ref{fig:newton}  \`e evidente che ci sono 3 intersezioni con l'asse delle $x$ che ci proponiamo di determinare usando il metodo delle tangenti di Newton. Ricordiamo che nel metodo delle tangenti di Newton si deve scegliere un punto iniziale $x_0$  ed il numero di iterazioni (o un criterio di arresto).  Il passo iterativo \`e descritto dalla funzione:
-$$g(x)=x-\frac{f(x)}{f'(x)}$$
-In assenza della derivata esatta possiamo anche usare la regola dei 3 punti.
-In quanto segue ipotizzeremo di avere scelto un 10 iterazioni a partire dal valore $x_0=2$.
-
-<<echo=TRUE>>=
-x<-2
+Dal grafico~\ref{fig:newton} \`e evidente che ci sono 3 intersezioni con l'asse delle $x$ che ci proponiamo di determinare usando il metodo delle tangenti di Newton. Ricordiamo che nel metodo delle tangenti di Newton si deve scegliere un punto iniziale $x_0$  ed il numero di iterazioni (o un criterio di arresto).  
+In assenza della derivata esatta possiamo anche usare la regola dei 3 punti. In questo caso possiamo scrivere la derivata come
+<<>>=
+df<-function(x) 5*x^4-3
 @
-Scegliamo un incremento
-$h=10^{-3}$ ed 
-iteriamo il processo attraverso un ciclo \texttt{for}\footnote{Il comando   \texttt{for(k in set) comando} esegue il \texttt{comando} (eventualmente dipendente da \texttt{k} per tutti i valori di \texttt{k} in \texttt{set}. }:
+e scegliamo $n=10$ iterazioni che eseguiremo  a partire dal valore $x_0=2$
+
+Iteriamo il processo attraverso un ciclo \texttt{for}\footnote{Il comando   \texttt{for(k in set) comando} esegue il \texttt{comando} (eventualmente dipendente da \texttt{k} per tutti i valori di \texttt{k} in \texttt{set}. }:
 
 <<echo=TRUE>>=
-h<-0.001
-for(k in 1:9) x[k+1]<-x[k]-f(x[k])/trepunti(f,x[k],h)
+iterazioni=10
+x=2
+for(k in 1:iterazioni) x[k+1]<-x[k]-f(x[k])/df(x[k])
 x
 @
-Si genera la lista di 10 passi iterativi, il fatto che la lista si stabilizzi \`e indice del fatto che la lista converge all'intersezione cercata.  Ricerchiamo anche un altro valore della {\it radice}:
+Si genera la lista di $n$ passi iterativi, il fatto che la lista si stabilizzi \`e indice del fatto che la lista converge all'intersezione cercata.  Ricerchiamo anche un altro valore della {\it radice}:
 <<echo=TRUE>>=
-x<- -2; iterazioni=10;
-for(k in seq(length=iterazioni)) x[k+1]<-x[k]-f(x[k])/
-trepunti(f,x[k],h)
+x= -2
+iterazioni=10;
+for(k in 1:iterazioni) x[k+1] = x[k]-f(x[k])/df(x[k])
 x
 @
 Per determinare la terza ed ultima intersezione partiamo da $x_0=0.5$
 <<echo=TRUE>>=
-x<-0.5
-for(k in 1:10) x[k+1]<-x[k]-
-f(x[k])/trepunti(f,x[k],h);x
+x=0.5
+for(k in 1:iterazioni) x[k+1]=x[k]-f(x[k])/df(x[k])
 @
-Le radici sono 0.3347341, -1.388792, 1.214648.
+Le radici sono dunque 0.3347341, -1.388792, 1.214648.
+
+
 \section{Integrali definiti}
 Ci occupiamo ora del calcolo di integrali definiti
 \begin{eqnarray*}
@@ -1689,7 +1829,7 @@ plot(x[centri],y[centri],col="red",cex=0.4)
 points(x[-centri],y[-centri], col="blue",cex=0.4)  
 @
 \caption{Metodo Montecarlo per il disco}
-\label{fig:newton}
+\label{fig:montecarlo}
 \end{center}
 \end{figure}
  Si noti che per ridurre la dimensione dei punti abbiamo usato l'opzione \texttt{cex}.
@@ -1707,6 +1847,9 @@ a=sympy("integrate(exp(-x))") # integrale indefinito
 sympy("diff(log(x,2), x, 1)")
 sympy("diff(log(x,2), x, 10)")
 @
+
+Nella notazione che appare sopra il simbolo $**$ sta per elevamento a potenza.
+
 \section{soluzioni}
 
 Le soluzioni sono

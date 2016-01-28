@@ -14,10 +14,12 @@
 \contentsline {subsection}{\numberline {3.1.1}I numeri}{15}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Costanti fondamentali}{16}{subsection.3.1.2}
 \contentsline {subsection}{\numberline {3.1.3}Interi e frazioni}{16}{subsection.3.1.3}
-\contentsline {section}{\numberline {3.2}Funzioni e grafici}{17}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Definizione di funzioni}{17}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Funzioni predefinite}{18}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Grafici}{19}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.2}Rappresentazione decimale dei numeri}{17}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Notazione scientifica e cifre significative}{17}{subsection.3.2.1}
+\contentsline {section}{\numberline {3.3}Funzioni e grafici}{19}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Definizione di funzioni}{19}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Funzioni predefinite}{19}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Grafici}{21}{subsection.3.3.3}
 \select@language {english}
 \select@language {italian}
 \select@language {english}
@@ -66,19 +68,21 @@
 \select@language {italian}
 \select@language {english}
 \select@language {italian}
-\contentsline {section}{\numberline {3.3}Composizione di funzioni}{29}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Esempi}{31}{subsection.3.3.1}
-\contentsline {section}{\numberline {3.4}Funzioni inverse}{31}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Grafico delle funzioni inverse}{32}{subsection.3.4.1}
-\contentsline {section}{\numberline {3.5}Funzioni inverse delle funzioni circolari}{35}{section.3.5}
-\contentsline {section}{\numberline {3.6}Applicazioni delle funzioni inverse: equazioni logaritmiche ed esponenziali}{39}{section.3.6}
-\contentsline {section}{\numberline {3.7}Derivate}{39}{section.3.7}
-\contentsline {subsection}{\numberline {3.7.1}Regola dei tre punti}{43}{subsection.3.7.1}
-\contentsline {subsection}{\numberline {3.7.2}Derivate ``formali''}{48}{subsection.3.7.2}
-\contentsline {subsection}{\numberline {3.7.3}Metodo delle tangenti di Newton}{50}{subsection.3.7.3}
-\contentsline {section}{\numberline {3.8}Integrali definiti}{53}{section.3.8}
-\contentsline {subsection}{\numberline {3.8.1}Metodi numerici di integrazione di \textsf {R}}{53}{subsection.3.8.1}
-\contentsline {subsection}{\numberline {3.8.2}Metodi di integrazione: metodo dei rettangoli e metodo dei trapezi}{54}{subsection.3.8.2}
-\contentsline {subsection}{\numberline {3.8.3}Metodo Montecarlo}{55}{subsection.3.8.3}
-\contentsline {section}{\numberline {3.9}Cenni di calcolo simbolico in \textsf {R}~}{60}{section.3.9}
-\contentsline {section}{\numberline {3.10}soluzioni}{60}{section.3.10}
+\contentsline {section}{\numberline {3.4}Composizione di funzioni}{31}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Esempi}{33}{subsection.3.4.1}
+\contentsline {section}{\numberline {3.5}Funzioni inverse}{33}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Grafico delle funzioni inverse}{34}{subsection.3.5.1}
+\contentsline {section}{\numberline {3.6}Funzioni inverse delle funzioni circolari}{37}{section.3.6}
+\contentsline {section}{\numberline {3.7}Applicazioni delle funzioni inverse: equazioni logaritmiche ed esponenziali}{40}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}Equazioni esponenziali}{40}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.2}Equazioni logaritmiche}{41}{subsection.3.7.2}
+\contentsline {section}{\numberline {3.8}Derivate}{41}{section.3.8}
+\contentsline {subsection}{\numberline {3.8.1}Regola dei tre punti}{45}{subsection.3.8.1}
+\contentsline {subsection}{\numberline {3.8.2}Derivate ``formali''}{50}{subsection.3.8.2}
+\contentsline {subsection}{\numberline {3.8.3}Metodo delle tangenti di Newton}{51}{subsection.3.8.3}
+\contentsline {section}{\numberline {3.9}Integrali definiti}{57}{section.3.9}
+\contentsline {subsection}{\numberline {3.9.1}Metodi numerici di integrazione di \textsf {R}}{57}{subsection.3.9.1}
+\contentsline {subsection}{\numberline {3.9.2}Metodi di integrazione: metodo dei rettangoli e metodo dei trapezi}{58}{subsection.3.9.2}
+\contentsline {subsection}{\numberline {3.9.3}Metodo Montecarlo}{59}{subsection.3.9.3}
+\contentsline {section}{\numberline {3.10}Cenni di calcolo simbolico in \textsf {R}~}{61}{section.3.10}
+\contentsline {section}{\numberline {3.11}soluzioni}{64}{section.3.11}
