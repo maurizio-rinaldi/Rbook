@@ -15,9 +15,9 @@
 \usepackage{lipsum}
 \usepackage[dvipsnames]{color}
 \definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
-\usepackage{graphicx} 
+\usepackage{graphicx}
 \usepackage{fancyvrb}
-\usepackage{amsmath} 
+\usepackage{amsmath}
 \usepackage{Sweave}
 \usepackage{hyperref}
 \newenvironment{question}{\item \textbf{Esercizio}\newline}{}
@@ -25,16 +25,16 @@
 \newenvironment{answerlist}{\renewcommand{\labelenumi}{(\alph{enumi})}\begin{enumerate}}{\end{enumerate}}
 \definecolor{grigetto}{rgb}{0.9,0.9,0.9}
 \DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
-\lhead[\thepage]{\today} 
+\lhead[\thepage]{\today}
 %\usepackage{draftwatermark}
 \usepackage{wrapfig}
 \pagestyle{fancy}
 \newcounter{fnotes}\setcounter{fnotes}{1}
 \newcounter{Raction}\setcounter{Raction}{1}
-\newcommand{\varia}[1]{\textsl{\textsf{#1}}} 
+\newcommand{\varia}[1]{\textsl{\textsf{#1}}}
 \newcommand{\mytilde}{$\sim$}
-\newcommand{\maurizio}[1]{\color{red}#1 \color{black}} 
-\newcommand{\federico}[1]{\color{green}#1 \color{black}} 
+\newcommand{\maurizio}[1]{\color{red}#1 \color{black}}
+\newcommand{\federico}[1]{\color{green}#1 \color{black}}
  %\newenvironment{question}{\item \textbf{Problema}\newline}{}
 %\newenvironment{solution}{\textbf{Soluzione}\newline}{}
 \newcommand{\rst}{\textsf{RStudio}~}
@@ -48,12 +48,12 @@
                           {
                          % \end{minipage}
                           %\end{center}
-                          \medskip}                           
+                          \medskip}
  \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
 \author{Federico Comoglio e  Maurizio Rinaldi}
 \markright{\today}
-\lhead{\today} 
+\lhead{\today}
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}
@@ -64,13 +64,13 @@
 \begin{document}
 \SweaveOpts{concordance=TRUE}
 \markright{\today}
-\thispagestyle{empty} 
+\thispagestyle{empty}
 \maketitle
 \newpage
-\thispagestyle{empty} 
+\thispagestyle{empty}
 \tableofcontents
 \newpage
-\thispagestyle{empty} 
+\thispagestyle{empty}
  \mainmatter
 %\usepackage{draft}
 \section*{Prefazione}
@@ -86,14 +86,14 @@ Queste dispense sono state realizzate in \LaTeX, con praticamente tutte le figur
 Nonostante abbiamo speso tempo nel pensare ai concetti da includere ed organizzarne il contenuto, ci assumiamo le nostre responsabilit\`a per errori che sono ancora presenti nel testo, figure o codice. A questo proposito ma non solo, ogni vostro suggerimento \`e ben accetto e potenzialmente molto prezioso.\\
 \begin{flushright}
 Grazie,\\
-Novara, \today \\ 
+Novara, \today \\
 Maurizio e Federico
 \end{flushright}
 \vfill\eject
- \thispagestyle{empty} 
+ \thispagestyle{empty}
 \chapter{Preambolo}
-{\textsf R} \`e un programma \textit{freeware} (di distribuzione gratuita) e \textit{open-source} (il cui codice sorgente pu\`o essere modificato e redistribuito) distribuito dalla ``\textsf{R} foundation'', utilizzato per il calcolo statistico ed in grado di svolgere calcoli matematici ed algebrici (sicuramente di livello superiore ad una normale calcolatrice tascabile) ma che non rientrano nello scopo primario di \textsf{R}. 
-La versione cui sono riferite queste dispense \`e la  
+{\textsf R} \`e un programma \textit{freeware} (di distribuzione gratuita) e \textit{open-source} (il cui codice sorgente pu\`o essere modificato e redistribuito) distribuito dalla ``\textsf{R} foundation'', utilizzato per il calcolo statistico ed in grado di svolgere calcoli matematici ed algebrici (sicuramente di livello superiore ad una normale calcolatrice tascabile) ma che non rientrano nello scopo primario di \textsf{R}.
+La versione cui sono riferite queste dispense \`e la
 \Sexpr{paste(R.Version()$major,R.Version()$minor)}.
  Assumiamo che lo studioso abbia scaricato dal sito  \texttt{http://www.r-project.org/} tale versione di  \textsf{R} e la abbia installata sul suo computer.
 \section{Introduzione}
@@ -104,17 +104,17 @@ Il programma si presenta all'utente con una interfaccia per l'inserimento dei da
 e premendo il tasto di invio appare come risposta
 <<echo=FALSE, eval = TRUE>>=
 1+1
-@ 
+@
 Oltre alla console
-\index{\texttt{console}}  
-\textsf{R} dispone di finestre di altra natura, per esempio finestre grafiche e finestre di {\it help}. 
+\index{\texttt{console}}
+\textsf{R} dispone di finestre di altra natura, per esempio finestre grafiche e finestre di {\it help}.
 \\
 Iniziamo a descrivere alcune peculiarit\`a di \textsf{R}.\\
 L'insieme dei comandi eseguiti costituisce la storia o \textit{cronologia} (\textit{history}) \index{\texttt{history}}
  di una sessione di lavoro. \`E possibile muoversi all'interno della cronologia, cio\`e richiamare i comandi precedenti e successivi utilizzando le frecce $\uparrow$ e $\downarrow$ della tastiera.\\
 \begin{wrapfigure}{r}{1in}
      \includegraphics[height=20mm,width=20mm]{grafici/Tastisugiu.png}
- \vspace{-20pt}  
+ \vspace{-20pt}
   %\caption{A gull}
 \end{wrapfigure}
 
@@ -123,8 +123,8 @@ Si ricordi sempre che \textsf{R} \`e {\emph case sensitive} ossia vi \`e differe
 \subsection*{Editori esterni}
 E' molto comodo scrivere le porzioni di codice che si intendono eseguire in \textsf{R} su un file di testo esterno in modo da disporre a fine sessione di un listato dei comandi usati (con eventuali commenti), scevro da errori e da operazioni superflue o ripetute.  Gli editor esterni hanno in particolare  la propriet\`a di
 \begin{itemize}
-\item Riconoscere la sintassi di \textsf{R} 
-\item Interagire con \textsf{R}, consentendo l'esecuzione di comandi direttamente dall'editor. 
+\item Riconoscere la sintassi di \textsf{R}
+\item Interagire con \textsf{R}, consentendo l'esecuzione di comandi direttamente dall'editor.
 \end{itemize}
 Ne menzioniamo quattro di semplice utilizzo: \textsf{Rstudio}, \textsf{Tinn-R}, \textsf{Komodo Edit} e \textsf{TextWrangler}, i cui dettagli sono presenti in tabella~\ref{editor}.\\
 \begin{table}[htp]
@@ -137,7 +137,7 @@ Editor & Sistema Operativo & Website\\
 \rst & Mutlipiattaforma & \url{http://www.Rstudio.org} \\
 \textsf{Tinn-R} & Windows & \url{http://www.sciviews.org/Tinn-R} \\
 \textsf{Komodo Edit} & Multipiattaforma & \url{http://www.activestate.com/komodo-edit}  \\
-\textsf{TextWrangler} & Mac OSX & \url{http://www.barebones.com/products/textwrangler/}  \\ 
+\textsf{TextWrangler} & Mac OSX & \url{http://www.barebones.com/products/textwrangler/}  \\
 \hline
 \end{tabular}
 \end{center}
@@ -150,22 +150,22 @@ A livello di sviluppo sono invece disponibili editori dedicati, che forniscono n
 %%, \footnote{Multipiattaforma, scaricabile all'indirizzo
 %%\texttt{http://www.activestate.com/komodo-edit} che possiede estensioni per lavorare con  \textsf{R} scaricabili anche esse all'indirizzo \texttt{http://www.sciviews.org }}.
 \\
-Un discorso pi\`u esteso spetta ad \textsf{RStudio} che presenta un ambiente di sviluppo integrato particolarmente adatto a fini didattici e come  gi\`a detto \`e \emph{free} e multipiattaforma.  
+Un discorso pi\`u esteso spetta ad \textsf{RStudio} che presenta un ambiente di sviluppo integrato particolarmente adatto a fini didattici e come  gi\`a detto \`e \emph{free} e multipiattaforma.
 \\
 Adotteremo in questo libro \textsf{RStudio} per la facilit\`a d'uso e per il fatto che consente una visualizzazione completa contestuale di diversi aspetti di una sessione di lavoro. \textsf{RStudio} ha inoltre una versione server che  \`e stata resa disponibile all'indirizzo \url{http://rstudio.med.unipmn.it:8787/} per gli studenti di questo corso\footnote{Ringraziamo il Dottor Valter Rolando per essersi adoperato in tal senso}
 %\begin{comment}
 \section{Introduzione ad \textsf{Rstudio}}
-All'apertura di \rst appaiono diversi pannelli mostrati in Figura~\ref{fig::Rstudiomain} 
-  \begin{figure} 
+All'apertura di \rst appaiono diversi pannelli mostrati in Figura~\ref{fig::Rstudiomain}
+  \begin{figure}
 \includegraphics[width=1\textwidth]{grafici/Rstudiomain.png}
 \caption{Finestra iniziale di  RStudio }
 \label{fig::Rstudiomain} \end{figure}
- 
+
 Il pannello  fondamentale (a sinistra nella figura) \`e la classica console di \textsf{R}.
 Ci sono poi 2 altri 2 pannelli a sinistra. Quello superiore   con 2 linguette  \texttt{Environment} e \texttt{History} e quello inferiore  con 5 linguette  \texttt{Files, Plots, Packages,Help, Viewer} il cui significato sar\`a presto chiarito.
 
 La barra dei menu fornisce diversi menu a tendina che scopriremo procedendo nello studio.
- 
+
 
 
 
@@ -173,35 +173,35 @@ La barra dei menu fornisce diversi menu a tendina che scopriremo procedendo nell
 \subsection*{Script di codice}
 Dovendo scrivere porzioni di codice si pu\`o aprire un nuovo documento selezionando dal menu di \rpr in corrispondenza a \texttt{File} il tab \texttt{New Document} come in figura \ref{fig::Rscript}
  \begin{figure} [h]
-\includegraphics[width=1\textwidth]{grafici/newRdoc.png} 
+\includegraphics[width=1\textwidth]{grafici/newRdoc.png}
 \caption{Apertura  di uno script di \rpr in \rpr.}
 \label{fig::Rscript} \end{figure}
 \\
 In \rst invece nel menu a relativo a \texttt{File}
 si pu\`o selezionare \texttt{New file} e aprire file di diversa natura, in particolare porzioni di codice di \rst (R Script) come in figura~\ref{fig::Rstudioscript}.
-Si provi per esempio ad aprire uno script di \rst e ad inserire il comando  
+Si provi per esempio ad aprire uno script di \rst e ad inserire il comando
 1+1.
-\begin{figure} 
+\begin{figure}
 \includegraphics[width=0.4\textwidth]{grafici/Rscript.png}\hskip40pt
 \includegraphics[width=0.4\textwidth]{grafici/esecuzione.png}
 \caption{Apertura  ed esecuzione di uno script di \rpr in  \rst }
 \label{fig::Rstudioscript} \end{figure}
 
 Usando le frecce o le scorciatoie da tastiera nel menu a tendina in corrispondenza a \texttt{code} si possono inviare i comandi a \rpr per la loro esecuzione.
- 
+
 
 Il file va poi salvato in una cartella opportuna  con estensione \texttt{.R}.
 
  \subsection*{Help e guida on-line}
 Una qualunque richiesta di informazioni pu\`o essere effettuata digitando il comando:
 $?\varia{argomento}$   (o $\texttt{help}(\varia{argomento}))$.
-\index{\texttt{help}} 
+\index{\texttt{help}}
 Ad esempio $?\texttt{sin}$  consente di ottenere informazioni sulla funzione seno e altre funzioni trigonometriche in quanto la guida \`e completamente indicizzata. \`E anche possibile utilizzare il menu a tendina ({\it help}), con modalit\`a diverse a seconda del sistema operativo.\\
 %Infine, il comando \texttt{help.start()} consente di aprire l'\textit{help} HTML di \textsf{R} da cui \`e poi possibile consultare %la documentazione.
 In \rst basta invece clicare sul menu \texttt{help} selezionare la casellina \texttt{Home} e scrivere il comando al quale si \`e interessati.
-\subsection*{Inserire i commenti}  
+\subsection*{Inserire i commenti}
 I commenti sono frasi, annotazioni o codice da non eseguire momentaneamente molto utilizzati in programmazione. L'introduzione di un commento in \textsf{R} \`e possibile mediante il simbolo \texttt{\#} (cancelletto singolo o \emph{hash}). Per evitare che un commento venga cancellato durante il normale \textit{editing} del testo e che esso venga eseguito si consiglia di raddoppiare i simboli (\texttt{\#\#}). Ad esempio:
-\index{\texttt{\#}} 
+\index{\texttt{\#}}
 <<ECHO=TRUE,keep.source=TRUE>>=
 1+1 # dovrebbe fare 2
 @
@@ -211,30 +211,30 @@ non produrr\`a errore perch\'e riconoscer\`a la stringa scritta dopo \texttt{\#}
 A prescindere dalle preferenze personali, un commento dovrebbe essere inserito quando la porzione di codice che si sta considerando risulta a noi non ovvia, quando le dimensioni, tipo e ruolo delle variabili coinvolte non sono ovvie o semplicemente quando si ha bisogno di introdurre una annotazione che renda pi\`u facile la lettura del codice non solo a noi stessi ma anche ad altri. Quest'ultimo punto \`e di fondamentale importanza quando si vuole condividere il codice con altri membri della comunit\`a scientifica. Per capire se i commenti che inserite sono superflui o mancanti:
 \begin{shaded}
 Ad un certo punto del corso salvate una porzione di codice (o una funzione) commentata in un file \texttt{.R}, lunga almeno 25 righe di codice. Aggiungete la data corrente al nome del file e in un periodo compreso tra 6 e 12 mesi semplicemente aprite il file e rileggetene il codice. Se siete in grado di capirne il contenuto, avete probabilmente fatto buon uso dei commenti.
- \end{shaded} 
+ \end{shaded}
 
 \subsection*{Working directory}
-Il comando \index{\texttt{getwd()}} 
+Il comando \index{\texttt{getwd()}}
 %codechunk
 <<echo=TRUE,eval=FALSE>>=
 getwd()
 @
-indica la directory di lavoro mentre il comando 
+indica la directory di lavoro mentre il comando
 %codechunk
 <<echo=TRUE,eval=FALSE>>=
 setwd("indirizzo")
-@  
-\index{\texttt{setwd()}} 
- imposta la {\it working directory}  nella posizione specificata da \texttt{"indirizzo"}. 
+@
+\index{\texttt{setwd()}}
+ imposta la {\it working directory}  nella posizione specificata da \texttt{"indirizzo"}.
  Lavorando con \rst per impostare la directory si pu\`o usare il menu a tendina
-\texttt{Session};  \`e  in particolare  possibile posizionare la \texttt{working directory} in corrispondenza al file di codice sorgente (\texttt{To Source File location}). 
+\texttt{Session};  \`e  in particolare  possibile posizionare la \texttt{working directory} in corrispondenza al file di codice sorgente (\texttt{To Source File location}).
 
 
 \subsection*{Pacchetti}
 
-Oltre all'aggiornamento costante del programma, lo sviluppo di \rpr consiste nello creazione e aggiornamento continui da parte della comunit\`a  mondiale di una serie di pacchetti addizionali. Un pacchetto contiene in particolare un insieme di comandi finalizzati alla  realizzazione di un determinato compito: esistono per esempio pacchetti per la risoluzione di equazioni differenziali, pacchetti per l'analisi statistica di {\it microarray}, pacchetti per il {\it clustering} di dati.  Per non appesantire \rpr i pacchetti (con poche eccezioni) vengono caricati solo se richiesto dalle esigenze dell'utente. 
-L'utente deve quindi inizialmente localizzare (per esempio via web) il pacchetto che lo interessa e scaricarlo localmente.  
-Per fare questo deve selezionare il sito CRAN da cui scaricarlo e poi (direttamente dal menu a tendina di \rpr) scaricarlo (con annesse eventuali {\it dependencies}). Una volta scaricato in locale il pacchetto pu\`o essere messo a disposizione dell'utente con il comando  
+Oltre all'aggiornamento costante del programma, lo sviluppo di \rpr consiste nello creazione e aggiornamento continui da parte della comunit\`a  mondiale di una serie di pacchetti addizionali. Un pacchetto contiene in particolare un insieme di comandi finalizzati alla  realizzazione di un determinato compito: esistono per esempio pacchetti per la risoluzione di equazioni differenziali, pacchetti per l'analisi statistica di {\it microarray}, pacchetti per il {\it clustering} di dati.  Per non appesantire \rpr i pacchetti (con poche eccezioni) vengono caricati solo se richiesto dalle esigenze dell'utente.
+L'utente deve quindi inizialmente localizzare (per esempio via web) il pacchetto che lo interessa e scaricarlo localmente.
+Per fare questo deve selezionare il sito CRAN da cui scaricarlo e poi (direttamente dal menu a tendina di \rpr) scaricarlo (con annesse eventuali {\it dependencies}). Una volta scaricato in locale il pacchetto pu\`o essere messo a disposizione dell'utente con il comando
 %codechunk
 <<echo=TRUE,eval=FALSE>>=
 library("nome.pacchetto")
@@ -251,20 +251,20 @@ $ \varia{variabile}\leftarrow\varia{ valore}$ e
 $\varia{valore} \to  \varia{variabile}$;
 ad esempio:
 <<echo=TRUE>>=
-a<-2 
+a<-2
 @
 associa il valore $2$ alla variabile \texttt{a}. Per comporre le frecce si usano i segni ``meno'' ``maggiore''  \texttt{->}(freccia a destra) o ``minore'' ``meno''  \texttt{<-}(freccia a sinistra).
 Si abbia cura di evitare di inserire spazi tra il nome della variabile e la freccia, cos\`\i \; come tra la freccia ed il valore assegnato. Il programma per assegnazioni semplici non invia  alcun messaggio di errore, ma si possono verificare problemi quando vi siano pi\`u membri costituenti il valore assegnato.
 Rivolgere {\bf sempre} la freccia dal valore alla variabile, infatti essa \`e una scatola in grado di contenere il valore voluto. Ad esempio non \`e valida la stringa:
 $variabile\rightarrow valore $ o $ valore\leftarrow variabile$.
 {\bf Non} lasciare spazi vuoti nel definire il nome della variabile, \`e possibile invece utilizzare  il sottotratto (\textit{underscore}) $\_$  ad esempio definendo: \texttt{variabile\_uno}, {\bf non} \texttt{variabile uno}. Si pu\`o anche usare il punto e scrivere  \texttt{variabile.uno}.
-I nomi delle variabili sottostanno ad alcune regole. Per esempio \texttt{variabile1} \`e un nome lecito mentre non lo \`e  \texttt{1variabile}.\\  L'assegnamento di uno stesso valore a pi\`u variabili (o costanti) in un unico comando \`e possibile con una sintassi del tipo: 
+I nomi delle variabili sottostanno ad alcune regole. Per esempio \texttt{variabile1} \`e un nome lecito mentre non lo \`e  \texttt{1variabile}.\\  L'assegnamento di uno stesso valore a pi\`u variabili (o costanti) in un unico comando \`e possibile con una sintassi del tipo:
 <<echo=TRUE>>=
-a<-b<-c<-5 
+a<-b<-c<-5
 @
 L'assegnazione pu\`o avvenire anche usando il segno `$=$', ad esempio
 <<echo=TRUE>>=
-a=5 
+a=5
 @
 o il comando
 <<echo=TRUE>>=
@@ -272,11 +272,11 @@ assign("a",5)
 @
 Ogni variabile \`e richiamabile scrivendo il suo nome.
 Ad esempio:
-\texttt{a} richiama la variabile \texttt{a} appena definita e mostra il valore di \texttt{a} in output, ovvero 5\footnote{Spesso 
+\texttt{a} richiama la variabile \texttt{a} appena definita e mostra il valore di \texttt{a} in output, ovvero 5\footnote{Spesso
 dopo aver scritto un comando ad esempio \texttt{a<-5} ci si interroga sull'assenza di output. In realt\`a il comando \`e stato eseguito. Per verificarlo basta scrivere \texttt{a} ed inviare. In modo alternativo il comando  \texttt{(a<-5)} oltre a definire l'associazione di 5 ad \texttt{a} ne stampa il valore.},
 Per rimuovere una variabile o un generico oggetto si utilizza il comando:
 $$\texttt{rm}(\varia{name}),$$
- ossia {\it remove memory}, \varia{name} \`e il nome della variabile da cancellare. Ad \index{\texttt{rm()}} esempio: 
+ ossia {\it remove memory}, \varia{name} \`e il nome della variabile da cancellare. Ad \index{\texttt{rm()}} esempio:
 <<echo=TRUE>>=
 rm(a)
 a=5;a
@@ -290,14 +290,14 @@ o in modo equivalente
 objects()
 @
 L'insieme degli oggetti presenti in una sessione costituisce il \textsl{worksapce} o \textsl{environment} (ambiente di lavoro) il cui contenuto \`e facilmente visualizzabile in \rst   cliccando su \texttt{Environment}.
-Scoprire come eliminare gli oggetti. 
+Scoprire come eliminare gli oggetti.
 
-\section{Costruzione di vettori}  Un vettore (o \textit{array} monodimensionale) 
-pu\`o essere visto come un casellario, le cui caselle sono dette celle (\emph{slot}) del vettore stesso. Tutte le celle sono variabili di uno stesso tipo, detto tipo base del vettore. Si possono cos\`\i\  definire vettori di numeri, di caratteri e vettori logici. 
-%In alcuni linguaggi una stringa \`e vista come un vettore di caratteri. 
+\section{Costruzione di vettori}  Un vettore (o \textit{array} monodimensionale)
+pu\`o essere visto come un casellario, le cui caselle sono dette celle (\emph{slot}) del vettore stesso. Tutte le celle sono variabili di uno stesso tipo, detto tipo base del vettore. Si possono cos\`\i\  definire vettori di numeri, di caratteri e vettori logici.
+%In alcuni linguaggi una stringa \`e vista come un vettore di caratteri.
 %Spesso inoltre la dimensione di un vettore (il numero celle di cui esso \`e composto) viene considerato parte della definizione,
-In \textsf{R} l'assegnamento della dimensione di un vettore non \`e obbligatorio. %Nel testo ci riferiremo ad un vettore utilizzando anche il termine elenco, che per comodit\`a consideriamo analogo. 
-Un vettore pu\`o  essere definito utilizzando il comando \texttt{c} di sintassi generale:  
+In \textsf{R} l'assegnamento della dimensione di un vettore non \`e obbligatorio. %Nel testo ci riferiremo ad un vettore utilizzando anche il termine elenco, che per comodit\`a consideriamo analogo.
+Un vettore pu\`o  essere definito utilizzando il comando \texttt{c} di sintassi generale:
 \index{\texttt{c}}
 \begin{equation*}
 \texttt{c}(\varia{valore}_1, \varia{valore}_2, \ldots,\varia{valore}_n)
@@ -328,13 +328,13 @@ vettore[i]<-"testo"
 vettore
 @
 abbiamo anche cambiato il tipo di base del vettore mentre, se scriviamo
-<<echo=TRUE>>=> 
+<<echo=TRUE>>=>
 vettore[i]<-11
 vettore
-@ 
+@
 il vettore non viene restaurato. Per farlo occorre in questo caso scrivere
 <<echo=TRUE>>=
-as.numeric(vettore)->vettore 
+as.numeric(vettore)->vettore
 @
 Possiamo anche definire celle con indice superiore alla lunghezza
 <<echo=TRUE>>=
@@ -349,68 +349,68 @@ vettore[-3]
 la cella di posizione 3 viene eliminata.
 Possiamo determinare la lunghezza di un vettore con la funzione \texttt{length}:
 \index{\texttt{length}}
-<<echo=TRUE>>= 
+<<echo=TRUE>>=
 length(vettore)
 @
  Possiamo poi ovviamente eseguire operazioni sui vettori
 <<echo=TRUE>>=
 3*vettore
 @
- 
+
 Il vettore di nome \texttt{vettore}, viene moltiplicato per 3, ovvero ciascuna cella viene moltiplicata per 3.
-\subsection{Generazione di sequenze: $\texttt{rep}$ e $\texttt{seq}$} 
+\subsection{Generazione di sequenze: $\texttt{rep}$ e $\texttt{seq}$}
 \`E possibile definire sequenze di numeri consecutivi come  \varia{n:m}.
 Ad esempio:
 <<echo=TRUE>>=
-1:11 
+1:11
 @
-consente di ottenere la sequenza dei numeri interi da 1 a 11. \`E anche possibile aggiungere un numero alla sequenza con il comando: 
+consente di ottenere la sequenza dei numeri interi da 1 a 11. \`E anche possibile aggiungere un numero alla sequenza con il comando:
 $\texttt{c}(\varia{n:m},\varia{numero \; aggiunto})$.
 Per esempio se vogliamo aggiungere il numero 100 alla lista precedente scriveremo:
 <<echo=TRUE>>=
 c(1:11,100)
 @
-Nota: l'aggiunta \`e posizionale, cio\`e rispetta l'ordine con cui compaiono gli elementi. 
+Nota: l'aggiunta \`e posizionale, cio\`e rispetta l'ordine con cui compaiono gli elementi.
 
 \`E inoltre possibile generare liste costanti di valore $k$ con il comando:
 $\texttt{rep} (\varia{k,n})$
 Se vogliamo una lista i cui elementi sono tutti 3 per un totale di 10 elementi scriveremo:
 <<echo=TRUE>>=
 rep(3,10)
-@  
+@
 Infine il parametro \texttt{each=}\varia{n} consente di ripetere ciascun elemento della sequenza \varia{n} volte. Ad esempio:
 <<echo=TRUE>>=
 rep(c(3,2,1),each=3)
 @
-Ripete 3 volte il numero 3, 3 volte il numero 2 e 3 volte il numero 1. 
-Diverso \`e il risultato con il comando 
+Ripete 3 volte il numero 3, 3 volte il numero 2 e 3 volte il numero 1.
+Diverso \`e il risultato con il comando
 <<echo=TRUE>>=
 rep(c(3,2,1),times=5)
-@ 
+@
 dove si ha la ripetizione \texttt{times} volte dell'intero vettore.
-Cosa succede se 2 vettori hanno lunghezza diversa? In matematica tradizionalmente questa somma non \`e definita. In \rpr invece vale la regola del riciclaggio  (\textit{recycling rule}). Se dobbiamo sommare i vettori che seguono 
+Cosa succede se 2 vettori hanno lunghezza diversa? In matematica tradizionalmente questa somma non \`e definita. In \rpr invece vale la regola del riciclaggio  (\textit{recycling rule}). Se dobbiamo sommare i vettori che seguono
  \begin{align*} &(1,2,3,4,5,6,7,8)+\\ &(3,4,5)\hskip50pt =\\
  &\noindent\rule{0.25\textwidth}{0.4pt}\\
-\end{align*} 
+\end{align*}
 si procede cos\'\i: la somma
 si calcola riciclando il vettore pi\`u breve
- \begin{align} 
+ \begin{align}
 &(1,~2,~3,~4,~5,~6,~7,~8)+\\
 &(3,~4,~5,~3,~4,~5,~3,~4)=\\
 &\noindent\rule{0.3\textwidth}{0.8pt} \\
 &(4, ~ 6,~  8 ,~ 7,~  9 ,11, 10,12)\\
 \end{align}
-In modo simile se dobbiamo sommare i vettori che seguono 
+In modo simile se dobbiamo sommare i vettori che seguono
  \begin{align*} &(1,2,3,4,5,6,7,8)+\\ &(3)\hskip70pt =\\
  &\noindent\rule{0.3\textwidth}{0.6pt}\\
-\end{align*} 
+\end{align*}
 si esegue la somma
-\begin{align} 
+\begin{align}
 &(1,~2,~3,~4,~5,~6,~7,~8)+\\
 &(3,~3,~3,~3,~3,~3,~3,~3)=\\
 &\noindent\rule{0.3\textwidth}{0.8pt} \\
 &(4, ~ 5,~  6 ,~ 7,~  8 ,~9, 10,11)\\
-\end{align} 
+\end{align}
 Ad esempio
 <<echo=TRUE>>=
 1:8+3:5
@@ -428,19 +428,19 @@ options(width=60)
 seq(0,100,1) ##analogo di seq(0,100)
 @
 Possiamo ottenere la sequenza di tutti i numeri dispari da $n$ a $m$ utilizzando il parametro \texttt{by},che consente di impostare il passo nella sequenza.
-Il comando:  
+Il comando:
 <<echo=FALSE>>=
 options(width=60)
 <<echo=TRUE>>=
 seq(1,100,by=2)
 @
-restituisce tutti i numeri tra 1 e 100 a passo 2, ovvero tutti i numeri dispari compresi nell'intervallo. 
+restituisce tutti i numeri tra 1 e 100 a passo 2, ovvero tutti i numeri dispari compresi nell'intervallo.
 Per ottenere i numeri pari compresi nell'intervallo possiamo reiterare il comando precedente ma partendo da 0 (e volendo possiamo sottintendere la specifica \texttt{by=})
 <<echo=TRUE>>=
 seq(0,100,2)
 @
 il parametro \texttt{length.out}  (brevemente \texttt{len} o \texttt{length} consente di definire il numero totale di elementi della sequenza, ovvero divide l'intervallo  da $m$ a $n$ utilizzando un numero di punti pari alla lunghezza assegnata.
-Ad esempio se nella  sequenza di numeri da 1 a 100 volessimo avere in totale 10 numeri scriveremo: 
+Ad esempio se nella  sequenza di numeri da 1 a 100 volessimo avere in totale 10 numeri scriveremo:
 <<echo=TRUE>>=
 seq(1,100,length=10)
 @
@@ -449,9 +449,9 @@ In effetti l'intevallo da 1 a 100  di lunghezza 99 viene diviso da 10 punti in 9
   \begin{description}
 \item{1.} Costruire un vettore contenente i numeri da 1 a 15. Identificare almeno due modi per invertire l'ordine degli elementi. Scambiare poi  il $5^o$  e il $6^o$ ingresso del vettore e stampare a video il risultato.
 \item{2.} Calcolare $23+37/10-2^3$
-\item{3.} Scrivere il vettore 
+\item{3.} Scrivere il vettore
 $x =(1,1,2,3,5,8)$.
-Stampare il $3^o$  elemento di $x$. Determinare la lunghezza di $x$. 
+Stampare il $3^o$  elemento di $x$. Determinare la lunghezza di $x$.
 Costruire un vettore i cui elementi siano la radice quadrata degli elementi di $x$.
 \item{4.} Si consideri la funzione $f(x)=x*\sin(x)$. Si determinino i valori di $f$ negli estremi della suddivisione dell'intervallo $[2,5]$  in 20 sotto-intervalli di ugual ampiezza.
 \end{description}
@@ -462,7 +462,7 @@ In quanto segue immaginiamo di operare direttamente in \rpr anche se avere a dis
 \subsection{I numeri}
 Se scriviamo in \rpr qualunque numero la rappresentazione che ne abbiamo \`e quella di un numero reale dove  il punto viene usato come separatore decimale. Inoltre per numeri molto grandi o molto piccoli \rpr ricorre alla notazione scientifica. Un numero  ``grande''  viene scritto come
 \varia{ae + b} (senza spazi) mentre un numero  ``piccolo'' viene scritto come
-\varia{ae - b} (senza spazi) 
+\varia{ae - b} (senza spazi)
 dove $a$ varia tra 1 e 9 e $b$  \`e l'esponente opportuno (in base 10). Ad esempio:
 <<echo=TRUE>>=
 0.0001
@@ -488,9 +488,9 @@ Per costante ci si riferisce ad un valore non modificabile. Ogni linguaggio perm
 \index{\texttt{pi}}
 \begin{itemize}
 \item{}$\pi$ definito come \texttt{pi}.
-\item{}\texttt{e}: numero di Nepero 
+\item{}\texttt{e}: numero di Nepero
 definito come il  valore  in $x=1$ della funzione esponenziale \texttt{exp(1)}. La notazione \`e equivalente ad $e^1$.
-Non \`e possibile definire \texttt{e} solo con la stringa \texttt{exp} senza assegnare l'esponente, in quanto esso \`e definito come una funzione di $x$.  
+Non \`e possibile definire \texttt{e} solo con la stringa \texttt{exp} senza assegnare l'esponente, in quanto esso \`e definito come una funzione di $x$.
 Ovviamente le costanti sono utilizzabili in qualsiasi calcolo:
 <<echo=TRUE>>=
 duepi<-2*pi
@@ -498,14 +498,14 @@ duepi
 @
 Abbiamo assegnato alla variabile \texttt{duepi}  valore $2*\pi$  e l'abbiamo richiamata per visualizzare il risultato.\\
 Nota bene: se si intende visualizzare il valore e non ad utilizzarlo in calcoli successivi \`e pi\`u comodo ricorrere alla visualizzazione a \emph{console}, come nell'esempio:
-<<echo=TRUE>>= 
+<<echo=TRUE>>=
 2*pi
 @
-in output si ottiene direttamente il risultato del calcolo.  
+in output si ottiene direttamente il risultato del calcolo.
 \end{itemize}
- 
 
- 
+
+
 \subsection{Interi e frazioni}
 Se scriviamo
 <<>>=
@@ -537,7 +537,7 @@ p <- sample(1:20, 1)
 q<- sample(2:20, 1)
 r=sample(1:20,1)
 s=sample(2:20,1)
-gcd <- function(a,b) ifelse (b==0, a, gcd(b, a %% b)) 
+gcd <- function(a,b) ifelse (b==0, a, gcd(b, a %% b))
 k1=gcd(p,q)
 k2=gcd(r,s)
 p=p/k1
@@ -562,7 +562,7 @@ p <- sample(1:20, 1)
 q<- sample(2:20, 1)
 r=sample(1:20,1)
 s=sample(2:20,1)
-gcd <- function(a,b) ifelse (b==0, a, gcd(b, a %% b)) 
+gcd <- function(a,b) ifelse (b==0, a, gcd(b, a %% b))
 k1=gcd(p,q)
 k2=gcd(r,s)
 p=p/k1
@@ -594,7 +594,7 @@ Si calcoli la frazione
 \Sexpr{testo}
 \end{enumerate}
 
- 
+
 \begin{comment}
 \subsection{Equazioni lineari}
 %Consideriamo semplici equazioni lineari del tipo
@@ -603,7 +603,7 @@ Per risolvere si portano i termini con la variabile $x$ da una parte e i termini
 $$(a-c) x=d-b$$
 e la soluzione unica \`e  (se $a-c$ \`e diverso da 0)
 $x=\dfrac{d-b}{a-c}$.
-In \rpr  per risolvere 
+In \rpr  per risolvere
 $$ 10 x+ 5=2 x+7$$
 basta scrivere
 <<echo=TRUE,eval=FALSE>>=
@@ -618,8 +618,8 @@ Tale comando non \`e qui particolarmente conveniente ma vedremo che si generaliz
 \section{Rappresentazione decimale dei numeri}
 \subsection{Notazione scientifica e cifre significative}
 Abbiamo gi\`a descritto la notazione scientifica di un numero.  Precisamente  il numero viene scritto nella forma $a*e \,b$ con a nell'intervallo $[1,10)$.
-Il numero di \emph{cifre significative}  di un numero $x$ \`e  il numero di cifre (in inglese \emph{figures}) del coefficiente $a$ di un  numero se questo viene espresso in notazione scientifica. 
-Per esempio consideriamo il numero 
+Il numero di \emph{cifre significative}  di un numero $x$ \`e  il numero di cifre (in inglese \emph{figures}) del coefficiente $a$ di un  numero se questo viene espresso in notazione scientifica.
+Per esempio consideriamo il numero
 <<echo=FALSE,eval=TRUE>>=
 set.seed( 10)
 x=runif(1,0,100)
@@ -634,9 +634,9 @@ fornisce la rappresentazione con 2 cifre significative del numero $x$ mentre
 <<echo=TRUE>>=
 round(x,2)
 @
-fornisce l'arrotondamento a 2 cifre dopo la virgola. Alcuni aspetti sono da sottolineare: 
+fornisce l'arrotondamento a 2 cifre dopo la virgola. Alcuni aspetti sono da sottolineare:
 \begin{itemize}
-\item nel caso in cui le ultime cifre nell'arrotondamento  significative fossero 0 questa non vengono scritte 
+\item nel caso in cui le ultime cifre nell'arrotondamento  significative fossero 0 questa non vengono scritte
 <<echo=TRUE>>=
 round(12.000,3)
 signif(12.00,4)
@@ -651,7 +651,7 @@ round(x,1)
 seq(90:110)+0.15
 round(seq(90:110)+0.15,1)
 @
-\item 
+\item
 Si noti che se abbiamo
 <<echo=TRUE>>=
 x=10001.0
@@ -659,39 +659,39 @@ signif(x,3)
 signif(x,4)
 signif(x,5)
 @
-\item 
+\item
 La rappresentazione standard a video prevede 7 cifre. Si possono modificare con i comandi
 <<echo=TRUE>>=
 options(digits =9)##cambia il default
 pi
 sprintf("%.48f",pi)
 @
-\end{itemize}                               
+\end{itemize}
 \section{Funzioni e grafici}
 \subsection{Definizione di funzioni}
 Per definire una funzione $f$ di una variabile \varia{variabile}  si utilizza il comando:
 $$f\leftarrow \texttt{function}(\varia{variabile})\; \varia{espressione}$$
-Ad esempio per definire la funzione $$f(x)=x^2$$ scriveremo:  
+Ad esempio per definire la funzione $$f(x)=x^2$$ scriveremo:
 <<echo=TRUE>>=
 f<-function(x) x^2
 @
 Possiamo calcolare il valore della funzione in un qualunque valore di $x$  con il comando:
 \texttt{f}(\varia{valore})
-ad esempio in $x=6$ si avr\`a 
+ad esempio in $x=6$ si avr\`a
 <<echo=TRUE>>=
 f(6)
 @
 Attenzione: nell'esempio che segue viene richiesto il valore di $f(x)$ in $x=0$:
 <<echo=TRUE>>=
-f<-function(x)  1/x 
+f<-function(x)  1/x
 f(0)
 @
 La dicitura \texttt{Inf} corrisponde ad $\infty$, infatti la funzione esplode in $x=0$.
 
 
-\subsection{Funzioni predefinite}  
+\subsection{Funzioni predefinite}
 \rpr consente l'utilizzo di funzioni matematiche gi\`a definite, come seno, coseno, tangente, le funzioni trigonometriche inverse, esponenziali, logaritmi, radici,ecc.
-Ecco di seguito le principali, la cui sintassi pu\`o essere visualizzata utilizzando l'\emph {help} di \rpr inserendo la parola chiave corretta (ad esempio \texttt{?sin}) per ottenere informazioni sul formalismo corretto:  
+Ecco di seguito le principali, la cui sintassi pu\`o essere visualizzata utilizzando l'\emph {help} di \rpr inserendo la parola chiave corretta (ad esempio \texttt{?sin}) per ottenere informazioni sul formalismo corretto:
 \begin{itemize}
  \item{}
  Funzioni trigonometriche\hfill\vskip10pt
@@ -709,11 +709,11 @@ Ecco di seguito le principali, la cui sintassi pu\`o essere visualizzata utilizz
 <<echo=TRUE>>=
 log(3)
 @
-\texttt{log2} \`e il logaritmo di base 2 
+\texttt{log2} \`e il logaritmo di base 2
 <<echo=TRUE>>=
 log2(3)
 @
-Controlliamo:  
+Controlliamo:
 <<echo=TRUE>>=
 log2(3)->a
 2^a
@@ -738,7 +738,7 @@ Ad esempio per ottenere il valore numerico dell'espressione $e^4$ si scrive:
 exp(4)
 @
 \item{}Radice quadrata.\vskip10pt
-Si indica come \texttt{sqrt} (\textit{square root}), ad esempio per ottenere la radice quadrata di 225 scriveremo: 
+Si indica come \texttt{sqrt} (\textit{square root}), ad esempio per ottenere la radice quadrata di 225 scriveremo:
 <<echo=TRUE>>=
 sqrt(225)
 @
@@ -746,7 +746,7 @@ Ovviamente la radice quadrata equivale ad elevare a potenza $1/2$ per cui la rad
 <<echo=TRUE>>=
 225^(1/2)
 @
-Tale procedura pu\`o essere utilizzata per radici di indice qualunque, ad esempio:  
+Tale procedura pu\`o essere utilizzata per radici di indice qualunque, ad esempio:
 <<echo=TRUE>>=
 16384^(1/7)
 @
@@ -756,7 +756,7 @@ Il comando $\texttt{curve}$, consente di tracciare il grafico di una funzione; $
 Volendo possiamo specificare gli estremi (\texttt{from} e \texttt{to}) con il comando: %%due punti
 \begin{eqnarray*}\texttt{curve}(\varia{espressione/nome\; funzione}, \varia{ estremo\; inferiore , estremo \;superiore})\end{eqnarray*}
 Ad esempio volendo tracciare il grafico della funzione $1/x$ nell'intervallo $(0,2)$ possiamo definire la funzione oppure scriverne direttamente l'espressione. %%nuovo pezzo
-La differenza tra le due scelte dipende dall'uso futuro della funzione, se essa sar\`a applicata in seguito conviene assegnarle un nome. 
+La differenza tra le due scelte dipende dall'uso futuro della funzione, se essa sar\`a applicata in seguito conviene assegnarle un nome.
 I comandi:
 <<echo=TRUE,eval=FALSE>>=
 curve(1/x,0,2)
@@ -788,7 +788,7 @@ f<-function(x) 1/x
 curve(f,0,2)
 <<echo=TRUE>>=
 g<-function(x) 20*x
-curve (g,add=T) 
+curve (g,add=T)
 @
 ottenendo la Figura~\ref{addF}.
 \begin{figure}[htbp]
@@ -796,7 +796,7 @@ ottenendo la Figura~\ref{addF}.
 <<echo=FALSE,fig=TRUE>>=
 f<-function(x) 1/x
 curve(f,0,2)
-g<-function(x) 20*x;curve (g,add=T) 
+g<-function(x) 20*x;curve (g,add=T)
 @
 \caption{Sovrapposizione di 2 grafici}
 \label{addF}
@@ -805,18 +805,18 @@ g<-function(x) 20*x;curve (g,add=T)
 Vediamo qui di seguito alcune opzioni grafiche:
 \begin{itemize}
 \item{}Definizione della finestra grafica.\vskip0pt
-Possiamo specificare completamente la finestra grafica. 
-Per l'asse delle $x$ si ricorre al parametro \texttt{xlim}: $$\texttt{xlim=c}(\varia{estremo inferiore, estremo superiore})$$ 
+Possiamo specificare completamente la finestra grafica.
+Per l'asse delle $x$ si ricorre al parametro \texttt{xlim}: $$\texttt{xlim=c}(\varia{estremo inferiore, estremo superiore})$$
 e in modo simile per l'asse delle $y$ il parametro \`e  \texttt{ylim}:$$\texttt{ylim=c}(\varia{estremo inferiore, estremo superiore})$$
 Se ad esempio volessimo tracciare il grafico della funzione precedente  tra -3 e 3 sull'asse $x$ e tra -4 e 4 sull'asse $y$, scriveremo:
 <<echo=TRUE,fig=FALSE>>=
-curve(1/x,xlim=c( -3,3), ylim=c(-4,4)) 
+curve(1/x,xlim=c( -3,3), ylim=c(-4,4))
 @
 ed otterremo il grafico della figura~\ref{finestra}.
 \begin{figure}[htbp]
 \begin{center}
 <<echo=FALSE,fig=TRUE>>=
-curve(1/x,xlim=c( -3,3), ylim=c(-4,4)) 
+curve(1/x,xlim=c( -3,3), ylim=c(-4,4))
 @
 %\includegraphics[scale=0.4]{grafici/Rplot34.pdf}
 \caption{Scelta della finestra grafica}
@@ -825,13 +825,13 @@ curve(1/x,xlim=c( -3,3), ylim=c(-4,4))
 \end{figure}
 Se vogliamo restringere il grafico  tra -2, e 2 della finiestra grafica precedente possiamo scrivere
 <<echo=TRUE,fig=FALSE>>=
-curve(1/x,from=-2,to=2,xlim=c( -3,3), ylim=c(-4,4)) 
+curve(1/x,from=-2,to=2,xlim=c( -3,3), ylim=c(-4,4))
 @
 ed otterremo il grafico della figura~\ref{finestra2}.
 \begin{figure}[htbp]
 \begin{center}
 <<echo=FALSE,fig=TRUE>>=
-curve(1/x,-2,2,xlim=c( -3,3), ylim=c(-4,4)) 
+curve(1/x,-2,2,xlim=c( -3,3), ylim=c(-4,4))
 @
 %\includegraphics[scale=0.4]{grafici/Rplot34.pdf}
 \caption{Scelta della finestra grafica: grafico con dominio ristretto}
@@ -840,9 +840,9 @@ curve(1/x,-2,2,xlim=c( -3,3), ylim=c(-4,4))
 \end{figure}
 \item{}Selezione del colore della curva.\vskip10pt
 Per cambiare il colore predefinito del grafico si deve utilizzare il parametro \texttt{col},  scrivendo  \texttt{col}(\texttt{\virgolette nome colore\virgolette)}.
-Il nome del colore deve essere definito in lingua inglese. Per visualizzare l'elenco completo dei colori disponibili si usa il comando: 
+Il nome del colore deve essere definito in lingua inglese. Per visualizzare l'elenco completo dei colori disponibili si usa il comando:
 \texttt{colors()}.
-Tra i principali colori troviamo \par 
+Tra i principali colori troviamo \par
 \begin{center}
 \begin{tabular}{|r| p{2cm} |}
 \hline
@@ -856,7 +856,7 @@ viola	&purple\\nero	&black\\  \hline
 \end{tabular}
 \end{center}
 \vskip10pt
-Sono utilizzabili anche i parametri \texttt{light} e \texttt{dark}, esse devono precedere il nome del colore. Possiamo pensare di colorare la curva precedente di blu scuro e scrivere: 
+Sono utilizzabili anche i parametri \texttt{light} e \texttt{dark}, esse devono precedere il nome del colore. Possiamo pensare di colorare la curva precedente di blu scuro e scrivere:
 <<echo=FALSE>>=
 options(width=55)
 <<echo=TRUE>>
@@ -876,7 +876,7 @@ curve(1/x,xlim=c( -3,3), ylim=c(-4,4),col="dark blue")
 Si noti che la dicitura \texttt{dark blue} e \texttt{darkblue} senza spazi producono lo stesso risultato (sono implementati ambo i colori) %%new.
 \item{}Selezione dello spessore delle linee
 
-Per cambiare lo spessore delle linee \`e possibile utilizzare il parametro \texttt{lwd}, esso pu\`o avere valori in una scala da 0 fino ad un numero qualunque (anche decimale) di {\it pixel}, se vogliamo  visualizzare la curva precedente con spessore della linea pari a 5 pixel, scriveremo: 
+Per cambiare lo spessore delle linee \`e possibile utilizzare il parametro \texttt{lwd}, esso pu\`o avere valori in una scala da 0 fino ad un numero qualunque (anche decimale) di {\it pixel}, se vogliamo  visualizzare la curva precedente con spessore della linea pari a 5 pixel, scriveremo:
 
 <<echo=FALSE>>=
 options(width=55)
@@ -901,7 +901,7 @@ Ad esempio se vogliamo un numero di punti pari a 100, non collegati, scriveremo:
 <<echo=FALSE>>=
 options(width=55)
 <<echo=TRUE,fig=FALSE>>=
-curve(1/x,xlim=c(-3,3),ylim=c(-4,4), 
+curve(1/x,xlim=c(-3,3),ylim=c(-4,4),
 col="dark blue", lwd=2,n=100,type="p")
 @
 il cui risultato \`e riportato in figura~\ref{graficopunti}.
@@ -910,7 +910,7 @@ il cui risultato \`e riportato in figura~\ref{graficopunti}.
 <<echo=FALSE>>=
 options(width=55)
 <<echo=FALSE,fig=TRUE>>=
-curve(1/x,xlim=c(-3,3),ylim=c(-4,4), 
+curve(1/x,xlim=c(-3,3),ylim=c(-4,4),
 col="dark blue", lwd=2,n=100,
 type="p")
 @
@@ -919,14 +919,14 @@ type="p")
 \label{graficopunti}
 \end{center}
 \end{figure}
-Altre scelte possibili sono \texttt{type=\virgolette n\virgolette} per il punto non vuoto ma anche \texttt{type=\virgolette l\virgolette} per le linee (scelta di default) e \texttt{type=\virgolette o\virgolette} per punti e linee. 
- 
+Altre scelte possibili sono \texttt{type=\virgolette n\virgolette} per il punto non vuoto ma anche \texttt{type=\virgolette l\virgolette} per le linee (scelta di default) e \texttt{type=\virgolette o\virgolette} per punti e linee.
 
- 
+
+
 
 \item{} La funzione  \texttt{abline}.
 
-La funzione \texttt{abline}, di sintassi:  
+La funzione \texttt{abline}, di sintassi:
 \texttt{abline}(\varia{b,a})
 consente di tracciare una retta di pendenza \varia{a} e di intercetta \varia{b}. Se scriviamo \texttt{abline(h}=\varia{valore})
 otteniamo una linea orizzontale a quota \varia{valore} mentre con: %%:
@@ -956,7 +956,7 @@ options(width=55)
 \caption{Iperbole con assi}
 \label{assisb}
 \end{center}
-\end{figure} 
+\end{figure}
 Notiamo che cambiando di poco la finestra grafica
 <<echo=FALSE>>=
 options(width=55)
@@ -978,7 +978,7 @@ abline(h=0);abline(v=0);
  \caption{Problemi grafici}
 \label{assisb2}
 \end{center}
-\end{figure} 
+\end{figure}
 
 In questa figura una porzione del grafico \`e stata sovraimpressa all'asse verticale.  In effetti uno \`e fittizio determinato dal fatto che la funzione non \`e definita in $x=0$ e che \rpr nel tracciare il grafico cerca di congiungere l'ultimo punto a sinistra dello zero ed il primo a destra. Per eliminare questo problema si pu\`o ricorrere ai comandi che seguono, che generano la figura~\ref{fig:noasint}:.
 <<echo=TRUE, fig=FALSE>>=
@@ -986,7 +986,7 @@ In questa figura una porzione del grafico \`e stata sovraimpressa all'asse verti
  curve(1/x,xlim=c(-3,0), ylim=c(-4,4), col="darkblue",lwd=5,add=T)
  curve(1/x,xlim=c(0,3.1),  ylim=c(-4,4),col="darkblue", lwd=5,add=T)
  abline(h=0,col="red"); abline(v=0,col="red")
-@ 
+@
 o anche a
 <<echo=TRUE, fig=TRUE>>=
  curve(1/x, -3,0,xlim=c( -3,3.1),ylim=c(-4,4), col="darkblue",lwd=5)
@@ -1018,12 +1018,12 @@ e
 qualora i valori nell'immagine di $f$ siano nel dominio di $g$  (se $\mathrm{Im(f)}  \subseteq D_{Y'}$,cosa garantita se $D_Y=D_{Y'}$ ) possiamo usare l'uscita $y=f(x)$ di $f $ come ingresso della funzione $g$ e possiamo calcolare quindi
  $g(y)=g(f(x))$.
 La funzione cos\'\i~costruita si chiama \emph{funzione composta} di $f$ e $g$ e viene indicata come
- $g\circ f$. 
+ $g\circ f$.
  Abbiamo quindi
  \begin{align*} g\circ f&\colon D_X\rightarrow D_Z\\
  &x\mapsto y=g(f(x))\end{align*}
- 
- 
+
+
 \subsection{Esempi}
 Si consideri la funzione composta $g\circ f$ delle funzioni $f(x)=x^3+3 \cdot x+1$ e $g(x)=\tan(x)+2$.
 Si calcoli $(g\circ f)(4)$. Con R chiamando gf la funzione $g\circ f$
@@ -1037,7 +1037,7 @@ gf(4)
 Ricordiamo che una funzione $f\colon D_X\rightarrow D_Y$
 \`e invertibile se comunque si scelga $y\in D_Y$ la soluzione $x$ in $D_X$ dell'equazione
 \[f(x)=y \]
-nella variabile $x$ esiste ed \`e unica. 
+nella variabile $x$ esiste ed \`e unica.
 \\
 In tale situazione la funzione inversa esiste \`e denotata con $f^{-1}$ ed  \`e definita come
 \begin{align*}     f^{-1}&\colon D_Y\rightarrow D_X
@@ -1055,13 +1055,13 @@ $(f\circ f^{-1})(y)=f(f^{-1}(y))=f(x)=y$  mentre se $x \in D_X$ $(f^{-1}\circ f)
 &x\mapsto f^{-1}(f(x))=x\end{align*}
 sono le funzioni identiche di dominio e codominio rispettivamente.
 \begin{itemize}
-\item Si calcoli 
+\item Si calcoli
 \[5^{3/2 \log_{5}(4)}\]
 \end{itemize}
 \subsection{Grafico delle funzioni inverse}
-Il grafico di una funzione invertible 
+Il grafico di una funzione invertible
 $f\colon D_X\rightarrow D_Y$ \`e
-l'insieme di punti nel piano 
+l'insieme di punti nel piano
 \[\Gamma_f=\{(x,f(x))\mid x \in D_X\}\]
 In modo simile il grafico di $f^{-1}$ \`e l'insieme di punti
 \[\Gamma_{f^{-1}}=\{(y,f(y))\mid y \in D_Y\}\]
@@ -1118,7 +1118,7 @@ plot(exp(x),x,type="l");abline(h=0,col="red");abline(v=0,col="red")
  par(mfrow=c(1,1))
 @
 \end{figure}
-possiamo partire da una sequenza regolare di punti del dominio  di $f$ ed eseguire le trasformazioni  
+possiamo partire da una sequenza regolare di punti del dominio  di $f$ ed eseguire le trasformazioni
 \begin{itemize}
 \item Cambiare $x$ in $-x$
 \item Cambiare $(x,f(x))$ in $(f(x),x)$
@@ -1134,7 +1134,7 @@ plot(y,x,type="l");abline(h=0,col="red");abline(v=0,col="red")
 par(mfrow=c(1,1))
 @
 Qui il comando \texttt{plot(x,y)} rappresenta i punti di coordinate $(x,y)$ nel piano.
-Se considerassimo una funzione non invertibile, per esempio la parabola 
+Se considerassimo una funzione non invertibile, per esempio la parabola
 $f(x)=x^2$
 otterremo
 <<echo=TRUE, fig=FALSE>>=
@@ -1163,7 +1163,7 @@ plot(sin(x),x,type="l")
 \begin{center}\begin{figure}
 
 <<fig=TRUE,echo=FALSE>>=
-par(mfrow=c(2,1))#genera un pannello di 2 grafici 
+par(mfrow=c(2,1))#genera un pannello di 2 grafici
 par(mai=c(0.3,1,0.4,0.5))
 par(mgp = c(1.7,0.5, 0))
 x=seq(-pi/2,pi/2,0.01)
@@ -1186,7 +1186,7 @@ plot(cos(x),x,type="l")
 \begin{center}\begin{figure}
 
 <<fig=TRUE,echo=FALSE>>=
-par(mfrow=c(2,1))#genera un pannello di 2 grafici 
+par(mfrow=c(2,1))#genera un pannello di 2 grafici
 par(mai=c(0.3,1,0.4,0.5))
 par(mgp = c(1.7,0.5, 0))
 x=seq(0,pi,0.01)
@@ -1211,14 +1211,14 @@ plot(tan(x),x,type="l",xlim=c(-10,10))
 \begin{center}\begin{figure}
 
 <<fig=TRUE,echo=FALSE>>=
-par(mfrow=c(2,1))#genera un pannello di 2 grafici 
+par(mfrow=c(2,1))#genera un pannello di 2 grafici
 par(mai=c(0.3,1,0.4,0.5))
 par(mgp = c(1.7,0.5, 0))
 x=seq(-pi/2,pi/2,0.01)
 plot(x,tan(x),type="l",ylim=c(-10,10))
 plot(tan(x),x,type="l",xlim=c(-10,10))
 @
-\caption{Grafico della tangente e dell'arcotangente. La finestra grafica \`e  stata limitata all'intervallo a $-10\leq y\leq 10$  (sopra) e 
+\caption{Grafico della tangente e dell'arcotangente. La finestra grafica \`e  stata limitata all'intervallo a $-10\leq y\leq 10$  (sopra) e
 $-10\leq x\leq 10 $(sotto)}
 \end{figure}
 
@@ -1229,7 +1229,7 @@ $-10\leq x\leq 10 $(sotto)}
 nella incognita $x$.
 Per determinare una soluzione di tale equazione si pu\`o procedere in diversi modi.
 \begin{itemize}
-\item Si riconosce che il risultato segue immediatamente dalla definizione di $\log_5$: 
+\item Si riconosce che il risultato segue immediatamente dalla definizione di $\log_5$:
 $x=\log_5(12)$
 e in \rpr
 <<>>=
@@ -1268,11 +1268,11 @@ Indicare il valore numerico con 3 cifre decimali. Si determini la soluzione $x$ 
 \end{enumerate}
 
 \section{Derivate}
-Richiamiamo il significato geometrico della derivata: se una funzione $f$ \`e derivabile in un punto $x_0$ allora il grafico si linearizza con un numero sufficiente di ingrandimenti attorno al punto $(x_0,f(x_0))$. 
+Richiamiamo il significato geometrico della derivata: se una funzione $f$ \`e derivabile in un punto $x_0$ allora il grafico si linearizza con un numero sufficiente di ingrandimenti attorno al punto $(x_0,f(x_0))$.
 Come illustrazione di questo processo consideriamo l'iperbole
 <<>>=
-f<-function(x) 4*x/(2+x)  
-@ 
+f<-function(x) 4*x/(2+x)
+@
 e disegniamo il suo grafico nella regione definita dalle condizioni $-d<x<d$ e $-d<y<d$, dove $d$ \`e inizialmente pari a 8.
 <<>>=
 d=8;curve(f,xlim=c(-d,d),ylim=c(-d,d), main="iperbole"); abline(h=0);abline(v=0)
@@ -1289,7 +1289,7 @@ Consideriamo ora l'ingrandimento di tale grafico con fattore di zoom \texttt{xf}
 d=d/2;curve(f,xlim=c(-d,d),ylim=c(-d,d),
 main="zoom 2"); abline(h=0);abline(v=0)
 @
-Iterando tale comando un certo numero di volte si assiste alla linearizzazione progressiva del grafico come in figura~\ref{fig:lin3}. 
+Iterando tale comando un certo numero di volte si assiste alla linearizzazione progressiva del grafico come in figura~\ref{fig:lin3}.
 \begin{center}
 \begin{figure}
 <<echo=FALSE,fig=TRUE>>=
@@ -1307,12 +1307,12 @@ main="xf: 2^4"); abline(h=0);abline(v=0)
 \label{fig:lin3}
 \end{figure}
 \end{center}
- 
+
 Consideriamo ora una funzione differente che combina un'espressione di quarto grado e una funzione circolare rapidamente oscillante
 <<>>=
 f<-function(x) x^4/500 + sin(100*x)/100;
 @
-Il grafico per $-8<x<8$ come in precedenza  suggerisce che la  retta tangente  in $x=0$ sia orizzontale.   
+Il grafico per $-8<x<8$ come in precedenza  suggerisce che la  retta tangente  in $x=0$ sia orizzontale.
 Effettuando un certo numero di zoom con fattore di zoom 2 questa prima impressione sembra confermata, anche se possiamo iniziare a notare delle piccole oscillazioni nell'ultima figura del pannello~\ref{fig:linear2}.
 \begin{figure}
 <<echo=FALSE,fig=TRUE>>=
@@ -1331,7 +1331,7 @@ main="xf:  2^3"); abline(h=0);abline(v=0)
 \end{figure}
 
 Se procediamo con gli ingrandimenti  questa sensazione viene confermata.
-Non ci saranno ulteriori sorprese da un certo punto in poi. 
+Non ci saranno ulteriori sorprese da un certo punto in poi.
 Per quanto si prosegua la retta trovata in ultimo verr\`a confermata~\ref{fig:linearizzazione4}
 
 \begin{figure}[h]
@@ -1349,9 +1349,9 @@ d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
 main="xf: 2^8"); abline(h=0);abline(v=0)
 d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
 main="xf: 2^9"); abline(h=0);abline(v=0)
-d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d), 
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
 main="xf: 2^10"); abline(h=0);abline(v=0)
-d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d), 
+d/2->d;curve(f,xlim=c(-d,d),ylim=c(-d,d),
 main="xf: 2^11"); abline(h=0);abline(v=0)
 
 @
@@ -1371,12 +1371,12 @@ Definiamo la funzione e la regola della differenza centrale
 f<-function(x) sin(x)
 trepunti<-function(f,x,h) (f(x+h)-f(x-h))/(2*h)
 @
-Per esempio assegnando  
+Per esempio assegnando
 <<>>=
 h=0.001
 x=1
 @
-Si ha 
+Si ha
 <<echo=TRUE>>=
 trepunti(f,x,h)
 @
@@ -1386,7 +1386,7 @@ Possiamo anche rappresentare graficamente la funzione derivata (insieme alla fun
 curve(trepunti(f,x,0.001),0,2*pi,col="blue")
 curve(f,add=T,col="red")
 @
-e ottenendo il grafico~\ref{sincos} da cui si evince che  $D\rm{sin}(x)={\rm cos}(x)$. In modo simile si pu\`o mostrare che 
+e ottenendo il grafico~\ref{sincos} da cui si evince che  $D\rm{sin}(x)={\rm cos}(x)$. In modo simile si pu\`o mostrare che
 $D{\rm cos}(x)=-{\rm sin}(x)$.
 \begin{figure}[ htbp]
 \begin{center}
@@ -1400,7 +1400,7 @@ curve(f,add=T,col="red")
 \end{figure}
 Analizziamo ancora la derivata delle funzioni esponenziali. Consideriamo inizialmente
 la funzione
-$$f(x)=2^x$$ 
+$$f(x)=2^x$$
 In questo caso
 <<echo=TRUE>>=
 f<-function(x) 2^x
@@ -1409,7 +1409,7 @@ col="blue")
 curve(f,add=T,col="red")
 curve(trepunti(f,x,0.001)/f(x),add=T,
 col="dark green")
-@	
+@
 sembra che  la funzione (in rosso) e la sua derivata (in blu, approssimata con la regola dei 3 punti)   siano proporzionali.
 \begin{figure}[ htbp]
 \begin{center}
@@ -1435,7 +1435,7 @@ f<-function(x) 3^x
 curve(trepunti(f,x,0.001),-2,2,col="blue")
 curve(f,add=T,col="red")
 curve(trepunti(f,x,0.001)/f(x),add=T,col="dark green")
-@	
+@
 e anche qui  le funzioni sembrano proporzionali. In questo caso per\`o il rapporto derivata diviso funzione \`e  maggiore di 1 e quindi la derivata \`e maggiore della funzione
 \begin{figure}[ htbp]
 \begin{center}
@@ -1486,7 +1486,7 @@ mostra il valore del rapporto.
  \item{ }Ripeti le considerazioni precedenti usando il quoziente di Newton a destra.
 \item{} Calcola il valore della approssimazione della derivata con la regola dei tre punti per la funzione $x^2*\sin(x)$ in $x=\pi$ con $h=\pi/6$.
 \end{enumerate}
-\end{shaded}  
+\end{shaded}
 \subsection{Derivate ``formali''}
 Per calcolare la derivata di una qualunque espressione possiamo scrivere:
 \begin{equation*}\texttt{D(expression}(\varia{funzione),variabile})
@@ -1512,10 +1512,10 @@ curve(g,0,2*pi)
  \item{} Calcola la derivata prima e seconda della funzione $x^2*\sin(x)$ in $x=\pi$.
  \item{} Determina l'equazione della retta tangente al grafico della funzione precedente e traccia grafico e retta in una finestra grafica opportuna.
 \end{enumerate}
-\end{shaded} 
+\end{shaded}
  \subsection{Metodo delle tangenti di Newton}
- 
-Consideriamo una funzione generica $f$ il cui grafico presenti delle intersezioni con l'asse delle $x$ come mostrato in figura~\ref{newton0} 
+
+Consideriamo una funzione generica $f$ il cui grafico presenti delle intersezioni con l'asse delle $x$ come mostrato in figura~\ref{newton0}
 dove si mostra il grafico di $f$ in prossimit\`a di una intersezione $x_*$
 \begin{figure}
 \begin{center}
@@ -1568,7 +1568,7 @@ q=f(x1)-m*x1
 x2=x1-f(x1)/m
 curve(m*x+q,add=T,from=x2,to=x1,col="red")
 testo2=expression("x"["2"])
-text( x2,-2,testo2) 
+text( x2,-2,testo2)
 segments(x1,0,x1,f(x1),col="brown")
 <<step0>>
 testo1=expression("x"[1])
@@ -1578,14 +1578,14 @@ q=f(x1)-m*x1
 x2=x1-f(x1)/m
 curve(m*x+q,add=T,from=x2,to=x1,col="red")
 testo2=expression("x"["2"])
-text( x2,-2,testo2) 
+text( x2,-2,testo2)
 segments(x1,0,x1,f(x1),col="brown")
 m=df(x2)
 q=f(x2)-m*x2
 x3=x2-f(x2)/m
 curve(m*x+q,col="red",from=x2,to=x3,add=T)
 testo3=expression("x"["3"])
-text( x3,-2,testo3) 
+text( x3,-2,testo3)
 segments(x2,0,x2,f(x2),col="brown")
 @
 \caption{Passi iterativi successivi}
@@ -1597,7 +1597,7 @@ Analizziamo ora la procedura dal punto di vista analitico. La retta tangente in 
 \[ y=f(x_0)+f'(x_0)(x-x_0)\]
 L'intersezione con l'asse $x$ si trova ponendo $y=0$ ed \`e dunque
 \[x_1=x_0-\dfrac{f(x_0)}{f'(x_0)}\]
-In modo simile si passa da $x_1$ e $x_2$ 
+In modo simile si passa da $x_1$ e $x_2$
 \[x_2=x_1-\dfrac{f(x_1)}{f'(x_1)}\]
 Il processo si ripete e la formula ricorsiva \`e
 \[x_{n+1}=x_n-\dfrac{f(x_n)}{f'(x_n)}\]
@@ -1605,11 +1605,11 @@ Il passo iterativo \`e descritto dalla funzione:
 \[g(x)=x-\dfrac{f(x)}{f'(x)}\]
 e possiamo quindi scrivere
 \[x_{n+1}=g(x_n)\]
-Vediamo ora un'applicazione concreta, per esempio esaminiamo una semplice funzione. Iniziamo a esaminare la situazione in modo grafico,  selezionando una finestra grafica abbastanza ampia in modo da visulaizzare le intersezioni di nostro interesse; la restringeremo in seguito per localizzare al meglio le intersezioni. 
+Vediamo ora un'applicazione concreta, per esempio esaminiamo una semplice funzione. Iniziamo a esaminare la situazione in modo grafico,  selezionando una finestra grafica abbastanza ampia in modo da visulaizzare le intersezioni di nostro interesse; la restringeremo in seguito per localizzare al meglio le intersezioni.
 
 <<echo=TRUE,eval=FALSE>>=
 f<-function(x) x^5-3*x+1
-curve(f,-10,10) 
+curve(f,-10,10)
 abline(h=0)
 curve(f,-2,2)
 abline(h=0)
@@ -1621,7 +1621,7 @@ abline(h=0)
 options(width=40)
 par(mfrow=c(1,2))
 f<-function(x) x^5-3*x+1
-curve(f,-10,10) 
+curve(f,-10,10)
 abline(h=0)
 curve(f,-2,2)
 abline(h=0)
@@ -1630,7 +1630,7 @@ abline(h=0)
 \label{fig:tnewton}
 \end{center}
 \end{figure}
-Dal grafico~\ref{fig:newton} \`e evidente che ci sono 3 intersezioni con l'asse delle $x$ che ci proponiamo di determinare usando il metodo delle tangenti di Newton. Ricordiamo che nel metodo delle tangenti di Newton si deve scegliere un punto iniziale $x_0$  ed il numero di iterazioni (o un criterio di arresto).  
+Dal grafico~\ref{fig:newton} \`e evidente che ci sono 3 intersezioni con l'asse delle $x$ che ci proponiamo di determinare usando il metodo delle tangenti di Newton. Ricordiamo che nel metodo delle tangenti di Newton si deve scegliere un punto iniziale $x_0$  ed il numero di iterazioni (o un criterio di arresto).
 In assenza della derivata esatta possiamo anche usare la regola dei 3 punti. In questo caso possiamo scrivere la derivata come
 <<>>=
 df<-function(x) 5*x^4-3
@@ -1674,13 +1674,13 @@ Per il calcolo di integrali definiti si scrive il comando
 \end{eqnarray*}
 Ad esempio per $x$ tra -1 e 2
 <<echo=TRUE>>=
-integrate(function(x) x^4,-1,2) 
+integrate(function(x) x^4,-1,2)
 @
 Il risultato \`e un numero e di tale numero viene fornito l'errore assoluto, molto basso (la tecnica utilizzata \`e buona).
 \subsection{Metodi di integrazione: metodo dei rettangoli e metodo dei trapezi}
 Ci proponiamo di calcolare $$\int_a^b f(x)dx$$ suddividendo $[a,b]$ in $n$ sottointervalli di eguale ampiezza. Richiamiamo la procedura:  si suddivide l'intervallo $[a,b]$ in $n$ sottointervalli di egual ampiezza determinando il passo del metodo
 $h=\dfrac{b-a}{n}$
-e gli estremi degli intervalli 
+e gli estremi degli intervalli
 $x_k=a+ k\, h$ con $k=0,\ldots,n$. Si calcolano poi i corrispondenti valori  $y_k=f(x_k)$ e si applicano poi le formule
 \begin{eqnarray*}
 L_n=h \sum_{i=0}^{n-1} y_k\\
@@ -1694,7 +1694,7 @@ Integriamo per esempio  una funzione $f(x)=x\, cos(x)$ con $n=10$, tra $a=1$ e $
 4->b
 (b-a)/n->h
 @
-Con il comando   
+Con il comando
 <<>>=
 a+(0:n)*h->x;x
 @
@@ -1729,8 +1729,8 @@ tn
 rn
 ln
 @
-  
-\subsection{Metodo Montecarlo}
+
+\subsection{Metodo Montecarlo: integrazione stocastica}
 Supponiamo di voler applicare il metodo Montecarlo alla determinazione dell'integrale
 \begin{equation*}
 \int_1^4{ (x^3+3x)dx}
@@ -1746,9 +1746,9 @@ curve(f,1,4)
 \end{center}
 \end{figure}
 
-Occorre determinare la finestra grafica da utilizzare come bersaglio. 
-Nell'esempio $x$ varia tra 1 e 4. 
-Per quanto riguarda la  $y$  tracciamo il grafico della funzione 
+Occorre determinare la finestra grafica da utilizzare come bersaglio.
+Nell'esempio $x$ varia tra 1 e 4.
+Per quanto riguarda la  $y$  tracciamo il grafico della funzione
 
 <<echo=TRUE>>=
 curve(x^3+3*x,1,4)
@@ -1763,40 +1763,40 @@ f(1)
 
 Possiamo quindi definire il bersaglio come
 $$[1,4]\times [0,76]$$
-Dobbiamo definire il numero di tiri. 
+Dobbiamo definire il numero di tiri.
 Il comando $\texttt{runif}(n,a,b)$, ({\it r}andom-{\it unif}orm), permette di generare $n$ numeri nell'intervallo $(a,b)$ distribuiti uniformemente. Se l'intervallo non \`e specificato i numeri appartengono all'intervallo $(0,1)$.
 Useremo il comando  \texttt{runif} per effettuare i tiri.
 
 \par
 <<echo=TRUE,fig=FALSE>>=
 1000->tiri;
-x<-runif(tiri,1,4)		 
+x<-runif(tiri,1,4)
 y<-runif(tiri,0,76)
-centri<-which(y<f(x))	 
+centri<-which(y<f(x))
 successi<-length(centri)
-successi/tiri*76*3                    
+successi/tiri*76*3
 integrate(f,1,4)
 plot(x[centri],y[centri],
-col="red",cex=0.3)   
+col="red",cex=0.3)
 points(x[-centri],y[-centri],
-col="blue",cex=0.3)  
-curve(f,add=T)		
+col="blue",cex=0.3)
+curve(f,add=T)
 @
 \begin{figure}[htbp]
 \begin{center}
 <<echo=FALSE,fig=TRUE>>=
 1000->tiri;
-x<-runif(tiri,1,4)		 
+x<-runif(tiri,1,4)
 y<-runif(tiri,0,76)
-centri<-which(y<f(x))	 
+centri<-which(y<f(x))
 successi<-length(centri)
-successi/tiri*76*3                    
+successi/tiri*76*3
 integrate(f,1,4)
 plot(x[centri],y[centri],
-col="red",cex=0.3)   
+col="red",cex=0.3)
 points(x[-centri],y[-centri],
-col="blue",cex=0.3)  
-curve(f,add=T)		
+col="blue",cex=0.3)
+curve(f,add=T)
 @
 \caption{Metodo Montecarlo }
 \label{fig:Montec1}
@@ -1807,26 +1807,26 @@ In modo simile possiamo considerare la determinazione di $\pi$. Immaginiamo di d
 In tal caso i comandi sono
 <<echo=TRUE,eval=FALSE>>=
 10000->tiri;
-x<-runif(tiri,-1,1)		 
+x<-runif(tiri,-1,1)
 y<-runif(tiri,-1,1)
-centri<-which(x^2+y^2<1)	 
+centri<-which(x^2+y^2<1)
 successi<-length(centri)
-successi/tiri*4                    
-plot(x[centri],y[centri],col="red",cex=0.4)   
-points(x[-centri],y[-centri], col="blue",cex=0.4)  
+successi/tiri*4
+plot(x[centri],y[centri],col="red",cex=0.4)
+points(x[-centri],y[-centri], col="blue",cex=0.4)
 @
 
 \begin{figure}[htbp]
 \begin{center}
 <<echo=FALSE,fig=TRUE>>=
 10000->tiri;
-x<-runif(tiri,-1,1)		 
+x<-runif(tiri,-1,1)
 y<-runif(tiri,-1,1)
-centri<-which(x^2+y^2<1)	 
+centri<-which(x^2+y^2<1)
 successi<-length(centri)
-successi/tiri*4                    
-plot(x[centri],y[centri],col="red",cex=0.4)   
-points(x[-centri],y[-centri], col="blue",cex=0.4)  
+successi/tiri*4
+plot(x[centri],y[centri],col="red",cex=0.4)
+points(x[-centri],y[-centri], col="blue",cex=0.4)
 @
 \caption{Metodo Montecarlo per il disco}
 \label{fig:montecarlo}
@@ -1837,10 +1837,10 @@ points(x[-centri],y[-centri], col="blue",cex=0.4)
 Se si volesse ricorrere alla possibilit\`a di calcolo simbolico in \rpr\ si pu\`o usare il pacchetto \texttt{rSymPy}. Ad esempio
 
 <<>>=
-library(rSymPy)  
+library(rSymPy)
 x <- Var("x")
 x+x
-sympy("solve(x**3 - 2*x+1, x)") 
+sympy("solve(x**3 - 2*x+1, x)")
 sympy("limit(1/x, x, oo)")
 a=sympy("integrate(exp(-x))") # integrale indefinito
  f<-function(x)  eval(parse(text=a))
@@ -1856,7 +1856,7 @@ Le soluzioni sono
 \begin{enumerate}
 \Sexpr{frazionisol}
 \end{enumerate}
- 
+
 
 Le soluzioni sono
 \begin{enumerate}
@@ -1894,7 +1894,7 @@ Re(z)
 <<echo=TRUE>>=
 Conj(z)
 @
-\item{}L'argomento \texttt{arg} di un numero complesso $z=a +i b$ \`e definito come 
+\item{}L'argomento \texttt{arg} di un numero complesso $z=a +i b$ \`e definito come
 $\texttt{arg}(z) =\texttt{arctan}(b/a)$. In  \textsf{R} si usa
 \texttt{Arg}(\varia{z})
 e per esempio
@@ -1907,9 +1907,9 @@ atan(4/3)
 Mod(z)
 @
 \item{}L'esponenziale con esponente complesso si indica come al solito con
-\texttt{exp}(\varia{z}) 
+\texttt{exp}(\varia{z})
 <<echo=TRUE>>=
 exp(z)
-exp(z)*exp(Conj(z))   		
+exp(z)*exp(Conj(z))
 @
 \end{itemize}

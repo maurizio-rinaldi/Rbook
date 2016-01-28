@@ -83,6 +83,6 @@
 \contentsline {section}{\numberline {3.9}Integrali definiti}{57}{section.3.9}
 \contentsline {subsection}{\numberline {3.9.1}Metodi numerici di integrazione di \textsf {R}}{57}{subsection.3.9.1}
 \contentsline {subsection}{\numberline {3.9.2}Metodi di integrazione: metodo dei rettangoli e metodo dei trapezi}{58}{subsection.3.9.2}
-\contentsline {subsection}{\numberline {3.9.3}Metodo Montecarlo}{59}{subsection.3.9.3}
+\contentsline {subsection}{\numberline {3.9.3}Metodo Montecarlo: integrazione stocastica}{59}{subsection.3.9.3}
 \contentsline {section}{\numberline {3.10}Cenni di calcolo simbolico in \textsf {R}~}{61}{section.3.10}
 \contentsline {section}{\numberline {3.11}soluzioni}{64}{section.3.11}
