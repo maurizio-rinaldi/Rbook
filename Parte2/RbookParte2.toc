@@ -1,0 +1,46 @@
+\select@language {italian}
+\select@language {italian}
+\contentsline {chapter}{\numberline {1}Statistica con \textsf {R}}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Variabili aleatorie}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Variabili aleatorie discrete}{1}{section.1.2}
+\contentsline {section}{\numberline {1.3}Statistica descrittiva: singola variabile}{4}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Indicatori statistici}{4}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Raggruppamenti in classi}{6}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Areogrammi}{9}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}Generazione di boxplot}{9}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {1.3.5}Creazione di grafici a torta}{13}{subsection.1.3.5}
+\contentsline {section}{\numberline {1.4}Variabili doppie e rette di regressione}{14}{section.1.4}
+\contentsline {section}{\numberline {1.5}Distribuzioni in \textsf {R}}{18}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}Distribuzione normale}{22}{subsection.1.5.1}
+\contentsline {subsubsection}{La funzione \texttt {dnorm}}{22}{section*.2}
+\contentsline {subsubsection}{La funzione \texttt {pnorm}}{24}{section*.3}
+\contentsline {subsubsection}{La funzione \texttt {qnorm} e la tabella della densit\`a di Gauss}{24}{section*.4}
+\contentsline {subsubsection}{La funzione \texttt {rnorm}}{26}{section*.5}
+\contentsline {subsection}{\numberline {1.5.2}La distribuzione $t$ di Student}{26}{subsection.1.5.2}
+\contentsline {subsection}{\numberline {1.5.3}Intervalli di confidenza e test di Student (dati non appaiati)}{26}{subsection.1.5.3}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\contentsline {subsection}{\numberline {1.5.4}Test di Student per dati appaiati}{30}{subsection.1.5.4}
+\contentsline {section}{\numberline {1.6}Test $\chi ^2$ di indipendenza}{30}{section.1.6}
