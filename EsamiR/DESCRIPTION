@@ -1,0 +1,36 @@
+Package: EsamiR
+Type: Package
+Title: Definisce una classe di funzioni reali e operazioni relative
+Version: 0.1
+Date: 2016-01-16
+Author: Maurizio Rinaldi
+Maintainer: Maurizio Rinaldi <maurizio.rinaldi@uniupo.it>
+Description: Definisce una classe di funzioni reali e operazioni relative. In
+    particolare consente di generare in modo random oggetti di tale classe.
+License: GPL 3
+LazyData: TRUE
+depends: methods
+RoxygenNote: 5.0.1
+Collate:
+    'compareIntervals.R'
+    'funzioneCasuale.R'
+    'funzioneClass.R'
+    'gaussiana.R'
+    'generaFunzione.R'
+    'generaHyp.R'
+    'generaSin.R'
+    'getR.R'
+    'getTex.R'
+    'initialize.R'
+    'inversecircolari.R'
+    'nuovaFunzione.R'
+    'package.R'
+    'plotMethod.R'
+    'prodotto.R'
+    'prodottoClass.R'
+    'prodottoTex.R'
+    'prodottocopy.R'
+    'sceltarange.R'
+    'showMethod.R'
+    'support.lib.R'
+    'uniforme.R'
