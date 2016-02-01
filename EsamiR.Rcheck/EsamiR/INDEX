@@ -8,17 +8,30 @@ compareIntervals        Definisce il dominio del prodotto in termini di
 funzioneCasuale         Genera una funzione random (oggetto di classe
                         Funzione).
 gaussiana               Definizione della classe uniforme
+<<<<<<< Updated upstream
 generaHyp               Genera una funzione iperbolica random (oggetto
                         di classe Funzione).
+=======
+generaHyp               Genera una funzione seno random (oggetto di
+                        classe Funzione).
+>>>>>>> Stashed changes
 generasin               Genera una funzione seno random (oggetto di
                         classe Funzione).
 getR                    Ricava la formulaR
 getTex                  Ricava la formulaTex
 initialize              Constructor della Class Funzione.
+<<<<<<< Updated upstream
 inversecircolari        generazione di funzioni acos asin e atan
 nuovaFunzione           Crea una nuova funzione
 prodottoR               Prodotto in R #' @author Maurizio Rinaldi
 prodottoTex             tex prodotto
 sceltarange             Genera m valori random nell'intervallo da:a
                         esclusi i valori. Con o senza ripetizioni
+=======
+nuovaFunzione           Crea una nuova funzione
+prodottoR               Prodotto in R #' @author Maurizio Rinaldi
+prodottoTex             tex prodotto
+sceltarange             Definizione di sceltarange
+tipolin                 generazione di funzioni acos asin e atan
+>>>>>>> Stashed changes
 uniforme                Definizione della classe uniforme

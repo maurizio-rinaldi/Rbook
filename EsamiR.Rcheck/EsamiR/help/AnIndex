@@ -9,9 +9,16 @@ generasin	generasin
 getR	getR
 getTex	getTex
 initialize	initialize
+<<<<<<< Updated upstream
 inversecircolari	inversecircolari
+=======
+>>>>>>> Stashed changes
 nuovaFunzione	nuovaFunzione
 prodottoR	prodottoR
 prodottoTex	prodottoTex
 sceltarange	sceltarange
+<<<<<<< Updated upstream
+=======
+tipolin	tipolin
+>>>>>>> Stashed changes
 uniforme	uniforme
