@@ -1,0 +1,11 @@
+* installing *source* package ‘EsamiR’ ...
+** R
+** data
+*** moving datasets to lazyload DB
+** preparing package for lazy loading
+Creating a generic function for ‘plot’ from package ‘graphics’ in package ‘EsamiR’
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (EsamiR)

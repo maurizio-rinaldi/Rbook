@@ -13,10 +13,10 @@
 \usepackage{lipsum}
 \usepackage[dvipsnames]{color}
 \definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
-\usepackage{graphicx} 
+\usepackage{graphicx}
 \usepackage{fancyvrb}
 
-\usepackage{amsmath} 
+\usepackage{amsmath}
 \usepackage{Sweave}
 \usepackage{hyperref}
 \newenvironment{question}{\item \textbf{Esercizio}\newline}{}
@@ -24,16 +24,16 @@
 \newenvironment{answerlist}{\renewcommand{\labelenumi}{(\alph{enumi})}\begin{enumerate}}{\end{enumerate}}
 \definecolor{grigetto}{rgb}{0.9,0.9,0.9}
 \DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
-\lhead[\thepage]{\today} 
+\lhead[\thepage]{\today}
 %\usepackage{draftwatermark}
 \usepackage{wrapfig}
 \pagestyle{fancy}
 \newcounter{fnotes}\setcounter{fnotes}{1}
 \newcounter{Raction}\setcounter{Raction}{1}
-\newcommand{\varia}[1]{\textsl{\textsf{#1}}} 
+\newcommand{\varia}[1]{\textsl{\textsf{#1}}}
 \newcommand{\mytilde}{$\sim$}
-\newcommand{\maurizio}[1]{\color{red}#1 \color{black}} 
-\newcommand{\federico}[1]{\color{green}#1 \color{black}} 
+\newcommand{\maurizio}[1]{\color{red}#1 \color{black}}
+\newcommand{\federico}[1]{\color{green}#1 \color{black}}
  %\newenvironment{question}{\item \textbf{Problema}\newline}{}
 %\newenvironment{solution}{\textbf{Soluzione}\newline}{}
 
@@ -46,12 +46,12 @@
                           {
                          % \end{minipage}
                           %\end{center}
-                          \medskip}                           
+                          \medskip}
  \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
 \author{Federico Comoglio e  Maurizio Rinaldi}
 \markright{\today}
-\lhead{\today} 
+\lhead{\today}
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}
@@ -62,13 +62,13 @@
 \begin{document}
 \input{RbookParte2-concordance}
 \markright{\today}
-\thispagestyle{empty} 
+\thispagestyle{empty}
 \maketitle
 \newpage
-\thispagestyle{empty} 
+\thispagestyle{empty}
 \tableofcontents
 \newpage
-\thispagestyle{empty} 
+\thispagestyle{empty}
  \mainmatter
 \chapter{Statistica con \textsf{R}}
 \section{Variabili aleatorie}
@@ -76,14 +76,14 @@ Una variabile aleatoria (\emph{random variabile}) \`e
  una variabile i cui valori sono soggetti a variazioni casuali. Quando i valori possibili di una variabile aleatoria  possono essere elencati parliamo di variabile aleatoria discreta. Quando i valori non possono essere elencati parliamo di variabile aleatoria continua.
 
 \section{Variabili aleatorie discrete}
-Le variabili aleatorie  discrete che  assumono un numero limitato di valori si dicono anche \emph{finite}.  I valori di una variabile aleatoria discreta possono essere numerici o nominali. 
+Le variabili aleatorie  discrete che  assumono un numero limitato di valori si dicono anche \emph{finite}.  I valori di una variabile aleatoria discreta possono essere numerici o nominali.
  Supponiamo di avere una variabile aleatoria che possa assumere un insieme di valori in  un \emph{alfabeto} assegnato costituito da lettere, parole o numeri. Per esempio un alfabeto pu\`o essere del tipo che segue
 \begin{itemize}
 \item{}(Femmina, Maschio)
 \item{}(A,C,T,G)
-\item{} (0,1) 
+\item{} (0,1)
 \item{}(Ottimo, Buono, Discreto, Sufficiente, Insufficiente)
-\item{} (Testa, Croce). 
+\item{} (Testa, Croce).
 \item{} I numeri interi
 \end{itemize}
 Per caratterizzare completamente una variabile aleatoria discreta oltre ai valori che questa può  assumere occorre conoscere la probabilità  di questi valori.
@@ -106,7 +106,7 @@ Se l'alfabeto consiste di tutte le lettere minuscole dell'alfabeto ordinario e n
 > sample(letters,8)
 \end{Sinput}
 \begin{Soutput}
-[1] "o" "r" "j" "g" "z" "x" "m" "u"
+[1] "t" "a" "w" "u" "b" "v" "f" "n"
 \end{Soutput}
 \end{Schunk}
   Se invece l'alfabeto consiste delle basi del DNA
@@ -116,19 +116,19 @@ Se l'alfabeto consiste di tutte le lettere minuscole dell'alfabeto ordinario e n
 > sample(alfabeto,2)
 \end{Sinput}
 \begin{Soutput}
-[1] "C" "G"
+[1] "A" "G"
 \end{Soutput}
 \begin{Sinput}
 > 
 \end{Sinput}
 \end{Schunk}
-Notiamo che  
+Notiamo che
 \begin{Schunk}
 \begin{Sinput}
 >  sample(alfabeto)
 \end{Sinput}
 \begin{Soutput}
-[1] "C" "G" "T" "A"
+[1] "A" "G" "T" "C"
 \end{Soutput}
 \end{Schunk}
 restituisce una permutazione dell'alfabeto, mentre chiedendo un campione di lunghezza superiore alla lunghezza dell'alfabeto otteniamo un messaggio di errore. Possiamo per\`o immaginare di re-immettere la lettera estratta nell'urna dopo ogni estrazione. In questo caso non c'\`e limite alla sequenza generata.
@@ -139,7 +139,7 @@ Per esempio
 > sample(alfabeto,5,replace=T)
 \end{Sinput}
 \begin{Soutput}
-[1] "testa" "testa" "testa" "croce" "croce"
+[1] "croce" "croce" "croce" "testa" "testa"
 \end{Soutput}
 \end{Schunk}
 Il precursore  del dado era chiamato astragalo ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
@@ -159,13 +159,13 @@ Per simulare un astragalo su un computer
 > sample(c(1,3,4,6),4,replace=T,prob=c(0.1,0.4,0.4,0.1))
 \end{Sinput}
 \begin{Soutput}
-[1] 4 4 4 4
+[1] 4 4 3 4
 \end{Soutput}
 \end{Schunk}
 
 Torniamo ora ai classici dadi a 6 facce.
 Supponiamo di lanciare 100 volte un dado equo a 6 facce e di registrare in \texttt{x}
-le uscite rilevate 
+le uscite rilevate
 \begin{Schunk}
 \begin{Sinput}
 > .Random.seed=seme
@@ -202,7 +202,7 @@ Volendo ordinare i numeri precedentemente ricavati scriveremo
 \end{Schunk}
 
 
- 
+
 \section{Statistica descrittiva: singola variabile}
 \subsection{Indicatori statistici}
 \begin{itemize}
@@ -244,7 +244,7 @@ Sempre basandosi sull'esempio precedente scriveremo
 \end{Schunk}
 
 \item{}Quantili. La notazione standard \`e semplicemente: \texttt{quantile}(\varia{variabile}) che determina i quartili e ci fornisce in uscita la statistica dei 5 numeri
- 
+
 \begin{Schunk}
 \begin{Sinput}
 > quantile(x)
@@ -281,9 +281,9 @@ Per esempio
 \end{Schunk}
 Sui dati in esame le 9 varianti coincidono.
 \end{itemize}
-Per quanto riguarda gli indicatori statistici nel caso di dati ripetuti basta notare che se la lista $x$ contiene i valori e la lista $f$ le frequenze assolute il comando 
+Per quanto riguarda gli indicatori statistici nel caso di dati ripetuti basta notare che se la lista $x$ contiene i valori e la lista $f$ le frequenze assolute il comando
 $$\varia{rep}(x,f)$$ costruisce un'unica lista dei dati inclusiva delle ripetizioni.
-Per esempio 
+Per esempio
 
 \begin{Schunk}
 \begin{Sinput}
@@ -298,7 +298,7 @@ Per esempio
 \end{Soutput}
 \end{Schunk}
 Ovviamente senza bisogno di visualizzare \texttt{y} possiamo calcolarne tutti gli indicatori statistici.
-Il comando 
+Il comando
 \begin{Schunk}
 \begin{Sinput}
 > cumsum(f)
@@ -307,7 +307,7 @@ Il comando
 [1]  9 16 25 32 40 50
 \end{Soutput}
 \end{Schunk}
-restituisce le frequenze cumulate, dalle quali si possono ricavare facilmente la mediana 
+restituisce le frequenze cumulate, dalle quali si possono ricavare facilmente la mediana
 i quantili.
 
 \subsection{Raggruppamenti in classi}
@@ -323,11 +323,11 @@ i quantili.
 > stringa=paste("Milano/", anno ,"/",m,"?format=csv",sep="")
 \end{Sinput}
 \end{Schunk}
-Consideriamo la rilevazione della temperatura media giornaliera di Milano nel mese di Dicembre 2015. 
+Consideriamo la rilevazione della temperatura media giornaliera di Milano nel mese di Gennaio 2016.
 Scriviamo
 \begin{Schunk}
 \begin{Soutput}
->stringa="Milano/2015/Dicembre?format=csv"
+>stringa="Milano/2016/Gennaio?format=csv"
 \end{Soutput}
 \end{Schunk}
 \begin{Schunk}
@@ -412,17 +412,17 @@ Il comando \texttt{table} conta i dati di ciascuna classe
       0       0       0       0       0 
 \end{Soutput}
 \end{Schunk}
-Si noti che la suddivisione in classi prevede intervalli aperti a sinistra e chiusi a destra.  
+Si noti che la suddivisione in classi prevede intervalli aperti a sinistra e chiusi a destra.
 Per suddividere in modo che gli intervalli siano chiusi a sinistra e aperti a destra si specifica il parametro \texttt{right=FALSE}.
 Possiamo anche usare il comando \texttt{seq} per specificare i tagli.
  \begin{eqnarray*}
 \texttt{table(cut}( \varia{variabile},\texttt{breaks=seq}(\varia{estremo inf},\\
 \varia{estremo sup},\texttt{by}=\varia{passo}),\texttt{right=FALSE}))
 \end{eqnarray*}
-o in modo  pi\`u generale   
+o in modo  pi\`u generale
 \begin{eqnarray*}
 &\texttt{table(cut}(\varia{ variabile},\\
-&\texttt{breaks=c}(\varia{estremo\; inferiore}, \ldots,\varia{estremo superiore})) 
+&\texttt{breaks=c}(\varia{estremo\; inferiore}, \ldots,\varia{estremo superiore}))
 \end{eqnarray*}
 estremamente utile in quanto consente di raggruppare i dati in classi non necessariamente di ugual ampiezza.
 \begin{Schunk}
@@ -435,7 +435,7 @@ estremamente utile in quanto consente di raggruppare i dati in classi non necess
         0         0         0         0         0         0 
 \end{Soutput}
 \end{Schunk}
-Volendo raggruppare in classi i dati delle precedenti uscite del dado possiamo scrivere  
+Volendo raggruppare in classi i dati delle precedenti uscite del dado possiamo scrivere
 \begin{Schunk}
 \begin{Sinput}
 > table(cut(dadi100,breaks=0:6))
@@ -464,7 +464,7 @@ che segue per\`o la struttura del comando \texttt{cut}. L'ampiezza di ciascuna c
 \`E  possibile variare tale condizione definendo una lista con i punti di taglio ({\it cutoff}) delle classi volute:
 \begin{equation} \texttt{hist}(\varia{variabile},\texttt{c}(\varia{valore}_1, \varia{valore}_2, \ldots))
 \end{equation}
-Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del dado, il comando 
+Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del dado, il comando
 \begin{Schunk}
 \begin{Sinput}
 > par(mfrow=c(1,2))
@@ -480,8 +480,8 @@ Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del 
 \end{center}
 \end{figure}
 genera l'istogramma (in rosso, a sinistra Figura~\ref{fig:datiist}) con le frequenze assolute delle classi in ordinata. La sequenza dei punti di taglio \`e stata scelta in modo che i numeri interi da 1 a 6 siano al centro delle classi corrispondenti. Se invece volessimo creare un areogramma  (ossia avere un tracciato per cui le aree siano pari alle frequenze relative) a partire dalle stesse uscite dovremo imporre il parametro \texttt{freq=FALSE} otterremo il pannello a destra (in blu) della figura~(\ref{fig:datiist}). Avendo scelto classi di ampiezza costante i 2 grafici differiscono semplicemente per un cambio di scala sull'asse $y$.
- 
-In modo simile possiamo tracciare un areogramma  dei dati nella variabile \texttt{milano}  
+
+In modo simile possiamo tracciare un areogramma  dei dati nella variabile \texttt{milano}
 \begin{Schunk}
 \begin{Sinput}
 > par(mfrow=c(1,2))
@@ -493,7 +493,7 @@ lasciando \textsf{R} libero di scegliere i punti di taglio (pannelli a sinistra 
 \begin{Schunk}
 \begin{Sinput}
 > hist(Milano,col="red",freq=FALSE,
-+ breaks=unique(as.vector(quantile(Milano,seq(0,1,by=1/6)))), 
++ breaks=unique(as.vector(quantile(Milano,seq(0,1,by=1/6)))),
 + main="Cutoff personalizzati")
 \end{Sinput}
 \end{Schunk}
@@ -546,8 +546,8 @@ fornisce in uscita  la Figura~\ref{fig:pie}
 \end{figure}
 \begin{shaded}{Costruire una matrice contenente le coordinate di 50 punti nel rettangolo $[0,4]\times [0,2]$ in due dimensioni (generate utilizzando il generatore di numeri pseudocasuali). Produrre un grafico con due pannelli, dove il primo pannello \`e uno scatter-plot}
 \end{shaded}
-\section{Variabili doppie e rette di regressione} 
-Supponiamo di misurare la concentrazione di acido lattico muscolare durante uno sforzo di 10 minuti,  
+\section{Variabili doppie e rette di regressione}
+Supponiamo di misurare la concentrazione di acido lattico muscolare durante uno sforzo di 10 minuti,
 \begin{Schunk}
 \begin{Sinput}
 > x<-tempo<-c(1,2,3,4,5,6,7,8,9,10)
@@ -555,7 +555,7 @@ Supponiamo di misurare la concentrazione di acido lattico muscolare durante uno 
 + 2.5)
 \end{Sinput}
 \end{Schunk}
-Per analizzare questi dati conviene preliminarmente tracciarne un diagramma a dispersione. 
+Per analizzare questi dati conviene preliminarmente tracciarne un diagramma a dispersione.
 \begin{figure}[htbp]
 \begin{center}
 \begin{Schunk}
@@ -580,16 +580,16 @@ Possiamo inoltre determinare il coefficiente di correlazione lineare
 Per definire un modello di relazione lineare occorre usare il comando \texttt{lm} (\varia{linear model}).
 Nella sua generica forma il comando \`e espresso come\footnote{ Per digitare la tilde  \mytilde\;  su Mac premere ALT 5 su PC invece il tasto Alt Gr (attivazione del codice ASCII) e sul tastierino numerico digitare il numero 126. Lavorando su un portatile il tastierino numerico \`e spesso incorporato nella tastiera con colorazione blue dei tasti.}
 $$\texttt{lm}(\varia{y} \sim  \varia{x})$$
-Otteniamo i valori di pendenza e intercetta. 
+Otteniamo i valori di pendenza e intercetta.
 
 Possiamo tracciare la retta di regressione con il comando \texttt{abline}.
 \begin{Schunk}
 \begin{Sinput}
-> plot(x,y,pch=19,col="red") 
+> plot(x,y,pch=19,col="red")
 > abline(lm(y~x),col="blue")
 \end{Sinput}
 \end{Schunk}
-Per determinare  la retta di regressione sulle $y$ dobbiamo invertire $x$ e $y$. 
+Per determinare  la retta di regressione sulle $y$ dobbiamo invertire $x$ e $y$.
 \begin{Schunk}
 \begin{Sinput}
 > lm(x~y)
@@ -717,11 +717,11 @@ come in Figura~\ref{fig:duemammals}.\begin{figure}[htbp]
 \label{fig:duemammals}
 \end{center}
 \end{figure}
-Visti i  risultati ottenuti usando la scala logaritmica tracciamo anche la corrispondente retta di regressione 
+Visti i  risultati ottenuti usando la scala logaritmica tracciamo anche la corrispondente retta di regressione
 \begin{Schunk}
 \begin{Sinput}
 > plot(log(mammals$brain)~log(mammals$body),col="BLUE",pch=19,type="p")
-> abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3); 
+> abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3);
 > uomo=which(rownames(mammals)=="Human")
 > text(log(mammals[uomo ,1]),log(mammals[uomo ,2]),rownames(mammals)[uomo])
 \end{Sinput}
@@ -818,7 +818,7 @@ $log
 [1] FALSE
 \end{Soutput}
 \end{Schunk}
-Se i parametri sono omessi \texttt{dnorm} rappresenta la densit\`a normale standard con $\mu=0$ e $\sigma=1$. 
+Se i parametri sono omessi \texttt{dnorm} rappresenta la densit\`a normale standard con $\mu=0$ e $\sigma=1$.
 Il grafico~(\ref{normalesta}) della gaussiana
  tra due estremi, ad esempio -2.5 e 2.5 si ottiene con il solito comando
 \begin{Schunk}
@@ -841,15 +841,15 @@ Per  visualizzare una gaussiana non standard, ad esempio con media $\mu=1$,  dev
 \end{Sinput}
 \end{Schunk}
 \subsubsection{La funzione \texttt{pnorm}}
-La funzione \texttt{pnorm}(\varia{x})  \`e definita come 
+La funzione \texttt{pnorm}(\varia{x})  \`e definita come
 \begin{equation*}\texttt{pnorm}(\varia{x}) =\int_{-\infty}^x  \texttt{dnorm}(s)ds
 \end{equation*}
-Ovviamente 
+Ovviamente
 $$\int_a^b \texttt{dnorm}(x)dx=\texttt{pnorm}(b)-\texttt{pnorm}(a)$$
 e per avere l'area sottesa tra $3$ e $5$  basta scrivere:
 \begin{Schunk}
 \begin{Sinput}
-> pnorm(5)-pnorm(3) 
+> pnorm(5)-pnorm(3)
 \end{Sinput}
 \begin{Soutput}
 [1] 0.001349611
@@ -870,7 +870,7 @@ Per cui possiamo scrivere:
 
  \subsubsection{La funzione \texttt{qnorm} e la tabella della densit\`a di Gauss}
 
-Notiamo preliminarmente che 
+Notiamo preliminarmente che
 se $$ \int_{-x}^x \texttt{dnorm}(s)ds= y$$ allora
 $$\texttt{pnorm}(x)=\int_{-\infty}^x \texttt{dnorm}(s)ds=1-\frac{1-y}{2}=\frac{1+y}{2}$$
  La funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}  quindi
@@ -926,7 +926,7 @@ Il grafico della distribuzione di Student ad un certo numero \texttt{df} di grad
 \end{equation*}
 Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di libert\`a (vedi figura ~(\ref{fig:graficostudent1})):
 
-\begin{figure}[htbp] 
+\begin{figure}[htbp]
 \begin{center}
 \begin{Schunk}
 \begin{Sinput}
@@ -939,8 +939,8 @@ Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di l
 \end{center}
 \end{figure}
 Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cui  la deviazione standard della popolazione $\sigma$  non \`e conosciuta e viene rimpiazzata  dalla deviazione standard campionaria  $S$, calcolata con un numero $N$ di dati e quindi con $N-1$ gradi di libert\`a. Quando per\`o il numero di dati si avvicina a 30 la curva di Student \`e praticamente sovrapposta a quella della distribuzione normale, come mostra il grafico~(\ref{fig:graficostudent}):
- 
-\begin{figure}[htbp] 
+
+\begin{figure}[htbp]
 \begin{center}
 \begin{Schunk}
 \begin{Sinput}
@@ -957,8 +957,8 @@ Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cu
 \end{figure}
  \subsection
 {Intervalli di confidenza e test di Student (dati non appaiati)}
-La funzione di 
-\textsf{R} che esegue il test di Student nelle sue diverse forme \`e  \texttt{t.test}   Nella sua forma pi\`u semplice 
+La funzione di
+\textsf{R} che esegue il test di Student nelle sue diverse forme \`e  \texttt{t.test}   Nella sua forma pi\`u semplice
 
 \begin{Schunk}
 \begin{Sinput}
@@ -978,7 +978,7 @@ mean of x
 \end{Soutput}
 \end{Schunk}
 In assenza di ipotesi  \textsf{R} calcola il consuntivo $$t=\dfrac{M_N(X)-\mu}{S_X}\sqrt {N}$$
-assumendo che sia $\mu=0$. 
+assumendo che sia $\mu=0$.
 Possiamo anche eseguire specificare l'ipotesi sul valore di $\mu$:
 \begin{Schunk}
 \begin{Sinput}
@@ -998,7 +998,7 @@ mean of x
 \end{Soutput}
 \end{Schunk}
 Possiamo infine specificare l'ipotesi alternativa. Per esempio se l'ipotesi alternativa \`e
-\texttt{\virgolette less\virgolette}  il risultato del test cambia completamente. 
+\texttt{\virgolette less\virgolette}  il risultato del test cambia completamente.
 \begin{Schunk}
 \begin{Sinput}
 > t.test(x,mu=7, alternative="less")
@@ -1018,7 +1018,7 @@ mean of x
 \end{Schunk}
 
 In pratica ci viene fornito come $p$-value il valore dell'area sottesa dalla distribuzione di Student da $-\infty$ al valore di $t$ se l'ipotesi alternativa \`e  \texttt{\virgolette less\virgolette} e il valore dell'area sottesa dalla distribuzione di Student dal valore di $t$ a $+\infty$ se l'ipotesi alternativa \`e     \texttt{\virgolette greater\virgolette}  \subsection{Test di Student per dati appaiati}
-Il test di Student per dati appaiati non \`e altro che un test di Student sulla differenza di 2 liste di dati di ugual lunghezza. Consideriamo ad esempio il confronto di 2 tecniche di misura applicate agli stessi campioni 
+Il test di Student per dati appaiati non \`e altro che un test di Student sulla differenza di 2 liste di dati di ugual lunghezza. Consideriamo ad esempio il confronto di 2 tecniche di misura applicate agli stessi campioni
 \begin{Schunk}
 \begin{Sinput}
 > x<-c(1.46,2.22,2.84,1.97,1.13,2.35)
@@ -1046,7 +1046,7 @@ mean of the differences
 \end{Schunk}
 
 Il consuntivo   \texttt{t} cade entro la regione di accettazione del test.
-\`E  possibile specificare il livello di fiducia da utilizzare per il test di Student come: 
+\`E  possibile specificare il livello di fiducia da utilizzare per il test di Student come:
 
 $$\texttt{conf.level}=\varia{numero}$$
 
@@ -1062,12 +1062,12 @@ Ad esempio eseguiamo un $t$-test per dati appaiati, tra $x=(1,2,3,4)$ e $y=(3,2,
 > t.test(1:4,5:2,paired=TRUE,conf.level=0.85)
 \end{Sinput}
 \end{Schunk}
- Il consuntivo $t$ cade fuori dalla regione di accettazione proposta. 
- 
+ Il consuntivo $t$ cade fuori dalla regione di accettazione proposta.
+
  \section{Test $\chi^2$  di indipendenza}
 
 %code chunk
-Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani   
+Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
 \begin{Schunk}
 \begin{Sinput}
 > read.table("http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html",
@@ -1159,9 +1159,9 @@ Urban.Rural Grades Popular Sports
    Urban       103      49     26
 \end{Soutput}
 \end{Schunk}
-Il test $\chi^2$  di indipendenza consente di  verificare se  due variabili sono indipendenti. 
+Il test $\chi^2$  di indipendenza consente di  verificare se  due variabili sono indipendenti.
 Se consideriamo le due variabili precedenti sesso e interessi.
-\textsf{R}  dispone del comando \texttt{chisq.test},\index{\texttt{chisq.tst},test $\chi^2$} 
+\textsf{R}  dispone del comando \texttt{chisq.test},\index{\texttt{chisq.tst},test $\chi^2$}
 dalla sintassi generale:$$\texttt{chisq.test}(\varia{tabella})$$
 
 Nell'esempio
@@ -1200,24 +1200,24 @@ Ad esempio scriveremo:
 > chisq.test(tabellaEH,correct=FALSE)
 \end{Sinput}
 \end{Schunk}
-  
+
 \subsection{Test $\chi^2$  di adeguamento}
 Consideriamo una variabile aleatoria discreta con frequenza assoluta delle uscite racchiuse in una lista \texttt{data}. Ci si pone il problema di stabilire se tali frequenze sono compatibili con le probabilit\`a (riportate nella lista $p$).
 \begin{Schunk}
 \begin{Sinput}
 > data<-c(2,3,4,5,6,7,8,9,10,11)
 > prob<-c(5,20,5,10,5,15,5,10,10,15)
-> sum(prob)  
+> sum(prob)
 > chisq.test(data,p=prob,rescale.p=TRUE)
 \end{Sinput}
 \end{Schunk}
-Si \`e usata qui la scelta \texttt{rescale.p=TRUE} in quanto la somma delle  probabilit\`a non era 1. 
-L'uscita del test riporta il valore del consuntivo $\chi^2$ i gradi di libert\`a ed il valore $p$.   
+Si \`e usata qui la scelta \texttt{rescale.p=TRUE} in quanto la somma delle  probabilit\`a non era 1.
+L'uscita del test riporta il valore del consuntivo $\chi^2$ i gradi di libert\`a ed il valore $p$.
 
 \section{Distribuzione Binomiale}
-Il coefficiente binomiale \`e definito come 
+Il coefficiente binomiale \`e definito come
 \begin{equation*} \texttt{choose}(\varia{n},\varia{m})={n \choose m}=\dfrac{n!}{m!\times (n-m)!}\end{equation*}
-Ad esempio  
+Ad esempio
 \begin{Schunk}
 \begin{Sinput}
 > choose(6,3)
@@ -1241,7 +1241,7 @@ Ad esempio, nel lancio di un dado 10 volte, vogliamo determinare la  probabilit\
 
 La  probabilit\`a \`e circa del 29\%.
 
- 
+
 \begin{shaded}
 \begin{description}
  \item{}conta i caratteri del tuo nome
@@ -1250,15 +1250,15 @@ La  probabilit\`a \`e circa del 29\%.
 \item{}inserire in una matrice le coordinate 2D dei punti di un pentagono. Plot dei punti, come punti, come linee e come linee tratteggiate. Pi\`u arduo: riempimento della superficie
 \item{}derivata di $x^3+x^2+2x+1$, plot della funzione e plot della derivata come due pannelli distinti in un grafico unico. hint: par(mfrow)
 \end{description}
-\end{shaded}  
- 
+\end{shaded}
+
 \chapter{Strutture di dati}
 %\section{Aritmetica modulare}
 \section{Visualizzazione di oggetti di \textsf{R}}
-Per visualizzare un oggetto di \textsf{R} si pu\`o usare il comando \texttt{print} ma anche il comando \texttt{cat} che fornisce spesso un risultato migliore. 
+Per visualizzare un oggetto di \textsf{R} si pu\`o usare il comando \texttt{print} ma anche il comando \texttt{cat} che fornisce spesso un risultato migliore.
 
 Per avere una stampa abbreviata
-%codechunk 
+%codechunk
 \begin{Schunk}
 \begin{Sinput}
 > head(iris)
@@ -1314,9 +1314,9 @@ Il comando \texttt{str}\index{\texttt{str}} consente una visualizzazione parzial
 \normalsize
 \section{Le stringhe}
 \subsection{Stringhe \texttt{print}, \texttt{cat} e caratteri speciali}
-Una stringa\index{stringa} di testo \`e una collezione di caratteri; in genere, una stringa \`e resa riconoscibile dall'essere racchiusa tra virgolette. 
-Oltre alle virgolette, vi sono numerosi altri caratteri speciali che possono apparire in una stringa. 
-I pi\`u comuni sono ``\texttt{\textbackslash t}'' per \texttt{TAB}, `` \texttt{\textbackslash n}'' per una nuova linea e ``\texttt{\textbackslash }'' per un singolo {\it backslash}. 
+Una stringa\index{stringa} di testo \`e una collezione di caratteri; in genere, una stringa \`e resa riconoscibile dall'essere racchiusa tra virgolette.
+Oltre alle virgolette, vi sono numerosi altri caratteri speciali che possono apparire in una stringa.
+I pi\`u comuni sono ``\texttt{\textbackslash t}'' per \texttt{TAB}, `` \texttt{\textbackslash n}'' per una nuova linea e ``\texttt{\textbackslash }'' per un singolo {\it backslash}.
 Quest'ultimo carattere \`e un carattere di \emph{escape} e consente una lettura diversa di quanto lo segue.  Per esempio
 \begin{Schunk}
 \begin{Sinput}
@@ -1354,7 +1354,7 @@ ora spazio	riprendo
 La funzione \texttt{nchar}, \index{\texttt{nchar}} che conta il numero di caratteri di una stringa, non includer\`a quindi il carattere di \emph{escape}\index{\emph{escape}} nel totale dei caratteri. Ad esempio:
 \begin{Schunk}
 \begin{Sinput}
-> "Tab\t" 
+> "Tab\t"
 \end{Sinput}
 \begin{Soutput}
 [1] "Tab\t"
@@ -1376,14 +1376,14 @@ Tab
 \subsection{Operare con le stringhe}
 
 Succede spesso di dover lavorare in modo automatico con stringhe di testo, anche nello scrivere indirizzi di rete o cartelle di lavoro. In  \textsf{R} diversi comandi consentono la  generazione, manipolazione e stampa di una o pi\`u stringhe di testo\footnote{Per un  uso pi\`u specifico si pu\`o consultare il pacchetto \texttt{biostrings}.}. Consideriamo inizialmente una singola frase.
-%codechunk 
+%codechunk
 \begin{Schunk}
 \begin{Sinput}
 > x="lavorare con le stringhe"
 \end{Sinput}
 \end{Schunk}
 Possiamo verificarne la classe e determinare il numero di caratteri di \texttt{x}
-%codechunk  
+%codechunk
 \begin{Schunk}
 \begin{Sinput}
 > class(x)
@@ -1424,7 +1424,7 @@ Certi oggetti possono essere convertiti a stringhe: per esempio il numero 2 pu\`
 %codechunk
 \begin{Schunk}
 \begin{Sinput}
->  i=2;toString(i) 
+>  i=2;toString(i)
 \end{Sinput}
 \begin{Soutput}
 [1] "2"
@@ -1456,14 +1456,14 @@ o i mesi dell'anno (per esempio abbreviati in inglese)\index{\texttt{month.abb}}
 %codechunk
 \begin{Schunk}
 \begin{Sinput}
-> month.abb 
+> month.abb
 \end{Sinput}
 \begin{Soutput}
  [1] "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep"
 [10] "Oct" "Nov" "Dec"
 \end{Soutput}
 \end{Schunk}
-Le stringhe possono poi essere ``incollate'' con il comando\index{\texttt{paste}} 
+Le stringhe possono poi essere ``incollate'' con il comando\index{\texttt{paste}}
 %codechunk
 \begin{Schunk}
 \begin{Sinput}
@@ -1482,7 +1482,7 @@ E tutto insieme
 a1	a2	a3	a4	a5	
 \end{Soutput}
 \end{Schunk}
-Il comando pu\`o anche essere utilizzato su vettori. 
+Il comando pu\`o anche essere utilizzato su vettori.
 Per esempio
 %codechunk
 \begin{Schunk}
@@ -1523,7 +1523,7 @@ e giocando con \texttt{rep} si possono ottenere diverse combinazioni.
 [10] "b10" "c11" "c12" "c13" "c14" "c15"
 \end{Soutput}
 \begin{Sinput}
-> paste(rep(letters[1:3],ntimes=5),1:15,sep="") 
+> paste(rep(letters[1:3],ntimes=5),1:15,sep="")
 \end{Sinput}
 \begin{Soutput}
  [1] "a1"  "b2"  "c3"  "a4"  "b5"  "c6"  "a7"  "b8"  "c9" 
@@ -1541,14 +1541,14 @@ Con l'opzione \texttt{collapse="x"} le stringhe vengono unite con separatore la 
 \end{Soutput}
 \end{Schunk}
 Si noti il separatore - dell'operazione \texttt{paste} e  - - dell'operazione \texttt{collapse}.
- 
+
  \begin{shaded}
  \begin{enumerate}
  \item{} Inserisci il tuo cognome in una variabile `cognome' ed il tuo nome in una variabile 'nome'. Crea una terza variabile 'nomecognome' che contenga entrambi separati da un TAB. Stampa a console la scritta "Good job" seguita dal valore di nomecognome.
   \item{} Creare un elenco che contenga mesi e anno dal 2001 al 2010 nel seguente formato "tre lettere iniziali del mese-anno".
  \item{} Costruire una tabella che contenga tutte le parole di 2 lettere.
 \item{}
-Si consideri 
+Si consideri
 \begin{Schunk}
 \begin{Sinput}
 > paste(letters[1:7],1:7,sep="=")
@@ -1560,8 +1560,8 @@ Estendere la corrispondenza a tutto l'alfabeto.
 \item Scrivere un elenco di 5 persone con le relative date di nascita nel formato anno-mese-giorno.
  \end{enumerate}
  \end{shaded}
- 
-\section{Matrici} 
+
+\section{Matrici}
 
 Assegnati $n\times m$ ingressi possiamo costruire una matrice (ossia una tabella) con $n$ righe e $m$ colonne. Occorre solo riempire la matrice per righe o per colonne.
 Ad esempio:
@@ -1724,7 +1724,7 @@ Per la  moltiplicazione di matrici (definita per ingressi numerici) si usa il si
 \begin{Schunk}
 \begin{Sinput}
 > b<-matrix(2,nrow=3,ncol=3)
-> for(j in (1:3)) 
+> for(j in (1:3))
 + for(i in (1:3)) b[i,j]<-i+j+i^2
 > b
 \end{Sinput}
@@ -1759,23 +1759,23 @@ Non \`e infatti possibile moltiplicare una matrice 3x4 con una 3x3. Possiamo per
 [1] 1.887379e-14
 \end{Soutput}
 \end{Schunk}
- 
+
 Si noti che se eseguendo i calcoli a mano si trovano in alcuni casi risultati diversi da quelli di {\textsf R}. Per esempio la matrice in esame ha determinante 0 e 0 ne \`e anche un autovalore.\index{autovalore}
 \begin{shaded}
  \begin{enumerate}
- \item{}Creare una matrice $3\times 2$ che abbia come ingressi i primi 6 numeri pari. Estendere la matrice aggiungendo due colonne contenenti i primi 6 numeri dispari. Calcolare e stampare la somma per riga e la somma per colonna. Modifica la matrice cambiando di segno la prima riga. Moltiplicare la matrice  per 4.  
+ \item{}Creare una matrice $3\times 2$ che abbia come ingressi i primi 6 numeri pari. Estendere la matrice aggiungendo due colonne contenenti i primi 6 numeri dispari. Calcolare e stampare la somma per riga e la somma per colonna. Modifica la matrice cambiando di segno la prima riga. Moltiplicare la matrice  per 4.
  \end{enumerate}
  \end{shaded}
  \section{I \emph{dataframe}}
 
-I \emph{datafra me} costituiscono in {\textsf R} la classe di oggetti fondamentali per la collezione di dati per una susseguente analisi statistica.  
-Un \emph{dataframe}  \`e una collezione di vettori aventi egual lunghezza. \`E diverso da una matrice in quanto le colonne sono vettori eventualmente di tipi diversi. Il comando generale per costruire \emph{dataframe} a partire da vettori o liste 
+I \emph{datafra me} costituiscono in {\textsf R} la classe di oggetti fondamentali per la collezione di dati per una susseguente analisi statistica.
+Un \emph{dataframe}  \`e una collezione di vettori aventi egual lunghezza. \`E diverso da una matrice in quanto le colonne sono vettori eventualmente di tipi diversi. Il comando generale per costruire \emph{dataframe} a partire da vettori o liste
 \`e \texttt{data.frame}.  Esso richiede come parametri i nomi dei vettori (colonna) da affiancare nella tabella. In generale si scrive:
 \begin{equation*}\texttt{data.frame}(\varia{vettore}_1,\varia{vettore}_2, \ldots, \varia{vettore}_n)\end{equation*}
-dove tutti i vettori hanno la stessa lunghezza. 
+dove tutti i vettori hanno la stessa lunghezza.
 Si noti la asimmetria  (rispetto ad una matrice) nel ruolo di righe e colonne. Le colonne sono omogenee, lo stesso non si pu\`o dire per le righe. Le colonne sono le variabili analizzate, le righe le unit\`a statistiche. Anche i vari comandi che vedremo rispettano tale differenza.
 
-Per esempio possiamo considerare il dataframe \texttt{d} definito come segue%code chunk 
+Per esempio possiamo considerare il dataframe \texttt{d} definito come segue%code chunk
 \begin{Schunk}
 \begin{Sinput}
 > L3 <- LETTERS[1:3]
@@ -1834,8 +1834,8 @@ Per esempio
 [8] "hF"  
 \end{Soutput}
 \end{Schunk}
-Le varie colonne hanno dei nomi di facile interpretazione. Si noti anche che a fianco di variabili numeriche (\texttt{W} e \texttt{H}, peso-altezza ad esempio) sono presenti variabili  \emph {nominali} quali sesso (\texttt{Sex}) e colore degli occhi (\texttt{Eyes}).  
-Per associare i nomi alle colonne  alle varie colonne dobbiamo eseguire una operazione di collegamento con il comando \texttt{attach}, 
+Le varie colonne hanno dei nomi di facile interpretazione. Si noti anche che a fianco di variabili numeriche (\texttt{W} e \texttt{H}, peso-altezza ad esempio) sono presenti variabili  \emph {nominali} quali sesso (\texttt{Sex}) e colore degli occhi (\texttt{Eyes}).
+Per associare i nomi alle colonne  alle varie colonne dobbiamo eseguire una operazione di collegamento con il comando \texttt{attach},
 %code chunk
 \begin{Schunk}
 \begin{Sinput}
@@ -1875,11 +1875,11 @@ Le variabili nominali sono caratterizzate dal fatto che i loro valori (livelli, 
 [1] "character"
 \end{Soutput}
 \end{Schunk}
-Possiamo anche considerare il processo inverso e cambiare una variabile priva di livelli in una nominale 
+Possiamo anche considerare il processo inverso e cambiare una variabile priva di livelli in una nominale
 $$\texttt{factor}(\varia{variabile})\rightarrow\varia{ variabile}$$
 Per definire i suoi livelli (ad esempio $n$) scriveremo:
 $$\texttt{levels}(\varia{variabile})\leftarrow\texttt{c}(\varia{nome}_1,\varia{nome}_2,\ldots,\varia{nome}_n)$$
-Per rendere la variabilie \texttt{Sex} nominale con nomi dei livelli 
+Per rendere la variabilie \texttt{Sex} nominale con nomi dei livelli
 \texttt{F} e \texttt{M})  scriveremo:
 \begin{Schunk}
 \begin{Sinput}
@@ -1893,7 +1893,7 @@ Per rendere la variabilie \texttt{Sex} nominale con nomi dei livelli
 Levels: F M
 \end{Soutput}
 \end{Schunk}
-Con il comando 
+Con il comando
 \texttt{detach} \index{detach}  si pu\`o eliminare l'associazione creata tra colonne e nomi delle colonne.
 Consideriamo ora un \emph{dataset} simile raccolto dagli studenti di Biotecnologie dello stesso anno
 %code chunk
@@ -1914,7 +1914,7 @@ Scrivendo
 \end{Soutput}
 \end{Schunk}
 vediamo che anche \texttt{biotec} \`e un \emph{dataframe}.  Inoltre confrontando i nomi delle colonne di \texttt{farmacia} e di \texttt{biotec} possiamo verificare che sono essenzialmente uguali a meno di traduzione e eventuale abbreviazione.
-Possiamo creare un \emph{dataframe} unico che raggruppi \texttt{biotec} e \texttt{farmacia}. Per farlo  vorremmo incollare un \emph{dataframe} sopra all'altro. 
+Possiamo creare un \emph{dataframe} unico che raggruppi \texttt{biotec} e \texttt{farmacia}. Per farlo  vorremmo incollare un \emph{dataframe} sopra all'altro.
 A tal fine occorre uniformare i nomi delle colonne scrivendo per esempio
 \begin{Schunk}
 \begin{Sinput}
@@ -1961,7 +1961,7 @@ Per correggere la strana numerazione possiamo scrivere
 \end{Sinput}
 \end{Schunk}
 
-Giunti a  questo punto la tabella \texttt{dati} presenta ancora alcuni problemi; per esempio se scriviamo 
+Giunti a  questo punto la tabella \texttt{dati} presenta ancora alcuni problemi; per esempio se scriviamo
  %code chunk
 \begin{Schunk}
 \begin{Sinput}
@@ -1992,7 +1992,7 @@ Ci incuriosisce   il dato con gli occhi neri. Verifichiamo:
 \end{Soutput}
 \end{Schunk}
 Possiamo ritenere che sia un errore e che in  realt\`a gli occhi siano marroni molto scuri.
-Risulta evidente che nel riportare i colori degli  occhi si sono usate dizioni diverse per colori essenzialmente uguali, per esempio i livelli \texttt{"CASTANI"}, \texttt{"NOCCIOLA"}, 
+Risulta evidente che nel riportare i colori degli  occhi si sono usate dizioni diverse per colori essenzialmente uguali, per esempio i livelli \texttt{"CASTANI"}, \texttt{"NOCCIOLA"},
 \texttt{"MARRONI"} possono esser fatti confluire in un unico livello  \texttt{"castani"} e possiamo rendere minuscoli i nomi degli altri livelli con il comando
 \begin{Schunk}
 \begin{Sinput}
@@ -2002,7 +2002,7 @@ Risulta evidente che nel riportare i colori degli  occhi si sono usate dizioni d
 A questo punto
 \begin{Schunk}
 \begin{Sinput}
-> levels(studenti$Eyes) 
+> levels(studenti$Eyes)
 \end{Sinput}
 \begin{Soutput}
 [1] "azzurri" "castani" "verdi"  
@@ -2012,7 +2012,7 @@ Facciamo lo stesso con i capelli
 \begin{Schunk}
 \begin{Sinput}
 > levels(studenti$Hair)=c("biondi","castani","neri", "biondi", "castani","castani","castani","neri")
-> levels(studenti$Hair) 
+> levels(studenti$Hair)
 \end{Sinput}
 \begin{Soutput}
 [1] "biondi"  "castani" "neri"   
@@ -2210,7 +2210,7 @@ Quando abbiamo una struttura di dati a pi\`u dimensioni ad esempio un \emph{arra
 [2,]   22   24   26   28   30
 \end{Soutput}
 \end{Schunk}
-possiamo applicare una funzione selezionando il livello escluso: 
+possiamo applicare una funzione selezionando il livello escluso:
 \begin{Schunk}
 \begin{Sinput}
 > apply(x,2,mean)
@@ -2228,11 +2228,11 @@ possiamo applicare una funzione selezionando il livello escluso:
 \end{Soutput}
 \end{Schunk}
 
-In un \emph{dataframe} possiamo considerare diverse operazioni che coinvolgano due o pi\`u colonne. Per esempio possiamo considerare la tabella \texttt{farmacia} e proporci di calcolare la media del peso dei maschi e la media del peso delle femmine. Il comando \texttt{tapply} \index{\texttt{tapply}} consente di applicare una funzione ad una colonna di una tabella ripartita in gruppi in accordo ad un criterio specificato da un'altra colonna (nominale) della stessa tabella 
+In un \emph{dataframe} possiamo considerare diverse operazioni che coinvolgano due o pi\`u colonne. Per esempio possiamo considerare la tabella \texttt{farmacia} e proporci di calcolare la media del peso dei maschi e la media del peso delle femmine. Il comando \texttt{tapply} \index{\texttt{tapply}} consente di applicare una funzione ad una colonna di una tabella ripartita in gruppi in accordo ad un criterio specificato da un'altra colonna (nominale) della stessa tabella
 \begin{eqnarray*}
 \texttt{tapply}(\varia{vettore},\varia{criterio} ,\varia{funzione})\end{eqnarray*}
 L'esempio sopra riportato si risolve con la scrittura:
-%code chunk 
+%code chunk
 \begin{Schunk}
 \begin{Sinput}
 > tapply(studenti$W, studenti$Sex,mean)->Wmean
@@ -2245,7 +2245,7 @@ L'esempio sopra riportato si risolve con la scrittura:
 \end{Schunk}
 Possiamo anche chiedere di calcolare altri indicatori sempre basandoci  su questa ripartizione maschi/femmine.
 Ad esempio possiamo ottenere la deviazione standard(\texttt{sd}) di maschi e femmine:
-%code chunk 
+%code chunk
 \begin{Schunk}
 \begin{Sinput}
 > tapply(studenti$W, studenti$Sex,sd)->Wsd
@@ -2258,7 +2258,7 @@ Ad esempio possiamo ottenere la deviazione standard(\texttt{sd}) di maschi e fem
 \end{Schunk}
 
 \subsubsection{Il comando \texttt{table} applicato a diverse variabili nominali e le tabelle di contingenza}
-Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani   
+Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
 \begin{Schunk}
 \begin{Sinput}
 > read.table("http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html",
@@ -2353,19 +2353,19 @@ Urban.Rural Grades Popular Sports
 \end{Sinput}
 \end{Schunk}
 
-La tabella di contingenza delle due variabili (in questo caso a 3  livelli ciascuna) si realizza con il comando 
-\texttt{table}. 
-\texttt{table}(\varia(lista)) 
+La tabella di contingenza delle due variabili (in questo caso a 3  livelli ciascuna) si realizza con il comando
+\texttt{table}.
+\texttt{table}(\varia(lista))
 applicato ad una singola variabile nominale conta le frequenze di ciascuna classe, se le variabili sono $n$ esamina tutte le combinazioni possibili ($2^n$ se le variabili sono dicotomiche) e ne conta tutte le occorrenze
-  
+
 Allo stesso modo possiamo creare una tabella dei colori degli occhi e dei capelli
-%code chunk 
+%code chunk
 \begin{Schunk}
 \begin{Sinput}
 > tabellaEH=table(studenti$Eyes,studenti$Hair)
 \end{Sinput}
 \end{Schunk}
- %code chunk  
+ %code chunk
 O ripartirne il peso in base al colore degli occhi
 \begin{Schunk}
 \begin{Sinput}
@@ -2375,14 +2375,14 @@ O ripartirne il peso in base al colore degli occhi
 \end{Schunk}
 \includegraphics{RbookParte2-156}
 
- 
+
 \begin{enumerate}
 \item{} Costruire una funzione \texttt{inserisci} tale che il comando
-$\texttt{inserisci}(\varia{x}, \varia{dove},\varia{cosa})$ inserisca nel vettore $\varia{x}$ l'elemento $\varia{cosa}$ nella posizione $\varia{dove}$. 
+$\texttt{inserisci}(\varia{x}, \varia{dove},\varia{cosa})$ inserisca nel vettore $\varia{x}$ l'elemento $\varia{cosa}$ nella posizione $\varia{dove}$.
 Per esempio
 \begin{Schunk}
 \begin{Sinput}
-> y <-letters[1:10] 
+> y <-letters[1:10]
 > y
 \end{Sinput}
 \begin{Soutput}
@@ -2411,8 +2411,8 @@ Aiuto: usare \texttt{is.na}
 \item{}\cite{dalgaard}
 Carichiamo il \emph{dataset} \texttt{juul} dal pacchetto \texttt{ISwR}. Ricavare il sottoinsieme di dati che corrispondono a ragazze tra i 7 e i 14 anni. Plottare \texttt{igf1} versus et\`a per ragazzi e ragazze separatamente. Conclusioni?
 \end{enumerate}
- 
- 
+
+
 \chapter{Operatori logici e selezione di elementi}
 Consideriamo la selezione di elementi di un oggetto di \textsf{R}, per esempio \texttt{crabs}.
 Selezioniamo per esempio tra i primi  50 i granchi con carapaci di lunghezza (sesta colonna) maggiore di 42:
@@ -2430,7 +2430,7 @@ Selezioniamo per esempio tra i primi  50 i granchi con carapaci di lunghezza (se
 [49]  TRUE  TRUE
 \end{Soutput}
 \end{Schunk}
-Ciascun elemento del vettore viene confrontato con la soglia scelta (42) e quando supera la soglia la risposta \`e \texttt{TRUE} altrimenti \texttt{FALSE}. 
+Ciascun elemento del vettore viene confrontato con la soglia scelta (42) e quando supera la soglia la risposta \`e \texttt{TRUE} altrimenti \texttt{FALSE}.
 \vskip20pt
 %\begin{table}
 \begin{tabular}
@@ -2527,8 +2527,8 @@ Gli operatori condizionali valutano una condizione e in base alle risultanze ass
 [1] "b vale 1"
 \end{Soutput}
 \end{Schunk}
- 
-Abbiamo poi i cicli \texttt{for} con la struttura 
+
+Abbiamo poi i cicli \texttt{for} con la struttura
 \begin{equation*}
 \texttt{for} (i \texttt{it} \varia{sequenza}) \varia{esegui} B
 \end{equation*}
@@ -2546,7 +2546,7 @@ Abbiamo poi i cicli \texttt{for} con la struttura
 \end{Sinput}
 \end{Schunk}
 
- 
+
 \section{Funzioni di pi\`u variabili}
 Finora abbiamo considerato funzioni di singola variabile. Una generalizzazione estremamente naturale consiste nel considerare funzioni di due o pi\`u variabili. Diamo alcuni esempi
 \begin{enumerate}
@@ -2554,7 +2554,7 @@ Finora abbiamo considerato funzioni di singola variabile. Una generalizzazione e
 Calcolare la lunghezza del segmento che congiunge  due punti nel piano (distanza euclidea). Possiamo procedere con  una funzione di 4 numeri (le 2 coordinate dei 2 punti)
 \begin{Schunk}
 \begin{Sinput}
-> dist<-function(x1,y1,x2,y2) 
+> dist<-function(x1,y1,x2,y2)
 + {dx<-(x2-x1)^2;dy<-(y2-y1)^2;return (sqrt(dx+dy))}
 > dist(0,0,3,4)
 \end{Sinput}
@@ -2565,11 +2565,11 @@ Calcolare la lunghezza del segmento che congiunge  due punti nel piano (distanza
 oppure possiamo generalizzare con una funzione che dipenda dai 2 vettori (e non direttamente dalle loro coordinate)
 \begin{Schunk}
 \begin{Sinput}
-> dist<-function(x,y) 
+> dist<-function(x,y)
 + {return (sqrt(sum((x-y)^2)))}
 \end{Sinput}
 \end{Schunk}
-\item{}: il massimo di due numeri 
+\item{}: il massimo di due numeri
 \begin{Schunk}
 \begin{Sinput}
 > massimo<-function(a,b)
@@ -2589,9 +2589,9 @@ Si noti che la condizione viene messa tra parentesi tonde.
 
 \begin{Schunk}
 \begin{Sinput}
-> n=0;while (somma(n)<10000) 
+> n=0;while (somma(n)<10000)
 > n=n+1
-> sommasinoa<-function(b) {i<-1;somma<-i;while (somma<=b) 
+> sommasinoa<-function(b) {i<-1;somma<-i;while (somma<=b)
 + {i=i+1;somma=somma+i}; return(i)}
 \end{Sinput}
 \end{Schunk}
@@ -2602,7 +2602,7 @@ Generazione ricorsiva di successioni (successione di Fibonacci)
 %code chunk
 \begin{Schunk}
 \begin{Sinput}
-> fibonacci<-function(n) 
+> fibonacci<-function(n)
 + {f=0;f[1]<-1;f[2]<-1;for (i in 3:n) {f[i]<-f[i-1]+f[i-2]};return(f[n])}
 \end{Sinput}
 \end{Schunk}
@@ -2620,16 +2620,16 @@ Generazione ricorsiva di successioni (successione di Fibonacci)
 > print()
 > read.delim
 >  aggregate
->  
+> 
 \end{Sinput}
 \end{Schunk}
 
 \chapter{Statistica II parte}
 %\section{Simulazioni e statistica Bayesiana}
-Uno degli usi rilevanti a fini statistici dei computer  \`e la possibilit\`a di stimare attraverso simulazioni probabilit\`a difficili da calcolare teoricamente.  
+Uno degli usi rilevanti a fini statistici dei computer  \`e la possibilit\`a di stimare attraverso simulazioni probabilit\`a difficili da calcolare teoricamente.
 \begin{shaded}\begin{description}
-\item{\bf Estrazioni da un'urna. }Supponiamo 2 palle siano estratte da un'urna contenente 6 palle rosse e 2 verdi. 
-Simuliamo due estrazioni e consideriamo gli eventi:  
+\item{\bf Estrazioni da un'urna. }Supponiamo 2 palle siano estratte da un'urna contenente 6 palle rosse e 2 verdi.
+Simuliamo due estrazioni e consideriamo gli eventi:
 \begin{itemize}
 \item{}$A$ = {la prima palla  \`e rossa}
 \item{}$B$ = {la seconda palla \`e rossa}
@@ -2642,7 +2642,7 @@ Eseguire poi la simulazione 1000 volte e verificare che le stime frequentiste si
 Gli ultimi due punti richiedono opportuni accorgimenti.
 \item{\bf Simulazione del problema di  Monthy Hall.}
 Il problema di Monthy Hall ricalca una trasmissione televisiva americana. Immaginate di avere tre porte chiuse dietro alle quali si nascondono 2 capre e un premio, una Ferrari per esempio. L'ospite deve scegliere una porta; effettuata tale scelta il presentatore (che conosce cosa si nasconde dietro alle 3 porte) apre una porta mostrando una capra e d\`a all'ospite la scelta se attenersi alla scelta originale o cambiare porta. Cosa fareste se foste voi l'ospite?
-\end{description} 
+\end{description}
 \end{shaded}
 Come si pu\`o simulare il problema di Monthy Hall?
 Iniziamo a disporre gli oggetti e a fare la nostra scelta
@@ -2662,7 +2662,7 @@ Iniziamo a disporre gli oggetti e a fare la nostra scelta
 [1] 1
 \end{Soutput}
 \end{Schunk}
-A questo punto  il presentatore deve aprire una porta, 
+A questo punto  il presentatore deve aprire una porta,
 \begin{Schunk}
 \begin{Sinput}
 > (ammessa<-(1:3)[-unique(c(scelta,which(posizione=="ferrari")))])
@@ -2671,7 +2671,7 @@ A questo punto  il presentatore deve aprire una porta,
 [1] 2
 \end{Soutput}
 \begin{Sinput}
-> if(length(ammessa)==1) 
+> if(length(ammessa)==1)
 + presentatore<-ammessa else presentatore=sample(ammessa,1)
 \end{Sinput}
 \end{Schunk}
@@ -2680,7 +2680,7 @@ Ripetiamolo ora 1000 volte
 \begin{Sinput}
 > replicate(1000,{
 + sample(c("capra","capra","ferrari"))->dietro;
-+ scelta=sample(1:3,1);  
++ scelta=sample(1:3,1);
 + ammessi=(1:3)[-unique(c(scelta,which(
 + dietro=="ferrari")))];
 + if(length(ammessi)==1) {presentatore=ammessi} else {presentatore=sample(ammessi,1)};
@@ -2736,12 +2736,12 @@ Levels: 1 2 3 4
 24 23 4
 \end{Soutput}
 \end{Schunk}
-Il comando  \texttt{tapply} consente di applicare una funzione (in questo caso la media) alla lista  $y$ in base alla ripartizione indicata da $x$. 
-$$\texttt{tapply}(y,x,\texttt{mean})$$ 
+Il comando  \texttt{tapply} consente di applicare una funzione (in questo caso la media) alla lista  $y$ in base alla ripartizione indicata da $x$.
+$$\texttt{tapply}(y,x,\texttt{mean})$$
 In questo caso
 \begin{Schunk}
 \begin{Sinput}
-> tapply(y,x,mean) 
+> tapply(y,x,mean)
 \end{Sinput}
 \begin{Soutput}
        1        2        3        4 
@@ -2761,13 +2761,13 @@ consente il tracciamento di un \emph{boxplot} comparativo.
 \label{datiist}
 \end{center}
 \end{figure}
-In modo analogo 
+In modo analogo
  <<echo=TRUE>>=
-anova(lm(y~x))  
-   
+anova(lm(y~x))
+
 fornisce il risultato dell'analisi della varianza.
 
- 
+
 
 \section{Test $\chi^2$  di indipendenza}
 
@@ -2777,7 +2777,7 @@ fornisce il risultato dell'analisi della varianza.
 > read.table("../filedati/PopularKids.html",skip=39,header=T,nrow=478,sep="\t")->kidinterest
 \end{Sinput}
 \end{Schunk}
-Il test $\chi^2$  di indipendenza consente di  verificare se  due variabili sono indipendenti. 
+Il test $\chi^2$  di indipendenza consente di  verificare se  due variabili sono indipendenti.
 Se consideriamo le due variabili precedenti sesso e interessi.
 \textsf{R}  dispone del comando \texttt{chisq.test},\index{\texttt{chisq.tst},test $\chi^2$} dalla sintassi generale:$$\texttt{chisq.test}(\varia{tabella})$$
 
@@ -2805,24 +2805,24 @@ Ad esempio scriveremo:
 > chisq.test(tabellaEH,correct=FALSE)
 \end{Sinput}
 \end{Schunk}
-  
+
 \subsection{Test $\chi^2$  di adeguamento}
 Consideriamo una variabile aleatoria discreta con frequenza assoluta delle uscite racchiuse in una lista \texttt{data}. Ci si pone il problema di stabilire se tali frequenze sono compatibili con le probabilit\`a (riportate nella lista $p$).
 \begin{Schunk}
 \begin{Sinput}
 > data<-c(2,3,4,5,6,7,8,9,10,11)
 > prob<-c(5,20,5,10,5,15,5,10,10,15)
-> sum(prob)  
+> sum(prob)
 > chisq.test(data,p=prob,rescale.p=TRUE)
 \end{Sinput}
 \end{Schunk}
-Si \`e usata qui la scelta \texttt{rescale.p=TRUE} in quanto la somma delle  probabilit\`a non era 1. 
-L'uscita del test riporta il valore del consuntivo $\chi^2$ i gradi di libert\`a ed il valore $p$.   
+Si \`e usata qui la scelta \texttt{rescale.p=TRUE} in quanto la somma delle  probabilit\`a non era 1.
+L'uscita del test riporta il valore del consuntivo $\chi^2$ i gradi di libert\`a ed il valore $p$.
 
 \section{Distribuzione Binomiale}
-Il coefficiente binomiale \`e definito come 
+Il coefficiente binomiale \`e definito come
 \begin{equation*} \texttt{choose}(\varia{n},\varia{m})={n \choose m}=\dfrac{n!}{m!\times (n-m)!}\end{equation*}
-Ad esempio  
+Ad esempio
 \begin{Schunk}
 \begin{Sinput}
 > choose(6,3)
@@ -2846,10 +2846,10 @@ Ad esempio, nel lancio di un dado 10 volte, vogliamo determinare la  probabilit\
 
 La  probabilit\`a \`e circa del 29\%.
 
- 
-\section{Distribuzione di Fisher} 
 
-La distribuzione di Fisher \`e indicata in \textsf{R} con la lettera \texttt{f}. Per tracciare il grafico della densit\`a con gradi di libert\`a $\nu_1$ e $\nu_2$ basta scrivere  
+\section{Distribuzione di Fisher}
+
+La distribuzione di Fisher \`e indicata in \textsf{R} con la lettera \texttt{f}. Per tracciare il grafico della densit\`a con gradi di libert\`a $\nu_1$ e $\nu_2$ basta scrivere
 \begin{Schunk}
 \begin{Sinput}
 > curve(df(x,3,10),0,5)
@@ -2883,26 +2883,26 @@ Per esempio per ottenere il valore della funzione inversa  per $x=0.9$ e $df1=3$
 
 
 \section{Tabelle di contingenza}
-Il comando 
+Il comando
 $\texttt{table}$ applicato ad un lista contenente valori di una singola variabile nominale conta le frequenze di ciascuna livello, se applicato ad un \emph{dataframe} di $n$  variabili conta le occorrenze di  ciascuna combinazione di livelli possibile ($2^n$ se le variabili sono dicotomiche). Per esempio se consideriamo il \emph{dataframe}  \texttt{studenti}  possiamo creare una tabella dei colori degli occhi e dei capelli
-%code chunk 
+%code chunk
 \begin{Schunk}
 \begin{Sinput}
 > tabellaEH=table(studenti$Eyes,studenti$Hair)
 \end{Sinput}
 \end{Schunk}
- 
- 
 
- 
-  
+
+
+
+
 
 \section{Farmacocinetica e modelli non lineari}
 
-Dopo la somministrazione, un farmaco viene distribuito alle regioni del corpo accessibili. 
-Se consideriamo questo evento istantaneo, il corpo pu\`o qui essere considerato un contenitore omogeneo del farmaco, e la cinetica di diffusione pu\`o essere modellata con un modello a singolo compartimento aperto. 
+Dopo la somministrazione, un farmaco viene distribuito alle regioni del corpo accessibili.
+Se consideriamo questo evento istantaneo, il corpo pu\`o qui essere considerato un contenitore omogeneo del farmaco, e la cinetica di diffusione pu\`o essere modellata con un modello a singolo compartimento aperto.
 Quest'ultimo termine significa che il contenuto del compartimento non \`e confinato nel compartimento.
-Se invece la diffusione non \`e istantanea e il contenuto arriva al siero secondo un modello di decrescita malthusiana,  il sistema  pu\`o essere modellato come un sistema a due compartimenti aperti.  
+Se invece la diffusione non \`e istantanea e il contenuto arriva al siero secondo un modello di decrescita malthusiana,  il sistema  pu\`o essere modellato come un sistema a due compartimenti aperti.
 
 Il dataset \texttt{Theoph} contiene 11 misure di concentrazione (a diversa tempistica) per ciascuno dei 12 soggetti sottoposti a somministrazione orale di teofillina.
 \begin{Schunk}
@@ -2936,7 +2936,7 @@ Selezioniamo ora il paziente 4, lo possiamo fare note le righe che esso occupa n
 \end{Sinput}
 \end{Schunk}
 \subsection{Regressione non lineare}
-In statistica, una regressione non lineare \`e una forma di regressione in cui i dati osservati sono modellati da una funzione che non \`e una combinazione lineare dei parametri e che dipende da una o pi\`u  variabili indipendenti.  
+In statistica, una regressione non lineare \`e una forma di regressione in cui i dati osservati sono modellati da una funzione che non \`e una combinazione lineare dei parametri e che dipende da una o pi\`u  variabili indipendenti.
 
 Il comando \texttt{nls} determina le stime dei parametri di un modello non lineare con il metodo dei minimi quadrati (ponderati).
 Se consideriamo un modello a 2 compartimenti aperti del primo ordine descritto da sistema di equazioni differenziali
@@ -2954,9 +2954,9 @@ y(t) =&x_0 k_a  \frac{e^{-k_e t} - e^{-k_a t}}{k_a-k_e}
  \end{equation}
 In particolare la funzione \texttt{SSfol} in \textsf{R} consente di descrivere una cinetica del primo ordine per il modello a proposto. Essa infatti restituisce i logaritmi dei parametri di eliminazione, assorbimento e  \emph{clearance} (\texttt{lKe, lKa, lCl}).
 L'uso \`e il seguente
-\begin{equation*}\texttt{SSfol(Dose, input, lKe, lKa, lCl})  
+\begin{equation*}\texttt{SSfol(Dose, input, lKe, lKa, lCl})
 \end{equation*}
-dove \texttt{Dose}  rappresenta la dose iniziale,  \texttt{input} \`e un vettore numerico con il quale valutiamo il modello. \texttt{lKe} \`e un parametro numerico che rappresenta il logaritmo naturale della costante velocit\`a di eliminazione. \texttt{lKa} \`e un parametro numerico che rappresenta il logaritmo naturale della costante velocit\`a di assorbimento mentre  \texttt{lCl} \`e un parametro numerico che rappresenta il logaritmo naturale  della \emph{clearance}. 
+dove \texttt{Dose}  rappresenta la dose iniziale,  \texttt{input} \`e un vettore numerico con il quale valutiamo il modello. \texttt{lKe} \`e un parametro numerico che rappresenta il logaritmo naturale della costante velocit\`a di eliminazione. \texttt{lKa} \`e un parametro numerico che rappresenta il logaritmo naturale della costante velocit\`a di assorbimento mentre  \texttt{lCl} \`e un parametro numerico che rappresenta il logaritmo naturale  della \emph{clearance}.
 Proviamo ad utilizzare il comando \texttt{SSfol}, e inseriamo il risultato della regressione nella variabile \texttt{fm1} (modello 1).
 %code chunk
 \begin{Schunk}
@@ -2964,7 +2964,7 @@ Proviamo ad utilizzare il comando \texttt{SSfol}, e inseriamo il risultato della
 > fm1 <- nls(conc ~ SSfol(Dose, Time, lKe, lKa, lCl), data = Theoph.4)
 \end{Sinput}
 \end{Schunk}
-Osserviamo \texttt{fm1},  con il comando \texttt{summary}  
+Osserviamo \texttt{fm1},  con il comando \texttt{summary}
 \begin{Schunk}
 \begin{Sinput}
 > summary(fm1)
@@ -2995,14 +2995,14 @@ Ora riportiamo il grafico delle osservazioni per il soggetto 4 su un grafico sin
 > options(width=40)
 > plot(conc ~ Time, data = Theoph.4,
 + xlab = "tempo dalla somministazione (ore)",
-+  ylab = "Concentrazione di Teofillina(mg/L)", 
++  ylab = "Concentrazione di Teofillina(mg/L)",
 + main = "Concentrazioni osservate e modello", sub = "Soggetto 4",
 + las = 1, col = 4)
 \end{Sinput}
 \end{Schunk}
 \includegraphics{RbookParte2-197}
 
-Si pu\`o ora sovrapporre la curva ottenuta con il modello al grafico attuale. 
+Si pu\`o ora sovrapporre la curva ottenuta con il modello al grafico attuale.
 Per prima cosa definiamo i possibili valori di $x$.
 
 \begin{Schunk}
@@ -3017,7 +3017,7 @@ dove \texttt{par(usr)}  \`e un ottimo modo per conoscere l'estensione di una del
 \begin{Sinput}
 > plot(conc ~ Time, data = Theoph.4,
 + xlab = "tempo dalla somministazione (ore)",
-+ ylab = "Concentrazione di Teofillina(mg/L)", 
++ ylab = "Concentrazione di Teofillina(mg/L)",
 + main = "Concentrazioni osservate e modello", sub = "Soggetto 4",
 + las = 1, col = 4)
 > lines(xvals, predict(fm1, newdata = list(Time = xvals)), col = 4)
@@ -3026,10 +3026,10 @@ dove \texttt{par(usr)}  \`e un ottimo modo per conoscere l'estensione di una del
 \includegraphics{RbookParte2-199}
 
 \subsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
-Sempre da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui dei ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese. 
+Sempre da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui dei ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
 \begin{Schunk}
 \begin{Sinput}
-> age=18:29 
+> age=18:29
 > height=c(76.1,77,78.1,78.2,78.8,79.7,79.9,81.1,81.2,81.8,82.8,83.5)
 \end{Sinput}
 \end{Schunk}
@@ -3053,12 +3053,12 @@ Ora diamo una prima occhiata ai dati:
 \label{kalama}
 \end{center}
 \end{figure}
-L'andamento \`e lineare. Determiniamo la retta di regressione 
-per predire l?altezza media nota l'et\`a in mesi. 
+L'andamento \`e lineare. Determiniamo la retta di regressione
+per predire l?altezza media nota l'et\`a in mesi.
 %code chunk
 \begin{Schunk}
 \begin{Sinput}
-> ris=lm(height~age) 
+> ris=lm(height~age)
 > ris
 \end{Sinput}
 \begin{Soutput}
@@ -3078,7 +3078,7 @@ La retta di regressione cercata ha formula:
 $$h(\texttt{age})=64.93+ 0.63\, \texttt{age}$$
 
 Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l?altezza a 27.5 mesi di et\`a:
-oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione  
+oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione
 \texttt{predict}:
 %codechunk
 \begin{Schunk}
@@ -3090,13 +3090,13 @@ oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la f
 82.38986 
 \end{Soutput}
 \end{Schunk}
- 
+
 fornendo in input i parametri della retta ed un preciso valore della variabile indipendente (richiamata col proprio nome).
 Molti comandi di \textsf{R} sono in grado di manipolare dataframe  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
 Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt{village} direttamente al comando:
 \begin{Schunk}
 \begin{Sinput}
-> res=lm(height~age,data=village) 
+> res=lm(height~age,data=village)
 > res
 \end{Sinput}
 \begin{Soutput}
@@ -3108,7 +3108,7 @@ Coefficients:
      64.928        0.635  
 \end{Soutput}
 \end{Schunk}
-con la formula $lm(y ~x,data=dataset)$. 
+con la formula $lm(y ~x,data=dataset)$.
 Inoltre possiammo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
 \begin{Schunk}
 \begin{Sinput}
@@ -3126,7 +3126,7 @@ $mfrow
 normality test}
 \chapter{Grafica}
 Il sistema grafico di \textsf{R} si compone di 3 parti: grafica di alto livello che produce grafici completi (per esempio \texttt{plot}, \texttt{curve}), grafica di basso livello che aggiunge elementi a grafici preesistenti (\texttt{text}, \texttt{abline}) e funzioni che lavorano interattivamente con grafici (ad esempio \texttt{locator()} e \texttt{identify()}).
-\cite{murrell}. 
+\cite{murrell}.
 A fianco della grafica tradizionale (gestita dal pacchetto \texttt{graphics}) esistono sistemi non tradizionali cui si pu\`o accedere attraverso il pacchetto \texttt{grid}. \index{\texttt{grid}}
 In questo capitolo ci dedicheremo essenzialmente ad inquadrare la grafica tradizionale e daremo alcuni cenni sulla grafica non tradizionale.
 \section{Le \emph{device} grafiche}
@@ -3144,7 +3144,7 @@ Se omettiamo il nome avremo il nome di defaults \texttt{Rplots}.
 Per particolari \emph{device}  (per esempio \text{pdf}) la stampa su \emph{file} pu\`o occupare diverse pagine e quindi si possono inserire in un unico file diversi grafici.
 Occorre ricordarsi di chiudere la \emph{device} al termine della produzione grafica con il comando \texttt{dev.off()}.
 Il grafico sar\`a direttamente prodotto nel file indicato, dunque non si vedranno finestre grafiche e  apparir\`a  a schermo solo  un messaggio di avvenuta realizzazione del file una volta che la
-\emph{device} viene chiusa. 
+\emph{device} viene chiusa.
 La sintassi generica richiede dunque
 \begin{enumerate}
 \item{}Apertura della \emph{device} (definendone il nome, la dimensione
@@ -3159,7 +3159,7 @@ Ogni \emph{device} grafica mantiene uno stato grafico che viene consultato da \t
 \begin{equation*}\texttt{par}(\varia{parametro}_1=\texttt{val}_1,\ldots)
 \end{equation*}
 Tecnicamente \texttt{par()} \`e una funzione  che restituisce una lista.
-I parametri grafici specificabili con \texttt{par} sono ottenibili con il comando 
+I parametri grafici specificabili con \texttt{par} sono ottenibili con il comando
 \begin{Schunk}
 \begin{Sinput}
 > options(width=55)
@@ -3210,7 +3210,7 @@ Qui contestualmente alla ridefinizione abbiamo salvato (con il nome \texttt{oldp
 \end{center}
 \end{figure}
 ottenendo la figura~\ref{parbg}.
-Si noti che si possono riesumare i valori precedenti 
+Si noti che si possono riesumare i valori precedenti
 \begin{Schunk}
 \begin{Sinput}
 > par("bg")
@@ -3233,7 +3233,7 @@ Per costruire tabelle di grafici in una finestra unica si usa il comando
 \begin{equation*}
 \texttt{par(mfrow=c}(\varia{nrighe},\varia{ncolonne}))
 \end{equation*}
-Per esempio  con una riga e due colonne  
+Per esempio  con una riga e due colonne
 \begin{Schunk}
 \begin{Sinput}
 > par(mfrow=c(1,2))
@@ -3248,18 +3248,18 @@ otteniamo i grafici affiancati della figura \ref{graficiaffiancati}.
 \caption{Grafici affiancati con \texttt{mfrow=c(1,2)}}
 \label{graficiaffiancati}
 \end{center}
-\end{figure} 
+\end{figure}
 
 \subsection{Diagrammi a dispersione}
 La sintassi di riferimento della funzione \texttt{plot} \index{\texttt{plot}} \`e
 \begin{equation*}
 \texttt{plot}(\varia{dati},\varia{opzione}_1=val_1, \varia{opzione}_2=val_2,\ldots,\varia{opzione}_n=val_n)\end{equation*}
-Scarichiamo da \cite{dasl} il \emph{dataset} che chiameremo \texttt{Gompertz} in cui si studia la mortalit\`a di una popolazione di moscerini al variare dell'et\`a 
+Scarichiamo da \cite{dasl} il \emph{dataset} che chiameremo \texttt{Gompertz} in cui si studia la mortalit\`a di una popolazione di moscerini al variare dell'et\`a
 %code chunk
 \begin{Schunk}
 \begin{Sinput}
 > url="http://lib.stat.cmu.edu/DASL/Datafiles/Medflies.html"
-> gompertz<-read.table(url,skip=25,nrow=173,header=T) 
+> gompertz<-read.table(url,skip=25,nrow=173,header=T)
 \end{Sinput}
 \end{Schunk}
 \begin{Schunk}
@@ -3287,7 +3287,7 @@ Scarichiamo da \cite{dasl} il \emph{dataset} che chiameremo \texttt{Gompertz} in
 > plot(gompertz[,1],gompertz[,3])
 \end{Sinput}
 \end{Schunk}
- 
+
 \begin{figure}\begin{center}
 \includegraphics{RbookParte2-217}
 \caption{Mortalit\`a dei moscerini. A sinistra la decrescita della popolazione, a destra la mortalit\`a.}
@@ -3317,10 +3317,10 @@ Il comando che segue consente quindi di verificare la terza colonna di Gompertz
 
 Alcune opzioni che possono perfezionare un grafico sono
 \begin{itemize}
-\item{}\texttt{main}=: assegna il titolo al grafico; 
-\item{}\texttt{xlab}=: assegna l'etichetta all'asse delle $x$; 
+\item{}\texttt{main}=: assegna il titolo al grafico;
+\item{}\texttt{xlab}=: assegna l'etichetta all'asse delle $x$;
 \item{}\texttt{ylab}=: assegna l'etichetta all'asse delle $y$;
-\item{}\texttt{type}=: 
+\item{}\texttt{type}=:
 \begin{itemize}
 \item{} \texttt{p} Disegna solo i punti.
 \item{} \texttt{l} Disegna linee.
@@ -3330,13 +3330,13 @@ sovrapporre le linee ai punti.
 \item{} \texttt{n} Non disegna n\'e linee n\'e punti. Serve talora a impostare la finestra grafica.
 \end{itemize}
 \item{} \texttt{col}=: assegna il colore il cui elenco si ottiene con il comando: \texttt{colors()};
-\item{} \texttt{cex}=: un valore numerico, da 0 (sopprime i punti) a valori numerici consigliati minori di 2, definisce la dimensione dei punti; 
-\item{}\texttt{lty}=: definisce il tipo di linea ({\it line type}), se 1 linea continua, se 2 tratteggiata, se 3 tratteggiata con tratto ridotto, se 4 tratto e punto;  
+\item{} \texttt{cex}=: un valore numerico, da 0 (sopprime i punti) a valori numerici consigliati minori di 2, definisce la dimensione dei punti;
+\item{}\texttt{lty}=: definisce il tipo di linea ({\it line type}), se 1 linea continua, se 2 tratteggiata, se 3 tratteggiata con tratto ridotto, se 4 tratto e punto;
 \item{}\texttt{lwd}=: definisce lo spessore della linea ({\it line width}), valori suggeriti tra 0.5 e 2;
 \item{} \texttt{pch}=: definisce il \emph{marker} dei punti
 \end{itemize}
 \footnote{Si noti che tali opzioni coincidono in alcuni casi con opzioni specificabili con \texttt{par}.  In questo caso sono per\`o solo locali. }
- 
+
 Per esempio
 \begin{Schunk}
 \begin{Sinput}
@@ -3367,7 +3367,7 @@ Il risultato \`e riportato nella figura~\ref{4moscerini}
 
 \subsection{Grafici multipli e/o sovrapposti}
 
-Analizziamo il {\it dataframe} \texttt{quakes} che riporta numerosi dati sui terremoti che colpiscono la zona delle isole Fiji. 
+Analizziamo il {\it dataframe} \texttt{quakes} che riporta numerosi dati sui terremoti che colpiscono la zona delle isole Fiji.
 Carichiamo i dati e utilizziamo la funzione \texttt{pairs}\index{pairs} per costruire grafici multipli in un'unica finestra:
 \begin{Schunk}
 \begin{Sinput}
@@ -3383,7 +3383,7 @@ Carichiamo i dati e utilizziamo la funzione \texttt{pairs}\index{pairs} per cost
 \label{pairplot}
 \end{figure}
 \end{center}
-In effetti il comando \texttt{plot} funziona anche su \emph{dataframe} come \`e verificabile con 
+In effetti il comando \texttt{plot} funziona anche su \emph{dataframe} come \`e verificabile con
 \begin{Schunk}
 \begin{Sinput}
 > methods(plot)
@@ -3438,7 +3438,7 @@ Nell'esempio seguente generiamo i vertici di un poligono regolare con numero di 
 \end{Schunk}
 \includegraphics{RbookParte2-226}
 
-Il parametro  \texttt{adj} sposta il testo rispetto alle coordinate  
+Il parametro  \texttt{adj} sposta il testo rispetto alle coordinate
 \subsection{Immagini di un vulcano}
 Vediamo alcune rappresentazioni grafiche 3D.
 \begin{Schunk}
@@ -3457,8 +3457,8 @@ Vediamo alcune rappresentazioni grafiche 3D.
 \label{vulcano1}
 \end{center}
 \end{figure}
- 
-  
+
+
 \begin{Schunk}
 \begin{Sinput}
 > x<- c(0.00, 0.40, 0.86, 0.85, 0.69, 0.48, 0.54, 1.09, 1.11, 1.73, 2.05, 2.02)
@@ -3480,7 +3480,7 @@ Vediamo alcune rappresentazioni grafiche 3D.
 Un esempio:
 \begin{Schunk}
 \begin{Sinput}
-> boxplot(len~dose, data = ToothGrowth, 
+> boxplot(len~dose, data = ToothGrowth,
 + boxwex = 0.25, at = 1:3 - 0.2,
 + subset = supp == "VC", col = "yellow",
 + main = "Guinea Pigs' Tooth Growth",
@@ -3508,15 +3508,15 @@ Un esempio:
 \includegraphics{RbookParte2-232}
 
 \section{Grafici professionali: legenda, annotazioni e formule}
-Ricordiamo che una volta che sia  assegnato il livello di fiducia $1-\epsilon$, il numero $u_{1-\epsilon}$ che leggiamo nelle tabelle  distribuzione normale \`e il valore dell'ascissa tale che nell'intervallo $[-u_{1-\epsilon},u_{1-\epsilon}]$  cada un'area pari al livello di fiducia; in altre parole le 2 code della distribuzione vengono rimosse. 
+Ricordiamo che una volta che sia  assegnato il livello di fiducia $1-\epsilon$, il numero $u_{1-\epsilon}$ che leggiamo nelle tabelle  distribuzione normale \`e il valore dell'ascissa tale che nell'intervallo $[-u_{1-\epsilon},u_{1-\epsilon}]$  cada un'area pari al livello di fiducia; in altre parole le 2 code della distribuzione vengono rimosse.
 Vogliamo ora creare un grafico illustrativo di questa definizione.
 
-Tracceremo inizialmente un grafico della normale tra $[-3,3]$ scegliendo come valore dell'ascissa 
-$u_{1-\epsilon}$  il numero  1.  Vogliamo quindi scrivere l'espressione $u_{1-\epsilon}$ nel punto di ascissa  1 e il suo opposto nel punto di ascissa -1 dell'asse $x$. 
+Tracceremo inizialmente un grafico della normale tra $[-3,3]$ scegliendo come valore dell'ascissa
+$u_{1-\epsilon}$  il numero  1.  Vogliamo quindi scrivere l'espressione $u_{1-\epsilon}$ nel punto di ascissa  1 e il suo opposto nel punto di ascissa -1 dell'asse $x$.
 Per disegnare delle tacche sugli assi e assegnare valori alfanumerici alle stesse
 si pu\`o utilizzare Il comando\selectlanguage{english}
 \begin{eqnarray*}
-\texttt{axis}(\varia{num},\texttt{c}(\varia{tacca}_1,\varia{tacca}_2,\ldots,\varia{tacca}_\varia{n}),\\ 
+\texttt{axis}(\varia{num},\texttt{c}(\varia{tacca}_1,\varia{tacca}_2,\ldots,\varia{tacca}_\varia{n}),\\
 \texttt{c("}\varia{nome}_1, \texttt{"}\varia{nome}_2 \texttt{"},\ldots,\texttt{"}\varia{nome}_\varia{n}\texttt{"}))
 \end{eqnarray*}
 \selectlanguage{italian}
@@ -3537,18 +3537,18 @@ Possiamo  procedere con
 \end{center}
 \end{figure}
 
-Il comando \texttt{expression} consente di scrivere simboli e anche lettere greche. 
+Il comando \texttt{expression} consente di scrivere simboli e anche lettere greche.
 Come uscita di questo primo comando troviamo il grafico~(\ref{normale13})
 Per evidenziare le 2 code tratteggiamo l'area sottesa dalla normale tra 1 e 3  (e in seguito da  -3 a -1). Per operare questo tratteggio si approssima
 la regione da tratteggiare con un poligono con un numero molto elevato (200) di vertici definiti come segue
 %code chunk
 \begin{Schunk}
 \begin{Sinput}
-> xmin<-1;xmax<-3; 
+> xmin<-1;xmax<-3;
 > npunti<-200
-> f=dnorm#selezione degli  estremi 
+> f=dnorm#selezione degli  estremi
 > #e del numero di punti base del poligono
-> vals<-seq(xmin,xmax,length=npunti) 
+> vals<-seq(xmin,xmax,length=npunti)
 > x<-c(xmin,vals,xmax,xmin)
 > y<-c(0,f(vals),0,0);
 \end{Sinput}
@@ -3563,7 +3563,7 @@ La sintassi di \texttt{polygon}?\`e
 })
 \end{eqnarray*}
 
-Il comando 
+Il comando
 \begin{Schunk}
 \begin{Sinput}
 > curve(dnorm(x),-3,3,axes=FALSE,ylab="",xlab="",ylim=c(0,0.5))
@@ -3580,7 +3580,7 @@ consente la visualizzazione dei punti ottenuti (come in figura~(\ref{normale200p
 \end{center}
 \end{figure}
 
-Questi punti  possono poi essere uniti con una curva poligonale  
+Questi punti  possono poi essere uniti con una curva poligonale
 \begin{Schunk}
 \begin{Sinput}
 > curve(dnorm(x),-3,3,axes=FALSE,ylab="",xlab="",ylim=c(0,0.5))
@@ -3610,7 +3610,7 @@ Infine possiamo riportare i valori delle aree delle 2 code, evidenziare l'asse d
 > text(0,0.45,expression("code della gaussiana"))
 > text(-1.6,0.03,expression(epsilon/2))
 > text(1.6,0.03,expression(epsilon/2))
-> lines(c(0,0),c(0,dnorm(0))) 
+> lines(c(0,0),c(0,dnorm(0)))
 \end{Sinput}
 \end{Schunk}
 \includegraphics{RbookParte2-239}
@@ -3624,7 +3624,7 @@ Infine possiamo riportare i valori delle aree delle 2 code, evidenziare l'asse d
 > text(0,0.45,expression("code della gaussiana"))
 > text(-1.6,0.03,expression(epsilon/2))
 > text(1.6,0.03,expression(epsilon/2))
-> lines(c(0,0),c(0,dnorm(0))) 
+> lines(c(0,0),c(0,dnorm(0)))
 \end{Sinput}
 \end{Schunk}
 \includegraphics{RbookParte2-240}
@@ -3652,8 +3652,8 @@ Iniziamo a disegnare dei rettangoli, di coordinate casuali ma entro un dato rang
 \end{Schunk}
 \includegraphics{RbookParte2-241}
 \section{Grafica 3D, il vulcano Maunga Whau}
-Con il codice che segue 
- 
+Con il codice che segue
+
 \begin{Schunk}
 \begin{Sinput}
 > z<- 2 * volcano
@@ -3688,7 +3688,7 @@ otteniamo la figura~\ref{vulcano3D}. Il comando di base \`e \texttt{persp} che r
 
  Costruiamo due curve che rappresentano due distribuzioni normali, in particolare al posto della funzione \texttt{dnorm} andremo a calcolare i singoli valori di $y$ associati ad un set di valori di
 $x$, essendo poi liberi di utilizzare la funzione \texttt{plot}
- 
+
 
 \begin{Schunk}
 \begin{Sinput}
@@ -3696,11 +3696,11 @@ $x$, essendo poi liberi di utilizzare la funzione \texttt{plot}
 > x<-seq(-10,10,length=400)
 > y1<-dnorm(x)
 > y2<-dnorm(x,m=3)
-> par(mar=c(5,4,2,1))  
+> par(mar=c(5,4,2,1))
 > plot(x, y2, xlim=c(-3,8), type="n", xlab=quote(Z==frac(mu[1]-mu[2],
 + sigma/sqrt(n))), ylab="Density")
 > polygon(c(1.96,1.96,x[240:400],10), c(0,dnorm(1.96,m=3),y2[240:400],0),
-+ col="grey80", lty=0)  
++ col="grey80", lty=0)
 > lines(x, y1)
 > polygon(c(-1.96,-1.96,x[161:1],-10), c(0,dnorm(-1.96,m=0), y1[161:1],0),
 + col="grey30", lty=0)
@@ -3751,7 +3751,7 @@ per realizzare ci\`o sono i seguenti:
 \item{4.} Verificare che sia stato prodotto il file mondrian.png e sua apertura. Se non specifichiamo l'indirizzo del file esso si trover\`a nella cartella di lavoro di \textsf{R}, ottenibile con il comando getwd().
 \end{itemize}
 \section{Grafica 3D, grafico di una funzione di due variabili}
-La funzione di base in \textsf{R} per realizzare grafica 3D statica \`e \texttt{persp}. 
+La funzione di base in \textsf{R} per realizzare grafica 3D statica \`e \texttt{persp}.
 Gli input richiesti sono due vettori (coordinate sulle $x$ e sulle $y$) ed una matrice (di ingressi ingressi $x$ e $y$, contenente
 all'incrocio $z$).
 
@@ -3768,7 +3768,7 @@ all'incrocio $z$).
 \end{Sinput}
 \end{Schunk}
 
- 
+
 \subsection{Il pacchetto \texttt{rgl}}
 
 Il pacchetto \texttt{rgl} si compone di funzioni per la grafica 3D dinamica e consente di realizzare grafici ruotabili, eventualmente animati e sicuramente di grande impatto e potenzialit\`a.
@@ -3864,7 +3864,7 @@ Il grafico realizzato con il comando precedente in modo automatico, usando il co
 \subsection{Personalizzare la regione di plot}
 Il comando \texttt{plot.new()} crea una finestra che contiene la regione di plot vera e propria, fiancheggiata dalle regioni di margine che sono predisposte per contenere le annotazioni. La finestra complessiva di default  \`e  mostrata in figura
 
-A volte \`e necessario personalizzare i margini, ad esempio se le annotazioni dei due assi sono molto ingombranti oppure nel caso di plot multipli in un'unica finestra (in tal caso, i grafici diventano molto piccoli ed \`e possibile guadagnare spazio eliminando i margini inutilizzati). 
+A volte \`e necessario personalizzare i margini, ad esempio se le annotazioni dei due assi sono molto ingombranti oppure nel caso di plot multipli in un'unica finestra (in tal caso, i grafici diventano molto piccoli ed \`e possibile guadagnare spazio eliminando i margini inutilizzati).
 
 \begin{Schunk}
 \begin{Sinput}
@@ -3880,7 +3880,7 @@ A volte \`e necessario personalizzare i margini, ad esempio se le annotazioni de
 Tale modifica si opera con il comando \texttt{mar}.
 \begin{equation}\texttt{par}(\texttt{mar=c}(l_1, l_2, l_3, l_4))
 \end{equation}
-dove $l_1$,$ l_2$, $l_3$,$ l_4$ sono le linee di testo da lasciare libere per annotazioni su ciascun lato come in figura. 
+dove $l_1$,$ l_2$, $l_3$,$ l_4$ sono le linee di testo da lasciare libere per annotazioni su ciascun lato come in figura.
 Un comando analogo \`e \texttt{mai}, che consente di definire gli spazi in {\it inch} (pollici):
 \begin{equation}\texttt{par}(\texttt{mai=c}(i_1, i_2, i_3, i_4))\end{equation}
 Infine, \`e possibile definire direttamente la regione di plot utilizzando \texttt{pin}, di sintassi:
@@ -3928,10 +3928,10 @@ Possiamo utilizzarla per realizzare il plot del solito vulcano, in particolare a
 \end{center}
 \end{figure}
 
- 
+
 Una seconda funzione importante, che consente di realizzare dei plot in tre dimensioni \`e \texttt{cloud}.  \index{\texttt{cloud}}
 Se ad esempio disponiamo di una tabella come \texttt{Titanic} (riporta il numero di passeggeri sopravvissuti o meno al naufragio ripartiti per et\`a, classe di viaggio e sesso) e voletssimo ottenere invece una tabella che ne riporti la proporzione  sul totale possiamo usare la funzione \texttt{prop.table()}.
-Disegnamo ora con \texttt{cloud} la situazione dopo il naufragio, con 
+Disegnamo ora con \texttt{cloud} la situazione dopo il naufragio, con
 \texttt{strip}\index{\texttt{strip}} definiamo le due righe di titolo (in cui sono ripartiti i dati), e con la quadra [,1:2]  finale disegniamo entrambe le classi (sopravvissuti e non sopravvissuti).
 \begin{Schunk}
 \begin{Sinput}
@@ -3974,9 +3974,9 @@ pdf
 \caption{Cloud graph}
 \label{default}
 \end{center}
-\end{figure} 
+\end{figure}
 \subsection{Il \texttt{parallel plot}}
-Un plot di questo tipo parte da una matrice o da un \emph{dataframe}, rappresentando graficamente ogni riga dello stesso (ingresso) con le sue coordinate (il cui numero dipende dal numero dei parametri). I punti ottenuti vengono cos? congiunti da segmenti (attribuendo un colore automatico ad ogni campione, ridefinibile). L'idea di fondo \`e quella di valutare se campioni ad esempio di specie o fenotipi differenti presentano profilo simile (e se diverso lo scopo \`e quello di identificare le variabili/colonne discriminanti). 
+Un plot di questo tipo parte da una matrice o da un \emph{dataframe}, rappresentando graficamente ogni riga dello stesso (ingresso) con le sue coordinate (il cui numero dipende dal numero dei parametri). I punti ottenuti vengono cos? congiunti da segmenti (attribuendo un colore automatico ad ogni campione, ridefinibile). L'idea di fondo \`e quella di valutare se campioni ad esempio di specie o fenotipi differenti presentano profilo simile (e se diverso lo scopo \`e quello di identificare le variabili/colonne discriminanti).
 Nell'esempio vogliamo rappresentare larghezza e lunghezza dei petali e del sepalo dei fiori Iris, volendone poi valutare i profili tra le tre differenti specie. I dati che ci interessano sono cos? le prime 4 colonne (diremo iris[1:4 perch\'e il modello della funzione  lo richiede) mentre le intestazioni saranno le specie di iris, definite da Species, iris.
 %code chunk
 \begin{Schunk}
@@ -3996,7 +3996,7 @@ pdf
 \caption{Cloud graph}
 \label{default}
 \end{center}
-\end{figure} 
+\end{figure}
 
 Oppure valutiamo due diversi trattamenti con vitamina C per la crescita dei denti suini,
 ricordate?
@@ -4020,7 +4020,7 @@ pdf
 \caption{Cloud graph}
 \label{default}
 \end{center}
-\end{figure} 
+\end{figure}
 
 
 \subsection{Applicazione in campo geografico}
@@ -4044,7 +4044,7 @@ Costruiamo l'oggetto base (\texttt{nc}) e trattiamo le coordinate con CRS:
 > names(nc)
 \end{Sinput}
 \end{Schunk}
- 
+
 Poi creiamo i due pannelli \texttt{pannello1} e \texttt{pannello2} con il comando \texttt{sample} (sceglie un campione di 100 numeri a caso tra 1 a 5), con etichette le prime 5 lettere dell'alfabeto.
 \begin{Schunk}
 \begin{Sinput}
@@ -4067,7 +4067,7 @@ brewer.pal(5,Set3). Potrete poi provare anche Set1 e Set2.
 \begin{Schunk}
 \begin{Sinput}
 > pdf("../grafici/SPPLOT.pdf")
-> spplot(nc, c("pannello1","pannello2"), 
+> spplot(nc, c("pannello1","pannello2"),
 + col.regions=brewer.pal(5, "Set3"), scales=list(draw=TRUE))
 > dev.off()
 \end{Sinput}
@@ -4124,10 +4124,10 @@ L'orientamento delle etichette degli assi \`e molto importante, il parametro \te
 \textsf{R} consente di disegnare forme (dette primitive) come rettangoli o poligoni. I rettangoli in particolare sono molto utili e versatili, consentendo di realizzare riquadri, evidenziare regioni grafiche, ecc.
 \begin{Schunk}
 \begin{Sinput}
-> plot(c(100, 200), c(300, 450), type= "n", xlab="", ylab="") 
-> rect(100, 300, 125, 350) 
-> rect(100, 400, 125, 450, col="green", border="blue")  
-> rect(115, 375, 150, 425, col=par("bg"), border="transparent") 
+> plot(c(100, 200), c(300, 450), type= "n", xlab="", ylab="")
+> rect(100, 300, 125, 350)
+> rect(100, 400, 125, 450, col="green", border="blue")
+> rect(115, 375, 150, 425, col=par("bg"), border="transparent")
 > rect(150, 300, 175, 350, density=10, border="red")
 > rect(150, 400, 175, 450, density=30, col="blue", angle=-30, border="transparent")
 > legend(180, 450, legend=1:4, fill=c(NA, "green", par("fg"), "blue"), density=c(NA, NA, 10, 30), angle=c(NA, NA, 30, -30))
@@ -4140,12 +4140,12 @@ Ed ora, riproduciamo un Mondrian:
 > par(bg=rgb(0.95,0.96,0.9))
 > plot(NA,xlim=c(0,1),ylim=c(0,1),axes=F,xlab="",ylab="",main="Mondrian Virtuale")
 > rect(0,0,1,1,col=rgb(0.95,0.96,0.9),lwd=1)
-> rect(0.1,0.35,0.6,0.9,col=rgb(0.973,0.09,0.047),lwd=8) 
-> rect(0.6,0.625,0.95,0.9,col=rgb(1,0.87,0.34),lwd=8)  
+> rect(0.1,0.35,0.6,0.9,col=rgb(0.973,0.09,0.047),lwd=8)
+> rect(0.6,0.625,0.95,0.9,col=rgb(1,0.87,0.34),lwd=8)
 > rect(0.6,0.35,0.95,0.625,lwd=8) ##bianco
 > rect(0.775,0.35,0.95,0.625,lwd=8) ##bianco 2
 > rect(0.6,0.225,0.95,0.35,lwd=8) ##bianco 3
-> rect(0.6,0.05,0.95,0.225,lwd=8,col=rgb(0.063,0.008,0.58))  
+> rect(0.6,0.05,0.95,0.225,lwd=8,col=rgb(0.063,0.008,0.58))
 > rect(0.35,0.225,0.6,0.35,lwd=8) #bianco sx 1
 > rect(0.35,0.1,0.6,0.225,lwd=8) #bianco sx basso
 > rect(0.35,0.05,0.6,0.1,lwd=8,col="black") ##nero sx basso
@@ -4169,8 +4169,8 @@ Ed ora, riproduciamo un Mondrian:
 \includegraphics{RbookParte2-270}
 
 Provate a confrontarlo con l'originale, cercatelo tra le immagini di Google (url{http:/images.google.com})
- 
- 
+
+
 Il comando  $\texttt{locator}(n)$ \index{\texttt{locator}}
 consente di selezionare con il puntatore $n$ punti in un grafico.
 Selezioniamo 1 punto cliccando  sul punto che riteniamo il massimo del grafico
@@ -4187,7 +4187,7 @@ Selezioniamo 1 punto cliccando  sul punto che riteniamo il massimo del grafico
 > library(datasets)
 > plot(as.vector(discoveries))
 > coord= c(12,26)
-> points(coord[2],coord[1], cex=3, col="red") 
+> points(coord[2],coord[1], cex=3, col="red")
 \end{Sinput}
 \end{Schunk}
 \includegraphics{RbookParte2-272}
@@ -4219,17 +4219,17 @@ In modo simile per generare la tabella della distribuzione $t$ di Student si sel
 > ncol=length(fiducia);
 > nrow=length(gradi);
 > cifre=5;
-> tstud<-function(x,gradi,cifre)  
+> tstud<-function(x,gradi,cifre)
 + round(10^cifre*qt((1+x)/2,gradi))/10^cifre
 > tabstudent=matrix(0,ncol=ncol,nrow=nrow)
->  for (i in 1:length(fiducia)) 
+>  for (i in 1:length(fiducia))
 +  tabstudent[,i]= tstud(fiducia[i],gradi,5)
 >  rownames(tabstudent)=gradi
 > colnames(tabstudent)=fiducia
 \end{Sinput}
 \end{Schunk}
  Per la distribuzione $\chi^2$ si procede esattamente come sopra
- 
+
 \begin{Schunk}
 \begin{Sinput}
 > gradi=c(1:40,50,60,70,80,90,100,150,200)
@@ -4237,10 +4237,10 @@ In modo simile per generare la tabella della distribuzione $t$ di Student si sel
 > ncol=length(fiducia);
 > nrow=length(gradi);
 > cifre=4;
-> chiqua<-function(x,gradi,cifre)  
+> chiqua<-function(x,gradi,cifre)
 + round(10^cifre*qchisq(x,gradi))/10^cifre
 > tabchi=matrix(0,ncol=ncol,nrow=nrow)
-> for (i in 1:length(fiducia)) 
+> for (i in 1:length(fiducia))
 + tabchi[,i]=chiqua(fiducia[i],gradi,5)
 > rownames(tabchi)=gradi
 > colnames(tabchi)=fiducia
@@ -4257,17 +4257,17 @@ Per la  distribuzione di Fisher occorre specificare il numero di gradi di libert
 > ncol=length(gradinum);
 > nrow=length(gradiden);
 > cifre=3;
-> fisher95<-function(gradinum,gradiden,cifre)  
+> fisher95<-function(gradinum,gradiden,cifre)
 + round(10^cifre*qf(fiducia[1],gradinum,gradiden))/10^cifre
 > fisher095=matrix(0,ncol=ncol,nrow=nrow);
-> for (i in 1:length(gradinum))  
+> for (i in 1:length(gradinum))
 + fisher095[,i]= fisher95(gradinum[i],gradiden,cifre)
 >  rownames(fisher095)=gradiden
 > colnames(fisher095)=gradinum
 > fisher099=fisher095;
-> fisher99<-function(gradinum,gradiden,cifre)  
+> fisher99<-function(gradinum,gradiden,cifre)
 + round(10^cifre*qf(fiducia
-+ [2],gradinum,gradiden))/10^cifre;for (i in 1:length(gradinum)) 
++ [2],gradinum,gradiden))/10^cifre;for (i in 1:length(gradinum))
 > fisher099[,i]= fisher99(gradinum[i],gradiden,cifre)
 \end{Sinput}
 \end{Schunk}
@@ -4567,7 +4567,7 @@ Inf 1.28155 1.43953 1.64485  1.95996  2.32635  2.57583   3.29053
 200   1.878
 \end{Soutput}
 \begin{Sinput}
->  
+> 
 \end{Sinput}
 \end{Schunk}
  \vfill
@@ -4685,7 +4685,7 @@ Inf 1.28155 1.43953 1.64485  1.95996  2.32635  2.57583   3.29053
 \eject
 
 \input{../biblio.tex}
- 
+
 Per esempio, consideriamo la serie temporale (oggetto di classe \texttt{ts}) \texttt{discoveries} che mostra l'andamento annuale del numero di scoperte scientifiche. Rappresentiamo graficamente tale serie trascurando  prima e ricordandoci poi della sua struttura  addizionale
 \printindex
 \begin{thebibliography}{}
@@ -4699,6 +4699,6 @@ Per esempio, consideriamo la serie temporale (oggetto di classe \texttt{ts}) \te
 \bibitem[david]{david}
 	{David F. M., (1955), Studies in the History of Probability and Statistics I. Dicing and Gaming (A Note on the History of Probability).} {\it Biometrika Trust}, {\bf 42}, 1--15.
 \bibitem[Murrell]{murrell}{Paul Murrell,  {\it R graphics}, Chapman\& Hall/CRC}
-\end{thebibliography}	 
+\end{thebibliography}
 \printindex
 \end{document}
