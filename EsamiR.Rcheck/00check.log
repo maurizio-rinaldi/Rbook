@@ -21,8 +21,7 @@
 * checking top-level files ... OK
 * checking for left-over files ... OK
 * checking index information ... OK
-* checking package subdirectories ... WARNING
-Subdirectory ‘data’ contains no data sets.
+* checking package subdirectories ... OK
 * checking R files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... OK
@@ -40,8 +39,20 @@ package 'methods' is used but not declared
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
 * checking Rd cross-references ... OK
-* checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
+* checking for missing documentation entries ... WARNING
+Undocumented code objects:
+  ‘mtcars’
+Undocumented data sets:
+  ‘mtcars’
+All user-level objects in a package should have documentation entries.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking for code/documentation mismatches ... WARNING
+Data codoc mismatches from documentation object 'gompertz':
+Variables in data frame 'gompertz'
+  Code: day living mort.rate
+  Docs: carat price
+
 * checking Rd \usage sections ... WARNING
 Undocumented arguments in documentation object 'funzioneCasuale'
   ‘finito’ ‘bignumber’ ‘smallnumber’
@@ -69,11 +80,13 @@ Extensions’ manual.
 * checking for unstated dependencies in examples ... OK
 * checking contents of ‘data’ directory ... WARNING
 Files not of a type allowed in a ‘data’ directory:
-  ‘dataset.Rdata’
+  ‘biotec.rData’ ‘crabs.rData’ ‘dataset.Rdata’ ‘farmacia.rData’
+  ‘kidinterest.rData’ ‘meteo.rData’ ‘studenti.rData’
 Please use e.g. ‘inst/extdata’ for non-R data files
 * checking data for non-ASCII characters ... OK
-* checking data for ASCII and uncompressed saves ... OK
+* checking data for ASCII and uncompressed saves ... WARNING
+  Warning: package needs dependence on R (>= 2.10)
 * checking examples ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 3 WARNINGs, 1 NOTE
+Status: 5 WARNINGs, 1 NOTE

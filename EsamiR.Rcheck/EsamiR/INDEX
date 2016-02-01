@@ -14,6 +14,7 @@ generasin               Genera una funzione seno random (oggetto di
                         classe Funzione).
 getR                    Ricava la formulaR
 getTex                  Ricava la formulaTex
+gompertz                Prices of 50,000 round cut diamonds.
 initialize              Constructor della Class Funzione.
 inversecircolari        generazione di funzioni acos asin e atan
 nuovaFunzione           Crea una nuova funzione

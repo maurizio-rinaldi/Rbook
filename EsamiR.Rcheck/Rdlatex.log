@@ -81,15 +81,16 @@ ive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [5]
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
 (/usr/local/texlive/texmf-local/tex/latex/inconsolata/ts1zi4.fd)
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [6]
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [7]
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [7]
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [8]
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [9]
 No file Rd2.ind.
-[9] (./Rd2.aux)
+[10] (./Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -104,12 +105,12 @@ cal/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/local/texlive/201
 s/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/ut
 mri8a.pfb>
-Output written on Rd2.pdf (9 pages, 79990 bytes).
+Output written on Rd2.pdf (10 pages, 82191 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2015] (kpathsea + Thai support).
-Scanning input file Rd2.idx....done (17 entries accepted, 0 rejected).
-Sorting entries....done (61 comparisons).
-Generating output file Rd2.ind....done (45 lines written, 0 warnings).
+Scanning input file Rd2.idx....done (19 entries accepted, 0 rejected).
+Sorting entries....done (82 comparisons).
+Generating output file Rd2.ind....done (51 lines written, 0 warnings).
 Output written in Rd2.ind.
 Transcript written in Rd2.ilg.
 This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex)
@@ -193,13 +194,14 @@ Writing index file Rd2.idx
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [5]
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
-(/usr/local/texlive/texmf-local/tex/latex/inconsolata/ts1zi4.fd)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [6]
+(/usr/local/texlive/texmf-local/tex/latex/inconsolata/ts1zi4.fd)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [7]
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [8]
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [9] (./Rd2.ind
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [9]
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) (./Rd2.ind
 [10] [11]) (./Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
@@ -210,17 +212,18 @@ Package rerunfilecheck Warning: File `Rd2.out' has changed.
 local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/t
 exmf-local/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/local/texlive/texmf-lo
 cal/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/local/texlive/201
-5/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2015/texmf
--dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/font
-s/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/ur
-w/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/ut
-mri8a.pfb>
-Output written on Rd2.pdf (11 pages, 83893 bytes).
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015
+/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2015/texmf-
+dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts
+/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw
+/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utm
+ri8a.pfb>
+Output written on Rd2.pdf (11 pages, 93143 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.15 [TeX Live 2015] (kpathsea + Thai support).
-Scanning input file Rd2.idx....done (17 entries accepted, 0 rejected).
-Sorting entries....done (61 comparisons).
-Generating output file Rd2.ind....done (45 lines written, 0 warnings).
+Scanning input file Rd2.idx....done (19 entries accepted, 0 rejected).
+Sorting entries....done (82 comparisons).
+Generating output file Rd2.ind....done (51 lines written, 0 warnings).
 Output written in Rd2.ind.
 Transcript written in Rd2.ilg.
 This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex)
@@ -294,8 +297,8 @@ Writing index file Rd2.idx
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/t1phv.fd) (./Rd2.toc
 [1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [2]
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [3]
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [4]
@@ -304,24 +307,26 @@ Writing index file Rd2.idx
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [5]
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
-(/usr/local/texlive/texmf-local/tex/latex/inconsolata/ts1zi4.fd)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [6]
+(/usr/local/texlive/texmf-local/tex/latex/inconsolata/ts1zi4.fd)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [7]
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [8]
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def)
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [9] (./Rd2.ind
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) [9]
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/utf8.def) (./Rd2.ind
 [10] [11]) (./Rd2.aux) ){/usr/local/texlive/texmf-local/fonts/enc/dvips/inconso
 lata/i4-ts1.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc
 }{/usr/local/texlive/texmf-local/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</usr/
 local/texlive/texmf-local/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/lo
-cal/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/tex
-mf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fo
-nts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (11 pages, 84050 bytes).
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/loc
+al/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texm
+f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fon
+ts/type1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (11 pages, 93409 bytes).
 Transcript written on Rd2.log.
 Saving output to 'EsamiR-manual.pdf' ...
 Done
-You may want to clean up by 'rm -rf /var/folders/0s/gmsdl7cn4mjg749hx_mpy8x80000gn/T//RtmpNAD15F/Rd2pdf44973917b22c'
+You may want to clean up by 'rm -rf /var/folders/0s/gmsdl7cn4mjg749hx_mpy8x80000gn/T//RtmpKsIZ11/Rd2pdf4c8653164788'

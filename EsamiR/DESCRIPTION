@@ -13,6 +13,7 @@ depends: methods
 RoxygenNote: 5.0.1
 Collate:
     'compareIntervals.R'
+    'data.R'
     'funzioneCasuale.R'
     'funzioneClass.R'
     'gaussiana.R'
