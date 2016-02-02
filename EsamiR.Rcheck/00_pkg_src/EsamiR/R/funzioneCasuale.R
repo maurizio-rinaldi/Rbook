@@ -109,17 +109,29 @@ switch(tipo,
                k=sample(-5:5,1)
                domain=k*pi+c(-(pi+2*temp[1])/(2*temp[2]),(pi-2*temp[1])/(2*temp[2]))
        },###tan(a x+b)
+<<<<<<< Updated upstream
        asin={ inversecircolari("asin")->temp
+=======
+       asin={ tipolin("asin")->temp
+>>>>>>> Stashed changes
                ftex=temp[[1]]
                fr=temp[[2]]
                environment(fr)<-globalenv()
                domain=temp[[3]]},
+<<<<<<< Updated upstream
        acos={ inversecircolari("acos")->temp
+=======
+       acos={ tipolin("acos")->temp
+>>>>>>> Stashed changes
                ftex=temp[[1]]
                fr=temp[[2]]
                environment(fr)<-globalenv()
                domain=temp[[3]]},
+<<<<<<< Updated upstream
        atan={ inversecircolari("atan")->temp
+=======
+       atan={ tipolin("atan")->temp
+>>>>>>> Stashed changes
                ftex=temp[[1]]
                fr=temp[[2]]
                domain=temp[[3]]},

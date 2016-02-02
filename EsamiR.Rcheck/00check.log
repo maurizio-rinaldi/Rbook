@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 * using log directory ‘/Users/mauriziorinaldi/Documents/github/Rbook/EsamiR.Rcheck’
 * using R version 3.2.3 (2015-12-10)
 * using platform: x86_64-apple-darwin13.4.0 (64-bit)
@@ -6,6 +7,16 @@
 * checking for file ‘EsamiR/DESCRIPTION’ ... OK
 * checking extension type ... Package
 * this is package ‘EsamiR’ version ‘0.2’
+=======
+* using log directory '/Users/mauriziorinaldi/Documents/github/Rbook/Rbook/EsamiR.Rcheck'
+* using R version 3.2.3 (2015-12-10)
+* using platform: x86_64-apple-darwin13.4.0 (64-bit)
+* using session charset: ASCII
+* using option '--as-cran'
+* checking for file 'EsamiR/DESCRIPTION' ... OK
+* checking extension type ... Package
+* this is package 'EsamiR' version '0.1'
+>>>>>>> Stashed changes
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -14,6 +25,7 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
+<<<<<<< Updated upstream
 * checking whether package ‘EsamiR’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
@@ -89,4 +101,21 @@ Please use e.g. ‘inst/extdata’ for non-R data files
 * checking examples ... OK
 * checking PDF version of manual ... OK
 * DONE
+<<<<<<< HEAD
 Status: 5 WARNINGs, 1 NOTE
+=======
+Status: 3 WARNINGs, 1 NOTE
+=======
+* checking whether package 'EsamiR' can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... ERROR
+During startup - Warning messages:
+1: Setting LC_CTYPE failed, using "C" 
+2: Setting LC_TIME failed, using "C" 
+3: Setting LC_MESSAGES failed, using "C" 
+4: Setting LC_MONETARY failed, using "C" 
+* DONE
+Status: 1 ERROR
+>>>>>>> Stashed changes
+>>>>>>> origin/master

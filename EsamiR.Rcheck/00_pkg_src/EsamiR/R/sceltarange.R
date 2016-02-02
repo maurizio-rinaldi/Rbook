@@ -1,6 +1,12 @@
+<<<<<<< Updated upstream
 #' Genera m valori random nell'intervallo da:a esclusi i valori. Con o senza ripetizioni
 #' @param m quanti valori
 #' @param escluso i valori da eliminare
+=======
+#' Definizione di sceltarange
+#' @param m quanti valori
+#' @param escluso i valori da eliminares
+>>>>>>> Stashed changes
 #' @param da valore minimo dei parametri
 #' @param a valore massimo dei parametri
 #' @param logica se il campione prevede ripetizioni
