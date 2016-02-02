@@ -2,11 +2,7 @@
 % Please edit documentation in R/generaHyp.R
 \name{generaHyp}
 \alias{generaHyp}
-<<<<<<< Updated upstream
 \title{Genera una funzione iperbolica random (oggetto di classe Funzione).}
-=======
-\title{Genera una funzione seno random (oggetto di classe Funzione).}
->>>>>>> Stashed changes
 \usage{
 generaHyp(a = 9, b = 2, finito = FALSE, xmax = 10)
 }
@@ -16,26 +12,16 @@ generaHyp(a = 9, b = 2, finito = FALSE, xmax = 10)
 \item{b}{il numero di parametri}
 
 \item{finito}{variabile logica per il dominio}
-<<<<<<< Updated upstream
 
 \item{xmax}{massima estensione se il dominio  e' finito}
-=======
->>>>>>> Stashed changes
 }
 \value{
 la funzione generata (un oggetto di classe Funzione)
 }
 \description{
-<<<<<<< Updated upstream
 Genera una funzione iperbolica random (oggetto di classe Funzione).
 }
 \examples{
 x=generaHyp(finito=TRUE)
-=======
-Genera una funzione seno random (oggetto di classe Funzione).
-}
-\examples{
-generasin(finito=TRUE)
->>>>>>> Stashed changes
 }
 

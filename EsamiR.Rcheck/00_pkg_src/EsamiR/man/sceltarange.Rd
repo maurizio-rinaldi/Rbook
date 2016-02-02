@@ -2,11 +2,7 @@
 % Please edit documentation in R/sceltarange.R
 \name{sceltarange}
 \alias{sceltarange}
-<<<<<<< Updated upstream
 \title{Genera m valori random nell'intervallo da:a esclusi i valori. Con o senza ripetizioni}
-=======
-\title{Definizione di sceltarange}
->>>>>>> Stashed changes
 \usage{
 sceltarange(m = 1, da, a, escluso = c(), logica = T)
 }
@@ -17,11 +13,7 @@ sceltarange(m = 1, da, a, escluso = c(), logica = T)
 
 \item{a}{valore massimo dei parametri}
 
-<<<<<<< Updated upstream
 \item{escluso}{i valori da eliminare}
-=======
-\item{escluso}{i valori da eliminares}
->>>>>>> Stashed changes
 
 \item{logica}{se il campione prevede ripetizioni}
 }
@@ -29,10 +21,6 @@ sceltarange(m = 1, da, a, escluso = c(), logica = T)
 m numeri nell'intervallo specificato
 }
 \description{
-<<<<<<< Updated upstream
 Genera m valori random nell'intervallo da:a esclusi i valori. Con o senza ripetizioni
-=======
-Definizione di sceltarange
->>>>>>> Stashed changes
 }
 

@@ -8,18 +8,11 @@ export(gaussiana)
 export(generaHyp)
 export(generasin)
 export(getR)
-<<<<<<< Updated upstream
 export(inversecircolari)
-=======
->>>>>>> Stashed changes
 export(nuovaFunzione)
 export(prodottoR)
 export(prodottoTex)
 export(sceltarange)
-<<<<<<< Updated upstream
-=======
-export(tipolin)
->>>>>>> Stashed changes
 export(uniforme)
 exportClasses(Funzione)
 exportMethods(initialize)

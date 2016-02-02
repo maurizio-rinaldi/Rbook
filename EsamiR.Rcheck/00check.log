@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 * using log directory ‘/Users/mauriziorinaldi/Documents/github/Rbook/EsamiR.Rcheck’
 * using R version 3.2.3 (2015-12-10)
 * using platform: x86_64-apple-darwin13.4.0 (64-bit)
@@ -7,16 +6,6 @@
 * checking for file ‘EsamiR/DESCRIPTION’ ... OK
 * checking extension type ... Package
 * this is package ‘EsamiR’ version ‘0.2’
-=======
-* using log directory '/Users/mauriziorinaldi/Documents/github/Rbook/Rbook/EsamiR.Rcheck'
-* using R version 3.2.3 (2015-12-10)
-* using platform: x86_64-apple-darwin13.4.0 (64-bit)
-* using session charset: ASCII
-* using option '--as-cran'
-* checking for file 'EsamiR/DESCRIPTION' ... OK
-* checking extension type ... Package
-* this is package 'EsamiR' version '0.1'
->>>>>>> Stashed changes
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -25,7 +14,6 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-<<<<<<< Updated upstream
 * checking whether package ‘EsamiR’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
@@ -53,9 +41,9 @@ package 'methods' is used but not declared
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... WARNING
 Undocumented code objects:
-  ‘mtcars’
+  ‘biotec’ ‘crabs’ ‘farmacia’ ‘meteo’ ‘mtcars’
 Undocumented data sets:
-  ‘mtcars’
+  ‘biotec’ ‘crabs’ ‘farmacia’ ‘meteo’ ‘mtcars’
 All user-level objects in a package should have documentation entries.
 See chapter ‘Writing R documentation files’ in the ‘Writing R
 Extensions’ manual.
@@ -63,7 +51,19 @@ Extensions’ manual.
 Data codoc mismatches from documentation object 'gompertz':
 Variables in data frame 'gompertz'
   Code: day living mort.rate
+  Docs: carat eta
+
+Data codoc mismatches from documentation object 'kidinterest':
+Variables in data frame 'kidinterest'
+  Code: Age Gender Goals Grade Grades Looks Money Race School Sports
+        Urban.Rural
   Docs: carat price
+
+Data codoc mismatches from documentation object 'studenti':
+Variables in data frame 'studenti'
+  Code: Eyes H Hair Sex Sh W X hF hM
+  Docs: Age Gender Goals Grades Looks Money Race School Sport
+        Urban/Rural
 
 * checking Rd \usage sections ... WARNING
 Undocumented arguments in documentation object 'funzioneCasuale'
@@ -90,32 +90,11 @@ See chapter ‘Writing R documentation files’ in the ‘Writing R
 Extensions’ manual.
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking contents of ‘data’ directory ... WARNING
-Files not of a type allowed in a ‘data’ directory:
-  ‘biotec.rData’ ‘crabs.rData’ ‘dataset.Rdata’ ‘farmacia.rData’
-  ‘kidinterest.rData’ ‘meteo.rData’ ‘studenti.rData’
-Please use e.g. ‘inst/extdata’ for non-R data files
+* checking contents of ‘data’ directory ... OK
 * checking data for non-ASCII characters ... OK
 * checking data for ASCII and uncompressed saves ... WARNING
   Warning: package needs dependence on R (>= 2.10)
 * checking examples ... OK
 * checking PDF version of manual ... OK
 * DONE
-<<<<<<< HEAD
-Status: 5 WARNINGs, 1 NOTE
-=======
-Status: 3 WARNINGs, 1 NOTE
-=======
-* checking whether package 'EsamiR' can be installed ... OK
-* checking installed package size ... OK
-* checking package directory ... OK
-* checking DESCRIPTION meta-information ... ERROR
-During startup - Warning messages:
-1: Setting LC_CTYPE failed, using "C" 
-2: Setting LC_TIME failed, using "C" 
-3: Setting LC_MESSAGES failed, using "C" 
-4: Setting LC_MONETARY failed, using "C" 
-* DONE
-Status: 1 ERROR
->>>>>>> Stashed changes
->>>>>>> origin/master
+Status: 4 WARNINGs, 1 NOTE

@@ -1,0 +1,42 @@
+"SESSO";"PESO";"ALTEZZA";"OCCHI";"CAPELLI";"SCARPE";"hMADRE";"hPADRE"
+"1";"M";86;1,9;"marroni";"neri";48;1,58;1,82
+"2";"M";53;1,76;"azzurri";"castani";42;1,7;1,6
+"3";"M";64;1,74;"verdi";"castani";41;1,63;1,8
+"4";"F";61;1,64;"marroni";"castani";39;1,65;1,78
+"5";"M";64;1,8;"verdi";"castani";42;1,56;1,75
+"6";"F";51;1,68;"castani";"castani";38;1,6;1,75
+"7";"M";78;1,78;"marroni";"castani";42;1,65;1,75
+"8";"M";55;1,68;"marroni";"neri";40;1,56;1,7
+"9";"F";59;1,68;"castani";"castani";38;1,58;1,83
+"10";"F";52;1,67;"marroni";"castani";39;1,65;1,7
+"11";"F";55;1,74;"azzurri";"castani";40;1,68;1,82
+"12";"F";65;1,82;"azzurri";"castani";41;1,73;1,83
+"13";"M";78;1,75;"marroni";"castani";43;1,7;1,75
+"14";"M";83;1,93;"marroni";"biondi";47;1,7;1,85
+"15";"M";65;1,73;"marroni";"neri";43;1,65;1,68
+"16";"F";55;1,66;"marroni";"castano scuro";38;1,6;1,8
+"17";"F";55;1,67;"verdi";"castani";40;1,6;1,8
+"18";"M";73;1,8;"marroni";"castani";43;1,63;1,77
+"19";"M";72,5;1,83;"azzurri";"castani";43;1,64;1,8
+"20";"F";60;1,55;"castani";"castani";36;1,6;1,8
+"21";"M";85;1,84;"verdi";"castani";43;1,69;1,69
+"22";"F";60;1,67;"verdi";"castano scuro";38;1,64;1,7
+"23";"F";55;1,68;"azzurri";"biondi";37;1,7;1,7
+"24";"F";60;1,7;"marroni";"biondi";39;1,65;1,9
+"25";"F";51;1,65;"marroni";"castano scuro";37;1,6;1,75
+"26";"F";62;1,61;"verdi";"castano chiaro";39;1,6;1,66
+"27";"F";53;1,67;"azzurri";"castano chiaro";39;1,65;1,65
+"28";"F";60;1,77;"marroni";"castano chiaro";40;1,75;1,75
+"29";"F";48;1,65;"marroni";"castano scuro";37;1,6;1,75
+"30";"M";80;1,78;"marroni";"biondi";43;1,6;1,75
+"31";"M";80;1,85;"azzurri";"neri";46;1,65;1,78
+"32";"M";65;1,74;"marroni";"castano chiaro";41;1,65;1,85
+"33";"M";64;1,72;"marroni";"neri";42;1,66;1,7
+"34";"F";50;1,57;"azzurri";"biondi";37;1,58;1,74
+"35";"F";49;1,6;"verdi";"castano chiaro";40;1,58;1,75
+"36";"F";62;1,76;"verdi";"biondi";40;1,7;1,73
+"37";"M";81;1,75;"azzurri";"castani";47;1,6;1,75
+"38";"F";53;1,65;"verdi";"castani";38;1,55;1,85
+"39";"F";47;1,53;"azzurri";"castani";37;1,5;1,7
+"40";"M";80;1,8;"verdi";"castani";44;1,68;1,7
+"41";"F";55;1,64;"marroni";"castano scuro";38;1,65;1,75

@@ -1,32 +1,12 @@
-<<<<<<< Updated upstream
 * installing *source* package ‘EsamiR’ ...
-=======
-During startup - Warning messages:
-1: Setting LC_CTYPE failed, using "C" 
-2: Setting LC_TIME failed, using "C" 
-3: Setting LC_MESSAGES failed, using "C" 
-4: Setting LC_MONETARY failed, using "C" 
-* installing *source* package 'EsamiR' ...
->>>>>>> Stashed changes
 ** R
 ** data
 *** moving datasets to lazyload DB
+** inst
 ** preparing package for lazy loading
-<<<<<<< Updated upstream
 Creating a generic function for ‘plot’ from package ‘graphics’ in package ‘EsamiR’
-=======
-Creating a generic function for 'plot' from package 'graphics' in package 'EsamiR'
->>>>>>> Stashed changes
 ** help
 *** installing help indices
 ** building package indices
 ** testing if installed package can be loaded
-<<<<<<< Updated upstream
-=======
-During startup - Warning messages:
-1: Setting LC_CTYPE failed, using "C" 
-2: Setting LC_TIME failed, using "C" 
-3: Setting LC_MESSAGES failed, using "C" 
-4: Setting LC_MONETARY failed, using "C" 
->>>>>>> Stashed changes
 * DONE (EsamiR)
