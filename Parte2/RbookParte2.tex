@@ -86,7 +86,7 @@ Le variabili aleatorie  discrete che  assumono un numero limitato di valori si d
 \item{} (Testa, Croce).
 \item{} I numeri interi
 \end{itemize}
-Per caratterizzare completamente una variabile aleatoria discreta oltre ai valori che questa può  assumere occorre conoscere la probabilità  di questi valori.
+Per caratterizzare completamente una variabile aleatoria discreta oltre ai valori che questa pu\`o  assumere occorre conoscere la probabilit\`a  di questi valori.
 
 
 Per semplicit\`a considereremo variabili aleatorie finite.\\
@@ -106,7 +106,7 @@ Se l'alfabeto consiste di tutte le lettere minuscole dell'alfabeto ordinario e n
 > sample(letters,8)
 \end{Sinput}
 \begin{Soutput}
-[1] "t" "a" "w" "u" "b" "v" "f" "n"
+[1] "z" "p" "w" "e" "n" "v" "j" "a"
 \end{Soutput}
 \end{Schunk}
   Se invece l'alfabeto consiste delle basi del DNA
@@ -116,7 +116,7 @@ Se l'alfabeto consiste di tutte le lettere minuscole dell'alfabeto ordinario e n
 > sample(alfabeto,2)
 \end{Sinput}
 \begin{Soutput}
-[1] "A" "G"
+[1] "C" "A"
 \end{Soutput}
 \begin{Sinput}
 > 
@@ -128,7 +128,7 @@ Notiamo che
 >  sample(alfabeto)
 \end{Sinput}
 \begin{Soutput}
-[1] "A" "G" "T" "C"
+[1] "G" "A" "T" "C"
 \end{Soutput}
 \end{Schunk}
 restituisce una permutazione dell'alfabeto, mentre chiedendo un campione di lunghezza superiore alla lunghezza dell'alfabeto otteniamo un messaggio di errore. Possiamo per\`o immaginare di re-immettere la lettera estratta nell'urna dopo ogni estrazione. In questo caso non c'\`e limite alla sequenza generata.
@@ -139,11 +139,23 @@ Per esempio
 > sample(alfabeto,5,replace=T)
 \end{Sinput}
 \begin{Soutput}
-[1] "croce" "croce" "croce" "testa" "testa"
+[1] "croce" "croce" "croce" "testa" "croce"
 \end{Soutput}
 \end{Schunk}
 Il precursore  del dado era chiamato astragalo ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
-Gli  astragali sono dei piccoli ossicini di forma irregolare ed hanno 6 facce ma atterranno in  modo stabile solo su 4 di esse numerate 1, 3, 4 e 6  con probabilit\`a all'incirca 0.4 per il 3 e il 4  e di 0.1 per l'1 e il 6.
+Gli  astragali sono dei piccoli ossicini di forma irregolare ed hanno 6 facce ma atterranno in  modo stabile solo su 4 di esse numerate 1, 3, 4 e 6  con probabilit\`a all'incirca 0.4 per il 3 e il 4  e di 0.1 per l'1 e il 6. In altre parole l'astragalo \`e descritto dalla tabella
+
+\begin{center}\begin{tabular}{|r|r |}
+\hline
+ valore&  probabilit\`a \\
+\hline
+1&0.1\\
+3 &0.4\\
+4& 0.4\\
+6&0.1\\
+ \hline
+\end{tabular}
+\end{center}
 Il tiro pi\`u gettonato all'epoca era l'uscita di 4 facce diverse nel lancio di 4 astragali e si chiamava {\it Venus}.
 Il lancio considerato peggiore sul singolo lancio era l'1 chiamato cane o avvoltoio.
 \begin{figure}[htbp]
@@ -159,7 +171,7 @@ Per simulare un astragalo su un computer
 > sample(c(1,3,4,6),4,replace=T,prob=c(0.1,0.4,0.4,0.1))
 \end{Sinput}
 \begin{Soutput}
-[1] 4 4 3 4
+[1] 4 4 4 4
 \end{Soutput}
 \end{Schunk}
 
@@ -182,13 +194,13 @@ le uscite rilevate
 Volendo invece simulare una combinazione da giocare al SuperEnalotto possiamo scrivere
 \begin{Schunk}
 \begin{Sinput}
-> x<-sample(1:90,6,replace=T);x
+> (x<-sample(1:90,6,replace=T))
 \end{Sinput}
 \begin{Soutput}
 [1] 13 76 66 76 17 53
 \end{Soutput}
 \end{Schunk}
- I numeri usciti sono stati salvati  in una variabile \texttt{x}, per poter effettuare la ricerca di indicatori statistici.
+I numeri usciti sono stati salvati  in una variabile \texttt{x}, per poter effettuare la ricerca di indicatori statistici.
 Il comando che consente di ordinare una lista o un vettore \`e \texttt{sort}, esso pu\`o essere usato in associazione al nome di una variabile o di una lista, ossia:
 \begin{equation}\texttt{sort}(\varia{variabile/lista})\end{equation}
 Volendo ordinare i numeri precedentemente ricavati scriveremo
@@ -212,7 +224,8 @@ $\texttt{mean}(\varia{variabile})$.
 Ad esempio, lavorando con la lunghezza del sepalo di 150 piante di iris
 \begin{Schunk}
 \begin{Sinput}
-> mean(x=iris[,1])
+> x=iris[,1]
+> mean(x)
 \end{Sinput}
 \begin{Soutput}
 [1] 5.843333
@@ -227,7 +240,7 @@ Possiamo calcolare la varianza come
 > var(x)
 \end{Sinput}
 \begin{Soutput}
-[1] 814.9667
+[1] 0.6856935
 \end{Soutput}
 \end{Schunk}
 \item{}Deviazione Standard campionaria.\vskip0pt
@@ -239,7 +252,7 @@ Sempre basandosi sull'esempio precedente scriveremo
 > sd(x)
 \end{Sinput}
 \begin{Soutput}
-[1] 28.54762
+[1] 0.8280661
 \end{Soutput}
 \end{Schunk}
 
@@ -251,7 +264,7 @@ Sempre basandosi sull'esempio precedente scriveremo
 \end{Sinput}
 \begin{Soutput}
   0%  25%  50%  75% 100% 
-13.0 26.0 59.5 73.5 76.0 
+ 4.3  5.1  5.8  6.4  7.9 
 \end{Soutput}
 \end{Schunk}
  Volendo ricavare i decili dovremo scrivere:
@@ -265,21 +278,21 @@ Nell'esempio:
 \end{Sinput}
 \begin{Soutput}
   0%  10%  20%  30%  40%  50%  60%  70%  80%  90% 100% 
-13.0 15.0 17.0 35.0 53.0 59.5 66.0 71.0 76.0 76.0 76.0 
+4.30 4.80 5.00 5.27 5.60 5.80 6.10 6.30 6.52 6.90 7.90 
 \end{Soutput}
 \end{Schunk}
 Si noti che \texttt{quantile} ammette 9 varianti specificabili con l'opzione $\texttt{type}=n$ dove $n$ va da 1 a 9.
 Per esempio
 \begin{Schunk}
 \begin{Sinput}
-> quantile(x,type=4)
+> quantile(x,type=2)
 \end{Sinput}
 \begin{Soutput}
   0%  25%  50%  75% 100% 
-  13   15   53   71   76 
+ 4.3  5.1  5.8  6.4  7.9 
 \end{Soutput}
 \end{Schunk}
-Sui dati in esame le 9 varianti coincidono.
+Sui dati in esame le 9 varianti coincidono. La convenzione da noi adottata corrisponde al numero 2
 \end{itemize}
 Per quanto riguarda gli indicatori statistici nel caso di dati ripetuti basta notare che se la lista $x$ contiene i valori e la lista $f$ le frequenze assolute il comando
 $$\varia{rep}(x,f)$$ costruisce un'unica lista dei dati inclusiva delle ripetizioni.
@@ -289,15 +302,14 @@ Per esempio
 \begin{Sinput}
 > x=1:6
 > f=c(9,7,9,7,8,10)
-> y=rep(x,f)
-> y
+> (dati=rep(x,f))
 \end{Sinput}
 \begin{Soutput}
  [1] 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 4 4 4 4 4
 [31] 4 4 5 5 5 5 5 5 5 5 6 6 6 6 6 6 6 6 6 6
 \end{Soutput}
 \end{Schunk}
-Ovviamente senza bisogno di visualizzare \texttt{y} possiamo calcolarne tutti gli indicatori statistici.
+Ovviamente senza bisogno di visualizzare \texttt{dati} possiamo calcolarne tutti gli indicatori statistici.
 Il comando
 \begin{Schunk}
 \begin{Sinput}
@@ -311,20 +323,8 @@ restituisce le frequenze cumulate, dalle quali si possono ricavare facilmente la
 i quantili.
 
 \subsection{Raggruppamenti in classi}
-\begin{Schunk}
-\begin{Sinput}
-> mese=month(as.POSIXlt(date(),format="%a %b %d %H:%M:%S %Y"))
-> mesit= c("Dicembre" ,"Gennaio" ,"Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settemnbre","Ottobre","Novembre")
-> mesi=1:12
-> names(mesi)=mesit
-> m=names(mesi[mese])
-> anno=year(as.POSIXlt(date(),format="%a %b %d %H:%M:%S %Y"))
-> if(mese==1) anno=anno-1
-> stringa=paste("Milano/", anno ,"/",m,"?format=csv",sep="")
-\end{Sinput}
-\end{Schunk}
 Consideriamo la rilevazione della temperatura media giornaliera di Milano nel mese di Gennaio 2016.
-Scriviamo
+Scegliamo il mese
 \begin{Schunk}
 \begin{Soutput}
 >stringa="Milano/2016/Gennaio?format=csv"
@@ -339,19 +339,27 @@ Scriviamo
 \end{Schunk}
 \begin{Schunk}
 \begin{Sinput}
+> meteo[1,]
+\end{Sinput}
+\begin{Soutput}
+        V1   V2        V3      V4      V5              V6
+1 LOCALITA DATA TMEDIA °C TMIN °C TMAX °C PUNTORUGIADA °C
+         V7            V8              V9           V10
+1 UMIDITA % VISIBILITA km VENTOMEDIA km/h VENTOMAX km/h
+           V11             V12               V13        V14
+1 RAFFICA km/h PRESSIONESLM mb PRESSIONEMEDIA mb PIOGGIA mm
+       V15
+1 FENOMENI
+\end{Soutput}
+\begin{Sinput}
 > dim(meteo)
 \end{Sinput}
 \begin{Soutput}
 [1] 32 15
 \end{Soutput}
 \begin{Sinput}
-> meteo[-1,3]
+> #meteo[-1,3]
 \end{Sinput}
-\begin{Soutput}
- [1] 6 4 4 3 6 6 7 6 5 3 2 3 6 6 6 8 6 5 5 6 7 8 8 7 6 3 2 1 1 6
-[31] 5
-Levels: 1 2 3 4 5 6 7 8 TMEDIA °C
-\end{Soutput}
 \end{Schunk}
 A questo punto eliminiamo i livelli di \texttt{meteo} con il comando \texttt{as.vector} e consideriamo il risultato come numerico con
 \begin{Schunk}
@@ -360,44 +368,46 @@ A questo punto eliminiamo i livelli di \texttt{meteo} con il comando \texttt{as.
 > Milano
 \end{Sinput}
 \begin{Soutput}
- [1] 6 4 4 3 6 6 7 6 5 3 2 3 6 6 6 8 6 5 5 6 7 8 8 7 6 3 2 1 1 6
-[31] 5
+ [1]  1  1  1  2  3  5  3  2  5  5  6  5  7  2  5  5  6  0 -1  0
+[21]  0  0  2  2  4  7  7  9 10  8  8
 \end{Soutput}
 \begin{Sinput}
 > quantile(Milano)
 \end{Sinput}
 \begin{Soutput}
   0%  25%  50%  75% 100% 
- 1.0  3.5  6.0  6.0  8.0 
+-1.0  1.5  4.0  6.0 10.0 
 \end{Soutput}
 \end{Schunk}
 L'ultimo comando in particolare ci fornisce minimo e massimo dei dati.
 Possiamo esaminare la serie temporale dei dati con i comandi
 \begin{Schunk}
 \begin{Sinput}
-> plot(Milano,type="l",xlab="settembre 2010 a milano",ylab="temperatura media")
+> plot(Milano,type="l",xlab=paste(m,anno, "a milano"),ylab="temperatura media")
 \end{Sinput}
 \end{Schunk}
-ottenendo la figura~\ref{datiist}
+ottenendo la figura~\ref{fig:datiist}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-029}
-\caption{ Andamento della temperatura a settembre 2010. }
+\includegraphics{RbookParte2-030}
+\caption{ Andamento della temperatura a Gennaio 2016  a Milano. }
 \label{fig:datiist}
 \end{center}
 \end{figure}
 
-Raggruppiamo ora i dati in classi comprese  tra due estremi che comprendano certamente tutti i dati, per esempio 13 e 23, decidendo di applicare un passo di 2 e vedere come si distribuiscono. Il comando \texttt{cut} associa a ciascun dato la classe di appartenenza selezionata in base ai punti di taglio.
+Raggruppiamo ora i dati in classi comprese  tra due estremi che comprendano certamente tutti i dati, per esempio -2 e 10, decidendo di applicare un passo di 2 e vedere come si distribuiscono. Il comando \texttt{cut} associa a ciascun dato la classe di appartenenza selezionata in base ai punti di taglio.
 
 \begin{Schunk}
 \begin{Sinput}
-> cut(Milano,breaks=seq(13.,23.,by=2))
+> tagli=c(-2,0,2,4,6,10)
+> cut(Milano,breaks=tagli)
 \end{Sinput}
 \begin{Soutput}
- [1] <NA> <NA> <NA> <NA> <NA> <NA> <NA> <NA> <NA> <NA> <NA> <NA>
-[13] <NA> <NA> <NA> <NA> <NA> <NA> <NA> <NA> <NA> <NA> <NA> <NA>
-[25] <NA> <NA> <NA> <NA> <NA> <NA> <NA>
-Levels: (13,15] (15,17] (17,19] (19,21] (21,23]
+ [1] (0,2]  (0,2]  (0,2]  (0,2]  (2,4]  (4,6]  (2,4]  (0,2] 
+ [9] (4,6]  (4,6]  (4,6]  (4,6]  (6,10] (0,2]  (4,6]  (4,6] 
+[17] (4,6]  (-2,0] (-2,0] (-2,0] (-2,0] (-2,0] (0,2]  (0,2] 
+[25] (2,4]  (6,10] (6,10] (6,10] (6,10] (6,10] (6,10]
+Levels: (-2,0] (0,2] (2,4] (4,6] (6,10]
 \end{Soutput}
 \end{Schunk}
 
@@ -405,11 +415,11 @@ Il comando \texttt{table} conta i dati di ciascuna classe
 
 \begin{Schunk}
 \begin{Sinput}
-> table(cut(Milano,breaks=seq(13.,23.,by=2)))
+> table(cut(Milano,breaks=tagli))
 \end{Sinput}
 \begin{Soutput}
-(13,15] (15,17] (17,19] (19,21] (21,23] 
-      0       0       0       0       0 
+(-2,0]  (0,2]  (2,4]  (4,6] (6,10] 
+     5      8      3      8      7 
 \end{Soutput}
 \end{Schunk}
 Si noti che la suddivisione in classi prevede intervalli aperti a sinistra e chiusi a destra.
@@ -417,7 +427,7 @@ Per suddividere in modo che gli intervalli siano chiusi a sinistra e aperti a de
 Possiamo anche usare il comando \texttt{seq} per specificare i tagli.
  \begin{eqnarray*}
 \texttt{table(cut}( \varia{variabile},\texttt{breaks=seq}(\varia{estremo inf},\\
-\varia{estremo sup},\texttt{by}=\varia{passo}),\texttt{right=FALSE}))
+\varia{estremo sup},\texttt{by}=\varia{passo}),\texttt{right=TRUE}))
 \end{eqnarray*}
 o in modo  pi\`u generale
 \begin{eqnarray*}
@@ -427,12 +437,11 @@ o in modo  pi\`u generale
 estremamente utile in quanto consente di raggruppare i dati in classi non necessariamente di ugual ampiezza.
 \begin{Schunk}
 \begin{Sinput}
-> table(cut(Milano,breaks=c(12.5,14,15,16, 18,20,22.5),
-+ right=F))
+> table(cut(Milano,breaks=c(-3,1,3,4,5,6,8,10)))
 \end{Sinput}
 \begin{Soutput}
-[12.5,14)   [14,15)   [15,16)   [16,18)   [18,20) [20,22.5) 
-        0         0         0         0         0         0 
+(-3,1]  (1,3]  (3,4]  (4,5]  (5,6]  (6,8] (8,10] 
+     8      7      1      6      2      5      2 
 \end{Soutput}
 \end{Schunk}
 Volendo raggruppare in classi i dati delle precedenti uscite del dado possiamo scrivere
@@ -474,7 +483,7 @@ Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del 
 \end{Schunk}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-036}
+\includegraphics{RbookParte2-037}
 \caption{ Diagramma a colonne e areogramma per il lancio di un dado.}
 \label{fig:datiiist}
 \end{center}
@@ -499,7 +508,7 @@ lasciando \textsf{R} libero di scegliere i punti di taglio (pannelli a sinistra 
 \end{Schunk}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-040}
+\includegraphics{RbookParte2-041}
 \caption{ Areogramma dei dati della temperatura. Scelta automatica dei punti di taglio.}
 \label{fig:datiistmilano}
 \end{center}
@@ -518,7 +527,7 @@ otteniamo la figura~\ref{fig:boxplotdado}
 > boxplot(dadi100)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-041}
+\includegraphics{RbookParte2-042}
 \caption{Boxplot dei risultati del lancio di un dado}\label{fig:boxplotdado}
 \end{center}
 \end{figure}
@@ -539,7 +548,7 @@ ad esempio (facendo riferimento ai precedenti dati):
 fornisce in uscita  la Figura~\ref{fig:pie}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-043}
+\includegraphics{RbookParte2-044}
 \caption{Diagramma a torta per il lancio di un dado equo.}
 \label{fig:pie}
 \end{center}
@@ -563,7 +572,7 @@ Per analizzare questi dati conviene preliminarmente tracciarne un diagramma a di
 > plot(x,y)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-045}
+\includegraphics{RbookParte2-046}
 \caption{Diagramma a dispersione tempo/concentrazione. }
 \label{fig:scatte}
 \end{center}
@@ -578,7 +587,7 @@ Possiamo inoltre determinare il coefficiente di correlazione lineare
 \end{Soutput}
 \end{Schunk}
 Per definire un modello di relazione lineare occorre usare il comando \texttt{lm} (\varia{linear model}).
-Nella sua generica forma il comando \`e espresso come\footnote{ Per digitare la tilde  \mytilde\;  su Mac premere ALT 5 su PC invece il tasto Alt Gr (attivazione del codice ASCII) e sul tastierino numerico digitare il numero 126. Lavorando su un portatile il tastierino numerico \`e spesso incorporato nella tastiera con colorazione blue dei tasti.}
+Nella sua generica forma il comando \`e espresso come\footnote{ Per digitare la tilde  \mytilde\;  su Mac premere ALT 5 su PC invece il tasto Alt Gr (attivazione del codice ASCII) e sul tastierino numerico digitare il numero 126. Lavorando su un portatile il tastierino numerico \`e spesso incorporato nella tastiera con colorazione blu dei tasti.}
 $$\texttt{lm}(\varia{y} \sim  \varia{x})$$
 Otteniamo i valori di pendenza e intercetta.
 
@@ -618,11 +627,110 @@ Coefficients:
 In tal modo otteniamo il grafico~\ref{fig:duerettex}.
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-049}
+\includegraphics{RbookParte2-050}
 \caption{Rette di regressione. In blu $R_x$, in verde $R_y$.}
 \label{fig:duerettex}
 \end{center}
 \end{figure}
+
+
+\subsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
+Sempre da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui dei ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
+\begin{Schunk}
+\begin{Sinput}
+> age=18:29
+> height=c(76.1,77,78.1,78.2,78.8,79.7,79.9,81.1,81.2,81.8,82.8,83.5)
+\end{Sinput}
+\end{Schunk}
+Possiamo quindi costruire il \texttt{data.frame}
+\begin{Schunk}
+\begin{Sinput}
+> village=data.frame(age=age,height=height)
+\end{Sinput}
+\end{Schunk}
+Ora diamo una prima occhiata ai dati:
+ %code chunk
+\begin{figure}[htbp]
+\begin{center}
+\begin{Schunk}
+\begin{Sinput}
+> plot(age,height)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{RbookParte2-053}
+\caption{I bambini di Kalama}
+\label{kalama}
+\end{center}
+\end{figure}
+L'andamento \`e lineare. Determiniamo la retta di regressione
+per predire l?altezza media nota l'et\`a in mesi.
+%code chunk
+\begin{Schunk}
+\begin{Sinput}
+> ris=lm(height~age)
+> ris
+\end{Sinput}
+\begin{Soutput}
+Call:
+lm(formula = height ~ age)
+
+Coefficients:
+(Intercept)          age  
+     64.928        0.635  
+\end{Soutput}
+\begin{Sinput}
+> plot(ris)
+\end{Sinput}
+\end{Schunk}
+
+La retta di regressione cercata ha formula:
+$$h(\texttt{age})=64.93+ 0.63\, \texttt{age}$$
+
+Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l?altezza a 27.5 mesi di et\`a:
+oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione
+\texttt{predict}:
+%codechunk
+\begin{Schunk}
+\begin{Sinput}
+> predict(ris,data.frame(age=27.5))
+\end{Sinput}
+\begin{Soutput}
+       1 
+82.38986 
+\end{Soutput}
+\end{Schunk}
+
+fornendo in input i parametri della retta ed un preciso valore della variabile indipendente (richiamata col proprio nome).
+Molti comandi di \textsf{R} sono in grado di manipolare dataframe  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
+Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt{village} direttamente al comando:
+\begin{Schunk}
+\begin{Sinput}
+> res=lm(height~age,data=village)
+> res
+\end{Sinput}
+\begin{Soutput}
+Call:
+lm(formula = height ~ age, data = village)
+
+Coefficients:
+(Intercept)          age  
+     64.928        0.635  
+\end{Soutput}
+\end{Schunk}
+con la formula $lm(y ~x,data=dataset)$.
+Inoltre possiammo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
+\begin{Schunk}
+\begin{Sinput}
+> oldpar<-par(mfrow=c(2,2))
+> par(ask=FALSE);plot(lm(height~age))
+> oldpar
+\end{Sinput}
+\begin{Soutput}
+$mfrow
+[1] 1 1
+\end{Soutput}
+\end{Schunk}
+\includegraphics{RbookParte2-057}
 Consideriamo ora il seguente \emph{dataset} di mammiferi  in cui le 2 variabili rappresentano  le dimensioni del corpo e del cervello.
 \begin{Schunk}
 \begin{Sinput}
@@ -705,14 +813,7 @@ Per prima cosa tracciamo il grafico dei punti  in scala non trasformata e, visto
 \end{Schunk}
 come in Figura~\ref{fig:duemammals}.\begin{figure}[htbp]
 \begin{center}
-\begin{Schunk}
-\begin{Sinput}
-> par(mfrow=c(1,2))
-> plot(mammals)
-> plot(mammals,log="xy")
-\end{Sinput}
-\end{Schunk}
-\includegraphics{RbookParte2-052}
+\includegraphics{RbookParte2-060}
 \caption{Diagramma a dispersione massa corporea/massa del cervello in scala normale ed in scala logaritmica. }
 \label{fig:duemammals}
 \end{center}
@@ -728,7 +829,7 @@ Visti i  risultati ottenuti usando la scala logaritmica tracciamo anche la corri
 \end{Schunk}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-054}
+\includegraphics{RbookParte2-062}
 \caption{ Retta di regressione. Dimensione del corpo e del cervello. Si noti la posizione dell'uomo.}
 \label{duerette}
 \end{center}
@@ -757,7 +858,7 @@ A questi nomi possiamo aggiungere diversi prefissi\vskip10pt
 \end{tabular}
 \vskip10pt
 per caratterizzare diversi aspetti.
-
+\begin{comment}
 \begin{itemize}
 \begin{question}
   Figure~\ref{fig:scatterplot} shows a scatterplot. Which of the
@@ -766,7 +867,7 @@ per caratterizzare diversi aspetti.
 \setkeys{Gin}{width=0.7\textwidth}
 \begin{figure}[htb!]
 \begin{center}
-\includegraphics{RbookParte2-056}
+\includegraphics{RbookParte2-064}
 \caption{\label{fig:scatterplot} Scatterplot}
 \end{center}
 \end{figure}
@@ -796,7 +897,7 @@ per caratterizzare diversi aspetti.
 %% \exsolution{01100}
 %% \exname{Multiple choice}
 
-
+\end{comment}
 \subsection{Distribuzione normale}
 \subsubsection{La funzione \texttt{dnorm}}
 Come appena visto \textsf{R }indica con il nome \texttt{dnorm}, la densit\`a normale o gaussiana. Essa accetta come parametri sia la media $\mu$ che la deviazione standard $\sigma$ come \`e possibile verificare con il comando \texttt{formals} che ci fornisce gli argomenti di una funzione e gli eventuali valori preassegnati.
@@ -829,7 +930,7 @@ Il grafico~(\ref{normalesta}) della gaussiana
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-059}
+\includegraphics{RbookParte2-067}
 \caption{ Grafico della normale standard nell'intervallo $[-2.5,2.5]$. }
 \label{normalesta}
 \end{center}
@@ -868,12 +969,33 @@ Per cui possiamo scrivere:
 \end{Schunk}
 
 
- \subsubsection{La funzione \texttt{qnorm} e la tabella della densit\`a di Gauss}
+\subsubsection{La funzione \texttt{qnorm} e la tabella della densit\`a di Gauss}
+Notiamo che $$\texttt{pnorm}(x)=\int_{-\infty}^x \texttt{dnorm}(s)ds=1-\frac{1-y}{2}=\frac{1+y}{2}$$ mentre la funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm} 
+Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di area $A$   fornisca l'ascissa $u=U(A)$ come in figura in modo che l'area tra - $u$ e $u$ sia esattamente pari ad $A$.  
 
+
+
+
+ 
+\begin{Schunk}
+\begin{Sinput}
+> par(mfrow=c(1,2))
+> s2(-1.96,1.96)
+> s3(-4,1.96)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{RbookParte2-072}
+ 
+Allora la funzione che riproduce la tabella è
+ 
+\begin{Schunk}
+\begin{Sinput}
+> U <-function (a) qnorm (1/2 + a/2)
+\end{Sinput}
+\end{Schunk}
 Notiamo preliminarmente che
 se $$ \int_{-x}^x \texttt{dnorm}(s)ds= y$$ allora
-$$\texttt{pnorm}(x)=\int_{-\infty}^x \texttt{dnorm}(s)ds=1-\frac{1-y}{2}=\frac{1+y}{2}$$
- La funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}  quindi
+ quindi
 $$x=\texttt{qnorm}\left(\frac{1+y}{2}\right)$$
 In termini pratici possiamo introdurre la funzione
 \begin{Schunk}
@@ -892,8 +1014,8 @@ fornisce fissato il livello di fiducia l'ascissa $x$  tale che l'intervallo simm
 \end{Schunk}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-066}
-\caption{ Code della distribuzione normale}
+\includegraphics{RbookParte2-077}
+\caption{Code della distribuzione normale}
 \label{normaletratto}
 \end{center}
 \end{figure}
@@ -933,8 +1055,8 @@ Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di l
 > curve(dt(x,10),-2,2)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-068}
-\caption{ Grafico della distribuzione di Student a 10 gradi di libert\`a. }
+\includegraphics{RbookParte2-079}
+\caption{Grafico della distribuzione di Student a 10 gradi di libert\`a. }
 \label{fig:graficostudent1}
 \end{center}
 \end{figure}
@@ -950,8 +1072,8 @@ Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cu
 > legend("topleft", c("df=2","df=25","normale"),pch=15,col=1:3);
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-069}
-\caption{Grafico della distribuzione di Student a 10 gradi di libert. }
+\includegraphics{RbookParte2-080}
+\caption{Grafico della distribuzione di Student a 10 gradi di libert\`a. }
 \label{fig:graficostudent}
 \end{center}
 \end{figure}
@@ -1070,41 +1192,29 @@ Ad esempio eseguiamo un $t$-test per dati appaiati, tra $x=(1,2,3,4)$ e $y=(3,2,
 Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
 \begin{Schunk}
 \begin{Sinput}
-> read.table("http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html",
-+ skip=39,header=T,nrow=478,sep="\t")->kidinterest
+> data(kidinterest)
+> str(kidinterest)
 \end{Sinput}
-\end{Schunk}
-\begin{Schunk}
 \begin{Soutput}
-  Gender Grade Age  Race Urban.Rural School   Goals
-1    boy     5  11 White       Rural    Elm  Sports
-2    boy     5  10 White       Rural    Elm Popular
-3   girl     5  11 White       Rural    Elm Popular
-4   girl     5  11 White       Rural    Elm Popular
-5   girl     5  10 White       Rural    Elm Popular
-6   girl     5  11 White       Rural    Elm Popular
-  Grades Sports Looks Money
-1      1      2     4     3
-2      2      1     4     3
-3      4      3     1     2
-4      2      3     4     1
-5      4      2     1     3
-6      4      2     1     3
+'data.frame':	478 obs. of  11 variables:
+ $ Gender     : Factor w/ 2 levels "boy","girl": 1 1 2 2 2 2 2 2 2 2 ...
+ $ Grade      : int  5 5 5 5 5 5 5 5 5 5 ...
+ $ Age        : int  11 10 11 11 10 11 10 10 10 10 ...
+ $ Race       : Factor w/ 2 levels "Other","White": 2 2 2 2 2 2 2 2 2 2 ...
+ $ Urban.Rural: Factor w/ 3 levels "Rural","Suburban",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ School     : Factor w/ 9 levels "Brentwood Elementary",..: 4 4 4 4 4 4 4 4 4 4 ...
+ $ Goals      : Factor w/ 3 levels "Grades","Popular",..: 3 2 2 2 2 2 2 1 3 3 ...
+ $ Grades     : int  1 2 4 2 4 4 3 3 3 4 ...
+ $ Sports     : int  2 1 3 3 2 2 4 4 2 3 ...
+ $ Looks      : int  4 4 1 4 1 1 1 2 1 2 ...
+ $ Money      : int  3 3 2 1 3 3 2 1 4 1 ...
 \end{Soutput}
 \end{Schunk}
+
 Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
 %codechunk
-\end{document}
+ 
 \begin{Schunk}
-\begin{Sinput}
-> colnames(kidinterest)
-\end{Sinput}
-\begin{Soutput}
- [1] "Gender"      "Grade"       "Age"        
- [4] "Race"        "Urban.Rural" "School"     
- [7] "Goals"       "Grades"      "Sports"     
-[10] "Looks"       "Money"      
-\end{Soutput}
 \begin{Sinput}
 > interessi=kidinterest[,c(1,5,7)]
 > head(interessi)
@@ -1159,6 +1269,7 @@ Urban.Rural Grades Popular Sports
    Urban       103      49     26
 \end{Soutput}
 \end{Schunk}
+ 
 Il test $\chi^2$  di indipendenza consente di  verificare se  due variabili sono indipendenti.
 Se consideriamo le due variabili precedenti sesso e interessi.
 \textsf{R}  dispone del comando \texttt{chisq.test},\index{\texttt{chisq.tst},test $\chi^2$}
@@ -1168,17 +1279,20 @@ Nell'esempio
 %code chunk
 \begin{Schunk}
 \begin{Sinput}
-> studenti<-read.csv("../filedati/studenti.csv")
-> head(studenti)
+> data(studenti)
+> str(studenti)
 \end{Sinput}
 \begin{Soutput}
-  X Sex  W    H    Eyes    Hair Sh   hM   hF
-1 1   M 86 1.90 castani    neri 48 1.58 1.82
-2 2   M 53 1.76 azzurri castani 42 1.70 1.60
-3 3   M 64 1.74   verdi castani 41 1.63 1.80
-4 4   F 61 1.64 castani castani 39 1.65 1.78
-5 5   M 64 1.80   verdi castani 42 1.56 1.75
-6 6   F 51 1.68 castani castani 38 1.60 1.75
+'data.frame':	96 obs. of  9 variables:
+ $ X   : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ Sex : Factor w/ 2 levels "F","M": 2 2 2 1 2 1 2 2 1 1 ...
+ $ W   : num  86 53 64 61 64 51 78 55 59 52 ...
+ $ H   : num  1.9 1.76 1.74 1.64 1.8 1.68 1.78 1.68 1.68 1.67 ...
+ $ Eyes: Factor w/ 3 levels "azzurri","castani",..: 2 1 3 2 3 2 2 2 2 2 ...
+ $ Hair: Factor w/ 3 levels "biondi","castani",..: 3 2 2 2 2 2 2 3 2 2 ...
+ $ Sh  : int  48 42 41 39 42 38 42 40 38 39 ...
+ $ hM  : num  1.58 1.7 1.63 1.65 1.56 1.6 1.65 1.56 1.58 1.65 ...
+ $ hF  : num  1.82 1.6 1.8 1.78 1.75 1.75 1.75 1.7 1.83 1.7 ...
 \end{Soutput}
 \begin{Sinput}
 > tabellaEH=table(studenti$Eyes,studenti$Hair)
@@ -1251,7 +1365,7 @@ La  probabilit\`a \`e circa del 29\%.
 \item{}derivata di $x^3+x^2+2x+1$, plot della funzione e plot della derivata come due pannelli distinti in un grafico unico. hint: par(mfrow)
 \end{description}
 \end{shaded}
-
+\begin{comment}
 \chapter{Strutture di dati}
 %\section{Aritmetica modulare}
 \section{Visualizzazione di oggetti di \textsf{R}}
@@ -1799,27 +1913,14 @@ Per esempio possiamo considerare il dataframe \texttt{d} definito come segue%cod
 \end{Soutput}
 \end{Schunk}
 Si noti che anche in questo caso si usa la \emph{recycling rule}
-\begin{Schunk}
-\begin{Sinput}
-> sito="http://www.pharm.unipmn.it/rinaldi/file_corso/"
-> nomefile="australian-crabs.txt"
-> indirizzo=paste(sito,nomefile,sep="")
-> read.table(indirizzo)->crabs
-> dim(crabs)
-\end{Sinput}
-\end{Schunk}
-\begin{Schunk}
-\begin{Soutput}
-[1] 200   8
-\end{Soutput}
-\end{Schunk}
+ <<echo=TRUE,eval=TRUE>>=
+data(crabs)
+dim(crabs)
 In quanto segue lavoreremo con il seguente \emph{dataframe} che rappresenta i risultati di un'indagine svolta sugli studenti che nell'Anno Accademico 2007/2008 frequentavano il primo anno del corso di Laurea di Farmacia della Facolt\`a di Farmacia del Piemonte Orientale. Potete scaricarlo dal sito e caricarlo in {\textsf R} con il comando
 %code chunk
 \begin{Schunk}
 \begin{Sinput}
-> sito="http://www.pharm.unipmn.it/rinaldi"
-> nomefile="/file_corso/datifarmacia.txt"
-> dati=read.table(paste(sito,nomefile,sep=""))
+> data(farmacia)
 \end{Sinput}
 \end{Schunk}
 Il comando \texttt{colnames}  consente di  visualizzare o assegnare il nome alle colonne.
@@ -2348,9 +2449,6 @@ Urban.Rural Grades Popular Sports
    Suburban     87      42     22
    Urban       103      49     26
 \end{Soutput}
-\begin{Sinput}
-> save.image(file="../Rdata/cap02.Rdata")
-\end{Sinput}
 \end{Schunk}
 
 La tabella di contingenza delle due variabili (in questo caso a 3  livelli ciascuna) si realizza con il comando
@@ -2373,7 +2471,7 @@ O ripartirne il peso in base al colore degli occhi
 > boxplot(stEyeW)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-156}
+\includegraphics{RbookParte2-162}
 
 
 \begin{enumerate}
@@ -2785,7 +2883,6 @@ Nell'esempio
 %code chunk
 \begin{Schunk}
 \begin{Sinput}
-> load("../Rdata/cap02.Rdata")
 > tabellaEH=table(studenti$Eyes,studenti$Hair)
 > chisq.test(tabellaEH)
 \end{Sinput}
@@ -2855,7 +2952,7 @@ La distribuzione di Fisher \`e indicata in \textsf{R} con la lettera \texttt{f}.
 > curve(df(x,3,10),0,5)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-187}
+\includegraphics{RbookParte2-193}
 ottenendo il grafico
 \begin{figure}[htbp]
 \begin{center}
@@ -2864,7 +2961,7 @@ ottenendo il grafico
 > curve(df(x,3,10),0,5)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-188}
+\includegraphics{RbookParte2-194}
 \caption{Distribuzione di Fisher.}
 \label{datiist}
 \end{center}
@@ -2926,7 +3023,7 @@ Diamo una prima occhiata ai dati con il comando \texttt{coplot}, ovvero {\it con
 > coplot(conc ~ Time | Subject, data = Theoph, show.given = FALSE)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-193}
+\includegraphics{RbookParte2-199}
 
 Selezioniamo ora il paziente 4, lo possiamo fare note le righe che esso occupa nel dataframe oppure selezionando per un preciso valore della variabile Subject.
 
@@ -3000,7 +3097,7 @@ Ora riportiamo il grafico delle osservazioni per il soggetto 4 su un grafico sin
 + las = 1, col = 4)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-197}
+\includegraphics{RbookParte2-203}
 
 Si pu\`o ora sovrapporre la curva ottenuta con il modello al grafico attuale.
 Per prima cosa definiamo i possibili valori di $x$.
@@ -3023,105 +3120,9 @@ dove \texttt{par(usr)}  \`e un ottimo modo per conoscere l'estensione di una del
 > lines(xvals, predict(fm1, newdata = list(Time = xvals)), col = 4)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-199}
+\includegraphics{RbookParte2-205}
 
-\subsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
-Sempre da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui dei ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
-\begin{Schunk}
-\begin{Sinput}
-> age=18:29
-> height=c(76.1,77,78.1,78.2,78.8,79.7,79.9,81.1,81.2,81.8,82.8,83.5)
-\end{Sinput}
-\end{Schunk}
-Possiamo quindi costruire il \texttt{data.frame}
-\begin{Schunk}
-\begin{Sinput}
-> village=data.frame(age=age,height=height)
-\end{Sinput}
-\end{Schunk}
-Ora diamo una prima occhiata ai dati:
- %code chunk
-\begin{figure}[htbp]
-\begin{center}
-\begin{Schunk}
-\begin{Sinput}
-> plot(age,height)
-\end{Sinput}
-\end{Schunk}
-\includegraphics{RbookParte2-202}
-\caption{I bambini di Kalama}
-\label{kalama}
-\end{center}
-\end{figure}
-L'andamento \`e lineare. Determiniamo la retta di regressione
-per predire l?altezza media nota l'et\`a in mesi.
-%code chunk
-\begin{Schunk}
-\begin{Sinput}
-> ris=lm(height~age)
-> ris
-\end{Sinput}
-\begin{Soutput}
-Call:
-lm(formula = height ~ age)
 
-Coefficients:
-(Intercept)          age  
-     64.928        0.635  
-\end{Soutput}
-\begin{Sinput}
-> plot(ris)
-\end{Sinput}
-\end{Schunk}
-
-La retta di regressione cercata ha formula:
-$$h(\texttt{age})=64.93+ 0.63\, \texttt{age}$$
-
-Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l?altezza a 27.5 mesi di et\`a:
-oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione
-\texttt{predict}:
-%codechunk
-\begin{Schunk}
-\begin{Sinput}
-> predict(ris,data.frame(age=27.5))
-\end{Sinput}
-\begin{Soutput}
-       1 
-82.38986 
-\end{Soutput}
-\end{Schunk}
-
-fornendo in input i parametri della retta ed un preciso valore della variabile indipendente (richiamata col proprio nome).
-Molti comandi di \textsf{R} sono in grado di manipolare dataframe  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
-Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt{village} direttamente al comando:
-\begin{Schunk}
-\begin{Sinput}
-> res=lm(height~age,data=village)
-> res
-\end{Sinput}
-\begin{Soutput}
-Call:
-lm(formula = height ~ age, data = village)
-
-Coefficients:
-(Intercept)          age  
-     64.928        0.635  
-\end{Soutput}
-\end{Schunk}
-con la formula $lm(y ~x,data=dataset)$.
-Inoltre possiammo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
-\begin{Schunk}
-\begin{Sinput}
-> oldpar<-par(mfrow=c(2,2))
-> par(ask=FALSE);plot(lm(height~age))
-> oldpar
-\end{Sinput}
-\begin{Soutput}
-$mfrow
-[1] 1 1
-\end{Soutput}
-\end{Schunk}
-\includegraphics{RbookParte2-206}
 \section{QQPlot
 normality test}
 \chapter{Grafica}
@@ -3203,7 +3204,7 @@ Per cambiare i default dei due parametri
 \end{Schunk}
 Qui contestualmente alla ridefinizione abbiamo salvato (con il nome \texttt{oldpar}) la versione corrente dei parametri per poterli eventualmente ripristinare in seguito.
 \begin{figure}\begin{center}
-\includegraphics{RbookParte2-210}
+\includegraphics{RbookParte2-209}
 \caption{esempio di utilizzo di \texttt{par()}
 }
 \label{parbg}
@@ -3244,7 +3245,7 @@ Per esempio  con una riga e due colonne
 otteniamo i grafici affiancati della figura \ref{graficiaffiancati}.
 \begin{figure}
 \begin{center}
-\includegraphics{RbookParte2-213}
+\includegraphics{RbookParte2-212}
 \caption{Grafici affiancati con \texttt{mfrow=c(1,2)}}
 \label{graficiaffiancati}
 \end{center}
@@ -3289,7 +3290,7 @@ Scarichiamo da \cite{dasl} il \emph{dataset} che chiameremo \texttt{Gompertz} in
 \end{Schunk}
 
 \begin{figure}\begin{center}
-\includegraphics{RbookParte2-217}
+\includegraphics{RbookParte2-216}
 \caption{Mortalit\`a dei moscerini. A sinistra la decrescita della popolazione, a destra la mortalit\`a.}
 \label{moscerini}
 \end{center}
@@ -3355,7 +3356,7 @@ Per esempio
 \end{Schunk}
 Il risultato \`e riportato nella figura~\ref{4moscerini}
 \begin{figure}\begin{center}
-\includegraphics{RbookParte2-221}
+\includegraphics{RbookParte2-220}
 \caption{Utilizzo di diversi parametri grafici}
 \label{4moscerini}
 \end{center}
@@ -3378,7 +3379,7 @@ Carichiamo i dati e utilizziamo la funzione \texttt{pairs}\index{pairs} per cost
 
 \begin{center}
 \begin{figure}
-\includegraphics{RbookParte2-223}
+\includegraphics{RbookParte2-222}
 \caption{Plot per variabili multiple}
 \label{pairplot}
 \end{figure}
@@ -3389,23 +3390,24 @@ In effetti il comando \texttt{plot} funziona anche su \emph{dataframe} come \`e 
 > methods(plot)
 \end{Sinput}
 \begin{Soutput}
- [1] plot.acf*            plot.correspondence*
- [3] plot.data.frame*     plot.decomposed.ts* 
- [5] plot.default         plot.dendrogram*    
- [7] plot.density*        plot.ecdf           
- [9] plot.factor*         plot.formula*       
-[11] plot.function        plot.hclust*        
-[13] plot.histogram*      plot.HoltWinters*   
-[15] plot.isoreg*         plot.lda*           
-[17] plot.lm*             plot.mca*           
-[19] plot.medpolish*      plot.mlm*           
-[21] plot.ppr*            plot.prcomp*        
-[23] plot.princomp*       plot.profile*       
-[25] plot.profile.nls*    plot.raster*        
-[27] plot.ridgelm*        plot.spec*          
-[29] plot.stepfun         plot.stl*           
-[31] plot.table*          plot.ts             
-[33] plot.tskernel*       plot.TukeyHSD*      
+ [1] plot,ANY-method      plot,Funzione-method
+ [3] plot.acf*            plot.correspondence*
+ [5] plot.data.frame*     plot.decomposed.ts* 
+ [7] plot.default         plot.dendrogram*    
+ [9] plot.density*        plot.ecdf           
+[11] plot.factor*         plot.formula*       
+[13] plot.function        plot.hclust*        
+[15] plot.histogram*      plot.HoltWinters*   
+[17] plot.isoreg*         plot.lda*           
+[19] plot.lm*             plot.mca*           
+[21] plot.medpolish*      plot.mlm*           
+[23] plot.ppr*            plot.prcomp*        
+[25] plot.princomp*       plot.profile*       
+[27] plot.profile.nls*    plot.raster*        
+[29] plot.ridgelm*        plot.spec*          
+[31] plot.stepfun         plot.stl*           
+[33] plot.table*          plot.ts             
+[35] plot.tskernel*       plot.TukeyHSD*      
 see '?methods' for accessing help and source code
 \end{Soutput}
 \end{Schunk}
@@ -3416,7 +3418,7 @@ Il grafico risulta complesso da comprendere anche per via delle ridotte dimensio
 >  plot(quakes[,c(1,2)], main = "Fiji Earthquakes, N = 1000", cex.main=1.2, pch=".")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-225}
+\includegraphics{RbookParte2-224}
 \ese{Migliorare questi grafici secondo il gusto personale inserendo, titoli, colorazioni, sfondo, tipo di rappresentazione, tipo di punti, etc.}
 \subsection{Aggiungere testo al grafico}
 Si pu\`o aggiungere testo in qualunque posizione del grafico, in particolare possiamo posizionare commenti, annotazioni, formule, ecc. Si devono solo specificare coordinate e testo, oltre ad altri parametri visualizzabili con \texttt{?text}.
@@ -3436,7 +3438,7 @@ Nell'esempio seguente generiamo i vertici di un poligono regolare con numero di 
 > text(coord,letters,col="red")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-226}
+\includegraphics{RbookParte2-225}
 
 Il parametro  \texttt{adj} sposta il testo rispetto alle coordinate
 \subsection{Immagini di un vulcano}
@@ -3452,7 +3454,7 @@ Vediamo alcune rappresentazioni grafiche 3D.
 \begin{figure}[htbp]
 \begin{center}
 
-\includegraphics{RbookParte2-228}
+\includegraphics{RbookParte2-227}
 \caption{Linee di livello}
 \label{vulcano1}
 \end{center}
@@ -3475,7 +3477,7 @@ Vediamo alcune rappresentazioni grafiche 3D.
 > title(xlab="1996", col.lab="red")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-229}
+\includegraphics{RbookParte2-228}
 
 Un esempio:
 \begin{Schunk}
@@ -3488,7 +3490,7 @@ Un esempio:
 + ylab = "tooth length")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-231}
+\includegraphics{RbookParte2-230}
 
 \subsection{I rettangoli }
 \textsf{R} consente di disegnare forme (dette primitive) come rettangoli o poligoni. I rettangoli in particolare sono molto utili e versatili, consentendo di realizzare riquadri, evidenziare regioni grafiche, ecc.
@@ -3505,7 +3507,7 @@ Un esempio:
 + density=c(NA, NA, 10, 30), angle=c(NA, NA, 30, -30))
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-232}
+\includegraphics{RbookParte2-231}
 
 \section{Grafici professionali: legenda, annotazioni e formule}
 Ricordiamo che una volta che sia  assegnato il livello di fiducia $1-\epsilon$, il numero $u_{1-\epsilon}$ che leggiamo nelle tabelle  distribuzione normale \`e il valore dell'ascissa tale che nell'intervallo $[-u_{1-\epsilon},u_{1-\epsilon}]$  cada un'area pari al livello di fiducia; in altre parole le 2 code della distribuzione vengono rimosse.
@@ -3531,7 +3533,7 @@ Possiamo  procedere con
 \end{Schunk}
 
 \begin{figure}\begin{center}
-\includegraphics{RbookParte2-234}
+\includegraphics{RbookParte2-233}
 \caption{Selezione delle etichette sull'asse $x$. }
 \label{normale13}
 \end{center}
@@ -3574,7 +3576,7 @@ Il comando
 consente la visualizzazione dei punti ottenuti (come in figura~(\ref{normale200punti})).
 
 \begin{figure}\begin{center}
-\includegraphics{RbookParte2-237}
+\includegraphics{RbookParte2-236}
 \caption{ Selezione dei punti per l'ombreggiamento di una regione poligonale}
 \label{normale200punti}
 \end{center}
@@ -3613,7 +3615,7 @@ Infine possiamo riportare i valori delle aree delle 2 code, evidenziare l'asse d
 > lines(c(0,0),c(0,dnorm(0)))
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-239}
+\includegraphics{RbookParte2-238}
 
 \begin{figure}\begin{center}
 \begin{Schunk}
@@ -3627,7 +3629,7 @@ Infine possiamo riportare i valori delle aree delle 2 code, evidenziare l'asse d
 > lines(c(0,0),c(0,dnorm(0)))
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-240}
+\includegraphics{RbookParte2-239}
 \caption{ Area delle code della distribuzione normale. Il valore di $u_{1-\epsilon}$ \`e quello riportato nella  tabella della distribuzione normale. }
 \label{normaletratto}
 \end{center}
@@ -3650,7 +3652,7 @@ Iniziamo a disegnare dei rettangoli, di coordinate casuali ma entro un dato rang
 + rect(sinistra,sotto,destra,sopra,col=rgb(runif(1),runif(1),runif(1)),border=bordi[i],lwd=spess)}
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-241}
+\includegraphics{RbookParte2-240}
 \section{Grafica 3D, il vulcano Maunga Whau}
 Con il codice che segue
 
@@ -3679,7 +3681,7 @@ Con il codice che segue
 otteniamo la figura~\ref{vulcano3D}. Il comando di base \`e \texttt{persp} che richiede una griglia di valori di $(x,y)$ e il corrispondente valore di quota.
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-243}
+\includegraphics{RbookParte2-242}
 
 \caption{Grafica 3 dimensionale, ottenuta con il comando \texttt{persp}}
 \label{vulcano3D}
@@ -3713,7 +3715,7 @@ $x$, essendo poi liberi di utilizzare la funzione \texttt{plot}
 > text(3, .2, quote(H[1]:~~mu[1]==mu[2]+delta))
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-244}
+\includegraphics{RbookParte2-243}
 
 
 \section{Web}
@@ -3875,7 +3877,7 @@ A volte \`e necessario personalizzare i margini, ad esempio se le annotazioni de
 > text(0,0,"margini")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-254}
+\includegraphics{RbookParte2-253}
 
 Tale modifica si opera con il comando \texttt{mar}.
 \begin{equation}\texttt{par}(\texttt{mar=c}(l_1, l_2, l_3, l_4))
@@ -3900,7 +3902,7 @@ Proviamo i comandi:
 > plot(1:10)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-255}
+\includegraphics{RbookParte2-254}
 
 \subsection{Il pacchetto  \texttt{lattice}}
 Il pacchetto \texttt{lattice} consente di utilizzare funzioni avanzate di grafica, tra cui alcune che sono in grado di lavorare con \emph{data.frame} anche molto complessi.
@@ -4094,19 +4096,22 @@ brewer.pal(5,Set3). Potrete poi provare anche Set1 e Set2.
 + main = "Puromycin data and fitted Michaelis-Menten curves")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-267}
+\includegraphics{RbookParte2-266}
 
 Sarebbe poi meglio sostituire con il reale valore degli anni le etichette presenti sull'asse $x$ originale. Questo si pu\`o ottenere in diversi modi (vedi \texttt{axis}), ma perch\'e non sfruttare l'attributo \texttt{names} della struttura dati?
 
- <<echo=TRUE,eval=FALSE>>=
-names(dati)<-as.character(floor(seq(1860,1959,length=length(dati))))
- plot(as.vector(names(dati)),dati,main="Andamento delle scoperte scientifiche 1860-1959",
-xlab="Anni, dal 1860 al 1959",ylab="Numero di scoperte",type="o",
-col="dark green",cex=0.5,lty=4)
+\begin{Schunk}
+\begin{Sinput}
+> names(dati)<-as.character(floor(seq(1860,1959,length=length(dati))))
+>  plot(as.vector(names(dati)),dati,main="Andamento delle scoperte scientifiche 1860-1959",
++ xlab="Anni, dal 1860 al 1959",ylab="Numero di scoperte",type="o",
++ col="dark green",cex=0.5,lty=4)
+\end{Sinput}
+\end{Schunk}
 
 Possiamo poi anche orientare diversamente il grafico, scambiando l'asse \texttt{x} con l'asse \texttt{y}, la
 rappresentazione dei dati specie nell'insieme pu\`o apparire pi\`u appropriata, oppure peggiore:
-%code chink
+%code chunk
 \begin{Schunk}
 \begin{Sinput}
 > plot(dati,as.vector(names(dati)),main="Andamento delle scoperte scientifiche 1860-1959",
@@ -4193,8 +4198,9 @@ Selezioniamo 1 punto cliccando  sul punto che riteniamo il massimo del grafico
 \includegraphics{RbookParte2-272}
 \section{File Rmd}
 \section{ggplot}
+\end{comment}
 \section*{Tabelle delle distribuzioni statistiche}
-Per generare la tabella delle aree sottese dalla distribuzione normale da 0 ad $x$ si deve per prima cosa tenere conto del fatto che \texttt{pnorm} ???? la cumulativa ad una sola coda. Si sceglie l'intervallo di tabulazione, il numero di colonne ed il numero di cifre.
+Per generare la tabella delle aree sottese dalla distribuzione normale da 0 ad $x$ si deve per prima cosa tenere conto del fatto che \texttt{pnorm}  \`e la cumulativa ad una sola coda. Si sceglie l'intervallo di tabulazione, il numero di colonne ed il numero di cifre.
 \begin{Schunk}
 \begin{Sinput}
 > start=0.01
@@ -4251,7 +4257,7 @@ Per la  distribuzione di Fisher occorre specificare il numero di gradi di libert
 
 \begin{Schunk}
 \begin{Sinput}
-> gradinum=1:10
+> gradinum=1:9
 > gradiden=c(1:40,50,60,70,80,90,100,150,200)
 > fiducia=c(0.95,0.99);
 > ncol=length(gradinum);
@@ -4516,55 +4522,6 @@ Inf 1.28155 1.43953 1.64485  1.95996  2.32635  2.57583   3.29053
 100   3.936   3.087   2.696   2.463   2.305   2.191   2.103   2.032   1.975
 150   3.904   3.056   2.665   2.432   2.274   2.160   2.071   2.001   1.943
 200   3.888   3.041   2.650   2.417   2.259   2.144   2.056   1.985   1.927
-         10
-1   241.882
-2    19.396
-3     8.786
-4     5.964
-5     4.735
-6     4.060
-7     3.637
-8     3.347
-9     3.137
-10    2.978
-11    2.854
-12    2.753
-13    2.671
-14    2.602
-15    2.544
-16    2.494
-17    2.450
-18    2.412
-19    2.378
-20    2.348
-21    2.321
-22    2.297
-23    2.275
-24    2.255
-25    2.236
-26    2.220
-27    2.204
-28    2.190
-29    2.177
-30    2.165
-31    2.153
-32    2.142
-33    2.133
-34    2.123
-35    2.114
-36    2.106
-37    2.098
-38    2.091
-39    2.084
-40    2.077
-50    2.026
-60    1.993
-70    1.969
-80    1.951
-90    1.938
-100   1.927
-150   1.894
-200   1.878
 \end{Soutput}
 \begin{Sinput}
 > 
@@ -4630,55 +4587,55 @@ Inf 1.28155 1.43953 1.64485  1.95996  2.32635  2.57583   3.29053
 100    6.895    4.824    3.984    3.513    3.206    2.988    2.823    2.694
 150    6.807    4.749    3.915    3.447    3.142    2.924    2.761    2.632
 200    6.763    4.713    3.881    3.414    3.110    2.893    2.730    2.601
-           9       10
-1   6022.473 6055.847
-2     99.388   99.399
-3     27.345   27.229
-4     14.659   14.546
-5     10.158   10.051
-6      7.976    7.874
-7      6.719    6.620
-8      5.911    5.814
-9      5.351    5.257
-10     4.942    4.849
-11     4.632    4.539
-12     4.388    4.296
-13     4.191    4.100
-14     4.030    3.939
-15     3.895    3.805
-16     3.780    3.691
-17     3.682    3.593
-18     3.597    3.508
-19     3.523    3.434
-20     3.457    3.368
-21     3.398    3.310
-22     3.346    3.258
-23     3.299    3.211
-24     3.256    3.168
-25     3.217    3.129
-26     3.182    3.094
-27     3.149    3.062
-28     3.120    3.032
-29     3.092    3.005
-30     3.067    2.979
-31     3.043    2.955
-32     3.021    2.934
-33     3.000    2.913
-34     2.981    2.894
-35     2.963    2.876
-36     2.946    2.859
-37     2.930    2.843
-38     2.915    2.828
-39     2.901    2.814
-40     2.888    2.801
-50     2.785    2.698
-60     2.718    2.632
-70     2.672    2.585
-80     2.637    2.551
-90     2.611    2.524
-100    2.590    2.503
-150    2.528    2.441
-200    2.497    2.411
+           9
+1   6022.473
+2     99.388
+3     27.345
+4     14.659
+5     10.158
+6      7.976
+7      6.719
+8      5.911
+9      5.351
+10     4.942
+11     4.632
+12     4.388
+13     4.191
+14     4.030
+15     3.895
+16     3.780
+17     3.682
+18     3.597
+19     3.523
+20     3.457
+21     3.398
+22     3.346
+23     3.299
+24     3.256
+25     3.217
+26     3.182
+27     3.149
+28     3.120
+29     3.092
+30     3.067
+31     3.043
+32     3.021
+33     3.000
+34     2.981
+35     2.963
+36     2.946
+37     2.930
+38     2.915
+39     2.901
+40     2.888
+50     2.785
+60     2.718
+70     2.672
+80     2.637
+90     2.611
+100    2.590
+150    2.528
+200    2.497
 \end{Soutput}
 \end{Schunk}
 \vfill

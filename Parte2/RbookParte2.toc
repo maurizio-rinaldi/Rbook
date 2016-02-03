@@ -7,17 +7,18 @@
 \contentsline {subsection}{\numberline {1.3.1}Indicatori statistici}{4}{subsection.1.3.1}
 \contentsline {subsection}{\numberline {1.3.2}Raggruppamenti in classi}{6}{subsection.1.3.2}
 \contentsline {subsection}{\numberline {1.3.3}Areogrammi}{9}{subsection.1.3.3}
-\contentsline {subsection}{\numberline {1.3.4}Generazione di boxplot}{9}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {1.3.4}Generazione di boxplot}{12}{subsection.1.3.4}
 \contentsline {subsection}{\numberline {1.3.5}Creazione di grafici a torta}{13}{subsection.1.3.5}
 \contentsline {section}{\numberline {1.4}Variabili doppie e rette di regressione}{14}{section.1.4}
-\contentsline {section}{\numberline {1.5}Distribuzioni in \textsf {R}}{18}{section.1.5}
-\contentsline {subsection}{\numberline {1.5.1}Distribuzione normale}{22}{subsection.1.5.1}
-\contentsline {subsubsection}{La funzione \texttt {dnorm}}{22}{section*.2}
+\contentsline {subsection}{\numberline {1.4.1}I bambini di Kalama (Egitto). Ancora retta di regressione}{16}{subsection.1.4.1}
+\contentsline {section}{\numberline {1.5}Distribuzioni in \textsf {R}}{21}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}Distribuzione normale}{24}{subsection.1.5.1}
+\contentsline {subsubsection}{La funzione \texttt {dnorm}}{24}{section*.2}
 \contentsline {subsubsection}{La funzione \texttt {pnorm}}{24}{section*.3}
-\contentsline {subsubsection}{La funzione \texttt {qnorm} e la tabella della densit\`a di Gauss}{24}{section*.4}
-\contentsline {subsubsection}{La funzione \texttt {rnorm}}{26}{section*.5}
-\contentsline {subsection}{\numberline {1.5.2}La distribuzione $t$ di Student}{26}{subsection.1.5.2}
-\contentsline {subsection}{\numberline {1.5.3}Intervalli di confidenza e test di Student (dati non appaiati)}{26}{subsection.1.5.3}
+\contentsline {subsubsection}{La funzione \texttt {qnorm} e la tabella della densit\`a di Gauss}{26}{section*.4}
+\contentsline {subsubsection}{La funzione \texttt {rnorm}}{29}{section*.5}
+\contentsline {subsection}{\numberline {1.5.2}La distribuzione $t$ di Student}{29}{subsection.1.5.2}
+\contentsline {subsection}{\numberline {1.5.3}Intervalli di confidenza e test di Student (dati non appaiati)}{29}{subsection.1.5.3}
 \select@language {english}
 \select@language {italian}
 \select@language {english}
@@ -42,5 +43,7 @@
 \select@language {italian}
 \select@language {english}
 \select@language {italian}
-\contentsline {subsection}{\numberline {1.5.4}Test di Student per dati appaiati}{30}{subsection.1.5.4}
-\contentsline {section}{\numberline {1.6}Test $\chi ^2$ di indipendenza}{30}{section.1.6}
+\contentsline {subsection}{\numberline {1.5.4}Test di Student per dati appaiati}{33}{subsection.1.5.4}
+\contentsline {section}{\numberline {1.6}Test $\chi ^2$ di indipendenza}{33}{section.1.6}
+\contentsline {subsection}{\numberline {1.6.1}Test $\chi ^2$ di adeguamento}{36}{subsection.1.6.1}
+\contentsline {section}{\numberline {1.7}Distribuzione Binomiale}{36}{section.1.7}

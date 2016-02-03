@@ -72,6 +72,7 @@
  \mainmatter
 <<echo=FALSE>>=
 library(lubridate)
+library(EsamiR)
 @
 \chapter{Statistica con \textsf{R}}
 \section{Variabili aleatorie}
@@ -89,7 +90,7 @@ Le variabili aleatorie  discrete che  assumono un numero limitato di valori si d
 \item{} (Testa, Croce).
 \item{} I numeri interi
 \end{itemize}
-Per caratterizzare completamente una variabile aleatoria discreta oltre ai valori che questa può  assumere occorre conoscere la probabilità  di questi valori.
+Per caratterizzare completamente una variabile aleatoria discreta oltre ai valori che questa pu\`o  assumere occorre conoscere la probabilit\`a  di questi valori.
 
 
 Per semplicit\`a considereremo variabili aleatorie finite.\\
@@ -122,7 +123,19 @@ alfabeto=c("testa","croce")
 sample(alfabeto,5,replace=T)
 @
 Il precursore  del dado era chiamato astragalo ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
-Gli  astragali sono dei piccoli ossicini di forma irregolare ed hanno 6 facce ma atterranno in  modo stabile solo su 4 di esse numerate 1, 3, 4 e 6  con probabilit\`a all'incirca 0.4 per il 3 e il 4  e di 0.1 per l'1 e il 6.
+Gli  astragali sono dei piccoli ossicini di forma irregolare ed hanno 6 facce ma atterranno in  modo stabile solo su 4 di esse numerate 1, 3, 4 e 6  con probabilit\`a all'incirca 0.4 per il 3 e il 4  e di 0.1 per l'1 e il 6. In altre parole l'astragalo \`e descritto dalla tabella
+
+\begin{center}\begin{tabular}{|r|r |}
+\hline
+ valore&  probabilit\`a \\
+\hline
+1&0.1\\
+3 &0.4\\
+4& 0.4\\
+6&0.1\\
+ \hline
+\end{tabular}
+\end{center}
 Il tiro pi\`u gettonato all'epoca era l'uscita di 4 facce diverse nel lancio di 4 astragali e si chiamava {\it Venus}.
 Il lancio considerato peggiore sul singolo lancio era l'1 chiamato cane o avvoltoio.
 \begin{figure}[htbp]
@@ -151,9 +164,9 @@ Volendo invece simulare una combinazione da giocare al SuperEnalotto possiamo sc
 <<echo=FALSE>>=
 options(width=65)
 <<echo=TRUE>>=
-x<-sample(1:90,6,replace=T);x
+(x<-sample(1:90,6,replace=T))
 @
- I numeri usciti sono stati salvati  in una variabile \texttt{x}, per poter effettuare la ricerca di indicatori statistici.
+I numeri usciti sono stati salvati  in una variabile \texttt{x}, per poter effettuare la ricerca di indicatori statistici.
 Il comando che consente di ordinare una lista o un vettore \`e \texttt{sort}, esso pu\`o essere usato in associazione al nome di una variabile o di una lista, ossia:
 \begin{equation}\texttt{sort}(\varia{variabile/lista})\end{equation}
 Volendo ordinare i numeri precedentemente ricavati scriveremo
@@ -171,7 +184,8 @@ La media di una serie di numeri si ottiene con la funzione \texttt{mean} scriven
 $\texttt{mean}(\varia{variabile})$.
 Ad esempio, lavorando con la lunghezza del sepalo di 150 piante di iris
 <<echo=TRUE>>=
-mean(x=iris[,1])
+x=iris[,1]
+mean(x)
 @
 \item{}Varianza campionaria\vskip0pt
 Si ottiene con la funzione predefinita di espressione:
@@ -204,9 +218,9 @@ quantile(x,seq(0,1,by=0.1))
 Si noti che \texttt{quantile} ammette 9 varianti specificabili con l'opzione $\texttt{type}=n$ dove $n$ va da 1 a 9.
 Per esempio
 <<echo=TRUE>>=
-quantile(x,type=4)
+quantile(x,type=2)
 @
-Sui dati in esame le 9 varianti coincidono.
+Sui dati in esame le 9 varianti coincidono. La convenzione da noi adottata corrisponde al numero 2
 \end{itemize}
 Per quanto riguarda gli indicatori statistici nel caso di dati ripetuti basta notare che se la lista $x$ contiene i valori e la lista $f$ le frequenze assolute il comando
 $$\varia{rep}(x,f)$$ costruisce un'unica lista dei dati inclusiva delle ripetizioni.
@@ -215,10 +229,9 @@ Per esempio
 <<echo=TRUE>>=
 x=1:6
 f=c(9,7,9,7,8,10)
-y=rep(x,f)
-y
+(dati=rep(x,f))
 @
-Ovviamente senza bisogno di visualizzare \texttt{y} possiamo calcolarne tutti gli indicatori statistici.
+Ovviamente senza bisogno di visualizzare \texttt{dati} possiamo calcolarne tutti gli indicatori statistici.
 Il comando
 <<echo=TRUE>>=
 cumsum(f)
@@ -227,7 +240,7 @@ restituisce le frequenze cumulate, dalle quali si possono ricavare facilmente la
 i quantili.
 
 \subsection{Raggruppamenti in classi}
-<<echo=TRUE>>=
+<<echo=FALSE,eval=FALSE>>=
 mese=month(as.POSIXlt(date(),format="%a %b %d %H:%M:%S %Y"))
 mesit= c("Dicembre" ,"Gennaio" ,"Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settemnbre","Ottobre","Novembre")
 mesi=1:12
@@ -235,13 +248,16 @@ names(mesi)=mesit
 m=names(mesi[mese])
 anno=year(as.POSIXlt(date(),format="%a %b %d %H:%M:%S %Y"))
 if(mese==1) anno=anno-1
+@
+<<echo=FALSE,eval=TRUE>>=
+m="Gennaio"
+anno=2016
 stringa=paste("Milano/", anno ,"/",m,"?format=csv",sep="")
 @
 Consideriamo la rilevazione della temperatura media giornaliera di Milano nel mese di \Sexpr{m} \Sexpr{anno}.
-Scriviamo
+Scegliamo il mese
 <<echo=FALSE>>=
 cat(paste(">stringa=\"",stringa,"\"",sep=""))
-@
 <<echo=TRUE,eval=FALSE>>=
 sito="http://www.ilmeteo.it/portale/archivio-meteo/"
 indirizzo=paste(sito,stringa,sep="")
@@ -250,9 +266,10 @@ meteo=read.table(indirizzo,sep=";")
 write.table(meteo,file="../filedati/meteo.txt",sep=";")
 <<echo=FALSE,eval=TRUE>>=
 meteo=read.table("../filedati/meteo.txt",sep=";")
-<<echo=TRUE>>=meteo[1,]
+<<echo=TRUE>>=
+meteo[1,]
 dim(meteo)
-meteo[-1,3]
+#meteo[-1,3]
 @
 A questo punto eliminiamo i livelli di \texttt{meteo} con il comando \texttt{as.vector} e consideriamo il risultato come numerico con
 <<echo=TRUE>>=
@@ -263,36 +280,37 @@ quantile(Milano)
 L'ultimo comando in particolare ci fornisce minimo e massimo dei dati.
 Possiamo esaminare la serie temporale dei dati con i comandi
 <<echo=TRUE,fig=FALSE>>=
-plot(Milano,type="l",xlab="settembre 2010 a milano",ylab="temperatura media")
+plot(Milano,type="l",xlab=paste(m,anno, "a milano"),ylab="temperatura media")
 @
-ottenendo la figura~\ref{datiist}
+ottenendo la figura~\ref{fig:datiist}
 \begin{figure}[htbp]
 \begin{center}
 <<echo=FALSE,fig=TRUE>>=
-plot(Milano,type="l",xlab="settembre 2010 a milano",ylab="temperatura media")
+plot(Milano,type="l",xlab=paste(m,anno, "a milano"),ylab="temperatura media")
 @
-\caption{ Andamento della temperatura a settembre 2010. }
+\caption{ Andamento della temperatura a \Sexpr{paste(m,anno)}  a Milano. }
 \label{fig:datiist}
 \end{center}
 \end{figure}
 
-Raggruppiamo ora i dati in classi comprese  tra due estremi che comprendano certamente tutti i dati, per esempio 13 e 23, decidendo di applicare un passo di 2 e vedere come si distribuiscono. Il comando \texttt{cut} associa a ciascun dato la classe di appartenenza selezionata in base ai punti di taglio.
+Raggruppiamo ora i dati in classi comprese  tra due estremi che comprendano certamente tutti i dati, per esempio \Sexpr{2*round(min(Milano)/2-0.1)} e \Sexpr{2*round(max(Milano)/2+0.1)}, decidendo di applicare un passo di 2 e vedere come si distribuiscono. Il comando \texttt{cut} associa a ciascun dato la classe di appartenenza selezionata in base ai punti di taglio.
 
 <<echo=TRUE>>=
-cut(Milano,breaks=seq(13.,23.,by=2))
+tagli=c(-2,0,2,4,6,10)
+cut(Milano,breaks=tagli)
 @
 
 Il comando \texttt{table} conta i dati di ciascuna classe
 
 <<echo=TRUE>>=
-table(cut(Milano,breaks=seq(13.,23.,by=2)))
+table(cut(Milano,breaks=tagli))
 @
 Si noti che la suddivisione in classi prevede intervalli aperti a sinistra e chiusi a destra.
 Per suddividere in modo che gli intervalli siano chiusi a sinistra e aperti a destra si specifica il parametro \texttt{right=FALSE}.
 Possiamo anche usare il comando \texttt{seq} per specificare i tagli.
  \begin{eqnarray*}
 \texttt{table(cut}( \varia{variabile},\texttt{breaks=seq}(\varia{estremo inf},\\
-\varia{estremo sup},\texttt{by}=\varia{passo}),\texttt{right=FALSE}))
+\varia{estremo sup},\texttt{by}=\varia{passo}),\texttt{right=TRUE}))
 \end{eqnarray*}
 o in modo  pi\`u generale
 \begin{eqnarray*}
@@ -301,8 +319,7 @@ o in modo  pi\`u generale
 \end{eqnarray*}
 estremamente utile in quanto consente di raggruppare i dati in classi non necessariamente di ugual ampiezza.
 <<echo=TRUE>>=
-table(cut(Milano,breaks=c(12.5,14,15,16, 18,20,22.5),
-right=F))
+table(cut(Milano,breaks=c(-3,1,3,4,5,6,8,10)))
 @
 Volendo raggruppare in classi i dati delle precedenti uscite del dado possiamo scrivere
 <<echo=TRUE>>=
@@ -427,7 +444,7 @@ Possiamo inoltre determinare il coefficiente di correlazione lineare
 cor(x,y)
 @
 Per definire un modello di relazione lineare occorre usare il comando \texttt{lm} (\varia{linear model}).
-Nella sua generica forma il comando \`e espresso come\footnote{ Per digitare la tilde  \mytilde\;  su Mac premere ALT 5 su PC invece il tasto Alt Gr (attivazione del codice ASCII) e sul tastierino numerico digitare il numero 126. Lavorando su un portatile il tastierino numerico \`e spesso incorporato nella tastiera con colorazione blue dei tasti.}
+Nella sua generica forma il comando \`e espresso come\footnote{ Per digitare la tilde  \mytilde\;  su Mac premere ALT 5 su PC invece il tasto Alt Gr (attivazione del codice ASCII) e sul tastierino numerico digitare il numero 126. Lavorando su un portatile il tastierino numerico \`e spesso incorporato nella tastiera con colorazione blu dei tasti.}
 $$\texttt{lm}(\varia{y} \sim  \varia{x})$$
 Otteniamo i valori di pendenza e intercetta.
 
@@ -456,6 +473,63 @@ abline(b,a,col="green")
 \label{fig:duerettex}
 \end{center}
 \end{figure}
+
+
+\subsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
+Sempre da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui dei ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
+<<echo=TRUE>>=
+age=18:29
+height=c(76.1,77,78.1,78.2,78.8,79.7,79.9,81.1,81.2,81.8,82.8,83.5)
+@
+Possiamo quindi costruire il \texttt{data.frame}
+<<echo=TRUE>>=
+village=data.frame(age=age,height=height)
+@
+Ora diamo una prima occhiata ai dati:
+ %code chunk
+\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE,fig=TRUE>>=
+plot(age,height)
+@
+\caption{I bambini di Kalama}
+\label{kalama}
+\end{center}
+\end{figure}
+L'andamento \`e lineare. Determiniamo la retta di regressione
+per predire l?altezza media nota l'et\`a in mesi.
+%code chunk
+<<echo=TRUE>>=
+ris=lm(height~age)
+ris
+plot(ris)
+@
+
+La retta di regressione cercata ha formula:
+$$h(\texttt{age})=\Sexpr{1/100*round(100*ris$coefficients[1])}+ \Sexpr{1/100*round(100*ris$coefficients[2])}\, \texttt{age}$$
+
+Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l?altezza a 27.5 mesi di et\`a:
+oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione
+\texttt{predict}:
+%codechunk
+<<echo=TRUE>>=
+predict(ris,data.frame(age=27.5))
+@
+
+fornendo in input i parametri della retta ed un preciso valore della variabile indipendente (richiamata col proprio nome).
+Molti comandi di \textsf{R} sono in grado di manipolare dataframe  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
+Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt{village} direttamente al comando:
+<<echo=TRUE>>=
+res=lm(height~age,data=village)
+res
+@
+con la formula $lm(y ~x,data=dataset)$.
+Inoltre possiammo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
+<<fig=TRUE>>=
+oldpar<-par(mfrow=c(2,2))
+par(ask=FALSE);plot(lm(height~age))
+oldpar
+@
 Consideriamo ora il seguente \emph{dataset} di mammiferi  in cui le 2 variabili rappresentano  le dimensioni del corpo e del cervello.
 <<echo=TRUE>>=
 library(MASS)
@@ -469,7 +543,7 @@ plot(mammals,log="xy")
 @
 come in Figura~\ref{fig:duemammals}.\begin{figure}[htbp]
 \begin{center}
-<<echo=TRUE,fig=TRUE>>=
+<<echo=FALSE,fig=TRUE>>=
 par(mfrow=c(1,2))
 plot(mammals)
 plot(mammals,log="xy")
@@ -521,7 +595,7 @@ A questi nomi possiamo aggiungere diversi prefissi\vskip10pt
 \end{tabular}
 \vskip10pt
 per caratterizzare diversi aspetti.
-
+\begin{comment}
 <<echo=FALSE, results=hide>>=
 library(exams)
 ## DATA GENERATION
@@ -656,7 +730,7 @@ plot(x, y)
 %% \exsolution{\Sexpr{mchoice2string(solutions)}}
 %% \exname{Multiple choice}
 
-
+\end{comment}
 \subsection{Distribuzione normale}
 \subsubsection{La funzione \texttt{dnorm}}
 Come appena visto \textsf{R }indica con il nome \texttt{dnorm}, la densit\`a normale o gaussiana. Essa accetta come parametri sia la media $\mu$ che la deviazione standard $\sigma$ come \`e possibile verificare con il comando \texttt{formals} che ci fornisce gli argomenti di una funzione e gli eventuali valori preassegnati.
@@ -701,12 +775,80 @@ pnorm(1)-0.5
 @
 
 
- \subsubsection{La funzione \texttt{qnorm} e la tabella della densit\`a di Gauss}
+\subsubsection{La funzione \texttt{qnorm} e la tabella della densit\`a di Gauss}
+<<echo=FALSE>>=
+s2<-function(a,b) 
+        {sigma=1;mu=0
+        curve(dnorm(x),lwd=4,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n",ylab="")
+        axis(1,at=c(a,b),labels=c("-u",expression(paste("u=U(A"[2],")"))))
+        x1 <- a  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+text(-0,0.15,expression("A")  ,cex=1)
+}
+s3<-function(a,b) 
+        {sigma=1;mu=0
+        curve(dnorm(x,mu,sigma),lwd=4,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n")
+        axis(1,at=c(a,b),labels=c("-u",expression(paste("u=qnorm(A"[1],"/2+1/2)"))))
+        x1 <- 0  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+        x1 <- -4  
+        x2 <- 0
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light blue")
+text(-1,0.15,bquote("1/2")  ,cex=1)
+text(1,0.15,expression("A"/2)  ,cex=1)
+text(0,0.43,expression(paste("A"[1],"=1/2+A"/2))  ,cex=2)
+}
+ 
+@
+Per definizione  $$\texttt{pnorm}(x)=\int_{-\infty}^x \texttt{dnorm}(s)ds=$$ mentre la funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}.
+Quindi
+<<>>=
+s4<-function(a,b) 
+        {
+        sigma=1;mu=0
+        curve(dnorm(x,mu,sigma),lwd=4,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n")
+        axis(1,at=c(2*a,b),labels=c("-x","x"))
+        x1 <- 0  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+        x1 <- -4  
+        x2 <- 0
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light blue")
+ 
+text(1,0.15,expression("a")  ,cex=1)
+text(-1,0.15,expression("1/2")  ,cex=1) 
+}
+par(mfrow=c(1,1))
+s4(-2,2)
+@
+Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di area $A$   fornisca l'ascissa $u=U(A)$ come in figura in modo che l'area tra - $u$ e $u$ sia esattamente pari ad $A$.  
 
+
+
+
+
+ 
+<<fig=TRUE>>=
+par(mfrow=c(1,2))
+s2(-1.96,1.96)
+s3(-4,1.96)
+@
+ 
+Allora la funzione che riproduce la tabella è
+ 
+<<>>=
+U <-function (a) qnorm (1/2 + a/2)
+@
 Notiamo preliminarmente che
 se $$ \int_{-x}^x \texttt{dnorm}(s)ds= y$$ allora
-$$\texttt{pnorm}(x)=\int_{-\infty}^x \texttt{dnorm}(s)ds=1-\frac{1-y}{2}=\frac{1+y}{2}$$
- La funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}  quindi
+ quindi
 $$x=\texttt{qnorm}\left(\frac{1+y}{2}\right)$$
 In termini pratici possiamo introdurre la funzione
 <<echo=TRUE>>=
@@ -739,7 +881,7 @@ text(0,0.45,expression("code della gaussiana"))
  text(1.6,0.03,expression(epsilon/2))
  lines(c(0,0),c(0,dnorm(0)))
 @
-\caption{ Code della distribuzione normale}
+\caption{Code della distribuzione normale}
 \label{normaletratto}
 \end{center}
 \end{figure}
@@ -775,7 +917,7 @@ Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di l
 <<echo=TRUE,fig=TRUE>>=
 curve(dt(x,10),-2,2)
 @
-\caption{ Grafico della distribuzione di Student a 10 gradi di libert\`a. }
+\caption{Grafico della distribuzione di Student a 10 gradi di libert\`a. }
 \label{fig:graficostudent1}
 \end{center}
 \end{figure}
@@ -789,7 +931,7 @@ curve(dt(x,2),-2,2,col=1,add=T)
 curve(dt(x,25),-2,2,col=2,add=T)
 legend("topleft", c("df=2","df=25","normale"),pch=15,col=1:3);
 @
-\caption{Grafico della distribuzione di Student a 10 gradi di libert. }
+\caption{Grafico della distribuzione di Student a 10 gradi di libert\`a. }
 \label{fig:graficostudent}
 \end{center}
 \end{figure}
@@ -846,19 +988,15 @@ t.test(1:4,5:2,paired=TRUE,conf.level=0.85)
 
 %code chunk
 Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
-<<eval=FALSE,keep.source=TRUE>>=
-read.table("http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html",
-skip=39,header=T,nrow=478,sep="\t")->kidinterest
-<<echo=FALSE,eval=TRUE>>=
-read.table("../filedati/PopularKids.html",
-skip=39,header=T,nrow=478,sep="\t")->kidinterest
-head(kidinterest)
+<<eval=TRUE,keep.source=TRUE>>=
+data(kidinterest)
+str(kidinterest)
 @
+
 Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
 %codechunk
-\end{document}
+ 
 <<>>=
-colnames(kidinterest)
 interessi=kidinterest[,c(1,5,7)]
 head(interessi)
 table(interessi)
@@ -869,9 +1007,7 @@ interessi2=kidinterest[,c(5,7)]
 tabella=table(interessi2)
 tabella
 @
-<<echo=FALSE>>=
-save.image(file="../Rdata/cap02.Rdata")
-@
+ 
 Il test $\chi^2$  di indipendenza consente di  verificare se  due variabili sono indipendenti.
 Se consideriamo le due variabili precedenti sesso e interessi.
 \textsf{R}  dispone del comando \texttt{chisq.test},\index{\texttt{chisq.tst},test $\chi^2$}
@@ -880,8 +1016,8 @@ dalla sintassi generale:$$\texttt{chisq.test}(\varia{tabella})$$
 Nell'esempio
 %code chunk
 <<echo=TRUE>>=
-studenti<-read.csv("../filedati/studenti.csv")
-head(studenti)
+data(studenti)
+str(studenti)
 tabellaEH=table(studenti$Eyes,studenti$Hair)
 chisq.test(tabellaEH)
 @
@@ -931,7 +1067,7 @@ La  probabilit\`a \`e circa del 29\%.
 \item{}derivata di $x^3+x^2+2x+1$, plot della funzione e plot della derivata come due pannelli distinti in un grafico unico. hint: par(mfrow)
 \end{description}
 \end{shaded}
-
+\begin{comment}
 \chapter{Strutture di dati}
 %\section{Aritmetica modulare}
 \section{Visualizzazione di oggetti di \textsf{R}}
@@ -1190,14 +1326,8 @@ stringsAsFactors=TRUE)
 d
 @
 Si noti che anche in questo caso si usa la \emph{recycling rule}
-<<echo=TRUE,eval=FALSE>>=
-sito="http://www.pharm.unipmn.it/rinaldi/file_corso/"
-nomefile="australian-crabs.txt"
-indirizzo=paste(sito,nomefile,sep="")
-read.table(indirizzo)->crabs
-dim(crabs)
-<<echo=FALSE,eval=TRUE>>=
-read.table("../filedati/australian-crabs.txt",header=T)->crabs
+ <<echo=TRUE,eval=TRUE>>=
+data(crabs)
 dim(crabs)
 @
 In quanto segue lavoreremo con il seguente \emph{dataframe} che rappresenta i risultati di un'indagine svolta sugli studenti che nell'Anno Accademico 2007/2008 frequentavano il primo anno del corso di Laurea di Farmacia della Facolt\`a di Farmacia del Piemonte Orientale. Potete scaricarlo dal sito e caricarlo in {\textsf R} con il comando
@@ -1206,11 +1336,7 @@ In quanto segue lavoreremo con il seguente \emph{dataframe} che rappresenta i ri
 options(width=55)
 @
 <<echo=TRUE,eval=FALSE>>=
-sito="http://www.pharm.unipmn.it/rinaldi"
-nomefile="/file_corso/datifarmacia.txt"
-dati=read.table(paste(sito,nomefile,sep=""))
-<<echo=FALSE,eval=TRUE>>=
-farmacia=read.table("../filedati/datifarmacia.txt")
+data(farmacia)
 @
 Il comando \texttt{colnames}  consente di  visualizzare o assegnare il nome alle colonne.
 Per esempio
@@ -1394,7 +1520,6 @@ table(interessi)
 interessi2=kidinterest[,c(5,7)]
 tabella=table(interessi2)
 tabella
-save.image(file="../Rdata/cap02.Rdata")
 @
 
 La tabella di contingenza delle due variabili (in questo caso a 3  livelli ciascuna) si realizza con il comando
@@ -1670,7 +1795,6 @@ Se consideriamo le due variabili precedenti sesso e interessi.
 Nell'esempio
 %code chunk
 <<echo=TRUE>>=
-load("../Rdata/cap02.Rdata")
 tabellaEH=table(studenti$Eyes,studenti$Hair)
 chisq.test(tabellaEH)
 @
@@ -1736,8 +1860,7 @@ qf(0.9,3,4)
 
 
 \section{Tabelle di contingenza}
-<<echo=FALSE>>=
-load("../Rdata/cap02.Rdata")
+<<echo=FALSE>>= 
 tabellaEH=table(studenti$Eyes,studenti$Hair)
 @
 Il comando
@@ -1835,61 +1958,7 @@ las = 1, col = 4)
 lines(xvals, predict(fm1, newdata = list(Time = xvals)), col = 4)
 @
 
-\subsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
-Sempre da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui dei ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
-<<echo=TRUE>>=
-age=18:29
-height=c(76.1,77,78.1,78.2,78.8,79.7,79.9,81.1,81.2,81.8,82.8,83.5)
-@
-Possiamo quindi costruire il \texttt{data.frame}
-<<echo=TRUE>>=
-village=data.frame(age=age,height=height)
-@
-Ora diamo una prima occhiata ai dati:
- %code chunk
-\begin{figure}[htbp]
-\begin{center}
-<<echo=TRUE,fig=TRUE>>=
-plot(age,height)
-@
-\caption{I bambini di Kalama}
-\label{kalama}
-\end{center}
-\end{figure}
-L'andamento \`e lineare. Determiniamo la retta di regressione
-per predire l?altezza media nota l'et\`a in mesi.
-%code chunk
-<<echo=TRUE>>=
-ris=lm(height~age)
-ris
-plot(ris)
-@
 
-La retta di regressione cercata ha formula:
-$$h(\texttt{age})=\Sexpr{1/100*round(100*ris$coefficients[1])}+ \Sexpr{1/100*round(100*ris$coefficients[2])}\, \texttt{age}$$
-
-Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l?altezza a 27.5 mesi di et\`a:
-oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione
-\texttt{predict}:
-%codechunk
-<<echo=TRUE>>=
-predict(ris,data.frame(age=27.5))
-@
-
-fornendo in input i parametri della retta ed un preciso valore della variabile indipendente (richiamata col proprio nome).
-Molti comandi di \textsf{R} sono in grado di manipolare dataframe  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
-Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt{village} direttamente al comando:
-<<echo=TRUE>>=
-res=lm(height~age,data=village)
-res
-@
-con la formula $lm(y ~x,data=dataset)$.
-Inoltre possiammo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
-<<fig=TRUE>>=
-oldpar<-par(mfrow=c(2,2))
-par(ask=FALSE);plot(lm(height~age))
-oldpar
-@
 \section{QQPlot
 normality test}
 \chapter{Grafica}
@@ -2725,7 +2794,7 @@ main = "Puromycin data and fitted Michaelis-Menten curves")
 
 Sarebbe poi meglio sostituire con il reale valore degli anni le etichette presenti sull'asse $x$ originale. Questo si pu\`o ottenere in diversi modi (vedi \texttt{axis}), ma perch\'e non sfruttare l'attributo \texttt{names} della struttura dati?
 
- <<echo=TRUE,eval=FALSE>>=
+<<echo=TRUE,eval=FALSE>>=
 names(dati)<-as.character(floor(seq(1860,1959,length=length(dati))))
  plot(as.vector(names(dati)),dati,main="Andamento delle scoperte scientifiche 1860-1959",
 xlab="Anni, dal 1860 al 1959",ylab="Numero di scoperte",type="o",
@@ -2734,7 +2803,7 @@ col="dark green",cex=0.5,lty=4)
 
 Possiamo poi anche orientare diversamente il grafico, scambiando l'asse \texttt{x} con l'asse \texttt{y}, la
 rappresentazione dei dati specie nell'insieme pu\`o apparire pi\`u appropriata, oppure peggiore:
-%code chink
+%code chunk
 <<echo=TRUE,eval=FALSE>>=
 plot(dati,as.vector(names(dati)),main="Andamento delle scoperte scientifiche 1860-1959",
 xlab="Anni, dal 1860 al 1959",ylab="Numero di scoperte",type="o",
@@ -2808,8 +2877,9 @@ points(coord[2],coord[1], cex=3, col="red")
 @
 \section{File Rmd}
 \section{ggplot}
+\end{comment}
 \section*{Tabelle delle distribuzioni statistiche}
-Per generare la tabella delle aree sottese dalla distribuzione normale da 0 ad $x$ si deve per prima cosa tenere conto del fatto che \texttt{pnorm} ???? la cumulativa ad una sola coda. Si sceglie l'intervallo di tabulazione, il numero di colonne ed il numero di cifre.
+Per generare la tabella delle aree sottese dalla distribuzione normale da 0 ad $x$ si deve per prima cosa tenere conto del fatto che \texttt{pnorm}  \`e la cumulativa ad una sola coda. Si sceglie l'intervallo di tabulazione, il numero di colonne ed il numero di cifre.
 <<echo=TRUE>>=
 start=0.01
 stop=3.00
@@ -2859,7 +2929,7 @@ colnames(tabchi)=fiducia
 Per la  distribuzione di Fisher occorre specificare il numero di gradi di libertà del numeratore e del denominatore e fissare i valori di significatività (0.05 e 0.01)
 
 <<echo=TRUE>>=
-gradinum=1:10
+gradinum=1:9
 gradiden=c(1:40,50,60,70,80,90,100,150,200)
 fiducia=c(0.95,0.99);
 ncol=length(gradinum);
