@@ -1,6 +1,39 @@
 \begin{theindex}
 
-  \item \texttt{chisq.tst},test $\chi^2$, \hyperpage{37}
-  \item \texttt{dbinom}, \hyperpage{38}
+  \item \emph{escape}, \hyperpage{2}
+  \item \texttt{LETTERS}, \hyperpage{3}
+  \item \texttt{\%*\%}, prodotto di matrici, \hyperpage{7}
+  \item \texttt{abbreviate}, \hyperpage{2}
+  \item \texttt{cbind}, \hyperpage{12}
+  \item \texttt{chisq.tst},test $\chi^2$, \hyperpage{62}
+  \item \texttt{colnames}, \hyperpage{6}
+  \item \texttt{dbinom}, \hyperpage{63}
+  \item \texttt{letters}, \hyperpage{3}
+  \item \texttt{level}, \hyperpage{10}
+  \item \texttt{list}, \hyperpage{15}
+  \item \texttt{month.abb}, \hyperpage{3}
+  \item \texttt{nchar}, \hyperpage{2}
+  \item \texttt{paste}, \hyperpage{3}
+  \item \texttt{rbind}, \hyperpage{12}
+  \item \texttt{rownames}, \hyperpage{6}
+  \item \texttt{str}, \hyperpage{9}
+  \item \texttt{tapply}, \hyperpage{17}
+  \item \texttt{t}, trasposto, \hyperpage{7}
+
+  \indexspace
+
+  \item autovalore, \hyperpage{8}
+
+  \indexspace
+
+  \item detach, \hyperpage{11}
+
+  \indexspace
+
+  \item stringa, \hyperpage{1}
+
+  \indexspace
+
+  \item trasposto, \hyperpage{7}
 
 \end{theindex}

@@ -1,26 +1,10 @@
 \select@language {italian}
 \select@language {italian}
 \select@language {italian}
-\contentsline {chapter}{\numberline {1}Statistica con \textsf {R}}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Variabili aleatorie}{1}{section.1.1}
-\contentsline {section}{\numberline {1.2}Variabili aleatorie discrete}{1}{section.1.2}
-\contentsline {section}{\numberline {1.3}Statistica descrittiva: singola variabile}{4}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}Indicatori statistici}{4}{subsection.1.3.1}
-\contentsline {subsection}{\numberline {1.3.2}Raggruppamenti in classi}{6}{subsection.1.3.2}
-\contentsline {subsection}{\numberline {1.3.3}Areogrammi}{11}{subsection.1.3.3}
-\contentsline {subsection}{\numberline {1.3.4}Generazione di boxplot}{13}{subsection.1.3.4}
-\contentsline {subsection}{\numberline {1.3.5}Creazione di grafici a torta}{15}{subsection.1.3.5}
-\contentsline {section}{\numberline {1.4}Variabili doppie e rette di regressione}{16}{section.1.4}
-\contentsline {subsection}{\numberline {1.4.1}I bambini di Kalama (Egitto). Ancora retta di regressione}{18}{subsection.1.4.1}
-\contentsline {section}{\numberline {1.5}Modelli potenza}{21}{section.1.5}
-\contentsline {section}{\numberline {1.6}Distribuzioni in \textsf {R}}{23}{section.1.6}
-\contentsline {subsection}{\numberline {1.6.1}Distribuzione normale}{26}{subsection.1.6.1}
-\contentsline {subsubsection}{La funzione \texttt {dnorm}}{26}{section*.2}
-\contentsline {subsection}{\numberline {1.6.2}La funzione \texttt {pnorm}}{26}{subsection.1.6.2}
-\contentsline {subsection}{\numberline {1.6.3}La funzione \texttt {qnorm} e la tabella della densit\`a di Gauss}{28}{subsection.1.6.3}
-\contentsline {subsection}{\numberline {1.6.4}La funzione \texttt {rnorm}}{29}{subsection.1.6.4}
-\contentsline {subsection}{\numberline {1.6.5}La distribuzione $t$ di Student}{31}{subsection.1.6.5}
-\contentsline {subsection}{\numberline {1.6.6}Intervalli di confidenza e test di Student (dati non appaiati)}{33}{subsection.1.6.6}
+\contentsline {chapter}{\numberline {1}Strutture di dati}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Le stringhe}{1}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Operare con le stringhe}{1}{subsection.1.1.1}
+\contentsline {section}{\numberline {1.2}Matrici}{5}{section.1.2}
 \select@language {english}
 \select@language {italian}
 \select@language {english}
@@ -45,11 +29,93 @@
 \select@language {italian}
 \select@language {english}
 \select@language {italian}
-\contentsline {subsection}{\numberline {1.6.7}Test di Student per dati appaiati}{35}{subsection.1.6.7}
-\contentsline {section}{\numberline {1.7}Test $\chi ^2$ di indipendenza}{35}{section.1.7}
-\contentsline {subsection}{\numberline {1.7.1}Test $\chi ^2$ di adeguamento}{38}{subsection.1.7.1}
-\contentsline {section}{\numberline {1.8}Distribuzione Binomiale}{38}{section.1.8}
-\contentsline {chapter}{Bibliografia}{53}{section*.8}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\contentsline {subsubsection}{Aggiungere righe o colonne}{6}{section*.2}
+\contentsline {subsection}{\numberline {1.2.1}Operazioni con le matrici}{7}{subsection.1.2.1}
+\contentsline {subsubsection}{Trasposizione}{7}{section*.3}
+\contentsline {subsubsection}{Prodotto}{7}{section*.4}
+\contentsline {subsubsection}{Determinante}{7}{section*.5}
+\contentsline {section}{\numberline {1.3}I \emph {dataframe}}{8}{section.1.3}
+\contentsline {subsubsection}{Selezione in base a criteri}{13}{section*.6}
+\contentsline {section}{\numberline {1.4}Gli \emph {array}}{14}{section.1.4}
+\contentsline {section}{\numberline {1.5}Liste}{15}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}Funzioni applicate a oggetti}{16}{subsection.1.5.1}
+\contentsline {subsubsection}{La funzione \texttt {apply}}{16}{section*.7}
+\contentsline {subsubsection}{Il comando \texttt {table} applicato a diverse variabili nominali e le tabelle di contingenza}{18}{section*.8}
+\contentsline {chapter}{\numberline {2}Operatori logici e selezione di elementi}{23}{chapter.2}
+\contentsline {subsection}{\numberline {2.0.1}I valori non assegnati}{24}{subsection.2.0.1}
+\contentsline {chapter}{\numberline {3}Statistica con \textsf {R}}{25}{chapter.3}
+\contentsline {section}{\numberline {3.1}Variabili aleatorie}{25}{section.3.1}
+\contentsline {section}{\numberline {3.2}Variabili aleatorie discrete}{25}{section.3.2}
+\contentsline {section}{\numberline {3.3}Statistica descrittiva: singola variabile}{28}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Indicatori statistici}{28}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Raggruppamenti in classi}{30}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Areogrammi}{36}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Generazione di boxplot}{37}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Creazione di grafici a torta}{37}{subsection.3.3.5}
+\contentsline {section}{\numberline {3.4}Variabili doppie e rette di regressione}{41}{section.3.4}
+\contentsline {subsubsection}{I bambini di Kalama (Egitto). Ancora retta di regressione}{43}{section*.9}
+\contentsline {section}{\numberline {3.5}Modelli potenza}{46}{section.3.5}
+\contentsline {section}{\numberline {3.6}Distribuzioni in \textsf {R}}{49}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Distribuzione normale}{50}{subsection.3.6.1}
+\contentsline {subsubsection}{La funzione \texttt {dnorm}}{50}{section*.10}
+\contentsline {subsection}{\numberline {3.6.2}La funzione \texttt {pnorm}}{52}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}La funzione \texttt {qnorm} e la tabella della densit\`a di Gauss}{52}{subsection.3.6.3}
+\contentsline {subsection}{\numberline {3.6.4}La funzione \texttt {rnorm}}{54}{subsection.3.6.4}
+\contentsline {subsection}{\numberline {3.6.5}La distribuzione $t$ di Student}{56}{subsection.3.6.5}
+\contentsline {subsection}{\numberline {3.6.6}Intervalli di confidenza e test di Student (dati non appaiati)}{58}{subsection.3.6.6}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\select@language {english}
+\select@language {italian}
+\contentsline {subsection}{\numberline {3.6.7}Test di Student per dati appaiati}{60}{subsection.3.6.7}
+\contentsline {section}{\numberline {3.7}Test $\chi ^2$ di indipendenza}{60}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}Test $\chi ^2$ di adeguamento}{63}{subsection.3.7.1}
+\contentsline {section}{\numberline {3.8}Distribuzione Binomiale}{63}{section.3.8}
+\contentsline {chapter}{Bibliografia}{77}{section*.16}
 \select@language {italian}
 \select@language {italian}
 \select@language {italian}

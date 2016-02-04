@@ -1,2 +1,23 @@
-\indexentry{\texttt{chisq.tst},test $\chi^2$|hyperpage}{37}
-\indexentry{\texttt{dbinom}|hyperpage}{38}
+\indexentry{stringa|hyperpage}{1}
+\indexentry{\texttt{nchar}|hyperpage}{2}
+\indexentry{\emph{escape}|hyperpage}{2}
+\indexentry{\texttt{abbreviate}|hyperpage}{2}
+\indexentry{\texttt{letters}|hyperpage}{3}
+\indexentry{\texttt{LETTERS}|hyperpage}{3}
+\indexentry{\texttt{month.abb}|hyperpage}{3}
+\indexentry{\texttt{paste}|hyperpage}{3}
+\indexentry{\texttt{colnames}|hyperpage}{6}
+\indexentry{\texttt{rownames}|hyperpage}{6}
+\indexentry{trasposto|hyperpage}{7}
+\indexentry{\texttt{t}, trasposto|hyperpage}{7}
+\indexentry{\texttt{\%*\%}, prodotto di matrici|hyperpage}{7}
+\indexentry{autovalore|hyperpage}{8}
+\indexentry{\texttt{str}|hyperpage}{9}
+\indexentry{\texttt{level}|hyperpage}{10}
+\indexentry{detach|hyperpage}{11}
+\indexentry{\texttt{rbind}|hyperpage}{12}
+\indexentry{\texttt{cbind}|hyperpage}{12}
+\indexentry{\texttt{list}|hyperpage}{15}
+\indexentry{\texttt{tapply}|hyperpage}{17}
+\indexentry{\texttt{chisq.tst},test $\chi^2$|hyperpage}{62}
+\indexentry{\texttt{dbinom}|hyperpage}{63}

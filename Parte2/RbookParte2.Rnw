@@ -22,7 +22,8 @@
 \newenvironment{solution}{\textbf{Soluzione}\newline}{}
 \newenvironment{answerlist}{\renewcommand{\labelenumi}{(\alph{enumi})}\begin{enumerate}}{\end{enumerate}}
 \definecolor{grigetto}{rgb}{0.9,0.9,0.9}
-\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
+ 
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
 \lhead[\thepage]{\today}
 %\usepackage{draftwatermark}
 \usepackage{wrapfig}
@@ -35,7 +36,9 @@
 \newcommand{\federico}[1]{\color{green}#1 \color{black}}
  %\newenvironment{question}{\item \textbf{Problema}\newline}{}
 %\newenvironment{solution}{\textbf{Soluzione}\newline}{}
-
+%\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em,
+                                            %  frame=single}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em,   frame=single}
  \newenvironment{ese} [1]{\vskip10pt
 %\begin{center}
 %\begin{minipage}{12cm}
@@ -57,6 +60,8 @@
 %\renewcommand{\sectionmark}[1]{%
 % \markboth{\sectionname
 % \ \thesection.\ #1}{}}
+\newcommand{\rst}{\textsf{RStudio}~}
+\newcommand{\rpr}{\textsf{R}~}
 \makeindex
 \begin{document}
 \setkeys{Gin}{width=0.7\textwidth}
@@ -73,6 +78,570 @@
 <<echo=FALSE>>=
 library(lubridate)
 library(EsamiR)
+@
+
+\chapter{Strutture di dati}
+%\section{Aritmetica modulare}
+ 
+Premettiamo che per visualizzare un oggetto di \textsf{R} si pu\`o usare il comando \texttt{print} o il comando \texttt{cat} che fornisce spesso un risultato migliore. \texttt{str} visualizza la struttura di un oggetto mentre \texttt{head} o \texttt{tail} ne visualizzano l'inizio o la fine.
+
+
+\section{Le stringhe}
+Una stringa\index{stringa} di testo \`e una collezione di caratteri; in genere, una stringa \`e resa riconoscibile dall'essere racchiusa tra virgolette.
+\subsection{Operare con le stringhe}
+Oltre alle virgolette, vi sono numerosi altri caratteri speciali che possono apparire in una stringa.
+I pi\`u comuni sono ``\texttt{\textbackslash t}'' per \texttt{TAB}, `` \texttt{\textbackslash n}'' per una nuova linea e ``\texttt{\textbackslash }'' per un singolo {\it backslash}.
+Quest'ultimo carattere \`e un carattere di \emph{escape} e consente una lettura diversa di quanto lo segue.  Per esempio
+<<>>=
+cat("\"sin\"")
+nchar("\"sin\"")
+cat("\\")
+cat("ora a capo\nsono a capo?")
+cat("ora spazio\triprendo")
+@
+La funzione \texttt{nchar}, \index{\texttt{nchar}} che conta il numero di caratteri di una stringa, non includer\`a quindi il carattere di \emph{escape}\index{\emph{escape}} nel totale dei caratteri. Ad esempio:
+<<echo=TRUE>>=
+"Tab\t"
+cat("Tab\t")
+nchar("Tab\t")
+@
+
+
+
+Succede spesso di dover lavorare in modo automatico con stringhe di testo, anche nello scrivere indirizzi di rete o cartelle di lavoro. In  \textsf{R} diversi comandi consentono la  generazione, manipolazione e stampa di una o pi\`u stringhe di testo\footnote{Per un  uso pi\`u specifico si pu\`o consultare il pacchetto \texttt{biostrings}.}. Consideriamo inizialmente una singola frase.
+%codechunk
+<<echo=TRUE>>=
+x="lavorare con le stringhe"
+@
+Possiamo verificarne la classe e determinare il numero di caratteri di \texttt{x}
+%codechunk
+<<echo=TRUE>>=
+class(x)
+nchar(x)
+@
+e anche considerare sottostringhe
+%codechunk
+<<echo=TRUE>>=
+substr(x,3,8)
+@
+o  abbreviazioni ottenibili con il comando \texttt{abbreviate} \index{\texttt{abbreviate}}
+%codechunk
+<<echo=TRUE>>=
+abbreviate("Mario Rossi",4)
+@
+
+Certi oggetti possono essere convertiti a stringhe: per esempio il numero 2 pu\`o essere visto come una stringa e riconvertito a numero.
+%codechunk
+<<echo=TRUE>>=
+ i=2;toString(i)
+as.numeric(toString(i))
+@
+Alcune stringhe molto frequenti sono le lettere \index{\texttt{letters}}\index{\texttt{LETTERS}} dell'alfabeto, maiuscole o minuscole
+%codechunk
+<<echo=TRUE>>=
+letters[1:10]
+LETTERS[1:10]
+@
+o i mesi dell'anno (per esempio abbreviati in inglese)\index{\texttt{month.abb}}
+%codechunk
+<<echo=FALSE>>=
+options(width=60)
+<<echo=TRUE>>=
+month.abb
+@
+Le stringhe possono poi essere ``incollate'' con il comando\index{\texttt{paste}}
+%codechunk
+<<echo=TRUE,eval=FALSE>>=
+paste("a","b",sep="")
+@
+dove \texttt{sep}  indica il separatore usato.
+E tutto insieme
+%codechunk
+<<echo=FALSE>>=
+options(width=60)
+@
+
+<<echo=TRUE>>=
+for (i in 1:5) cat(paste("a",toString(i),"\t",sep=""))
+@
+Il comando pu\`o anche essere utilizzato su vettori.
+Per esempio
+%codechunk
+<<echo=TRUE,eval=TRUE>>=
+paste(letters[1:10],1:10,sep="")
+@
+La \textit{recycling rule} continua a valere
+%codechunk
+
+<<echo=TRUE>>=
+paste(letters[1:3],1:10,sep="")
+paste(letters[1:3],1:12,sep="")
+@
+e giocando con \texttt{rep} si possono ottenere diverse combinazioni.
+<<echo=TRUE,eval=TRUE>>=
+paste(rep(letters[1:3],each=5),1:15,sep="")
+paste(rep(letters[1:3],ntimes=5),1:15,sep="")
+@
+Con l'opzione \texttt{collapse="x"} le stringhe vengono unite con separatore la stringa "x".
+%codechunk
+<<echo=TRUE,eval=TRUE>>=
+paste(c("X", "Y"), 1:4, sep = "-", collapse = "--")
+@
+Si noti il separatore - dell'operazione \texttt{paste} e  - - dell'operazione \texttt{collapse}.
+
+ \begin{shaded}
+ \begin{enumerate}
+ \item{} Inserisci il tuo cognome in una variabile `cognome' ed il tuo nome in una variabile 'nome'. Crea una terza variabile 'nomecognome' che contenga entrambi separati da un TAB. Stampa a console la scritta "Good job" seguita dal valore di nomecognome.
+  \item{} Creare un elenco che contenga mesi e anno dal 2001 al 2010 nel seguente formato "tre lettere iniziali del mese-anno".
+ \item{} Costruire una tabella che contenga tutte le parole di 2 lettere.
+\item{}
+Si consideri
+<<results=hide>>=
+paste(letters[1:7],1:7,sep="=")
+@
+Estendere la corrispondenza a tutto l'alfabeto.
+\item Creare un elenco in cui a ciascun mese corrisponda il suo numero (a partire da gennaio).
+\item Creare un elenco con nomi i mesi e valori il numero di giorni di ciascun mese.
+\item Scrivere un elenco di 5 persone con le relative date di nascita nel formato anno-mese-giorno.
+ \end{enumerate}
+ \end{shaded}
+
+\section{Matrici}
+
+Assegnati $n\times m$ ingressi possiamo costruire una matrice (ossia una tabella) con $n$ righe e $m$ colonne. Occorre solo riempire la matrice per righe o per colonne.
+Ad esempio:
+%code chunk
+<<echo=TRUE>>=
+a<-matrix(letters[1:12],nrow=3,ncol=4)
+a
+class(a)
+@
+Se i parametri hanno natura diversa vengono resi uniformi
+%code chunk
+<<echo=TRUE>>=
+a<-matrix(c(1:6,letters[1:6]),nrow=3,ncol=4);a
+@
+Con il parametro \texttt{byrow=T} il riempimento avviene per righe, anzich\`e per colonne.
+%code chunk
+<<echo=TRUE>>=
+ a<-matrix(1:12,nrow=3,ncol=4,byrow=T)
+ a
+@
+Se i numeri sono insufficienti vengono \emph {riciclati}
+%code chunk
+<<echo=TRUE>>=
+a<-matrix(1:4,nrow=3,ncol=4)
+a
+@
+in modo pacifico se sono un sottomultiplo della dimensione della matrice o con qualche
+\texttt{warning} altrimenti.
+%code chunk
+<<echo=TRUE,eval=FALSE>>=
+a<-matrix(2,nrow=3,ncol=4)
+a
+@
+Si possono anche definire gli ingressi attraverso opportune funzioni
+%code chunk
+<<echo=TRUE>>=
+<<echo=TRUE,eval=FALSE>>=
+for(j in (1:4)) for(i in (1:3))  a[i,j]<-i^2+j
+@
+Per assegnare nomi alle  righe e alle colonne:\index{\texttt{colnames}} \index{\texttt{rownames}}
+\begin{eqnarray*}
+ \texttt{colnames}(\varia{matrice})=\texttt{c}(\virgolette \varia{  nome}_1\virgolette,\\
+\virgolette \varia{nome}_2\virgolette,\ldots,\virgolette \varia{nome}_n\virgolette )\\
+ \texttt{rownames}(\varia{matrice})=\texttt{c}(\virgolette \varia{nome}_1\virgolette,\\
+\virgolette \varia{nome}_2\virgolette,\ldots,\virgolette \varia{nome}_n\virgolette )
+\end{eqnarray*}
+<<echo=TRUE,eval=FALSE>>=
+colnames(a)=c("c1","c2","c3")
+rownames(a)=c("r1","r2","r3")
+a
+@
+\subsubsection{Aggiungere righe o colonne}
+Per aggiungere una o pi\`u righe (o colonne)
+ad una matrice si possono usare i comandi (\texttt{rbind} e \texttt{cbind})
+<<>>=
+dim(a)
+rbind(a,letters[1:ncol(a)])
+cbind(a,letters[1:nrow(a)])
+@
+Possiamo anche effettuare semplici operazioni, come somma degli elementi delle righe o delle colonne
+<<>>=
+colSums(a)
+rowSums(a)
+@
+
+\subsection{Operazioni con le matrici}
+\subsubsection{Trasposizione}
+Per invertire righe e colonne di una matrice ossia per ottenere il trasposto \index{trasposto} di una matrice si usa il comando \texttt{t}(\texttt{matrice})\index{\texttt{t}, trasposto}
+%code chunk
+<<echo=TRUE>>=
+t(a)
+@
+\subsubsection{Prodotto}
+Per la  moltiplicazione di matrici (definita per ingressi numerici) si usa il simbolo \texttt{\%*\%}.
+\index{\texttt{\%*\%}, prodotto di matrici}
+ %code chunk
+<<echo=TRUE>>=
+b<-matrix(2,nrow=3,ncol=3)
+for(j in (1:3))
+for(i in (1:3)) b[i,j]<-i+j+i^2
+b
+@
+Non \`e infatti possibile moltiplicare una matrice 3x4 con una 3x3. Possiamo per\`o calcolare
+%code chunk
+<<echo=TRUE>>=
+b%*%a
+@
+\subsubsection{Determinante} Il determinante di una matrice quadrata si ottiene con il comando
+%\index{\texttt{det},determinante}
+\begin{equation}\texttt{det} (\varia{matrice})\end{equation}
+<<echo=TRUE>>=
+det(b)
+@
+
+Si noti che se eseguendo i calcoli a mano si trovano in alcuni casi risultati diversi da quelli di {\textsf R}. Per esempio la matrice in esame ha determinante 0 e 0 ne \`e anche un autovalore.\index{autovalore}
+\begin{shaded}
+ \begin{enumerate}
+ \item{}Creare una matrice $3\times 2$ che abbia come ingressi i primi 6 numeri pari. Estendere la matrice aggiungendo due colonne contenenti i primi 6 numeri dispari. Calcolare e stampare la somma per riga e la somma per colonna. Modifica la matrice cambiando di segno la prima riga. Moltiplicare la matrice  per 4.
+ \end{enumerate}
+ \end{shaded}
+ \section{I \emph{dataframe}}
+
+I \emph{dataframe} (in \rpr  \texttt{data.frame}) costituiscono in \rpr la classe di oggetti fondamentali per la collezione di dati per una susseguente analisi statistica.
+Un \emph{dataframe}  \`e una collezione di vettori aventi egual lunghezza e allineati verticalmente. Un dataframe \`e diverso da una matrice in quanto le colonne sono vettori eventualmente di tipi diversi. Il comando generale per costruire \emph{dataframe} a partire da vettori o liste
+\`e \texttt{data.frame}.  Esso richiede come parametri i nomi dei vettori (colonna) da affiancare nella tabella. In generale si scrive:
+\begin{equation*}\texttt{data.frame}(\varia{vettore}_1,\varia{vettore}_2, \ldots, \varia{vettore}_n)\end{equation*}
+dove tutti i vettori hanno la stessa lunghezza.
+Si noti la asimmetria  (rispetto ad una matrice) nel ruolo di righe e colonne. Le colonne sono omogenee, lo stesso non si pu\`o dire per le righe. Le colonne sono le variabili analizzate, le righe le unit\`a statistiche. Anche i vari comandi che vedremo rispettano tale differenza.
+Il data.frame classico da cui partiamo è \texttt{iris}
+
+Per avere una stampa abbreviata
+%codechunk
+
+<<echo=TRUE,eval=T>>=
+head(iris)
+tail(iris)
+@
+
+Il comando \texttt{str}\index{\texttt{str}} consente una visualizzazione parziale che ci fornisce la struttura.
+ 
+\small
+<<echo=FALSE,eval=TRUE>>=
+options(width=50)
+<<echo=TRUE>>
+str(iris)
+@
+\normalsize
+Per esempio possiamo considerare il dataframe \texttt{d} definito come segue 
+<<echo=TRUE>>=
+L3 <- LETTERS[1:3]
+d <- data.frame(cbind(x=1, y=1:10,
+fac=sample(L3, 10, replace=TRUE)),
+stringsAsFactors=TRUE)
+d
+@
+Si noti che anche in questo caso si usa la \emph{recycling rule}
+<<echo=TRUE,eval=TRUE>>=
+data(crabs)
+dim(crabs)
+@
+In quanto segue lavoreremo con il seguente \emph{dataframe} che rappresenta i risultati di un'indagine svolta sugli studenti che nell'Anno Accademico 2007/2008 frequentavano il primo anno del corso di Laurea di Farmacia della Facolt\`a di Farmacia del Piemonte Orientale. Potete scaricarlo dal sito e caricarlo in {\textsf R} con il comando
+%code chunk
+<<echo=FALSE>>=
+options(width=55)
+@
+<<echo=TRUE,eval=FALSE>>=
+data(farmacia)
+@
+Il comando \texttt{colnames}  consente di  visualizzare o assegnare il nome alle colonne.
+Per esempio
+%code chunk
+<<echo=TRUE>>=
+colnames(farmacia)
+@
+Le varie colonne hanno dei nomi di facile interpretazione. Si noti anche che a fianco di variabili numeriche (\texttt{W} e \texttt{H}, peso-altezza ad esempio) sono presenti variabili  \emph {nominali} quali sesso (\texttt{Sex}) e colore degli occhi (\texttt{Eyes}).
+Per associare i nomi alle colonne  alle varie colonne dobbiamo eseguire una operazione di collegamento con il comando \texttt{attach},
+%code chunk
+<<echo=TRUE>>=
+attach(farmacia)
+@
+A questo punto digitando il nome delle colonne appare il contenuto della colonna
+%code chunk
+<<echo=TRUE>>=
+Sex
+@
+Le variabili nominali sono caratterizzate dal fatto che i loro valori (livelli, \texttt{levels}) \index{\texttt{level}} non hanno significato numerico, anche se possono essere codificati con dei numeri.   Ad esempio il sesso di una persona \`e una variabile nominale con due possibili valori, che sono stati  indicati qui con la convenzione  \texttt{"F"}  per le femmine e \texttt{"M"} per i maschi.  Se volessimo eliminare i livelli di una variabile nominale potremmo scrivere
+<<>>=
+Sex=as.vector(Sex)
+Sex
+class(Sex)
+@
+Possiamo anche considerare il processo inverso e cambiare una variabile priva di livelli in una nominale
+$$\texttt{factor}(\varia{variabile})\rightarrow\varia{ variabile}$$
+Per definire i suoi livelli (ad esempio $n$) scriveremo:
+$$\texttt{levels}(\varia{variabile})\leftarrow\texttt{c}(\varia{nome}_1,\varia{nome}_2,\ldots,\varia{nome}_n)$$
+Per rendere la variabilie \texttt{Sex} nominale con nomi dei livelli
+\texttt{F} e \texttt{M})  scriveremo:
+<<>>=
+Sex=factor(Sex)
+Sex
+@
+Con il comando
+\texttt{detach} \index{detach}  si pu\`o eliminare l'associazione creata tra colonne e nomi delle colonne.
+Consideriamo ora un \emph{dataset} simile raccolto dagli studenti di Biotecnologie dello stesso anno
+%code chunk
+<<echo=FALSE>>=
+options(width=50)
+@
+<<echo=TRUE,eval=FALSE>>=
+sito="http://www.pharm.unipmn.it/rinaldi"
+nomefile="/file_corso/datibiotec.csv"
+biotec=read.table(paste(sito,nomefile,sep=""),sep=";",dec=",",header=T)
+<<echo=FALSE,eval=TRUE>>=
+biotec=read.table("../filedati/datibiotec.txt",sep=";",dec=",",header=T)
+@
+Scrivendo
+<<echo=TRUE>>=
+class(biotec)
+@
+vediamo che anche \texttt{biotec} \`e un \emph{dataframe}.  Inoltre confrontando i nomi delle colonne di \texttt{farmacia} e di \texttt{biotec} possiamo verificare che sono essenzialmente uguali a meno di traduzione e eventuale abbreviazione.
+Possiamo creare un \emph{dataframe} unico che raggruppi \texttt{biotec} e \texttt{farmacia}. Per farlo  vorremmo incollare un \emph{dataframe} sopra all'altro.
+A tal fine occorre uniformare i nomi delle colonne scrivendo per esempio
+<<echo=TRUE>>=
+colnames(biotec)=colnames(farmacia)
+studenti=rbind(farmacia,biotec)
+head(studenti)
+@
+Si noti che il comando \texttt{rbind} \index{\texttt{rbind}} incolla per riga, mentre l'analogo comando \texttt{cbind}
+\index{\texttt{cbind}} incolla le colonne.
+Le intestazioni di riga di dati sono
+<<echo=TRUE>>=
+rownames(studenti)
+@
+Per correggere la strana numerazione possiamo scrivere
+<<echo=TRUE>>=
+rownames(studenti)=seq(length=nrow(studenti))
+@
+
+Giunti a  questo punto la tabella \texttt{dati} presenta ancora alcuni problemi; per esempio se scriviamo
+ %code chunk
+<<echo=TRUE>>=
+levels(studenti$Eyes)
+levels(studenti$Hair)
+@
+Ci incuriosisce   il dato con gli occhi neri. Verifichiamo:
+<<echo=TRUE>>=
+studenti[which(studenti$Eyes=="NERI"),]
+@
+Possiamo ritenere che sia un errore e che in  realt\`a gli occhi siano marroni molto scuri.
+Risulta evidente che nel riportare i colori degli  occhi si sono usate dizioni diverse per colori essenzialmente uguali, per esempio i livelli \texttt{"CASTANI"}, \texttt{"NOCCIOLA"},
+\texttt{"MARRONI"} possono esser fatti confluire in un unico livello  \texttt{"castani"} e possiamo rendere minuscoli i nomi degli altri livelli con il comando
+<<echo=FALSE>>=
+options(width=50)
+@
+<<echo=TRUE>>=
+options(width=50)
+levels(studenti$Eyes)=c("azzurri","castani","castani", "castani", "castani","verdi","azzurri","castani","castani","verdi")
+@
+A questo punto
+<<echo=FALSE>>=
+options(width=50)
+@
+<<echo=TRUE>>=
+levels(studenti$Eyes)
+@
+Facciamo lo stesso con i capelli
+<<echo=FALSE>>=
+options(width=50)
+@
+<<echo=TRUE>>=
+levels(studenti$Hair)=c("biondi","castani","neri", "biondi", "castani","castani","castani","neri")
+levels(studenti$Hair)
+@
+\subsubsection{Selezione in base a criteri}
+Supponiamo di voler selezionare gli studenti con gli occhi castani.
+Basta scrivere
+%code chunk
+<<echo=TRUE>>=
+subset(studenti,studenti$Eyes=="verdi")
+@
+Se siamo invece interessati al colore dei capelli degli studenti con occhi castani
+<<echo=TRUE,eval=TRUE>>=
+subset(studenti,studenti$Eyes=="verdi",select="Hair")
+@
+
+
+\section{Gli \emph{array}}
+Un \emph{array}  \`e una generalizzazione multidimensionale di una matrice. Gli \emph{array} sono caratterizzati dal numero di dimensioni  (se le dimensioni sono 2 un \emph{array} si identifica con una  matrice) e dal nome dei vari livelli
+%code chunk
+<<echo=TRUE>>=
+array(LETTERS[1:24],
+dim=c(2,3,4))
+array(sample(1:100,24), dim=c(3,4,2),dimnames=list(LETTERS[1:3],LETTERS[11:14],letters[1:2]))->x
+x[,,"b"]
+@
+\section{Liste}
+Una lista (in \textsf{R} \texttt{list}) \`e un vettore di oggetti.  Gli oggetti possono avere un nome ed avere natura diversa fra di loro. \index{\texttt{list}}
+Per esempio
+%code chunk
+<<echo=TRUE>>=
+x=list(a=month.abb , b=array(rep(0,20), dim=c(4,5)),c="your name")
+x
+@
+Possiamo annidare anche liste entro liste
+%code chunk
+<<echo=TRUE>>=
+x=list(a=1:10,b=array(rep(0,20),dim=c(4,5)),
+c="testo",d=list(g="h",r=1:10) )
+x
+@
+\subsection{Funzioni applicate a oggetti}
+\subsubsection{La funzione \texttt{apply}}
+Quando abbiamo una struttura di dati a pi\`u dimensioni ad esempio un \emph{array}
+<<>>=
+array(1:30,dim=c(2,5,3))->x
+x
+@
+possiamo applicare una funzione selezionando il livello escluso:
+<<>>=
+apply(x,2,mean)
+apply(x,c(1,3),mean)
+@
+
+In un \emph{dataframe} possiamo considerare diverse operazioni che coinvolgano due o pi\`u colonne. Per esempio possiamo considerare la tabella \texttt{farmacia} e proporci di calcolare la media del peso dei maschi e la media del peso delle femmine. Il comando \texttt{tapply} \index{\texttt{tapply}} consente di applicare una funzione ad una colonna di una tabella ripartita in gruppi in accordo ad un criterio specificato da un'altra colonna (nominale) della stessa tabella
+\begin{eqnarray*}
+\texttt{tapply}(\varia{vettore},\varia{criterio} ,\varia{funzione})\end{eqnarray*}
+L'esempio sopra riportato si risolve con la scrittura:
+%code chunk
+<<echo=TRUE>>=
+tapply(studenti$W, studenti$Sex,mean)->Wmean
+Wmean
+@
+Possiamo anche chiedere di calcolare altri indicatori sempre basandoci  su questa ripartizione maschi/femmine.
+Ad esempio possiamo ottenere la deviazione standard(\texttt{sd}) di maschi e femmine:
+%code chunk
+<<echo=TRUE>>=
+tapply(studenti$W, studenti$Sex,sd)->Wsd
+Wsd
+@
+
+\subsubsection{Il comando \texttt{table} applicato a diverse variabili nominali e le tabelle di contingenza}
+Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
+<<eval=FALSE,keep.source=TRUE>>=
+read.table("http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html",
+skip=39,header=T,nrow=478,sep="\t")->kidinterest
+<<echo=FALSE,eval=TRUE>>=
+read.table("../filedati/PopularKids.html",
+skip=39,header=T,nrow=478,sep="\t")->kidinterest
+head(kidinterest)
+@
+Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
+%codechunk
+<<>>=
+colnames(kidinterest)
+interessi=kidinterest[,c(1,5,7)]
+head(interessi)
+table(interessi)
+@
+ Consideriamo per esempio le variabili provenienza e traguardi
+<<>>=
+interessi2=kidinterest[,c(5,7)]
+tabella=table(interessi2)
+tabella
+@
+
+La tabella di contingenza delle due variabili (in questo caso a 3  livelli ciascuna) si realizza con il comando
+\texttt{table}.
+\texttt{table}(\varia(lista))
+applicato ad una singola variabile nominale conta le frequenze di ciascuna classe, se le variabili sono $n$ esamina tutte le combinazioni possibili ($2^n$ se le variabili sono dicotomiche) e ne conta tutte le occorrenze
+
+Allo stesso modo possiamo creare una tabella dei colori degli occhi e dei capelli
+%code chunk
+<<echo=TRUE>>=
+tabellaEH=table(studenti$Eyes,studenti$Hair)
+@
+ %code chunk
+O ripartirne il peso in base al colore degli occhi
+<<echo=TRUE,fig=TRUE>>=
+stEyeW=split(studenti$W,studenti$Eyes)
+boxplot(stEyeW)
+@
+
+
+\begin{enumerate}
+\item{} Costruire una funzione \texttt{inserisci} tale che il comando
+$\texttt{inserisci}(\varia{x}, \varia{dove},\varia{cosa})$ inserisca nel vettore $\varia{x}$ l'elemento $\varia{cosa}$ nella posizione $\varia{dove}$.
+Per esempio
+<<echo=TRUE>>=
+y <-letters[1:10]
+y
+<<eval=FALSE>>=
+inserisci(x, 5, 0)
+<<echo=FALSE>>=
+c(letters[1:4],0,letters[5:10])
+@
+Generalizzare  al caso di inserimento di righe in \emph{dataframe}.
+\item{}
+Come si pu\`o verificare l'uguaglianza di 2 vettori includendo gli ingressi \texttt{NA}
+<<eval=FALSE>>=
+NA==NA
+@
+Aiuto: usare \texttt{is.na}
+\item{}\cite{dalgaard}
+Carichiamo il \emph{dataset} \texttt{juul} dal pacchetto \texttt{ISwR}. Ricavare il sottoinsieme di dati che corrispondono a ragazze tra i 7 e i 14 anni. Plottare \texttt{igf1} versus et\`a per ragazzi e ragazze separatamente. Conclusioni?
+\end{enumerate}
+
+
+\chapter{Operatori logici e selezione di elementi}
+Consideriamo la selezione di elementi di un oggetto di \textsf{R}, per esempio \texttt{crabs}.
+Selezioniamo per esempio tra i primi  50 i granchi con carapaci di lunghezza (sesta colonna) maggiore di 42:
+<<echo=TRUE>>=
+crabs[1:50,6]>42
+@
+Ciascun elemento del vettore viene confrontato con la soglia scelta (42) e quando supera la soglia la risposta \`e \texttt{TRUE} altrimenti \texttt{FALSE}.
+\vskip20pt
+%\begin{table}
+\begin{tabular}
+{|r r |}\hline
+ \texttt{operatore}&  significato\\
+\hline
+\texttt{$>$}&  maggiore\\
+\texttt{>=}& maggiore o uguale\\
+\texttt{<}&   minore\\
+\texttt{<=}&   minore o uguale\\
+\texttt{==}&   uguale\\
+\texttt{!=}&   diverso\\
+\texttt{\&}&   and (e)\\
+\texttt{|} & or (o)\\
+\hline
+\end{tabular}
+\vskip20pt
+%\end{table}
+Gli ultimi due operatori combinano gli operatori precedenti. Per esempio
+%code chunk
+<<echo=TRUE,eval=FALSE>>=
+crabs[crabs$sex == "F" | crabs$sp == "O",]
+dim(crabs[crabs$sex == "F" & crabs$sp == "O",])
+@
+%code chunk
+
+\subsection{I valori non assegnati}
+Capita frequentemente che un oggetto contenga valori non assegnati.
+Per esempio
+<<>>=
+x=1;x[10]=4;x
+@
+<<echo=TRUE>>=
+x[!is.na(x)]
+class(x)
+class(unclass(x))
+
+is.na(x)
+ DF <- data.frame(x = c(1, 2, 3), y = c(0, 10, NA))
+na.omit(DF)
+complete.cases(x)
 @
 \chapter{Statistica con \textsf{R}}
 \section{Variabili aleatorie}
@@ -357,7 +926,7 @@ par(mfrow=c(1,2))
 hist(dadi100,breaks=seq(0.5,6.5,1),col="red")
 hist(dadi100,freq=FALSE,breaks=seq(0.5,6.5,1),col="blue")
 @
-\caption{ Diagramma a colonne e areogramma per il lancio di un dado.}
+\caption{Diagramma a colonne e areogramma per il lancio di un dado.}
 \label{fig:datidado}
 \end{center}
 \end{figure}
@@ -442,7 +1011,7 @@ Per analizzare questi dati conviene preliminarmente tracciarne un diagramma a di
 <<echo=TRUE,fig=TRUE>>=
 plot(x,y)
 @
-\caption{Diagramma a dispersione tempo/concentrazione. }
+\caption{Diagramma a dispersione tempo/concentrazione.}
 \label{fig:scatte}
 \end{center}
 \end{figure}
@@ -462,15 +1031,15 @@ abline(lm(y~x),col="blue")
 @
 Per determinare  la retta di regressione sulle $y$ dobbiamo invertire $x$ e $y$.
 <<echo=TRUE,fig=FALSE>>=
-lm(x~y)
-lm(x~y)$coefficients->coeff
-a=1/coeff[2];a;
-b=-coeff[1]/coeff[2];
+(modellox=lm(x~y))
+coeff=modellox$coefficients
+(a=1/coeff[2])
+(b=-coeff[1]/coeff[2])
 abline(b,a,col="green")
 @
 In tal modo otteniamo il grafico~\ref{fig:duerettex}.
-\begin{figure}[htbp]
 \begin{center}
+\begin{figure}[htbp]
 <<echo=FALSE,fig=TRUE>>=
 plot(x,y,col="red")
 abline(lm(y~x),col="blue")
@@ -478,12 +1047,11 @@ abline(b,a,col="green")
 @
 \caption{Rette di regressione. In blu $R_x$, in verde $R_y$.}
 \label{fig:duerettex}
-\end{center}
 \end{figure}
+\end{center}
 
-
-\subsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
-Da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui dei ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
+\subsubsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
+Da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui i ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
 <<echo=TRUE>>=
 age=18:29
 height=c(76.1,77,78.1,78.2,78.8,79.7,79.9,81.1,81.2,81.8,82.8,83.5)
@@ -499,7 +1067,7 @@ Ora diamo una prima occhiata ai dati:
 <<echo=TRUE,fig=TRUE>>=
 plot(age,height)
 @
-\caption{I bambini di Kalama}
+\caption{Crescita dei bambini di Kalama}
 \label{kalama}
 \end{center}
 \end{figure}
@@ -507,19 +1075,17 @@ L'andamento \`e lineare. Determiniamo la retta di regressione
 per predire l'altezza media nota l'et\`a in mesi.
 %code chunk
 <<echo=TRUE>>=
-ris=lm(height~age)
-ris
+(modello=lm(height~age))
 @
-
 La retta di regressione cercata ha formula:
-$$h(\texttt{age})=\Sexpr{1/100*round(100*ris$coefficients[1])}+ \Sexpr{1/100*round(100*ris$coefficients[2])}\, \texttt{age}$$
+$$h(\texttt{age})=\Sexpr{1/100*round(100*modello$coefficients[1])}+ \Sexpr{1/100*round(100*modello$coefficients[2])}\, \texttt{age}$$
 
 Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l'altezza a 27.5 mesi di et\`a:
 oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione
 \texttt{predict}:
 %codechunk
 <<echo=TRUE>>=
-predict(ris,data.frame(age=27.5))
+predict(modello,data.frame(age=27.5))
 @
 fornendo in input i parametri della retta ed un preciso valore della variabile indipendente (richiamata col proprio nome).
 Molti comandi di \textsf{R} sono in grado di manipolare \emph{dataframe}  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
@@ -1069,551 +1635,7 @@ La  probabilit\`a \`e circa del 29\%.
 \end{description}
 \end{shaded}
 \begin{comment}
-\chapter{Strutture di dati}
-%\section{Aritmetica modulare}
-\section{Visualizzazione di oggetti di \textsf{R}}
-Per visualizzare un oggetto di \textsf{R} si pu\`o usare il comando \texttt{print} ma anche il comando \texttt{cat} che fornisce spesso un risultato migliore.
 
-Per avere una stampa abbreviata
-%codechunk
-<<echo=TRUE,eval=T>>=
-head(iris)
-tail(iris)
-@
-Il comando \texttt{str}\index{\texttt{str}} consente una visualizzazione parziale.
-\scriptsize
-<<echo=FALSE,eval=TRUE>>=
-options(width=50)
-<<echo=TRUE>>
-str(iris)
-@
-\normalsize
-\section{Le stringhe}
-\subsection{Stringhe \texttt{print}, \texttt{cat} e caratteri speciali}
-Una stringa\index{stringa} di testo \`e una collezione di caratteri; in genere, una stringa \`e resa riconoscibile dall'essere racchiusa tra virgolette.
-Oltre alle virgolette, vi sono numerosi altri caratteri speciali che possono apparire in una stringa.
-I pi\`u comuni sono ``\texttt{\textbackslash t}'' per \texttt{TAB}, `` \texttt{\textbackslash n}'' per una nuova linea e ``\texttt{\textbackslash }'' per un singolo {\it backslash}.
-Quest'ultimo carattere \`e un carattere di \emph{escape} e consente una lettura diversa di quanto lo segue.  Per esempio
-<<>>=
-cat("\"sin\"")
-nchar("\"sin\"")
-cat("\\")
-cat("ora a capo\nsono a capo?")
-cat("ora spazio\triprendo")
-@
-La funzione \texttt{nchar}, \index{\texttt{nchar}} che conta il numero di caratteri di una stringa, non includer\`a quindi il carattere di \emph{escape}\index{\emph{escape}} nel totale dei caratteri. Ad esempio:
-<<echo=TRUE>>=
-"Tab\t"
-cat("Tab\t")
-nchar("Tab\t")
-@
-
-\subsection{Operare con le stringhe}
-
-Succede spesso di dover lavorare in modo automatico con stringhe di testo, anche nello scrivere indirizzi di rete o cartelle di lavoro. In  \textsf{R} diversi comandi consentono la  generazione, manipolazione e stampa di una o pi\`u stringhe di testo\footnote{Per un  uso pi\`u specifico si pu\`o consultare il pacchetto \texttt{biostrings}.}. Consideriamo inizialmente una singola frase.
-%codechunk
-<<echo=TRUE>>=
-x="lavorare con le stringhe"
-@
-Possiamo verificarne la classe e determinare il numero di caratteri di \texttt{x}
-%codechunk
-<<echo=TRUE>>=
-class(x)
-nchar(x)
-@
-e anche considerare sottostringhe
-%codechunk
-<<echo=TRUE>>=
-substr(x,3,8)
-@
-o  abbreviazioni ottenibili con il comando \texttt{abbreviate} \index{\texttt{abbreviate}}
-%codechunk
-<<echo=TRUE>>=
-abbreviate("Mario Rossi",4)
-@
-
-Certi oggetti possono essere convertiti a stringhe: per esempio il numero 2 pu\`o essere visto come una stringa e riconvertito a numero.
-%codechunk
-<<echo=TRUE>>=
- i=2;toString(i)
-as.numeric(toString(i))
-@
-Alcune stringhe molto frequenti sono le lettere \index{\texttt{letters}}\index{\texttt{LETTERS}} dell'alfabeto, maiuscole o minuscole
-%codechunk
-<<echo=TRUE>>=
-letters[1:10]
-LETTERS[1:10]
-@
-o i mesi dell'anno (per esempio abbreviati in inglese)\index{\texttt{month.abb}}
-%codechunk
-<<echo=FALSE>>=
-options(width=60)
-<<echo=TRUE>>=
-month.abb
-@
-Le stringhe possono poi essere ``incollate'' con il comando\index{\texttt{paste}}
-%codechunk
-<<echo=TRUE,eval=FALSE>>=
-paste("a","b",sep="")
-@
-dove \texttt{sep}  indica il separatore usato.
-E tutto insieme
-%codechunk
-<<echo=FALSE>>=
-options(width=60)
-@
-
-<<echo=TRUE>>=
-for (i in 1:5) cat(paste("a",toString(i),"\t",sep=""))
-@
-Il comando pu\`o anche essere utilizzato su vettori.
-Per esempio
-%codechunk
-<<echo=TRUE,eval=TRUE>>=
-paste(letters[1:10],1:10,sep="")
-@
-La \textit{recycling rule} continua a valere
-%codechunk
-
-<<echo=TRUE>>=
-paste(letters[1:3],1:10,sep="")
-paste(letters[1:3],1:12,sep="")
-@
-e giocando con \texttt{rep} si possono ottenere diverse combinazioni.
-<<echo=TRUE,eval=TRUE>>=
-paste(rep(letters[1:3],each=5),1:15,sep="")
-paste(rep(letters[1:3],ntimes=5),1:15,sep="")
-@
-Con l'opzione \texttt{collapse="x"} le stringhe vengono unite con separatore la stringa "x".
-%codechunk
-<<echo=TRUE,eval=TRUE>>=
-paste(c("X", "Y"), 1:4, sep = "-", collapse = "--")
-@
-Si noti il separatore - dell'operazione \texttt{paste} e  - - dell'operazione \texttt{collapse}.
-
- \begin{shaded}
- \begin{enumerate}
- \item{} Inserisci il tuo cognome in una variabile `cognome' ed il tuo nome in una variabile 'nome'. Crea una terza variabile 'nomecognome' che contenga entrambi separati da un TAB. Stampa a console la scritta "Good job" seguita dal valore di nomecognome.
-  \item{} Creare un elenco che contenga mesi e anno dal 2001 al 2010 nel seguente formato "tre lettere iniziali del mese-anno".
- \item{} Costruire una tabella che contenga tutte le parole di 2 lettere.
-\item{}
-Si consideri
-<<results=hide>>=
-paste(letters[1:7],1:7,sep="=")
-@
-Estendere la corrispondenza a tutto l'alfabeto.
-\item Creare un elenco in cui a ciascun mese corrisponda il suo numero (a partire da gennaio).
-\item Creare un elenco con nomi i mesi e valori il numero di giorni di ciascun mese.
-\item Scrivere un elenco di 5 persone con le relative date di nascita nel formato anno-mese-giorno.
- \end{enumerate}
- \end{shaded}
-
-\section{Matrici}
-
-Assegnati $n\times m$ ingressi possiamo costruire una matrice (ossia una tabella) con $n$ righe e $m$ colonne. Occorre solo riempire la matrice per righe o per colonne.
-Ad esempio:
-%code chunk
-<<echo=TRUE>>=
-a<-matrix(letters[1:12],nrow=3,ncol=4)
-a
-class(a)
-@
-Se i parametri hanno natura diversa vengono resi uniformi
-%code chunk
-<<echo=TRUE>>=
-a<-matrix(c(1:6,letters[1:6]),nrow=3,ncol=4);a
-@
-Con il parametro \texttt{byrow=T} il riempimento avviene per righe, anzich\`e per colonne.
-%code chunk
-<<echo=TRUE>>=
- a<-matrix(1:12,nrow=3,ncol=4,byrow=T)
- a
-@
-Se i numeri sono insufficienti vengono \emph {riciclati}
-%code chunk
-<<echo=TRUE>>=
-a<-matrix(1:4,nrow=3,ncol=4)
-a
-@
-in modo pacifico se sono un sottomultiplo della dimensione della matrice o con qualche
-\texttt{warning} altrimenti.
-%code chunk
-<<echo=TRUE,eval=FALSE>>=
-a<-matrix(2,nrow=3,ncol=4)
-a
-@
-Si possono anche definire gli ingressi attraverso opportune funzioni
-%code chunk
-<<echo=TRUE>>=
-<<echo=TRUE,eval=FALSE>>=
-for(j in (1:4)) for(i in (1:3))  a[i,j]<-i^2+j
-@
-Per assegnare nomi alle  righe e alle colonne:\index{\texttt{colnames}} \index{\texttt{rownames}}
-\begin{eqnarray*}
- \texttt{colnames}(\varia{matrice})=\texttt{c}(\virgolette \varia{  nome}_1\virgolette,\\
-\virgolette \varia{nome}_2\virgolette,\ldots,\virgolette \varia{nome}_n\virgolette )\\
- \texttt{rownames}(\varia{matrice})=\texttt{c}(\virgolette \varia{nome}_1\virgolette,\\
-\virgolette \varia{nome}_2\virgolette,\ldots,\virgolette \varia{nome}_n\virgolette )
-\end{eqnarray*}
-<<echo=TRUE,eval=FALSE>>=
-colnames(a)=c("c1","c2","c3")
-rownames(a)=c("r1","r2","r3")
-a
-@
-\subsubsection{Aggiungere righe o colonne}
-Per aggiungere una o pi\`u righe (o colonne)
-ad una matrice si possono usare i comandi (\texttt{rbind} e \texttt{cbind})
-<<>>=
-dim(a)
-rbind(a,letters[1:ncol(a)])
-cbind(a,letters[1:nrow(a)])
-@
-Possiamo anche effettuare semplici operazioni, come somma degli elementi delle righe o delle colonne
-<<>>=
-colSums(a)
-rowSums(a)
-@
-
-\subsection{Operazioni con le matrici}
-\subsubsection{Trasposizione}
-Per invertire righe e colonne di una matrice ossia per ottenere il trasposto \index{trasposto} di una matrice si usa il comando \texttt{t}(\texttt{matrice})\index{\texttt{t}, trasposto}
-%code chunk
-<<echo=TRUE>>=
-t(a)
-@
-\subsubsection{Prodotto}
-Per la  moltiplicazione di matrici (definita per ingressi numerici) si usa il simbolo \texttt{\%*\%}.
-\index{\texttt{\%*\%}, prodotto di matrici}
- %code chunk
-<<echo=TRUE>>=
-b<-matrix(2,nrow=3,ncol=3)
-for(j in (1:3))
-for(i in (1:3)) b[i,j]<-i+j+i^2
-b
-@
-Non \`e infatti possibile moltiplicare una matrice 3x4 con una 3x3. Possiamo per\`o calcolare
-%code chunk
-<<echo=TRUE>>=
-b%*%a
-@
-\subsubsection{Determinante} Il determinante di una matrice quadrata si ottiene con il comando
-%\index{\texttt{det},determinante}
-\begin{equation}\texttt{det} (\varia{matrice})\end{equation}
-<<echo=TRUE>>=
-det(b)
-@
-
-Si noti che se eseguendo i calcoli a mano si trovano in alcuni casi risultati diversi da quelli di {\textsf R}. Per esempio la matrice in esame ha determinante 0 e 0 ne \`e anche un autovalore.\index{autovalore}
-\begin{shaded}
- \begin{enumerate}
- \item{}Creare una matrice $3\times 2$ che abbia come ingressi i primi 6 numeri pari. Estendere la matrice aggiungendo due colonne contenenti i primi 6 numeri dispari. Calcolare e stampare la somma per riga e la somma per colonna. Modifica la matrice cambiando di segno la prima riga. Moltiplicare la matrice  per 4.
- \end{enumerate}
- \end{shaded}
- \section{I \emph{dataframe}}
-
-I \emph{datafra me} costituiscono in {\textsf R} la classe di oggetti fondamentali per la collezione di dati per una susseguente analisi statistica.
-Un \emph{dataframe}  \`e una collezione di vettori aventi egual lunghezza. \`E diverso da una matrice in quanto le colonne sono vettori eventualmente di tipi diversi. Il comando generale per costruire \emph{dataframe} a partire da vettori o liste
-\`e \texttt{data.frame}.  Esso richiede come parametri i nomi dei vettori (colonna) da affiancare nella tabella. In generale si scrive:
-\begin{equation*}\texttt{data.frame}(\varia{vettore}_1,\varia{vettore}_2, \ldots, \varia{vettore}_n)\end{equation*}
-dove tutti i vettori hanno la stessa lunghezza.
-Si noti la asimmetria  (rispetto ad una matrice) nel ruolo di righe e colonne. Le colonne sono omogenee, lo stesso non si pu\`o dire per le righe. Le colonne sono le variabili analizzate, le righe le unit\`a statistiche. Anche i vari comandi che vedremo rispettano tale differenza.
-
-Per esempio possiamo considerare il dataframe \texttt{d} definito come segue%code chunk
-<<echo=TRUE>>=
-L3 <- LETTERS[1:3]
-d <- data.frame(cbind(x=1, y=1:10,
-fac=sample(L3, 10, replace=TRUE)),
-stringsAsFactors=TRUE)
-d
-@
-Si noti che anche in questo caso si usa la \emph{recycling rule}
- <<echo=TRUE,eval=TRUE>>=
-data(crabs)
-dim(crabs)
-@
-In quanto segue lavoreremo con il seguente \emph{dataframe} che rappresenta i risultati di un'indagine svolta sugli studenti che nell'Anno Accademico 2007/2008 frequentavano il primo anno del corso di Laurea di Farmacia della Facolt\`a di Farmacia del Piemonte Orientale. Potete scaricarlo dal sito e caricarlo in {\textsf R} con il comando
-%code chunk
-<<echo=FALSE>>=
-options(width=55)
-@
-<<echo=TRUE,eval=FALSE>>=
-data(farmacia)
-@
-Il comando \texttt{colnames}  consente di  visualizzare o assegnare il nome alle colonne.
-Per esempio
-%code chunk
-<<echo=TRUE>>=
-colnames(farmacia)
-@
-Le varie colonne hanno dei nomi di facile interpretazione. Si noti anche che a fianco di variabili numeriche (\texttt{W} e \texttt{H}, peso-altezza ad esempio) sono presenti variabili  \emph {nominali} quali sesso (\texttt{Sex}) e colore degli occhi (\texttt{Eyes}).
-Per associare i nomi alle colonne  alle varie colonne dobbiamo eseguire una operazione di collegamento con il comando \texttt{attach},
-%code chunk
-<<echo=TRUE>>=
-attach(farmacia)
-@
-A questo punto digitando il nome delle colonne appare il contenuto della colonna
-%code chunk
-<<echo=TRUE>>=
-Sex
-@
-Le variabili nominali sono caratterizzate dal fatto che i loro valori (livelli, \texttt{levels}) \index{\texttt{level}} non hanno significato numerico, anche se possono essere codificati con dei numeri.   Ad esempio il sesso di una persona \`e una variabile nominale con due possibili valori, che sono stati  indicati qui con la convenzione  \texttt{"F"}  per le femmine e \texttt{"M"} per i maschi.  Se volessimo eliminare i livelli di una variabile nominale potremmo scrivere
-<<>>=
-Sex=as.vector(Sex)
-Sex
-class(Sex)
-@
-Possiamo anche considerare il processo inverso e cambiare una variabile priva di livelli in una nominale
-$$\texttt{factor}(\varia{variabile})\rightarrow\varia{ variabile}$$
-Per definire i suoi livelli (ad esempio $n$) scriveremo:
-$$\texttt{levels}(\varia{variabile})\leftarrow\texttt{c}(\varia{nome}_1,\varia{nome}_2,\ldots,\varia{nome}_n)$$
-Per rendere la variabilie \texttt{Sex} nominale con nomi dei livelli
-\texttt{F} e \texttt{M})  scriveremo:
-<<>>=
-Sex=factor(Sex)
-Sex
-@
-Con il comando
-\texttt{detach} \index{detach}  si pu\`o eliminare l'associazione creata tra colonne e nomi delle colonne.
-Consideriamo ora un \emph{dataset} simile raccolto dagli studenti di Biotecnologie dello stesso anno
-%code chunk
-<<echo=TRUE,eval=FALSE>>=
-sito="http://www.pharm.unipmn.it/rinaldi"
-nomefile="/file_corso/datibiotec.csv"
-biotec=read.table(paste(sito,nomefile,sep=""),sep=";",dec=",",header=T)
-<<echo=FALSE,eval=TRUE>>=
-biotec=read.table("../filedati/datibiotec.txt",sep=";",dec=",",header=T)
-@
-Scrivendo
-<<echo=TRUE>>=
-class(biotec)
-@
-vediamo che anche \texttt{biotec} \`e un \emph{dataframe}.  Inoltre confrontando i nomi delle colonne di \texttt{farmacia} e di \texttt{biotec} possiamo verificare che sono essenzialmente uguali a meno di traduzione e eventuale abbreviazione.
-Possiamo creare un \emph{dataframe} unico che raggruppi \texttt{biotec} e \texttt{farmacia}. Per farlo  vorremmo incollare un \emph{dataframe} sopra all'altro.
-A tal fine occorre uniformare i nomi delle colonne scrivendo per esempio
-<<echo=TRUE>>=
-colnames(biotec)=colnames(farmacia)
-studenti=rbind(farmacia,biotec)
-head(studenti)
-@
-Si noti che il comando \texttt{rbind} \index{\texttt{rbind}} incolla per riga, mentre l'analogo comando \texttt{cbind}
-\index{\texttt{cbind}} incolla le colonne.
-Le intestazioni di riga di dati sono
-<<echo=TRUE>>=
-rownames(studenti)
-@
-Per correggere la strana numerazione possiamo scrivere
-<<echo=TRUE>>=
-rownames(studenti)=seq(length=nrow(studenti))
-@
-
-Giunti a  questo punto la tabella \texttt{dati} presenta ancora alcuni problemi; per esempio se scriviamo
- %code chunk
-<<echo=TRUE>>=
-levels(studenti$Eyes)
-levels(studenti$Hair)
-@
-Ci incuriosisce   il dato con gli occhi neri. Verifichiamo:
-<<echo=TRUE>>=
-studenti[which(studenti$Eyes=="NERI"),]
-@
-Possiamo ritenere che sia un errore e che in  realt\`a gli occhi siano marroni molto scuri.
-Risulta evidente che nel riportare i colori degli  occhi si sono usate dizioni diverse per colori essenzialmente uguali, per esempio i livelli \texttt{"CASTANI"}, \texttt{"NOCCIOLA"},
-\texttt{"MARRONI"} possono esser fatti confluire in un unico livello  \texttt{"castani"} e possiamo rendere minuscoli i nomi degli altri livelli con il comando
-<<echo=TRUE>>=
-levels(studenti$Eyes)=c("azzurri","castani","castani", "castani", "castani","verdi","azzurri","castani","castani","verdi")
-@
-A questo punto
-<<echo=TRUE>>=
-levels(studenti$Eyes)
-@
-Facciamo lo stesso con i capelli
-<<echo=TRUE>>=
-levels(studenti$Hair)=c("biondi","castani","neri", "biondi", "castani","castani","castani","neri")
-levels(studenti$Hair)
-@
-\subsubsection{Selezione in base a criteri}
-Supponiamo di voler selezionare gli studenti con gli occhi castani.
-Basta scrivere
-%code chunk
-<<echo=TRUE>>=
-subset(studenti,studenti$Eyes=="verdi")
-@
-Se siamo invece interessati al colore dei capelli degli studenti con occhi castani
-<<echo=TRUE,eval=TRUE>>=
-subset(studenti,studenti$Eyes=="verdi",select="Hair")
-@
-
-
-\section{Gli \emph{array}}
-Un \emph{array}  \`e una generalizzazione multidimensionale di una matrice. Gli \emph{array} sono caratterizzati dal numero di dimensioni  (se le dimensioni sono 2 un \emph{array} si identifica con una  matrice) e dal nome dei vari livelli
-%code chunk
-<<echo=TRUE>>=
-array(LETTERS[1:24],
-dim=c(2,3,4))
-array(sample(1:100,24), dim=c(3,4,2),dimnames=list(LETTERS[1:3],LETTERS[11:14],letters[1:2]))->x
-x[,,"b"]
-@
-\section{Liste}
-Una lista (in \textsf{R} \texttt{list}) \`e un vettore di oggetti.  Gli oggetti possono avere un nome ed avere natura diversa fra di loro. \index{\texttt{list}}
-Per esempio
-%code chunk
-<<echo=TRUE>>=
-x=list(a=month.abb , b=array(rep(0,20), dim=c(4,5)),c="your name")
-x
-@
-Possiamo annidare anche liste entro liste
-%code chunk
-<<echo=TRUE>>=
-x=list(a=1:10,b=array(rep(0,20),dim=c(4,5)),
-c="testo",d=list(g="h",r=1:10) )
-x
-@
-\subsection{Funzioni applicate a oggetti}
-\subsubsection{La funzione \texttt{apply}}
-Quando abbiamo una struttura di dati a pi\`u dimensioni ad esempio un \emph{array}
-<<>>=
-array(1:30,dim=c(2,5,3))->x
-x
-@
-possiamo applicare una funzione selezionando il livello escluso:
-<<>>=
-apply(x,2,mean)
-apply(x,c(1,3),mean)
-@
-
-In un \emph{dataframe} possiamo considerare diverse operazioni che coinvolgano due o pi\`u colonne. Per esempio possiamo considerare la tabella \texttt{farmacia} e proporci di calcolare la media del peso dei maschi e la media del peso delle femmine. Il comando \texttt{tapply} \index{\texttt{tapply}} consente di applicare una funzione ad una colonna di una tabella ripartita in gruppi in accordo ad un criterio specificato da un'altra colonna (nominale) della stessa tabella
-\begin{eqnarray*}
-\texttt{tapply}(\varia{vettore},\varia{criterio} ,\varia{funzione})\end{eqnarray*}
-L'esempio sopra riportato si risolve con la scrittura:
-%code chunk
-<<echo=TRUE>>=
-tapply(studenti$W, studenti$Sex,mean)->Wmean
-Wmean
-@
-Possiamo anche chiedere di calcolare altri indicatori sempre basandoci  su questa ripartizione maschi/femmine.
-Ad esempio possiamo ottenere la deviazione standard(\texttt{sd}) di maschi e femmine:
-%code chunk
-<<echo=TRUE>>=
-tapply(studenti$W, studenti$Sex,sd)->Wsd
-Wsd
-@
-
-\subsubsection{Il comando \texttt{table} applicato a diverse variabili nominali e le tabelle di contingenza}
-Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
-<<eval=FALSE,keep.source=TRUE>>=
-read.table("http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html",
-skip=39,header=T,nrow=478,sep="\t")->kidinterest
-<<echo=FALSE,eval=TRUE>>=
-read.table("../filedati/PopularKids.html",
-skip=39,header=T,nrow=478,sep="\t")->kidinterest
-head(kidinterest)
-@
-Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
-%codechunk
-<<>>=
-colnames(kidinterest)
-interessi=kidinterest[,c(1,5,7)]
-head(interessi)
-table(interessi)
-@
- Consideriamo per esempio le variabili provenienza e traguardi
-<<>>=
-interessi2=kidinterest[,c(5,7)]
-tabella=table(interessi2)
-tabella
-@
-
-La tabella di contingenza delle due variabili (in questo caso a 3  livelli ciascuna) si realizza con il comando
-\texttt{table}.
-\texttt{table}(\varia(lista))
-applicato ad una singola variabile nominale conta le frequenze di ciascuna classe, se le variabili sono $n$ esamina tutte le combinazioni possibili ($2^n$ se le variabili sono dicotomiche) e ne conta tutte le occorrenze
-
-Allo stesso modo possiamo creare una tabella dei colori degli occhi e dei capelli
-%code chunk
-<<echo=TRUE>>=
-tabellaEH=table(studenti$Eyes,studenti$Hair)
-@
- %code chunk
-O ripartirne il peso in base al colore degli occhi
-<<echo=TRUE,fig=TRUE>>=
-stEyeW=split(studenti$W,studenti$Eyes)
-boxplot(stEyeW)
-@
-
-
-\begin{enumerate}
-\item{} Costruire una funzione \texttt{inserisci} tale che il comando
-$\texttt{inserisci}(\varia{x}, \varia{dove},\varia{cosa})$ inserisca nel vettore $\varia{x}$ l'elemento $\varia{cosa}$ nella posizione $\varia{dove}$.
-Per esempio
-<<echo=TRUE>>=
-y <-letters[1:10]
-y
-<<eval=FALSE>>=
-inserisci(x, 5, 0)
-<<echo=FALSE>>=
-c(letters[1:4],0,letters[5:10])
-@
-Generalizzare  al caso di inserimento di righe in \emph{dataframe}.
-\item{}
-Come si pu\`o verificare l'uguaglianza di 2 vettori includendo gli ingressi \texttt{NA}
-<<eval=FALSE>>=
-NA==NA
-@
-Aiuto: usare \texttt{is.na}
-\item{}\cite{dalgaard}
-Carichiamo il \emph{dataset} \texttt{juul} dal pacchetto \texttt{ISwR}. Ricavare il sottoinsieme di dati che corrispondono a ragazze tra i 7 e i 14 anni. Plottare \texttt{igf1} versus et\`a per ragazzi e ragazze separatamente. Conclusioni?
-\end{enumerate}
-
-
-\chapter{Operatori logici e selezione di elementi}
-Consideriamo la selezione di elementi di un oggetto di \textsf{R}, per esempio \texttt{crabs}.
-Selezioniamo per esempio tra i primi  50 i granchi con carapaci di lunghezza (sesta colonna) maggiore di 42:
-<<echo=TRUE>>=
-crabs[1:50,6]>42
-@
-Ciascun elemento del vettore viene confrontato con la soglia scelta (42) e quando supera la soglia la risposta \`e \texttt{TRUE} altrimenti \texttt{FALSE}.
-\vskip20pt
-%\begin{table}
-\begin{tabular}
-{|r r |}\hline
- \texttt{operatore}&  significato\\
-\hline
-\texttt{$>$}&  maggiore\\
-\texttt{>=}& maggiore o uguale\\
-\texttt{<}&   minore\\
-\texttt{<=}&   minore o uguale\\
-\texttt{==}&   uguale\\
-\texttt{!=}&   diverso\\
-\texttt{\&}&   and (e)\\
-\texttt{|} & or (o)\\
-\hline
-\end{tabular}
-\vskip20pt
-%\end{table}
-Gli ultimi due operatori combinano gli operatori precedenti. Per esempio
-%code chunk
-<<echo=TRUE,eval=FALSE>>=
-crabs[crabs$sex == "F" | crabs$sp == "O",]
-dim(crabs[crabs$sex == "F" & crabs$sp == "O",])
-@
-%code chunk
-
-\subsection{I valori non assegnati}
-Capita frequentemente che un oggetto contenga valori non assegnati.
-Per esempio
-<<>>=
-x=1;x[10]=4;x
-@
-<<echo=TRUE>>=
-x[!is.na(x)]
-class(x)
-class(unclass(x))
-
-is.na(x)
- DF <- data.frame(x = c(1, 2, 3), y = c(0, 10, NA))
-na.omit(DF)
-complete.cases(x)
-@
 \section{Operatori condizionali e cicli}
 with(rainforest, table(complete.cases(root), species))
 

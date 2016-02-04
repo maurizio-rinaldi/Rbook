@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.5)  4 FEB 2016 12:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.5)  4 FEB 2016 16:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -754,35 +754,35 @@ Writing index file RbookParte2.idx
 (./RbookParte2.aux)
 \openout1 = `RbookParte2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 61.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 61.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 66.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 66.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Info: Redefining \it@ocap on input line 61.
-LaTeX Info: Redefining \it@ccap on input line 61.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Info: Redefining \it@ocap on input line 66.
+LaTeX Info: Redefining \it@ccap on input line 66.
 
 
 File italian.ldf warning: 
 italian.ldf    The AE font collection does not contain the guillemets 
 italian.ldf    Use the Latin Modern font collection instead 
-italian.ldf   on input line 61.
+italian.ldf   on input line 66.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -826,7 +826,7 @@ babelbib extension \bibsitalian added to \extrasitalian
 babelbib extension \btxifchangecaseoff added to \extrasitalian
 )
 \AtBeginShipoutBox=\box33
-Package hyperref Info: Link coloring OFF on input line 61.
+Package hyperref Info: Link coloring OFF on input line 66.
  (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -835,16 +835,16 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count131
 )
-LaTeX Info: Redefining \ref on input line 61.
-LaTeX Info: Redefining \pageref on input line 61.
-LaTeX Info: Redefining \nameref on input line 61.
+LaTeX Info: Redefining \ref on input line 66.
+LaTeX Info: Redefining \pageref on input line 66.
+LaTeX Info: Redefining \nameref on input line 66.
 
 (./RbookParte2.out) (./RbookParte2.out)
 \@outlinefile=\write5
 \openout5 = `RbookParte2.out'.
 
  (./RbookParte2-concordance.tex)
-LaTeX Font Info:    Try loading font information for T1+aess on input line 67.
+LaTeX Font Info:    Try loading font information for T1+aess on input line 72.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/ae/t1aess.fd
 File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
@@ -855,30 +855,14 @@ File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
 
 ] (./RbookParte2.toc
-LaTeX Font Info:    Try loading font information for T1+aett on input line 19.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 85.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-))
+) [3])
 \tf@toc=\write6
 \openout6 = `RbookParte2.toc'.
 
- [3] [4
-
-]
-Capitolo 1.
-LaTeX Font Info:    Try loading font information for TS1+aer on input line 82.
-(/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/ts1aer.fd
-File: ts1aer.fd 
-)
-LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
-(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 82.
-
-[1
-
-]
-
-LaTeX Warning: Citation `david' on page 2 undefined on input line 149.
 
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -886,212 +870,266 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[2] <../grafici/astragals.jpeg, id=165, 150.5625pt x 146.5475pt>
-File: ../grafici/astragals.jpeg Graphic file (type jpg)
-
-<use ../grafici/astragals.jpeg>
-Package pdftex.def Info: ../grafici/astragals.jpeg used on input line 167.
-(pdftex.def)             Requested size: 170.71652pt x 166.18034pt.
- [3 <../grafici/astragals.jpeg>]
-Overfull \hbox (12.8137pt too wide) in paragraph at lines 226--230
-[]\T1/aer/m/n/12 La me-dia di una se-rie di nu-me-ri si ot-tie-ne con la fun-zi
-o-ne \T1/aett/m/n/12 mean \T1/aer/m/n/12 scri-ven-do: $[]\OT1/cmr/m/n/12 ([])$\
-T1/aer/m/n/12 .
- []
-
-[4] [5] [6] [7] [8] <RbookParte2-030.pdf, id=195, 433.62pt x 433.62pt>
-File: RbookParte2-030.pdf Graphic file (type pdf)
-
-<use RbookParte2-030.pdf>
-Package pdftex.def Info: RbookParte2-030.pdf used on input line 507.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
- [9] [10 <./RbookParte2-030.pdf>] [11]
-<RbookParte2-037.pdf, id=216, 433.62pt x 433.62pt>
-File: RbookParte2-037.pdf Graphic file (type pdf)
- <use RbookParte2-037.pdf>
-Package pdftex.def Info: RbookParte2-037.pdf used on input line 603.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-[12 <./RbookParte2-037.pdf>]
-<RbookParte2-041.pdf, id=232, 433.62pt x 433.62pt>
-File: RbookParte2-041.pdf Graphic file (type pdf)
- <use RbookParte2-041.pdf>
-Package pdftex.def Info: RbookParte2-041.pdf used on input line 628.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-<RbookParte2-042.pdf, id=234, 289.08pt x 289.08pt>
-File: RbookParte2-042.pdf Graphic file (type pdf)
- <use RbookParte2-042.pdf>
-Package pdftex.def Info: RbookParte2-042.pdf used on input line 647.
-(pdftex.def)             Requested size: 322.50345pt x 322.51907pt.
-
-[13 <./RbookParte2-041.pdf>] [14 <./RbookParte2-042.pdf>]
-<RbookParte2-044.pdf, id=258, 433.62pt x 433.62pt>
-File: RbookParte2-044.pdf Graphic file (type pdf)
- <use RbookParte2-044.pdf>
-Package pdftex.def Info: RbookParte2-044.pdf used on input line 669.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-[15 <./RbookParte2-044.pdf>]
-<RbookParte2-046.pdf, id=270, 433.62pt x 433.62pt>
-File: RbookParte2-046.pdf Graphic file (type pdf)
- <use RbookParte2-046.pdf>
-Package pdftex.def Info: RbookParte2-046.pdf used on input line 693.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-[16] [17 <./RbookParte2-046.pdf>]
-<RbookParte2-050.pdf, id=291, 433.62pt x 433.62pt>
-File: RbookParte2-050.pdf Graphic file (type pdf)
- <use RbookParte2-050.pdf>
-Package pdftex.def Info: RbookParte2-050.pdf used on input line 748.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-[18 <./RbookParte2-050.pdf>]
-<RbookParte2-053.pdf, id=306, 433.62pt x 433.62pt>
-File: RbookParte2-053.pdf Graphic file (type pdf)
- <use RbookParte2-053.pdf>
-Package pdftex.def Info: RbookParte2-053.pdf used on input line 778.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-[19 <./RbookParte2-053.pdf>]
-<RbookParte2-057.pdf, id=317, 433.62pt x 433.62pt>
-File: RbookParte2-057.pdf Graphic file (type pdf)
- <use RbookParte2-057.pdf>
-Package pdftex.def Info: RbookParte2-057.pdf used on input line 842.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-Underfull \vbox (badness 1412) has occurred while \output is active []
-
- [20]
-[21 <./RbookParte2-057.pdf>] [22]
-<RbookParte2-060.pdf, id=337, 433.62pt x 433.62pt>
-File: RbookParte2-060.pdf Graphic file (type pdf)
- <use RbookParte2-060.pdf>
-Package pdftex.def Info: RbookParte2-060.pdf used on input line 926.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-<RbookParte2-062.pdf, id=338, 433.62pt x 433.62pt>
-File: RbookParte2-062.pdf Graphic file (type pdf)
- <use RbookParte2-062.pdf>
-Package pdftex.def Info: RbookParte2-062.pdf used on input line 942.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+[4]
+Capitolo 1.
+[1
 
 
-LaTeX Font Warning: Font shape `T1/aett/bx/n' undefined
-(Font)              using `T1/aett/m/n' instead on input line 1012.
+] [2] [3] [4] [5] [6] [7] [8]
+LaTeX Font Info:    Try loading font information for TS1+aett on input line 591
+.
 
-[23] [24 <./RbookParte2-060.pdf>] [25 <./RbookParte2-062.pdf>]
-<RbookParte2-067.pdf, id=364, 433.62pt x 433.62pt>
-File: RbookParte2-067.pdf Graphic file (type pdf)
- <use RbookParte2-067.pdf>
-Package pdftex.def Info: RbookParte2-067.pdf used on input line 1043.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-[26] [27 <./RbookParte2-067.pdf>]
-<RbookParte2-072.pdf, id=384, 433.62pt x 433.62pt>
-File: RbookParte2-072.pdf Graphic file (type pdf)
- <use RbookParte2-072.pdf>
-Package pdftex.def Info: RbookParte2-072.pdf used on input line 1089.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-[28 <./RbookParte2-072.pdf>]
-<RbookParte2-073.pdf, id=396, 433.62pt x 433.62pt>
-File: RbookParte2-073.pdf Graphic file (type pdf)
- <use RbookParte2-073.pdf>
-Package pdftex.def Info: RbookParte2-073.pdf used on input line 1097.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-<RbookParte2-077.pdf, id=397, 433.62pt x 433.62pt>
-File: RbookParte2-077.pdf Graphic file (type pdf)
- <use RbookParte2-077.pdf>
-Package pdftex.def Info: RbookParte2-077.pdf used on input line 1118.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-[29 <./RbookParte2-073.pdf>] [30 <./RbookParte2-077.pdf>]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1135.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1135.
-
-<RbookParte2-079.pdf, id=420, 433.62pt x 433.62pt>
-File: RbookParte2-079.pdf Graphic file (type pdf)
- <use RbookParte2-079.pdf>
-Package pdftex.def Info: RbookParte2-079.pdf used on input line 1159.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [31]
-<RbookParte2-080.pdf, id=428, 433.62pt x 433.62pt>
-File: RbookParte2-080.pdf Graphic file (type pdf)
- <use RbookParte2-080.pdf>
-Package pdftex.def Info: RbookParte2-080.pdf used on input line 1176.
-(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [32 <./RbookParte2-079.pdf>] [33 <./RbookParte2-080.pdf>] [34]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1290.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\chi' on input line 1290.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `superscript' on input line 1290.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1290.
-
-LaTeX Font Info:    Try loading font information for TS1+aett on input line 130
-0.
 (/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/ts1aett.fd
 File: ts1aett.fd 
 )
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 130
-0.
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 591
+.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `TS1/aett/m/n' in size <12> not available
-(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 1300.
+LaTeX Font Info:    Font shape `TS1/aett/m/n' in size <10.95> not available
+(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 591.
+ [9] [10]
+[11] [12] [13] [14] [15]
 
- [35] [36]
-[37]
+LaTeX Font Warning: Font shape `T1/aett/bx/n' undefined
+(Font)              using `T1/aett/m/n' instead on input line 1005.
+
+[16] [17] [18] [19] <RbookParte2-074.pdf, id=311, 433.62pt x 433.62pt>
+File: RbookParte2-074.pdf Graphic file (type pdf)
+
+<use RbookParte2-074.pdf>
+Package pdftex.def Info: RbookParte2-074.pdf used on input line 1192.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+ [20 <./RbookParte2-074.pdf>] [21] [22
+
+]
+Capitolo 2.
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 1275.
+
+[23] [24]
+Capitolo 3.
+LaTeX Font Info:    Try loading font information for TS1+aer on input line 1338
+.
+(/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/ts1aer.fd
+File: ts1aer.fd 
+)
+LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
+(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 1338.
+
+[25
+
+]
+
+LaTeX Warning: Citation `david' on page 26 undefined on input line 1405.
+
+[26] <../grafici/astragals.jpeg, id=353, 150.5625pt x 146.5475pt>
+File: ../grafici/astragals.jpeg Graphic file (type jpg)
+
+<use ../grafici/astragals.jpeg>
+Package pdftex.def Info: ../grafici/astragals.jpeg used on input line 1423.
+(pdftex.def)             Requested size: 170.71652pt x 166.18034pt.
+ [27 <../grafici/astragals.jpeg>]
+Overfull \hbox (12.8137pt too wide) in paragraph at lines 1482--1486
+[]\T1/aer/m/n/12 La me-dia di una se-rie di nu-me-ri si ot-tie-ne con la fun-zi
+o-ne \T1/aett/bx/n/12 mean \T1/aer/m/n/12 scri-ven-do: $[]\OT1/cmr/m/n/12 ([])$
+\T1/aer/m/n/12 .
+ []
+
+[28] [29] [30]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [31]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [32]
+<RbookParte2-111.pdf, id=382, 433.62pt x 433.62pt>
+File: RbookParte2-111.pdf Graphic file (type pdf)
+ <use RbookParte2-111.pdf>
+Package pdftex.def Info: RbookParte2-111.pdf used on input line 1763.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+[33] [34 <./RbookParte2-111.pdf>] [35]
+<RbookParte2-118.pdf, id=402, 433.62pt x 433.62pt>
+File: RbookParte2-118.pdf Graphic file (type pdf)
+ <use RbookParte2-118.pdf>
+Package pdftex.def Info: RbookParte2-118.pdf used on input line 1859.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+[36 <./RbookParte2-118.pdf>]
+<RbookParte2-122.pdf, id=419, 433.62pt x 433.62pt>
+File: RbookParte2-122.pdf Graphic file (type pdf)
+ <use RbookParte2-122.pdf>
+Package pdftex.def Info: RbookParte2-122.pdf used on input line 1884.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+<RbookParte2-123.pdf, id=421, 289.08pt x 289.08pt>
+File: RbookParte2-123.pdf Graphic file (type pdf)
+ <use RbookParte2-123.pdf>
+Package pdftex.def Info: RbookParte2-123.pdf used on input line 1903.
+(pdftex.def)             Requested size: 322.50345pt x 322.51907pt.
+
+<RbookParte2-125.pdf, id=423, 433.62pt x 433.62pt>
+File: RbookParte2-125.pdf Graphic file (type pdf)
+ <use RbookParte2-125.pdf>
+Package pdftex.def Info: RbookParte2-125.pdf used on input line 1925.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+[37] [38 <./RbookParte2-122.pdf>] [39 <./RbookParte2-123.pdf>] [40 <./RbookPart
+e2-125.pdf>] <RbookParte2-127.pdf, id=462, 433.62pt x 433.62pt>
+File: RbookParte2-127.pdf Graphic file (type pdf)
+
+<use RbookParte2-127.pdf>
+Package pdftex.def Info: RbookParte2-127.pdf used on input line 1949.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+ [41] [42 <./RbookParte2-127.pdf>]
+<RbookParte2-131.pdf, id=480, 433.62pt x 433.62pt>
+File: RbookParte2-131.pdf Graphic file (type pdf)
+ <use RbookParte2-131.pdf>
+Package pdftex.def Info: RbookParte2-131.pdf used on input line 2010.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+[43 <./RbookParte2-131.pdf>]
+<RbookParte2-134.pdf, id=494, 433.62pt x 433.62pt>
+File: RbookParte2-134.pdf Graphic file (type pdf)
+ <use RbookParte2-134.pdf>
+Package pdftex.def Info: RbookParte2-134.pdf used on input line 2039.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+[44 <./RbookParte2-134.pdf>]
+<RbookParte2-138.pdf, id=505, 433.62pt x 433.62pt>
+File: RbookParte2-138.pdf Graphic file (type pdf)
+ <use RbookParte2-138.pdf>
+Package pdftex.def Info: RbookParte2-138.pdf used on input line 2101.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+Underfull \vbox (badness 1540) has occurred while \output is active []
+
+ [45]
+[46 <./RbookParte2-138.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [47]
+<RbookParte2-141.pdf, id=525, 433.62pt x 433.62pt>
+File: RbookParte2-141.pdf Graphic file (type pdf)
+ <use RbookParte2-141.pdf>
+Package pdftex.def Info: RbookParte2-141.pdf used on input line 2185.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+[48 <./RbookParte2-141.pdf>]
+<RbookParte2-143.pdf, id=536, 433.62pt x 433.62pt>
+File: RbookParte2-143.pdf Graphic file (type pdf)
+ <use RbookParte2-143.pdf>
+Package pdftex.def Info: RbookParte2-143.pdf used on input line 2201.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+Underfull \vbox (badness 2653) has occurred while \output is active []
+
+ [49 <./RbookParte2-143.pdf>] <RbookParte2-148.pdf, id=548, 433.62pt x 433.62pt
+>
+File: RbookParte2-148.pdf Graphic file (type pdf)
+
+<use RbookParte2-148.pdf>
+Package pdftex.def Info: RbookParte2-148.pdf used on input line 2302.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+ [50] [51 <./RbookParte2-148.pdf>]
+<RbookParte2-153.pdf, id=567, 433.62pt x 433.62pt>
+File: RbookParte2-153.pdf Graphic file (type pdf)
+ <use RbookParte2-153.pdf>
+Package pdftex.def Info: RbookParte2-153.pdf used on input line 2348.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+Underfull \vbox (badness 4193) has occurred while \output is active []
+
+ [52]
+<RbookParte2-154.pdf, id=576, 433.62pt x 433.62pt>
+File: RbookParte2-154.pdf Graphic file (type pdf)
+ <use RbookParte2-154.pdf>
+Package pdftex.def Info: RbookParte2-154.pdf used on input line 2356.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [53 <./RbookParte2-153.pdf>] <RbookParte2-158.pdf, id=587, 433.62pt x 433.62pt
+>
+File: RbookParte2-158.pdf Graphic file (type pdf)
+
+<use RbookParte2-158.pdf>
+Package pdftex.def Info: RbookParte2-158.pdf used on input line 2377.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+ [54 <./RbookParte2-154.pdf>] [55 <./RbookParte2-158.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1419.
+(hyperref)                removing `math shift' on input line 2394.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\chi' on input line 1419.
+(hyperref)                removing `math shift' on input line 2394.
+
+<RbookParte2-160.pdf, id=610, 433.62pt x 433.62pt>
+File: RbookParte2-160.pdf Graphic file (type pdf)
+ <use RbookParte2-160.pdf>
+Package pdftex.def Info: RbookParte2-160.pdf used on input line 2418.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [56]
+<RbookParte2-161.pdf, id=617, 433.62pt x 433.62pt>
+File: RbookParte2-161.pdf Graphic file (type pdf)
+ <use RbookParte2-161.pdf>
+Package pdftex.def Info: RbookParte2-161.pdf used on input line 2435.
+(pdftex.def)             Requested size: 322.50345pt x 322.52129pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [57 <./RbookParte2-160.pdf>] [58 <./RbookParte2-161.pdf>] [59]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 2549.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `superscript' on input line 1419.
+(hyperref)                removing `\chi' on input line 2549.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1419.
+(hyperref)                removing `superscript' on input line 2549.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 2549.
+
+[60] [61] [62]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 2678.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\chi' on input line 2678.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `superscript' on input line 2678.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 2678.
 
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 1434.
+(amsmath)                 on input line 2693.
 
-[38] [39] [40] [41] [42] [43] [44] [45] [46] [47] [48]
+[63] [64] [65] [66] [67] [68] [69] [70] [71] [72]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [49]
-[50] (./RbookParte2.ind [51] [52
+ [73]
+[74] (./RbookParte2.ind [75] [76
 
 
 ]) (./RbookParte2.bbl
@@ -1106,24 +1144,24 @@ babelbib: Using the BibTeX style's default font for `ISBN'.
 babelbib: Using the BibTeX style's default font for `ISSN'.
 babelbib: Using the BibTeX style's default font for `url'.
 babelbib: Using the BibTeX style's default font for `numeral'.
-) [53
+) [77
 
 
 
-] [54
+] [78
 
-] (./RbookParte2.ind [55
+] (./RbookParte2.ind [79
 
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4778.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 4778.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4793.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 4793.
  (./RbookParte2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4778.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4778.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4793.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4793.
 
 Package rerunfilecheck Info: File `RbookParte2.out' has not changed.
-(rerunfilecheck)             Checksum: DA76076CDD2E28C09EE7CCE36AB701B5;1851.
+(rerunfilecheck)             Checksum: CD8492143B2643E0449D896946AACEA3;2458.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1133,41 +1171,42 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 9316 strings out of 493089
- 133054 string characters out of 6134842
- 337228 words of memory out of 5000000
- 12397 multiletter control sequences out of 15000+600000
- 72302 words of font info for 132 fonts, out of 8000000 for 9000
+ 9396 strings out of 493089
+ 133876 string characters out of 6134842
+ 338320 words of memory out of 5000000
+ 12416 multiletter control sequences out of 15000+600000
+ 75305 words of font info for 137 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 35i,14n,43p,806b,720s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 35i,14n,43p,806b,822s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
-sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
-/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
-ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
-al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local
-/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texli
-ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/local/texlive/
-2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/
-2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/20
-15/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/201
-5/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2015
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2015/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2015/t
-exmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2015/tex
-mf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on RbookParte2.pdf (59 pages, 457230 bytes).
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
+l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texliv
+e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texliv
+e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/local/texliv
+e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2
+015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/20
+15/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/201
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2015
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2015/
+texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2015/te
+xmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on RbookParte2.pdf (83 pages, 544375 bytes).
 PDF statistics:
- 660 PDF objects out of 1000 (max. 8388607)
- 534 compressed objects within 6 object streams
- 116 named destinations out of 1000 (max. 500000)
- 287 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 899 PDF objects out of 1000 (max. 8388607)
+ 744 compressed objects within 8 object streams
+ 172 named destinations out of 1000 (max. 500000)
+ 372 words of extra memory for PDF output out of 10000 (max. 10000000)
 
