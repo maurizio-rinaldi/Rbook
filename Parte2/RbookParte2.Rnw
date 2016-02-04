@@ -1,8 +1,6 @@
 %!TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \usepackage[english,italian]{babel}
-%\usepackage{color}
-%\usepackage[utf8]{inputenc}
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
@@ -15,7 +13,6 @@
 \definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
 \usepackage{graphicx}
 \usepackage{fancyvrb}
-
 \usepackage{amsmath}
 \usepackage{Sweave}
 \usepackage{hyperref}
@@ -207,7 +204,7 @@ sd(x)
 <<echo=TRUE>>=
 quantile(x)
 @
- Volendo ricavare i decili dovremo scrivere:
+Volendo ricavare i decili dovremo scrivere:
 $$\texttt{quantile}(\varia{variabile},\texttt{seq(0,1,by=0.1)})$$
 in quanto vogliamo dividere l'intervallo $[0,1]$ a passo $0.1$
 
@@ -476,7 +473,7 @@ abline(b,a,col="green")
 
 
 \subsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
-Sempre da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui dei ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
+Da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui dei ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
 <<echo=TRUE>>=
 age=18:29
 height=c(76.1,77,78.1,78.2,78.8,79.7,79.9,81.1,81.2,81.8,82.8,83.5)
@@ -497,39 +494,39 @@ plot(age,height)
 \end{center}
 \end{figure}
 L'andamento \`e lineare. Determiniamo la retta di regressione
-per predire l?altezza media nota l'et\`a in mesi.
+per predire l'altezza media nota l'et\`a in mesi.
 %code chunk
 <<echo=TRUE>>=
 ris=lm(height~age)
 ris
-plot(ris)
 @
 
 La retta di regressione cercata ha formula:
 $$h(\texttt{age})=\Sexpr{1/100*round(100*ris$coefficients[1])}+ \Sexpr{1/100*round(100*ris$coefficients[2])}\, \texttt{age}$$
 
-Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l?altezza a 27.5 mesi di et\`a:
+Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l'altezza a 27.5 mesi di et\`a:
 oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione
 \texttt{predict}:
 %codechunk
 <<echo=TRUE>>=
 predict(ris,data.frame(age=27.5))
 @
-
 fornendo in input i parametri della retta ed un preciso valore della variabile indipendente (richiamata col proprio nome).
-Molti comandi di \textsf{R} sono in grado di manipolare dataframe  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
+Molti comandi di \textsf{R} sono in grado di manipolare \emph{dataframe}  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
 Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt{village} direttamente al comando:
 <<echo=TRUE>>=
-res=lm(height~age,data=village)
-res
+modello=lm(height~age,data=village)
+modello
 @
-con la formula $lm(y ~x,data=dataset)$.
+con la formula $lm(y \tilde{} x,data=dataset)$.
 Inoltre possiammo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
-<<fig=TRUE>>=
+<<fig=TRUE,echo=FALSE>>=
 oldpar<-par(mfrow=c(2,2))
-par(ask=FALSE);plot(lm(height~age))
+par(ask=FALSE)
+plot(lm(height~age))
 oldpar
 @
+\section{Modelli potenza}
 Consideriamo ora il seguente \emph{dataset} di mammiferi  in cui le 2 variabili rappresentano  le dimensioni del corpo e del cervello.
 <<echo=TRUE>>=
 library(MASS)
@@ -738,7 +735,7 @@ Come appena visto \textsf{R }indica con il nome \texttt{dnorm}, la densit\`a nor
 formals(dnorm)
 @
 Se i parametri sono omessi \texttt{dnorm} rappresenta la densit\`a normale standard con $\mu=0$ e $\sigma=1$.
-Il grafico~(\ref{normalesta}) della gaussiana
+Il grafico~(\ref{fig:normalesta}) della gaussiana
  tra due estremi, ad esempio -2.5 e 2.5 si ottiene con il solito comando
 <<echo=TRUE,fig=FALSE>>=
 curve(dnorm,-2.5,2.5)
@@ -750,15 +747,15 @@ curve(dnorm,-2.5,2.5)
 curve(dnorm,-2.5,2.5)
 @
 \caption{ Grafico della normale standard nell'intervallo $[-2.5,2.5]$. }
-\label{normalesta}
+\label{fig:normalesta}
 \end{center}
 \end{figure}
-Per  visualizzare una gaussiana non standard, ad esempio con media $\mu=1$,  deviazione standard $\sigma=1.5$, tra -3 e 3. scriveremo invece
+Per  visualizzare una gaussiana non standard, ad esempio una gaussiana con media $\mu=1$ e  deviazione standard $\sigma=1.5$, tra -3 e 3. scriveremo invece
 <<echo=TRUE>>=
 curve(dnorm(x,mean=1,sd=1.5),-3,3)
 @
-\subsubsection{La funzione \texttt{pnorm}}
-La funzione \texttt{pnorm}(\varia{x})  \`e definita come
+\subsection{La funzione \texttt{pnorm}}
+La funzione \texttt{pnorm}(\varia{x})   \`e la antiderivata di \texttt{dnorm} calcolata come segue
 \begin{equation*}\texttt{pnorm}(\varia{x}) =\int_{-\infty}^x  \texttt{dnorm}(s)ds
 \end{equation*}
 Ovviamente
@@ -775,12 +772,12 @@ pnorm(1)-0.5
 @
 
 
-\subsubsection{La funzione \texttt{qnorm} e la tabella della densit\`a di Gauss}
+\subsection{La funzione \texttt{qnorm} e la tabella della densit\`a di Gauss}
 <<echo=FALSE>>=
 s2<-function(a,b) 
         {sigma=1;mu=0
         curve(dnorm(x),lwd=4,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n",ylab="")
-        axis(1,at=c(a,b),labels=c("-u",expression(paste("u=U(A"[2],")"))))
+        axis(1,at=c(a,b),labels=c("-x",expression("x")))
         x1 <- a  
         x2 <- b
         x=seq(x1,x2,by=0.01)
@@ -789,8 +786,8 @@ text(-0,0.15,expression("A")  ,cex=1)
 }
 s3<-function(a,b) 
         {sigma=1;mu=0
-        curve(dnorm(x,mu,sigma),lwd=4,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n")
-        axis(1,at=c(a,b),labels=c("-u",expression(paste("u=qnorm(A"[1],"/2+1/2)"))))
+        curve(dnorm(x,mu,sigma),lwd=4,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n",ylab="")
+        axis(1,at=c(a,b),labels=c("-x","x"))
         x1 <- 0  
         x2 <- b
         x=seq(x1,x2,by=0.01)
@@ -800,14 +797,16 @@ s3<-function(a,b)
         x=seq(x1,x2,by=0.01)
         polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light blue")
 text(-1,0.15,bquote("1/2")  ,cex=1)
-text(1,0.15,expression("A"/2)  ,cex=1)
-text(0,0.43,expression(paste("A"[1],"=1/2+A"/2))  ,cex=2)
+text(0.5,0.15,expression("A"/2)  ,cex=1)
 }
- 
 @
-Per definizione  $$\texttt{pnorm}(x)=\int_{-\infty}^x \texttt{dnorm}(s)ds=$$ mentre la funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}.
-Quindi
-<<>>=
+
+La funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}.
+\[\texttt{qnorm}(A)=x\Leftrightarrow A=\int_{-\infty}^x \texttt{dnorm}(s)ds\] 
+come illustrato nella figura che segue
+\begin{center}
+\begin{figure}[h]
+<<echo=FALSE,fig=TRUE>>=
 s4<-function(a,b) 
         {
         sigma=1;mu=0
@@ -820,43 +819,37 @@ s4<-function(a,b)
         x1 <- -4  
         x2 <- 0
         x=seq(x1,x2,by=0.01)
-        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light blue")
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
  
-text(1,0.15,expression("a")  ,cex=1)
-text(-1,0.15,expression("1/2")  ,cex=1) 
+text(0.4,0.15,expression("A")  ,cex=1) 
 }
 par(mfrow=c(1,1))
 s4(-2,2)
 @
-Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di area $A$   fornisca l'ascissa $u=U(A)$ come in figura in modo che l'area tra - $u$ e $u$ sia esattamente pari ad $A$.  
+\caption{$x=qnorm(A)$}
+\label{fig:fig2code}
+\end{figure}
+\end{center}
 
-
-
-
-
- 
-<<fig=TRUE>>=
+Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di area $A$   fornisca l'ascissa $x=U(A)$ come in figura in modo che l'area tra - $x$ e $x$ sia esattamente pari ad $A$.  
+Dall figura~\ref{fig:fig12code}
+\begin{figure}
+<<fig=TRUE,echo=FALSE>>=
 par(mfrow=c(1,2))
 s2(-1.96,1.96)
 s3(-4,1.96)
 @
- 
-Allora la funzione che riproduce la tabella è
- 
+\caption{$x=U(A)=qnorm(1/2+A/2)$}
+\label{fig:fig12code}
+\end{figure}
+La funzione che riproduce la tabella è
 <<>>=
-U <-function (a) qnorm (1/2 + a/2)
+U <-function (A) qnorm (1/2 + A/2)
 @
-Notiamo preliminarmente che
-se $$ \int_{-x}^x \texttt{dnorm}(s)ds= y$$ allora
- quindi
-$$x=\texttt{qnorm}\left(\frac{1+y}{2}\right)$$
-In termini pratici possiamo introdurre la funzione
+
+Questa funzione fornisce fissato il livello di fiducia l'ascissa $x$  tale che l'intervallo simmetrico $[-x,x]$ racchiuda un'area pari al lvello di fiducia. Per esempio
 <<echo=TRUE>>=
-u<-function(area) qnorm((1+area)/2)
-@
-fornisce fissato il livello di fiducia l'ascissa $x$  tale che l'intervallo simmetrico $[-x,x]$ racchiuda un'area pari al lvello di fiducia. Per esempio
-<<echo=TRUE>>=
-u(0.95)
+U(0.95)
 @
 \begin{figure}[htbp]
 \begin{center}
@@ -938,7 +931,7 @@ legend("topleft", c("df=2","df=25","normale"),pch=15,col=1:3);
  \subsection
 {Intervalli di confidenza e test di Student (dati non appaiati)}
 La funzione di
-\textsf{R} che esegue il test di Student nelle sue diverse forme \`e  \texttt{t.test}   Nella sua forma pi\`u semplice
+\textsf{R} che esegue il test di Student nelle sue diverse forme \`e  \texttt{t.test}.   Nella sua forma pi\`u semplice
 
 <<echo=TRUE>>=
 x=1:20;  t.test(x)

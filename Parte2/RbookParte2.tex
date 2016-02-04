@@ -1,8 +1,6 @@
 %!TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \usepackage[english,italian]{babel}
-%\usepackage{color}
-%\usepackage[utf8]{inputenc}
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
@@ -15,7 +13,6 @@
 \definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
 \usepackage{graphicx}
 \usepackage{fancyvrb}
-
 \usepackage{amsmath}
 \usepackage{Sweave}
 \usepackage{hyperref}
@@ -106,7 +103,7 @@ Se l'alfabeto consiste di tutte le lettere minuscole dell'alfabeto ordinario e n
 > sample(letters,8)
 \end{Sinput}
 \begin{Soutput}
-[1] "z" "p" "w" "e" "n" "v" "j" "a"
+[1] "w" "v" "k" "l" "f" "r" "e" "u"
 \end{Soutput}
 \end{Schunk}
   Se invece l'alfabeto consiste delle basi del DNA
@@ -128,7 +125,7 @@ Notiamo che
 >  sample(alfabeto)
 \end{Sinput}
 \begin{Soutput}
-[1] "G" "A" "T" "C"
+[1] "G" "C" "A" "T"
 \end{Soutput}
 \end{Schunk}
 restituisce una permutazione dell'alfabeto, mentre chiedendo un campione di lunghezza superiore alla lunghezza dell'alfabeto otteniamo un messaggio di errore. Possiamo per\`o immaginare di re-immettere la lettera estratta nell'urna dopo ogni estrazione. In questo caso non c'\`e limite alla sequenza generata.
@@ -139,7 +136,7 @@ Per esempio
 > sample(alfabeto,5,replace=T)
 \end{Sinput}
 \begin{Soutput}
-[1] "croce" "croce" "croce" "testa" "croce"
+[1] "croce" "croce" "testa" "testa" "croce"
 \end{Soutput}
 \end{Schunk}
 Il precursore  del dado era chiamato astragalo ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
@@ -171,7 +168,7 @@ Per simulare un astragalo su un computer
 > sample(c(1,3,4,6),4,replace=T,prob=c(0.1,0.4,0.4,0.1))
 \end{Sinput}
 \begin{Soutput}
-[1] 4 4 4 4
+[1] 4 4 4 1
 \end{Soutput}
 \end{Schunk}
 
@@ -267,7 +264,7 @@ Sempre basandosi sull'esempio precedente scriveremo
  4.3  5.1  5.8  6.4  7.9 
 \end{Soutput}
 \end{Schunk}
- Volendo ricavare i decili dovremo scrivere:
+Volendo ricavare i decili dovremo scrivere:
 $$\texttt{quantile}(\varia{variabile},\texttt{seq(0,1,by=0.1)})$$
 in quanto vogliamo dividere l'intervallo $[0,1]$ a passo $0.1$
 
@@ -635,7 +632,7 @@ In tal modo otteniamo il grafico~\ref{fig:duerettex}.
 
 
 \subsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
-Sempre da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui dei ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
+Da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui dei ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
 \begin{Schunk}
 \begin{Sinput}
 > age=18:29
@@ -663,7 +660,7 @@ Ora diamo una prima occhiata ai dati:
 \end{center}
 \end{figure}
 L'andamento \`e lineare. Determiniamo la retta di regressione
-per predire l?altezza media nota l'et\`a in mesi.
+per predire l'altezza media nota l'et\`a in mesi.
 %code chunk
 \begin{Schunk}
 \begin{Sinput}
@@ -678,15 +675,12 @@ Coefficients:
 (Intercept)          age  
      64.928        0.635  
 \end{Soutput}
-\begin{Sinput}
-> plot(ris)
-\end{Sinput}
 \end{Schunk}
 
 La retta di regressione cercata ha formula:
 $$h(\texttt{age})=64.93+ 0.63\, \texttt{age}$$
 
-Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l?altezza a 27.5 mesi di et\`a:
+Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l'altezza a 27.5 mesi di et\`a:
 oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione
 \texttt{predict}:
 %codechunk
@@ -699,14 +693,13 @@ oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la f
 82.38986 
 \end{Soutput}
 \end{Schunk}
-
 fornendo in input i parametri della retta ed un preciso valore della variabile indipendente (richiamata col proprio nome).
-Molti comandi di \textsf{R} sono in grado di manipolare dataframe  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
+Molti comandi di \textsf{R} sono in grado di manipolare \emph{dataframe}  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
 Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt{village} direttamente al comando:
 \begin{Schunk}
 \begin{Sinput}
-> res=lm(height~age,data=village)
-> res
+> modello=lm(height~age,data=village)
+> modello
 \end{Sinput}
 \begin{Soutput}
 Call:
@@ -717,20 +710,16 @@ Coefficients:
      64.928        0.635  
 \end{Soutput}
 \end{Schunk}
-con la formula $lm(y ~x,data=dataset)$.
+con la formula $lm(y \tilde{} x,data=dataset)$.
 Inoltre possiammo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
 \begin{Schunk}
-\begin{Sinput}
-> oldpar<-par(mfrow=c(2,2))
-> par(ask=FALSE);plot(lm(height~age))
-> oldpar
-\end{Sinput}
 \begin{Soutput}
 $mfrow
 [1] 1 1
 \end{Soutput}
 \end{Schunk}
 \includegraphics{RbookParte2-057}
+\section{Modelli potenza}
 Consideriamo ora il seguente \emph{dataset} di mammiferi  in cui le 2 variabili rappresentano  le dimensioni del corpo e del cervello.
 \begin{Schunk}
 \begin{Sinput}
@@ -920,7 +909,7 @@ $log
 \end{Soutput}
 \end{Schunk}
 Se i parametri sono omessi \texttt{dnorm} rappresenta la densit\`a normale standard con $\mu=0$ e $\sigma=1$.
-Il grafico~(\ref{normalesta}) della gaussiana
+Il grafico~(\ref{fig:normalesta}) della gaussiana
  tra due estremi, ad esempio -2.5 e 2.5 si ottiene con il solito comando
 \begin{Schunk}
 \begin{Sinput}
@@ -932,17 +921,17 @@ Il grafico~(\ref{normalesta}) della gaussiana
 \begin{center}
 \includegraphics{RbookParte2-067}
 \caption{ Grafico della normale standard nell'intervallo $[-2.5,2.5]$. }
-\label{normalesta}
+\label{fig:normalesta}
 \end{center}
 \end{figure}
-Per  visualizzare una gaussiana non standard, ad esempio con media $\mu=1$,  deviazione standard $\sigma=1.5$, tra -3 e 3. scriveremo invece
+Per  visualizzare una gaussiana non standard, ad esempio una gaussiana con media $\mu=1$ e  deviazione standard $\sigma=1.5$, tra -3 e 3. scriveremo invece
 \begin{Schunk}
 \begin{Sinput}
 > curve(dnorm(x,mean=1,sd=1.5),-3,3)
 \end{Sinput}
 \end{Schunk}
-\subsubsection{La funzione \texttt{pnorm}}
-La funzione \texttt{pnorm}(\varia{x})  \`e definita come
+\subsection{La funzione \texttt{pnorm}}
+La funzione \texttt{pnorm}(\varia{x})   \`e la antiderivata di \texttt{dnorm} calcolata come segue
 \begin{equation*}\texttt{pnorm}(\varia{x}) =\int_{-\infty}^x  \texttt{dnorm}(s)ds
 \end{equation*}
 Ovviamente
@@ -969,44 +958,37 @@ Per cui possiamo scrivere:
 \end{Schunk}
 
 
-\subsubsection{La funzione \texttt{qnorm} e la tabella della densit\`a di Gauss}
-Notiamo che $$\texttt{pnorm}(x)=\int_{-\infty}^x \texttt{dnorm}(s)ds=1-\frac{1-y}{2}=\frac{1+y}{2}$$ mentre la funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm} 
-Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di area $A$   fornisca l'ascissa $u=U(A)$ come in figura in modo che l'area tra - $u$ e $u$ sia esattamente pari ad $A$.  
+\subsection{La funzione \texttt{qnorm} e la tabella della densit\`a di Gauss}
 
-
-
-
- 
-\begin{Schunk}
-\begin{Sinput}
-> par(mfrow=c(1,2))
-> s2(-1.96,1.96)
-> s3(-4,1.96)
-\end{Sinput}
-\end{Schunk}
+La funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}.
+\[\texttt{qnorm}(A)=x\Leftrightarrow A=\int_{-\infty}^x \texttt{dnorm}(s)ds\] 
+come illustrato nella figura che segue
+\begin{center}
+\begin{figure}[h]
 \includegraphics{RbookParte2-072}
- 
-Allora la funzione che riproduce la tabella è
- 
+\caption{$x=qnorm(A)$}
+\label{fig:fig2code}
+\end{figure}
+\end{center}
+
+Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di area $A$   fornisca l'ascissa $x=U(A)$ come in figura in modo che l'area tra - $x$ e $x$ sia esattamente pari ad $A$.  
+Dall figura~\ref{fig:fig12code}
+\begin{figure}
+\includegraphics{RbookParte2-073}
+\caption{$x=U(A)=qnorm(1/2+A/2)$}
+\label{fig:fig12code}
+\end{figure}
+La funzione che riproduce la tabella è
 \begin{Schunk}
 \begin{Sinput}
-> U <-function (a) qnorm (1/2 + a/2)
+> U <-function (A) qnorm (1/2 + A/2)
 \end{Sinput}
 \end{Schunk}
-Notiamo preliminarmente che
-se $$ \int_{-x}^x \texttt{dnorm}(s)ds= y$$ allora
- quindi
-$$x=\texttt{qnorm}\left(\frac{1+y}{2}\right)$$
-In termini pratici possiamo introdurre la funzione
+
+Questa funzione fornisce fissato il livello di fiducia l'ascissa $x$  tale che l'intervallo simmetrico $[-x,x]$ racchiuda un'area pari al lvello di fiducia. Per esempio
 \begin{Schunk}
 \begin{Sinput}
-> u<-function(area) qnorm((1+area)/2)
-\end{Sinput}
-\end{Schunk}
-fornisce fissato il livello di fiducia l'ascissa $x$  tale che l'intervallo simmetrico $[-x,x]$ racchiuda un'area pari al lvello di fiducia. Per esempio
-\begin{Schunk}
-\begin{Sinput}
-> u(0.95)
+> U(0.95)
 \end{Sinput}
 \begin{Soutput}
 [1] 1.959964
@@ -1080,7 +1062,7 @@ Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cu
  \subsection
 {Intervalli di confidenza e test di Student (dati non appaiati)}
 La funzione di
-\textsf{R} che esegue il test di Student nelle sue diverse forme \`e  \texttt{t.test}   Nella sua forma pi\`u semplice
+\textsf{R} che esegue il test di Student nelle sue diverse forme \`e  \texttt{t.test}.   Nella sua forma pi\`u semplice
 
 \begin{Schunk}
 \begin{Sinput}
