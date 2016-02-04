@@ -4,6 +4,8 @@
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
+\usepackage{babelbib}
+\usepackage{float}
 \usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -57,6 +59,7 @@
 % \ \thesection.\ #1}{}}
 \makeindex
 \begin{document}
+\setkeys{Gin}{width=0.7\textwidth}
 \input{RbookParte2-concordance}
 \markright{\today}
 \thispagestyle{empty}
@@ -88,13 +91,18 @@ Per caratterizzare completamente una variabile aleatoria discreta oltre ai valor
 
 Per semplicit\`a considereremo variabili aleatorie finite.\\
 Come possiamo simulare variabili aventi valore nell'alfabeto assegnato?
-In effetti qualunque comando di generazione su un computer non \`e perfettamente casuale; infatti la generazione avviene in effetti in modo pseudo-casuale e  secondo un meccanismo che dipende dallo stato interno del computer codificato in una variabile indicata con \texttt{.Random.seed}. Se il {\it seme} iniziale \`e lo stesso i numeri generati saranno uguali. Spesso conviene che i calcoli (ad esempio a fine didattico) siano riproducibili. Ad esempio mettendo in una variabile \texttt{seme} il valore corrente di \texttt{.Random.seed} e richiamandolo o generandolo all'occorrenza. Scegliamo per la riproducibilit\`a dei risultati
-
+In effetti qualunque comando di generazione su un computer non \`e perfettamente casuale; infatti la generazione avviene in effetti in modo pseudo-casuale e  secondo un meccanismo che dipende dallo stato interno del computer codificato in una variabile indicata con \texttt{.Random.seed}. Se il {\it seme} iniziale \`e lo stesso i numeri generati saranno uguali. Spesso conviene che i calcoli (ad esempio a fine didattico) siano riproducibili. Ad esempio mettendo in una variabile \texttt{seme} il valore corrente di \texttt{.Random.seed} e richiamandolo o generandolo all'occorrenza.  
+Un altro modo di procedere consiste nell'impostare il valore di 
+\texttt{.Random.seed} attraverso il comando 
+\texttt{set.seed}  la cui sintassi \`e 
+$\texttt{set.seed}(\varia{n})$ dove $n$ \`e un numero intero.
+ 
 \begin{Schunk}
 \begin{Sinput}
-> seme=as.integer(c(0,1,2,3))
+> set.seed(3)
 \end{Sinput}
 \end{Schunk}
+ 
 A questo punto possiamo simulare le variabili richieste usando la struttura
 \begin{equation}\texttt{sample}(\varia{alfabeto},\varia{n})\end{equation}
 Se l'alfabeto consiste di tutte le lettere minuscole dell'alfabeto ordinario e ne vogliamo selezionare $n=8$  (in modo che ciascun uscita abbia la stessa probabilit\`a)  basta scrivere
@@ -103,21 +111,18 @@ Se l'alfabeto consiste di tutte le lettere minuscole dell'alfabeto ordinario e n
 > sample(letters,8)
 \end{Sinput}
 \begin{Soutput}
-[1] "w" "v" "k" "l" "f" "r" "e" "u"
+[1] "e" "u" "j" "h" "n" "m" "c" "f"
 \end{Soutput}
 \end{Schunk}
-  Se invece l'alfabeto consiste delle basi del DNA
+Se invece l'alfabeto consiste delle basi del DNA
 \begin{Schunk}
 \begin{Sinput}
 > alfabeto=c("A","C","G","T")
 > sample(alfabeto,2)
 \end{Sinput}
 \begin{Soutput}
-[1] "C" "A"
+[1] "G" "C"
 \end{Soutput}
-\begin{Sinput}
-> 
-\end{Sinput}
 \end{Schunk}
 Notiamo che
 \begin{Schunk}
@@ -125,7 +130,7 @@ Notiamo che
 >  sample(alfabeto)
 \end{Sinput}
 \begin{Soutput}
-[1] "G" "C" "A" "T"
+[1] "G" "C" "T" "A"
 \end{Soutput}
 \end{Schunk}
 restituisce una permutazione dell'alfabeto, mentre chiedendo un campione di lunghezza superiore alla lunghezza dell'alfabeto otteniamo un messaggio di errore. Possiamo per\`o immaginare di re-immettere la lettera estratta nell'urna dopo ogni estrazione. In questo caso non c'\`e limite alla sequenza generata.
@@ -136,9 +141,11 @@ Per esempio
 > sample(alfabeto,5,replace=T)
 \end{Sinput}
 \begin{Soutput}
-[1] "croce" "croce" "testa" "testa" "croce"
+[1] "croce" "croce" "testa" "croce" "croce"
 \end{Soutput}
 \end{Schunk}
+ 
+
 Il precursore  del dado era chiamato astragalo ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
 Gli  astragali sono dei piccoli ossicini di forma irregolare ed hanno 6 facce ma atterranno in  modo stabile solo su 4 di esse numerate 1, 3, 4 e 6  con probabilit\`a all'incirca 0.4 per il 3 e il 4  e di 0.1 per l'1 e il 6. In altre parole l'astragalo \`e descritto dalla tabella
 
@@ -159,7 +166,7 @@ Il lancio considerato peggiore sul singolo lancio era l'1 chiamato cane o avvolt
 \begin{center}
 \includegraphics[width=6cm]{../grafici/astragals.jpeg}
 \caption{ Astragalo. }
-\label{fig:daiist}
+\label{fig:astragalo}
 \end{center}
 \end{figure}
 Per simulare un astragalo su un computer
@@ -168,7 +175,7 @@ Per simulare un astragalo su un computer
 > sample(c(1,3,4,6),4,replace=T,prob=c(0.1,0.4,0.4,0.1))
 \end{Sinput}
 \begin{Soutput}
-[1] 4 4 4 1
+[1] 3 3 3 3
 \end{Soutput}
 \end{Schunk}
 
@@ -177,15 +184,15 @@ Supponiamo di lanciare 100 volte un dado equo a 6 facce e di registrare in \text
 le uscite rilevate
 \begin{Schunk}
 \begin{Sinput}
-> .Random.seed=seme
+> set.seed(3)
 > dadi100<-sample(1:6,100,replace=T)
 > dadi100
 \end{Sinput}
 \begin{Soutput}
-  [1] 1 5 1 5 3 6 5 5 5 6 6 3 5 6 6 5 5 2 4 6 1 4 2 3 4 5 2 4
- [29] 5 6 3 3 5 5 6 1 6 4 2 6 6 3 2 2 3 5 1 3 3 2 5 6 3 4 2 4
- [57] 2 1 4 1 6 5 6 2 2 3 4 3 3 4 3 2 4 3 6 3 1 3 2 4 6 1 3 1
- [85] 1 6 6 6 5 5 3 3 3 4 1 4 4 2 5 3
+  [1] 2 5 3 2 4 4 1 2 4 4 4 4 4 4 6 5 1 5 6 2 2 1 1 1 2 5 4 6
+ [29] 4 5 3 3 2 3 2 3 6 2 4 2 2 5 2 4 3 2 1 1 2 5 2 2 6 6 6 6
+ [57] 3 2 1 2 5 1 5 1 5 2 5 4 3 1 5 5 6 6 4 4 1 1 5 5 5 4 3 1
+ [85] 6 6 2 3 4 6 1 2 3 5 6 2 2 2 2 5
 \end{Soutput}
 \end{Schunk}
 Volendo invece simulare una combinazione da giocare al SuperEnalotto possiamo scrivere
@@ -194,7 +201,7 @@ Volendo invece simulare una combinazione da giocare al SuperEnalotto possiamo sc
 > (x<-sample(1:90,6,replace=T))
 \end{Sinput}
 \begin{Soutput}
-[1] 13 76 66 76 17 53
+[1] 69 62 19 65 55 31
 \end{Soutput}
 \end{Schunk}
 I numeri usciti sono stati salvati  in una variabile \texttt{x}, per poter effettuare la ricerca di indicatori statistici.
@@ -206,7 +213,7 @@ Volendo ordinare i numeri precedentemente ricavati scriveremo
 > sort(x)
 \end{Sinput}
 \begin{Soutput}
-[1] 13 17 53 66 76 76
+[1] 19 31 55 62 65 69
 \end{Soutput}
 \end{Schunk}
 
@@ -324,44 +331,155 @@ Consideriamo la rilevazione della temperatura media giornaliera di Milano nel me
 Scegliamo il mese
 \begin{Schunk}
 \begin{Soutput}
->stringa="Milano/2016/Gennaio?format=csv"
+> stringa="Milano/2016/Gennaio?format=csv"
 \end{Soutput}
 \end{Schunk}
 \begin{Schunk}
 \begin{Sinput}
 > sito="http://www.ilmeteo.it/portale/archivio-meteo/"
 > indirizzo=paste(sito,stringa,sep="")
-> meteo=read.table(indirizzo,sep=";")
+> meteo=read.table(indirizzo,sep=";",header=T)
 \end{Sinput}
 \end{Schunk}
 \begin{Schunk}
 \begin{Sinput}
-> meteo[1,]
+> meteo
 \end{Sinput}
 \begin{Soutput}
-        V1   V2        V3      V4      V5              V6
-1 LOCALITA DATA TMEDIA °C TMIN °C TMAX °C PUNTORUGIADA °C
-         V7            V8              V9           V10
-1 UMIDITA % VISIBILITA km VENTOMEDIA km/h VENTOMAX km/h
-           V11             V12               V13        V14
-1 RAFFICA km/h PRESSIONESLM mb PRESSIONEMEDIA mb PIOGGIA mm
-       V15
-1 FENOMENI
+   LOCALITA      DATA TMEDIA..C TMIN..C TMAX..C PUNTORUGIADA..C
+1    Milano  1/1/2016         1      -2       4               1
+2    Milano  2/1/2016         1       0       2               1
+3    Milano  3/1/2016         1       0       3               1
+4    Milano  4/1/2016         2       1       3               1
+5    Milano  5/1/2016         3       2       5               2
+6    Milano  6/1/2016         5       3       8               2
+7    Milano  7/1/2016         3      -1       6               2
+8    Milano  8/1/2016         2      -1       5               2
+9    Milano  9/1/2016         5       3       5               4
+10   Milano 10/1/2016         5       4       7               5
+11   Milano 11/1/2016         6       4       8               6
+12   Milano 12/1/2016         5       0      12               3
+13   Milano 13/1/2016         7       1      12               0
+14   Milano 14/1/2016         2      -2       5               1
+15   Milano 15/1/2016         5       1      11               1
+16   Milano 16/1/2016         5      -3      11               0
+17   Milano 17/1/2016         6       2       8               0
+18   Milano 18/1/2016         0      -5       5               0
+19   Milano 19/1/2016        -1      -5       4               0
+20   Milano 20/1/2016         0      -4       4               0
+21   Milano 21/1/2016         0      -5       5               0
+22   Milano 22/1/2016         0      -5       6               0
+23   Milano 23/1/2016         2      -3       8               0
+24   Milano 24/1/2016         2      -4       8               0
+25   Milano 25/1/2016         4      -2      13               2
+26   Milano 26/1/2016         7      -1      15               5
+27   Milano 27/1/2016         7       1      12               5
+28   Milano 28/1/2016         9       7      12               6
+29   Milano 29/1/2016        10       6      15               6
+30   Milano 30/1/2016         8       7       9               6
+31   Milano 31/1/2016         8       4      13               7
+   UMIDITA.. VISIBILITA.km VENTOMEDIA.km.h VENTOMAX.km.h
+1         97             2               6            11
+2         97             2               5             9
+3         96             3               7            11
+4         93             4               7            11
+5         89             5               6            11
+6         85             5               8            13
+7         88             8               5            11
+8         89             7               7            17
+9         95             2               6            11
+10        95             3               5            11
+11        95             3               8            13
+12        80             6               7            20
+13        46            31              11            19
+14        74            10               7            15
+15        54             9              11            22
+16        43            13              10            24
+17        22            18              17            28
+18        40            26               4            11
+19        55            14               4             9
+20        63            10               6            13
+21        69             7               6            11
+22        75             7               4             7
+23        73             6               6            15
+24        75             5               6            11
+25        77             5               5            13
+26        81             5               5            11
+27        85             4               4             7
+28        84             4               5             9
+29        81             5               5            11
+30        91             2               4             9
+31        92             2               8            17
+   RAFFICA.km.h PRESSIONESLM.mb PRESSIONEMEDIA.mb PIOGGIA.mm
+1             0            1026                 0          0
+2             0            1019                 0          0
+3             0            1010                 0          0
+4             0            1000                 0          0
+5             0            1001                 0          0
+6             0            1001                 0          0
+7             0            1004                 0          0
+8             0            1009                 0          0
+9             0            1008                 0          0
+10            0            1004                 0          0
+11            0             997                 0          0
+12            0            1002                 0          0
+13            0            1014                 0          0
+14            0            1014                 0          0
+15           35            1010                 0          0
+16            0            1014                 0          0
+17           44            1017                 0          0
+18            0            1020                 0          0
+19            0            1017                 0          0
+20            0            1018                 0          0
+21            0            1023                 0          0
+22            0            1032                 0          0
+23            0            1033                 0          0
+24            0            1034                 0          0
+25            0            1032                 0          0
+26            0            1030                 0          0
+27            0            1029                 0          0
+28            0            1028                 0          0
+29            0            1030                 0          0
+30            0            1027                 0          0
+31            0            1016                 0          0
+               FENOMENI
+1               nebbia 
+2  pioggia neve nebbia 
+3          neve nebbia 
+4         pioggia neve 
+5              pioggia 
+6               nebbia 
+7               nebbia 
+8               nebbia 
+9              pioggia 
+10      pioggia nebbia 
+11      pioggia nebbia 
+12              nebbia 
+13                     
+14                     
+15                     
+16                     
+17                     
+18                     
+19                     
+20                     
+21                     
+22                     
+23                     
+24                     
+25              nebbia 
+26              nebbia 
+27              nebbia 
+28             pioggia 
+29      pioggia nebbia 
+30      pioggia nebbia 
+31              nebbia 
 \end{Soutput}
-\begin{Sinput}
-> dim(meteo)
-\end{Sinput}
-\begin{Soutput}
-[1] 32 15
-\end{Soutput}
-\begin{Sinput}
-> #meteo[-1,3]
-\end{Sinput}
 \end{Schunk}
-A questo punto eliminiamo i livelli di \texttt{meteo} con il comando \texttt{as.vector} e consideriamo il risultato come numerico con
+A questo punto selezioniamo la colonna della temperatura media 
 \begin{Schunk}
 \begin{Sinput}
-> as.numeric(as.vector(meteo[-1,3]))->Milano;
+> meteo[,3]->Milano;
 > Milano
 \end{Sinput}
 \begin{Soutput}
@@ -448,20 +566,22 @@ Volendo raggruppare in classi i dati delle precedenti uscite del dado possiamo s
 \end{Sinput}
 \begin{Soutput}
 (0,1] (1,2] (2,3] (3,4] (4,5] (5,6] 
-   12    14    22    15    18    19 
+   15    25    11    17    18    14 
 \end{Soutput}
 \end{Schunk}
-Se scegliamo di chiudere a sinistra gli intervalli
+Se scegliamo di chiudere a sinistra gli intervalli dobbiamo però includere il 7 altrimenti 
+il valore 6 non risutlerebbe incluso.
 \begin{Schunk}
 \begin{Sinput}
 > table(cut(dadi100,breaks= 1:7,right=FALSE))
 \end{Sinput}
 \begin{Soutput}
 [1,2) [2,3) [3,4) [4,5) [5,6) [6,7) 
-   12    14    22    15    18    19 
+   15    25    11    17    18    14 
 \end{Soutput}
 \end{Schunk}
-In questo caso la occorre prestare attenzione alla chiusura agli estremi degli intervalli\subsection{Areogrammi}
+
+\subsection{Areogrammi}
 Il comando generico per generare un istogramma \`e:
 \begin{equation*}
 \texttt{hist}(\varia{variabile})
@@ -482,7 +602,7 @@ Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del 
 \begin{center}
 \includegraphics{RbookParte2-037}
 \caption{ Diagramma a colonne e areogramma per il lancio di un dado.}
-\label{fig:datiiist}
+\label{fig:datidado}
 \end{center}
 \end{figure}
 genera l'istogramma (in rosso, a sinistra Figura~\ref{fig:datiist}) con le frequenze assolute delle classi in ordinata. La sequenza dei punti di taglio \`e stata scelta in modo che i numeri interi da 1 a 6 siano al centro delle classi corrispondenti. Se invece volessimo creare un areogramma  (ossia avere un tracciato per cui le aree siano pari alle frequenze relative) a partire dalle stesse uscite dovremo imporre il parametro \texttt{freq=FALSE} otterremo il pannello a destra (in blu) della figura~(\ref{fig:datiist}). Avendo scelto classi di ampiezza costante i 2 grafici differiscono semplicemente per un cambio di scala sull'asse $y$.
@@ -525,7 +645,8 @@ otteniamo la figura~\ref{fig:boxplotdado}
 \end{Sinput}
 \end{Schunk}
 \includegraphics{RbookParte2-042}
-\caption{Boxplot dei risultati del lancio di un dado}\label{fig:boxplotdado}
+\caption{Boxplot dei risultati del lancio di un dado}
+\label{fig:boxplotdado}
 \end{center}
 \end{figure}
 da cui si evince che il valore massimo dei dati \`e 6, il minimo \`e 1 e non ci sono punti anomali, per cui non vi sono dati anomali, altrimenti evidenziati da un pallino. Si legge inoltre il valore di mediana (4) primo quartile (2) e terzo quartile (5).
@@ -853,19 +974,19 @@ per caratterizzare diversi aspetti.
   Figure~\ref{fig:scatterplot} shows a scatterplot. Which of the
   following statements are correct?
 
-\setkeys{Gin}{width=0.7\textwidth}
+
 \begin{figure}[htb!]
 \begin{center}
 \includegraphics{RbookParte2-064}
-\caption{\label{fig:scatterplot} Scatterplot}
+\caption{ Scatterplot}\label{fig:scatterplot}
 \end{center}
 \end{figure}
 
 \begin{answerlist}
   \item The standard deviation of $Y$ is at least $6$.
-  \item The scatterplot is standardized.
+  \item For $X =  13.6 $, $Y$ can be expected to be about  -44 .
+  \item La pendenza della retta di regressione ? circa $1$.
   \item The mean of $X$ is at most $5$.
-  \item For $X =  0.1 $, $Y$ can be expected to be about  0.2 .
   \item The absolute value of the correlation coefficient is at most $0.8$.
 \end{answerlist}
 \end{question}
@@ -873,17 +994,17 @@ per caratterizzare diversi aspetti.
 %% SOLUTIONS
 \begin{solution}
 \begin{answerlist}
-  \item \textbf{False}: The standard deviation of $Y$ is about equal to $ 1 $ and is therefore smaller than $6$.
-  \item \textbf{True}: $X$ and $Y$ have both mean $0$ and variance $1$.
-  \item \textbf{True}: The mean of $X$ is about equal to $ 0 $ and hence is smaller than $5$.
-  \item \textbf{False}: The regression line at $X=0.1$ implies a value of about $Y = 0.9$.
+  \item \textbf{True}: The standard deviation of $Y$ is about equal to $ 20 $ and is therefore larger than $6$.
+  \item \textbf{False}: The regression line at $X=13.6$ implies a value of about $Y = 7.2$.
+  \item \textbf{False}: The slope of the regression line is given by $r \cdot s_y/s_x$ and hence not about equal to $1$.
+  \item \textbf{False}: The mean of $X$ is about equal to $ 20 $ and hence is larger than $5$.
   \item \textbf{False}: A strong association between the variables is given in the scatterplot. Hence the absolute value of the correlation coefficient is close to $1$ and therefore larger than $0.8$.
 \end{answerlist}
 \end{solution}
 \end{itemize}
 %% META-INFORMATION
 %% \extype{mchoice}
-%% \exsolution{01100}
+%% \exsolution{10000}
 %% \exname{Multiple choice}
 
 \end{comment}
@@ -962,29 +1083,27 @@ Per cui possiamo scrivere:
 
 La funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}.
 \[\texttt{qnorm}(A)=x\Leftrightarrow A=\int_{-\infty}^x \texttt{dnorm}(s)ds\] 
-come illustrato nella figura che segue
+come illustrato nella figura~\ref{fig:fig2code}.
 \begin{center}
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics{RbookParte2-072}
-\caption{$x=qnorm(A)$}
+\caption{$x=\texttt{qnorm}(A)$}
 \label{fig:fig2code}
 \end{figure}
 \end{center}
+Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di area $A$   fornisca l'ascissa $x=U(A)$ come in figura~\ref{fig:fig12code} in modo che l'area tra - $x$ e $x$ sia esattamente pari ad $A$.  
 
-Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di area $A$   fornisca l'ascissa $x=U(A)$ come in figura in modo che l'area tra - $x$ e $x$ sia esattamente pari ad $A$.  
-Dall figura~\ref{fig:fig12code}
-\begin{figure}
+\begin{figure}[H]
 \includegraphics{RbookParte2-073}
-\caption{$x=U(A)=qnorm(1/2+A/2)$}
+\caption{$x=U(A)=\texttt{qnorm}(1/2+A/2)$}
 \label{fig:fig12code}
 \end{figure}
-La funzione che riproduce la tabella è
+Dalla stessa figura  si evince che la funzione che riproduce la tabella è
 \begin{Schunk}
 \begin{Sinput}
 > U <-function (A) qnorm (1/2 + A/2)
 \end{Sinput}
 \end{Schunk}
-
 Questa funzione fornisce fissato il livello di fiducia l'ascissa $x$  tale che l'intervallo simmetrico $[-x,x]$ racchiuda un'area pari al lvello di fiducia. Per esempio
 \begin{Schunk}
 \begin{Sinput}
@@ -998,11 +1117,11 @@ Questa funzione fornisce fissato il livello di fiducia l'ascissa $x$  tale che l
 \begin{center}
 \includegraphics{RbookParte2-077}
 \caption{Code della distribuzione normale}
-\label{normaletratto}
+\label{fig:normaletratto}
 \end{center}
 \end{figure}
 
- \subsubsection{La funzione \texttt{rnorm}}
+ \subsection{La funzione \texttt{rnorm}}
 \`E possibile generare dei valori standardizzati casuali (media uguale a 0, deviazione standard pari a 1) che seguono la distribuzione normale standard. Basta semplicemente definire il numero di valori desiderati.
 Il comando nella sua espressione generale \`e:
 \begin{equation}\texttt{rnorm}(n,\texttt{mean}=\varia{valore}_1,\texttt{sd}=\varia{valore}_2)\end{equation}
@@ -1030,7 +1149,7 @@ Il grafico della distribuzione di Student ad un certo numero \texttt{df} di grad
 \end{equation*}
 Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di libert\`a (vedi figura ~(\ref{fig:graficostudent1})):
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \begin{Schunk}
 \begin{Sinput}
@@ -1042,9 +1161,9 @@ Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di l
 \label{fig:graficostudent1}
 \end{center}
 \end{figure}
-Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cui  la deviazione standard della popolazione $\sigma$  non \`e conosciuta e viene rimpiazzata  dalla deviazione standard campionaria  $S$, calcolata con un numero $N$ di dati e quindi con $N-1$ gradi di libert\`a. Quando per\`o il numero di dati si avvicina a 30 la curva di Student \`e praticamente sovrapposta a quella della distribuzione normale, come mostra il grafico~(\ref{fig:graficostudent}):
+Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cui la deviazione standard della popolazione $\sigma$  non \`e conosciuta e viene rimpiazzata  dalla deviazione standard campionaria  $S$, calcolata con un numero $N$ di dati e quindi con $N-1$ gradi di libert\`a. Quando per\`o il numero di dati si avvicina a 30 la curva di Student \`e praticamente sovrapposta a quella della distribuzione normale, come mostra il grafico~(\ref{fig:graficostudent}):
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \begin{Schunk}
 \begin{Sinput}
@@ -1882,15 +2001,15 @@ Per esempio possiamo considerare il dataframe \texttt{d} definito come segue%cod
 \end{Sinput}
 \begin{Soutput}
    x  y fac
-1  1  1   C
+1  1  1   A
 2  1  2   C
-3  1  3   A
-4  1  4   C
-5  1  5   A
+3  1  3   B
+4  1  4   B
+5  1  5   B
 6  1  6   A
-7  1  7   B
+7  1  7   C
 8  1  8   C
-9  1  9   C
+9  1  9   B
 10 1 10   A
 \end{Soutput}
 \end{Schunk}
@@ -2205,9 +2324,9 @@ Un \emph{array}  \`e una generalizzazione multidimensionale di una matrice. Gli 
 \end{Sinput}
 \begin{Soutput}
    K  L  M  N
-A 25 27 23 63
-B 38 79 86 91
-C 66 60 29 72
+A 52 46 41 68
+B 76 16 34  1
+C 71 50 81 85
 \end{Soutput}
 \end{Schunk}
 \section{Liste}
@@ -2837,7 +2956,9 @@ consente il tracciamento di un \emph{boxplot} comparativo.
 \end{Sinput}
 \end{Schunk}
 \begin{figure}[htbp]
-\begin{center}\caption{Boxplot comparativo di 4 tipi di grasso di cottura.}
+\begin{center}
+\includegraphics{RbookParte2-187}
+\caption{Boxplot comparativo di 4 tipi di grasso di cottura.}
 \label{datiist}
 \end{center}
 \end{figure}
@@ -2934,7 +3055,7 @@ La distribuzione di Fisher \`e indicata in \textsf{R} con la lettera \texttt{f}.
 > curve(df(x,3,10),0,5)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-193}
+\includegraphics{RbookParte2-194}
 ottenendo il grafico
 \begin{figure}[htbp]
 \begin{center}
@@ -2943,9 +3064,9 @@ ottenendo il grafico
 > curve(df(x,3,10),0,5)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-194}
+\includegraphics{RbookParte2-195}
 \caption{Distribuzione di Fisher.}
-\label{datiist}
+\label{fig:fisher}
 \end{center}
 \end{figure}.
 
@@ -3005,7 +3126,7 @@ Diamo una prima occhiata ai dati con il comando \texttt{coplot}, ovvero {\it con
 > coplot(conc ~ Time | Subject, data = Theoph, show.given = FALSE)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-199}
+\includegraphics{RbookParte2-200}
 
 Selezioniamo ora il paziente 4, lo possiamo fare note le righe che esso occupa nel dataframe oppure selezionando per un preciso valore della variabile Subject.
 
@@ -3079,7 +3200,7 @@ Ora riportiamo il grafico delle osservazioni per il soggetto 4 su un grafico sin
 + las = 1, col = 4)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-203}
+\includegraphics{RbookParte2-204}
 
 Si pu\`o ora sovrapporre la curva ottenuta con il modello al grafico attuale.
 Per prima cosa definiamo i possibili valori di $x$.
@@ -3102,7 +3223,7 @@ dove \texttt{par(usr)}  \`e un ottimo modo per conoscere l'estensione di una del
 > lines(xvals, predict(fm1, newdata = list(Time = xvals)), col = 4)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-205}
+\includegraphics{RbookParte2-206}
 
 
 \section{QQPlot
@@ -3186,7 +3307,7 @@ Per cambiare i default dei due parametri
 \end{Schunk}
 Qui contestualmente alla ridefinizione abbiamo salvato (con il nome \texttt{oldpar}) la versione corrente dei parametri per poterli eventualmente ripristinare in seguito.
 \begin{figure}\begin{center}
-\includegraphics{RbookParte2-209}
+\includegraphics{RbookParte2-210}
 \caption{esempio di utilizzo di \texttt{par()}
 }
 \label{parbg}
@@ -3227,9 +3348,9 @@ Per esempio  con una riga e due colonne
 otteniamo i grafici affiancati della figura \ref{graficiaffiancati}.
 \begin{figure}
 \begin{center}
-\includegraphics{RbookParte2-212}
+\includegraphics{RbookParte2-213}
 \caption{Grafici affiancati con \texttt{mfrow=c(1,2)}}
-\label{graficiaffiancati}
+\label{fig:graficiaffiancati}
 \end{center}
 \end{figure}
 
@@ -3272,7 +3393,7 @@ Scarichiamo da \cite{dasl} il \emph{dataset} che chiameremo \texttt{Gompertz} in
 \end{Schunk}
 
 \begin{figure}\begin{center}
-\includegraphics{RbookParte2-216}
+\includegraphics{RbookParte2-217}
 \caption{Mortalit\`a dei moscerini. A sinistra la decrescita della popolazione, a destra la mortalit\`a.}
 \label{moscerini}
 \end{center}
@@ -3338,7 +3459,7 @@ Per esempio
 \end{Schunk}
 Il risultato \`e riportato nella figura~\ref{4moscerini}
 \begin{figure}\begin{center}
-\includegraphics{RbookParte2-220}
+\includegraphics{RbookParte2-221}
 \caption{Utilizzo di diversi parametri grafici}
 \label{4moscerini}
 \end{center}
@@ -3361,7 +3482,7 @@ Carichiamo i dati e utilizziamo la funzione \texttt{pairs}\index{pairs} per cost
 
 \begin{center}
 \begin{figure}
-\includegraphics{RbookParte2-222}
+\includegraphics{RbookParte2-223}
 \caption{Plot per variabili multiple}
 \label{pairplot}
 \end{figure}
@@ -3400,7 +3521,7 @@ Il grafico risulta complesso da comprendere anche per via delle ridotte dimensio
 >  plot(quakes[,c(1,2)], main = "Fiji Earthquakes, N = 1000", cex.main=1.2, pch=".")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-224}
+\includegraphics{RbookParte2-225}
 \ese{Migliorare questi grafici secondo il gusto personale inserendo, titoli, colorazioni, sfondo, tipo di rappresentazione, tipo di punti, etc.}
 \subsection{Aggiungere testo al grafico}
 Si pu\`o aggiungere testo in qualunque posizione del grafico, in particolare possiamo posizionare commenti, annotazioni, formule, ecc. Si devono solo specificare coordinate e testo, oltre ad altri parametri visualizzabili con \texttt{?text}.
@@ -3420,7 +3541,7 @@ Nell'esempio seguente generiamo i vertici di un poligono regolare con numero di 
 > text(coord,letters,col="red")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-225}
+\includegraphics{RbookParte2-226}
 
 Il parametro  \texttt{adj} sposta il testo rispetto alle coordinate
 \subsection{Immagini di un vulcano}
@@ -3436,7 +3557,7 @@ Vediamo alcune rappresentazioni grafiche 3D.
 \begin{figure}[htbp]
 \begin{center}
 
-\includegraphics{RbookParte2-227}
+\includegraphics{RbookParte2-228}
 \caption{Linee di livello}
 \label{vulcano1}
 \end{center}
@@ -3459,7 +3580,7 @@ Vediamo alcune rappresentazioni grafiche 3D.
 > title(xlab="1996", col.lab="red")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-228}
+\includegraphics{RbookParte2-229}
 
 Un esempio:
 \begin{Schunk}
@@ -3472,7 +3593,7 @@ Un esempio:
 + ylab = "tooth length")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-230}
+\includegraphics{RbookParte2-231}
 
 \subsection{I rettangoli }
 \textsf{R} consente di disegnare forme (dette primitive) come rettangoli o poligoni. I rettangoli in particolare sono molto utili e versatili, consentendo di realizzare riquadri, evidenziare regioni grafiche, ecc.
@@ -3489,7 +3610,7 @@ Un esempio:
 + density=c(NA, NA, 10, 30), angle=c(NA, NA, 30, -30))
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-231}
+\includegraphics{RbookParte2-232}
 
 \section{Grafici professionali: legenda, annotazioni e formule}
 Ricordiamo che una volta che sia  assegnato il livello di fiducia $1-\epsilon$, il numero $u_{1-\epsilon}$ che leggiamo nelle tabelle  distribuzione normale \`e il valore dell'ascissa tale che nell'intervallo $[-u_{1-\epsilon},u_{1-\epsilon}]$  cada un'area pari al livello di fiducia; in altre parole le 2 code della distribuzione vengono rimosse.
@@ -3515,7 +3636,7 @@ Possiamo  procedere con
 \end{Schunk}
 
 \begin{figure}\begin{center}
-\includegraphics{RbookParte2-233}
+\includegraphics{RbookParte2-234}
 \caption{Selezione delle etichette sull'asse $x$. }
 \label{normale13}
 \end{center}
@@ -3558,7 +3679,7 @@ Il comando
 consente la visualizzazione dei punti ottenuti (come in figura~(\ref{normale200punti})).
 
 \begin{figure}\begin{center}
-\includegraphics{RbookParte2-236}
+\includegraphics{RbookParte2-237}
 \caption{ Selezione dei punti per l'ombreggiamento di una regione poligonale}
 \label{normale200punti}
 \end{center}
@@ -3597,7 +3718,7 @@ Infine possiamo riportare i valori delle aree delle 2 code, evidenziare l'asse d
 > lines(c(0,0),c(0,dnorm(0)))
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-238}
+\includegraphics{RbookParte2-239}
 
 \begin{figure}\begin{center}
 \begin{Schunk}
@@ -3611,7 +3732,7 @@ Infine possiamo riportare i valori delle aree delle 2 code, evidenziare l'asse d
 > lines(c(0,0),c(0,dnorm(0)))
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-239}
+\includegraphics{RbookParte2-240}
 \caption{ Area delle code della distribuzione normale. Il valore di $u_{1-\epsilon}$ \`e quello riportato nella  tabella della distribuzione normale. }
 \label{normaletratto}
 \end{center}
@@ -3634,7 +3755,7 @@ Iniziamo a disegnare dei rettangoli, di coordinate casuali ma entro un dato rang
 + rect(sinistra,sotto,destra,sopra,col=rgb(runif(1),runif(1),runif(1)),border=bordi[i],lwd=spess)}
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-240}
+\includegraphics{RbookParte2-241}
 \section{Grafica 3D, il vulcano Maunga Whau}
 Con il codice che segue
 
@@ -3663,7 +3784,7 @@ Con il codice che segue
 otteniamo la figura~\ref{vulcano3D}. Il comando di base \`e \texttt{persp} che richiede una griglia di valori di $(x,y)$ e il corrispondente valore di quota.
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-242}
+\includegraphics{RbookParte2-243}
 
 \caption{Grafica 3 dimensionale, ottenuta con il comando \texttt{persp}}
 \label{vulcano3D}
@@ -3697,7 +3818,7 @@ $x$, essendo poi liberi di utilizzare la funzione \texttt{plot}
 > text(3, .2, quote(H[1]:~~mu[1]==mu[2]+delta))
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-243}
+\includegraphics{RbookParte2-244}
 
 
 \section{Web}
@@ -3859,7 +3980,7 @@ A volte \`e necessario personalizzare i margini, ad esempio se le annotazioni de
 > text(0,0,"margini")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-253}
+\includegraphics{RbookParte2-254}
 
 Tale modifica si opera con il comando \texttt{mar}.
 \begin{equation}\texttt{par}(\texttt{mar=c}(l_1, l_2, l_3, l_4))
@@ -3884,7 +4005,7 @@ Proviamo i comandi:
 > plot(1:10)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-254}
+\includegraphics{RbookParte2-255}
 
 \subsection{Il pacchetto  \texttt{lattice}}
 Il pacchetto \texttt{lattice} consente di utilizzare funzioni avanzate di grafica, tra cui alcune che sono in grado di lavorare con \emph{data.frame} anche molto complessi.
@@ -3932,7 +4053,7 @@ Disegnamo ora con \texttt{cloud} la situazione dopo il naufragio, con
 \begin{center}
 \includegraphics[scale=0.8]{../grafici/Titanic.pdf}
 \caption{default}
-\label{default}
+\label{defagult}
 \end{center}
 \end{figure}
 
@@ -3956,7 +4077,7 @@ pdf
 \begin{center}
 \includegraphics[scale=0.8]{../grafici/cloudgraph.pdf}
 \caption{Cloud graph}
-\label{default}
+\label{defaulgt}
 \end{center}
 \end{figure}
 \subsection{Il \texttt{parallel plot}}
@@ -3978,7 +4099,7 @@ pdf
 \begin{center}
 \includegraphics[scale=0.6]{../grafici/parallelplot.pdf}
 \caption{Cloud graph}
-\label{default}
+\label{defauglt}
 \end{center}
 \end{figure}
 
@@ -4002,7 +4123,7 @@ pdf
 \begin{center}
 \includegraphics[scale=0.6]{../grafici/parplot2.pdf}
 \caption{Cloud graph}
-\label{default}
+\label{defadult}
 \end{center}
 \end{figure}
 
@@ -4060,7 +4181,7 @@ brewer.pal(5,Set3). Potrete poi provare anche Set1 e Set2.
 \begin{center}
 \includegraphics[scale=0.6]{../grafici/SPPLOT.pdf}
 \caption{maptool}
-\label{default}
+\label{maptool}
 \end{center}
 \end{figure}
 
@@ -4078,7 +4199,7 @@ brewer.pal(5,Set3). Potrete poi provare anche Set1 e Set2.
 + main = "Puromycin data and fitted Michaelis-Menten curves")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-266}
+\includegraphics{RbookParte2-267}
 
 Sarebbe poi meglio sostituire con il reale valore degli anni le etichette presenti sull'asse $x$ originale. Questo si pu\`o ottenere in diversi modi (vedi \texttt{axis}), ma perch\'e non sfruttare l'attributo \texttt{names} della struttura dati?
 
@@ -4120,7 +4241,7 @@ L'orientamento delle etichette degli assi \`e molto importante, il parametro \te
 > legend(180, 450, legend=1:4, fill=c(NA, "green", par("fg"), "blue"), density=c(NA, NA, 10, 30), angle=c(NA, NA, 30, -30))
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-269}
+\includegraphics{RbookParte2-270}
 Ed ora, riproduciamo un Mondrian:
 \begin{Schunk}
 \begin{Sinput}
@@ -4153,7 +4274,7 @@ Ed ora, riproduciamo un Mondrian:
 > text(0.45,0.02,"Mondrian Review",cex=0.5)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-270}
+\includegraphics{RbookParte2-271}
 
 Provate a confrontarlo con l'originale, cercatelo tra le immagini di Google (url{http:/images.google.com})
 
@@ -4177,7 +4298,7 @@ Selezioniamo 1 punto cliccando  sul punto che riteniamo il massimo del grafico
 > points(coord[2],coord[1], cex=3, col="red")
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-272}
+\includegraphics{RbookParte2-273}
 \section{File Rmd}
 \section{ggplot}
 \end{comment}
@@ -4623,10 +4744,23 @@ Inf 1.28155 1.43953 1.64485  1.95996  2.32635  2.57583   3.29053
 \vfill
 \eject
 
-\input{../biblio.tex}
+% \input{../biblio.bib}
 
 Per esempio, consideriamo la serie temporale (oggetto di classe \texttt{ts}) \texttt{discoveries} che mostra l'andamento annuale del numero di scoperte scientifiche. Rappresentiamo graficamente tale serie trascurando  prima e ricordandoci poi della sua struttura  addizionale
 \printindex
+\vfill\eject
+\thispagestyle{empty}\cleardoublepage
+ \addcontentsline{toc}{chapter}{Bibliografia}
+%\bibliographystyle{babplain}
+\bibliographystyle{babplain}
+\bibliography{../biblio}
+%\pagenumbering{arabic}
+
+\vfill\eject\thispagestyle{empty}\cleardoublepage
+
+
+
+\begin{comment}
 \begin{thebibliography}{}
 \bibliographystyle{plain}
 \bibitem[DASL]{dasl}
@@ -4639,5 +4773,6 @@ Per esempio, consideriamo la serie temporale (oggetto di classe \texttt{ts}) \te
 	{David F. M., (1955), Studies in the History of Probability and Statistics I. Dicing and Gaming (A Note on the History of Probability).} {\it Biometrika Trust}, {\bf 42}, 1--15.
 \bibitem[Murrell]{murrell}{Paul Murrell,  {\it R graphics}, Chapman\& Hall/CRC}
 \end{thebibliography}
+\end{comment}
 \printindex
 \end{document}

@@ -1,3 +1,23 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+  \providebibliographyfont{name}{}%
+  \providebibliographyfont{lastname}{}%
+  \providebibliographyfont{title}{\emph}%
+  \providebibliographyfont{jtitle}{\btxtitlefont}%
+  \providebibliographyfont{etal}{\emph}%
+  \providebibliographyfont{journal}{}%
+  \providebibliographyfont{volume}{}%
+  \providebibliographyfont{ISBN}{\MakeUppercase}%
+  \providebibliographyfont{ISSN}{\MakeUppercase}%
+  \providebibliographyfont{url}{\url}%
+  \providebibliographyfont{numeral}{}%
+  \expandafter\btxselectlanguage\expandafter {\btxfallbacklanguage}
+
+\expandafter\btxselectlanguage\expandafter {\btxfallbacklanguage}
+\bibitem {DASL}
+\btxnamefont {\btxlastnamefont {Project}, DASL}\btxauthorcolon\ \btxtitlefont
+  {\btxifchangecase {The data and stories library}{The data and Stories
+  Library}}.
+\newblock {\latintext \btxurlfont{http://lib.stat.cmu.edu/DASL}}, accessed on
+  line 2015.
 
 \end{thebibliography}

@@ -4,6 +4,8 @@
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
+\usepackage{babelbib}
+\usepackage{float}
 \usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -57,6 +59,7 @@
 % \ \thesection.\ #1}{}}
 \makeindex
 \begin{document}
+\setkeys{Gin}{width=0.7\textwidth}
 \SweaveOpts{concordance=TRUE}
 \markright{\today}
 \thispagestyle{empty}
@@ -92,22 +95,26 @@ Per caratterizzare completamente una variabile aleatoria discreta oltre ai valor
 
 Per semplicit\`a considereremo variabili aleatorie finite.\\
 Come possiamo simulare variabili aventi valore nell'alfabeto assegnato?
-In effetti qualunque comando di generazione su un computer non \`e perfettamente casuale; infatti la generazione avviene in effetti in modo pseudo-casuale e  secondo un meccanismo che dipende dallo stato interno del computer codificato in una variabile indicata con \texttt{.Random.seed}. Se il {\it seme} iniziale \`e lo stesso i numeri generati saranno uguali. Spesso conviene che i calcoli (ad esempio a fine didattico) siano riproducibili. Ad esempio mettendo in una variabile \texttt{seme} il valore corrente di \texttt{.Random.seed} e richiamandolo o generandolo all'occorrenza. Scegliamo per la riproducibilit\`a dei risultati
-
+In effetti qualunque comando di generazione su un computer non \`e perfettamente casuale; infatti la generazione avviene in effetti in modo pseudo-casuale e  secondo un meccanismo che dipende dallo stato interno del computer codificato in una variabile indicata con \texttt{.Random.seed}. Se il {\it seme} iniziale \`e lo stesso i numeri generati saranno uguali. Spesso conviene che i calcoli (ad esempio a fine didattico) siano riproducibili. Ad esempio mettendo in una variabile \texttt{seme} il valore corrente di \texttt{.Random.seed} e richiamandolo o generandolo all'occorrenza.  
+Un altro modo di procedere consiste nell'impostare il valore di 
+\texttt{.Random.seed} attraverso il comando 
+\texttt{set.seed}  la cui sintassi \`e 
+$\texttt{set.seed}(\varia{n})$ dove $n$ \`e un numero intero.
+ 
 <<echo=TRUE>>=
-seme=as.integer(c(0,1,2,3))
+set.seed(3)
 @
+ 
 A questo punto possiamo simulare le variabili richieste usando la struttura
 \begin{equation}\texttt{sample}(\varia{alfabeto},\varia{n})\end{equation}
 Se l'alfabeto consiste di tutte le lettere minuscole dell'alfabeto ordinario e ne vogliamo selezionare $n=8$  (in modo che ciascun uscita abbia la stessa probabilit\`a)  basta scrivere
 <<echo=TRUE,>>=
 sample(letters,8)
 @
-  Se invece l'alfabeto consiste delle basi del DNA
+Se invece l'alfabeto consiste delle basi del DNA
 <<echo=TRUE>>=
 alfabeto=c("A","C","G","T")
 sample(alfabeto,2)
-
 @
 Notiamo che
 <<echo=TRUE>>=
@@ -119,6 +126,8 @@ Per esempio
 alfabeto=c("testa","croce")
 sample(alfabeto,5,replace=T)
 @
+ 
+
 Il precursore  del dado era chiamato astragalo ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
 Gli  astragali sono dei piccoli ossicini di forma irregolare ed hanno 6 facce ma atterranno in  modo stabile solo su 4 di esse numerate 1, 3, 4 e 6  con probabilit\`a all'incirca 0.4 per il 3 e il 4  e di 0.1 per l'1 e il 6. In altre parole l'astragalo \`e descritto dalla tabella
 
@@ -139,7 +148,7 @@ Il lancio considerato peggiore sul singolo lancio era l'1 chiamato cane o avvolt
 \begin{center}
 \includegraphics[width=6cm]{../grafici/astragals.jpeg}
 \caption{ Astragalo. }
-\label{fig:daiist}
+\label{fig:astragalo}
 \end{center}
 \end{figure}
 Per simulare un astragalo su un computer
@@ -153,7 +162,7 @@ le uscite rilevate
 <<echo=FALSE>>=
 options(width=62)
 <<echo=TRUE>>=
-.Random.seed=seme
+set.seed(3)
 dadi100<-sample(1:6,100,replace=T)
 dadi100
 @
@@ -254,23 +263,21 @@ stringa=paste("Milano/", anno ,"/",m,"?format=csv",sep="")
 Consideriamo la rilevazione della temperatura media giornaliera di Milano nel mese di \Sexpr{m} \Sexpr{anno}.
 Scegliamo il mese
 <<echo=FALSE>>=
-cat(paste(">stringa=\"",stringa,"\"",sep=""))
+cat(paste("> stringa=\"",stringa,"\"",sep=""))
 <<echo=TRUE,eval=FALSE>>=
 sito="http://www.ilmeteo.it/portale/archivio-meteo/"
 indirizzo=paste(sito,stringa,sep="")
-meteo=read.table(indirizzo,sep=";")
+meteo=read.table(indirizzo,sep=";",header=T)
 <<echo=FALSE,eval=FALSE>>=
 write.table(meteo,file="../filedati/meteo.txt",sep=";")
 <<echo=FALSE,eval=TRUE>>=
-meteo=read.table("../filedati/meteo.txt",sep=";")
+meteo=read.table("../filedati/meteo.txt",sep=";",header=T)
 <<echo=TRUE>>=
-meteo[1,]
-dim(meteo)
-#meteo[-1,3]
+meteo
 @
-A questo punto eliminiamo i livelli di \texttt{meteo} con il comando \texttt{as.vector} e consideriamo il risultato come numerico con
+A questo punto selezioniamo la colonna della temperatura media 
 <<echo=TRUE>>=
-as.numeric(as.vector(meteo[-1,3]))->Milano;
+meteo[,3]->Milano;
 Milano
 quantile(Milano)
 @
@@ -322,11 +329,13 @@ Volendo raggruppare in classi i dati delle precedenti uscite del dado possiamo s
 <<echo=TRUE>>=
 table(cut(dadi100,breaks=0:6))
 @
-Se scegliamo di chiudere a sinistra gli intervalli
+Se scegliamo di chiudere a sinistra gli intervalli dobbiamo però includere il 7 altrimenti 
+il valore 6 non risutlerebbe incluso.
 <<echo=TRUE>>=
 table(cut(dadi100,breaks= 1:7,right=FALSE))
 @
-In questo caso la occorre prestare attenzione alla chiusura agli estremi degli intervalli\subsection{Areogrammi}
+
+\subsection{Areogrammi}
 Il comando generico per generare un istogramma \`e:
 \begin{equation*}
 \texttt{hist}(\varia{variabile})
@@ -349,7 +358,7 @@ hist(dadi100,breaks=seq(0.5,6.5,1),col="red")
 hist(dadi100,freq=FALSE,breaks=seq(0.5,6.5,1),col="blue")
 @
 \caption{ Diagramma a colonne e areogramma per il lancio di un dado.}
-\label{fig:datiiist}
+\label{fig:datidado}
 \end{center}
 \end{figure}
 genera l'istogramma (in rosso, a sinistra Figura~\ref{fig:datiist}) con le frequenze assolute delle classi in ordinata. La sequenza dei punti di taglio \`e stata scelta in modo che i numeri interi da 1 a 6 siano al centro delle classi corrispondenti. Se invece volessimo creare un areogramma  (ossia avere un tracciato per cui le aree siano pari alle frequenze relative) a partire dalle stesse uscite dovremo imporre il parametro \texttt{freq=FALSE} otterremo il pannello a destra (in blu) della figura~(\ref{fig:datiist}). Avendo scelto classi di ampiezza costante i 2 grafici differiscono semplicemente per un cambio di scala sull'asse $y$.
@@ -392,7 +401,8 @@ otteniamo la figura~\ref{fig:boxplotdado}
 <<echo=TRUE,fig=TRUE,height=4,width=4>>=
 boxplot(dadi100)
 @
-\caption{Boxplot dei risultati del lancio di un dado}\label{fig:boxplotdado}
+\caption{Boxplot dei risultati del lancio di un dado}
+\label{fig:boxplotdado}
 \end{center}
 \end{figure}
 da cui si evince che il valore massimo dei dati \`e 6, il minimo \`e 1 e non ci sono punti anomali, per cui non vi sono dati anomali, altrimenti evidenziati da un pallino. Si legge inoltre il valore di mediana (4) primo quartile (2) e terzo quartile (5).
@@ -692,13 +702,13 @@ explanations <- explanations[o]
   Figure~\ref{fig:scatterplot} shows a scatterplot. Which of the
   following statements are correct?
 
-\setkeys{Gin}{width=0.7\textwidth}
+
 \begin{figure}[htb!]
 \begin{center}
 <<fig=TRUE, height = 5, width = 6, echo=FALSE, eps=FALSE, results=hide>>=
 plot(x, y)
 @
-\caption{\label{fig:scatterplot} Scatterplot}
+\caption{ Scatterplot}\label{fig:scatterplot}
 \end{center}
 \end{figure}
 
@@ -803,9 +813,9 @@ text(0.5,0.15,expression("A"/2)  ,cex=1)
 
 La funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}.
 \[\texttt{qnorm}(A)=x\Leftrightarrow A=\int_{-\infty}^x \texttt{dnorm}(s)ds\] 
-come illustrato nella figura che segue
+come illustrato nella figura~\ref{fig:fig2code}.
 \begin{center}
-\begin{figure}[h]
+\begin{figure}[H]
 <<echo=FALSE,fig=TRUE>>=
 s4<-function(a,b) 
         {
@@ -826,27 +836,25 @@ text(0.4,0.15,expression("A")  ,cex=1)
 par(mfrow=c(1,1))
 s4(-2,2)
 @
-\caption{$x=qnorm(A)$}
+\caption{$x=\texttt{qnorm}(A)$}
 \label{fig:fig2code}
 \end{figure}
 \end{center}
+Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di area $A$   fornisca l'ascissa $x=U(A)$ come in figura~\ref{fig:fig12code} in modo che l'area tra - $x$ e $x$ sia esattamente pari ad $A$.  
 
-Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di area $A$   fornisca l'ascissa $x=U(A)$ come in figura in modo che l'area tra - $x$ e $x$ sia esattamente pari ad $A$.  
-Dall figura~\ref{fig:fig12code}
-\begin{figure}
+\begin{figure}[H]
 <<fig=TRUE,echo=FALSE>>=
 par(mfrow=c(1,2))
 s2(-1.96,1.96)
 s3(-4,1.96)
 @
-\caption{$x=U(A)=qnorm(1/2+A/2)$}
+\caption{$x=U(A)=\texttt{qnorm}(1/2+A/2)$}
 \label{fig:fig12code}
 \end{figure}
-La funzione che riproduce la tabella è
+Dalla stessa figura  si evince che la funzione che riproduce la tabella è
 <<>>=
 U <-function (A) qnorm (1/2 + A/2)
 @
-
 Questa funzione fornisce fissato il livello di fiducia l'ascissa $x$  tale che l'intervallo simmetrico $[-x,x]$ racchiuda un'area pari al lvello di fiducia. Per esempio
 <<echo=TRUE>>=
 U(0.95)
@@ -875,11 +883,11 @@ text(0,0.45,expression("code della gaussiana"))
  lines(c(0,0),c(0,dnorm(0)))
 @
 \caption{Code della distribuzione normale}
-\label{normaletratto}
+\label{fig:normaletratto}
 \end{center}
 \end{figure}
 
- \subsubsection{La funzione \texttt{rnorm}}
+ \subsection{La funzione \texttt{rnorm}}
 \`E possibile generare dei valori standardizzati casuali (media uguale a 0, deviazione standard pari a 1) che seguono la distribuzione normale standard. Basta semplicemente definire il numero di valori desiderati.
 Il comando nella sua espressione generale \`e:
 \begin{equation}\texttt{rnorm}(n,\texttt{mean}=\varia{valore}_1,\texttt{sd}=\varia{valore}_2)\end{equation}
@@ -905,7 +913,7 @@ Il grafico della distribuzione di Student ad un certo numero \texttt{df} di grad
 \end{equation*}
 Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di libert\`a (vedi figura ~(\ref{fig:graficostudent1})):
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 <<echo=TRUE,fig=TRUE>>=
 curve(dt(x,10),-2,2)
@@ -914,9 +922,9 @@ curve(dt(x,10),-2,2)
 \label{fig:graficostudent1}
 \end{center}
 \end{figure}
-Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cui  la deviazione standard della popolazione $\sigma$  non \`e conosciuta e viene rimpiazzata  dalla deviazione standard campionaria  $S$, calcolata con un numero $N$ di dati e quindi con $N-1$ gradi di libert\`a. Quando per\`o il numero di dati si avvicina a 30 la curva di Student \`e praticamente sovrapposta a quella della distribuzione normale, come mostra il grafico~(\ref{fig:graficostudent}):
+Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cui la deviazione standard della popolazione $\sigma$  non \`e conosciuta e viene rimpiazzata  dalla deviazione standard campionaria  $S$, calcolata con un numero $N$ di dati e quindi con $N-1$ gradi di libert\`a. Quando per\`o il numero di dati si avvicina a 30 la curva di Student \`e praticamente sovrapposta a quella della distribuzione normale, come mostra il grafico~(\ref{fig:graficostudent}):
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 <<echo=TRUE,fig=TRUE>>=
 curve(dnorm(x),-2,2,col=3)
@@ -1762,7 +1770,11 @@ consente il tracciamento di un \emph{boxplot} comparativo.
 boxplot(y~x,data=tabelladati)
 @
 \begin{figure}[htbp]
-\begin{center}\caption{Boxplot comparativo di 4 tipi di grasso di cottura.}
+\begin{center}
+<<echo=FALSE,fig=TRUE>>=
+boxplot(y~x,data=tabelladati)
+@
+\caption{Boxplot comparativo di 4 tipi di grasso di cottura.}
 \label{datiist}
 \end{center}
 \end{figure}
@@ -1841,7 +1853,7 @@ ottenendo il grafico
 curve(df(x,3,10),0,5)
 @
 \caption{Distribuzione di Fisher.}
-\label{datiist}
+\label{fig:fisher}
 \end{center}
 \end{figure}.
 
@@ -2040,7 +2052,7 @@ plot(iris[,1],iris[,2])
 plot(iris[,3],iris[,4])
 @
 \caption{Grafici affiancati con \texttt{mfrow=c(1,2)}}
-\label{graficiaffiancati}
+\label{fig:graficiaffiancati}
 \end{center}
 \end{figure}
 
@@ -2666,7 +2678,7 @@ dev.off()
 \begin{center}
 \includegraphics[scale=0.8]{../grafici/Titanic.pdf}
 \caption{default}
-\label{default}
+\label{defagult}
 \end{center}
 \end{figure}
 
@@ -2684,7 +2696,7 @@ dev.off()
 \begin{center}
 \includegraphics[scale=0.8]{../grafici/cloudgraph.pdf}
 \caption{Cloud graph}
-\label{default}
+\label{defaulgt}
 \end{center}
 \end{figure}
 \subsection{Il \texttt{parallel plot}}
@@ -2700,7 +2712,7 @@ dev.off()
 \begin{center}
 \includegraphics[scale=0.6]{../grafici/parallelplot.pdf}
 \caption{Cloud graph}
-\label{default}
+\label{defauglt}
 \end{center}
 \end{figure}
 
@@ -2718,7 +2730,7 @@ dev.off()
 \begin{center}
 \includegraphics[scale=0.6]{../grafici/parplot2.pdf}
 \caption{Cloud graph}
-\label{default}
+\label{defadult}
 \end{center}
 \end{figure}
 
@@ -2766,7 +2778,7 @@ dev.off()
 \begin{center}
 \includegraphics[scale=0.6]{../grafici/SPPLOT.pdf}
 \caption{maptool}
-\label{default}
+\label{maptool}
 \end{center}
 \end{figure}
 
@@ -2991,10 +3003,23 @@ fisher099
 \vfill
 \eject
 
-\input{../biblio.tex}
+% \input{../biblio.bib}
 
 Per esempio, consideriamo la serie temporale (oggetto di classe \texttt{ts}) \texttt{discoveries} che mostra l'andamento annuale del numero di scoperte scientifiche. Rappresentiamo graficamente tale serie trascurando  prima e ricordandoci poi della sua struttura  addizionale
 \printindex
+\vfill\eject
+\thispagestyle{empty}\cleardoublepage
+ \addcontentsline{toc}{chapter}{Bibliografia}
+%\bibliographystyle{babplain}
+\bibliographystyle{babplain}
+\bibliography{../biblio}
+%\pagenumbering{arabic}
+
+\vfill\eject\thispagestyle{empty}\cleardoublepage
+
+
+
+\begin{comment}
 \begin{thebibliography}{}
 \bibliographystyle{plain}
 \bibitem[DASL]{dasl}
@@ -3007,5 +3032,6 @@ Per esempio, consideriamo la serie temporale (oggetto di classe \texttt{ts}) \te
 	{David F. M., (1955), Studies in the History of Probability and Statistics I. Dicing and Gaming (A Note on the History of Probability).} {\it Biometrika Trust}, {\bf 42}, 1--15.
 \bibitem[Murrell]{murrell}{Paul Murrell,  {\it R graphics}, Chapman\& Hall/CRC}
 \end{thebibliography}
+\end{comment}
 \printindex
 \end{document}
