@@ -79,6 +79,7 @@
 library(lubridate)
 library(EsamiR)
 @
+Per accedere ai dati richiesti in questa parte occorre caricare il pacchetto allegato
 
 \chapter{Strutture di dati}
 %\section{Aritmetica modulare}
@@ -347,7 +348,7 @@ Si noti che anche in questo caso si usa la \emph{recycling rule}
 data(crabs)
 dim(crabs)
 @
-In quanto segue lavoreremo con il seguente \emph{dataframe} che rappresenta i risultati di un'indagine svolta sugli studenti che nell'Anno Accademico 2007/2008 frequentavano il primo anno del corso di Laurea di Farmacia della Facolt\`a di Farmacia del Piemonte Orientale. Potete scaricarlo dal sito e caricarlo in {\textsf R} con il comando
+In quanto segue lavoreremo con il seguente \emph{dataframe} che rappresenta i risultati di un'indagine svolta sugli studenti che nell'Anno Accademico 2007/2008 frequentavano il primo anno del corso di Laurea di Farmacia della Facolt\`a di Farmacia del Piemonte Orientale. Potete caricarlo dal pacchetto oppure  caricarlo in {\textsf R} con il comando
 %code chunk
 <<echo=FALSE>>=
 options(width=55)
@@ -395,12 +396,8 @@ Consideriamo ora un \emph{dataset} simile raccolto dagli studenti di Biotecnolog
 <<echo=FALSE>>=
 options(width=50)
 @
-<<echo=TRUE,eval=FALSE>>=
-sito="http://www.pharm.unipmn.it/rinaldi"
-nomefile="/file_corso/datibiotec.csv"
-biotec=read.table(paste(sito,nomefile,sep=""),sep=";",dec=",",header=T)
-<<echo=FALSE,eval=TRUE>>=
-biotec=read.table("../filedati/datibiotec.txt",sep=";",dec=",",header=T)
+ <<echo=FALSE,eval=TRUE>>=
+data(biotec)
 @
 Scrivendo
 <<echo=TRUE>>=
