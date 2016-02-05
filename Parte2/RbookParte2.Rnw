@@ -79,8 +79,26 @@
 library(lubridate)
 library(EsamiR)
 @
-Per accedere ai dati richiesti in questa parte occorre caricare il pacchetto allegato
-
+\chapter{Introduzione}
+Per accedere ai dati richiesti in questa parte occorre caricare il pacchetto allegato \texttt{libroR}. Per farlo conviene scaricare il file \texttt{libroR$\_0$.0.tgz}  sul proprio computer e  selezionare il menu \texttt{Install}\\
+\begin{center}\begin{figure} 
+\includegraphics[width=0.4\textwidth]{../grafici/installlibro.png}
+\caption{Procedura di installazione del pacchetto}
+\label{fig::rlibroinstall} \end{figure}
+\end{center}
+Il file viene poi localizzato usando \texttt{Browse..}. \\
+Alternativamente si pu\`o utilizzare direttamente il comando
+<<eval=TRUE,echo=FALSE>>=
+install.packages("../libroR_0.0.tgz", repos = NULL, type = .Platform$pkgType)
+@
+<<eval=FALSE,echo=TRUE>>=
+install.packages("libroR_0.0.tgz", repos = NULL, type = .Platform$pkgType)
+@
+a patto di impostare la \emph{working directory} precisamente dove si trova il file.
+Il pacchetto va poi successivamente caricato con il comando
+<<eval=TRUE,echo=TRUE>>=
+library("libroR")
+@
 \chapter{Strutture di dati}
 %\section{Aritmetica modulare}
  
@@ -254,8 +272,8 @@ Per assegnare nomi alle  righe e alle colonne:\index{\texttt{colnames}} \index{\
  \texttt{rownames}(\varia{matrice})=\texttt{c}(\virgolette \varia{nome}_1\virgolette,\\
 \virgolette \varia{nome}_2\virgolette,\ldots,\virgolette \varia{nome}_n\virgolette )
 \end{eqnarray*}
-<<echo=TRUE,eval=FALSE>>=
-colnames(a)=c("c1","c2","c3")
+<<echo=TRUE,eval=TRUE>>=
+colnames(a)=c("c1","c2","c3","c4")
 rownames(a)=c("r1","r2","r3")
 a
 @
@@ -344,11 +362,8 @@ stringsAsFactors=TRUE)
 d
 @
 Si noti che anche in questo caso si usa la \emph{recycling rule}
-<<echo=TRUE,eval=TRUE>>=
-data(crabs)
-dim(crabs)
-@
-In quanto segue lavoreremo con il seguente \emph{dataframe} che rappresenta i risultati di un'indagine svolta sugli studenti che nell'Anno Accademico 2007/2008 frequentavano il primo anno del corso di Laurea di Farmacia della Facolt\`a di Farmacia del Piemonte Orientale. Potete caricarlo dal pacchetto oppure  caricarlo in {\textsf R} con il comando
+
+In quanto segue lavoreremo con il seguente \emph{dataframe} che rappresenta i risultati di un'indagine svolta sugli studenti che nell'Anno Accademico 2007/2008 frequentavano il primo anno del corso di Laurea di Farmacia della Facolt\`a di Farmacia del Piemonte Orientale. Potete caricarlo  in {\textsf R} dal pacchetto con il comando
 %code chunk
 <<echo=FALSE>>=
 options(width=55)
@@ -396,7 +411,7 @@ Consideriamo ora un \emph{dataset} simile raccolto dagli studenti di Biotecnolog
 <<echo=FALSE>>=
 options(width=50)
 @
- <<echo=FALSE,eval=TRUE>>=
+<<echo=FALSE,eval=TRUE>>=
 data(biotec)
 @
 Scrivendo
@@ -439,8 +454,8 @@ Risulta evidente che nel riportare i colori degli  occhi si sono usate dizioni d
 options(width=50)
 @
 <<echo=TRUE>>=
-options(width=50)
-levels(studenti$Eyes)=c("azzurri","castani","castani", "castani", "castani","verdi","azzurri","castani","castani","verdi")
+levels(studenti$Eyes)=c("azzurri","castani","castani", "castani", "castani",
+                        "verdi","azzurri","castani","castani","verdi")
 @
 A questo punto
 <<echo=FALSE>>=
@@ -454,7 +469,8 @@ Facciamo lo stesso con i capelli
 options(width=50)
 @
 <<echo=TRUE>>=
-levels(studenti$Hair)=c("biondi","castani","neri", "biondi", "castani","castani","castani","neri")
+levels(studenti$Hair)=c("biondi","castani","neri", "biondi", "castani","castani",
+                        "castani","neri")
 levels(studenti$Hair)
 @
 \subsubsection{Selezione in base a criteri}
@@ -476,7 +492,8 @@ Un \emph{array}  \`e una generalizzazione multidimensionale di una matrice. Gli 
 <<echo=TRUE>>=
 array(LETTERS[1:24],
 dim=c(2,3,4))
-array(sample(1:100,24), dim=c(3,4,2),dimnames=list(LETTERS[1:3],LETTERS[11:14],letters[1:2]))->x
+array(sample(1:100,24), dim=c(3,4,2),
+      dimnames=list(LETTERS[1:3],LETTERS[11:14],letters[1:2]))->x
 x[,,"b"]
 @
 \section{Liste}
@@ -494,152 +511,7 @@ x=list(a=1:10,b=array(rep(0,20),dim=c(4,5)),
 c="testo",d=list(g="h",r=1:10) )
 x
 @
-\subsection{Funzioni applicate a oggetti}
-\subsubsection{La funzione \texttt{apply}}
-Quando abbiamo una struttura di dati a pi\`u dimensioni ad esempio un \emph{array}
-<<>>=
-array(1:30,dim=c(2,5,3))->x
-x
-@
-possiamo applicare una funzione selezionando il livello escluso:
-<<>>=
-apply(x,2,mean)
-apply(x,c(1,3),mean)
-@
 
-In un \emph{dataframe} possiamo considerare diverse operazioni che coinvolgano due o pi\`u colonne. Per esempio possiamo considerare la tabella \texttt{farmacia} e proporci di calcolare la media del peso dei maschi e la media del peso delle femmine. Il comando \texttt{tapply} \index{\texttt{tapply}} consente di applicare una funzione ad una colonna di una tabella ripartita in gruppi in accordo ad un criterio specificato da un'altra colonna (nominale) della stessa tabella
-\begin{eqnarray*}
-\texttt{tapply}(\varia{vettore},\varia{criterio} ,\varia{funzione})\end{eqnarray*}
-L'esempio sopra riportato si risolve con la scrittura:
-%code chunk
-<<echo=TRUE>>=
-tapply(studenti$W, studenti$Sex,mean)->Wmean
-Wmean
-@
-Possiamo anche chiedere di calcolare altri indicatori sempre basandoci  su questa ripartizione maschi/femmine.
-Ad esempio possiamo ottenere la deviazione standard(\texttt{sd}) di maschi e femmine:
-%code chunk
-<<echo=TRUE>>=
-tapply(studenti$W, studenti$Sex,sd)->Wsd
-Wsd
-@
-
-\subsubsection{Il comando \texttt{table} applicato a diverse variabili nominali e le tabelle di contingenza}
-Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
-<<eval=FALSE,keep.source=TRUE>>=
-read.table("http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html",
-skip=39,header=T,nrow=478,sep="\t")->kidinterest
-<<echo=FALSE,eval=TRUE>>=
-read.table("../filedati/PopularKids.html",
-skip=39,header=T,nrow=478,sep="\t")->kidinterest
-head(kidinterest)
-@
-Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
-%codechunk
-<<>>=
-colnames(kidinterest)
-interessi=kidinterest[,c(1,5,7)]
-head(interessi)
-table(interessi)
-@
- Consideriamo per esempio le variabili provenienza e traguardi
-<<>>=
-interessi2=kidinterest[,c(5,7)]
-tabella=table(interessi2)
-tabella
-@
-
-La tabella di contingenza delle due variabili (in questo caso a 3  livelli ciascuna) si realizza con il comando
-\texttt{table}.
-\texttt{table}(\varia(lista))
-applicato ad una singola variabile nominale conta le frequenze di ciascuna classe, se le variabili sono $n$ esamina tutte le combinazioni possibili ($2^n$ se le variabili sono dicotomiche) e ne conta tutte le occorrenze
-
-Allo stesso modo possiamo creare una tabella dei colori degli occhi e dei capelli
-%code chunk
-<<echo=TRUE>>=
-tabellaEH=table(studenti$Eyes,studenti$Hair)
-@
- %code chunk
-O ripartirne il peso in base al colore degli occhi
-<<echo=TRUE,fig=TRUE>>=
-stEyeW=split(studenti$W,studenti$Eyes)
-boxplot(stEyeW)
-@
-
-
-\begin{enumerate}
-\item{} Costruire una funzione \texttt{inserisci} tale che il comando
-$\texttt{inserisci}(\varia{x}, \varia{dove},\varia{cosa})$ inserisca nel vettore $\varia{x}$ l'elemento $\varia{cosa}$ nella posizione $\varia{dove}$.
-Per esempio
-<<echo=TRUE>>=
-y <-letters[1:10]
-y
-<<eval=FALSE>>=
-inserisci(x, 5, 0)
-<<echo=FALSE>>=
-c(letters[1:4],0,letters[5:10])
-@
-Generalizzare  al caso di inserimento di righe in \emph{dataframe}.
-\item{}
-Come si pu\`o verificare l'uguaglianza di 2 vettori includendo gli ingressi \texttt{NA}
-<<eval=FALSE>>=
-NA==NA
-@
-Aiuto: usare \texttt{is.na}
-\item{}\cite{dalgaard}
-Carichiamo il \emph{dataset} \texttt{juul} dal pacchetto \texttt{ISwR}. Ricavare il sottoinsieme di dati che corrispondono a ragazze tra i 7 e i 14 anni. Plottare \texttt{igf1} versus et\`a per ragazzi e ragazze separatamente. Conclusioni?
-\end{enumerate}
-
-
-\chapter{Operatori logici e selezione di elementi}
-Consideriamo la selezione di elementi di un oggetto di \textsf{R}, per esempio \texttt{crabs}.
-Selezioniamo per esempio tra i primi  50 i granchi con carapaci di lunghezza (sesta colonna) maggiore di 42:
-<<echo=TRUE>>=
-crabs[1:50,6]>42
-@
-Ciascun elemento del vettore viene confrontato con la soglia scelta (42) e quando supera la soglia la risposta \`e \texttt{TRUE} altrimenti \texttt{FALSE}.
-\vskip20pt
-%\begin{table}
-\begin{tabular}
-{|r r |}\hline
- \texttt{operatore}&  significato\\
-\hline
-\texttt{$>$}&  maggiore\\
-\texttt{>=}& maggiore o uguale\\
-\texttt{<}&   minore\\
-\texttt{<=}&   minore o uguale\\
-\texttt{==}&   uguale\\
-\texttt{!=}&   diverso\\
-\texttt{\&}&   and (e)\\
-\texttt{|} & or (o)\\
-\hline
-\end{tabular}
-\vskip20pt
-%\end{table}
-Gli ultimi due operatori combinano gli operatori precedenti. Per esempio
-%code chunk
-<<echo=TRUE,eval=FALSE>>=
-crabs[crabs$sex == "F" | crabs$sp == "O",]
-dim(crabs[crabs$sex == "F" & crabs$sp == "O",])
-@
-%code chunk
-
-\subsection{I valori non assegnati}
-Capita frequentemente che un oggetto contenga valori non assegnati.
-Per esempio
-<<>>=
-x=1;x[10]=4;x
-@
-<<echo=TRUE>>=
-x[!is.na(x)]
-class(x)
-class(unclass(x))
-
-is.na(x)
- DF <- data.frame(x = c(1, 2, 3), y = c(0, 10, NA))
-na.omit(DF)
-complete.cases(x)
-@
 \chapter{Statistica con \textsf{R}}
 \section{Variabili aleatorie}
 Una variabile aleatoria (\emph{random variabile}) \`e
@@ -833,7 +705,7 @@ cat(paste("> stringa=\"",stringa,"\"",sep=""))
 <<echo=TRUE,eval=FALSE>>=
 sito="http://www.ilmeteo.it/portale/archivio-meteo/"
 indirizzo=paste(sito,stringa,sep="")
-meteo=read.table(indirizzo,sep=";",header=T)
+meteo=read.table(indirizzo,sep=";",header=T)[,-1]
 <<echo=FALSE,eval=FALSE>>=
 write.table(meteo,file="../filedati/meteo.txt",sep=";")
 <<echo=FALSE,eval=TRUE>>=
@@ -904,7 +776,7 @@ table(cut(dadi100,breaks= 1:7,right=FALSE))
 \subsection{Areogrammi}
 Il comando generico per generare un istogramma \`e:
 \begin{equation*}
-\texttt{hist}(\varia{variabile})
+\texttt{hist}(\varia{variabile})\index{\texttt{hist}}
 \end{equation*}
 che segue per\`o la struttura del comando \texttt{cut}. L'ampiezza di ciascuna classe salvo diversamente indicato \`e costante e decisa da \textsf{R}.
 \`E  possibile variare tale condizione definendo una lista con i punti di taglio ({\it cutoff}) delle classi volute:
@@ -1091,8 +963,8 @@ Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt
 modello=lm(height~age,data=village)
 modello
 @
-con la formula $lm(y \tilde{} x,data=dataset)$.
-Inoltre possiammo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
+con la formula $lm(y \widetilde{} x,data=dataset)$.
+Inoltre possiamo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
 <<fig=TRUE,echo=FALSE>>=
 oldpar<-par(mfrow=c(2,2))
 par(ask=FALSE)
@@ -1553,21 +1425,16 @@ t.test(1:4,5:2,paired=TRUE,conf.level=0.85)
 %code chunk
 Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
 <<eval=TRUE,keep.source=TRUE>>=
-data(kidinterest)
-str(kidinterest)
+data(bambini)
+str(bambini)
 @
 
 Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
 %codechunk
  
-<<>>=
-interessi=kidinterest[,c(1,5,7)]
-head(interessi)
-table(interessi)
-@
 Consideriamo per esempio le variabili provenienza e traguardi
 <<>>=
-interessi2=kidinterest[,c(5,7)]
+interessi2=bambini[,c(5,7)]
 tabella=table(interessi2)
 tabella
 @
@@ -1576,8 +1443,10 @@ Il test $\chi^2$  di indipendenza consente di  verificare se  due variabili sono
 Se consideriamo le due variabili precedenti sesso e interessi.
 \textsf{R}  dispone del comando \texttt{chisq.test},\index{\texttt{chisq.tst},test $\chi^2$}
 dalla sintassi generale:$$\texttt{chisq.test}(\varia{tabella})$$
-
-Nell'esempio
+<<>>=
+chisq.test(tabella)
+@
+Nell'esempio degli studenti
 %code chunk
 <<echo=TRUE>>=
 data(studenti)
@@ -1586,13 +1455,14 @@ tabellaEH=table(studenti$Eyes,studenti$Hair)
 chisq.test(tabellaEH)
 @
 L'intervallo di accettazione dell'ipotesi (che ricordiamo \`e l'indipendenza) al 95\% di fiducia e 1 gradi di libert\`a \`e  $[0, 3.841]$, il consuntivo cade dentro, per cui l'ipotesi \`e accettata.
-Per eliminare la correzione di Pearson si utilizza il parametro  \texttt{correct=FALSE}.
+ 
+Se le celle in una tabella 2x2 contengono numeri bassi R utilizza la correzione di Yates. Se la si vuole eliminare  si utilizza il parametro  \texttt{correct=FALSE}.
 Ad esempio scriveremo:
 %code chunk
-<<echo=TRUE,eval=FALSE>>=
-chisq.test(tabellaEH,correct=FALSE)
+<<echo=TRUE>>=
+chisq.test(matrix(c(12,3,4,5),nc=2))
+chisq.test(matrix(c(12,3,4,5),nc=2),correct=F)
 @
-
 \subsection{Test $\chi^2$  di adeguamento}
 Consideriamo una variabile aleatoria discreta con frequenza assoluta delle uscite racchiuse in una lista \texttt{data}. Ci si pone il problema di stabilire se tali frequenze sono compatibili con le probabilit\`a (riportate nella lista $p$).
 <<echo=TRUE,eval=FALSE>>=
@@ -1981,7 +1851,148 @@ main = "Concentrazioni osservate e modello", sub = "Soggetto 4",
 las = 1, col = 4)
 lines(xvals, predict(fm1, newdata = list(Time = xvals)), col = 4)
 @
+\chpater{Varie}
+\subsubsection{La funzione \texttt{apply}}
+Quando abbiamo una struttura di dati a pi\`u dimensioni ad esempio un \emph{array}
+<<>>=
+array(1:30,dim=c(2,5,3))->x
+x
+@
+possiamo applicare una funzione selezionando il livello escluso:
+<<>>=
+apply(x,2,mean)
+apply(x,c(1,3),mean)
+@
 
+In un \emph{dataframe} possiamo considerare diverse operazioni che coinvolgano due o pi\`u colonne. Per esempio possiamo considerare la tabella \texttt{farmacia} e proporci di calcolare la media del peso dei maschi e la media del peso delle femmine. Il comando \texttt{tapply} \index{\texttt{tapply}} consente di applicare una funzione ad una colonna di una tabella ripartita in gruppi in accordo ad un criterio specificato da un'altra colonna (nominale) della stessa tabella
+\begin{eqnarray*}
+\texttt{tapply}(\varia{vettore},\varia{criterio} ,\varia{funzione})\end{eqnarray*}
+L'esempio sopra riportato si risolve con la scrittura:
+%code chunk
+<<echo=TRUE>>=
+tapply(studenti$W, studenti$Sex,mean)->Wmean
+Wmean
+@
+Possiamo anche chiedere di calcolare altri indicatori sempre basandoci  su questa ripartizione maschi/femmine.
+Ad esempio possiamo ottenere la deviazione standard(\texttt{sd}) di maschi e femmine:
+%code chunk
+<<echo=TRUE>>=
+tapply(studenti$W, studenti$Sex,sd)->Wsd
+Wsd
+@
+
+\subsubsection{Il comando \texttt{table} applicato a diverse variabili nominali e le tabelle di contingenza}
+Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
+<<eval=FALSE,keep.source=TRUE>>=
+data(bambini)
+@
+Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
+%codechunk
+<<>>=
+colnames(bambini)
+interessi=bambini[,c(1,5,7)]
+head(interessi)
+table(interessi)
+@
+ Consideriamo per esempio le variabili provenienza e traguardi
+<<>>=
+interessi2=bambini[,c(5,7)]
+tabella=table(interessi2)
+tabella
+@
+
+La tabella di contingenza delle due variabili (in questo caso a 3  livelli ciascuna) si realizza con il comando
+\texttt{table}.
+\texttt{table}(\varia(lista))
+applicato ad una singola variabile nominale conta le frequenze di ciascuna classe, se le variabili sono $n$ esamina tutte le combinazioni possibili ($2^n$ se le variabili sono dicotomiche) e ne conta tutte le occorrenze
+
+Allo stesso modo possiamo creare una tabella dei colori degli occhi e dei capelli
+%code chunk
+<<echo=TRUE>>=
+tabellaEH=table(studenti$Eyes,studenti$Hair)
+@
+ %code chunk
+O ripartirne il peso in base al colore degli occhi
+<<echo=TRUE,fig=TRUE>>=
+stEyeW=split(studenti$W,studenti$Eyes)
+boxplot(stEyeW)
+@
+
+
+\begin{enumerate}
+\item{} Costruire una funzione \texttt{inserisci} tale che il comando
+$\texttt{inserisci}(\varia{x}, \varia{dove},\varia{cosa})$ inserisca nel vettore $\varia{x}$ l'elemento $\varia{cosa}$ nella posizione $\varia{dove}$.
+Per esempio
+<<echo=TRUE>>=
+y <-letters[1:10]
+y
+<<eval=FALSE>>=
+inserisci(x, 5, 0)
+<<echo=FALSE>>=
+c(letters[1:4],0,letters[5:10])
+@
+Generalizzare  al caso di inserimento di righe in \emph{dataframe}.
+\item{}
+Come si pu\`o verificare l'uguaglianza di 2 vettori includendo gli ingressi \texttt{NA}
+<<eval=FALSE>>=
+NA==NA
+@
+Aiuto: usare \texttt{is.na}
+\item{}\cite{dalgaard}
+Carichiamo il \emph{dataset} \texttt{juul} dal pacchetto \texttt{ISwR}. Ricavare il sottoinsieme di dati che corrispondono a ragazze tra i 7 e i 14 anni. Plottare \texttt{igf1} versus et\`a per ragazzi e ragazze separatamente. Conclusioni?
+\end{enumerate}
+
+
+\chapter{Operatori logici e selezione di elementi}
+Consideriamo la selezione di elementi di un oggetto di \textsf{R}, per esempio \texttt{granchi}.
+Selezioniamo per esempio tra i primi  50 i granchi con carapaci di lunghezza (sesta colonna) maggiore di 42:
+<<echo=TRUE>>=
+data(granchi)
+granchi[1:50,6]>42
+@
+Ciascun elemento del vettore viene confrontato con la soglia scelta (42) e quando supera la soglia la risposta \`e \texttt{TRUE} altrimenti \texttt{FALSE}.
+\vskip20pt
+%\begin{table}
+\begin{tabular}
+{|r r |}\hline
+ \texttt{operatore}&  significato\\
+\hline
+\texttt{$>$}&  maggiore\\
+\texttt{>=}& maggiore o uguale\\
+\texttt{<}&   minore\\
+\texttt{<=}&   minore o uguale\\
+\texttt{==}&   uguale\\
+\texttt{!=}&   diverso\\
+\texttt{\&}&   and (e)\\
+\texttt{|} & or (o)\\
+\hline
+\end{tabular}
+\vskip20pt
+%\end{table}
+Gli ultimi due operatori combinano gli operatori precedenti. Per esempio
+%code chunk
+<<echo=TRUE,eval=FALSE>>=
+crabs[crabs$sex == "F" | crabs$sp == "O",]
+dim(crabs[crabs$sex == "F" & crabs$sp == "O",])
+@
+%code chunk
+
+\subsection{I valori non assegnati}
+Capita frequentemente che un oggetto contenga valori non assegnati.
+Per esempio
+<<>>=
+x=1;x[10]=4;x
+@
+<<echo=TRUE>>=
+x[!is.na(x)]
+class(x)
+class(unclass(x))
+
+is.na(x)
+ DF <- data.frame(x = c(1, 2, 3), y = c(0, 10, NA))
+na.omit(DF)
+complete.cases(x)
+@
 
 \section{QQPlot
 normality test}

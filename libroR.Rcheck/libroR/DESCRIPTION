@@ -1,0 +1,15 @@
+Package: libroR
+Type: Package
+Title: Dati per il libro di R e il corso
+Version: 0.0
+Date: 2016-02-16
+Author: Maurizio Rinaldi
+Maintainer: Maurizio Rinaldi <maurizio.rinaldi@uniupo.it>
+Description: Dati per il libro di R e il corso.
+License: GPL-3
+LazyData: TRUE
+depends: methods
+RoxygenNote: 5.0.1
+NeedsCompilation: no
+Packaged: 2016-02-05 14:13:40 UTC; mauriziorinaldi
+Built: R 3.2.3; ; 2016-02-05 14:13:41 UTC; unix

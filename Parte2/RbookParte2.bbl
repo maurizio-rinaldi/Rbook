@@ -13,11 +13,6 @@
   \expandafter\btxselectlanguage\expandafter {\btxfallbacklanguage}
 
 \expandafter\btxselectlanguage\expandafter {\btxfallbacklanguage}
-\bibitem {dalgaard}
-\btxnamefont {\btxlastnamefont {Daalgaard}, P}\btxauthorcolon\ \btxjtitlefont
-  {\btxifchangecase {Introductory statistics with r}{Introductory Statistics
-  with R}}.
-
 \bibitem {DASL}
 \btxnamefont {\btxlastnamefont {Project}, DASL}\btxauthorcolon\ \btxtitlefont
   {\btxifchangecase {The data and stories library}{The data and Stories

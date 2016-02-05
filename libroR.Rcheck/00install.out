@@ -1,0 +1,12 @@
+* installing *source* package ‘libroR’ ...
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** preparing package for lazy loading
+** help
+Warning: bad markup (extra space?) at bambini.Rd:19:15
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (libroR)

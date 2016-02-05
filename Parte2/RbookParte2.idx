@@ -1,23 +1,23 @@
-\indexentry{stringa|hyperpage}{1}
-\indexentry{\texttt{nchar}|hyperpage}{2}
-\indexentry{\emph{escape}|hyperpage}{2}
-\indexentry{\texttt{abbreviate}|hyperpage}{2}
-\indexentry{\texttt{letters}|hyperpage}{3}
-\indexentry{\texttt{LETTERS}|hyperpage}{3}
-\indexentry{\texttt{month.abb}|hyperpage}{3}
-\indexentry{\texttt{paste}|hyperpage}{3}
-\indexentry{\texttt{colnames}|hyperpage}{6}
-\indexentry{\texttt{rownames}|hyperpage}{6}
-\indexentry{trasposto|hyperpage}{7}
-\indexentry{\texttt{t}, trasposto|hyperpage}{7}
-\indexentry{\texttt{\%*\%}, prodotto di matrici|hyperpage}{7}
-\indexentry{autovalore|hyperpage}{8}
-\indexentry{\texttt{str}|hyperpage}{9}
-\indexentry{\texttt{level}|hyperpage}{10}
-\indexentry{detach|hyperpage}{11}
-\indexentry{\texttt{rbind}|hyperpage}{12}
-\indexentry{\texttt{cbind}|hyperpage}{12}
-\indexentry{\texttt{list}|hyperpage}{15}
-\indexentry{\texttt{tapply}|hyperpage}{17}
-\indexentry{\texttt{chisq.tst},test $\chi^2$|hyperpage}{62}
-\indexentry{\texttt{dbinom}|hyperpage}{63}
+\indexentry{stringa|hyperpage}{3}
+\indexentry{\texttt{nchar}|hyperpage}{4}
+\indexentry{\emph{escape}|hyperpage}{4}
+\indexentry{\texttt{abbreviate}|hyperpage}{4}
+\indexentry{\texttt{letters}|hyperpage}{5}
+\indexentry{\texttt{LETTERS}|hyperpage}{5}
+\indexentry{\texttt{month.abb}|hyperpage}{5}
+\indexentry{\texttt{paste}|hyperpage}{5}
+\indexentry{\texttt{colnames}|hyperpage}{8}
+\indexentry{\texttt{rownames}|hyperpage}{8}
+\indexentry{trasposto|hyperpage}{9}
+\indexentry{\texttt{t}, trasposto|hyperpage}{9}
+\indexentry{\texttt{\%*\%}, prodotto di matrici|hyperpage}{9}
+\indexentry{autovalore|hyperpage}{10}
+\indexentry{\texttt{str}|hyperpage}{11}
+\indexentry{\texttt{level}|hyperpage}{12}
+\indexentry{detach|hyperpage}{13}
+\indexentry{\texttt{rbind}|hyperpage}{14}
+\indexentry{\texttt{cbind}|hyperpage}{14}
+\indexentry{\texttt{list}|hyperpage}{17}
+\indexentry{\texttt{hist}|hyperpage}{30}
+\indexentry{\texttt{chisq.tst},test $\chi^2$|hyperpage}{55}
+\indexentry{\texttt{dbinom}|hyperpage}{57}

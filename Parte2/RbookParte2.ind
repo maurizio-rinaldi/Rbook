@@ -1,39 +1,39 @@
 \begin{theindex}
 
-  \item \emph{escape}, \hyperpage{2}
-  \item \texttt{LETTERS}, \hyperpage{3}
-  \item \texttt{\%*\%}, prodotto di matrici, \hyperpage{7}
-  \item \texttt{abbreviate}, \hyperpage{2}
-  \item \texttt{cbind}, \hyperpage{12}
-  \item \texttt{chisq.tst},test $\chi^2$, \hyperpage{62}
-  \item \texttt{colnames}, \hyperpage{6}
-  \item \texttt{dbinom}, \hyperpage{63}
-  \item \texttt{letters}, \hyperpage{3}
-  \item \texttt{level}, \hyperpage{10}
-  \item \texttt{list}, \hyperpage{15}
-  \item \texttt{month.abb}, \hyperpage{3}
-  \item \texttt{nchar}, \hyperpage{2}
-  \item \texttt{paste}, \hyperpage{3}
-  \item \texttt{rbind}, \hyperpage{12}
-  \item \texttt{rownames}, \hyperpage{6}
-  \item \texttt{str}, \hyperpage{9}
-  \item \texttt{tapply}, \hyperpage{17}
-  \item \texttt{t}, trasposto, \hyperpage{7}
+  \item \emph{escape}, \hyperpage{4}
+  \item \texttt{LETTERS}, \hyperpage{5}
+  \item \texttt{\%*\%}, prodotto di matrici, \hyperpage{9}
+  \item \texttt{abbreviate}, \hyperpage{4}
+  \item \texttt{cbind}, \hyperpage{14}
+  \item \texttt{chisq.tst},test $\chi^2$, \hyperpage{55}
+  \item \texttt{colnames}, \hyperpage{8}
+  \item \texttt{dbinom}, \hyperpage{57}
+  \item \texttt{hist}, \hyperpage{30}
+  \item \texttt{letters}, \hyperpage{5}
+  \item \texttt{level}, \hyperpage{12}
+  \item \texttt{list}, \hyperpage{17}
+  \item \texttt{month.abb}, \hyperpage{5}
+  \item \texttt{nchar}, \hyperpage{4}
+  \item \texttt{paste}, \hyperpage{5}
+  \item \texttt{rbind}, \hyperpage{14}
+  \item \texttt{rownames}, \hyperpage{8}
+  \item \texttt{str}, \hyperpage{11}
+  \item \texttt{t}, trasposto, \hyperpage{9}
 
   \indexspace
 
-  \item autovalore, \hyperpage{8}
+  \item autovalore, \hyperpage{10}
 
   \indexspace
 
-  \item detach, \hyperpage{11}
+  \item detach, \hyperpage{13}
 
   \indexspace
 
-  \item stringa, \hyperpage{1}
+  \item stringa, \hyperpage{3}
 
   \indexspace
 
-  \item trasposto, \hyperpage{7}
+  \item trasposto, \hyperpage{9}
 
 \end{theindex}

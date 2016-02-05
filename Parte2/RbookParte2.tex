@@ -75,7 +75,27 @@
 \newpage
 \thispagestyle{empty}
  \mainmatter
-
+\chapter{Introduzione}
+Per accedere ai dati richiesti in questa parte occorre caricare il pacchetto allegato \texttt{libroR}. Per farlo conviene scaricare il file \texttt{libroR$\_0$.0.tgz}  sul proprio computer e  selezionare il menu \texttt{Install}\\
+\begin{center}\begin{figure} 
+\includegraphics[width=0.4\textwidth]{../grafici/installlibro.png}
+\caption{Procedura di installazione del pacchetto}
+\label{fig::rlibroinstall} \end{figure}
+\end{center}
+Il file viene poi localizzato usando \texttt{Browse..}. \\
+Alternativamente si pu\`o utilizzare direttamente il comando
+\begin{Schunk}
+\begin{Sinput}
+> install.packages("libroR_0.0.tgz", repos = NULL, type = .Platform$pkgType)
+\end{Sinput}
+\end{Schunk}
+a patto di impostare la \emph{working directory} precisamente dove si trova il file.
+Il pacchetto va poi successivamente caricato con il comando
+\begin{Schunk}
+\begin{Sinput}
+> library("libroR")
+\end{Sinput}
+\end{Schunk}
 \chapter{Strutture di dati}
 %\section{Aritmetica modulare}
  
@@ -420,10 +440,16 @@ Per assegnare nomi alle  righe e alle colonne:\index{\texttt{colnames}} \index{\
 \end{eqnarray*}
 \begin{Schunk}
 \begin{Sinput}
-> colnames(a)=c("c1","c2","c3")
+> colnames(a)=c("c1","c2","c3","c4")
 > rownames(a)=c("r1","r2","r3")
 > a
 \end{Sinput}
+\begin{Soutput}
+   c1 c2 c3 c4
+r1  1  4  3  2
+r2  2  1  4  3
+r3  3  2  1  4
+\end{Soutput}
 \end{Schunk}
 \subsubsection{Aggiungere righe o colonne}
 Per aggiungere una o pi\`u righe (o colonne)
@@ -439,20 +465,20 @@ ad una matrice si possono usare i comandi (\texttt{rbind} e \texttt{cbind})
 > rbind(a,letters[1:ncol(a)])
 \end{Sinput}
 \begin{Soutput}
-     [,1] [,2] [,3] [,4]
-[1,] "1"  "4"  "3"  "2" 
-[2,] "2"  "1"  "4"  "3" 
-[3,] "3"  "2"  "1"  "4" 
-[4,] "a"  "b"  "c"  "d" 
+   c1  c2  c3  c4 
+r1 "1" "4" "3" "2"
+r2 "2" "1" "4" "3"
+r3 "3" "2" "1" "4"
+   "a" "b" "c" "d"
 \end{Soutput}
 \begin{Sinput}
 > cbind(a,letters[1:nrow(a)])
 \end{Sinput}
 \begin{Soutput}
-     [,1] [,2] [,3] [,4] [,5]
-[1,] "1"  "4"  "3"  "2"  "a" 
-[2,] "2"  "1"  "4"  "3"  "b" 
-[3,] "3"  "2"  "1"  "4"  "c" 
+   c1  c2  c3  c4     
+r1 "1" "4" "3" "2" "a"
+r2 "2" "1" "4" "3" "b"
+r3 "3" "2" "1" "4" "c"
 \end{Soutput}
 \end{Schunk}
 Possiamo anche effettuare semplici operazioni, come somma degli elementi delle righe o delle colonne
@@ -461,13 +487,15 @@ Possiamo anche effettuare semplici operazioni, come somma degli elementi delle r
 > colSums(a)
 \end{Sinput}
 \begin{Soutput}
-[1] 6 7 8 9
+c1 c2 c3 c4 
+ 6  7  8  9 
 \end{Soutput}
 \begin{Sinput}
 > rowSums(a)
 \end{Sinput}
 \begin{Soutput}
-[1] 10 10 10
+r1 r2 r3 
+10 10 10 
 \end{Soutput}
 \end{Schunk}
 
@@ -480,11 +508,11 @@ Per invertire righe e colonne di una matrice ossia per ottenere il trasposto \in
 > t(a)
 \end{Sinput}
 \begin{Soutput}
-     [,1] [,2] [,3]
-[1,]    1    2    3
-[2,]    4    1    2
-[3,]    3    4    1
-[4,]    2    3    4
+   r1 r2 r3
+c1  1  2  3
+c2  4  1  2
+c3  3  4  1
+c4  2  3  4
 \end{Soutput}
 \end{Schunk}
 \subsubsection{Prodotto}
@@ -512,10 +540,10 @@ Non \`e infatti possibile moltiplicare una matrice 3x4 con una 3x3. Possiamo per
 > b%*%a
 \end{Sinput}
 \begin{Soutput}
-     [,1] [,2] [,3] [,4]
-[1,]   26   26   30   38
-[2,]   50   54   62   74
-[3,]   86   96  110  128
+     c1 c2  c3  c4
+[1,] 26 26  30  38
+[2,] 50 54  62  74
+[3,] 86 96 110 128
 \end{Soutput}
 \end{Schunk}
 \subsubsection{Determinante} Il determinante di una matrice quadrata si ottiene con il comando
@@ -608,29 +636,21 @@ Per esempio possiamo considerare il dataframe \texttt{d} definito come segue
 \end{Sinput}
 \begin{Soutput}
    x  y fac
-1  1  1   C
-2  1  2   B
+1  1  1   A
+2  1  2   A
 3  1  3   A
 4  1  4   C
-5  1  5   C
-6  1  6   B
-7  1  7   C
-8  1  8   A
-9  1  9   C
-10 1 10   B
+5  1  5   B
+6  1  6   A
+7  1  7   A
+8  1  8   B
+9  1  9   A
+10 1 10   A
 \end{Soutput}
 \end{Schunk}
 Si noti che anche in questo caso si usa la \emph{recycling rule}
-\begin{Schunk}
-\begin{Sinput}
-> data(crabs)
-> dim(crabs)
-\end{Sinput}
-\begin{Soutput}
-[1] 201   8
-\end{Soutput}
-\end{Schunk}
-In quanto segue lavoreremo con il seguente \emph{dataframe} che rappresenta i risultati di un'indagine svolta sugli studenti che nell'Anno Accademico 2007/2008 frequentavano il primo anno del corso di Laurea di Farmacia della Facolt\`a di Farmacia del Piemonte Orientale. Potete scaricarlo dal sito e caricarlo in {\textsf R} con il comando
+
+In quanto segue lavoreremo con il seguente \emph{dataframe} che rappresenta i risultati di un'indagine svolta sugli studenti che nell'Anno Accademico 2007/2008 frequentavano il primo anno del corso di Laurea di Farmacia della Facolt\`a di Farmacia del Piemonte Orientale. Potete caricarlo  in {\textsf R} dal pacchetto con il comando
 %code chunk
 \begin{Schunk}
 \begin{Sinput}
@@ -712,13 +732,6 @@ Con il comando
 \texttt{detach} \index{detach}  si pu\`o eliminare l'associazione creata tra colonne e nomi delle colonne.
 Consideriamo ora un \emph{dataset} simile raccolto dagli studenti di Biotecnologie dello stesso anno
 %code chunk
-\begin{Schunk}
-\begin{Sinput}
-> sito="http://www.pharm.unipmn.it/rinaldi"
-> nomefile="/file_corso/datibiotec.csv"
-> biotec=read.table(paste(sito,nomefile,sep=""),sep=";",dec=",",header=T)
-\end{Sinput}
-\end{Schunk}
 Scrivendo
 \begin{Schunk}
 \begin{Sinput}
@@ -814,8 +827,8 @@ Risulta evidente che nel riportare i colori degli  occhi si sono usate dizioni d
 \texttt{"MARRONI"} possono esser fatti confluire in un unico livello  \texttt{"castani"} e possiamo rendere minuscoli i nomi degli altri livelli con il comando
 \begin{Schunk}
 \begin{Sinput}
-> options(width=50)
-> levels(studenti$Eyes)=c("azzurri","castani","castani", "castani", "castani","verdi","azzurri","castani","castani","verdi")
+> levels(studenti$Eyes)=c("azzurri","castani","castani", "castani", "castani",
++                         "verdi","azzurri","castani","castani","verdi")
 \end{Sinput}
 \end{Schunk}
 A questo punto
@@ -830,7 +843,8 @@ A questo punto
 Facciamo lo stesso con i capelli
 \begin{Schunk}
 \begin{Sinput}
-> levels(studenti$Hair)=c("biondi","castani","neri", "biondi", "castani","castani","castani","neri")
+> levels(studenti$Hair)=c("biondi","castani","neri", "biondi", "castani","castani",
++                         "castani","neri")
 > levels(studenti$Hair)
 \end{Sinput}
 \begin{Soutput}
@@ -936,14 +950,15 @@ Un \emph{array}  \`e una generalizzazione multidimensionale di una matrice. Gli 
 [2,] "T"  "V"  "X" 
 \end{Soutput}
 \begin{Sinput}
-> array(sample(1:100,24), dim=c(3,4,2),dimnames=list(LETTERS[1:3],LETTERS[11:14],letters[1:2]))->x
+> array(sample(1:100,24), dim=c(3,4,2),
++       dimnames=list(LETTERS[1:3],LETTERS[11:14],letters[1:2]))->x
 > x[,,"b"]
 \end{Sinput}
 \begin{Soutput}
    K  L  M  N
-A 82 27 76 41
-B 60 53 52 13
-C 68  7 57 28
+A 33 37 65 86
+B 41 84 52 53
+C 16 91  9 74
 \end{Soutput}
 \end{Schunk}
 \section{Liste}
@@ -1001,331 +1016,7 @@ $d$r
  [1]  1  2  3  4  5  6  7  8  9 10
 \end{Soutput}
 \end{Schunk}
-\subsection{Funzioni applicate a oggetti}
-\subsubsection{La funzione \texttt{apply}}
-Quando abbiamo una struttura di dati a pi\`u dimensioni ad esempio un \emph{array}
-\begin{Schunk}
-\begin{Sinput}
-> array(1:30,dim=c(2,5,3))->x
-> x
-\end{Sinput}
-\begin{Soutput}
-, , 1
 
-     [,1] [,2] [,3] [,4] [,5]
-[1,]    1    3    5    7    9
-[2,]    2    4    6    8   10
-
-, , 2
-
-     [,1] [,2] [,3] [,4] [,5]
-[1,]   11   13   15   17   19
-[2,]   12   14   16   18   20
-
-, , 3
-
-     [,1] [,2] [,3] [,4] [,5]
-[1,]   21   23   25   27   29
-[2,]   22   24   26   28   30
-\end{Soutput}
-\end{Schunk}
-possiamo applicare una funzione selezionando il livello escluso:
-\begin{Schunk}
-\begin{Sinput}
-> apply(x,2,mean)
-\end{Sinput}
-\begin{Soutput}
-[1] 11.5 13.5 15.5 17.5 19.5
-\end{Soutput}
-\begin{Sinput}
-> apply(x,c(1,3),mean)
-\end{Sinput}
-\begin{Soutput}
-     [,1] [,2] [,3]
-[1,]    5   15   25
-[2,]    6   16   26
-\end{Soutput}
-\end{Schunk}
-
-In un \emph{dataframe} possiamo considerare diverse operazioni che coinvolgano due o pi\`u colonne. Per esempio possiamo considerare la tabella \texttt{farmacia} e proporci di calcolare la media del peso dei maschi e la media del peso delle femmine. Il comando \texttt{tapply} \index{\texttt{tapply}} consente di applicare una funzione ad una colonna di una tabella ripartita in gruppi in accordo ad un criterio specificato da un'altra colonna (nominale) della stessa tabella
-\begin{eqnarray*}
-\texttt{tapply}(\varia{vettore},\varia{criterio} ,\varia{funzione})\end{eqnarray*}
-L'esempio sopra riportato si risolve con la scrittura:
-%code chunk
-\begin{Schunk}
-\begin{Sinput}
-> tapply(studenti$W, studenti$Sex,mean)->Wmean
-> Wmean
-\end{Sinput}
-\begin{Soutput}
-       F        M 
-58.19298 69.34615 
-\end{Soutput}
-\end{Schunk}
-Possiamo anche chiedere di calcolare altri indicatori sempre basandoci  su questa ripartizione maschi/femmine.
-Ad esempio possiamo ottenere la deviazione standard(\texttt{sd}) di maschi e femmine:
-%code chunk
-\begin{Schunk}
-\begin{Sinput}
-> tapply(studenti$W, studenti$Sex,sd)->Wsd
-> Wsd
-\end{Sinput}
-\begin{Soutput}
-       F        M 
-10.01149 10.61971 
-\end{Soutput}
-\end{Schunk}
-
-\subsubsection{Il comando \texttt{table} applicato a diverse variabili nominali e le tabelle di contingenza}
-Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
-\begin{Schunk}
-\begin{Sinput}
-> read.table("http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html",
-+ skip=39,header=T,nrow=478,sep="\t")->kidinterest
-\end{Sinput}
-\end{Schunk}
-\begin{Schunk}
-\begin{Soutput}
-  Gender Grade Age  Race Urban.Rural School
-1    boy     5  11 White       Rural    Elm
-2    boy     5  10 White       Rural    Elm
-3   girl     5  11 White       Rural    Elm
-4   girl     5  11 White       Rural    Elm
-5   girl     5  10 White       Rural    Elm
-6   girl     5  11 White       Rural    Elm
-    Goals Grades Sports Looks Money
-1  Sports      1      2     4     3
-2 Popular      2      1     4     3
-3 Popular      4      3     1     2
-4 Popular      2      3     4     1
-5 Popular      4      2     1     3
-6 Popular      4      2     1     3
-\end{Soutput}
-\end{Schunk}
-Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
-%codechunk
-\begin{Schunk}
-\begin{Sinput}
-> colnames(kidinterest)
-\end{Sinput}
-\begin{Soutput}
- [1] "Gender"      "Grade"       "Age"        
- [4] "Race"        "Urban.Rural" "School"     
- [7] "Goals"       "Grades"      "Sports"     
-[10] "Looks"       "Money"      
-\end{Soutput}
-\begin{Sinput}
-> interessi=kidinterest[,c(1,5,7)]
-> head(interessi)
-\end{Sinput}
-\begin{Soutput}
-  Gender Urban.Rural   Goals
-1    boy       Rural  Sports
-2    boy       Rural Popular
-3   girl       Rural Popular
-4   girl       Rural Popular
-5   girl       Rural Popular
-6   girl       Rural Popular
-\end{Soutput}
-\begin{Sinput}
-> table(interessi)
-\end{Sinput}
-\begin{Soutput}
-, , Goals = Grades
-
-      Urban.Rural
-Gender Rural Suburban Urban
-  boy     21       51    45
-  girl    36       36    58
-
-, , Goals = Popular
-
-      Urban.Rural
-Gender Rural Suburban Urban
-  boy     19       20    11
-  girl    31       22    38
-
-, , Goals = Sports
-
-      Urban.Rural
-Gender Rural Suburban Urban
-  boy     26       18    16
-  girl    16        4    10
-\end{Soutput}
-\end{Schunk}
- Consideriamo per esempio le variabili provenienza e traguardi
-\begin{Schunk}
-\begin{Sinput}
-> interessi2=kidinterest[,c(5,7)]
-> tabella=table(interessi2)
-> tabella
-\end{Sinput}
-\begin{Soutput}
-           Goals
-Urban.Rural Grades Popular Sports
-   Rural        57      50     42
-   Suburban     87      42     22
-   Urban       103      49     26
-\end{Soutput}
-\end{Schunk}
-
-La tabella di contingenza delle due variabili (in questo caso a 3  livelli ciascuna) si realizza con il comando
-\texttt{table}.
-\texttt{table}(\varia(lista))
-applicato ad una singola variabile nominale conta le frequenze di ciascuna classe, se le variabili sono $n$ esamina tutte le combinazioni possibili ($2^n$ se le variabili sono dicotomiche) e ne conta tutte le occorrenze
-
-Allo stesso modo possiamo creare una tabella dei colori degli occhi e dei capelli
-%code chunk
-\begin{Schunk}
-\begin{Sinput}
-> tabellaEH=table(studenti$Eyes,studenti$Hair)
-\end{Sinput}
-\end{Schunk}
- %code chunk
-O ripartirne il peso in base al colore degli occhi
-\begin{Schunk}
-\begin{Sinput}
-> stEyeW=split(studenti$W,studenti$Eyes)
-> boxplot(stEyeW)
-\end{Sinput}
-\end{Schunk}
-\includegraphics{RbookParte2-074}
-
-
-\begin{enumerate}
-\item{} Costruire una funzione \texttt{inserisci} tale che il comando
-$\texttt{inserisci}(\varia{x}, \varia{dove},\varia{cosa})$ inserisca nel vettore $\varia{x}$ l'elemento $\varia{cosa}$ nella posizione $\varia{dove}$.
-Per esempio
-\begin{Schunk}
-\begin{Sinput}
-> y <-letters[1:10]
-> y
-\end{Sinput}
-\begin{Soutput}
- [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j"
-\end{Soutput}
-\end{Schunk}
-\begin{Schunk}
-\begin{Sinput}
-> inserisci(x, 5, 0)
-\end{Sinput}
-\end{Schunk}
-\begin{Schunk}
-\begin{Soutput}
- [1] "a" "b" "c" "d" "0" "e" "f" "g" "h" "i" "j"
-\end{Soutput}
-\end{Schunk}
-Generalizzare  al caso di inserimento di righe in \emph{dataframe}.
-\item{}
-Come si pu\`o verificare l'uguaglianza di 2 vettori includendo gli ingressi \texttt{NA}
-\begin{Schunk}
-\begin{Sinput}
-> NA==NA
-\end{Sinput}
-\end{Schunk}
-Aiuto: usare \texttt{is.na}
-\item{}\cite{dalgaard}
-Carichiamo il \emph{dataset} \texttt{juul} dal pacchetto \texttt{ISwR}. Ricavare il sottoinsieme di dati che corrispondono a ragazze tra i 7 e i 14 anni. Plottare \texttt{igf1} versus et\`a per ragazzi e ragazze separatamente. Conclusioni?
-\end{enumerate}
-
-
-\chapter{Operatori logici e selezione di elementi}
-Consideriamo la selezione di elementi di un oggetto di \textsf{R}, per esempio \texttt{crabs}.
-Selezioniamo per esempio tra i primi  50 i granchi con carapaci di lunghezza (sesta colonna) maggiore di 42:
-\begin{Schunk}
-\begin{Sinput}
-> crabs[1:50,6]>42
-\end{Sinput}
-\begin{Soutput}
- [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-[16] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-[31] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-[46] NA NA NA NA NA
-\end{Soutput}
-\end{Schunk}
-Ciascun elemento del vettore viene confrontato con la soglia scelta (42) e quando supera la soglia la risposta \`e \texttt{TRUE} altrimenti \texttt{FALSE}.
-\vskip20pt
-%\begin{table}
-\begin{tabular}
-{|r r |}\hline
- \texttt{operatore}&  significato\\
-\hline
-\texttt{$>$}&  maggiore\\
-\texttt{>=}& maggiore o uguale\\
-\texttt{<}&   minore\\
-\texttt{<=}&   minore o uguale\\
-\texttt{==}&   uguale\\
-\texttt{!=}&   diverso\\
-\texttt{\&}&   and (e)\\
-\texttt{|} & or (o)\\
-\hline
-\end{tabular}
-\vskip20pt
-%\end{table}
-Gli ultimi due operatori combinano gli operatori precedenti. Per esempio
-%code chunk
-\begin{Schunk}
-\begin{Sinput}
-> crabs[crabs$sex == "F" | crabs$sp == "O",]
-> dim(crabs[crabs$sex == "F" & crabs$sp == "O",])
-\end{Sinput}
-\end{Schunk}
-%code chunk
-
-\subsection{I valori non assegnati}
-Capita frequentemente che un oggetto contenga valori non assegnati.
-Per esempio
-\begin{Schunk}
-\begin{Sinput}
-> x=1;x[10]=4;x
-\end{Sinput}
-\begin{Soutput}
- [1]  1 NA NA NA NA NA NA NA NA  4
-\end{Soutput}
-\end{Schunk}
-\begin{Schunk}
-\begin{Sinput}
-> x[!is.na(x)]
-\end{Sinput}
-\begin{Soutput}
-[1] 1 4
-\end{Soutput}
-\begin{Sinput}
-> class(x)
-\end{Sinput}
-\begin{Soutput}
-[1] "numeric"
-\end{Soutput}
-\begin{Sinput}
-> class(unclass(x))
-\end{Sinput}
-\begin{Soutput}
-[1] "numeric"
-\end{Soutput}
-\begin{Sinput}
-> is.na(x)
-\end{Sinput}
-\begin{Soutput}
- [1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
- [8]  TRUE  TRUE FALSE
-\end{Soutput}
-\begin{Sinput}
->  DF <- data.frame(x = c(1, 2, 3), y = c(0, 10, NA))
-> na.omit(DF)
-\end{Sinput}
-\begin{Soutput}
-  x  y
-1 1  0
-2 2 10
-\end{Soutput}
-\begin{Sinput}
-> complete.cases(x)
-\end{Sinput}
-\begin{Soutput}
- [1]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
- [8] FALSE FALSE  TRUE
-\end{Soutput}
-\end{Schunk}
 \chapter{Statistica con \textsf{R}}
 \section{Variabili aleatorie}
 Una variabile aleatoria (\emph{random variabile}) \`e
@@ -1594,7 +1285,7 @@ Scegliamo il mese
 \begin{Sinput}
 > sito="http://www.ilmeteo.it/portale/archivio-meteo/"
 > indirizzo=paste(sito,stringa,sep="")
-> meteo=read.table(indirizzo,sep=";",header=T)
+> meteo=read.table(indirizzo,sep=";",header=T)[,-1]
 \end{Sinput}
 \end{Schunk}
 \begin{Schunk}
@@ -1760,7 +1451,7 @@ Possiamo esaminare la serie temporale dei dati con i comandi
 ottenendo la figura~\ref{fig:datiist}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-111}
+\includegraphics{RbookParte2-094}
 \caption{ Andamento della temperatura a Gennaio 2016  a Milano. }
 \label{fig:datiist}
 \end{center}
@@ -1840,7 +1531,7 @@ il valore 6 non risutlerebbe incluso.
 \subsection{Areogrammi}
 Il comando generico per generare un istogramma \`e:
 \begin{equation*}
-\texttt{hist}(\varia{variabile})
+\texttt{hist}(\varia{variabile})\index{\texttt{hist}}
 \end{equation*}
 che segue per\`o la struttura del comando \texttt{cut}. L'ampiezza di ciascuna classe salvo diversamente indicato \`e costante e decisa da \textsf{R}.
 \`E  possibile variare tale condizione definendo una lista con i punti di taglio ({\it cutoff}) delle classi volute:
@@ -1856,7 +1547,7 @@ Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del 
 \end{Schunk}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-118}
+\includegraphics{RbookParte2-101}
 \caption{Diagramma a colonne e areogramma per il lancio di un dado.}
 \label{fig:datidado}
 \end{center}
@@ -1881,7 +1572,7 @@ lasciando \textsf{R} libero di scegliere i punti di taglio (pannelli a sinistra 
 \end{Schunk}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-122}
+\includegraphics{RbookParte2-105}
 \caption{ Areogramma dei dati della temperatura. Scelta automatica dei punti di taglio.}
 \label{fig:datiistmilano}
 \end{center}
@@ -1900,7 +1591,7 @@ otteniamo la figura~\ref{fig:boxplotdado}
 > boxplot(dadi100)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-123}
+\includegraphics{RbookParte2-106}
 \caption{Boxplot dei risultati del lancio di un dado}
 \label{fig:boxplotdado}
 \end{center}
@@ -1922,7 +1613,7 @@ ad esempio (facendo riferimento ai precedenti dati):
 fornisce in uscita  la Figura~\ref{fig:pie}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-125}
+\includegraphics{RbookParte2-108}
 \caption{Diagramma a torta per il lancio di un dado equo.}
 \label{fig:pie}
 \end{center}
@@ -1946,7 +1637,7 @@ Per analizzare questi dati conviene preliminarmente tracciarne un diagramma a di
 > plot(x,y)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-127}
+\includegraphics{RbookParte2-110}
 \caption{Diagramma a dispersione tempo/concentrazione.}
 \label{fig:scatte}
 \end{center}
@@ -2007,7 +1698,7 @@ Coefficients:
 In tal modo otteniamo il grafico~\ref{fig:duerettex}.
 \begin{center}
 \begin{figure}[htbp]
-\includegraphics{RbookParte2-131}
+\includegraphics{RbookParte2-114}
 \caption{Rette di regressione. In blu $R_x$, in verde $R_y$.}
 \label{fig:duerettex}
 \end{figure}
@@ -2036,7 +1727,7 @@ Ora diamo una prima occhiata ai dati:
 > plot(age,height)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-134}
+\includegraphics{RbookParte2-117}
 \caption{Crescita dei bambini di Kalama}
 \label{kalama}
 \end{center}
@@ -2090,15 +1781,15 @@ Coefficients:
      64.928        0.635  
 \end{Soutput}
 \end{Schunk}
-con la formula $lm(y \tilde{} x,data=dataset)$.
-Inoltre possiammo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
+con la formula $lm(y \widetilde{} x,data=dataset)$.
+Inoltre possiamo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
 \begin{Schunk}
 \begin{Soutput}
 $mfrow
 [1] 1 1
 \end{Soutput}
 \end{Schunk}
-\includegraphics{RbookParte2-138}
+\includegraphics{RbookParte2-121}
 \section{Modelli potenza}
 Consideriamo ora il seguente \emph{dataset} di mammiferi  in cui le 2 variabili rappresentano  le dimensioni del corpo e del cervello.
 \begin{Schunk}
@@ -2182,7 +1873,7 @@ Per prima cosa tracciamo il grafico dei punti  in scala non trasformata e, visto
 \end{Schunk}
 come in Figura~\ref{fig:duemammals}.\begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-141}
+\includegraphics{RbookParte2-124}
 \caption{Diagramma a dispersione massa corporea/massa del cervello in scala normale ed in scala logaritmica. }
 \label{fig:duemammals}
 \end{center}
@@ -2198,7 +1889,7 @@ Visti i  risultati ottenuti usando la scala logaritmica tracciamo anche la corri
 \end{Schunk}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-143}
+\includegraphics{RbookParte2-126}
 \caption{ Retta di regressione. Dimensione del corpo e del cervello. Si noti la posizione dell'uomo.}
 \label{duerette}
 \end{center}
@@ -2236,7 +1927,7 @@ per caratterizzare diversi aspetti.
 
 \begin{figure}[htb!]
 \begin{center}
-\includegraphics{RbookParte2-145}
+\includegraphics{RbookParte2-128}
 \caption{ Scatterplot}\label{fig:scatterplot}
 \end{center}
 \end{figure}
@@ -2299,7 +1990,7 @@ Il grafico~(\ref{fig:normalesta}) della gaussiana
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-148}
+\includegraphics{RbookParte2-131}
 \caption{ Grafico della normale standard nell'intervallo $[-2.5,2.5]$. }
 \label{fig:normalesta}
 \end{center}
@@ -2345,7 +2036,7 @@ La funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}.
 come illustrato nella figura~\ref{fig:fig2code}.
 \begin{center}
 \begin{figure}[H]
-\includegraphics{RbookParte2-153}
+\includegraphics{RbookParte2-136}
 \caption{$x=\texttt{qnorm}(A)$}
 \label{fig:fig2code}
 \end{figure}
@@ -2353,7 +2044,7 @@ come illustrato nella figura~\ref{fig:fig2code}.
 Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di area $A$   fornisca l'ascissa $x=U(A)$ come in figura~\ref{fig:fig12code} in modo che l'area tra - $x$ e $x$ sia esattamente pari ad $A$.  
 
 \begin{figure}[H]
-\includegraphics{RbookParte2-154}
+\includegraphics{RbookParte2-137}
 \caption{$x=U(A)=\texttt{qnorm}(1/2+A/2)$}
 \label{fig:fig12code}
 \end{figure}
@@ -2374,7 +2065,7 @@ Questa funzione fornisce fissato il livello di fiducia l'ascissa $x$  tale che l
 \end{Schunk}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-158}
+\includegraphics{RbookParte2-141}
 \caption{Code della distribuzione normale}
 \label{fig:normaletratto}
 \end{center}
@@ -2415,7 +2106,7 @@ Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di l
 > curve(dt(x,10),-2,2)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-160}
+\includegraphics{RbookParte2-143}
 \caption{Grafico della distribuzione di Student a 10 gradi di libert\`a. }
 \label{fig:graficostudent1}
 \end{center}
@@ -2432,7 +2123,7 @@ Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cu
 > legend("topleft", c("df=2","df=25","normale"),pch=15,col=1:3);
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-161}
+\includegraphics{RbookParte2-144}
 \caption{Grafico della distribuzione di Student a 10 gradi di libert\`a. }
 \label{fig:graficostudent}
 \end{center}
@@ -2552,8 +2243,8 @@ Ad esempio eseguiamo un $t$-test per dati appaiati, tra $x=(1,2,3,4)$ e $y=(3,2,
 Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
 \begin{Schunk}
 \begin{Sinput}
-> data(kidinterest)
-> str(kidinterest)
+> data(bambini)
+> str(bambini)
 \end{Sinput}
 \begin{Soutput}
 'data.frame':	478 obs. of  11 variables:
@@ -2574,50 +2265,10 @@ Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo 
 Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
 %codechunk
  
-\begin{Schunk}
-\begin{Sinput}
-> interessi=kidinterest[,c(1,5,7)]
-> head(interessi)
-\end{Sinput}
-\begin{Soutput}
-  Gender Urban.Rural   Goals
-1    boy       Rural  Sports
-2    boy       Rural Popular
-3   girl       Rural Popular
-4   girl       Rural Popular
-5   girl       Rural Popular
-6   girl       Rural Popular
-\end{Soutput}
-\begin{Sinput}
-> table(interessi)
-\end{Sinput}
-\begin{Soutput}
-, , Goals = Grades
-
-      Urban.Rural
-Gender Rural Suburban Urban
-  boy     21       51    45
-  girl    36       36    58
-
-, , Goals = Popular
-
-      Urban.Rural
-Gender Rural Suburban Urban
-  boy     19       20    11
-  girl    31       22    38
-
-, , Goals = Sports
-
-      Urban.Rural
-Gender Rural Suburban Urban
-  boy     26       18    16
-  girl    16        4    10
-\end{Soutput}
-\end{Schunk}
 Consideriamo per esempio le variabili provenienza e traguardi
 \begin{Schunk}
 \begin{Sinput}
-> interessi2=kidinterest[,c(5,7)]
+> interessi2=bambini[,c(5,7)]
 > tabella=table(interessi2)
 > tabella
 \end{Sinput}
@@ -2634,8 +2285,18 @@ Il test $\chi^2$  di indipendenza consente di  verificare se  due variabili sono
 Se consideriamo le due variabili precedenti sesso e interessi.
 \textsf{R}  dispone del comando \texttt{chisq.test},\index{\texttt{chisq.tst},test $\chi^2$}
 dalla sintassi generale:$$\texttt{chisq.test}(\varia{tabella})$$
+\begin{Schunk}
+\begin{Sinput}
+> chisq.test(tabella)
+\end{Sinput}
+\begin{Soutput}
+	Pearson's Chi-squared test
 
-Nell'esempio
+data:  tabella
+X-squared = 18.828, df = 4, p-value = 0.0008497
+\end{Soutput}
+\end{Schunk}
+Nell'esempio degli studenti
 %code chunk
 \begin{Schunk}
 \begin{Sinput}
@@ -2643,8 +2304,7 @@ Nell'esempio
 > str(studenti)
 \end{Sinput}
 \begin{Soutput}
-'data.frame':	96 obs. of  9 variables:
- $ X   : int  1 2 3 4 5 6 7 8 9 10 ...
+'data.frame':	96 obs. of  8 variables:
  $ Sex : Factor w/ 2 levels "F","M": 2 2 2 1 2 1 2 2 1 1 ...
  $ W   : num  86 53 64 61 64 51 78 55 59 52 ...
  $ H   : num  1.9 1.76 1.74 1.64 1.8 1.68 1.78 1.68 1.68 1.67 ...
@@ -2666,15 +2326,31 @@ X-squared = 5.9614, df = 4, p-value = 0.202
 \end{Soutput}
 \end{Schunk}
 L'intervallo di accettazione dell'ipotesi (che ricordiamo \`e l'indipendenza) al 95\% di fiducia e 1 gradi di libert\`a \`e  $[0, 3.841]$, il consuntivo cade dentro, per cui l'ipotesi \`e accettata.
-Per eliminare la correzione di Pearson si utilizza il parametro  \texttt{correct=FALSE}.
+ 
+Se le celle in una tabella 2x2 contengono numeri bassi R utilizza la correzione di Yates. Se la si vuole eliminare  si utilizza il parametro  \texttt{correct=FALSE}.
 Ad esempio scriveremo:
 %code chunk
 \begin{Schunk}
 \begin{Sinput}
-> chisq.test(tabellaEH,correct=FALSE)
+> chisq.test(matrix(c(12,3,4,5),nc=2))
 \end{Sinput}
-\end{Schunk}
+\begin{Soutput}
+	Pearson's Chi-squared test with Yates'
+	continuity correction
 
+data:  matrix(c(12, 3, 4, 5), nc = 2)
+X-squared = 1.8, df = 1, p-value = 0.1797
+\end{Soutput}
+\begin{Sinput}
+> chisq.test(matrix(c(12,3,4,5),nc=2),correct=F)
+\end{Sinput}
+\begin{Soutput}
+	Pearson's Chi-squared test
+
+data:  matrix(c(12, 3, 4, 5), nc = 2)
+X-squared = 3.2, df = 1, p-value = 0.07364
+\end{Soutput}
+\end{Schunk}
 \subsection{Test $\chi^2$  di adeguamento}
 Consideriamo una variabile aleatoria discreta con frequenza assoluta delle uscite racchiuse in una lista \texttt{data}. Ci si pone il problema di stabilire se tali frequenze sono compatibili con le probabilit\`a (riportate nella lista $p$).
 \begin{Schunk}
@@ -2972,7 +2648,7 @@ consente il tracciamento di un \emph{boxplot} comparativo.
 \end{Schunk}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{RbookParte2-192}
+\includegraphics{RbookParte2-175}
 \caption{Boxplot comparativo di 4 tipi di grasso di cottura.}
 \label{datiist}
 \end{center}
@@ -3070,7 +2746,7 @@ La distribuzione di Fisher \`e indicata in \textsf{R} con la lettera \texttt{f}.
 > curve(df(x,3,10),0,5)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-199}
+\includegraphics{RbookParte2-182}
 ottenendo il grafico
 \begin{figure}[htbp]
 \begin{center}
@@ -3079,7 +2755,7 @@ ottenendo il grafico
 > curve(df(x,3,10),0,5)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-200}
+\includegraphics{RbookParte2-183}
 \caption{Distribuzione di Fisher.}
 \label{fig:fisher}
 \end{center}
@@ -3141,7 +2817,7 @@ Diamo una prima occhiata ai dati con il comando \texttt{coplot}, ovvero {\it con
 > coplot(conc ~ Time | Subject, data = Theoph, show.given = FALSE)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-205}
+\includegraphics{RbookParte2-188}
 
 Selezioniamo ora il paziente 4, lo possiamo fare note le righe che esso occupa nel dataframe oppure selezionando per un preciso valore della variabile Subject.
 
@@ -3215,7 +2891,7 @@ Ora riportiamo il grafico delle osservazioni per il soggetto 4 su un grafico sin
 + las = 1, col = 4)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-209}
+\includegraphics{RbookParte2-192}
 
 Si pu\`o ora sovrapporre la curva ottenuta con il modello al grafico attuale.
 Per prima cosa definiamo i possibili valori di $x$.
@@ -3238,8 +2914,323 @@ dove \texttt{par(usr)}  \`e un ottimo modo per conoscere l'estensione di una del
 > lines(xvals, predict(fm1, newdata = list(Time = xvals)), col = 4)
 \end{Sinput}
 \end{Schunk}
-\includegraphics{RbookParte2-211}
+\includegraphics{RbookParte2-194}
+\chpater{Varie}
+\subsubsection{La funzione \texttt{apply}}
+Quando abbiamo una struttura di dati a pi\`u dimensioni ad esempio un \emph{array}
+\begin{Schunk}
+\begin{Sinput}
+> array(1:30,dim=c(2,5,3))->x
+> x
+\end{Sinput}
+\begin{Soutput}
+, , 1
 
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    3    5    7    9
+[2,]    2    4    6    8   10
+
+, , 2
+
+     [,1] [,2] [,3] [,4] [,5]
+[1,]   11   13   15   17   19
+[2,]   12   14   16   18   20
+
+, , 3
+
+     [,1] [,2] [,3] [,4] [,5]
+[1,]   21   23   25   27   29
+[2,]   22   24   26   28   30
+\end{Soutput}
+\end{Schunk}
+possiamo applicare una funzione selezionando il livello escluso:
+\begin{Schunk}
+\begin{Sinput}
+> apply(x,2,mean)
+\end{Sinput}
+\begin{Soutput}
+[1] 11.5 13.5 15.5 17.5 19.5
+\end{Soutput}
+\begin{Sinput}
+> apply(x,c(1,3),mean)
+\end{Sinput}
+\begin{Soutput}
+     [,1] [,2] [,3]
+[1,]    5   15   25
+[2,]    6   16   26
+\end{Soutput}
+\end{Schunk}
+
+In un \emph{dataframe} possiamo considerare diverse operazioni che coinvolgano due o pi\`u colonne. Per esempio possiamo considerare la tabella \texttt{farmacia} e proporci di calcolare la media del peso dei maschi e la media del peso delle femmine. Il comando \texttt{tapply} \index{\texttt{tapply}} consente di applicare una funzione ad una colonna di una tabella ripartita in gruppi in accordo ad un criterio specificato da un'altra colonna (nominale) della stessa tabella
+\begin{eqnarray*}
+\texttt{tapply}(\varia{vettore},\varia{criterio} ,\varia{funzione})\end{eqnarray*}
+L'esempio sopra riportato si risolve con la scrittura:
+%code chunk
+\begin{Schunk}
+\begin{Sinput}
+> tapply(studenti$W, studenti$Sex,mean)->Wmean
+> Wmean
+\end{Sinput}
+\begin{Soutput}
+       F        M 
+58.19298 69.34615 
+\end{Soutput}
+\end{Schunk}
+Possiamo anche chiedere di calcolare altri indicatori sempre basandoci  su questa ripartizione maschi/femmine.
+Ad esempio possiamo ottenere la deviazione standard(\texttt{sd}) di maschi e femmine:
+%code chunk
+\begin{Schunk}
+\begin{Sinput}
+> tapply(studenti$W, studenti$Sex,sd)->Wsd
+> Wsd
+\end{Sinput}
+\begin{Soutput}
+       F        M 
+10.01149 10.61971 
+\end{Soutput}
+\end{Schunk}
+
+\subsubsection{Il comando \texttt{table} applicato a diverse variabili nominali e le tabelle di contingenza}
+Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
+\begin{Schunk}
+\begin{Sinput}
+> data(bambini)
+\end{Sinput}
+\end{Schunk}
+Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
+%codechunk
+\begin{Schunk}
+\begin{Sinput}
+> colnames(bambini)
+\end{Sinput}
+\begin{Soutput}
+ [1] "Gender"      "Grade"      
+ [3] "Age"         "Race"       
+ [5] "Urban.Rural" "School"     
+ [7] "Goals"       "Grades"     
+ [9] "Sports"      "Looks"      
+[11] "Money"      
+\end{Soutput}
+\begin{Sinput}
+> interessi=bambini[,c(1,5,7)]
+> head(interessi)
+\end{Sinput}
+\begin{Soutput}
+  Gender Urban.Rural   Goals
+1    boy       Rural  Sports
+2    boy       Rural Popular
+3   girl       Rural Popular
+4   girl       Rural Popular
+5   girl       Rural Popular
+6   girl       Rural Popular
+\end{Soutput}
+\begin{Sinput}
+> table(interessi)
+\end{Sinput}
+\begin{Soutput}
+, , Goals = Grades
+
+      Urban.Rural
+Gender Rural Suburban Urban
+  boy     21       51    45
+  girl    36       36    58
+
+, , Goals = Popular
+
+      Urban.Rural
+Gender Rural Suburban Urban
+  boy     19       20    11
+  girl    31       22    38
+
+, , Goals = Sports
+
+      Urban.Rural
+Gender Rural Suburban Urban
+  boy     26       18    16
+  girl    16        4    10
+\end{Soutput}
+\end{Schunk}
+ Consideriamo per esempio le variabili provenienza e traguardi
+\begin{Schunk}
+\begin{Sinput}
+> interessi2=bambini[,c(5,7)]
+> tabella=table(interessi2)
+> tabella
+\end{Sinput}
+\begin{Soutput}
+           Goals
+Urban.Rural Grades Popular Sports
+   Rural        57      50     42
+   Suburban     87      42     22
+   Urban       103      49     26
+\end{Soutput}
+\end{Schunk}
+
+La tabella di contingenza delle due variabili (in questo caso a 3  livelli ciascuna) si realizza con il comando
+\texttt{table}.
+\texttt{table}(\varia(lista))
+applicato ad una singola variabile nominale conta le frequenze di ciascuna classe, se le variabili sono $n$ esamina tutte le combinazioni possibili ($2^n$ se le variabili sono dicotomiche) e ne conta tutte le occorrenze
+
+Allo stesso modo possiamo creare una tabella dei colori degli occhi e dei capelli
+%code chunk
+\begin{Schunk}
+\begin{Sinput}
+> tabellaEH=table(studenti$Eyes,studenti$Hair)
+\end{Sinput}
+\end{Schunk}
+ %code chunk
+O ripartirne il peso in base al colore degli occhi
+\begin{Schunk}
+\begin{Sinput}
+> stEyeW=split(studenti$W,studenti$Eyes)
+> boxplot(stEyeW)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{RbookParte2-203}
+
+
+\begin{enumerate}
+\item{} Costruire una funzione \texttt{inserisci} tale che il comando
+$\texttt{inserisci}(\varia{x}, \varia{dove},\varia{cosa})$ inserisca nel vettore $\varia{x}$ l'elemento $\varia{cosa}$ nella posizione $\varia{dove}$.
+Per esempio
+\begin{Schunk}
+\begin{Sinput}
+> y <-letters[1:10]
+> y
+\end{Sinput}
+\begin{Soutput}
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i"
+[10] "j"
+\end{Soutput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> inserisci(x, 5, 0)
+\end{Sinput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Soutput}
+ [1] "a" "b" "c" "d" "0" "e" "f" "g" "h"
+[10] "i" "j"
+\end{Soutput}
+\end{Schunk}
+Generalizzare  al caso di inserimento di righe in \emph{dataframe}.
+\item{}
+Come si pu\`o verificare l'uguaglianza di 2 vettori includendo gli ingressi \texttt{NA}
+\begin{Schunk}
+\begin{Sinput}
+> NA==NA
+\end{Sinput}
+\end{Schunk}
+Aiuto: usare \texttt{is.na}
+\item{}\cite{dalgaard}
+Carichiamo il \emph{dataset} \texttt{juul} dal pacchetto \texttt{ISwR}. Ricavare il sottoinsieme di dati che corrispondono a ragazze tra i 7 e i 14 anni. Plottare \texttt{igf1} versus et\`a per ragazzi e ragazze separatamente. Conclusioni?
+\end{enumerate}
+
+
+\chapter{Operatori logici e selezione di elementi}
+Consideriamo la selezione di elementi di un oggetto di \textsf{R}, per esempio \texttt{granchi}.
+Selezioniamo per esempio tra i primi  50 i granchi con carapaci di lunghezza (sesta colonna) maggiore di 42:
+\begin{Schunk}
+\begin{Sinput}
+> data(granchi)
+> granchi[1:50,6]>42
+\end{Sinput}
+\begin{Soutput}
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE
+ [7] FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE FALSE FALSE FALSE
+[19] FALSE FALSE FALSE FALSE FALSE FALSE
+[25] FALSE FALSE FALSE FALSE FALSE FALSE
+[31] FALSE FALSE FALSE FALSE FALSE FALSE
+[37] FALSE FALSE FALSE FALSE FALSE FALSE
+[43] FALSE  TRUE FALSE FALSE FALSE  TRUE
+[49]  TRUE  TRUE
+\end{Soutput}
+\end{Schunk}
+Ciascun elemento del vettore viene confrontato con la soglia scelta (42) e quando supera la soglia la risposta \`e \texttt{TRUE} altrimenti \texttt{FALSE}.
+\vskip20pt
+%\begin{table}
+\begin{tabular}
+{|r r |}\hline
+ \texttt{operatore}&  significato\\
+\hline
+\texttt{$>$}&  maggiore\\
+\texttt{>=}& maggiore o uguale\\
+\texttt{<}&   minore\\
+\texttt{<=}&   minore o uguale\\
+\texttt{==}&   uguale\\
+\texttt{!=}&   diverso\\
+\texttt{\&}&   and (e)\\
+\texttt{|} & or (o)\\
+\hline
+\end{tabular}
+\vskip20pt
+%\end{table}
+Gli ultimi due operatori combinano gli operatori precedenti. Per esempio
+%code chunk
+\begin{Schunk}
+\begin{Sinput}
+> crabs[crabs$sex == "F" | crabs$sp == "O",]
+> dim(crabs[crabs$sex == "F" & crabs$sp == "O",])
+\end{Sinput}
+\end{Schunk}
+%code chunk
+
+\subsection{I valori non assegnati}
+Capita frequentemente che un oggetto contenga valori non assegnati.
+Per esempio
+\begin{Schunk}
+\begin{Sinput}
+> x=1;x[10]=4;x
+\end{Sinput}
+\begin{Soutput}
+ [1]  1 NA NA NA NA NA NA NA NA  4
+\end{Soutput}
+\end{Schunk}
+\begin{Schunk}
+\begin{Sinput}
+> x[!is.na(x)]
+\end{Sinput}
+\begin{Soutput}
+[1] 1 4
+\end{Soutput}
+\begin{Sinput}
+> class(x)
+\end{Sinput}
+\begin{Soutput}
+[1] "numeric"
+\end{Soutput}
+\begin{Sinput}
+> class(unclass(x))
+\end{Sinput}
+\begin{Soutput}
+[1] "numeric"
+\end{Soutput}
+\begin{Sinput}
+> is.na(x)
+\end{Sinput}
+\begin{Soutput}
+ [1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+ [7]  TRUE  TRUE  TRUE FALSE
+\end{Soutput}
+\begin{Sinput}
+>  DF <- data.frame(x = c(1, 2, 3), y = c(0, 10, NA))
+> na.omit(DF)
+\end{Sinput}
+\begin{Soutput}
+  x  y
+1 1  0
+2 2 10
+\end{Soutput}
+\begin{Sinput}
+> complete.cases(x)
+\end{Sinput}
+\begin{Soutput}
+ [1]  TRUE FALSE FALSE FALSE FALSE FALSE
+ [7] FALSE FALSE FALSE  TRUE
+\end{Soutput}
+\end{Schunk}
 
 \section{QQPlot
 normality test}
