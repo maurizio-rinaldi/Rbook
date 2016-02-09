@@ -1,6 +1,10 @@
 %!TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \usepackage[english,italian]{babel}
+\usepackage{inconsolata}
+%\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+\usepackage[T1]{fontenc}
+
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
@@ -27,6 +31,7 @@
 \lhead[\thepage]{\today}
 %\usepackage{draftwatermark}
 \usepackage{wrapfig}
+\usepackage{listings}
 \pagestyle{fancy}
 \newcounter{fnotes}\setcounter{fnotes}{1}
 \newcounter{Raction}\setcounter{Raction}{1}
@@ -80,8 +85,8 @@ library(lubridate)
 library(EsamiR)
 @
 \chapter{Introduzione}
-Per accedere ai dati richiesti in questa parte occorre caricare il pacchetto allegato \texttt{libroR}. Per farlo conviene scaricare il file \texttt{libroR$\_0$.0.tgz}  sul proprio computer e  selezionare il menu \texttt{Install}\\
-\begin{center}\begin{figure} 
+Per accedere ai dati richiesti in questa parte occorre caricare il pacchetto allegato \texttt{libroR}. Per farlo conviene scaricare il file \texttt{libroR$\_0$.0.tgz}  sul proprio computer e  selezionare il menu \texttt{Install}
+\begin{center}\begin{figure}[H]
 \includegraphics[width=0.4\textwidth]{../grafici/installlibro.png}
 \caption{Procedura di installazione del pacchetto}
 \label{fig::rlibroinstall} \end{figure}
@@ -99,15 +104,18 @@ Il pacchetto va poi successivamente caricato con il comando
 <<eval=TRUE,echo=TRUE>>=
 library("libroR")
 @
+
+Precisiamo inoltre che questa \`e una versione assolutamente preliminare.
 \chapter{Strutture di dati}
-%\section{Aritmetica modulare}
+
  
-Premettiamo che per visualizzare un oggetto di \textsf{R} si pu\`o usare il comando \texttt{print} o il comando \texttt{cat} che fornisce spesso un risultato migliore. \texttt{str} visualizza la struttura di un oggetto mentre \texttt{head} o \texttt{tail} ne visualizzano l'inizio o la fine.
+Per visualizzare un oggetto di \textsf{R} si pu\`o usare il comando \texttt{print} o il comando \texttt{cat} che fornisce spesso un risultato migliore. \texttt{str} visualizza la struttura di un oggetto mentre \texttt{head} o \texttt{tail} ne visualizzano l'inizio o la fine.
 
 
-\section{Le stringhe}
+\section{I diversi  tipi di vettori}
+\subsection{Vettori di caratteri/stringhe}
 Una stringa\index{stringa} di testo \`e una collezione di caratteri; in genere, una stringa \`e resa riconoscibile dall'essere racchiusa tra virgolette.
-\subsection{Operare con le stringhe}
+\subsubsection{Operare con le stringhe}
 Oltre alle virgolette, vi sono numerosi altri caratteri speciali che possono apparire in una stringa.
 I pi\`u comuni sono ``\texttt{\textbackslash t}'' per \texttt{TAB}, `` \texttt{\textbackslash n}'' per una nuova linea e ``\texttt{\textbackslash }'' per un singolo {\it backslash}.
 Quest'ultimo carattere \`e un carattere di \emph{escape} e consente una lettura diversa di quanto lo segue.  Per esempio
@@ -152,7 +160,7 @@ abbreviate("Mario Rossi",4)
 Certi oggetti possono essere convertiti a stringhe: per esempio il numero 2 pu\`o essere visto come una stringa e riconvertito a numero.
 %codechunk
 <<echo=TRUE>>=
- i=2;toString(i)
+i=2;toString(i)
 as.numeric(toString(i))
 @
 Alcune stringhe molto frequenti sono le lettere \index{\texttt{letters}}\index{\texttt{LETTERS}} dell'alfabeto, maiuscole o minuscole
@@ -224,7 +232,24 @@ Estendere la corrispondenza a tutto l'alfabeto.
 \item Scrivere un elenco di 5 persone con le relative date di nascita nel formato anno-mese-giorno.
  \end{enumerate}
  \end{shaded}
-
+\subsection{Vettori logici}
+I valori logici in R sono i valori \texttt{TRUE} e \texttt{FALSE} e corrispondono alla veridicit\`a di un'affermazione.
+Per esempio
+<<>>=
+1:10 > 4
+@
+Ci fornisce simultaneamente i valori dei 10 confronti.
+\section{Vettori numerici e operazioni di aritmetica modulare}
+<<>>=
+1:10
+@
+<<>>=
+resto=(1:10)%%4
+resto
+quoziente=(1:10)%/%4
+quoziente
+resto+4*quoziente
+@
 \section{Matrici}
 
 Assegnati $n\times m$ ingressi possiamo costruire una matrice (ossia una tabella) con $n$ righe e $m$ colonne. Occorre solo riempire la matrice per righe o per colonne.
@@ -496,7 +521,7 @@ array(sample(1:100,24), dim=c(3,4,2),
       dimnames=list(LETTERS[1:3],LETTERS[11:14],letters[1:2]))->x
 x[,,"b"]
 @
-\section{Liste}
+\section{Le liste}
 Una lista (in \textsf{R} \texttt{list}) \`e un vettore di oggetti.  Gli oggetti possono avere un nome ed avere natura diversa fra di loro. \index{\texttt{list}}
 Per esempio
 %code chunk
@@ -624,7 +649,11 @@ sort(x)
 \subsection{Indicatori statistici}
 \begin{itemize}
 \item{}Media.\vskip0pt
-La media di una serie di numeri si ottiene con la funzione \texttt{mean} scrivendo:
+La varianza di un vettore di $n$ numeri
+\[x=(x_1,\ldots,\ldots,x_n)\] 
+\`e definita come
+\[ \bar{x}=\frac 1 n \sum_{i=1}^n x_i\]
+Si calcona in \rpr con la funzione \texttt{mean} scrivendo:
 $\texttt{mean}(\varia{variabile})$.
 Ad esempio, lavorando con la lunghezza del sepalo di 150 piante di iris
 <<echo=TRUE>>=
@@ -632,6 +661,10 @@ x=iris[,1]
 mean(x)
 @
 \item{}Varianza campionaria\vskip0pt
+La varianza di un vettore di $n$ numeri
+\[x=(x_1,\ldots,\ldots,x_n)\]
+\`e definita come
+\[  \mathrm{var}(x)=\dfrac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2\]
 Si ottiene con la funzione predefinita di espressione:
 \texttt{var}(\varia{variabile}).
 Possiamo calcolare la varianza come
@@ -710,8 +743,9 @@ meteo=read.table(indirizzo,sep=";",header=T)[,-1]
 write.table(meteo,file="../filedati/meteo.txt",sep=";")
 <<echo=FALSE,eval=TRUE>>=
 meteo=read.table("../filedati/meteo.txt",sep=";",header=T)
-<<echo=TRUE>>=
-meteo
+<<tidy=TRUE>>=
+options(width=60)
+str(meteo)
 @
 A questo punto selezioniamo la colonna della temperatura media 
 <<echo=TRUE>>=
@@ -963,14 +997,14 @@ Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt
 modello=lm(height~age,data=village)
 modello
 @
-con la formula $lm(y \widetilde{} x,data=dataset)$.
-Inoltre possiamo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
-<<fig=TRUE,echo=FALSE>>=
-oldpar<-par(mfrow=c(2,2))
-par(ask=FALSE)
-plot(lm(height~age))
-oldpar
-@
+con la formula \texttt{lm(y \mytilde x,data=dataset)}.
+%Inoltre possiamo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
+%<<fig=TRUE,echo=FALSE>>=
+%oldpar<-par(mfrow=c(2,2))
+%par(ask=FALSE)
+%plot(lm(height~age))
+%oldpar
+%@
 \section{Modelli potenza}
 Consideriamo ora il seguente \emph{dataset} di mammiferi  in cui le 2 variabili rappresentano  le dimensioni del corpo e del cervello.
 <<echo=TRUE>>=
@@ -1326,13 +1360,12 @@ text(0,0.45,expression("code della gaussiana"))
 \`E possibile generare dei valori standardizzati casuali (media uguale a 0, deviazione standard pari a 1) che seguono la distribuzione normale standard. Basta semplicemente definire il numero di valori desiderati.
 Il comando nella sua espressione generale \`e:
 \begin{equation}\texttt{rnorm}(n,\texttt{mean}=\varia{valore}_1,\texttt{sd}=\varia{valore}_2)\end{equation}
-Nel caso in cui volessimo una lista di 20 valori di una variabile normale con media assegnata 5 e deviazione standard 1 scriveremo :
-
-<<echo=TRUE,eval=FALSE>>=
+Nel caso in cui volessimo una lista di 20 valori di una variabile normale con media assegnata 5 e deviazione standard 1 scriveremo
+<<echo=TRUE,eval=TRUE>>=
 rnorm(20,mean=5,sd=1)
 @
 \subsection{La distribuzione $t$ di Student}
-In \textsf{R} la distribuzione di Student \`e indicata con la lettera  \texttt{t}.  Come per le altre densit\`a  si possono considerare le funzioni\vskip5pt
+In \textsf{R} la distribuzione di Student \`e indicata con la lettera  \texttt{t}.  Come per le altre distribuzioni  si possono considerare le funzioni\vskip5pt
 \begin{tabular}{|r|r |}
 \hline
 dt  &densit\`a\\
@@ -1371,15 +1404,24 @@ legend("topleft", c("df=2","df=25","normale"),pch=15,col=1:3);
 \label{fig:graficostudent}
 \end{center}
 \end{figure}
+Come nel caso della distribuzione normale se vogliamo una funzione diciamo \texttt{student}  tale che assegnato un valore di area $A$   fornisca l'ascissa $x=student(A)$  in modo che l'area tra - $x$ e $x$ sia esattamente pari ad $A$ dobbiamo scrivere la funzione
+<<>>=
+student<-function (A,..) qt (1/2 + A/2,..)
+@
+dove i puntini stanno per le variabili omesse o pi\`u esplicitamente
+<<>>=
+student<-function (A,df) qt (1/2 + A/2,df)
+@
+dove \texttt{df} sono i gradi di libert\`a. 
  \subsection
-{Intervalli di confidenza e test di Student (dati non appaiati)}
+{Intervalli di confidenza e test di Student}
 La funzione di
 \textsf{R} che esegue il test di Student nelle sue diverse forme \`e  \texttt{t.test}.   Nella sua forma pi\`u semplice
 
 <<echo=TRUE>>=
 x=1:20;  t.test(x)
 @
-In assenza di ipotesi  \textsf{R} calcola il consuntivo $$t=\dfrac{M_N(X)-\mu}{S_X}\sqrt {N}$$
+In assenza di ipotesi  \textsf{R} calcola il valore osservato del consuntivo $$T=\dfrac{M_N(X)-\mu}{S_X}\sqrt {N}$$
 assumendo che sia $\mu=0$.
 Possiamo anche eseguire specificare l'ipotesi sul valore di $\mu$:
 <<echo=TRUE>>=
@@ -1420,7 +1462,139 @@ t.test(1:4,5:2,paired=TRUE,conf.level=0.85)
 @
  Il consuntivo $t$ cade fuori dalla regione di accettazione proposta.
 
- \section{Test $\chi^2$  di indipendenza}
+
+\subsection{t-test: caso ad egual varianza}
+<<echo=FALSE>>=
+R=c(11.4,16.5,21.1,29.9,25.3)
+B=c(23.7,24.3,28.5,26.6, 17.9,14.2)
+n_R=length(R)
+n_B=length(B)
+m_R=mean(R)
+m_B=mean(B)
+s_R=sd(R)
+s_B=sd(B)
+sigma=sqrt(((n_R-1)*s_R^2+ (n_B-1) *s_B^2)/(n_R+n_B-2) *(1/n_R  +1/n_B))
+@
+Si considerino i seguenti dati relativi alla misura di una grandezza fisica.
+
+
+\[(
+\color{red}{11.4},\color{blue}{23.7},\color{blue}{24.3},\color{red}{16.5},\color{blue}{28.5},
+\color{blue}{26.6},\color{red}{21.1},\color{red}{29.9},\color{blue}{17.9},\color{red}{25.3},\color{blue}{14.2})\]
+
+
+I colori rosso e blu si riferiscono all'utilizzo di due diversi strumenti di misura. Si noti che il numero di esperimenti in rosso (esperimenti 1,4, 7,8,10) non é uguale al numero di esperimenti in blu (esperimenti 2,3,5,6,9,11): non si tratta di misure ripetute sugli stessi campioni, ma di misure effettuate su campioni diversi.
+
+Si dica, con fiducia al 95\% se esiste una differenza fra i due strumenti.
+\begin{itemize}
+\item I dati sono
+<<echo=FALSE>>=
+cat(R)
+cat(B)
+@
+\item Ipotesi di lavoro \[\mu_R= \mu_B\]
+  \item Calcoliamo i valori dei parametri statistici per il campione rosso e per il campione blu.
+\item Indicatori:
+\[m_R=\Sexpr{mean(R)}\]
+\[m_B=\Sexpr{mean(B)}\]
+ \[s_R=\Sexpr{sd(R)}\]
+\[s_B=\Sexpr{sd(B)}\]
+\end{itemize}
+
+Dobbiamo valutare il valore del consuntivo
+\[ t_{ R, B} =\frac{ (M_R-M_B) -(\mu_R-\mu_B)}{\Sigma }\]
+nell'ipotesi di lavoro 
+\[\mu_R-\mu_B= 0\Leftrightarrow \mu_R=\mu_B\]
+
+dove
+\[
+\begin{aligned}
+\Sigma =& \sqrt{\dfrac{(n_R-1) S_R^2+(n_B-1) S_B^2 }{n_R+n_B-2}  \left(\frac{1}{n_R} +\frac{1}{n_B}\right)}\rightarrow  \\
+&\sqrt{\dfrac{\Sexpr{ (n_R-1)* s_R^2}+\Sexpr{ (n_B-1) *s_B^2} }{\Sexpr{ n_R+n_B-2}}   \left(\frac{1}{\Sexpr{ n_R}} +\frac{1}{\Sexpr{ n_B}}\right)}= 
+\sqrt{\Sexpr{ ((n_R-1)*s_R^2+ (n_B-1) *s_B^2)/(n_R+n_B-2) *(1/n_R  +1/n_B)}} = \Sexpr{ sigma}
+\end{aligned}
+\] 
+
+Il valore osservato di $t_{R,B}$ è
+
+\[t_{ R,B} = \frac{m_R-m_B}{\Sigma}  =\Sexpr{ (m_R-m_B)/sigma} \]
+
+
+La regione di accettazione \`e
+
+\[[-t_{ 0.95, 9} , t_{0.95, 9} ] = [-2.262, 2.262]\]
+
+Visto che il consuntivo  cade ampiamente in tale intervallo accettiamo l'ipotesi di lavoro.
+
+con \rpr basta scrivere:
+<<>>=
+R=c(11.4,16.5,21.1,29.9,25.3)
+B=c(23.7,24.3,28.5,26.6, 17.9,14.2)
+t.test(R,B,var.equal=T)
+@
+Se non potessimo ipotizzare la provenienza dei due campioni da popolazioni con ugual varianza potremmo scrivere
+
+\subsection{Caso generale (test di Welch)}
+
+Qualora non si possa affermare l'eguaglianza delle varianze l'errore standard della differenza delle medie si può stimare come
+
+\[ \Sigma= \sqrt{\frac{s_X^2}{n_X}+\frac{s_Y^2}{n_Y}}\]
+\[ df =\dfrac
+{ \left(\frac{s_X^2}{n_X}+\frac{s_Y^2}{n_Y}\right)^2}
+{
+\frac{(s_X^2/n_X)^2}{n_X-1}+
+\frac{(s_Y^2/n_Y)^2}{n_Y-1}
+}\]
+
+Il consuntivo diviene
+
+\[\frac{M_X-M_Y-(\mu_X-\mu_Y)}{\Sigma}  \]
+
+e la regione di accettazione si calcola come
+
+\[ [-t_{1-\epsilon,df},t_{1-\epsilon,df}]\]
+
+
+\subsubsection{Esempio}
+Con gli stessi dati di prima si ipotizzi $\mu_X=\mu_Y$ (fiducia al 95\%)
+<<echo=FALSE>>=
+X=c(11.4,16.5,21.1,29.9,25.3)
+Y=c(23.7,24.3,28.5,26.6, 17.9,14.2)
+s_X=sd(X)
+n_X=length(X)
+m_X=mean(X)
+s_Y=sd(Y)
+n_Y=length(Y)
+m_Y=mean(Y)
+df= (( s_X^2/n_X +   s_Y^2/n_Y)^2)/
+( 
+((s_X^2/n_X)^2/( n_X-1)) +
+((s_Y^2/n_Y)^2/( n_Y-1))
+)
+Sigma=sqrt(s_X^2/n_X + s_Y^2/n_Y)
+@
+\[ X=(\Sexpr{X})\quad Y=(\Sexpr{Y})\]
+
+
+\[ \Sigma= \sqrt{\Sexpr{s_X^2/n_X + s_Y^2/n_Y}}\]
+e i gradi di libertà  
+\[ df =\dfrac
+{  (\Sexpr{s_X^2/n_X + s_Y^2/n_Y})^2}
+{
+(\Sexpr{(s_X^2/n_X)^2}/\Sexpr{n_X-1}+
+\Sexpr{(s_Y^2/n_Y)^2}/\Sexpr{n_Y-1})
+}= \]
+\[
+  \Sexpr{((s_X^2/n_X + s_Y^2/n_Y)^2)/( ((s_X^2/n_X)^2/( n_X-1)) +((s_Y^2/n_Y)^2/( n_Y-1)))}
+\]
+
+Se si usa  \rpr basta scrivere
+
+<<echo=TRUE>>=
+t.test(X,Y) 
+@
+
+\subsection{Test $\chi^2$  di indipendenza}
 
 %code chunk
 Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
@@ -1456,7 +1630,7 @@ chisq.test(tabellaEH)
 @
 L'intervallo di accettazione dell'ipotesi (che ricordiamo \`e l'indipendenza) al 95\% di fiducia e 1 gradi di libert\`a \`e  $[0, 3.841]$, il consuntivo cade dentro, per cui l'ipotesi \`e accettata.
  
-Se le celle in una tabella 2x2 contengono numeri bassi R utilizza la correzione di Yates. Se la si vuole eliminare  si utilizza il parametro  \texttt{correct=FALSE}.
+Se le celle in una tabella 2x2 contengono numeri bassi \rpr  utilizza la correzione di Yates. Se la si vuole eliminare  si utilizza il parametro  \texttt{correct=FALSE}.
 Ad esempio scriveremo:
 %code chunk
 <<echo=TRUE>>=
@@ -1490,7 +1664,7 @@ dbinom(2,10,1/6)
 @
 
 La  probabilit\`a \`e circa del 29\%.
-
+\begin{comment}
 
 \begin{shaded}
 \begin{description}
@@ -1501,6 +1675,7 @@ La  probabilit\`a \`e circa del 29\%.
 \item{}derivata di $x^3+x^2+2x+1$, plot della funzione e plot della derivata come due pannelli distinti in un grafico unico. hint: par(mfrow)
 \end{description}
 \end{shaded}
+\end{comment}
 \begin{comment}
 
 \section{Operatori condizionali e cicli}
@@ -1676,7 +1851,7 @@ fornisce il risultato dell'analisi della varianza.
 
 
 
-\section{Test $\chi^2$  di indipendenza}
+\subsection{Test $\chi^2$  di indipendenza}
 
 %code chunk
 <<>>=
@@ -2913,14 +3088,14 @@ points(coord[2],coord[1], cex=3, col="red")
 \section{File Rmd}
 \section{ggplot}
 \end{comment}
-\section*{Tabelle delle distribuzioni statistiche}
+\chapter*{Tabelle delle distribuzioni statistiche}
 Per generare la tabella delle aree sottese dalla distribuzione normale da 0 ad $x$ si deve per prima cosa tenere conto del fatto che \texttt{pnorm}  \`e la cumulativa ad una sola coda. Si sceglie l'intervallo di tabulazione, il numero di colonne ed il numero di cifre.
 <<echo=TRUE>>=
 start=0.01
 stop=3.00
 step=0.01;
 nc=6;
-cifre=5;
+cifre=4;
 correzione<-function(x)  round(10^cifre* (pnorm(x)-0.5))/10^cifre
  tabnormale<-cbind(matrix(correzione(seq(start,stop,by=step)),nc=nc),
  matrix(seq(start,stop,by=step),nc=nc))
@@ -2981,7 +3156,7 @@ fisher099=fisher095;
 fisher99<-function(gradinum,gradiden,cifre)
 round(10^cifre*qf(fiducia
 [2],gradinum,gradiden))/10^cifre;for (i in 1:length(gradinum))
-fisher099[,i]= fisher99(gradinum[i],gradiden,cifre)
+fisher099[,i]= fisher99(gradinum[i],gradiden,cifre-1)
 @
  \setlength\textheight{9in}
 \vfill\eject
@@ -2991,7 +3166,7 @@ fisher099[,i]= fisher99(gradinum[i],gradiden,cifre)
 \topmargin -0.4in
 \small
 <<echo=FALSE>>=
-options(width=80)
+options(width=85)
 <<echo=FALSE>>=
 tabnormale[,ordinecol]
 @
@@ -3032,7 +3207,7 @@ fisher099
 @
 \vfill
 \eject
-
+\end{document}
 % \input{../biblio.bib}
 
 Per esempio, consideriamo la serie temporale (oggetto di classe \texttt{ts}) \texttt{discoveries} che mostra l'andamento annuale del numero di scoperte scientifiche. Rappresentiamo graficamente tale serie trascurando  prima e ricordandoci poi della sua struttura  addizionale

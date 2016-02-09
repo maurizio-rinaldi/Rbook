@@ -117,9 +117,8 @@ switch(tipo,
        poli= {
                temp1=sceltarange(-9,9,5,0)
                temp2=sceltarange(0,6,5,logica=F)
-
-               ftex=paste(temp1,"x^",temp2,sep="",collapse="+")###polinomio
-               fr1=paste(temp1,"*x^",temp2,sep="",collapse="+")###
+                ftex=paste(temp1,"x^",temp2,sep="",collapse="+")###polinomio
+               fr1=paste(temp1,"*x^",temp2,sep="",collapse="+") 
                body(fr)= parse(text=fr1)
                environment(fr)<-globalenv()
                domain=c(-Inf,Inf)

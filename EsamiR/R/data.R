@@ -1,88 +1,121 @@
-#' Prices of 50,000 round cut diamonds.
+#' Sopravvivenza di una colonia di moscerini
+#' 
+#' #' Mortalita' dei moscerini  su un periodo di 173 giorni
 #'
-#' A dataset containing the prices and other attributes of almost 54,000
-#' diamonds.
-#'
-#' @format A data frame with 53940 rows and 10 variables:
+#' @format Un data frame di 173 righe e 3 variabili:
 #' \describe{
-#'   \item{eta }{price, in US dollars}
-#'   \item{carat}{weight of the diamond, in carats}
+#'   \item{day }{tempo in giorni}
+#'   \item{living}{moscerini vivi}
+#'   \item{mort.rate}{tasso di mortalita' per ogni giorno}
 #'   ...
 #' }
-#' @source \url{http://www.diamondse.info/}
-"gompertz"
+#' @source \url{http://lib.stat.cmu.edu/DASL/Datafiles/Medflies.html}
+"moscerini"
 
-#' Interesse dei bambini
+#' Misure morfologiche di granchi Leptograpsus Variegatus
 #'
-#' Datafile Name: Popular Kids
-#' Story Names: Students' Goals , What Makes Kids Popular
-#'Reference: Chase, M. A., and Dummer, G. M. (1992), "The Role of Sports as a Social Determinant for Children," Research Quarterly for Exercise and Sport, 63, 418-424
-#'Authorization: Contact authors
-#'Description: Subjects were students in grades 4-6 from three school districts in Ingham and Clinton Counties, Michigan. Chase and Dummer stratified their sample, selecting students from urban, suburban, and rural school districts with approximately 1/3 of their sample coming from each district. Students indicated whether good grades, athletic ability, or popularity was most important to them. They also ranked four factors: grades, sports, looks, and money, in order of their importance for popularity. The questionnaire also asked for gender, grade level, and other demographic information.
-#' Number of cases: 478
-#'Variable Names:
-#'Gender: Boy or girl
-#'Grade: 4, 5 or 6
-#' Age: Age in years
-#' Race: White, Other
-#'Urban/Rural: Rural, Suburban, or Urban school district
-#'School: Brentwood Elementary, Brentwood Middle, Ridge, Sand, Eureka, Brown, Main, Portage, Westdale Middle
-#'Goals: Student's choice in the personal goals question where options were 1 = Make Good Grades, 2 = Be Popular, 3 = Be Good in Sports
-#'Grades: Rank of "make good grades" (1=most important for popularity, 4=least important)
-#'Sports: Rank of "being good at sports" (1=most important for popularity, 4=least important)
-#'Looks: Rank of "being handsome or pretty" (1=most important for popularity, 4=least important)
-#'Money: Rank of "having lots of money" (1=most important for popularity, 4=least important)
-#'The Data: Un dataset che contiene informazioni su 478 bambini
-#' diamonds.
-#'
-#' @format A data frame with 53940 rows and 10 variables:
+#' Un dataset che contiene informazioni su 200 granchi (tratto dal pacchetto MASS)
+#' @format Un data frame di 200 righe e 8 variabili:
 #' \describe{
-#'   \item{price}{price, in US dollars}
-#'   \item{carat}{weight of the diamond, in carats}
+#'   \item{sp }{specie B (blu) O (arancione)}
+#'   \item{sex}{sesso}
+#'   \item{index}{indice da 1 a 50 per i 4 gruppi}
+#'   \item{FL}{dimensione del lobo frontale}
+#'   \item{RW}{larghezza psteriore}
+#'   \item{CL}{lunghezza del carapace}
+#'   \item{CW}{larghezza del carapace}
+#'   \item{BD}{spessore corporeo}
+#' }
+#' @source \url{http://www.publish.csiro.au/paper/ZO9740417.htm}
+"granchi"
+
+#' Meteo  a Milano
+#' 
+#' @format Un data frame di 31 righe e 15 variabili:
+#' \describe{
+#'   \item{LOCALITA }{localita}
+#'   \item{DATA}{Data}
 #'   ...
 #' }
-#' @source \url{http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html}
-"studenti"
+#' @source \url{http://www.ilmeteo.it/portale/archivio-meteo/Milano/2016/Gennaio?format=csv}
+"meteo"
 
-
-
-#' Interesse dei bambini
+ 
+#' Attitudini e priorita' di bambini delle elementari
+#' 
+#' I dati: Un dataset che contiene informazioni su 478 bambini
 #'
-#' Datafile Name: Popular Kids
-#' Story Names: Students' Goals , What Makes Kids Popular
-#'Reference: Chase, M. A., and Dummer, G. M. (1992), "The Role of Sports as a Social Determinant for Children," Research Quarterly for Exercise and Sport, 63, 418-424
-#'Authorization: Contact authors
-#'Description: Subjects were students in grades 4-6 from three school districts in Ingham and Clinton Counties, Michigan. Chase and Dummer stratified their sample, selecting students from urban, suburban, and rural school districts with approximately 1/3 of their sample coming from each district. Students indicated whether good grades, athletic ability, or popularity was most important to them. They also ranked four factors: grades, sports, looks, and money, in order of their importance for popularity. The questionnaire also asked for gender, grade level, and other demographic information.
-#' Number of cases: 478
-#'Variable Names:
-#'Gender: Boy or girl
-#'Grade: 4, 5 or 6
-#' Age: Age in years
-#' Race: White, Other
-#'Urban/Rural: Rural, Suburban, or Urban school district
-#'School: Brentwood Elementary, Brentwood Middle, Ridge, Sand, Eureka, Brown, Main, Portage, Westdale Middle
-#'Goals: Student's choice in the personal goals question where options were 1 = Make Good Grades, 2 = Be Popular, 3 = Be Good in Sports
-#'Grades: Rank of "make good grades" (1=most important for popularity, 4=least important)
-#'Sports: Rank of "being good at sports" (1=most important for popularity, 4=least important)
-#'Looks: Rank of "being handsome or pretty" (1=most important for popularity, 4=least important)
-#'Money: Rank of "having lots of money" (1=most important for popularity, 4=least important)
-#'The Data: Un dataset che contiene informazioni su 478 bambini
-#' diamonds.
-#'
-#' @format A data frame with 53940 rows and 10 variables:
+#' @format A data frame with 478 rows and 10 variables:
 #' \describe{
 #'   \item{Gender}{Sesso}
+#'   \item{Grade}{la Classe}
 #'   \item{Age}{eta' in anni}
 #'   \item{Race}{Bianco o altro}
 #'   \item{Urban/Rural}{distretto scolastico di tipo rurale, urbano o suburbano}
-#'   \item{School}{eta' in anni}
-#'   \item{Goals}{Gli obiettivi degli studenti erano  1 =Ottenere buone valutazioni, 2 = Essere popolari,
+#'   \item{School}{scuola}
+#'   \item{Goals}{Gli obiettivi degli studenti: 1 =Ottenere buone valutazioni, 2 = Essere popolari,
 #'    3 = Essere bravo negli sport}
-#'   \item{Grades}{(1=most important for popularity, 4=least important)}
-#'   \item{Sport}{eta' in anni}
-#'   \item{Looks}{(1=most important for popularity, 4=least important)i}
-#'   \item{Money}{eta' in anni}
+#'   \item{Grades}{ voti (1=piu' importante per essere popolari, 4=meno importante)}
+#'   \item{Sport}{ sport(1=piu' importante per essere popolari, 4=meno importante)}
+#'   \item{Looks} { aspetto (1=piu' importante per essere popolari, 4=meno importante)}
+#'   \item{Money}{denaro (1=piu' importante per essere popolari, 4=meno importante)}
 #' }
 #' @source \url{http://lib.stat.cmu.edu/DASL/Datafiles/PopularKids.html}
-"kidinterest"
+"bambini"
 
+
+
+#' Studenti di Biotecnologie
+#' 
+#' #' Un dataset che contiene informazioni su 41 studenti di Biotec
+#'
+#' @format A data frame with 41 rows and 8 variabili:
+#' \describe{
+#'   \item{SESSO}{M/F}
+#'   \item{PESO}{peso in kg}
+#'   \item{ALTEZZA}{Altezza in metri}
+#'   \item{OCCHI}{Colore degli occhi}
+#'   \item{CAPELLI}{Colore dei capelli}
+#'   \item{SCARPE}{numero di scarpe}
+#'   \item{hMADRE}{Altezza della madre}
+#'   \item{hPADRE}{Altezza del padre}
+#'   
+#' }
+"studentibiotec"
+#' 
+#' Studenti di Farmacia
+#'
+#' I dati: Un dataset che contiene informazioni su 55 studenti di Farmacia
+#'
+#' @format Un data frame con 41 righe e 8 variabili:
+#' \describe{
+#'   \item{SEX}{M/F}
+#'   \item{W}{peso in kg}
+#'   \item{H}{Altezza in metri}
+#'   \item{Eyes}{Colore degli occhi}
+#'   \item{Hair}{Colore dei capelli}
+#'   \item{Sh}{numero di scarpe}
+#'   \item{hM}{Altezza della madre}
+#'   \item{hF}{Altezza del padre}
+#' }
+#' 
+"studentifarmacia"
+
+#' 96  studenti 
+#' 
+#'I dati: Un dataset che contiene informazioni su 96 studenti  
+#'
+#' @format Un data frame con 96 righe e 8 variabili:
+#' \describe{
+#'   \item{SEX}{M/F}
+#'   \item{W}{peso in kg}
+#'   \item{H}{Altezza in metri}
+#'   \item{Eyes}{Colore degli occhi}
+#'   \item{Hair}{Colore dei capelli}
+#'   \item{Sh}{numero di scarpe}
+#'   \item{hM}{Altezza della madre}
+#'   \item{hF}{Altezza del padre}
+#'   
+#' }
+#' 
+"studenti"

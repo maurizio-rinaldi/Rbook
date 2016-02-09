@@ -8,16 +8,16 @@
 \indexentry{\texttt{paste}|hyperpage}{5}
 \indexentry{\texttt{colnames}|hyperpage}{8}
 \indexentry{\texttt{rownames}|hyperpage}{8}
-\indexentry{trasposto|hyperpage}{9}
-\indexentry{\texttt{t}, trasposto|hyperpage}{9}
-\indexentry{\texttt{\%*\%}, prodotto di matrici|hyperpage}{9}
-\indexentry{autovalore|hyperpage}{10}
-\indexentry{\texttt{str}|hyperpage}{11}
-\indexentry{\texttt{level}|hyperpage}{12}
-\indexentry{detach|hyperpage}{13}
+\indexentry{trasposto|hyperpage}{10}
+\indexentry{\texttt{t}, trasposto|hyperpage}{10}
+\indexentry{\texttt{\%*\%}, prodotto di matrici|hyperpage}{10}
+\indexentry{autovalore|hyperpage}{11}
+\indexentry{\texttt{str}|hyperpage}{12}
+\indexentry{\texttt{level}|hyperpage}{13}
+\indexentry{detach|hyperpage}{14}
 \indexentry{\texttt{rbind}|hyperpage}{14}
 \indexentry{\texttt{cbind}|hyperpage}{14}
-\indexentry{\texttt{list}|hyperpage}{17}
-\indexentry{\texttt{hist}|hyperpage}{30}
-\indexentry{\texttt{chisq.tst},test $\chi^2$|hyperpage}{55}
-\indexentry{\texttt{dbinom}|hyperpage}{57}
+\indexentry{\texttt{list}|hyperpage}{18}
+\indexentry{\texttt{hist}|hyperpage}{29}
+\indexentry{\texttt{chisq.tst},test $\chi^2$|hyperpage}{58}
+\indexentry{\texttt{dbinom}|hyperpage}{60}
