@@ -4,7 +4,7 @@
 \usepackage{inconsolata}
 %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
 \usepackage[T1]{fontenc}
-
+\usepackage[buttonsize=1em]{animate}
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
@@ -15,8 +15,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
 \usepackage{lipsum}
-\usepackage[dvipsnames]{color}
-\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\usepackage[]{color}
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{amsmath}
@@ -48,11 +47,9 @@
 %\begin{center}
 %\begin{minipage}{12cm}
  \markright{\today}
-\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
 \colorbox{grigetto}{\parbox{\linewidth}{#1}}}
                           {
-                         % \end{minipage}
-                          %\end{center}
+                
                           \medskip}
  \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
@@ -62,23 +59,17 @@
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}
-%\renewcommand{\sectionmark}[1]{%
-% \markboth{\sectionname
-% \ \thesection.\ #1}{}}
 \newcommand{\rst}{\textsf{RStudio}~}
 \newcommand{\rpr}{\textsf{R}~}
 \makeindex
 \begin{document}
-\SweaveOpts{concordance=TRUE}
 \setkeys{Gin}{width=0.7\textwidth}
 
-<<setup, include=FALSE, cache=FALSE>>=
+<<include=FALSE>>=
 library(knitr)
-options(formatR.arrow=TRUE,width=50)
-opts_chunk$set(fig.path='figure/graphics-', cache.path='cache/graphics-', fig.align='center', dev='tikz', fig.width=5, fig.height=5, fig.show='hold', cache=TRUE, par=TRUE)
-knit_hooks$set(par=function(before, options, envir){
-if (before && options$fig.show!='none') par(mar=c(4,4,.1,.1),cex.lab=.95,cex.axis=.9,mgp=c(2,.7,0),tcl=-.3)
-}, crop=hook_pdfcrop)
+opts_chunk$set(
+concordance=TRUE
+)
 @
 
 \markright{\today}
@@ -95,15 +86,6 @@ library(lubridate)
 library(EsamiR)
 @
 \chapter{Introduzione}
-<<par-hook, cache = FALSE>>=
-knit_hooks$set(pars = function(before, options, envir) {
-  if (before) graphics::par(options$pars)
-})
-@
-
-<<use-pars, pars = list(mar=c(4, 4, .1, .1), mgp=c(2, 1, 0))>>=
-plot(mtcars[, 1:2])
-@
 Per accedere ai dati richiesti in questa parte occorre caricare il pacchetto allegato \texttt{libroR}. Per farlo conviene scaricare il file \texttt{libroR$\_0$.0.tgz}  sul proprio computer e  selezionare il menu \texttt{Install}
 \begin{center}\begin{figure}[H]
 \includegraphics[width=0.4\textwidth]{../grafici/installlibro.png}
@@ -123,6 +105,20 @@ Il pacchetto va poi successivamente caricato con il comando
 <<eval=TRUE,echo=TRUE>>=
 library("libroR")
 @
+\begin{figure}
+<<clock-animation, fig.width=3, fig.height=3, out.width='.4\\linewidth', fig.show='animate', tidy=FALSE, crop=TRUE>>=
+par(mar = rep(3, 4))
+for (i in seq(pi/2, -4/3 * pi, length = 12)) {
+    plot(0, 0, pch = 20, ann = FALSE, axes = FALSE)
+    arrows(0, 0, cos(i), sin(i))
+    axis(1, 0, "VI"); axis(2, 0, "IX")
+    axis(3, 0, "XII"); axis(4, 0, "III"); box()
+}
+@
+
+\caption{A clock animation. You have to view it in Adobe Reader: click to play/pause;
+there are also buttons to speed up or slow down the animation.\label{fig:clock-animation}}
+\end{figure}
 
 Precisiamo inoltre che questa \`e una versione assolutamente preliminare.
 \chapter{Strutture di dati}
@@ -229,9 +225,8 @@ paste(rep(letters[1:3],each=5),1:15,sep="")
 paste(rep(letters[1:3],ntimes=5),1:15,sep="")
 @
 Con l'opzione \texttt{collapse="x"} le stringhe vengono unite con separatore la stringa "x".
-
-
-<<>>=
+%codechunk
+<<echo=TRUE,eval=TRUE>>=
 paste(c("X", "Y"), 1:4, sep = "-", collapse = "--")
 @
 Si noti il separatore - dell'operazione \texttt{paste} e  - - dell'operazione \texttt{collapse}.
@@ -243,7 +238,7 @@ Si noti il separatore - dell'operazione \texttt{paste} e  - - dell'operazione \t
  \item{} Costruire una tabella che contenga tutte le parole di 2 lettere.
 \item{}
 Si consideri
-<<results=hide>>=
+<<results='hide'>>=
 paste(letters[1:7],1:7,sep="=")
 @
 Estendere la corrispondenza a tutto l'alfabeto.
@@ -669,7 +664,11 @@ sort(x)
 \subsection{Indicatori statistici}
 \begin{itemize}
 \item{}Media.\vskip0pt
-La media di una serie di numeri si ottiene con la funzione \texttt{mean} scrivendo:
+La varianza di un vettore di $n$ numeri
+\[x=(x_1,\ldots,\ldots,x_n)\] 
+\`e definita come
+\[ \bar{x}=\frac 1 n \sum_{i=1}^n x_i\]
+Si calcona in \rpr con la funzione \texttt{mean} scrivendo:
 $\texttt{mean}(\varia{variabile})$.
 Ad esempio, lavorando con la lunghezza del sepalo di 150 piante di iris
 <<echo=TRUE>>=
@@ -677,6 +676,10 @@ x=iris[,1]
 mean(x)
 @
 \item{}Varianza campionaria\vskip0pt
+La varianza di un vettore di $n$ numeri
+\[x=(x_1,\ldots,\ldots,x_n)\]
+\`e definita come
+\[  \mathrm{var}(x)=\dfrac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2\]
 Si ottiene con la funzione predefinita di espressione:
 \texttt{var}(\varia{variabile}).
 Possiamo calcolare la varianza come
@@ -1041,16 +1044,15 @@ plot(mammals,log="xy")
 \end{center}
 \end{figure}
 Visti i  risultati ottenuti usando la scala logaritmica tracciamo anche la corrispondente retta di regressione
-<<>>=
+<<echo=TRUE,fig.keep='none'>>=
 plot(log(mammals$brain)~log(mammals$body),col="BLUE",pch=19,type="p")
 abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3);
 uomo=which(rownames(mammals)=="Human")
 text(log(mammals[uomo ,1]),log(mammals[uomo ,2]),rownames(mammals)[uomo])
 @
-
-\begin{figure}
+\begin{figure}[htbp]
 \begin{center}
-<<ddd>>=
+<<echo=FALSE>>=
 plot(log(mammals$brain)~log(mammals$body),col="BLUE",pch=19,type="p")
 abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3 );
 uomo=which(rownames(mammals)=="Human")
@@ -1085,7 +1087,7 @@ A questi nomi possiamo aggiungere diversi prefissi\vskip10pt
 \vskip10pt
 per caratterizzare diversi aspetti.
 \begin{comment}
-<<echo=FALSE, results="hide">>=
+<<echo=FALSE, results='hide'>>=
 library(exams)
 ## DATA GENERATION
 r <- sample(1:10)
@@ -1220,8 +1222,75 @@ plot(x, y)
 %% \exname{Multiple choice}
 
 \end{comment}
-\subsection{Distribuzione normale}
+
+ \subsection{Distribuzione normale}
+<<echo=FALSE>>=
+shadearea<-function(a,b,mu=0,sigma=1) 
+        {
+        curve(dnorm(x,mu,sigma),lwd=4,main="normale standard",xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n")
+        axis(1,at=c(a,b),labels=paste(letters[1:2],c(a,b),sep="="))
+        x1 <- a  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x,mu,sigma), 0), col="light green")
+text(a/2+b/2,dnorm(a/2+b/2,mu,sigma)/3,bquote(integral(dnorm(x,.(mu),.(sigma))*dx, .(a),.(b)) ~"="~ .(signif(pnorm(b,mu,sigma)-pnorm(a,mu,sigma),4))) ,cex=1)
+abline(v=0)
+abline(h=0)
+     } 
+@
+
+Spesso  i dati sperimentali presentano una distribuzione a  campana del tipo che segue
+
+<<echo=FALSE>>=
+a=rnorm(100000,100,3)
+hist(a,freq=F,breaks=seq(min(a)-0.3,max(a)+0.3,0.3),col="light green",main="Areogramma",xlab="x",ylab="densità")
+#lines(density(a),add=T)
+@
+
+Sovrapponiamo ora all'areogramma una curva che sembra approssimare molto bene l'areogramma. 
+
+
+<<echo=FALSE>>=
+hist(a,freq=F,breaks=seq(min(a)-0.3,max(a)+0.3,0.3),col="light green",main="Areogramma e curva normale",xlab="x",ylab="densità")
+curve(dnorm(x,100,3),add=T,col="red",lwd=4)
+@
+
+La curva sovraimpressa al grafico si chiama **gaussiana** o curva a campana o *funzione di densità normale*. Tale curva è una densità di probabilità e descrive un tipo particolare di variabili aleatorie continue.
+
+L'espressione analitica  dipende da due parametri $\mu$ e $\sigma$,  che coincidono con la media e la deviazione standard della variabile corrispondente:
+
+
+$$\textrm{dnorm}(x,\mu,\sigma)=\frac{1}{\sigma\sqrt{2 \pi} } \textrm{e}^{-\frac{(x - \mu)^2}{2 \sigma^2}}$$
+
+Abbiamo scritto qui direttamente l'espressione $\textrm{dnorm}(x,\mu,\sigma)$ senza preoccuparci di verificare che
+
+Verifica 1:  l'integrale è 1 [ossia la funzione è una densità di probabilità]
+
+Verifica 2: il valore atteso è $\mu$
+ 
+Verifica 3: la varianza è $\sigma^2$
+
+La conoscenza di $\mu$ e $\sigma$ caratterizza completamente una variabile gaussiana.  La probabilità che una variabile gaussiana assuma il valore nell'intervallo $[a,b]$ è uguale all'area sottesa alla corrispondente curva normale nell'intervallo $[a,b]$.
+
+
+Riportiamo in figura  il grafico di alcune gaussiane riportando i valori dei parametri  $\mu$ e $\sigma$
+
+<<echo=FALSE>>=
+mu=c(0,0,5)
+sigma=c(2,4,3)
+i=1
+curve(dnorm(x,mu[i],sigma[i]),xlim=c(-10,10),col=4,ylab="densit\u{E0}")
+for (i in 2:3)
+curve(dnorm(x,mu[i],sigma[i]),xlim=c(-10,10),col=i,add=T)
+#xlab1= bquote(mu~"="    ~ .(mu[1]) ~  sigma ~"="~.(sigma[1]))
+xlab2= bquote(mu~"="    ~ .(mu[2]) *"," ~  sigma ~"="~.(sigma[2]))
+xlab3= bquote(mu~"="    ~ .(mu[3]) *"," ~  sigma ~"="~.(sigma[3]))
+legend("topleft",legend=c(expression(paste(mu," = 0",",",sigma," = 2")),xlab2,xlab3),col=c(4,2,3),lty=1,lwd=5)
+
+@
+
 \subsubsection{La funzione \texttt{dnorm}}
+
 Come appena visto \textsf{R }indica con il nome \texttt{dnorm}, la densit\`a normale o gaussiana. Essa accetta come parametri sia la media $\mu$ che la deviazione standard $\sigma$ come \`e possibile verificare con il comando \texttt{formals} che ci fornisce gli argomenti di una funzione e gli eventuali valori preassegnati.
 <<echo=TRUE>>=
 formals(dnorm)
@@ -1341,11 +1410,11 @@ Questa funzione fornisce fissato il livello di fiducia l'ascissa $x$  tale che l
 <<echo=TRUE>>=
 U(0.95)
 @
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 <<echo=FALSE>>=
 f=dnorm
-axis(1,c(-3,-1,0,1,3),c("",expression(-u[1-epsilon]),0,expression(u[1-epsilon]),""))
+
 xmin<-1;xmax<-3; npunti<-200
 vals<-seq(xmin,xmax,length=npunti)
 x<-c(xmin,vals,xmax,xmin)
@@ -1378,7 +1447,7 @@ Nel caso in cui volessimo una lista di 20 valori di una variabile normale con me
 rnorm(20,mean=5,sd=1)
 @
 \subsection{La distribuzione $t$ di Student}
-In \textsf{R} la distribuzione di Student \`e indicata con la lettera  \texttt{t}.  Come per le altre densit\`a  si possono considerare le funzioni\vskip5pt
+In \textsf{R} la distribuzione di Student \`e indicata con la lettera  \texttt{t}.  Come per le altre distribuzioni  si possono considerare le funzioni\vskip5pt
 \begin{tabular}{|r|r |}
 \hline
 dt  &densit\`a\\
@@ -1426,16 +1495,26 @@ dove i puntini stanno per le variabili omesse o pi\`u esplicitamente
 student<-function (A,df) qt (1/2 + A/2,df)
 @
 dove \texttt{df} sono i gradi di libert\`a. 
- \subsection
-{Intervalli di confidenza e test di Student}
+\ubsection{Regione di accettazione del test di Student} 
+\subsection
+{Regione di accettazione, intervalli di confidenza e test di Student}
+
+Supponiamo di considerare una variabile normale $X$. Se ipotizziamo che il valore atteso di $X$ sia   $\mu$ (la nostra ipotesi nulla) allora il consuntivo $$T=\dfrac{M_N(X)-\mu}{S_X}\sqrt {N}$$
+\`e dsitribuito secondo la distribuzione di Student a $N-1$ gradi di libert\`a. Questo conduce come al solito a 2 possibilit\`a:
+\begin{itemize}
+\item Regione di accettazione del test
+\item Intervallo di confidenza.
+\end{itemize}
+Nel primo caso la regione di accettazione \`e definita come l'intervallo simmetrico rispetto all'origine entro il quale la probabilit\`a che il consuntivo cada è pari ad un prefissato livello di fiducia.\\
+Nel secondo caso esplicitando $M_N$ si ricava un intervallo entro il quale $\mu$ cada con probabilit\`a pari al livello di fiducia scelto
+assumendo che sia $\mu=0$.
+
 La funzione di
 \textsf{R} che esegue il test di Student nelle sue diverse forme \`e  \texttt{t.test}.   Nella sua forma pi\`u semplice
 
 <<echo=TRUE>>=
 x=1:20;  t.test(x)
 @
-In assenza di ipotesi  \textsf{R} calcola il valore osservato del consuntivo $$T=\dfrac{M_N(X)-\mu}{S_X}\sqrt {N}$$
-assumendo che sia $\mu=0$.
 Possiamo anche eseguire specificare l'ipotesi sul valore di $\mu$:
 <<echo=TRUE>>=
 t.test(x,mu=7)
@@ -1607,7 +1686,7 @@ Se si usa  \rpr basta scrivere
 t.test(X,Y) 
 @
 
-\section{Test $\chi^2$  di indipendenza}
+\subsection{Test $\chi^2$  di indipendenza}
 
 %code chunk
 Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
@@ -1643,7 +1722,7 @@ chisq.test(tabellaEH)
 @
 L'intervallo di accettazione dell'ipotesi (che ricordiamo \`e l'indipendenza) al 95\% di fiducia e 1 gradi di libert\`a \`e  $[0, 3.841]$, il consuntivo cade dentro, per cui l'ipotesi \`e accettata.
  
-Se le celle in una tabella 2x2 contengono numeri bassi R utilizza la correzione di Yates. Se la si vuole eliminare  si utilizza il parametro  \texttt{correct=FALSE}.
+Se le celle in una tabella 2x2 contengono numeri bassi \rpr  utilizza la correzione di Yates. Se la si vuole eliminare  si utilizza il parametro  \texttt{correct=FALSE}.
 Ad esempio scriveremo:
 %code chunk
 <<echo=TRUE>>=
@@ -2550,7 +2629,7 @@ points(x,y,pch=20,col="red",cex=0.2)
 consente la visualizzazione dei punti ottenuti (come in figura~(\ref{normale200punti})).
 
 \begin{figure}\begin{center}
-<<echo=FALSE>>=
+<<>>=
 curve(dnorm(x),-3,3,axes=FALSE,ylab="",xlab="",ylim=c(0,0.5))
 axis(1,c(-3,-1,0,1,3),c("",expression(-u[1-epsilon]),0,expression(u[1-epsilon]),""))
 points(x,y,pch=20,col="red",cex=0.2)
@@ -3101,14 +3180,14 @@ points(coord[2],coord[1], cex=3, col="red")
 \section{File Rmd}
 \section{ggplot}
 \end{comment}
-\section*{Tabelle delle distribuzioni statistiche}
+\chapter*{Tabelle delle distribuzioni statistiche}
 Per generare la tabella delle aree sottese dalla distribuzione normale da 0 ad $x$ si deve per prima cosa tenere conto del fatto che \texttt{pnorm}  \`e la cumulativa ad una sola coda. Si sceglie l'intervallo di tabulazione, il numero di colonne ed il numero di cifre.
 <<echo=TRUE>>=
 start=0.01
 stop=3.00
 step=0.01;
 nc=6;
-cifre=5;
+cifre=4;
 correzione<-function(x)  round(10^cifre* (pnorm(x)-0.5))/10^cifre
  tabnormale<-cbind(matrix(correzione(seq(start,stop,by=step)),nc=nc),
  matrix(seq(start,stop,by=step),nc=nc))
@@ -3169,7 +3248,7 @@ fisher099=fisher095;
 fisher99<-function(gradinum,gradiden,cifre)
 round(10^cifre*qf(fiducia
 [2],gradinum,gradiden))/10^cifre;for (i in 1:length(gradinum))
-fisher099[,i]= fisher99(gradinum[i],gradiden,cifre)
+fisher099[,i]= fisher99(gradinum[i],gradiden,cifre-1)
 @
  \setlength\textheight{9in}
 \vfill\eject
@@ -3179,7 +3258,7 @@ fisher099[,i]= fisher99(gradinum[i],gradiden,cifre)
 \topmargin -0.4in
 \small
 <<echo=FALSE>>=
-options(width=80)
+options(width=85)
 <<echo=FALSE>>=
 tabnormale[,ordinecol]
 @

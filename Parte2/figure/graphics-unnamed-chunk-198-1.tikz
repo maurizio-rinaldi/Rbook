@@ -1,0 +1,150 @@
+% Created by tikzDevice version 0.10 on 2016-02-11 14:38:03
+% !TEX encoding = UTF-8 Unicode
+\documentclass[onecolumn,12pt]{book}
+\nonstopmode
+
+\usepackage{tikz}
+
+\usepackage[active,tightpage,psfixbb]{preview}
+
+\PreviewEnvironment{pgfpicture}
+
+\setlength\PreviewBorder{0pt}
+
+\newcommand{\SweaveOpts}[1]{}  % do not interfere with LaTeX
+\newcommand{\SweaveInput}[1]{} % because they are not real TeX commands
+\newcommand{\Sexpr}[1]{}       % will only be parsed by R
+
+
+\usepackage[english,italian]{babel}
+\usepackage{inconsolata}
+%\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+\usepackage[T1]{fontenc}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
+ breaklinks=true,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+\hypersetup{pdfstartview=FitH}
+\usepackage{a4wide,Sweave,url}
+\usepackage{verbatim}
+\usepackage{makeidx}
+\usepackage{babelbib}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{framed}
+\usepackage{lipsum}
+\usepackage[dvipsnames]{color}
+\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+
+\usepackage{hyperref}
+\newenvironment{question}{\item \textbf{Esercizio}\newline}{}
+\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+\newenvironment{answerlist}{\renewcommand{\labelenumi}{(\alph{enumi})}\begin{enumerate}}{\end{enumerate}}
+\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
+ 
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
+\lhead[\thepage]{\today}
+%\usepackage{draftwatermark}
+\usepackage{wrapfig}
+\usepackage{listings}
+\pagestyle{fancy}
+\newcounter{fnotes}\setcounter{fnotes}{1}
+\newcounter{Raction}\setcounter{Raction}{1}
+\newcommand{\varia}[1]{\textsl{\textsf{#1}}}
+\newcommand{\mytilde}{$\sim$}
+\newcommand{\maurizio}[1]{\color{red}#1 \color{black}}
+\newcommand{\federico}[1]{\color{green}#1 \color{black}}
+ %\newenvironment{question}{\item \textbf{Problema}\newline}{}
+%\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+%\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em,
+                                            %  frame=single}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em,   frame=single}
+ \newenvironment{ese} [1]{\vskip10pt
+%\begin{center}
+%\begin{minipage}{12cm}
+ \markright{\today}
+\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
+\colorbox{grigetto}{\parbox{\linewidth}{#1}}}
+                          {
+                         % \end{minipage}
+                          %\end{center}
+                          \medskip}
+ \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
+ \frontmatter\title{Matematica e Statistica con \textsf{R}}
+\author{Federico Comoglio e  Maurizio Rinaldi}
+\markright{\today}
+\lhead{\today}
+\renewcommand{\chaptermark}[1]{%
+ \markboth{\chaptername
+ \ \thechapter.\ #1}{}}
+%\renewcommand{\sectionmark}[1]{%
+% \markboth{\sectionname
+% \ \thesection.\ #1}{}}
+\newcommand{\rst}{\textsf{RStudio}~}
+\newcommand{\rpr}{\textsf{R}~}
+\makeindex
+
+\begin{document}
+
+\begin{tikzpicture}[x=1pt,y=1pt]
+\definecolor{fillColor}{RGB}{255,255,255}
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,361.35);
+\begin{scope}
+\path[clip] ( 57.02, 52.27) rectangle (123.60,131.54);
+\definecolor{drawColor}{RGB}{211,211,211}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 59.49, 52.27) -- ( 59.49,131.54);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 71.99, 52.27) -- ( 71.99,131.54);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 84.50, 52.27) -- ( 84.50,131.54);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 97.00, 52.27) -- ( 97.00,131.54);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (109.51, 52.27) -- (109.51,131.54);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (122.01, 52.27) -- (122.01,131.54);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.02, 55.21) -- (123.60, 55.21);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.02, 68.08) -- (123.60, 68.08);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.02, 80.96) -- (123.60, 80.96);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.02, 93.84) -- (123.60, 93.84);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.02,106.71) -- (123.60,106.71);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.02,119.59) -- (123.60,119.59);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 59.49, 55.21) circle (  1.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 60.17, 63.51) circle (  1.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 60.94, 75.04) circle (  1.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 62.37, 96.67) circle (  1.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 64.57, 95.90) circle (  1.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.42, 90.81) circle (  1.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 71.99, 87.01) circle (  1.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 77.00, 81.09) circle (  1.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 82.55, 77.48) circle (  1.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 89.75, 73.11) circle (  1.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (119.13, 61.13) circle (  1.78);
+\end{scope}
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,10 @@
+base
+knitr
+tikzDevice
+lubridate
+EsamiR
+libroR
+MASS
+exams
+lattice
+RColorBrewer
