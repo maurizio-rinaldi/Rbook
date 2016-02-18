@@ -1,0 +1,10 @@
+base
+knitr
+tikzDevice
+MASS
+exams
+pracma
+rJava
+rjson
+rJython
+rSymPy

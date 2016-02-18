@@ -66,26 +66,32 @@
 \contentsline {subsubsection}{Selezione in base a criteri}{19}{section*.7}
 \contentsline {section}{\numberline {2.5}Gli \emph {array}}{21}{section.2.5}
 \contentsline {section}{\numberline {2.6}Le liste}{22}{section.2.6}
-\contentsline {chapter}{\numberline {3}Statistica con \textsf {R}}{25}{chapter.3}
-\contentsline {section}{\numberline {3.1}Variabili aleatorie}{25}{section.3.1}
-\contentsline {section}{\numberline {3.2}Variabili aleatorie discrete}{25}{section.3.2}
-\contentsline {section}{\numberline {3.3}Statistica descrittiva: singola variabile}{28}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Indicatori statistici}{28}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Raggruppamenti in classi}{30}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Areogrammi}{34}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Generazione di boxplot}{38}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Creazione di grafici a torta}{38}{subsection.3.3.5}
-\contentsline {section}{\numberline {3.4}Variabili doppie e rette di regressione}{39}{section.3.4}
-\contentsline {subsubsection}{I bambini di Kalama (Egitto). Ancora retta di regressione}{42}{section*.8}
-\contentsline {section}{\numberline {3.5}Modelli potenza}{46}{section.3.5}
-\contentsline {section}{\numberline {3.6}Distribuzioni in \textsf {R}}{48}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Distribuzione normale}{48}{subsection.3.6.1}
-\contentsline {subsubsection}{La funzione \texttt {dnorm}}{54}{section*.9}
-\contentsline {subsection}{\numberline {3.6.2}La funzione \texttt {pnorm}}{56}{subsection.3.6.2}
-\contentsline {subsection}{\numberline {3.6.3}La funzione \texttt {qnorm} e la tabella della densit\`a di Gauss}{57}{subsection.3.6.3}
-\contentsline {subsection}{\numberline {3.6.4}La funzione \texttt {rnorm}}{61}{subsection.3.6.4}
-\contentsline {subsection}{\numberline {3.6.5}La distribuzione $t$ di Student}{61}{subsection.3.6.5}
-\contentsline {subsection}{\numberline {3.6.6}Regione di accettazione, intervalli di confidenza e test di Student}{64}{subsection.3.6.6}
+\contentsline {chapter}{\numberline {3}Statistica e probabilit\`a con \textsf {R}}{25}{chapter.3}
+\contentsline {section}{\numberline {3.1}Lo spazio campionario}{25}{section.3.1}
+\contentsline {section}{\numberline {3.2}Gli eventi}{25}{section.3.2}
+\contentsline {subsubsection}{Costruzione di eventi}{25}{section*.8}
+\contentsline {section}{\numberline {3.3}La probabilit\IeC {\`a}}{26}{section.3.3}
+\contentsline {subsubsection}{ Assiomi}{27}{section*.9}
+\contentsline {subsection}{\numberline {3.3.1}Conseguenze}{27}{subsection.3.3.1}
+\contentsline {section}{\numberline {3.4}Variabili aleatorie}{28}{section.3.4}
+\contentsline {section}{\numberline {3.5}Variabili aleatorie discrete}{28}{section.3.5}
+\contentsline {section}{\numberline {3.6}Statistica descrittiva: singola variabile}{31}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Indicatori statistici}{31}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Raggruppamenti in classi}{33}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}Areogrammi}{37}{subsection.3.6.3}
+\contentsline {subsection}{\numberline {3.6.4}Generazione di boxplot}{41}{subsection.3.6.4}
+\contentsline {subsection}{\numberline {3.6.5}Creazione di grafici a torta}{41}{subsection.3.6.5}
+\contentsline {section}{\numberline {3.7}Variabili doppie e rette di regressione}{42}{section.3.7}
+\contentsline {subsubsection}{I bambini di Kalama (Egitto). Ancora retta di regressione}{45}{section*.10}
+\contentsline {section}{\numberline {3.8}Modelli potenza}{49}{section.3.8}
+\contentsline {section}{\numberline {3.9}Distribuzioni in \textsf {R}}{51}{section.3.9}
+\contentsline {subsection}{\numberline {3.9.1}Distribuzione normale}{51}{subsection.3.9.1}
+\contentsline {subsubsection}{La funzione \texttt {dnorm}}{57}{section*.11}
+\contentsline {subsection}{\numberline {3.9.2}La funzione \texttt {pnorm}}{59}{subsection.3.9.2}
+\contentsline {subsection}{\numberline {3.9.3}La funzione \texttt {qnorm} e la tabella della densit\`a di Gauss}{60}{subsection.3.9.3}
+\contentsline {subsection}{\numberline {3.9.4}La funzione \texttt {rnorm}}{64}{subsection.3.9.4}
+\contentsline {subsection}{\numberline {3.9.5}La distribuzione $t$ di Student}{64}{subsection.3.9.5}
+\contentsline {subsection}{\numberline {3.9.6}Regione di accettazione, intervalli di confidenza e test di Student}{67}{subsection.3.9.6}
 \select@language {english}
 \select@language {italian}
 \select@language {english}
@@ -110,10 +116,10 @@
 \select@language {italian}
 \select@language {english}
 \select@language {italian}
-\contentsline {subsection}{\numberline {3.6.7}Test di Student per dati appaiati}{65}{subsection.3.6.7}
-\contentsline {subsection}{\numberline {3.6.8}t-test: caso ad egual varianza}{66}{subsection.3.6.8}
-\contentsline {subsection}{\numberline {3.6.9}Caso generale (test di Welch)}{68}{subsection.3.6.9}
-\contentsline {subsubsection}{Esempio}{69}{section*.10}
-\contentsline {subsection}{\numberline {3.6.10}Test $\chi ^2$ di indipendenza}{69}{subsection.3.6.10}
-\contentsline {subsection}{\numberline {3.6.11}Test $\chi ^2$ di adeguamento}{72}{subsection.3.6.11}
-\contentsline {section}{\numberline {3.7}Distribuzione Binomiale}{72}{section.3.7}
+\contentsline {subsection}{\numberline {3.9.7}Test di Student per dati appaiati}{68}{subsection.3.9.7}
+\contentsline {subsection}{\numberline {3.9.8}t-test: caso ad egual varianza}{69}{subsection.3.9.8}
+\contentsline {subsection}{\numberline {3.9.9}Caso generale (test di Welch)}{71}{subsection.3.9.9}
+\contentsline {subsubsection}{Esempio}{72}{section*.12}
+\contentsline {subsection}{\numberline {3.9.10}Test $\chi ^2$ di indipendenza}{72}{subsection.3.9.10}
+\contentsline {subsection}{\numberline {3.9.11}Test $\chi ^2$ di adeguamento}{75}{subsection.3.9.11}
+\contentsline {section}{\numberline {3.10}Distribuzione Binomiale}{75}{section.3.10}

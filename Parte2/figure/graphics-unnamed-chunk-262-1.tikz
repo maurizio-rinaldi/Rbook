@@ -1,0 +1,967 @@
+% Created by tikzDevice version 0.10 on 2016-02-15 18:03:05
+% !TEX encoding = UTF-8 Unicode
+\documentclass[onecolumn,12pt]{book}
+\nonstopmode
+
+\usepackage{tikz}
+
+\usepackage[active,tightpage,psfixbb]{preview}
+
+\PreviewEnvironment{pgfpicture}
+
+\setlength\PreviewBorder{0pt}
+
+\newcommand{\SweaveOpts}[1]{}  % do not interfere with LaTeX
+\newcommand{\SweaveInput}[1]{} % because they are not real TeX commands
+\newcommand{\Sexpr}[1]{}       % will only be parsed by R
+
+
+\usepackage[english,italian]{babel}
+\usepackage{inconsolata}
+%\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+\usepackage[T1]{fontenc}
+\usepackage[buttonsize=1em]{animate}
+\usepackage{a4wide,Sweave,url}
+\usepackage{verbatim}
+\usepackage{makeidx}
+\usepackage{babelbib}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{framed}
+\usepackage{lipsum}
+\usepackage[]{color}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+
+\usepackage{hyperref}
+\newenvironment{question}{\item \textbf{Esercizio}\newline}{}
+\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+\newenvironment{answerlist}{\renewcommand{\labelenumi}{(\alph{enumi})}\begin{enumerate}}{\end{enumerate}}
+\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
+ 
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
+\lhead[\thepage]{\today}
+%\usepackage{draftwatermark}
+\usepackage{wrapfig}
+\usepackage{listings}
+\pagestyle{fancy}
+\newcounter{fnotes}\setcounter{fnotes}{1}
+\newcounter{Raction}\setcounter{Raction}{1}
+\newcommand{\varia}[1]{\textsl{\textsf{#1}}}
+\newcommand{\mytilde}{$\sim$}
+\newcommand{\maurizio}[1]{\color{red}#1 \color{black}}
+\newcommand{\federico}[1]{\color{green}#1 \color{black}}
+ %\newenvironment{question}{\item \textbf{Problema}\newline}{}
+%\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+%\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em,
+                                            %  frame=single}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em,   frame=single}
+ \newenvironment{ese} [1]{\vskip10pt
+%\begin{center}
+%\begin{minipage}{12cm}
+ \markright{\today}
+\colorbox{grigetto}{\parbox{\linewidth}{#1}}}
+                          {
+                
+                          \medskip}
+ \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
+ \frontmatter\title{Matematica e Statistica con \textsf{R}}
+\author{Federico Comoglio e  Maurizio Rinaldi}
+\markright{\today}
+\lhead{\today}
+\renewcommand{\chaptermark}[1]{%
+ \markboth{\chaptername
+ \ \thechapter.\ #1}{}}
+\newcommand{\rst}{\textsf{RStudio}~}
+\newcommand{\rpr}{\textsf{R}~}
+\makeindex
+
+\begin{document}
+
+\begin{tikzpicture}[x=1pt,y=1pt]
+\definecolor{fillColor}{RGB}{255,255,255}
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,361.35);
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (361.35,361.35);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 92.67, 72.00) -- (336.23, 72.00);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 92.67, 72.00) -- ( 92.67, 67.68);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (141.38, 72.00) -- (141.38, 67.68);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (190.10, 72.00) -- (190.10, 67.68);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (238.81, 72.00) -- (238.81, 67.68);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (287.52, 72.00) -- (287.52, 67.68);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (336.23, 72.00) -- (336.23, 67.68);
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 92.67, 50.40) {-2};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (141.38, 50.40) {0};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (190.10, 50.40) {2};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (238.81, 50.40) {4};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (287.52, 50.40) {6};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (336.23, 50.40) {8};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 81.65) -- ( 57.60,323.58);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 81.65) -- ( 53.28, 81.65);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,142.13) -- ( 53.28,142.13);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,202.61) -- ( 53.28,202.61);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,263.10) -- ( 53.28,263.10);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,323.58) -- ( 53.28,323.58);
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64, 81.65) {0.0};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,142.13) {0.1};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,202.61) {0.2};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,263.10) {0.3};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,323.58) {0.4};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 72.00) --
+	(346.95, 72.00) --
+	(346.95,332.55) --
+	( 57.60,332.55) --
+	( 57.60, 72.00);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (361.35,361.35);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.95] at (174.36, 42.24) {Z};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.95] at (184.02, 42.24) {=};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.95] at (195.54, 52.02) {m};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.66] at (204.83, 50.30) {1};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.95] at (211.00, 52.02) {-};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.95] at (216.99, 52.02) {m};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.66] at (226.28, 50.30) {2};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.95] at (201.70, 33.30) {s};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (207.33, 31.68) --
+	(209.78, 42.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (211.00, 35.27) --
+	(212.42, 35.76) --
+	(213.83, 33.30) --
+	(215.71, 40.17) --
+	(223.45, 40.17);
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.95] at (216.69, 33.30) {n};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (195.54, 45.49) --
+	(230.19, 45.49);
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at ( 25.92,202.27) {Density};
+\end{scope}
+\begin{scope}
+\path[clip] ( 57.60, 72.00) rectangle (346.95,332.55);
+\definecolor{fillColor}{gray}{0.80}
+
+\path[fill=fillColor] (189.12, 81.65) --
+	(189.12,222.15) --
+	(189.61,225.06) --
+	(190.83,232.40) --
+	(192.05,239.71) --
+	(193.27,246.96) --
+	(194.49,254.11) --
+	(195.71,261.12) --
+	(196.93,267.94) --
+	(198.15,274.53) --
+	(199.38,280.86) --
+	(200.60,286.88) --
+	(201.82,292.56) --
+	(203.04,297.84) --
+	(204.26,302.70) --
+	(205.48,307.11) --
+	(206.70,311.02) --
+	(207.92,314.42) --
+	(209.14,317.27) --
+	(210.36,319.56) --
+	(211.58,321.27) --
+	(212.80,322.39) --
+	(214.03,322.90) --
+	(215.25,322.81) --
+	(216.47,322.11) --
+	(217.69,320.82) --
+	(218.91,318.93) --
+	(220.13,316.47) --
+	(221.35,313.45) --
+	(222.57,309.90) --
+	(223.79,305.83) --
+	(225.01,301.29) --
+	(226.23,296.30) --
+	(227.46,290.89) --
+	(228.68,285.11) --
+	(229.90,279.00) --
+	(231.12,272.58) --
+	(232.34,265.91) --
+	(233.56,259.03) --
+	(234.78,251.98) --
+	(236.00,244.79) --
+	(237.22,237.52) --
+	(238.44,230.20) --
+	(239.66,222.87) --
+	(240.88,215.56) --
+	(242.11,208.31) --
+	(243.33,201.15) --
+	(244.55,194.12) --
+	(245.77,187.23) --
+	(246.99,180.51) --
+	(248.21,174.00) --
+	(249.43,167.69) --
+	(250.65,161.61) --
+	(251.87,155.78) --
+	(253.09,150.20) --
+	(254.31,144.88) --
+	(255.53,139.83) --
+	(256.76,135.04) --
+	(257.98,130.53) --
+	(259.20,126.29) --
+	(260.42,122.31) --
+	(261.64,118.59) --
+	(262.86,115.13) --
+	(264.08,111.92) --
+	(265.30,108.94) --
+	(266.52,106.20) --
+	(267.74,103.68) --
+	(268.96,101.37) --
+	(270.19, 99.25) --
+	(271.41, 97.32) --
+	(272.63, 95.57) --
+	(273.85, 93.99) --
+	(275.07, 92.55) --
+	(276.29, 91.26) --
+	(277.51, 90.10) --
+	(278.73, 89.07) --
+	(279.95, 88.14) --
+	(281.17, 87.31) --
+	(282.39, 86.58) --
+	(283.61, 85.93) --
+	(284.84, 85.36) --
+	(286.06, 84.85) --
+	(287.28, 84.41) --
+	(288.50, 84.02) --
+	(289.72, 83.69) --
+	(290.94, 83.39) --
+	(292.16, 83.14) --
+	(293.38, 82.92) --
+	(294.60, 82.72) --
+	(295.82, 82.56) --
+	(297.04, 82.42) --
+	(298.26, 82.30) --
+	(299.49, 82.19) --
+	(300.71, 82.11) --
+	(301.93, 82.03) --
+	(303.15, 81.97) --
+	(304.37, 81.91) --
+	(305.59, 81.87) --
+	(306.81, 81.83) --
+	(308.03, 81.80) --
+	(309.25, 81.77) --
+	(310.47, 81.75) --
+	(311.69, 81.73) --
+	(312.91, 81.72) --
+	(314.14, 81.71) --
+	(315.36, 81.70) --
+	(316.58, 81.69) --
+	(317.80, 81.68) --
+	(319.02, 81.67) --
+	(320.24, 81.67) --
+	(321.46, 81.67) --
+	(322.68, 81.66) --
+	(323.90, 81.66) --
+	(325.12, 81.66) --
+	(326.34, 81.66) --
+	(327.57, 81.66) --
+	(328.79, 81.65) --
+	(330.01, 81.65) --
+	(331.23, 81.65) --
+	(332.45, 81.65) --
+	(333.67, 81.65) --
+	(334.89, 81.65) --
+	(336.11, 81.65) --
+	(337.33, 81.65) --
+	(338.55, 81.65) --
+	(339.77, 81.65) --
+	(340.99, 81.65) --
+	(342.22, 81.65) --
+	(343.44, 81.65) --
+	(344.66, 81.65) --
+	(345.88, 81.65) --
+	(347.10, 81.65) --
+	(348.32, 81.65) --
+	(349.54, 81.65) --
+	(350.76, 81.65) --
+	(351.98, 81.65) --
+	(353.20, 81.65) --
+	(354.42, 81.65) --
+	(355.64, 81.65) --
+	(356.87, 81.65) --
+	(358.09, 81.65) --
+	(359.31, 81.65) --
+	(360.53, 81.65) --
+	(361.35, 81.65) --
+	(361.35, 81.65) --
+	cycle;
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (  0.00, 81.65) --
+	(  0.38, 81.65) --
+	(  1.60, 81.65) --
+	(  2.82, 81.65) --
+	(  4.04, 81.65) --
+	(  5.26, 81.65) --
+	(  6.48, 81.65) --
+	(  7.70, 81.65) --
+	(  8.92, 81.65) --
+	( 10.14, 81.65) --
+	( 11.36, 81.65) --
+	( 12.58, 81.65) --
+	( 13.81, 81.65) --
+	( 15.03, 81.65) --
+	( 16.25, 81.65) --
+	( 17.47, 81.65) --
+	( 18.69, 81.65) --
+	( 19.91, 81.65) --
+	( 21.13, 81.65) --
+	( 22.35, 81.65) --
+	( 23.57, 81.65) --
+	( 24.79, 81.65) --
+	( 26.01, 81.65) --
+	( 27.23, 81.65) --
+	( 28.46, 81.66) --
+	( 29.68, 81.66) --
+	( 30.90, 81.66) --
+	( 32.12, 81.66) --
+	( 33.34, 81.66) --
+	( 34.56, 81.67) --
+	( 35.78, 81.67) --
+	( 37.00, 81.67) --
+	( 38.22, 81.68) --
+	( 39.44, 81.69) --
+	( 40.66, 81.70) --
+	( 41.89, 81.71) --
+	( 43.11, 81.72) --
+	( 44.33, 81.74) --
+	( 45.55, 81.75) --
+	( 46.77, 81.78) --
+	( 47.99, 81.80) --
+	( 49.21, 81.84) --
+	( 50.43, 81.88) --
+	( 51.65, 81.92) --
+	( 52.87, 81.98) --
+	( 54.09, 82.04) --
+	( 55.31, 82.12) --
+	( 56.54, 82.21) --
+	( 57.76, 82.31) --
+	( 58.98, 82.44) --
+	( 60.20, 82.58) --
+	( 61.42, 82.75) --
+	( 62.64, 82.95) --
+	( 63.86, 83.17) --
+	( 65.08, 83.43) --
+	( 66.30, 83.73) --
+	( 67.52, 84.08) --
+	( 68.74, 84.47) --
+	( 69.96, 84.93) --
+	( 71.19, 85.44) --
+	( 72.41, 86.02) --
+	( 73.63, 86.68) --
+	( 74.85, 87.43) --
+	( 76.07, 88.27) --
+	( 77.29, 89.21) --
+	( 78.51, 90.27) --
+	( 79.73, 91.45) --
+	( 80.95, 92.76) --
+	( 82.17, 94.22) --
+	( 83.39, 95.83) --
+	( 84.62, 97.60) --
+	( 85.84, 99.56) --
+	( 87.06,101.70) --
+	( 88.28,104.04) --
+	( 89.50,106.60) --
+	( 90.72,109.38) --
+	( 91.94,112.38) --
+	( 93.16,115.63) --
+	( 94.38,119.13) --
+	( 95.60,122.89) --
+	( 96.82,126.91) --
+	( 98.04,131.19) --
+	( 99.27,135.74) --
+	(100.49,140.57) --
+	(101.71,145.66) --
+	(102.93,151.02) --
+	(104.15,156.64) --
+	(105.37,162.51) --
+	(106.59,168.62) --
+	(107.81,174.96) --
+	(109.03,181.51) --
+	(110.25,188.25) --
+	(111.47,195.16) --
+	(112.69,202.22) --
+	(113.92,209.39) --
+	(115.14,216.65) --
+	(116.36,223.96) --
+	(117.58,231.30) --
+	(118.80,238.62) --
+	(120.02,245.88) --
+	(121.24,253.04) --
+	(122.46,260.07) --
+	(123.68,266.93) --
+	(124.90,273.56) --
+	(126.12,279.93) --
+	(127.35,286.00) --
+	(128.57,291.73) --
+	(129.79,297.07) --
+	(131.01,302.00) --
+	(132.23,306.47) --
+	(133.45,310.46) --
+	(134.67,313.94) --
+	(135.89,316.88) --
+	(137.11,319.25) --
+	(138.33,321.05) --
+	(139.55,322.26) --
+	(140.77,322.86) --
+	(142.00,322.86) --
+	(143.22,322.26) --
+	(144.44,321.05) --
+	(145.66,319.25) --
+	(146.88,316.88) --
+	(148.10,313.94) --
+	(149.32,310.46) --
+	(150.54,306.47) --
+	(151.76,302.00) --
+	(152.98,297.07) --
+	(154.20,291.73) --
+	(155.42,286.00) --
+	(156.65,279.93) --
+	(157.87,273.56) --
+	(159.09,266.93) --
+	(160.31,260.07) --
+	(161.53,253.04) --
+	(162.75,245.88) --
+	(163.97,238.62) --
+	(165.19,231.30) --
+	(166.41,223.96) --
+	(167.63,216.65) --
+	(168.85,209.39) --
+	(170.07,202.22) --
+	(171.30,195.16) --
+	(172.52,188.25) --
+	(173.74,181.51) --
+	(174.96,174.96) --
+	(176.18,168.62) --
+	(177.40,162.51) --
+	(178.62,156.64) --
+	(179.84,151.02) --
+	(181.06,145.66) --
+	(182.28,140.57) --
+	(183.50,135.74) --
+	(184.73,131.19) --
+	(185.95,126.91) --
+	(187.17,122.89) --
+	(188.39,119.13) --
+	(189.61,115.63) --
+	(190.83,112.38) --
+	(192.05,109.38) --
+	(193.27,106.60) --
+	(194.49,104.04) --
+	(195.71,101.70) --
+	(196.93, 99.56) --
+	(198.15, 97.60) --
+	(199.38, 95.83) --
+	(200.60, 94.22) --
+	(201.82, 92.76) --
+	(203.04, 91.45) --
+	(204.26, 90.27) --
+	(205.48, 89.21) --
+	(206.70, 88.27) --
+	(207.92, 87.43) --
+	(209.14, 86.68) --
+	(210.36, 86.02) --
+	(211.58, 85.44) --
+	(212.80, 84.93) --
+	(214.03, 84.47) --
+	(215.25, 84.08) --
+	(216.47, 83.73) --
+	(217.69, 83.43) --
+	(218.91, 83.17) --
+	(220.13, 82.95) --
+	(221.35, 82.75) --
+	(222.57, 82.58) --
+	(223.79, 82.44) --
+	(225.01, 82.31) --
+	(226.23, 82.21) --
+	(227.46, 82.12) --
+	(228.68, 82.04) --
+	(229.90, 81.98) --
+	(231.12, 81.92) --
+	(232.34, 81.88) --
+	(233.56, 81.84) --
+	(234.78, 81.80) --
+	(236.00, 81.78) --
+	(237.22, 81.75) --
+	(238.44, 81.74) --
+	(239.66, 81.72) --
+	(240.88, 81.71) --
+	(242.11, 81.70) --
+	(243.33, 81.69) --
+	(244.55, 81.68) --
+	(245.77, 81.67) --
+	(246.99, 81.67) --
+	(248.21, 81.67) --
+	(249.43, 81.66) --
+	(250.65, 81.66) --
+	(251.87, 81.66) --
+	(253.09, 81.66) --
+	(254.31, 81.66) --
+	(255.53, 81.65) --
+	(256.76, 81.65) --
+	(257.98, 81.65) --
+	(259.20, 81.65) --
+	(260.42, 81.65) --
+	(261.64, 81.65) --
+	(262.86, 81.65) --
+	(264.08, 81.65) --
+	(265.30, 81.65) --
+	(266.52, 81.65) --
+	(267.74, 81.65) --
+	(268.96, 81.65) --
+	(270.19, 81.65) --
+	(271.41, 81.65) --
+	(272.63, 81.65) --
+	(273.85, 81.65) --
+	(275.07, 81.65) --
+	(276.29, 81.65) --
+	(277.51, 81.65) --
+	(278.73, 81.65) --
+	(279.95, 81.65) --
+	(281.17, 81.65) --
+	(282.39, 81.65) --
+	(283.61, 81.65) --
+	(284.84, 81.65) --
+	(286.06, 81.65) --
+	(287.28, 81.65) --
+	(288.50, 81.65) --
+	(289.72, 81.65) --
+	(290.94, 81.65) --
+	(292.16, 81.65) --
+	(293.38, 81.65) --
+	(294.60, 81.65) --
+	(295.82, 81.65) --
+	(297.04, 81.65) --
+	(298.26, 81.65) --
+	(299.49, 81.65) --
+	(300.71, 81.65) --
+	(301.93, 81.65) --
+	(303.15, 81.65) --
+	(304.37, 81.65) --
+	(305.59, 81.65) --
+	(306.81, 81.65) --
+	(308.03, 81.65) --
+	(309.25, 81.65) --
+	(310.47, 81.65) --
+	(311.69, 81.65) --
+	(312.91, 81.65) --
+	(314.14, 81.65) --
+	(315.36, 81.65) --
+	(316.58, 81.65) --
+	(317.80, 81.65) --
+	(319.02, 81.65) --
+	(320.24, 81.65) --
+	(321.46, 81.65) --
+	(322.68, 81.65) --
+	(323.90, 81.65) --
+	(325.12, 81.65) --
+	(326.34, 81.65) --
+	(327.57, 81.65) --
+	(328.79, 81.65) --
+	(330.01, 81.65) --
+	(331.23, 81.65) --
+	(332.45, 81.65) --
+	(333.67, 81.65) --
+	(334.89, 81.65) --
+	(336.11, 81.65) --
+	(337.33, 81.65) --
+	(338.55, 81.65) --
+	(339.77, 81.65) --
+	(340.99, 81.65) --
+	(342.22, 81.65) --
+	(343.44, 81.65) --
+	(344.66, 81.65) --
+	(345.88, 81.65) --
+	(347.10, 81.65) --
+	(348.32, 81.65) --
+	(349.54, 81.65) --
+	(350.76, 81.65) --
+	(351.98, 81.65) --
+	(353.20, 81.65) --
+	(354.42, 81.65) --
+	(355.64, 81.65) --
+	(356.87, 81.65) --
+	(358.09, 81.65) --
+	(359.31, 81.65) --
+	(360.53, 81.65) --
+	(361.35, 81.65);
+\definecolor{fillColor}{gray}{0.30}
+
+\path[fill=fillColor] ( 93.65, 81.65) --
+	( 93.65,117.00) --
+	( 93.16,115.63) --
+	( 91.94,112.38) --
+	( 90.72,109.38) --
+	( 89.50,106.60) --
+	( 88.28,104.04) --
+	( 87.06,101.70) --
+	( 85.84, 99.56) --
+	( 84.62, 97.60) --
+	( 83.39, 95.83) --
+	( 82.17, 94.22) --
+	( 80.95, 92.76) --
+	( 79.73, 91.45) --
+	( 78.51, 90.27) --
+	( 77.29, 89.21) --
+	( 76.07, 88.27) --
+	( 74.85, 87.43) --
+	( 73.63, 86.68) --
+	( 72.41, 86.02) --
+	( 71.19, 85.44) --
+	( 69.96, 84.93) --
+	( 68.74, 84.47) --
+	( 67.52, 84.08) --
+	( 66.30, 83.73) --
+	( 65.08, 83.43) --
+	( 63.86, 83.17) --
+	( 62.64, 82.95) --
+	( 61.42, 82.75) --
+	( 60.20, 82.58) --
+	( 58.98, 82.44) --
+	( 57.76, 82.31) --
+	( 56.54, 82.21) --
+	( 55.31, 82.12) --
+	( 54.09, 82.04) --
+	( 52.87, 81.98) --
+	( 51.65, 81.92) --
+	( 50.43, 81.88) --
+	( 49.21, 81.84) --
+	( 47.99, 81.80) --
+	( 46.77, 81.78) --
+	( 45.55, 81.75) --
+	( 44.33, 81.74) --
+	( 43.11, 81.72) --
+	( 41.89, 81.71) --
+	( 40.66, 81.70) --
+	( 39.44, 81.69) --
+	( 38.22, 81.68) --
+	( 37.00, 81.67) --
+	( 35.78, 81.67) --
+	( 34.56, 81.67) --
+	( 33.34, 81.66) --
+	( 32.12, 81.66) --
+	( 30.90, 81.66) --
+	( 29.68, 81.66) --
+	( 28.46, 81.66) --
+	( 27.23, 81.65) --
+	( 26.01, 81.65) --
+	( 24.79, 81.65) --
+	( 23.57, 81.65) --
+	( 22.35, 81.65) --
+	( 21.13, 81.65) --
+	( 19.91, 81.65) --
+	( 18.69, 81.65) --
+	( 17.47, 81.65) --
+	( 16.25, 81.65) --
+	( 15.03, 81.65) --
+	( 13.81, 81.65) --
+	( 12.58, 81.65) --
+	( 11.36, 81.65) --
+	( 10.14, 81.65) --
+	(  8.92, 81.65) --
+	(  7.70, 81.65) --
+	(  6.48, 81.65) --
+	(  5.26, 81.65) --
+	(  4.04, 81.65) --
+	(  2.82, 81.65) --
+	(  1.60, 81.65) --
+	(  0.38, 81.65) --
+	(  0.00, 81.65) --
+	(  0.00, 81.65) --
+	cycle;
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (189.12, 81.65) --
+	(189.12,117.00) --
+	(189.61,115.63) --
+	(190.83,112.38) --
+	(192.05,109.38) --
+	(193.27,106.60) --
+	(194.49,104.04) --
+	(195.71,101.70) --
+	(196.93, 99.56) --
+	(198.15, 97.60) --
+	(199.38, 95.83) --
+	(200.60, 94.22) --
+	(201.82, 92.76) --
+	(203.04, 91.45) --
+	(204.26, 90.27) --
+	(205.48, 89.21) --
+	(206.70, 88.27) --
+	(207.92, 87.43) --
+	(209.14, 86.68) --
+	(210.36, 86.02) --
+	(211.58, 85.44) --
+	(212.80, 84.93) --
+	(214.03, 84.47) --
+	(215.25, 84.08) --
+	(216.47, 83.73) --
+	(217.69, 83.43) --
+	(218.91, 83.17) --
+	(220.13, 82.95) --
+	(221.35, 82.75) --
+	(222.57, 82.58) --
+	(223.79, 82.44) --
+	(225.01, 82.31) --
+	(226.23, 82.21) --
+	(227.46, 82.12) --
+	(228.68, 82.04) --
+	(229.90, 81.98) --
+	(231.12, 81.92) --
+	(232.34, 81.88) --
+	(233.56, 81.84) --
+	(234.78, 81.80) --
+	(236.00, 81.78) --
+	(237.22, 81.75) --
+	(238.44, 81.74) --
+	(239.66, 81.72) --
+	(240.88, 81.71) --
+	(242.11, 81.70) --
+	(243.33, 81.69) --
+	(244.55, 81.68) --
+	(245.77, 81.67) --
+	(246.99, 81.67) --
+	(248.21, 81.67) --
+	(249.43, 81.66) --
+	(250.65, 81.66) --
+	(251.87, 81.66) --
+	(253.09, 81.66) --
+	(254.31, 81.66) --
+	(255.53, 81.65) --
+	(256.76, 81.65) --
+	(257.98, 81.65) --
+	(259.20, 81.65) --
+	(260.42, 81.65) --
+	(261.64, 81.65) --
+	(262.86, 81.65) --
+	(264.08, 81.65) --
+	(265.30, 81.65) --
+	(266.52, 81.65) --
+	(267.74, 81.65) --
+	(268.96, 81.65) --
+	(270.19, 81.65) --
+	(271.41, 81.65) --
+	(272.63, 81.65) --
+	(273.85, 81.65) --
+	(275.07, 81.65) --
+	(276.29, 81.65) --
+	(277.51, 81.65) --
+	(278.73, 81.65) --
+	(279.95, 81.65) --
+	(281.17, 81.65) --
+	(282.39, 81.65) --
+	(283.61, 81.65) --
+	(284.84, 81.65) --
+	(286.06, 81.65) --
+	(287.28, 81.65) --
+	(288.50, 81.65) --
+	(289.72, 81.65) --
+	(290.94, 81.65) --
+	(292.16, 81.65) --
+	(293.38, 81.65) --
+	(294.60, 81.65) --
+	(295.82, 81.65) --
+	(297.04, 81.65) --
+	(298.26, 81.65) --
+	(299.49, 81.65) --
+	(300.71, 81.65) --
+	(301.93, 81.65) --
+	(303.15, 81.65) --
+	(304.37, 81.65) --
+	(305.59, 81.65) --
+	(306.81, 81.65) --
+	(308.03, 81.65) --
+	(309.25, 81.65) --
+	(310.47, 81.65) --
+	(311.69, 81.65) --
+	(312.91, 81.65) --
+	(314.14, 81.65) --
+	(315.36, 81.65) --
+	(316.58, 81.65) --
+	(317.80, 81.65) --
+	(319.02, 81.65) --
+	(320.24, 81.65) --
+	(321.46, 81.65) --
+	(322.68, 81.65) --
+	(323.90, 81.65) --
+	(325.12, 81.65) --
+	(326.34, 81.65) --
+	(327.57, 81.65) --
+	(328.79, 81.65) --
+	(330.01, 81.65) --
+	(331.23, 81.65) --
+	(332.45, 81.65) --
+	(333.67, 81.65) --
+	(334.89, 81.65) --
+	(336.11, 81.65) --
+	(337.33, 81.65) --
+	(338.55, 81.65) --
+	(339.77, 81.65) --
+	(340.99, 81.65) --
+	(342.22, 81.65) --
+	(343.44, 81.65) --
+	(344.66, 81.65) --
+	(345.88, 81.65) --
+	(347.10, 81.65) --
+	(348.32, 81.65) --
+	(349.54, 81.65) --
+	(350.76, 81.65) --
+	(351.98, 81.65) --
+	(353.20, 81.65) --
+	(354.42, 81.65) --
+	(355.64, 81.65) --
+	(356.87, 81.65) --
+	(358.09, 81.65) --
+	(359.31, 81.65) --
+	(360.53, 81.65) --
+	(361.35, 81.65) --
+	(361.35, 81.65) --
+	cycle;
+\definecolor{fillColor}{gray}{0.80}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (254.48,312.32) rectangle (263.12,305.12);
+\definecolor{fillColor}{gray}{0.30}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (254.48,297.46) rectangle (263.12,290.26);
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (273.92,305.04) {P};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.25] at (281.91,305.04) {(};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (288.21,305.04) --
+	(288.21,313.30);
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (288.81,305.04) {Z};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (296.58,305.04) --
+	(296.58,313.30);
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (300.17,305.04) {>};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (312.29,305.04) {1.96};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (333.15,305.04) {,};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (336.40,305.04) { };
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (343.36,305.04) {H};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at (352.17,303.23) {1};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.25] at (356.28,305.04) {)};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (273.92,290.18) {P};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.25] at (281.91,290.18) {(};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (288.21,290.18) --
+	(288.21,298.45);
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (288.81,290.18) {Z};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (296.58,290.18) --
+	(296.58,298.45);
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (300.17,290.18) {>};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (312.29,290.18) {1.96};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (333.15,290.18) {,};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (336.40,290.18) { };
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (343.36,290.18) {H};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at (352.17,288.38) {0};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.25] at (356.28,290.18) {)};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (102.51,199.68) {H};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at (111.31,197.88) {0};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (117.81,199.68) {:};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (123.46,199.68) { };
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (130.42,199.68) { };
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (137.38,199.68) {m};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at (147.16,197.88) {1};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (154.25,199.68) {=};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (166.38,199.68) {m};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at (176.16,197.88) {2};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (165.36,199.68) {H};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at (174.17,197.88) {1};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (180.67,199.68) {:};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (186.31,199.68) { };
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (193.27,199.68) { };
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (200.23,199.68) {m};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at (210.01,197.88) {1};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (217.11,199.68) {=};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (229.23,199.68) {m};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.70] at (239.01,197.88) {2};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (245.51,199.68) {+};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (257.03,199.68) {d};
+\end{scope}
+\end{tikzpicture}
+
+\end{document}

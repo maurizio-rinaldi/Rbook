@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.10 on 2016-02-11 14:34:50
+% Created by tikzDevice version 0.10 on 2016-02-15 17:57:06
 % !TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \nonstopmode
@@ -20,7 +20,7 @@
 \usepackage{inconsolata}
 %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
 \usepackage[T1]{fontenc}
-
+\usepackage[buttonsize=1em]{animate}
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
@@ -31,8 +31,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
 \usepackage{lipsum}
-\usepackage[dvipsnames]{color}
-\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\usepackage[]{color}
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{amsmath}
@@ -64,11 +63,9 @@
 %\begin{center}
 %\begin{minipage}{12cm}
  \markright{\today}
-\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
 \colorbox{grigetto}{\parbox{\linewidth}{#1}}}
                           {
-                         % \end{minipage}
-                          %\end{center}
+                
                           \medskip}
  \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
@@ -78,9 +75,6 @@
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}
-%\renewcommand{\sectionmark}[1]{%
-% \markboth{\sectionname
-% \ \thesection.\ #1}{}}
 \newcommand{\rst}{\textsf{RStudio}~}
 \newcommand{\rpr}{\textsf{R}~}
 \makeindex
@@ -102,6 +96,40 @@
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (117.44,153.13) --
 	(108.41,168.78) --
 	( 99.37,153.13);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (216.81,216.81);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (108.41, 43.20) -- (108.41, 43.20);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (108.41, 43.20) -- (108.41, 38.88);
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (108.41, 21.60) {VI};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 43.20,108.41) -- ( 43.20,108.41);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 43.20,108.41) -- ( 38.88,108.41);
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 30.24,108.41) {IX};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (108.41,173.61) -- (108.41,173.61);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (108.41,173.61) -- (108.41,177.93);
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (108.41,186.57) {XII};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (173.61,108.41) -- (173.61,108.41);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (173.61,108.41) -- (177.93,108.41);
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (195.21,108.41) {III};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 43.20, 43.20) --
+	(173.61, 43.20) --
+	(173.61,173.61) --
+	( 43.20,173.61) --
+	( 43.20, 43.20);
 \end{scope}
 \end{tikzpicture}
 

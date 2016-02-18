@@ -1,0 +1,477 @@
+% Created by tikzDevice version 0.10 on 2016-02-15 18:02:20
+% !TEX encoding = UTF-8 Unicode
+\documentclass[onecolumn,12pt]{book}
+\nonstopmode
+
+\usepackage{tikz}
+
+\usepackage[active,tightpage,psfixbb]{preview}
+
+\PreviewEnvironment{pgfpicture}
+
+\setlength\PreviewBorder{0pt}
+
+\newcommand{\SweaveOpts}[1]{}  % do not interfere with LaTeX
+\newcommand{\SweaveInput}[1]{} % because they are not real TeX commands
+\newcommand{\Sexpr}[1]{}       % will only be parsed by R
+
+
+\usepackage[english,italian]{babel}
+\usepackage{inconsolata}
+%\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+\usepackage[T1]{fontenc}
+\usepackage[buttonsize=1em]{animate}
+\usepackage{a4wide,Sweave,url}
+\usepackage{verbatim}
+\usepackage{makeidx}
+\usepackage{babelbib}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{framed}
+\usepackage{lipsum}
+\usepackage[]{color}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+
+\usepackage{hyperref}
+\newenvironment{question}{\item \textbf{Esercizio}\newline}{}
+\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+\newenvironment{answerlist}{\renewcommand{\labelenumi}{(\alph{enumi})}\begin{enumerate}}{\end{enumerate}}
+\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
+ 
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
+\lhead[\thepage]{\today}
+%\usepackage{draftwatermark}
+\usepackage{wrapfig}
+\usepackage{listings}
+\pagestyle{fancy}
+\newcounter{fnotes}\setcounter{fnotes}{1}
+\newcounter{Raction}\setcounter{Raction}{1}
+\newcommand{\varia}[1]{\textsl{\textsf{#1}}}
+\newcommand{\mytilde}{$\sim$}
+\newcommand{\maurizio}[1]{\color{red}#1 \color{black}}
+\newcommand{\federico}[1]{\color{green}#1 \color{black}}
+ %\newenvironment{question}{\item \textbf{Problema}\newline}{}
+%\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+%\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em,
+                                            %  frame=single}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em,   frame=single}
+ \newenvironment{ese} [1]{\vskip10pt
+%\begin{center}
+%\begin{minipage}{12cm}
+ \markright{\today}
+\colorbox{grigetto}{\parbox{\linewidth}{#1}}}
+                          {
+                
+                          \medskip}
+ \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
+ \frontmatter\title{Matematica e Statistica con \textsf{R}}
+\author{Federico Comoglio e  Maurizio Rinaldi}
+\markright{\today}
+\lhead{\today}
+\renewcommand{\chaptermark}[1]{%
+ \markboth{\chaptername
+ \ \thechapter.\ #1}{}}
+\newcommand{\rst}{\textsf{RStudio}~}
+\newcommand{\rpr}{\textsf{R}~}
+\makeindex
+
+\begin{document}
+
+\begin{tikzpicture}[x=1pt,y=1pt]
+\definecolor{fillColor}{RGB}{255,255,255}
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,361.35);
+\begin{scope}
+\path[clip] ( 57.60, 57.60) rectangle (359.91,359.91);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{63,124,41}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (329.87, 59.01) rectangle (534.04,109.30);
+\definecolor{drawColor}{RGB}{255,255,0}
+\definecolor{fillColor}{RGB}{157,154,223}
+
+\path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round,fill=fillColor] (  3.28, 38.26) rectangle (354.79, 70.54);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{190,82,83}
+
+\path[draw=drawColor,line width= 2.4pt,line join=round,line cap=round,fill=fillColor] ( 19.58,132.35) rectangle (237.23,296.40);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{189,95,135}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (340.09,285.26) rectangle (417.84,615.84);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{29,42,8}
+
+\path[draw=drawColor,line width= 3.2pt,line join=round,line cap=round,fill=fillColor] (138.82,312.96) rectangle (287.77,406.97);
+\definecolor{drawColor}{RGB}{255,0,255}
+\definecolor{fillColor}{RGB}{33,107,39}
+
+\path[draw=drawColor,line width= 2.4pt,line join=round,line cap=round,fill=fillColor] (108.36,104.03) rectangle (156.05,173.84);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{239,26,215}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] ( 35.43,307.24) rectangle (242.15,455.05);
+\definecolor{drawColor}{RGB}{0,0,255}
+\definecolor{fillColor}{RGB}{182,136,65}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] ( 14.70,209.66) rectangle (205.23,413.91);
+\definecolor{drawColor}{RGB}{255,0,255}
+\definecolor{fillColor}{RGB}{112,154,235}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] (249.79, 10.25) rectangle (551.04,182.28);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{63,74,189}
+
+\path[draw=drawColor,line width= 1.6pt,line join=round,line cap=round,fill=fillColor] ( 22.01, 60.53) rectangle (115.76,175.06);
+\definecolor{drawColor}{RGB}{190,190,190}
+\definecolor{fillColor}{RGB}{232,20,209}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] (333.52,188.44) rectangle (376.10,465.19);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{235,236,176}
+
+\path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round,fill=fillColor] (-26.54,316.45) rectangle (134.29,373.50);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{194,98,29}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] (  7.69,256.30) rectangle (272.29,541.27);
+\definecolor{drawColor}{RGB}{255,255,0}
+\definecolor{fillColor}{RGB}{116,6,36}
+
+\path[draw=drawColor,line width= 2.4pt,line join=round,line cap=round,fill=fillColor] (291.19,346.17) rectangle (594.25,424.24);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{100,33,204}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] (244.65,121.99) rectangle (546.29,151.70);
+\definecolor{drawColor}{RGB}{255,0,255}
+\definecolor{fillColor}{RGB}{182,70,37}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] (217.25,270.53) rectangle (266.84,463.83);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{18,64,238}
+
+\path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round,fill=fillColor] (-23.06,195.63) rectangle (239.12,591.82);
+\definecolor{drawColor}{RGB}{190,190,190}
+\definecolor{fillColor}{RGB}{125,240,118}
+
+\path[draw=drawColor,line width= 3.2pt,line join=round,line cap=round,fill=fillColor] ( -9.48,111.46) rectangle ( 98.37,470.18);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{69,54,218}
+
+\path[draw=drawColor,line width= 2.0pt,line join=round,line cap=round,fill=fillColor] (141.01,221.17) rectangle (397.22,457.90);
+\definecolor{fillColor}{RGB}{32,129,147}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] (285.74, 74.22) rectangle (667.74,137.05);
+\definecolor{fillColor}{RGB}{19,102,94}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] (299.41,342.06) rectangle (578.79,696.33);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{3,130,242}
+
+\path[draw=drawColor,line width= 2.0pt,line join=round,line cap=round,fill=fillColor] (199.56,332.17) rectangle (594.94,704.86);
+\definecolor{drawColor}{RGB}{190,190,190}
+\definecolor{fillColor}{RGB}{110,169,50}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] ( 71.34,156.09) rectangle ( 96.44,211.11);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{43,83,119}
+
+\path[draw=drawColor,line width= 1.6pt,line join=round,line cap=round,fill=fillColor] (125.97,128.41) rectangle (148.69,229.86);
+\definecolor{drawColor}{RGB}{255,255,0}
+\definecolor{fillColor}{RGB}{117,82,86}
+
+\path[draw=drawColor,line width= 2.0pt,line join=round,line cap=round,fill=fillColor] (272.92,298.56) rectangle (512.24,498.96);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{192,209,245}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (  0.29,154.45) rectangle (268.82,322.91);
+\definecolor{drawColor}{RGB}{0,0,255}
+\definecolor{fillColor}{RGB}{214,216,69}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] (250.45,282.12) rectangle (573.81,576.60);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{145,70,157}
+
+\path[draw=drawColor,line width= 3.2pt,line join=round,line cap=round,fill=fillColor] ( 11.96,144.15) rectangle ( 24.07,366.56);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{27,126,218}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] ( 46.70,219.66) rectangle (336.95,434.37);
+\definecolor{drawColor}{RGB}{0,0,255}
+\definecolor{fillColor}{RGB}{86,8,218}
+
+\path[draw=drawColor,line width= 2.0pt,line join=round,line cap=round,fill=fillColor] (297.80, 62.05) rectangle (493.34,186.29);
+\definecolor{drawColor}{RGB}{0,205,0}
+\definecolor{fillColor}{RGB}{54,187,51}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] ( 66.36, 60.57) rectangle (206.79, 81.65);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{127,157,103}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (302.55,116.65) rectangle (317.26,128.89);
+\definecolor{drawColor}{RGB}{0,205,0}
+\definecolor{fillColor}{RGB}{183,224,242}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] (210.77,329.29) rectangle (313.87,511.40);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{203,97,80}
+
+\path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round,fill=fillColor] ( 37.99,197.90) rectangle (123.05,206.31);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{222,198,232}
+
+\path[draw=drawColor,line width= 1.6pt,line join=round,line cap=round,fill=fillColor] (248.64,242.30) rectangle (504.13,361.07);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{157,154,68}
+
+\path[draw=drawColor,line width= 2.0pt,line join=round,line cap=round,fill=fillColor] (339.12,317.47) rectangle (413.43,579.27);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{101,201,62}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] (292.25, 87.21) rectangle (491.90,311.48);
+\definecolor{drawColor}{RGB}{0,0,255}
+\definecolor{fillColor}{RGB}{84,239,11}
+
+\path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round,fill=fillColor] (199.80,336.09) rectangle (335.87,444.47);
+\definecolor{drawColor}{RGB}{0,205,0}
+\definecolor{fillColor}{RGB}{214,163,213}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] (110.87,  4.70) rectangle (190.76,213.28);
+\definecolor{drawColor}{RGB}{255,255,0}
+\definecolor{fillColor}{RGB}{244,160,161}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] ( 32.16, 42.82) rectangle (175.92,151.44);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{219,105,117}
+
+\path[draw=drawColor,line width= 2.4pt,line join=round,line cap=round,fill=fillColor] ( 71.68,242.43) rectangle (433.49,589.18);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{158,179,193}
+
+\path[draw=drawColor,line width= 1.6pt,line join=round,line cap=round,fill=fillColor] (255.82, 37.04) rectangle (306.60,202.64);
+\definecolor{fillColor}{RGB}{193,124,47}
+
+\path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round,fill=fillColor] (146.12,210.74) rectangle (176.25,532.38);
+\definecolor{drawColor}{RGB}{0,205,0}
+\definecolor{fillColor}{RGB}{176,43,204}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] (302.81,-43.31) rectangle (638.46,187.97);
+\definecolor{drawColor}{RGB}{190,190,190}
+\definecolor{fillColor}{RGB}{131,96,236}
+
+\path[draw=drawColor,line width= 2.4pt,line join=round,line cap=round,fill=fillColor] (206.84, 44.00) rectangle (306.42,250.47);
+\definecolor{drawColor}{RGB}{0,0,255}
+\definecolor{fillColor}{RGB}{6,66,68}
+
+\path[draw=drawColor,line width= 1.6pt,line join=round,line cap=round,fill=fillColor] (333.77, 38.78) rectangle (477.11,392.95);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{45,239,62}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] ( 92.99,217.29) rectangle (133.22,571.58);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{213,248,197}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (244.60,182.07) rectangle (603.22,553.73);
+\definecolor{drawColor}{RGB}{255,0,255}
+\definecolor{fillColor}{RGB}{187,49,155}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] (220.27, 98.21) rectangle (412.28,354.40);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{0,187,245}
+
+\path[draw=drawColor,line width= 3.2pt,line join=round,line cap=round,fill=fillColor] (124.29, 42.05) rectangle (304.60,358.66);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{94,109,154}
+
+\path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round,fill=fillColor] ( 31.87,315.50) rectangle ( 43.02,351.91);
+\definecolor{drawColor}{RGB}{0,0,255}
+\definecolor{fillColor}{RGB}{12,103,114}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] (313.02,334.83) rectangle (504.56,648.93);
+\definecolor{drawColor}{RGB}{255,255,0}
+\definecolor{fillColor}{RGB}{185,253,99}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] (-45.53,-15.43) rectangle ( 21.38,359.97);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{229,224,159}
+
+\path[draw=drawColor,line width= 2.0pt,line join=round,line cap=round,fill=fillColor] (272.90,-46.15) rectangle (585.19,197.55);
+\definecolor{drawColor}{RGB}{255,255,0}
+\definecolor{fillColor}{RGB}{21,151,223}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] (  1.45,259.42) rectangle (320.24,482.81);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{31,174,63}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] (167.25,210.33) rectangle (318.80,335.14);
+\definecolor{drawColor}{RGB}{0,205,0}
+\definecolor{fillColor}{RGB}{159,167,238}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] (210.36,265.16) rectangle (266.26,504.75);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{71,196,136}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] (345.88,-41.68) rectangle (643.49,276.32);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{104,160,53}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] (318.56, 38.64) rectangle (690.37,278.58);
+\definecolor{drawColor}{RGB}{255,255,0}
+\definecolor{fillColor}{RGB}{65,167,205}
+
+\path[draw=drawColor,line width= 1.6pt,line join=round,line cap=round,fill=fillColor] (-32.94, 81.58) rectangle (209.61,263.35);
+\definecolor{fillColor}{RGB}{96,177,120}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] (204.27,123.96) rectangle (470.78,291.52);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{158,246,129}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (-11.68, 27.54) rectangle ( 24.84,354.43);
+\definecolor{drawColor}{RGB}{190,190,190}
+\definecolor{fillColor}{RGB}{206,70,150}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] ( 24.20,317.35) rectangle (286.48,417.48);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{187,31,49}
+
+\path[draw=drawColor,line width= 3.2pt,line join=round,line cap=round,fill=fillColor] (183.81,-23.25) rectangle (242.51,364.05);
+\definecolor{drawColor}{RGB}{0,205,0}
+\definecolor{fillColor}{RGB}{6,181,180}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] ( 75.39,149.16) rectangle ( 83.06,355.19);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{167,118,73}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] (-49.36,316.72) rectangle (335.62,427.26);
+\definecolor{drawColor}{RGB}{190,190,190}
+\definecolor{fillColor}{RGB}{46,101,254}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] ( 30.12, 84.57) rectangle (243.83,222.92);
+\definecolor{drawColor}{RGB}{255,255,0}
+\definecolor{fillColor}{RGB}{195,214,136}
+
+\path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round,fill=fillColor] (315.74,133.11) rectangle (379.16,281.47);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{66,214,165}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (291.39,122.44) rectangle (294.79,131.40);
+\definecolor{drawColor}{RGB}{255,255,0}
+\definecolor{fillColor}{RGB}{253,182,65}
+
+\path[draw=drawColor,line width= 3.2pt,line join=round,line cap=round,fill=fillColor] (142.60, 28.70) rectangle (303.15,388.53);
+\definecolor{fillColor}{RGB}{154,38,139}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] ( 11.01,166.52) rectangle (352.77,368.13);
+\definecolor{drawColor}{RGB}{255,0,255}
+\definecolor{fillColor}{RGB}{37,8,61}
+
+\path[draw=drawColor,line width= 1.6pt,line join=round,line cap=round,fill=fillColor] (284.92, 65.43) rectangle (619.52, 99.94);
+\definecolor{fillColor}{RGB}{88,69,104}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] (146.05, 13.83) rectangle (413.53,296.33);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{22,210,175}
+
+\path[draw=drawColor,line width= 2.4pt,line join=round,line cap=round,fill=fillColor] (272.93,198.49) rectangle (536.01,399.35);
+\definecolor{drawColor}{RGB}{190,190,190}
+\definecolor{fillColor}{RGB}{124,196,243}
+
+\path[draw=drawColor,line width= 2.0pt,line join=round,line cap=round,fill=fillColor] (  2.53,-23.51) rectangle (265.12,365.00);
+\definecolor{fillColor}{RGB}{31,74,78}
+
+\path[draw=drawColor,line width= 1.6pt,line join=round,line cap=round,fill=fillColor] (241.04,-18.70) rectangle (598.78,332.31);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{104,107,186}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] ( 18.72, 41.01) rectangle (171.51,322.60);
+\definecolor{drawColor}{RGB}{0,205,0}
+\definecolor{fillColor}{RGB}{121,193,100}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] (  6.73,142.69) rectangle (328.37,183.38);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{123,175,37}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] (323.57, 52.69) rectangle (599.97,245.29);
+\definecolor{drawColor}{RGB}{0,205,0}
+\definecolor{fillColor}{RGB}{181,102,156}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] ( 19.11,132.84) rectangle ( 44.03,505.90);
+\definecolor{drawColor}{RGB}{0,0,255}
+\definecolor{fillColor}{RGB}{185,5,189}
+
+\path[draw=drawColor,line width= 2.0pt,line join=round,line cap=round,fill=fillColor] (301.94, 71.75) rectangle (370.57,205.81);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{75,238,59}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] ( 16.32, 40.35) rectangle ( 78.31,126.79);
+\definecolor{drawColor}{RGB}{0,205,0}
+\definecolor{fillColor}{RGB}{226,102,218}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] (-33.02,225.27) rectangle (197.38,242.18);
+\definecolor{drawColor}{RGB}{255,255,0}
+\definecolor{fillColor}{RGB}{133,49,101}
+
+\path[draw=drawColor,line width= 2.4pt,line join=round,line cap=round,fill=fillColor] (126.71,269.97) rectangle (387.80,311.31);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{237,104,148}
+
+\path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round,fill=fillColor] (344.62,311.80) rectangle (371.66,475.40);
+\definecolor{drawColor}{RGB}{255,0,255}
+\definecolor{fillColor}{RGB}{19,33,208}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] (-19.32,326.55) rectangle (310.28,711.58);
+\definecolor{drawColor}{RGB}{0,255,255}
+\definecolor{fillColor}{RGB}{244,161,131}
+
+\path[draw=drawColor,line width= 3.6pt,line join=round,line cap=round,fill=fillColor] (112.09,131.76) rectangle (376.32,436.64);
+\definecolor{drawColor}{RGB}{255,0,255}
+\definecolor{fillColor}{RGB}{197,155,156}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] (275.68,215.30) rectangle (413.85,406.32);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{73,63,219}
+
+\path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round,fill=fillColor] (297.15,115.80) rectangle (537.04,420.43);
+\definecolor{drawColor}{RGB}{0,0,255}
+\definecolor{fillColor}{RGB}{107,127,209}
+
+\path[draw=drawColor,line width= 2.4pt,line join=round,line cap=round,fill=fillColor] ( 37.11,327.71) rectangle (210.41,465.38);
+\definecolor{drawColor}{RGB}{190,190,190}
+\definecolor{fillColor}{RGB}{206,73,23}
+
+\path[draw=drawColor,line width= 2.0pt,line join=round,line cap=round,fill=fillColor] (206.80, 39.02) rectangle (515.37,113.70);
+\definecolor{drawColor}{RGB}{0,0,255}
+\definecolor{fillColor}{RGB}{78,201,85}
+
+\path[draw=drawColor,line width= 2.8pt,line join=round,line cap=round,fill=fillColor] (253.39,-30.52) rectangle (260.19,317.36);
+\definecolor{drawColor}{RGB}{255,0,255}
+\definecolor{fillColor}{RGB}{189,157,138}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] (266.81, 76.87) rectangle (647.11,260.97);
+\definecolor{drawColor}{RGB}{255,0,0}
+\definecolor{fillColor}{RGB}{97,186,124}
+
+\path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round,fill=fillColor] (325.82,-32.70) rectangle (565.41,347.21);
+\definecolor{drawColor}{RGB}{255,0,255}
+\definecolor{fillColor}{RGB}{3,178,106}
+
+\path[draw=drawColor,line width= 2.0pt,line join=round,line cap=round,fill=fillColor] ( 64.18,143.46) rectangle (360.38,508.37);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{86,146,182}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round,line cap=round,fill=fillColor] (181.71, 41.12) rectangle (257.45,207.03);
+\definecolor{drawColor}{RGB}{255,0,255}
+\definecolor{fillColor}{RGB}{20,198,145}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (295.48, 45.41) rectangle (488.32,288.47);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{37,111,192}
+
+\path[draw=drawColor,line width= 1.6pt,line join=round,line cap=round,fill=fillColor] ( 64.24,  7.70) rectangle (220.19, 61.05);
+\end{scope}
+\end{tikzpicture}
+
+\end{document}

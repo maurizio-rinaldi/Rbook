@@ -65,11 +65,13 @@
 \begin{document}
 \setkeys{Gin}{width=0.7\textwidth}
 
-<<include=FALSE>>=
+<<setup, include=FALSE, cache=TRUE>>=
 library(knitr)
-opts_chunk$set(
-concordance=TRUE
-)
+options(formatR.arrow=TRUE,width=50)
+opts_chunk$set(fig.path='figure/graphics-', cache.path='cache/graphics-', fig.align='center', dev='tikz', fig.width=5, fig.height=5, fig.show='hold', cache=TRUE, par=TRUE)
+knit_hooks$set(par=function(before, options, envir){
+if (before && options$fig.show!='none') par(mar=c(4,4,.1,.1),cex.lab=.95,cex.axis=.9,mgp=c(2,.7,0),tcl=-.3)
+}, crop=hook_pdfcrop)
 @
 
 \markright{\today}
@@ -552,7 +554,111 @@ c="testo",d=list(g="h",r=1:10) )
 x
 @
 
-\chapter{Statistica con \textsf{R}}
+\chapter{Statistica e probabilit\`a  con \textsf{R}}
+Riprendiamo qui sinteticamente alcune definizioni.
+\section{Lo spazio campionario}
+
+Lo spazio campionario $\Omega$  (\emph{sample space}) è l'insieme di tutte le uscite possibili di un esperimento. Per esempio 
+\begin{itemize}
+\item Dado: lo spazio campionario consiste nelle uscite dei numeri da 1 a 6. \item Moneta: lo spazio campionario consiste di 2 possibili  uscite "esce testa", "esce croce"
+\item Misure di lunghezza: lo spazio campionario è un intervallo del semiasse positivo della retta. 
+Come si vede lo spazio campionario pu\`o essere dscreto o continuo. Potrebbe essere anche una combinazione dei due.
+\end{itemize}
+\section{Gli eventi}
+
+
+ Un evento è un sottoinsieme dello spazio campionario. 
+ Ad esempio
+\begin{itemize}
+\item Nel lancio di un dado l'uscita del 6 o l'uscita di un numero pari sono possibili eventi. 
+\item Un evento semplice è un sottoinsieme di un elemento.
+\end{itemize}
+
+
+\subsubsection{Costruzione di eventi}
+
+Siano A e  B degli eventi che possono risultare da un esperimento. A partire da questi eventi possiamo costruire dei nuovi eventi
+\begin{itemize}
+\item $A\cup B$ ($A$ oppure $B$, evento unione) indica il verificarsi di A o di B (o di ambedue).
+\item $A \cap  B$  indica il verificarsi di A e di  B.
+\item L'evento  $A^c$ (complemento di A, non A)   indica il non verificarsi dell'evento $A$.   
+\end{itemize}
+<<echo=FALSE>>=
+plot(0,xlim=c(0,10),ylim=c(0,6),type="n",axes=F,xlab="",ylab="")
+library(plotrix)
+draw.circle(2,4,2,border="blue")
+draw.circle(5,4,2,border="red")
+text(2,4,"A")
+text(5,4,"B")
+text(3.5,4,expression(paste("A",intersect("B"))))
+@
+
+
+\section{La probabilità}
+
+$P(A)$ indica la probabilità di un evento A. Questo è un numero nell'intervallo $[0,1]$ che possiamo associare a ciascun evento che soddisfa certe regole (assiomi).
+Eventi certi corrispondono a probabilità uguale ad 1=100\%, eventi impossibili corrispondono a fiducia uguale a 0=0\%.
+
+\subsubsection{ Assiomi}
+\begin{enumerate}
+\item qualunque sia l'evento $E$, $P(E)\geq 0$
+\item $P(\Omega)=1$
+\item  $P(E_1\cup E_2\cup\ldots \cup E_n)=P(E_1)+P(E_2)+\ldots +P(E_n)$ (anche per $n=\infty$) dove $E_i\cap E_j=\emptyset$
+\end{enumerate}
+
+Consideriamo ad esempio il lancio di un dado e sia
+\begin{itemize}
+\item  A = \texttt{esce pari}=$\{2,4,6\}$
+\item  B = \texttt{esce un numero maggiore o uguale a 4}=$\{4,5,6\}$
+\end{itemize}
+
+
+Allora
+$A\cup B=\texttt{esce 2 o 4 o 5 o 6}=$\{2,4,5,6\}$
+
+$A\cap B$=\texttt{esce 4 o 6}$=\{4,6\}$
+
+$A^C=$ \texttt{esce un numero dispari}$=\{1,3,5\}$
+
+$B^C=$\texttt{esce 1 o 2 o 3}$=\{1,2,3\}$
+        
+        
+\subsection{Conseguenze}   
+
+
+   
+$A$ e $B$ sono \emph{incompatibili} se $A\cap B=\emptyset$.
+
+<<echo =FALSE,fig.height=5>>=
+plot(0,xlim=c(0,10),ylim=c(0,8),type="n",axes=F,xlab="",ylab="")
+library(plotrix)
+draw.circle(2,4,2,border="blue",col="gray90")
+draw.circle(4,4,2,border="red",col="gray70")
+draw.circle(2,4,2,border="blue")
+text(1,4,"A",col="blue")
+text(3.,5.,"X1")
+text(4,5.,"X2")
+text(5,4,"B",col="red")
+text(3.5,4,expression(paste("X3=A",intersect("B")))) 
+@
+
+Abbiamo quindi
+\[A=X_1\cup X_3, \quad B=X_2\cup X_3\]
+da cui
+\[P(A)=P(X_1)+P(X_3),\quad P(B)=P(X_3)+P(X_2)\]
+\[P(X_1)=P(A)-P(X_3),\quad P(X_2)=P(B)-P(X_3)\]
+\[P(A\cup B)=P(X_1\cup X_2\cup X_3)=P(X_1)+P(X_2)+P(X_3)=
+=P(A) +P(B)-P(X_3)=P(A) +P(B)-P(A\cap B)\]
+
+e quindi 
+
+$$P(A\cup B)=P(A) +P(B)-P(A\cap B)$$
+Il 60\% degli studenti in questa classe è geniale mentre il   70\% ama lo sport; il 40\%, oltre ad essere geniale, ama lo sport. Determinare la probabilità che uno studente scelto a caso non sia geniale e non ami lo sport.
+
+
+ 
+ 
+
 \section{Variabili aleatorie}
 Una variabile aleatoria (\emph{random variabile}) \`e
  una variabile i cui valori sono soggetti a variazioni casuali. Quando i valori possibili di una variabile aleatoria  possono essere elencati parliamo di variabile aleatoria discreta. Quando i valori non possono essere elencati parliamo di variabile aleatoria continua.
@@ -606,7 +712,7 @@ sample(alfabeto,5,replace=T)
 @
  
 
-Il precursore  del dado era chiamato astragalo ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
+Il precursore  del dado era chiamato \emph{astragalo} ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
 Gli  astragali sono dei piccoli ossicini di forma irregolare ed hanno 6 facce ma atterranno in  modo stabile solo su 4 di esse numerate 1, 3, 4 e 6  con probabilit\`a all'incirca 0.4 per il 3 e il 4  e di 0.1 per l'1 e il 6. In altre parole l'astragalo \`e descritto dalla tabella
 
 \begin{center}\begin{tabular}{|r|r |}

@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.10 on 2016-02-11 14:36:18
+% Created by tikzDevice version 0.10 on 2016-02-15 18:03:16
 % !TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \nonstopmode
@@ -20,7 +20,7 @@
 \usepackage{inconsolata}
 %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
 \usepackage[T1]{fontenc}
-
+\usepackage[buttonsize=1em]{animate}
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
@@ -31,8 +31,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
 \usepackage{lipsum}
-\usepackage[dvipsnames]{color}
-\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\usepackage[]{color}
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{amsmath}
@@ -64,11 +63,9 @@
 %\begin{center}
 %\begin{minipage}{12cm}
  \markright{\today}
-\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
 \colorbox{grigetto}{\parbox{\linewidth}{#1}}}
                           {
-                         % \end{minipage}
-                          %\end{center}
+                
                           \medskip}
  \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
@@ -78,14 +75,163 @@
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}
-%\renewcommand{\sectionmark}[1]{%
-% \markboth{\sectionname
-% \ \thesection.\ #1}{}}
 \newcommand{\rst}{\textsf{RStudio}~}
 \newcommand{\rpr}{\textsf{R}~}
 \makeindex
 
 \begin{document}
 
+\begin{tikzpicture}[x=1pt,y=1pt]
+\definecolor{fillColor}{RGB}{255,255,255}
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,361.35);
+\begin{scope}
+\path[clip] ( 57.60, 57.60) rectangle (359.91,359.91);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80,119.53) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80, 68.80) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 79.16,156.27) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 79.16,173.77) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 92.12,201.76) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 92.12,229.75) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (120.63,264.74) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (120.63,252.49) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (208.75,320.72) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (208.75,338.22) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (348.71,348.71) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (348.71,336.47) circle (  2.70);
+\definecolor{drawColor}{RGB}{255,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80,107.99) --
+	( 72.43,101.69) --
+	( 65.16,101.69) --
+	( 68.80,107.99);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80, 79.99) --
+	( 72.43, 73.70) --
+	( 65.16, 73.70) --
+	( 68.80, 79.99);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 79.16,137.73) --
+	( 82.80,131.43) --
+	( 75.53,131.43) --
+	( 79.16,137.73);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 79.16,141.23) --
+	( 82.80,134.93) --
+	( 75.53,134.93) --
+	( 79.16,141.23);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 92.12,162.22) --
+	( 95.76,155.92) --
+	( 88.49,155.92) --
+	( 92.12,162.22);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 92.12,191.96) --
+	( 95.76,185.66) --
+	( 88.49,185.66) --
+	( 92.12,191.96);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (120.63,219.95) --
+	(124.27,213.65) --
+	(117.00,213.65) --
+	(120.63,219.95);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (120.63,207.71) --
+	(124.27,201.41) --
+	(117.00,201.41) --
+	(120.63,207.71);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (208.75,242.69) --
+	(212.39,236.40) --
+	(205.12,236.40) --
+	(208.75,242.69);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (208.75,267.19) --
+	(212.39,260.89) --
+	(205.12,260.89) --
+	(208.75,267.19);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (348.71,270.69) --
+	(352.35,264.39) --
+	(345.08,264.39) --
+	(348.71,270.69);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (361.35,361.35);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 63.61, 57.60) -- (322.80, 57.60);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 63.61, 57.60) -- ( 63.61, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (115.45, 57.60) -- (115.45, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (167.29, 57.60) -- (167.29, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (219.12, 57.60) -- (219.12, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (270.96, 57.60) -- (270.96, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (322.80, 57.60) -- (322.80, 53.28);
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 63.61, 36.00) {0.0};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (115.45, 36.00) {0.2};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (167.29, 36.00) {0.4};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (219.12, 36.00) {0.6};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (270.96, 36.00) {0.8};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (322.80, 36.00) {1.0};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 74.05) -- ( 57.60,336.47);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 74.05) -- ( 53.28, 74.05);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,161.52) -- ( 53.28,161.52);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,248.99) -- ( 53.28,248.99);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,336.47) -- ( 53.28,336.47);
+
+\node[text=drawColor,anchor=base east,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 47.52, 70.33) {50};
+
+\node[text=drawColor,anchor=base east,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 47.52,157.80) {100};
+
+\node[text=drawColor,anchor=base east,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 47.52,245.28) {150};
+
+\node[text=drawColor,anchor=base east,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 47.52,332.75) {200};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 57.60) --
+	(359.91, 57.60) --
+	(359.91,359.91) --
+	( 57.60,359.91) --
+	( 57.60, 57.60);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (361.35,361.35);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.20] at (208.75,355.66) {\bfseries Puromycin data and fitted Michaelis-Menten curves};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at (208.75, 17.28) {Substrate concentration (ppm)};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at ( 25.92,208.75) {Reaction velocity (counts/min/min)};
+\end{scope}
+\end{tikzpicture}
 
 \end{document}

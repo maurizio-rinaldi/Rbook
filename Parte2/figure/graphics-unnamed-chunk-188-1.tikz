@@ -1,0 +1,203 @@
+% Created by tikzDevice version 0.10 on 2016-02-15 17:58:34
+% !TEX encoding = UTF-8 Unicode
+\documentclass[onecolumn,12pt]{book}
+\nonstopmode
+
+\usepackage{tikz}
+
+\usepackage[active,tightpage,psfixbb]{preview}
+
+\PreviewEnvironment{pgfpicture}
+
+\setlength\PreviewBorder{0pt}
+
+\newcommand{\SweaveOpts}[1]{}  % do not interfere with LaTeX
+\newcommand{\SweaveInput}[1]{} % because they are not real TeX commands
+\newcommand{\Sexpr}[1]{}       % will only be parsed by R
+
+
+\usepackage[english,italian]{babel}
+\usepackage{inconsolata}
+%\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+\usepackage[T1]{fontenc}
+\usepackage[buttonsize=1em]{animate}
+\usepackage{a4wide,Sweave,url}
+\usepackage{verbatim}
+\usepackage{makeidx}
+\usepackage{babelbib}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{framed}
+\usepackage{lipsum}
+\usepackage[]{color}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+
+\usepackage{hyperref}
+\newenvironment{question}{\item \textbf{Esercizio}\newline}{}
+\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+\newenvironment{answerlist}{\renewcommand{\labelenumi}{(\alph{enumi})}\begin{enumerate}}{\end{enumerate}}
+\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
+ 
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
+\lhead[\thepage]{\today}
+%\usepackage{draftwatermark}
+\usepackage{wrapfig}
+\usepackage{listings}
+\pagestyle{fancy}
+\newcounter{fnotes}\setcounter{fnotes}{1}
+\newcounter{Raction}\setcounter{Raction}{1}
+\newcommand{\varia}[1]{\textsl{\textsf{#1}}}
+\newcommand{\mytilde}{$\sim$}
+\newcommand{\maurizio}[1]{\color{red}#1 \color{black}}
+\newcommand{\federico}[1]{\color{green}#1 \color{black}}
+ %\newenvironment{question}{\item \textbf{Problema}\newline}{}
+%\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+%\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em,
+                                            %  frame=single}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em,   frame=single}
+ \newenvironment{ese} [1]{\vskip10pt
+%\begin{center}
+%\begin{minipage}{12cm}
+ \markright{\today}
+\colorbox{grigetto}{\parbox{\linewidth}{#1}}}
+                          {
+                
+                          \medskip}
+ \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
+ \frontmatter\title{Matematica e Statistica con \textsf{R}}
+\author{Federico Comoglio e  Maurizio Rinaldi}
+\markright{\today}
+\lhead{\today}
+\renewcommand{\chaptermark}[1]{%
+ \markboth{\chaptername
+ \ \thechapter.\ #1}{}}
+\newcommand{\rst}{\textsf{RStudio}~}
+\newcommand{\rpr}{\textsf{R}~}
+\makeindex
+
+\begin{document}
+
+\begin{tikzpicture}[x=1pt,y=1pt]
+\definecolor{fillColor}{RGB}{255,255,255}
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,361.35);
+\begin{scope}
+\path[clip] ( 57.60, 57.60) rectangle (359.91,359.91);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 1.2pt,line join=round] ( 75.79,126.43) -- (131.78,126.43);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (103.79,101.73) -- (103.79,118.19);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (103.79,137.95) -- (103.79,134.66);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 89.79,101.73) -- (117.78,101.73);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 89.79,137.95) -- (117.78,137.95);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 75.79,118.19) --
+	(131.78,118.19) --
+	(131.78,134.66) --
+	( 75.79,134.66) --
+	( 75.79,118.19);
+
+\path[draw=drawColor,line width= 1.2pt,line join=round] (145.77,269.68) -- (201.76,269.68);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (173.77, 68.80) -- (173.77,193.94);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (173.77,348.71) -- (173.77,315.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (159.77, 68.80) -- (187.76, 68.80);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (159.77,348.71) -- (187.76,348.71);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (145.77,193.94) --
+	(201.76,193.94) --
+	(201.76,315.78) --
+	(145.77,315.78) --
+	(145.77,193.94);
+
+\path[draw=drawColor,line width= 1.2pt,line join=round] (215.75,269.68) -- (271.74,269.68);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (243.74,128.07) -- (243.74,200.52);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (243.74,345.42) -- (243.74,338.83);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (229.75,128.07) -- (257.74,128.07);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (229.75,345.42) -- (257.74,345.42);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (215.75,200.52) --
+	(271.74,200.52) --
+	(271.74,338.83) --
+	(215.75,338.83) --
+	(215.75,200.52);
+
+\path[draw=drawColor,line width= 1.2pt,line join=round] (285.73,128.07) -- (341.72,128.07);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (313.72, 85.26) -- (313.72, 88.56);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (313.72,200.52) -- (313.72,193.94);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (299.73, 85.26) -- (327.72, 85.26);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (299.73,200.52) -- (327.72,200.52);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (285.73, 88.56) --
+	(341.72, 88.56) --
+	(341.72,193.94) --
+	(285.73,193.94) --
+	(285.73, 88.56);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (361.35,361.35);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (103.79, 57.60) -- (313.72, 57.60);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (103.79, 57.60) -- (103.79, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (173.77, 57.60) -- (173.77, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (243.74, 57.60) -- (243.74, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (313.72, 57.60) -- (313.72, 53.28);
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (103.79, 36.00) {1};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (173.77, 36.00) {2};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (243.74, 36.00) {3};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (313.72, 36.00) {4};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,118.19) -- ( 57.60,315.78);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,118.19) -- ( 53.28,118.19);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,184.06) -- ( 53.28,184.06);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,249.92) -- ( 53.28,249.92);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,315.78) -- ( 53.28,315.78);
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,118.19) {20};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,184.06) {40};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,249.92) {60};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,315.78) {80};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 57.60) --
+	(359.91, 57.60) --
+	(359.91,359.91) --
+	( 57.60,359.91) --
+	( 57.60, 57.60);
+\end{scope}
+\end{tikzpicture}
+
+\end{document}

@@ -846,16 +846,16 @@ Per esempio possiamo considerare il dataframe \texttt{d} definito come segue
 \end{alltt}
 \begin{verbatim}
 ##    x  y fac
-## 1  1  1   A
+## 1  1  1   C
 ## 2  1  2   A
-## 3  1  3   B
-## 4  1  4   A
-## 5  1  5   C
-## 6  1  6   B
-## 7  1  7   B
-## 8  1  8   C
-## 9  1  9   A
-## 10 1 10   C
+## 3  1  3   A
+## 4  1  4   B
+## 5  1  5   A
+## 6  1  6   A
+## 7  1  7   C
+## 8  1  8   A
+## 9  1  9   B
+## 10 1 10   A
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1208,9 +1208,9 @@ Un \emph{array}  \`e una generalizzazione multidimensionale di una matrice. Gli 
 \end{alltt}
 \begin{verbatim}
 ##    K  L  M  N
-## A 94 31 18 73
-## B 54 99 10 96
-## C 55  4 65 38
+## A 93 49 74 60
+## B  9  8 87  5
+## C 77 37 63 54
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1274,7 +1274,100 @@ Possiamo annidare anche liste entro liste
 \end{kframe}
 \end{knitrout}
 
-\chapter{Statistica con \textsf{R}}
+\chapter{Statistica e probabilit\`a  con \textsf{R}}
+Riprendiamo qui sinteticamente alcune definizioni.
+\section{Lo spazio campionario}
+
+Lo spazio campionario $\Omega$  (\emph{sample space}) è l'insieme di tutte le uscite possibili di un esperimento. Per esempio 
+\begin{itemize}
+\item Dado: lo spazio campionario consiste nelle uscite dei numeri da 1 a 6. \item Moneta: lo spazio campionario consiste di 2 possibili  uscite "esce testa", "esce croce"
+\item Misure di lunghezza: lo spazio campionario è un intervallo del semiasse positivo della retta. 
+Come si vede lo spazio campionario pu\`o essere dscreto o continuo. Potrebbe essere anche una combinazione dei due.
+\end{itemize}
+\section{Gli eventi}
+
+
+ Un evento è un sottoinsieme dello spazio campionario. 
+ Ad esempio
+\begin{itemize}
+\item Nel lancio di un dado l'uscita del 6 o l'uscita di un numero pari sono possibili eventi. 
+\item Un evento semplice è un sottoinsieme di un elemento.
+\end{itemize}
+
+
+\subsubsection{Costruzione di eventi}
+
+Siano A e  B degli eventi che possono risultare da un esperimento. A partire da questi eventi possiamo costruire dei nuovi eventi
+\begin{itemize}
+\item $A\cup B$ ($A$ oppure $B$, evento unione) indica il verificarsi di A o di B (o di ambedue).
+\item $A \cap  B$  indica il verificarsi di A e di  B.
+\item L'evento  $A^c$ (complemento di A, non A)   indica il non verificarsi dell'evento $A$.   
+\end{itemize}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-69-1} 
+
+\end{knitrout}
+
+
+\section{La probabilità}
+
+$P(A)$ indica la probabilità di un evento A. Questo è un numero nell'intervallo $[0,1]$ che possiamo associare a ciascun evento che soddisfa certe regole (assiomi).
+Eventi certi corrispondono a probabilità uguale ad 1=100\%, eventi impossibili corrispondono a fiducia uguale a 0=0\%.
+
+\subsubsection{ Assiomi}
+\begin{enumerate}
+\item qualunque sia l'evento $E$, $P(E)\geq 0$
+\item $P(\Omega)=1$
+\item  $P(E_1\cup E_2\cup\ldots \cup E_n)=P(E_1)+P(E_2)+\ldots +P(E_n)$ (anche per $n=\infty$) dove $E_i\cap E_j=\emptyset$
+\end{enumerate}
+
+Consideriamo ad esempio il lancio di un dado e sia
+\begin{itemize}
+\item  A = \texttt{esce pari}=$\{2,4,6\}$
+\item  B = \texttt{esce un numero maggiore o uguale a 4}=$\{4,5,6\}$
+\end{itemize}
+
+
+Allora
+$A\cup B=\texttt{esce 2 o 4 o 5 o 6}=$\{2,4,5,6\}$
+
+$A\cap B$=\texttt{esce 4 o 6}$=\{4,6\}$
+
+$A^C=$ \texttt{esce un numero dispari}$=\{1,3,5\}$
+
+$B^C=$\texttt{esce 1 o 2 o 3}$=\{1,2,3\}$
+        
+        
+\subsection{Conseguenze}   
+
+
+   
+$A$ e $B$ sono \emph{incompatibili} se $A\cap B=\emptyset$.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-70-1} 
+
+\end{knitrout}
+
+Abbiamo quindi
+\[A=X_1\cup X_3, \quad B=X_2\cup X_3\]
+da cui
+\[P(A)=P(X_1)+P(X_3),\quad P(B)=P(X_3)+P(X_2)\]
+\[P(X_1)=P(A)-P(X_3),\quad P(X_2)=P(B)-P(X_3)\]
+\[P(A\cup B)=P(X_1\cup X_2\cup X_3)=P(X_1)+P(X_2)+P(X_3)=
+=P(A) +P(B)-P(X_3)=P(A) +P(B)-P(A\cap B)\]
+
+e quindi 
+
+$$P(A\cup B)=P(A) +P(B)-P(A\cap B)$$
+Il 60\% degli studenti in questa classe è geniale mentre il   70\% ama lo sport; il 40\%, oltre ad essere geniale, ama lo sport. Determinare la probabilità che uno studente scelto a caso non sia geniale e non ami lo sport.
+
+
+ 
+ 
+
 \section{Variabili aleatorie}
 Una variabile aleatoria (\emph{random variabile}) \`e
  una variabile i cui valori sono soggetti a variazioni casuali. Quando i valori possibili di una variabile aleatoria  possono essere elencati parliamo di variabile aleatoria discreta. Quando i valori non possono essere elencati parliamo di variabile aleatoria continua.
@@ -1360,7 +1453,7 @@ Per esempio
 \end{knitrout}
  
 
-Il precursore  del dado era chiamato astragalo ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
+Il precursore  del dado era chiamato \emph{astragalo} ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
 Gli  astragali sono dei piccoli ossicini di forma irregolare ed hanno 6 facce ma atterranno in  modo stabile solo su 4 di esse numerate 1, 3, 4 e 6  con probabilit\`a all'incirca 0.4 per il 3 e il 4  e di 0.1 per l'1 e il 6. In altre parole l'astragalo \`e descritto dalla tabella
 
 \begin{center}\begin{tabular}{|r|r |}
@@ -1657,7 +1750,7 @@ ottenendo la figura~\ref{fig:datiist}
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-98-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-99-1} 
 
 \end{knitrout}
 \caption{ Andamento della temperatura a Gennaio 2016  a Milano. }
@@ -1773,7 +1866,7 @@ Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del 
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-105-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-106-1} 
 
 \end{knitrout}
 \caption{Diagramma a colonne e areogramma per il lancio di un dado.}
@@ -1802,14 +1895,14 @@ lasciando \textsf{R} libero di scegliere i punti di taglio (pannelli a sinistra 
 \hlkwc{main}\hlstd{=}\hlstr{"Cutoff personalizzati"}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-108-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-109-1} 
 
 \end{knitrout}
 \begin{figure}[htbp]
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-109-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-110-1} 
 
 \end{knitrout}
 \caption{ Areogramma dei dati della temperatura. Scelta automatica dei punti di taglio.}
@@ -1831,7 +1924,7 @@ otteniamo la figura~\ref{fig:boxplotdado}
 \hlkwd{boxplot}\hlstd{(dadi100)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-110-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-111-1} 
 
 \end{knitrout}
 \caption{Boxplot dei risultati del lancio di un dado}
@@ -1859,7 +1952,7 @@ fornisce in uscita  la Figura~\ref{fig:pie}
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-112-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-113-1} 
 
 \end{knitrout}
 \caption{Diagramma a torta per il lancio di un dado equo.}
@@ -1888,7 +1981,7 @@ Per analizzare questi dati conviene preliminarmente tracciarne un diagramma a di
 \hlkwd{plot}\hlstd{(x,y)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-114-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-115-1} 
 
 \end{knitrout}
 \caption{Diagramma a dispersione tempo/concentrazione.}
@@ -1962,7 +2055,7 @@ In tal modo otteniamo il grafico~\ref{fig:duerettex}.
 \begin{figure}[htbp]
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-118-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-119-1} 
 
 \end{knitrout}
 \caption{Rette di regressione. In blu $R_x$, in verde $R_y$.}
@@ -1998,7 +2091,7 @@ Ora diamo una prima occhiata ai dati:
 \hlkwd{plot}\hlstd{(age,height)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-121-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-122-1} 
 
 \end{knitrout}
 \caption{Crescita dei bambini di Kalama}
@@ -2165,7 +2258,7 @@ come in Figura~\ref{fig:duemammals}.\begin{figure}[htbp]
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-127-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-128-1} 
 
 \end{knitrout}
 \caption{Diagramma a dispersione massa corporea/massa del cervello in scala normale ed in scala logaritmica. }
@@ -2187,7 +2280,7 @@ Visti i  risultati ottenuti usando la scala logaritmica tracciamo anche la corri
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-129-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-130-1} 
 
 \end{knitrout}
 \caption{ Retta di regressione. Dimensione del corpo e del cervello. Si noti la posizione dell'uomo.}
@@ -2251,7 +2344,7 @@ per caratterizzare diversi aspetti.
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-131-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-132-1} 
 
 \end{knitrout}
 \caption{ Scatterplot}\label{fig:scatterplot}
@@ -2292,7 +2385,7 @@ Spesso  i dati sperimentali presentano una distribuzione a  campana del tipo che
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-133-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-134-1} 
 
 \end{knitrout}
 
@@ -2301,7 +2394,7 @@ Sovrapponiamo ora all'areogramma una curva che sembra approssimare molto bene l'
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-134-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-135-1} 
 
 \end{knitrout}
 
@@ -2327,7 +2420,7 @@ Riportiamo in figura  il grafico di alcune gaussiane riportando i valori dei par
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-135-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-136-1} 
 
 \end{knitrout}
 
@@ -2369,7 +2462,7 @@ Il grafico~(\ref{fig:normalesta}) della gaussiana
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-138-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-139-1} 
 
 \end{knitrout}
 \caption{ Grafico della normale standard nell'intervallo $[-2.5,2.5]$. }
@@ -2383,7 +2476,7 @@ Per  visualizzare una gaussiana non standard, ad esempio una gaussiana con media
 \hlkwd{curve}\hlstd{(}\hlkwd{dnorm}\hlstd{(x,}\hlkwc{mean}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{sd}\hlstd{=}\hlnum{1.5}\hlstd{),}\hlopt{-}\hlnum{3}\hlstd{,}\hlnum{3}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-139-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-140-1} 
 
 \end{knitrout}
 \subsection{La funzione \texttt{pnorm}}
@@ -2428,7 +2521,7 @@ come illustrato nella figura~\ref{fig:fig2code}.
 \begin{figure}[H]
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-143-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-144-1} 
 
 \end{knitrout}
 \caption{$x=\texttt{qnorm}(A)$}
@@ -2440,7 +2533,7 @@ Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di are
 \begin{figure}[H]
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-144-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-145-1} 
 
 \end{knitrout}
 \caption{$x=U(A)=\texttt{qnorm}(1/2+A/2)$}
@@ -2470,7 +2563,7 @@ Questa funzione fornisce fissato il livello di fiducia l'ascissa $x$  tale che l
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-148-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-149-1} 
 
 \end{knitrout}
 \caption{Code della distribuzione normale}
@@ -2521,7 +2614,7 @@ Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di l
 \hlkwd{curve}\hlstd{(}\hlkwd{dt}\hlstd{(x,}\hlnum{10}\hlstd{),}\hlopt{-}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-150-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-151-1} 
 
 \end{knitrout}
 \caption{Grafico della distribuzione di Student a 10 gradi di libert\`a. }
@@ -2541,7 +2634,7 @@ Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cu
 \hlkwd{legend}\hlstd{(}\hlstr{"topleft"}\hlstd{,} \hlkwd{c}\hlstd{(}\hlstr{"df=2"}\hlstd{,}\hlstr{"df=25"}\hlstd{,}\hlstr{"normale"}\hlstd{),}\hlkwc{pch}\hlstd{=}\hlnum{15}\hlstd{,}\hlkwc{col}\hlstd{=}\hlnum{1}\hlopt{:}\hlnum{3}\hlstd{);}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-151-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-152-1} 
 
 \end{knitrout}
 \caption{Grafico della distribuzione di Student a 10 gradi di libert\`a. }
@@ -3316,7 +3409,7 @@ consente il tracciamento di un \emph{boxplot} comparativo.
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-189-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-190-1} 
 
 \end{knitrout}
 \caption{Boxplot comparativo di 4 tipi di grasso di cottura.}
@@ -3448,7 +3541,7 @@ La distribuzione di Fisher \`e indicata in \textsf{R} con la lettera \texttt{f}.
 \hlkwd{curve}\hlstd{(}\hlkwd{df}\hlstd{(x,}\hlnum{3}\hlstd{,}\hlnum{10}\hlstd{),}\hlnum{0}\hlstd{,}\hlnum{5}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-197-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-198-1} 
 
 \end{knitrout}
 ottenendo il grafico
@@ -3460,7 +3553,7 @@ ottenendo il grafico
 \hlkwd{curve}\hlstd{(}\hlkwd{df}\hlstd{(x,}\hlnum{3}\hlstd{,}\hlnum{10}\hlstd{),}\hlnum{0}\hlstd{,}\hlnum{5}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-198-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-199-1} 
 
 \end{knitrout}
 \caption{Distribuzione di Fisher.}
@@ -3532,7 +3625,7 @@ Diamo una prima occhiata ai dati con il comando \texttt{coplot}, ovvero {\it con
 \hlkwd{coplot}\hlstd{(conc} \hlopt{~} \hlstd{Time} \hlopt{|} \hlstd{Subject,} \hlkwc{data} \hlstd{= Theoph,} \hlkwc{show.given} \hlstd{=} \hlnum{FALSE}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-203-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-204-1} 
 
 \end{knitrout}
 
@@ -3616,7 +3709,7 @@ Ora riportiamo il grafico delle osservazioni per il soggetto 4 su un grafico sin
 \hlkwc{las} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{col} \hlstd{=} \hlnum{4}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-207-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-208-1} 
 
 \end{knitrout}
 
@@ -3644,7 +3737,7 @@ dove \texttt{par(usr)}  \`e un ottimo modo per conoscere l'estensione di una del
 \hlkwd{lines}\hlstd{(xvals,} \hlkwd{predict}\hlstd{(fm1,} \hlkwc{newdata} \hlstd{=} \hlkwd{list}\hlstd{(}\hlkwc{Time} \hlstd{= xvals)),} \hlkwc{col} \hlstd{=} \hlnum{4}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-209-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-210-1} 
 
 \end{knitrout}
 \chpater{Varie}
@@ -3835,7 +3928,7 @@ O ripartirne il peso in base al colore degli occhi
 \hlkwd{boxplot}\hlstd{(stEyeW)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-218-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-219-1} 
 
 \end{knitrout}
 
@@ -4083,14 +4176,14 @@ Per cambiare i default dei due parametri
 \hlkwd{plot}\hlstd{(sin)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-229-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-230-1} 
 
 \end{knitrout}
 Qui contestualmente alla ridefinizione abbiamo salvato (con il nome \texttt{oldpar}) la versione corrente dei parametri per poterli eventualmente ripristinare in seguito.
 \begin{figure}\begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-230-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-231-1} 
 
 \end{knitrout}
 \caption{esempio di utilizzo di \texttt{par()}
@@ -4139,7 +4232,7 @@ otteniamo i grafici affiancati della figura \ref{graficiaffiancati}.
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-233-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-234-1} 
 
 \end{knitrout}
 \caption{Grafici affiancati con \texttt{mfrow=c(1,2)}}
@@ -4190,7 +4283,7 @@ Scarichiamo da \cite{dasl} il \emph{dataset} che chiameremo \texttt{Gompertz} in
 
 
 {\ttfamily\noindent\color{warningcolor}{\#\# Warning in xy.coords(x, y, xlabel, ylabel, log): NAs introduced by coercion}}\end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-236-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-237-1} 
 
 \end{knitrout}
 
@@ -4200,7 +4293,7 @@ Scarichiamo da \cite{dasl} il \emph{dataset} che chiameremo \texttt{Gompertz} in
 
 
 {\ttfamily\noindent\color{warningcolor}{\#\# Warning in xy.coords(x, y, xlabel, ylabel, log): NAs introduced by coercion}}\end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-237-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-238-1} 
 
 \end{knitrout}
 \caption{Mortalit\`a dei moscerini. A sinistra la decrescita della popolazione, a destra la mortalit\`a.}
@@ -4285,7 +4378,7 @@ Il risultato \`e riportato nella figura~\ref{4moscerini}
 {\ttfamily\noindent\color{warningcolor}{\#\# Warning in xy.coords(x, y, xlabel, ylabel, log): NAs introduced by coercion}}
 
 {\ttfamily\noindent\color{warningcolor}{\#\# Warning in xy.coords(x, y, xlabel, ylabel, log): NAs introduced by coercion}}\end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-241-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-242-1} 
 
 \end{knitrout}
 \caption{Utilizzo di diversi parametri grafici}
@@ -4314,7 +4407,7 @@ Carichiamo i dati e utilizziamo la funzione \texttt{pairs}\index{pairs} per cost
 \begin{figure}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-243-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-244-1} 
 
 \end{knitrout}
 \caption{Plot per variabili multiple}
@@ -4331,21 +4424,22 @@ In effetti il comando \texttt{plot} funziona anche su \emph{dataframe} come \`e 
 ##  [1] plot,ANY-method      plot,Funzione-method
 ##  [3] plot.acf*            plot.correspondence*
 ##  [5] plot.data.frame*     plot.decomposed.ts* 
-##  [7] plot.default         plot.dendrogram*    
-##  [9] plot.density*        plot.ecdf           
-## [11] plot.factor*         plot.formula*       
-## [13] plot.function        plot.hclust*        
-## [15] plot.histogram*      plot.HoltWinters*   
-## [17] plot.isoreg*         plot.lda*           
-## [19] plot.lm*             plot.mca*           
-## [21] plot.medpolish*      plot.mlm*           
-## [23] plot.ppr*            plot.prcomp*        
-## [25] plot.princomp*       plot.profile*       
-## [27] plot.profile.nls*    plot.raster*        
-## [29] plot.ridgelm*        plot.spec*          
-## [31] plot.stepfun         plot.stl*           
-## [33] plot.table*          plot.ts             
-## [35] plot.tskernel*       plot.TukeyHSD*      
+##  [7] plot.default         plot.dendrite       
+##  [9] plot.dendrogram*     plot.density*       
+## [11] plot.ecdf            plot.factor*        
+## [13] plot.formula*        plot.function       
+## [15] plot.hclust*         plot.histogram*     
+## [17] plot.HoltWinters*    plot.isoreg*        
+## [19] plot.lda*            plot.lm*            
+## [21] plot.mca*            plot.medpolish*     
+## [23] plot.mlm*            plot.ppr*           
+## [25] plot.prcomp*         plot.princomp*      
+## [27] plot.profile*        plot.profile.nls*   
+## [29] plot.raster*         plot.ridgelm*       
+## [31] plot.spec*           plot.stepfun        
+## [33] plot.stl*            plot.table*         
+## [35] plot.ts              plot.tskernel*      
+## [37] plot.TukeyHSD*      
 ## see '?methods' for accessing help and source code
 \end{verbatim}
 \end{kframe}
@@ -4358,7 +4452,7 @@ Il grafico risulta complesso da comprendere anche per via delle ridotte dimensio
  \hlkwd{plot}\hlstd{(quakes[,}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{)],} \hlkwc{main} \hlstd{=} \hlstr{"Fiji Earthquakes, N = 1000"}\hlstd{,} \hlkwc{cex.main}\hlstd{=}\hlnum{1.2}\hlstd{,} \hlkwc{pch}\hlstd{=}\hlstr{"."}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-245-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-246-1} 
 
 \end{knitrout}
 \ese{Migliorare questi grafici secondo il gusto personale inserendo, titoli, colorazioni, sfondo, tipo di rappresentazione, tipo di punti, etc.}
@@ -4381,7 +4475,7 @@ Nell'esempio seguente generiamo i vertici di un poligono regolare con numero di 
 \hlkwd{text}\hlstd{(coord,letters,}\hlkwc{col}\hlstd{=}\hlstr{"red"}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-246-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-247-1} 
 
 \end{knitrout}
 
@@ -4397,7 +4491,7 @@ Vediamo alcune rappresentazioni grafiche 3D.
 \hlkwd{title}\hlstd{(}\hlkwc{main} \hlstd{=} \hlstr{"volcano data: filled contour map"}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-247-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-248-1} 
 
 \end{knitrout}
 \begin{figure}[htbp]
@@ -4405,7 +4499,7 @@ Vediamo alcune rappresentazioni grafiche 3D.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-248-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-249-1} 
 
 \end{knitrout}
 \caption{Linee di livello}
@@ -4431,7 +4525,7 @@ Vediamo alcune rappresentazioni grafiche 3D.
 \hlkwd{title}\hlstd{(}\hlkwc{xlab}\hlstd{=}\hlstr{"1996"}\hlstd{,} \hlkwc{col.lab}\hlstd{=}\hlstr{"red"}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-249-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-250-1} 
 
 \end{knitrout}
 
@@ -4448,7 +4542,7 @@ Un esempio:
 \hlkwc{ylab} \hlstd{=} \hlstr{"tooth length"}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-251-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-252-1} 
 
 \end{knitrout}
 
@@ -4468,7 +4562,7 @@ Un esempio:
 \hlkwc{density}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{NA}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{30}\hlstd{),} \hlkwc{angle}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{NA}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{30}\hlstd{,} \hlopt{-}\hlnum{30}\hlstd{))}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-252-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-253-1} 
 
 \end{knitrout}
 
@@ -4500,7 +4594,7 @@ Possiamo  procedere con
 \begin{figure}\begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-254-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-255-1} 
 
 \end{knitrout}
 \caption{Selezione delle etichette sull'asse $x$. }
@@ -4557,7 +4651,7 @@ consente la visualizzazione dei punti ottenuti (come in figura~(\ref{normale200p
 \hlkwd{points}\hlstd{(x,y,}\hlkwc{pch}\hlstd{=}\hlnum{20}\hlstd{,}\hlkwc{col}\hlstd{=}\hlstr{"red"}\hlstd{,}\hlkwc{cex}\hlstd{=}\hlnum{0.2}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-257-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-258-1} 
 
 \end{knitrout}
 \caption{ Selezione dei punti per l'ombreggiamento di una regione poligonale}
@@ -4603,7 +4697,7 @@ Infine possiamo riportare i valori delle aree delle 2 code, evidenziare l'asse d
 \hlkwd{lines}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{),}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlkwd{dnorm}\hlstd{(}\hlnum{0}\hlstd{)))}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-258-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-259-1} 
 
 \end{knitrout}
 
@@ -4620,7 +4714,7 @@ Infine possiamo riportare i valori delle aree delle 2 code, evidenziare l'asse d
 \hlkwd{lines}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{),}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlkwd{dnorm}\hlstd{(}\hlnum{0}\hlstd{)))}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-259-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-260-1} 
 
 \end{knitrout}
 \caption{ Area delle code della distribuzione normale. Il valore di $u_{1-\epsilon}$ \`e quello riportato nella  tabella della distribuzione normale. }
@@ -4646,7 +4740,7 @@ Iniziamo a disegnare dei rettangoli, di coordinate casuali ma entro un dato rang
 \hlkwd{rect}\hlstd{(sinistra,sotto,destra,sopra,}\hlkwc{col}\hlstd{=}\hlkwd{rgb}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlnum{1}\hlstd{),}\hlkwd{runif}\hlstd{(}\hlnum{1}\hlstd{),}\hlkwd{runif}\hlstd{(}\hlnum{1}\hlstd{)),}\hlkwc{border}\hlstd{=bordi[i],}\hlkwc{lwd}\hlstd{=spess)\}}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-260-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-261-1} 
 
 \end{knitrout}
 \section{Grafica 3D, il vulcano Maunga Whau}
@@ -4681,7 +4775,7 @@ otteniamo la figura~\ref{vulcano3D}. Il comando di base \`e \texttt{persp} che r
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-262-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-263-1} 
 
 \end{knitrout}
 
@@ -4718,7 +4812,7 @@ $x$, essendo poi liberi di utilizzare la funzione \texttt{plot}
 \hlkwd{text}\hlstd{(}\hlnum{3}\hlstd{,} \hlnum{.2}\hlstd{,} \hlkwd{quote}\hlstd{(H[}\hlnum{1}\hlstd{]}\hlopt{:~~}\hlstd{mu[}\hlnum{1}\hlstd{]}\hlopt{==}\hlstd{mu[}\hlnum{2}\hlstd{]}\hlopt{+}\hlstd{delta))}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-263-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-264-1} 
 
 \end{knitrout}
 
@@ -4901,7 +4995,7 @@ A volte \`e necessario personalizzare i margini, ad esempio se le annotazioni de
 \hlkwd{text}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{,}\hlstr{"margini"}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-273-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-274-1} 
 
 \end{knitrout}
 
@@ -4929,7 +5023,7 @@ Proviamo i comandi:
 \hlkwd{plot}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-274-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-275-1} 
 
 \end{knitrout}
 
@@ -5147,7 +5241,7 @@ brewer.pal(5,Set3). Potrete poi provare anche Set1 e Set2.
 \hlkwc{main} \hlstd{=} \hlstr{"Puromycin data and fitted Michaelis-Menten curves"}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-286-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-287-1} 
 
 \end{knitrout}
 
@@ -5196,7 +5290,7 @@ L'orientamento delle etichette degli assi \`e molto importante, il parametro \te
 \hlkwd{legend}\hlstd{(}\hlnum{180}\hlstd{,} \hlnum{450}\hlstd{,} \hlkwc{legend}\hlstd{=}\hlnum{1}\hlopt{:}\hlnum{4}\hlstd{,} \hlkwc{fill}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{NA}\hlstd{,} \hlstr{"green"}\hlstd{,} \hlkwd{par}\hlstd{(}\hlstr{"fg"}\hlstd{),} \hlstr{"blue"}\hlstd{),} \hlkwc{density}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{NA}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{30}\hlstd{),} \hlkwc{angle}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{NA}\hlstd{,} \hlnum{NA}\hlstd{,} \hlnum{30}\hlstd{,} \hlopt{-}\hlnum{30}\hlstd{))}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-289-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-290-1} 
 
 \end{knitrout}
 Ed ora, riproduciamo un Mondrian:
@@ -5232,7 +5326,7 @@ Ed ora, riproduciamo un Mondrian:
 \hlkwd{text}\hlstd{(}\hlnum{0.45}\hlstd{,}\hlnum{0.02}\hlstd{,}\hlstr{"Mondrian Review"}\hlstd{,}\hlkwc{cex}\hlstd{=}\hlnum{0.5}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-290-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-291-1} 
 
 \end{knitrout}
 
@@ -5261,7 +5355,7 @@ Selezioniamo 1 punto cliccando  sul punto che riteniamo il massimo del grafico
 \hlkwd{points}\hlstd{(coord[}\hlnum{2}\hlstd{],coord[}\hlnum{1}\hlstd{],} \hlkwc{cex}\hlstd{=}\hlnum{3}\hlstd{,} \hlkwc{col}\hlstd{=}\hlstr{"red"}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-292-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-293-1} 
 
 \end{knitrout}
 \section{File Rmd}

@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.10 on 2016-02-11 14:37:51
+% Created by tikzDevice version 0.10 on 2016-02-15 17:57:54
 % !TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \nonstopmode
@@ -20,11 +20,7 @@
 \usepackage{inconsolata}
 %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
 \usepackage[T1]{fontenc}
-\usepackage[unicode=true,pdfusetitle,
- bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
- breaklinks=true,pdfborder={0 0 1},backref=false,colorlinks=false]
- {hyperref}
-\hypersetup{pdfstartview=FitH}
+\usepackage[buttonsize=1em]{animate}
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
@@ -35,8 +31,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
 \usepackage{lipsum}
-\usepackage[dvipsnames]{color}
-\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\usepackage[]{color}
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{amsmath}
@@ -68,11 +63,9 @@
 %\begin{center}
 %\begin{minipage}{12cm}
  \markright{\today}
-\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
 \colorbox{grigetto}{\parbox{\linewidth}{#1}}}
                           {
-                         % \end{minipage}
-                          %\end{center}
+                
                           \medskip}
  \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
@@ -82,9 +75,6 @@
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}
-%\renewcommand{\sectionmark}[1]{%
-% \markboth{\sectionname
-% \ \thesection.\ #1}{}}
 \newcommand{\rst}{\textsf{RStudio}~}
 \newcommand{\rpr}{\textsf{R}~}
 \makeindex
@@ -98,107 +88,181 @@
 \path[clip] ( 57.60, 57.60) rectangle (359.91,359.91);
 \definecolor{drawColor}{RGB}{0,0,0}
 
-\path[draw=drawColor,line width= 1.6pt,line join=round,line cap=round] ( 68.80, 71.39) --
-	( 71.60, 71.89) --
-	( 74.40, 72.48) --
-	( 77.19, 73.17) --
-	( 79.99, 73.97) --
-	( 82.79, 74.89) --
-	( 85.59, 75.95) --
-	( 88.39, 77.16) --
-	( 91.19, 78.54) --
-	( 93.99, 80.11) --
-	( 96.79, 81.89) --
-	( 99.59, 83.89) --
-	(102.39, 86.14) --
-	(105.19, 88.64) --
-	(107.98, 91.43) --
-	(110.78, 94.51) --
-	(113.58, 97.92) --
-	(116.38,101.65) --
-	(119.18,105.72) --
-	(121.98,110.16) --
-	(124.78,114.96) --
-	(127.58,120.13) --
-	(130.38,125.68) --
-	(133.18,131.60) --
-	(135.98,137.88) --
-	(138.78,144.53) --
-	(141.57,151.51) --
-	(144.37,158.81) --
-	(147.17,166.41) --
-	(149.97,174.26) --
-	(152.77,182.34) --
-	(155.57,190.60) --
-	(158.37,198.98) --
-	(161.17,207.45) --
-	(163.97,215.93) --
-	(166.77,224.38) --
-	(169.57,232.72) --
-	(172.37,240.88) --
-	(175.16,248.80) --
-	(177.96,256.41) --
-	(180.76,263.64) --
-	(183.56,270.41) --
-	(186.36,276.68) --
-	(189.16,282.37) --
-	(191.96,287.42) --
-	(194.76,291.80) --
-	(197.56,295.44) --
-	(200.36,298.31) --
-	(203.16,300.39) --
-	(205.96,301.64) --
-	(208.75,302.06) --
-	(211.55,301.64) --
-	(214.35,300.39) --
-	(217.15,298.31) --
-	(219.95,295.44) --
-	(222.75,291.80) --
-	(225.55,287.42) --
-	(228.35,282.37) --
-	(231.15,276.68) --
-	(233.95,270.41) --
-	(236.75,263.64) --
-	(239.55,256.41) --
-	(242.34,248.80) --
-	(245.14,240.88) --
-	(247.94,232.72) --
-	(250.74,224.38) --
-	(253.54,215.93) --
-	(256.34,207.45) --
-	(259.14,198.98) --
-	(261.94,190.60) --
-	(264.74,182.34) --
-	(267.54,174.26) --
-	(270.34,166.41) --
-	(273.14,158.81) --
-	(275.94,151.51) --
-	(278.73,144.53) --
-	(281.53,137.88) --
-	(284.33,131.60) --
-	(287.13,125.68) --
-	(289.93,120.13) --
-	(292.73,114.96) --
-	(295.53,110.16) --
-	(298.33,105.72) --
-	(301.13,101.65) --
-	(303.93, 97.92) --
-	(306.73, 94.51) --
-	(309.52, 91.43) --
-	(312.32, 88.64) --
-	(315.12, 86.14) --
-	(317.92, 83.89) --
-	(320.72, 81.89) --
-	(323.52, 80.11) --
-	(326.32, 78.54) --
-	(329.12, 77.16) --
-	(331.92, 75.95) --
-	(334.72, 74.89) --
-	(337.52, 73.97) --
-	(340.32, 73.17) --
-	(343.12, 72.48) --
-	(345.91, 71.89) --
-	(348.71, 71.39);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80, 68.80) --
+	( 71.60, 69.72) --
+	( 74.40, 70.72) --
+	( 77.19, 71.82) --
+	( 79.99, 73.02) --
+	( 82.79, 74.32) --
+	( 85.59, 75.73) --
+	( 88.39, 77.27) --
+	( 91.19, 78.92) --
+	( 93.99, 80.71) --
+	( 96.79, 82.64) --
+	( 99.59, 84.72) --
+	(102.39, 86.95) --
+	(105.19, 89.34) --
+	(107.98, 91.89) --
+	(110.78, 94.62) --
+	(113.58, 97.53) --
+	(116.38,100.62) --
+	(119.18,103.89) --
+	(121.98,107.36) --
+	(124.78,111.03) --
+	(127.58,114.90) --
+	(130.38,118.97) --
+	(133.18,123.25) --
+	(135.98,127.73) --
+	(138.78,132.42) --
+	(141.57,137.31) --
+	(144.37,142.41) --
+	(147.17,147.70) --
+	(149.97,153.19) --
+	(152.77,158.86) --
+	(155.57,164.72) --
+	(158.37,170.75) --
+	(161.17,176.94) --
+	(163.97,183.28) --
+	(166.77,189.76) --
+	(169.57,196.37) --
+	(172.37,203.08) --
+	(175.16,209.89) --
+	(177.96,216.78) --
+	(180.76,223.72) --
+	(183.56,230.69) --
+	(186.36,237.68) --
+	(189.16,244.66) --
+	(191.96,251.62) --
+	(194.76,258.51) --
+	(197.56,265.33) --
+	(200.36,272.05) --
+	(203.16,278.63) --
+	(205.96,285.06) --
+	(208.75,291.32) --
+	(211.55,297.36) --
+	(214.35,303.18) --
+	(217.15,308.74) --
+	(219.95,314.03) --
+	(222.75,319.01) --
+	(225.55,323.67) --
+	(228.35,327.98) --
+	(231.15,331.93) --
+	(233.95,335.50) --
+	(236.75,338.67) --
+	(239.55,341.43) --
+	(242.34,343.76) --
+	(245.14,345.66) --
+	(247.94,347.10) --
+	(250.74,348.10) --
+	(253.54,348.64) --
+	(256.34,348.71) --
+	(259.14,348.33) --
+	(261.94,347.49) --
+	(264.74,346.19) --
+	(267.54,344.44) --
+	(270.34,342.26) --
+	(273.14,339.64) --
+	(275.94,336.60) --
+	(278.73,333.17) --
+	(281.53,329.34) --
+	(284.33,325.14) --
+	(287.13,320.60) --
+	(289.93,315.72) --
+	(292.73,310.54) --
+	(295.53,305.06) --
+	(298.33,299.33) --
+	(301.13,293.36) --
+	(303.93,287.17) --
+	(306.73,280.80) --
+	(309.52,274.26) --
+	(312.32,267.58) --
+	(315.12,260.80) --
+	(317.92,253.92) --
+	(320.72,246.99) --
+	(323.52,240.01) --
+	(326.32,233.02) --
+	(329.12,226.04) --
+	(331.92,219.08) --
+	(334.72,212.18) --
+	(337.52,205.34) --
+	(340.32,198.60) --
+	(343.12,191.95) --
+	(345.91,185.43) --
+	(348.71,179.04);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (361.35,361.35);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80, 57.60) -- (348.71, 57.60);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80, 57.60) -- ( 68.80, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (115.45, 57.60) -- (115.45, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (162.10, 57.60) -- (162.10, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (208.75, 57.60) -- (208.75, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (255.41, 57.60) -- (255.41, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (302.06, 57.60) -- (302.06, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (348.71, 57.60) -- (348.71, 53.28);
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 68.80, 36.00) {-3};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (115.45, 36.00) {-2};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (162.10, 36.00) {-1};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (208.75, 36.00) {0};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (255.41, 36.00) {1};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (302.06, 36.00) {2};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (348.71, 36.00) {3};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 60.56) -- ( 57.60,331.44);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 60.56) -- ( 53.28, 60.56);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,114.74) -- ( 53.28,114.74);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,168.92) -- ( 53.28,168.92);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,223.09) -- ( 53.28,223.09);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,277.27) -- ( 53.28,277.27);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,331.44) -- ( 53.28,331.44);
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64, 60.56) {0.00};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,114.74) {0.05};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,168.92) {0.10};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,223.09) {0.15};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,277.27) {0.20};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,331.44) {0.25};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 57.60) --
+	(359.91, 57.60) --
+	(359.91,359.91) --
+	( 57.60,359.91) --
+	( 57.60, 57.60);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (361.35,361.35);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at (208.75, 17.28) {x};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at ( 25.92,208.75) {dnorm(x, mean = 1, sd = 1.5)};
 \end{scope}
 \end{tikzpicture}
 
