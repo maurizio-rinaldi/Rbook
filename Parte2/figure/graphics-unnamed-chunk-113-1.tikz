@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.10 on 2016-02-11 14:37:38
+% Created by tikzDevice version 0.10 on 2016-02-21 20:25:37
 % !TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \nonstopmode
@@ -20,23 +20,18 @@
 \usepackage{inconsolata}
 %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
 \usepackage[T1]{fontenc}
-\usepackage[unicode=true,pdfusetitle,
- bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
- breaklinks=true,pdfborder={0 0 1},backref=false,colorlinks=false]
- {hyperref}
-\hypersetup{pdfstartview=FitH}
+\usepackage[buttonsize=1em]{animate}
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
 \usepackage{babelbib}
 \usepackage{float}
-\usepackage{fancyhdr}
+%\usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
 \usepackage{lipsum}
-\usepackage[dvipsnames]{color}
-\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\usepackage[]{color}
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{amsmath}
@@ -68,11 +63,9 @@
 %\begin{center}
 %\begin{minipage}{12cm}
  \markright{\today}
-\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
 \colorbox{grigetto}{\parbox{\linewidth}{#1}}}
                           {
-                         % \end{minipage}
-                          %\end{center}
+                
                           \medskip}
  \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
@@ -82,9 +75,6 @@
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}
-%\renewcommand{\sectionmark}[1]{%
-% \markboth{\sectionname
-% \ \thesection.\ #1}{}}
 \newcommand{\rst}{\textsf{RStudio}~}
 \newcommand{\rpr}{\textsf{R}~}
 \makeindex
@@ -93,30 +83,47 @@
 
 \begin{tikzpicture}[x=1pt,y=1pt]
 \definecolor{fillColor}{RGB}{255,255,255}
-\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,361.35);
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,289.08);
 \begin{scope}
-\path[clip] ( 57.60, 57.60) rectangle (359.91,359.91);
+\path[clip] ( 57.60, 57.60) rectangle (359.91,287.64);
 \definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{255,255,255}
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80, 68.80) circle (  2.70);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (293.95,172.62) --
+	(293.91,175.39) --
+	(293.78,178.15) --
+	(293.55,180.91) --
+	(293.24,183.66) --
+	(292.83,186.40) --
+	(292.34,189.13) --
+	(291.76,191.84) --
+	(291.09,194.52) --
+	(290.34,197.19) --
+	(289.50,199.82) --
+	(288.57,202.43) --
+	(287.56,205.01) --
+	(286.46,207.55) --
+	(285.29,210.06) --
+	(284.03,212.53) --
+	(282.69,214.95) --
+	(281.28,217.33) --
+	(279.79,219.67) --
+	(278.22,221.95) --
+	(276.58,224.18) --
+	(274.87,226.36) --
+	(273.09,228.48) --
+	(271.24,230.54) --
+	(269.33,232.54) --
+	(267.35,234.47) --
+	(265.31,236.35) --
+	(263.21,238.15) --
+	(261.05,239.88) --
+	(258.83,241.55) --
+	(208.75,172.62) --
+	cycle;
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 99.90,113.33) circle (  2.70);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (131.00,119.69) circle (  2.70);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (162.10,132.41) circle (  2.70);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (193.20,151.50) circle (  2.70);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (224.31,164.22) circle (  2.70);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (255.41,196.03) circle (  2.70);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (286.51,246.93) circle (  2.70);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (317.61,272.37) circle (  2.70);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (348.71,348.71) circle (  2.70);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (284.67,211.30) --
+	(288.46,213.23);
 \end{scope}
 \end{tikzpicture}
 

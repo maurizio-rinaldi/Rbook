@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.10 on 2016-02-11 14:35:01
+% Created by tikzDevice version 0.10 on 2016-02-21 20:26:36
 % !TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \nonstopmode
@@ -20,19 +20,18 @@
 \usepackage{inconsolata}
 %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
 \usepackage[T1]{fontenc}
-
+\usepackage[buttonsize=1em]{animate}
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
 \usepackage{babelbib}
 \usepackage{float}
-\usepackage{fancyhdr}
+%\usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
 \usepackage{lipsum}
-\usepackage[dvipsnames]{color}
-\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\usepackage[]{color}
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{amsmath}
@@ -64,11 +63,9 @@
 %\begin{center}
 %\begin{minipage}{12cm}
  \markright{\today}
-\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
 \colorbox{grigetto}{\parbox{\linewidth}{#1}}}
                           {
-                         % \end{minipage}
-                          %\end{center}
+                
                           \medskip}
  \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
@@ -78,9 +75,6 @@
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}
-%\renewcommand{\sectionmark}[1]{%
-% \markboth{\sectionname
-% \ \thesection.\ #1}{}}
 \newcommand{\rst}{\textsf{RStudio}~}
 \newcommand{\rpr}{\textsf{R}~}
 \makeindex
@@ -89,112 +83,79 @@
 
 \begin{tikzpicture}[x=1pt,y=1pt]
 \definecolor{fillColor}{RGB}{255,255,255}
-\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,361.35);
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,289.08);
 \begin{scope}
-\path[clip] ( 57.60, 57.60) rectangle (359.91,359.91);
+\path[clip] ( 57.60, 57.60) rectangle (359.91,287.64);
+\definecolor{fillColor}{RGB}{255,255,0}
+
+\path[fill=fillColor] (103.79, 77.59) --
+	(127.11, 77.59) --
+	(127.11,116.32) --
+	(103.79,116.32) --
+	cycle;
 \definecolor{drawColor}{RGB}{0,0,0}
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80, 71.28) --
-	( 71.60, 71.76) --
-	( 74.40, 72.33) --
-	( 77.19, 72.99) --
-	( 79.99, 73.75) --
-	( 82.79, 74.63) --
-	( 85.59, 75.64) --
-	( 88.39, 76.81) --
-	( 91.19, 78.13) --
-	( 93.99, 79.63) --
-	( 96.79, 81.33) --
-	( 99.59, 83.25) --
-	(102.39, 85.40) --
-	(105.19, 87.80) --
-	(107.98, 90.47) --
-	(110.78, 93.42) --
-	(113.58, 96.68) --
-	(116.38,100.25) --
-	(119.18,104.15) --
-	(121.98,108.40) --
-	(124.78,113.00) --
-	(127.58,117.95) --
-	(130.38,123.26) --
-	(133.18,128.93) --
-	(135.98,134.95) --
-	(138.78,141.30) --
-	(141.57,147.99) --
-	(144.37,154.98) --
-	(147.17,162.25) --
-	(149.97,169.77) --
-	(152.77,177.51) --
-	(155.57,185.41) --
-	(158.37,193.45) --
-	(161.17,201.55) --
-	(163.97,209.68) --
-	(166.77,217.76) --
-	(169.57,225.74) --
-	(172.37,233.56) --
-	(175.16,241.14) --
-	(177.96,248.43) --
-	(180.76,255.35) --
-	(183.56,261.84) --
-	(186.36,267.84) --
-	(189.16,273.28) --
-	(191.96,278.12) --
-	(194.76,282.31) --
-	(197.56,285.80) --
-	(200.36,288.55) --
-	(203.16,290.54) --
-	(205.96,291.74) --
-	(208.75,292.14) --
-	(211.55,291.74) --
-	(214.35,290.54) --
-	(217.15,288.55) --
-	(219.95,285.80) --
-	(222.75,282.31) --
-	(225.55,278.12) --
-	(228.35,273.28) --
-	(231.15,267.84) --
-	(233.95,261.84) --
-	(236.75,255.35) --
-	(239.55,248.43) --
-	(242.34,241.14) --
-	(245.14,233.56) --
-	(247.94,225.74) --
-	(250.74,217.76) --
-	(253.54,209.68) --
-	(256.34,201.55) --
-	(259.14,193.45) --
-	(261.94,185.41) --
-	(264.74,177.51) --
-	(267.54,169.77) --
-	(270.34,162.25) --
-	(273.14,154.98) --
-	(275.94,147.99) --
-	(278.73,141.30) --
-	(281.53,134.95) --
-	(284.33,128.93) --
-	(287.13,123.26) --
-	(289.93,117.95) --
-	(292.73,113.00) --
-	(295.53,108.40) --
-	(298.33,104.15) --
-	(301.13,100.25) --
-	(303.93, 96.68) --
-	(306.73, 93.42) --
-	(309.52, 90.47) --
-	(312.32, 87.80) --
-	(315.12, 85.40) --
-	(317.92, 83.25) --
-	(320.72, 81.33) --
-	(323.52, 79.63) --
-	(326.32, 78.13) --
-	(329.12, 76.81) --
-	(331.92, 75.64) --
-	(334.72, 74.63) --
-	(337.52, 73.75) --
-	(340.32, 72.99) --
-	(343.12, 72.33) --
-	(345.91, 71.76) --
-	(348.71, 71.28);
+\path[draw=drawColor,line width= 1.2pt,line join=round] (103.79, 87.28) -- (127.11, 87.28);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (115.45, 66.12) -- (115.45, 77.59);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (115.45,118.47) -- (115.45,116.32);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (109.62, 66.12) -- (121.28, 66.12);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (109.62,118.47) -- (121.28,118.47);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (103.79, 77.59) --
+	(127.11, 77.59) --
+	(127.11,116.32) --
+	(103.79,116.32) --
+	(103.79, 77.59);
+
+\path[fill=fillColor] (197.09,145.01) --
+	(220.42,145.01) --
+	(220.42,160.07) --
+	(197.09,160.07) --
+	cycle;
+
+\path[draw=drawColor,line width= 1.2pt,line join=round] (197.09,154.33) -- (220.42,154.33);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (208.75,133.53) -- (208.75,145.01);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (208.75,170.83) -- (208.75,160.07);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (202.92,133.53) -- (214.59,133.53);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (202.92,170.83) -- (214.59,170.83);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (197.09,145.01) --
+	(220.42,145.01) --
+	(220.42,160.07) --
+	(197.09,160.07) --
+	(197.09,145.01);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (208.75,197.36) circle (  2.70);
+
+\path[fill=fillColor] (290.40,203.10) --
+	(313.72,203.10) --
+	(313.72,247.56) --
+	(290.40,247.56) --
+	cycle;
+
+\path[draw=drawColor,line width= 1.2pt,line join=round] (290.40,222.10) -- (313.72,222.10);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (302.06,168.68) -- (302.06,203.10);
+
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (302.06,279.12) -- (302.06,247.56);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (296.23,168.68) -- (307.89,168.68);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (296.23,279.12) -- (307.89,279.12);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (290.40,203.10) --
+	(313.72,203.10) --
+	(313.72,247.56) --
+	(290.40,247.56) --
+	(290.40,203.10);
 \end{scope}
 \end{tikzpicture}
 

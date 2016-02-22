@@ -59,7 +59,7 @@
 \usepackage{makeidx}
 \usepackage{babelbib}
 \usepackage{float}
-\usepackage{fancyhdr}
+%\usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
@@ -846,15 +846,15 @@ Per esempio possiamo considerare il dataframe \texttt{d} definito come segue
 \end{alltt}
 \begin{verbatim}
 ##    x  y fac
-## 1  1  1   C
+## 1  1  1   A
 ## 2  1  2   A
-## 3  1  3   A
+## 3  1  3   B
 ## 4  1  4   B
-## 5  1  5   A
-## 6  1  6   A
-## 7  1  7   C
-## 8  1  8   A
-## 9  1  9   B
+## 5  1  5   C
+## 6  1  6   B
+## 7  1  7   B
+## 8  1  8   C
+## 9  1  9   C
 ## 10 1 10   A
 \end{verbatim}
 \end{kframe}
@@ -1208,9 +1208,9 @@ Un \emph{array}  \`e una generalizzazione multidimensionale di una matrice. Gli 
 \end{alltt}
 \begin{verbatim}
 ##    K  L  M  N
-## A 93 49 74 60
-## B  9  8 87  5
-## C 77 37 63 54
+## A 54 57 32 75
+## B 78 79  1 11
+## C 89 43 37 81
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1330,9 +1330,9 @@ Consideriamo ad esempio il lancio di un dado e sia
 
 
 Allora
-$A\cup B=\texttt{esce 2 o 4 o 5 o 6}=$\{2,4,5,6\}$
+$A\cup B=$\texttt{esce 2 o 4 o 5 o 6}=$\{2,4,5,6\}$
 
-$A\cap B$=\texttt{esce 4 o 6}$=\{4,6\}$
+$A\cap B=$\texttt{esce 4 o 6}$=\{4,6\}$
 
 $A^C=$ \texttt{esce un numero dispari}$=\{1,3,5\}$
 
@@ -1356,7 +1356,7 @@ Abbiamo quindi
 da cui
 \[P(A)=P(X_1)+P(X_3),\quad P(B)=P(X_3)+P(X_2)\]
 \[P(X_1)=P(A)-P(X_3),\quad P(X_2)=P(B)-P(X_3)\]
-\[P(A\cup B)=P(X_1\cup X_2\cup X_3)=P(X_1)+P(X_2)+P(X_3)=
+\[P(A\cup B)=P(X_1\cup X_2\cup X_3)=P(X_1)+P(X_2)+P(X_3)
 =P(A) +P(B)-P(X_3)=P(A) +P(B)-P(A\cap B)\]
 
 e quindi 
@@ -1384,8 +1384,6 @@ Le variabili aleatorie  discrete che  assumono un numero limitato di valori si d
 \item{} I numeri interi
 \end{itemize}
 Per caratterizzare completamente una variabile aleatoria discreta oltre ai valori che questa pu\`o  assumere occorre conoscere la probabilit\`a  di questi valori.
-
-
 Per semplicit\`a considereremo variabili aleatorie finite.\\
 Come possiamo simulare variabili aventi valore nell'alfabeto assegnato?
 In effetti qualunque comando di generazione su un computer non \`e perfettamente casuale; infatti la generazione avviene in effetti in modo pseudo-casuale e  secondo un meccanismo che dipende dallo stato interno del computer codificato in una variabile indicata con \texttt{.Random.seed}. Se il {\it seme} iniziale \`e lo stesso i numeri generati saranno uguali. Spesso conviene che i calcoli (ad esempio a fine didattico) siano riproducibili. Ad esempio mettendo in una variabile \texttt{seme} il valore corrente di \texttt{.Random.seed} e richiamandolo o generandolo all'occorrenza.  
@@ -2658,20 +2656,26 @@ dove i puntini stanno per le variabili omesse o pi\`u esplicitamente
 \end{kframe}
 \end{knitrout}
 dove \texttt{df} sono i gradi di libert\`a. 
-\ubsection{Regione di accettazione del test di Student} 
 \subsection
 {Regione di accettazione, intervalli di confidenza e test di Student}
 
-Supponiamo di considerare una variabile normale $X$. Se ipotizziamo che il valore atteso di $X$ sia   $\mu$ (la nostra ipotesi nulla) allora il consuntivo $$T=\dfrac{M_N(X)-\mu}{S_X}\sqrt {N}$$
-\`e dsitribuito secondo la distribuzione di Student a $N-1$ gradi di libert\`a. Questo conduce come al solito a 2 possibilit\`a:
-\begin{itemize}
-\item Regione di accettazione del test
-\item Intervallo di confidenza.
-\end{itemize}
-Nel primo caso la regione di accettazione \`e definita come l'intervallo simmetrico rispetto all'origine entro il quale la probabilit\`a che il consuntivo cada è pari ad un prefissato livello di fiducia.\\
-Nel secondo caso esplicitando $M_N$ si ricava un intervallo entro il quale $\mu$ cada con probabilit\`a pari al livello di fiducia scelto
-assumendo che sia $\mu=0$.
+Consideriamo ora una variabile normale $X$. Se ipotizziamo che il valore atteso di $X$ sia   $\mu$ (ipotesi nulla) allora il consuntivo 
+\[T=\dfrac{M_N(X)-\mu}{S_X}\sqrt {N}\]
+\`e distribuito secondo la distribuzione di Student a $N-1$ gradi di libert\`a. 
+Se consideriamo una variabile distribuita secondo la distribuzione di Student, esattamente come nel caso della normale, possiamo determinare un valore $x$ dipendente dal livello di fiducia \texttt{f} e dai gradi di libert\`a 
+$x=x(\texttt {f},df)$ tale che nell'intervallo $[-x,x]$ si concentri una probabilit\`a pari a \texttt{f}.
 
+Applicando quanto detto a $T$ possiamo scrivere
+\[ P(-x(\texttt {f},df)<T<x(\texttt {f},df))=\ \texttt {f}\]
+
+Questo fatto consente di procedere in due direzioni.
+\begin{itemize}
+\item Test di ipotesi sul valore di $\mu$.
+\item Intervallo di confidenza per $\mu$. 
+\end{itemize}
+ 
+Mostriamo come si può procedere:  
+ 
 La funzione di
 \textsf{R} che esegue il test di Student nelle sue diverse forme \`e  \texttt{t.test}.   Nella sua forma pi\`u semplice
 

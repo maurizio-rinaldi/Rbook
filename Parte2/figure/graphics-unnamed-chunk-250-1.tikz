@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.10 on 2016-02-15 18:02:01
+% Created by tikzDevice version 0.10 on 2016-02-21 20:26:35
 % !TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \nonstopmode
@@ -26,7 +26,7 @@
 \usepackage{makeidx}
 \usepackage{babelbib}
 \usepackage{float}
-\usepackage{fancyhdr}
+%\usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
@@ -83,147 +83,53 @@
 
 \begin{tikzpicture}[x=1pt,y=1pt]
 \definecolor{fillColor}{RGB}{255,255,255}
-\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,361.35);
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,289.08);
 \begin{scope}
-\path[clip] ( 57.60, 57.60) rectangle (359.91,359.91);
-\definecolor{fillColor}{RGB}{255,255,0}
-
-\path[fill=fillColor] (103.79, 83.88) --
-	(127.11, 83.88) --
-	(127.11,134.77) --
-	(103.79,134.77) --
-	cycle;
+\path[clip] ( 57.60, 57.60) rectangle (359.91,287.64);
 \definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{255,248,220}
 
-\path[draw=drawColor,line width= 1.2pt,line join=round] (103.79, 96.60) -- (127.11, 96.60);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] ( 57.60, 57.60) rectangle (359.91,287.64);
+\definecolor{drawColor}{RGB}{0,0,255}
 
-\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (115.45, 68.80) -- (115.45, 83.88);
-
-\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (115.45,137.60) -- (115.45,134.77);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (109.62, 68.80) -- (121.28, 68.80);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (109.62,137.60) -- (121.28,137.60);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (103.79, 83.88) --
-	(127.11, 83.88) --
-	(127.11,134.77) --
-	(103.79,134.77) --
-	(103.79, 83.88);
-
-\path[fill=fillColor] (197.09,172.47) --
-	(220.42,172.47) --
-	(220.42,192.26) --
-	(197.09,192.26) --
-	cycle;
-
-\path[draw=drawColor,line width= 1.2pt,line join=round] (197.09,184.72) -- (220.42,184.72);
-
-\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (208.75,157.39) -- (208.75,172.47);
-
-\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (208.75,206.40) -- (208.75,192.26);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (202.92,157.39) -- (214.59,157.39);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (202.92,206.40) -- (214.59,206.40);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (197.09,172.47) --
-	(220.42,172.47) --
-	(220.42,192.26) --
-	(197.09,192.26) --
-	(197.09,172.47);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (208.75,241.27) circle (  2.70);
-
-\path[fill=fillColor] (290.40,248.81) --
-	(313.72,248.81) --
-	(313.72,307.24) --
-	(290.40,307.24) --
-	cycle;
-
-\path[draw=drawColor,line width= 1.2pt,line join=round] (290.40,273.79) -- (313.72,273.79);
-
-\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (302.06,203.57) -- (302.06,248.81);
-
-\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (302.06,348.71) -- (302.06,307.24);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (296.23,203.57) -- (307.89,203.57);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (296.23,348.71) -- (307.89,348.71);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (290.40,248.81) --
-	(313.72,248.81) --
-	(313.72,307.24) --
-	(290.40,307.24) --
-	(290.40,248.81);
-\end{scope}
-\begin{scope}
-\path[clip] (  0.00,  0.00) rectangle (361.35,361.35);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80, 66.12) --
+	( 94.24,107.68) --
+	(119.69,155.48) --
+	(145.14,154.44) --
+	(170.58,137.81) --
+	(196.03,115.99) --
+	(221.48,122.23) --
+	(246.93,179.37) --
+	(272.37,181.45) --
+	(297.82,245.87) --
+	(323.27,279.12) --
+	(348.71,276.00);
 \definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{224,255,255}
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (115.45, 57.60) -- (302.06, 57.60);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] ( 68.80, 66.12) circle (  3.38);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (115.45, 57.60) -- (115.45, 53.28);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] ( 94.24,107.68) circle (  3.38);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (208.75, 57.60) -- (208.75, 53.28);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (119.69,155.48) circle (  3.38);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (302.06, 57.60) -- (302.06, 53.28);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (145.14,154.44) circle (  3.38);
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (115.45, 36.00) {0.5};
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (170.58,137.81) circle (  3.38);
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (208.75, 36.00) {1};
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (196.03,115.99) circle (  3.38);
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (302.06, 36.00) {2};
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (221.48,122.23) circle (  3.38);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 76.34) -- ( 57.60,359.08);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (246.93,179.37) circle (  3.38);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 76.34) -- ( 53.28, 76.34);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (272.37,181.45) circle (  3.38);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,123.46) -- ( 53.28,123.46);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (297.82,245.87) circle (  3.38);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,170.58) -- ( 53.28,170.58);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (323.27,279.12) circle (  3.38);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,217.71) -- ( 53.28,217.71);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,264.83) -- ( 53.28,264.83);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,311.96) -- ( 53.28,311.96);
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,359.08) -- ( 53.28,359.08);
-
-\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64, 76.34) {5};
-
-\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,123.46) {10};
-
-\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,170.58) {15};
-
-\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,217.71) {20};
-
-\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,264.83) {25};
-
-\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,311.96) {30};
-
-\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,359.08) {35};
-\end{scope}
-\begin{scope}
-\path[clip] (  0.00,  0.00) rectangle (361.35,361.35);
-\definecolor{drawColor}{RGB}{0,0,0}
-
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.20] at (208.75,355.66) {\bfseries Guinea Pigs' Tooth Growth};
-
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at (208.75, 17.28) {Vitamin C dose mg};
-
-\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at ( 25.92,208.75) {tooth length};
-\end{scope}
-\begin{scope}
-\path[clip] (  0.00,  0.00) rectangle (361.35,361.35);
-\definecolor{drawColor}{RGB}{0,0,0}
-
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 57.60) --
-	(359.91, 57.60) --
-	(359.91,359.91) --
-	( 57.60,359.91) --
-	( 57.60, 57.60);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (348.71,276.00) circle (  3.38);
 \end{scope}
 \end{tikzpicture}
 

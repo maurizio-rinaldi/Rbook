@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.10 on 2016-02-11 14:35:00
+% Created by tikzDevice version 0.10 on 2016-02-21 20:26:33
 % !TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \nonstopmode
@@ -20,19 +20,18 @@
 \usepackage{inconsolata}
 %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
 \usepackage[T1]{fontenc}
-
+\usepackage[buttonsize=1em]{animate}
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
 \usepackage{babelbib}
 \usepackage{float}
-\usepackage{fancyhdr}
+%\usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
 \usepackage{lipsum}
-\usepackage[dvipsnames]{color}
-\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\usepackage[]{color}
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{amsmath}
@@ -64,11 +63,9 @@
 %\begin{center}
 %\begin{minipage}{12cm}
  \markright{\today}
-\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
 \colorbox{grigetto}{\parbox{\linewidth}{#1}}}
                           {
-                         % \end{minipage}
-                          %\end{center}
+                
                           \medskip}
  \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
@@ -78,9 +75,6 @@
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}
-%\renewcommand{\sectionmark}[1]{%
-% \markboth{\sectionname
-% \ \thesection.\ #1}{}}
 \newcommand{\rst}{\textsf{RStudio}~}
 \newcommand{\rpr}{\textsf{R}~}
 \makeindex
@@ -89,112 +83,73 @@
 
 \begin{tikzpicture}[x=1pt,y=1pt]
 \definecolor{fillColor}{RGB}{255,255,255}
-\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,361.35);
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,289.08);
 \begin{scope}
-\path[clip] ( 57.60, 57.60) rectangle (359.91,359.91);
+\path[clip] (274.95, 57.60) rectangle (303.75,287.64);
 \definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{0,166,0}
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80, 71.28) --
-	( 71.60, 71.76) --
-	( 74.40, 72.33) --
-	( 77.19, 72.99) --
-	( 79.99, 73.75) --
-	( 82.79, 74.63) --
-	( 85.59, 75.64) --
-	( 88.39, 76.81) --
-	( 91.19, 78.13) --
-	( 93.99, 79.63) --
-	( 96.79, 81.33) --
-	( 99.59, 83.25) --
-	(102.39, 85.40) --
-	(105.19, 87.80) --
-	(107.98, 90.47) --
-	(110.78, 93.42) --
-	(113.58, 96.68) --
-	(116.38,100.25) --
-	(119.18,104.15) --
-	(121.98,108.40) --
-	(124.78,113.00) --
-	(127.58,117.95) --
-	(130.38,123.26) --
-	(133.18,128.93) --
-	(135.98,134.95) --
-	(138.78,141.30) --
-	(141.57,147.99) --
-	(144.37,154.98) --
-	(147.17,162.25) --
-	(149.97,169.77) --
-	(152.77,177.51) --
-	(155.57,185.41) --
-	(158.37,193.45) --
-	(161.17,201.55) --
-	(163.97,209.68) --
-	(166.77,217.76) --
-	(169.57,225.74) --
-	(172.37,233.56) --
-	(175.16,241.14) --
-	(177.96,248.43) --
-	(180.76,255.35) --
-	(183.56,261.84) --
-	(186.36,267.84) --
-	(189.16,273.28) --
-	(191.96,278.12) --
-	(194.76,282.31) --
-	(197.56,285.80) --
-	(200.36,288.55) --
-	(203.16,290.54) --
-	(205.96,291.74) --
-	(208.75,292.14) --
-	(211.55,291.74) --
-	(214.35,290.54) --
-	(217.15,288.55) --
-	(219.95,285.80) --
-	(222.75,282.31) --
-	(225.55,278.12) --
-	(228.35,273.28) --
-	(231.15,267.84) --
-	(233.95,261.84) --
-	(236.75,255.35) --
-	(239.55,248.43) --
-	(242.34,241.14) --
-	(245.14,233.56) --
-	(247.94,225.74) --
-	(250.74,217.76) --
-	(253.54,209.68) --
-	(256.34,201.55) --
-	(259.14,193.45) --
-	(261.94,185.41) --
-	(264.74,177.51) --
-	(267.54,169.77) --
-	(270.34,162.25) --
-	(273.14,154.98) --
-	(275.94,147.99) --
-	(278.73,141.30) --
-	(281.53,134.95) --
-	(284.33,128.93) --
-	(287.13,123.26) --
-	(289.93,117.95) --
-	(292.73,113.00) --
-	(295.53,108.40) --
-	(298.33,104.15) --
-	(301.13,100.25) --
-	(303.93, 96.68) --
-	(306.73, 93.42) --
-	(309.52, 90.47) --
-	(312.32, 87.80) --
-	(315.12, 85.40) --
-	(317.92, 83.25) --
-	(320.72, 81.33) --
-	(323.52, 79.63) --
-	(326.32, 78.13) --
-	(329.12, 76.81) --
-	(331.92, 75.64) --
-	(334.72, 74.63) --
-	(337.52, 73.75) --
-	(340.32, 72.99) --
-	(343.12, 72.33) --
-	(345.91, 71.76) --
-	(348.71, 71.28);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95, 57.60) rectangle (303.75, 68.55);
+\definecolor{fillColor}{RGB}{19,173,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95, 68.55) rectangle (303.75, 79.51);
+\definecolor{fillColor}{RGB}{40,180,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95, 79.51) rectangle (303.75, 90.46);
+\definecolor{fillColor}{RGB}{62,187,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95, 90.46) rectangle (303.75,101.42);
+\definecolor{fillColor}{RGB}{86,194,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,101.42) rectangle (303.75,112.37);
+\definecolor{fillColor}{RGB}{112,201,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,112.37) rectangle (303.75,123.33);
+\definecolor{fillColor}{RGB}{139,208,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,123.33) rectangle (303.75,134.28);
+\definecolor{fillColor}{RGB}{167,215,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,134.28) rectangle (303.75,145.23);
+\definecolor{fillColor}{RGB}{198,222,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,145.23) rectangle (303.75,156.19);
+\definecolor{fillColor}{RGB}{230,230,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,156.19) rectangle (303.75,167.14);
+\definecolor{fillColor}{RGB}{231,212,21}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,167.14) rectangle (303.75,178.10);
+\definecolor{fillColor}{RGB}{232,197,42}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,178.10) rectangle (303.75,189.05);
+\definecolor{fillColor}{RGB}{233,187,64}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,189.05) rectangle (303.75,200.01);
+\definecolor{fillColor}{RGB}{234,180,85}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,200.01) rectangle (303.75,210.96);
+\definecolor{fillColor}{RGB}{235,177,107}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,210.96) rectangle (303.75,221.91);
+\definecolor{fillColor}{RGB}{236,178,129}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,221.91) rectangle (303.75,232.87);
+\definecolor{fillColor}{RGB}{238,183,151}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,232.87) rectangle (303.75,243.82);
+\definecolor{fillColor}{RGB}{239,191,174}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,243.82) rectangle (303.75,254.78);
+\definecolor{fillColor}{RGB}{240,204,196}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,254.78) rectangle (303.75,265.73);
+\definecolor{fillColor}{RGB}{241,221,219}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,265.73) rectangle (303.75,276.69);
+\definecolor{fillColor}{gray}{0.95}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (274.95,276.69) rectangle (303.75,287.64);
 \end{scope}
 \end{tikzpicture}
 

@@ -116,8 +116,8 @@
 \select@language {italian}
 \select@language {english}
 \select@language {italian}
-\contentsline {subsection}{\numberline {3.9.7}Test di Student per dati appaiati}{68}{subsection.3.9.7}
-\contentsline {subsection}{\numberline {3.9.8}t-test: caso ad egual varianza}{69}{subsection.3.9.8}
+\contentsline {subsection}{\numberline {3.9.7}Test di Student per dati appaiati}{69}{subsection.3.9.7}
+\contentsline {subsection}{\numberline {3.9.8}t-test: caso ad egual varianza}{70}{subsection.3.9.8}
 \contentsline {subsection}{\numberline {3.9.9}Caso generale (test di Welch)}{71}{subsection.3.9.9}
 \contentsline {subsubsection}{Esempio}{72}{section*.12}
 \contentsline {subsection}{\numberline {3.9.10}Test $\chi ^2$ di indipendenza}{72}{subsection.3.9.10}
