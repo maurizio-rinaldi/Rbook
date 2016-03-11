@@ -1,0 +1,2606 @@
+%!TEX encoding = UTF-8 Unicode
+\documentclass[onecolumn,12pt]{book}
+\usepackage[english,italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{inconsolata}
+%\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+\usepackage[T1]{fontenc}
+\usepackage[buttonsize=1em]{animate}
+\usepackage{a4wide,Sweave,url}
+\usepackage{verbatim}
+\usepackage{makeidx}
+%\usepackage{babelbib}
+\usepackage{float}
+%\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+\usepackage{framed}
+\usepackage{lipsum}
+\usepackage[]{color}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\newenvironment{question}{\item \textbf{Esercizio}\newline}{}
+\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+\newenvironment{answerlist}{\renewcommand{\labelenumi}{(\alph{enumi})}\begin{enumerate}}{\end{enumerate}}
+\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
+ 
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
+%\usepackage{draftwatermark}
+\usepackage{wrapfig}
+\usepackage{listings}
+\newcounter{fnotes}\setcounter{fnotes}{1}
+\newcounter{Raction}\setcounter{Raction}{1}
+\newcommand{\varia}[1]{\textsl{\textsf{#1}}}
+\newcommand{\mytilde}{$\sim$}
+\newcommand{\maurizio}[1]{\color{red}#1 \color{black}}
+\newcommand{\federico}[1]{\color{green}#1 \color{black}}
+ 
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em,   frame=single}
+ \newenvironment{ese} [1]{\vskip10pt
+ 
+ \markright{\today}
+\colorbox{grigetto}{\parbox{\linewidth}{#1}}}
+                          {
+                
+                          \medskip}
+ \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
+ \frontmatter\title{Matematica e Statistica con \textsf{R}}
+\author{Federico Comoglio e  Maurizio Rinaldi}
+\markright{\today}
+\renewcommand{\chaptermark}[1]{%
+ \markboth{\chaptername
+ \ \thechapter.\ #1}{}}
+\newcommand{\rst}{\textsf{RStudio}~}
+\newcommand{\rpr}{\textsf{R}~}
+\makeindex
+\begin{document}
+\setkeys{Gin}{width=0.7\textwidth}
+
+<<setup, include=FALSE, cache=TRUE>>=
+library(knitr)
+options(formatR.arrow=TRUE,width=50)
+opts_chunk$set(fig.path='figure/graphics-', cache.path='cache/graphics-', fig.align='center', dev='tikz', fig.width=5, fig.height=4, fig.show='hold', cache=TRUE, par=TRUE,warning=F)
+knit_hooks$set(par=function(before, options, envir){
+if (before && options$fig.show!='none') par(mar=c(4,4,.1,.1),cex.lab=.95,cex.axis=.9,mgp=c(2,.7,0),tcl=-.3)
+}, crop=hook_pdfcrop)
+@
+
+\markright{\today}
+\thispagestyle{empty}
+\maketitle
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\thispagestyle{empty}
+ \mainmatter
+<<echo=FALSE>>=
+library(lubridate)
+library(EsamiR)
+@
+ 
+<<eval=TRUE,echo=FALSE>>=
+install.packages("../libroR_0.0.tgz", repos = NULL, type = .Platform$pkgType)
+@
+ 
+ 
+\chapter{Statistica e probabilit\`a  con \textsf{R}}
+Riprendiamo qui sinteticamente alcune definizioni.
+\section{Lo spazio campionario}
+
+Lo spazio campionario $\Omega$  (\emph{sample space}) è l'insieme di tutte le uscite possibili di un esperimento. Per esempio 
+\begin{itemize}
+\item Dado: lo spazio campionario consiste nelle uscite dei numeri da 1 a 6. \item Moneta: lo spazio campionario consiste di 2 possibili  uscite "esce testa", "esce croce"
+\item Misure di lunghezza: lo spazio campionario è un intervallo del semiasse positivo della retta. 
+Come si vede lo spazio campionario pu\`o essere dscreto o continuo. Potrebbe essere anche una combinazione dei due.
+\end{itemize}
+\section{Gli eventi}
+
+
+ Un evento è un sottoinsieme dello spazio campionario. 
+ Ad esempio
+\begin{itemize}
+\item Nel lancio di un dado l'uscita del 6 o l'uscita di un numero pari sono possibili eventi. 
+\item Un evento semplice è un sottoinsieme di un elemento.
+\end{itemize}
+
+
+\subsubsection{Costruzione di eventi}
+
+Siano A e  B degli eventi che possono risultare da un esperimento. A partire da questi eventi possiamo costruire dei nuovi eventi
+\begin{itemize}
+\item $A\cup B$ ($A$ oppure $B$, evento unione) indica il verificarsi di A o di B (o di ambedue).
+\item $A \cap  B$  indica il verificarsi di A e di  B.
+\item L'evento  $A^c$ (complemento di A, non A)   indica il non verificarsi dell'evento $A$.   
+\end{itemize}
+<<echo=FALSE>>=
+plot(0,xlim=c(0,10),ylim=c(0,6),type="n",axes=F,xlab="",ylab="")
+library(plotrix)
+draw.circle(2,4,2,border="blue")
+draw.circle(5,4,2,border="red")
+text(2,4,"A")
+text(5,4,"B")
+text(3.5,4,expression(paste("A",intersect("B"))))
+@
+
+
+\section{La probabilità}
+
+$P(A)$ indica la probabilità di un evento A. Questo è un numero nell'intervallo $[0,1]$ che possiamo associare a ciascun evento che soddisfa certe regole (assiomi).
+Eventi certi corrispondono a probabilità uguale ad 1=100\%, eventi impossibili corrispondono a fiducia uguale a 0=0\%.
+
+\subsubsection{ Assiomi}
+\begin{enumerate}
+\item qualunque sia l'evento $E$, $P(E)\geq 0$
+\item $P(\Omega)=1$
+\item  $P(E_1\cup E_2\cup\ldots \cup E_n)=P(E_1)+P(E_2)+\ldots +P(E_n)$ (anche per $n=\infty$) dove $E_i\cap E_j=\emptyset$
+\end{enumerate}
+
+Consideriamo ad esempio il lancio di un dado e sia
+\begin{itemize}
+\item  A = \texttt{esce pari}=$\{2,4,6\}$
+\item  B = \texttt{esce un numero maggiore o uguale a 4}=$\{4,5,6\}$
+\end{itemize}
+
+
+Allora
+$A\cup B=$\texttt{esce 2 o 4 o 5 o 6}=$\{2,4,5,6\}$
+
+$A\cap B=$\texttt{esce 4 o 6}$=\{4,6\}$
+
+$A^C=$ \texttt{esce un numero dispari}$=\{1,3,5\}$
+
+$B^C=$\texttt{esce 1 o 2 o 3}$=\{1,2,3\}$
+        
+        
+\subsection{Conseguenze}   
+
+
+   
+$A$ e $B$ sono \emph{incompatibili} se $A\cap B=\emptyset$.
+
+<<echo =FALSE,fig.height=5>>=
+plot(0,xlim=c(0,10),ylim=c(0,8),type="n",axes=F,xlab="",ylab="")
+library(plotrix)
+draw.circle(2,4,2,border="blue",col="gray90")
+draw.circle(4,4,2,border="red",col="gray70")
+draw.circle(2,4,2,border="blue")
+text(1,4,"A",col="blue")
+text(3.,5.,"X1")
+text(4,5.,"X2")
+text(5,4,"B",col="red")
+text(3.5,4,expression(paste("X3=A",intersect("B")))) 
+@
+
+Abbiamo quindi
+\[A=X_1\cup X_3, \quad B=X_2\cup X_3\]
+da cui
+\begin{align*} P(A)=&P(X_1)+P(X_3),\quad P(B)=P(X_3)+P(X_2)\\
+ P(X_1)=&P(A)-P(X_3),\quad P(X_2)=P(B)-P(X_3)
+ \end{align*}
+\begin{align*} P(A\cup B)&=P(X_1\cup X_2\cup X_3)=P(X_1)+P(X_2)+P(X_3)=\\
+&=P(A) +P(B)-P(X_3)=P(A) +P(B)-P(A\cap B)\end{align*}
+
+e quindi 
+
+$$P(A\cup B)=P(A) +P(B)-P(A\cap B)$$
+ESEMPIO: Il 60\% degli studenti in questa classe è geniale mentre il   70\% ama lo sport; il 40\%, oltre ad essere geniale, ama lo sport. Determinare la probabilità che uno studente scelto a caso non sia geniale e non ami lo sport.
+
+
+ 
+ 
+
+\section{Variabili aleatorie}
+Una variabile aleatoria (\emph{random variabile}) \`e
+ una variabile i cui valori sono soggetti a variazioni casuali. Quando i valori possibili di una variabile aleatoria  possono essere elencati parliamo di variabile aleatoria discreta. Quando i valori non possono essere elencati parliamo di variabile aleatoria continua.
+
+\section{Variabili aleatorie discrete}
+Le variabili aleatorie  discrete che  assumono un numero limitato di valori si dicono anche \emph{finite}.  I valori di una variabile aleatoria discreta possono essere numerici o nominali.
+ Supponiamo di avere una variabile aleatoria che possa assumere un insieme di valori in  un \emph{alfabeto} assegnato costituito da lettere, parole o numeri. Per esempio un alfabeto pu\`o essere del tipo che segue
+\begin{itemize}
+\item{}(Femmina, Maschio)
+\item{}(A,C,T,G)
+\item{} (0,1)
+\item{}(Ottimo, Buono, Discreto, Sufficiente, Insufficiente)
+\item{} (Testa, Croce).
+\item{} I numeri interi
+\end{itemize}
+Per caratterizzare completamente una variabile aleatoria discreta oltre ai valori che questa pu\`o  assumere occorre conoscere la probabilit\`a  di questi valori.
+Per semplicit\`a considereremo variabili aleatorie finite.\\
+
+ 
+
+La probabilità $P(A)$ di un evento A è il grado di fiducia  che lo sperimentatore pone nella realizzazione dell'evento (Jacob Bernoulli, 1654-1705) 
+
+ 
+\subsection{Sistema completo di eventi}
+
+Diciamo sistema completo
+
+$$A_1, A_2,\ldots, A_N$$
+
+un insieme di eventi relativi ad un certo esperimento tali che in ogni realizzazione dell'esperimento si verifichi uno e uno solo di essi. 
+
+In generale sono un sistema completo di eventi si ha 
+
+$$P(A_1)+P(A_2)+\ldots+ P(A_N) =1$$
+
+\begin{itemize}
+\item Lanciando una moneta possiamo prendere come sistema completo di eventi gli eventi $A_1$="esce testa" e $A_2$="esce croce" 
+\item lanciando un dado   possiamo prendere come sistema completo di eventi le uscita $A_i$ dei numeri i da 1 a 6, ma anche gli eventi "esce pari", "esce dispari"
+\end{itemize}
+Se tutti gli eventi in un sistema completo di eventi sono equiprobabili possiamo facilmente ricavare la probabilità di ciascun evento.
+ 
+$$P(A_1)+P(A_2)+\ldots+ P(A_N) =1=P(A_i)+P(A_i)+\ldots+ P(A_i)$$
+$$P(A_i)=1/N$$
+Nel caso del dado equo
+$$P(\textrm{esce i}) = 1/6$$
+
+\section{Lancio di 2 dadi}
+
+Un  sistema completo di eventi i 36 eventi é 
+$$A_{i,j}=\textrm{esce i sul dado verde e j sul dado rosso}$$ 
+<<>>=
+plot(0,xlim=c(0,6),ylim=c(0,12),type="n",axes=F,xlab="",ylab="")
+for (i in 0:5)
+for (j in 0:5)
+{
+rect(i,2*j,3/8+i,2*j+1,col="red1")
+rect(3/8+i,2*j,6/8+i,1+2*j,col="green")
+text(3/16+i,0.5+2*j,j+1,cex=1)
+text(i+9/16,0.5+2*j,i+1,cex=1)}
+@
+Se i dadi sono equi ogni evento  $A_{i,j}$ ha probabilità  1/36. 
+Per esempio
+$$P(\textrm{la somma fa 8})$$
+ 
+ 
+\section{Probabilità condizionata}
+
+La notazione 
+
+$$P(A\mid B)$$
+
+indica la probabilità  dell'evento $A$ condizionata al verificarsi dell'evento $B$.
+In altre parole quale é la probabilità che si verifichi $A$ quando anche $B$ é verificato. 
+<<>>=
+set.seed(2000)
+par(mai=c(0,0,0,0))
+par(mgp=c(0,0,0))
+n=30
+library(plotrix)
+plot(0,0,xlim=c(-1,11),ylim=c(-1,11),type="n",xlab="",ylab="",asp=1,axes=F,
+     )
+rect(0,0,10,10,border="green",lwd=2)
+centro1=c(4,4)
+centro2=c(5,5)
+draw.circle(centro1[1],centro1[2],2,border="blue")
+draw.circle(centro2[1],centro2[2],2,border="red",lwd=3,col="light green")
+punti=cbind(runif(n,0,10),runif(n,0,10))
+points(punti,cex=0.8,pch=19)
+draw.circle(4,4,2,lwd=3,border="blue")
+text(3,3,"A",col="blue")
+text(6,6,"B")
+text(4,4,expression(paste("A",intersect("B"))))
+title("n=30",line=-2)
+@
+
+
+ 
+<<>>=
+library(MASS)
+a=length(which(rowSums((punti-centro1)^2)<4))
+b=length(which(rowSums((punti-centro2)^2)<4))
+acapb=length(which(rowSums((punti-centro1)^2)<4 & rowSums((punti-centro2)^2)<4))
+@
+
+$$P(A| B)=\frac{n_{A\cap B}}{n_{B}}=\frac{n_{A\cap B}/n}{n_{B}/n}=\frac{P({A\cap B})}{P(B)}=\Sexpr{acapb}/\Sexpr{ b}$$
+
+Quindi 
+$$P(A| B)=\frac{P({A\cap B})}{P(B)}\quad (\hbox{se } B\neq \emptyset)$$
+
+\section{Esempio  1}
+
+<<>>=
+set.seed(10)
+load("../cards.Rdata")
+library(XML)
+library(grid)
+library(grImport)
+mazzo=names(cards)[1:40]
+sample(mazzo,10)->estratte
+plot(numeric(0),xlim=c(0,7),ylim=c(0,2),xlab="",ylab="",axes=F)
+for (i in 1:5)
+picture(cards[[estratte[i]]],i*1.2,1,(i+1)*1.2,2)
+for (i in 1:5)
+picture(cards[[estratte[i+5]]],i*1.2,0,(i+1)*1.2,1)
+@
+
+<<>>=
+strsplit(estratte,split="[.]")->temp
+as.numeric(sapply(temp,"[",2))->valore
+pari=which(valore%%2==0)
+rosse=which(sapply(temp,"[",1)=="C"|sapply(temp,"[",1)=="Q")
+library(MASS)
+@
+
+\(P(\textrm{Rosso})\)= \Sexpr{  length(rosse)}/\Sexpr{ length(temp)}
+
+\(P(\textrm{Pari})\)=  \Sexpr{  length(pari)}/\Sexpr{ length(temp)}
+ 
+\(P(\textrm{Rosso}\cap \textrm{Pari})\)
+
+> - \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(temp)}
+
+\(P(\textrm{Rosso}\mid \textrm{Pari}) \)
+
+> - \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(pari)}
+
+\(P(\textrm{Pari}\mid \textrm{Rosso}) \)
+
+> - \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(rosse)}
+
+\(P(\textrm{Pari}\cup\textrm{Rossa})\)
+
+\Sexpr{length(unique(c(pari,rosse)))}/\Sexpr{ length(temp)}
+
+\section{Esempio 2}
+
+<<>>=
+n=7
+sample(mazzo,2*n)->estratte
+plot(numeric(0),xlim=c(0,1.4*n),ylim=c(0,2*5/n),xlab="",ylab="",axes=F)
+for (i in 1:n)
+picture(cards[[estratte[i]]],i*1.2,5/n,(i+1)*1.2,2*5/n)
+for (i in 1:n)
+picture(cards[[estratte[i+n]]],i*1.2,0,(i+1)*1.2,1*5/n)
+@
+
+<<>>=
+strsplit(estratte,split="[.]")->temp
+as.numeric(sapply(temp,"[",2))->valore
+pari=which(valore%%2==0)
+rosse=which(sapply(temp,"[",1)=="C"|sapply(temp,"[",1)=="Q")
+library(MASS)
+@
+
+\(P(\textrm{Rosso})\)
+
+> -  \Sexpr{  length(rosse)}/\Sexpr{ length(temp)}
+
+\(P(\textrm{Pari})\)
+
+> -  \Sexpr{  length(pari)}/\Sexpr{ length(temp)}
+ 
+\(P(\textrm{Rosso}\cap \textrm{Pari})\)
+
+> - \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(temp)}
+
+\(P(\textrm{Rosso}\mid \textrm{Pari}) \)
+
+> - \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(pari)}
+
+\(P(\textrm{Pari}\mid \textrm{Rosso}) \)
+
+> - \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(rosse)}
+
+\(P(\textrm{Pari}\cup\textrm{Rossa})\)
+
+> -  \Sexpr{  length(unique(c(pari,rosse)))}/\Sexpr{ length(temp)}
+
+ 
+
+Consideriamo una popolazione P di $N=10^6$ individui uomini o donne $(M/W)$ che possono essere mancini o destrorsi $(L/R)$. Sia
+
+$$WL =\textrm{Donne Mancine}=60000$$
+$$L=\textrm{Mancini totali}= 110000$$
+$$W=\textrm{Donne}= 650000$$
+
+<<>>=
+options(scipen=999)
+mancini=data.frame(c(60000,"-",110000),rep("-",3),c(650000,"-", 1000000))
+colnames(mancini)=c(  "L", "R", "Totali")
+rownames(mancini)=c("W", "M", "Totali")
+ library(knitr) 
+kable(mancini)
+@  
+
+Completando la tabella
+
+
+<<>>=
+mancini=matrix(c(60000,590000,650000,50000, 300000, 350000,  110000, 890000, 1000000),nrow=3,byrow=T)
+colnames(mancini)=c(  "L", "R", "Totali")
+rownames(mancini)=c("W", "M", "Totali")
+ library(knitr) 
+kable(mancini)
+@
+
+
+Per calcolare $P(L \mid  W)$  occorre determinare la probabilità di essere mancini se si é donne. In altre parole la popolazione é quella delle donne e all'interno di quello determiniamo  la probabilità di essere mancini:
+
+
+$$P(L) = 110000/1000000=\Sexpr{ 110000./1000000}$$
+$$P(W)= 650000/1000000=\Sexpr{  650000/1000000}$$
+$$P(L \cap  W) = 60000/1000000$$
+
+$$P (L \mid W)=(\# \textrm{Donne mancine})/(\# \textrm{Donne})=\Sexpr{ mancini["W","L"]}/\Sexpr{ sum(mancini["W",1:2])}=\Sexpr{ 60000./650000}$$
+Così come
+$$P(L\cap W)/P(W)=\dfrac{\Sexpr{ mancini["W","L"]}/\Sexpr{ 10^6}}{\Sexpr{ sum(mancini["W",1:2])}/\Sexpr{ 10^6}}$$
+
+ $$P (L \mid M)=\Sexpr{ mancini["M","L"]}/\Sexpr{ sum(mancini["M",1:2])}=\Sexpr{ 50000./350000}$$
+ $$P (M \mid L)=\Sexpr{ mancini["M","L"]}/\Sexpr{ sum(mancini[ 1:2,"L"])}=\Sexpr{ 50000./110000}$$
+ $$P (W \mid L)=1-\Sexpr{ 50000./350000}=\Sexpr{ 60000./110000}$$
+
+\section{Regola di Bayes}
+
+
+
+Dalla  definizione di probabilità condizionata
+$$P(A \mid B)=\dfrac{P(A \cap  B)}{P(B)}$$  segue
+$$P(A \cap B)=P(A \mid  B) P(B)$$  e scambiando $A$ con $B$
+$$P(B \cap A)=P(A \mid  B) P(B)$$
+ 
+si ha quindi
+ 
+$$P(A \mid  B)P(B) = P(B | A) P(A)$$
+
+e
+
+<img src="bayesrule.png" height="200px" width="300px" />
+
+ 
+\section{Legge della probabilità totale}
+
+Sia dato un sistema completo di esempi 
+
+$$E_1,\ldots,E_n$$
+$$\Omega=E_1\cup E_2\cup\ldots\cup E_n\quad E_i\cap E_j=\emptyset$$
+
+Ovviamente
+<<r,echo=FALSE>>=
+library(plotrix)
+plot(0,0,xlim=c(-6,6),ylim=c(-6,6),type="n",xlab="",ylab="",asp=1,axes=F)
+rect(-5,-5,5,5,border="green",lwd=2)
+centro1=c(1,1)
+centro2=c(5,5)
+draw.circle(centro1[1],centro1[2],2,border="blue")
+#draw.circle(centro2[1],centro2[2],2,border="red",lwd=3,col="light green")
+for (i in seq(-2,0,2))
+       { f<-function(x)  tan(i*pi/6+pi/12)*x
+                segments(-5,f(-5),5,f(5),col="red")}
+for (i in c(-2,0))
+       { f<-function(x)  tan(i*pi/6+pi/12)*x
+                segments( f(-5),-5,f(5),5,col="red")}
+text(3,3,expression(E[1]),col="blue")
+text(3,-1,expression(E[2]),col="blue")
+text(1,-2,expression(E[3]),col="blue")
+text(-2,-3,expression(E[4]),col="blue")
+text(-2,1,expression(E[5]),col="blue")
+text(-1,3,expression(E[6]),col="blue")
+text(4,4,expression(Omega),cex=1.4)
+text(2,2,"B",cex=1.4) 
+@
+$$B=(B\cap E_1)\cup (B\cap E_2)\cup\ldots \cup (B\cap E_N)$$
+E quindi
+
+$$P(B)=P(B\cap E_1)+P(B\cap E_2)+\ldots+ P(B\cap E_N)=$$
+$$ P(B\mid E_1)P(E_1)+\ldots+P(B\mid E_N)P(E_N)$$
+
+\subsection{Esempio}
+
+$$B=\textrm{piove}$$
+$$E_1 = \textrm{vado a lezione}$$
+$$E_2 = \textrm{non vado a lezione}$$
+$$P(\textrm{piove}) = P(\textrm{piove e vado a lezione}) + P(\textrm{piove e non vado a lezione}) $$ 
+
+ 
+
+\section{Teorema di Bayes [forma estesa]}
+
+Combinando con la regola di Bayes:
+
+$$P (E_i\mid B) = \dfrac{P(B\mid E_i) P(E_i)}{P(B)}= \dfrac{P(B\mid E_i ) P(E_i) }{ 
+\sum_{i=1}^N P(B\mid E_i)P(E_i)}$$
+
+Nel caso particolare in cui gli eventi possibili 
+$E_1$ e $E_2$ siano $A$ e il suo complemento  $A^C$ si ha
+
+$$P (A|B)=  \dfrac{P[B\mid A] P(A)}{P (B\mid A) P(A)+P(B\mid  A^C) P( A^C)}$$
+
+
+ 
+ 
+
+
+\section{La concezione frequentista}
+ 
+
+\subsection{Lancio di una coppia di dadi}
+
+<<echo =FALSE,fig.height=5>>=
+set.seed(1)
+x1=sample(1:6,10000,replace=T)
+x2=sample(1:6,10000,replace=T)
+x=x1+x2
+y=table(x)
+y
+hist(x,breaks= 1.5:12.5)
+@
+
+ 
+
+<<echo=TRUE>>=
+y
+@
+Il numero 8 è uscito in questo caso k=\Sexpr{y[7]} volte su N= 10000 lanci.  
+Possiamo dire che il risultato esce di norma k  volte su 10000 e scrivere 
+
+$$\textit{Probabilità che esca 8}=\lim_{N\to \infty}\dfrac{k}{N}$$
+ 
+Il valore stimato con 10000 lanci è
+
+$$\textrm{probabilità che esca 8} \approx \Sexpr{y[7]}/10000 = \Sexpr{y[7]/10000}$$
+
+ 
+
+
+Vedremo in seguito che
+
+$$\textrm{Probabilità che esca 8} = 5/36=\Sexpr{ round(5/36,4)} $$
+
+e quindi che la differenza relativa della nostra stima dal valor vero è di 
+
+$$\dfrac{\Sexpr{ y[7]/10000} -0.1389}{0.1389}=\Sexpr{ (y[7]/10000 -0.1389)/0.1389}$$
+
+ovvero la discrepanza relativa è circa del \Sexpr{ abs(signif(100*(y[7]/10000 -0.1389)/0.1389,2))}%.  
+
+Stimiamo la probabilità di un evento A come la frequenza relativa dell'evento
+$$P(A)\approx \dfrac{\textrm{numero di volte in cui l'evento si realizza}}{\textrm{numero di esperimenti 
+eseguiti}}$$
+
+ 
+
+Questa concezione ``frequentista`` della probabilità è sufficiente in tutti i casi in cui l'esperimento può essere ripetuto  (almeno a livello concettuale) quante volte si vuole.
+Non è però sufficiente per i casi in cui l'esperimento non può essere ripetuto o forse nemmeno eseguito. 
+
+ In tali casi si ricorre alla concezione \emph{soggettiva} della probabilità, in cui la probabilità viene stimata da un soggetto sulla base dell'esperienza personale. 
+
+
+\subsection{Esercizio 1 }
+
+<<echo=FALSE>>=
+n1=50
+n2=50
+n3=30
+n4=70
+p1=0.5
+p2=0.5
+@
+
+Due urne contengono palle colorate. La prima urna contiene  \Sexpr{ n1}
+palle rosse e \Sexpr{ n2} palle blu. La seconda contiene \Sexpr{ n3} palle rosse e \Sexpr{ n4} blu. Si sceglie una delle due urne a caso e si estrae da questa una palla a caso.  
+La palla   estratta  è rossa. 
+Quale è la probabilità che la palla provenga della prima urna?
+
+<<echo=FALSE,include=FALSE,message=FALSE>>=
+library(graph)
+library(Rgraphviz)
+a1=0.5
+a2=0.5
+a11=0.5
+a12=0.5
+a21=0.3
+a22=0.7
+p11=a1*a11
+p12=a1*a12
+p21=a2*a21
+p22=a2*a22
+node1<-"P"
+node2<-"U1"
+node3<-"U2"
+node4<-"RU1"
+node5<-"BU1"
+node6<-"RU2"
+node7<-"BU2"
+nodeNames<-c(node1,node2,node3,node4, node5,node6, node7)
+
+rEG <- new("graphNEL", nodes=nodeNames, edgemode="directed")
+ # Draw the "lines" or "branches" of the probability Tree
+rEG <- addEdge(nodeNames[1], nodeNames[2], rEG, 1)
+rEG <- addEdge(nodeNames[1], nodeNames[3], rEG, 1)
+rEG <- addEdge(nodeNames[2], nodeNames[4], rEG, 1)
+rEG <- addEdge(nodeNames[2], nodeNames[5], rEG, 1)
+rEG <- addEdge(nodeNames[3], nodeNames[6], rEG, 1)
+rEG <- addEdge(nodeNames[3], nodeNames[7], rEG, 10)
+
+eAttrs <- list()
+nAttrs<-list()
+q<-edgeNames(rEG)
+nAttrs$fillcolor=c("white","white","white","red","blue","red","blue")
+names(nAttrs$fillcolor) <- nodeNames
+nAttrs$label=c("_","U1","U2","R","B","R","B")
+names(nAttrs$label) <- nodeNames
+# Add the probability values to the the branch lines
+
+eAttrs$label <- c(toString(a1),toString(a2),
+                  toString(a11), toString(a12),
+                  toString(a21), toString(a22))
+names(eAttrs$label) <- c(q[1],q[2], q[3], q[4], q[5], q[6])
+edgeAttrs<-eAttrs
+nodeAttrs<-nAttrs
+# Set the color, etc, of the tree
+attributes<-list(node=list(label="foo", fontsize=8),
+                 edge=list(color="red",fontsize=8),graph=list(rankdir="TD"))
+
+#Plot the probability tree using Rgraphviz
+@
+
+\subsection{Albero di probabilità}
+
+<<echo=FALSE,fig.width=8,fig.height=6>>=
+plot(rEG, edgeAttrs=eAttrs, nodeAttrs=nAttrs,attrs=attributes)
+@
+
+Motliplicando i valori delle frecce che puntano ad una foglia si trova
+$$P(R\mid U1)P(U_1)=0.5\times 0.5=P(R\cap U1)$$
+$$P(R\mid U2)P(U_2)=0.5\times 0.3=P(R\cap U2)$$
+e quindi per esempio
+$$P(R)=P(R\cap U1)+P(R\cap U2)=0.4$$
+Usando poi la regola di Bayes
+$$P(U_1\mid R)=\dfrac{P(R\mid U_1)P(U_1)}{P(R)}=0.25/0.4=5/8$$
+
+
+\subsection{Esempio 2}
+
+Consideriamo dei container per la raccolta di materiale tossico. I container potrebbero non avere una tenuta perfetta ed avere delle perdite. Un programma di monitoraggio  controlla regolarmente se ci sono state perdite. Gli strumenti dedicati a tali controlli non sono perfetti e talora danno luogo a falsi positivi o falsi negativi.  In altre parole a volte viene emesso un segnale d'allarme quando non si ha perdita (falso positivo) a volte la perdita non viene segnalata quando c'è (falso negativo).
+
+Assumiamo di avere 3 informazioni
+
+Informazioni sui container
+
+1.   P (perdita)= 0.1    
+     P (nessuna perdita)=0.9
+
+Per quanto riguarda il test
+
+2.   P(test positivo | perdita)=P (analisi corretta se si ha perdita)=0.95
+
+     P(test negativo | perdita)=P(test negativo dato che  si ha perdita) =  0.05  (falsi negativi)
+
+3.   P(test positivo | non perdita)=P(test positivo quando non si ha perdita) =    0.1  (falso positivo)
+      
+      P(test negativo| non perdita)=P(non rilevamento quando non si ha perdita)=0.9
+      
+
+Vorremmo rispondere alle seguenti 2 domande.
+
+1.  Se l'allarme scatta quale è la probabilità che ci sia stata effettivamente una perdita?
+
+2.  Se l'allarme non scatta quale è la probabilità che il sito sia invece contaminato?
+
+Costruiamo un diagramma ad albero come prima
+
+---
+
+
+<<echo=FALSE,include=FALSE,message=FALSE>>=
+library(graph)
+library(Rgraphviz)
+a1=0.1
+a2=0.9
+a11=0.05
+a12=0.95
+a21=0.1
+a22=0.9
+p11=a1*a11
+p12=a1*a12
+p21=a2*a21
+p22=a2*a22
+node1<-"P"
+node2<-"U1"
+node3<-"U2"
+node4<-"RU1"
+node5<-"BU1"
+node6<-"RU2"
+node7<-"BU2"
+nodeNames<-c(node1,node2,node3,node4, node5,node6, node7)
+
+rEG <- new("graphNEL", nodes=nodeNames, edgemode="directed")
+ # Draw the "lines" or "branches" of the probability Tree
+rEG <- addEdge(nodeNames[1], nodeNames[2], rEG, 1)
+rEG <- addEdge(nodeNames[1], nodeNames[3], rEG, 1)
+rEG <- addEdge(nodeNames[2], nodeNames[4], rEG, 1)
+rEG <- addEdge(nodeNames[2], nodeNames[5], rEG, 1)
+rEG <- addEdge(nodeNames[3], nodeNames[6], rEG, 1)
+rEG <- addEdge(nodeNames[3], nodeNames[7], rEG, 10)
+
+eAttrs <- list()
+nAttrs<-list()
+q<-edgeNames(rEG)
+nAttrs$fillcolor=c("white","white","white","red","light green","red","light green")
+names(nAttrs$fillcolor) <- nodeNames
+nAttrs$label=c("_","Perdita","Non Perdita","Test-","Test+","Test+","Test-")
+names(nAttrs$label) <- nodeNames
+# Add the probability values to the the branch lines
+
+eAttrs$label <- c(toString(a1),toString(a2),
+                  toString(a11), toString(a12),
+                  toString(a21), toString(a22))
+names(eAttrs$label) <- c(q[1],q[2], q[3], q[4], q[5], q[6])
+edgeAttrs<-eAttrs
+nodeAttrs<-nAttrs
+# Set the color, etc, of the tree
+attributes<-list(node=list(label="foo", fontsize=15),
+                 edge=list(color="red",fontsize=12),graph=list(rankdir="TD"))
+@
+<<echo=FALSE>>=
+plot(rEG, edgeAttrs=eAttrs, nodeAttrs=nAttrs,attrs=attributes)
+text(44,-4,"Falso Negativo")
+text(401,-13,"Falso Positivo")
+@
+
+$$P(\textrm{positivo})=0.1\times 0.95+0.1\times 0.9=\Sexpr{ 0.1* 0.95+0.1*0.9}$$
+e utilizzando la regola di Bayes
+
+$$P(\textrm{perdita}\mid \textrm{positivo})=\dfrac{P(\textrm{positivo}\mid \textrm{perdita})P(\textrm{perdita})}{P(\textrm{positivo})}=\Sexpr{ 0.1* 0.95}/\Sexpr{ 0.1* 0.95+0.1*0.9}=\Sexpr{ 0.1* 0.95 /(0.1* 0.95+0.1*0.9)}$$
+
+
+$$P(\textrm{perdita}\mid \textrm{negativo})=\dfrac{P(\textrm{negativo}\mid \textrm{perdita})P(\textrm{perdita})}{P(\textrm{negativo})}=\Sexpr{ 0.1* 0.05}/\Sexpr{ 0.1* 0.05+0.9*0.9}=\Sexpr{ 0.1* 0.05 /(0.1* 0.05+0.9*0.9)}$$
+\subsection{Esempio 3: specificità e sensitività di un test diagnostico }
+
+\subsubsection{Sensitività }
+
+"proporzione dei positivi identificati tra i malati: 
+indica la capacità di individuare malati"
+
+
+$$P(+ \mid D)=P(\textrm{test positivo}\mid \textrm{malato})$$
+Supponiamo sia
+<<echo=FALSE>>=
+sens=0.97
+spec=0.95
+prevalence=0.001
+@
+
+$$P(\textrm{test positivo | malato}) = \Sexpr{ sens}$$
+$$P(\textrm{test negativo} \mid  \textrm{malato}) = \Sexpr{ 1-sens} \textrm{ (Falsi Negativi)}$$
+
+\subsubsection{Specificità }
+
+"proporzione dei negativi identificati: indica la capacità di individuare i sani" 
+$$P(-\mid D^c)= P(\textrm{test negativo | sano})$$
+
+Supponiamo sia
+$$P(\textrm{test negativo | sano}) = \Sexpr{ spec}$$
+$$P(\textrm{test positivo | sano}) = \Sexpr{ 1-spec} \quad \hbox{(Falsi positivi)}$$
+
+* Supponiamo di essere testati per una malattia che colpisce lo 0.1\%  della popolazione. 
+* Determinare  probabilità  di non avere la malattia avendo avuto un esito positivo del test.
+In formule 
+$$P (\textrm{sani | test positivo}) = ?$$
+$$P(\textrm{malati | test negativo})=?$$
+ 
+\subsection{Albero sensitività/specificità}
+
+
+
+<<echo=FALSE,include=FALSE,message=FALSE>>=
+library(graph)
+library(Rgraphviz)
+a1=prevalence
+a2=1-prevalence
+a11=1-sens
+a12=sens
+a21=1-spec
+a22=spec
+p11=a1*a11
+p12=a1*a12
+p21=a2*a21
+p22=a2*a22
+node1<-"P"
+node2<-"U1"
+node3<-"U2"
+node4<-"RU1"
+node5<-"BU1"
+node6<-"RU2"
+node7<-"BU2"
+nodeNames<-c(node1,node2,node3,node4, node5,node6, node7)
+
+rEG <- new("graphNEL", nodes=nodeNames, edgemode="directed")
+ # Draw the "lines" or "branches" of the probability Tree
+rEG <- addEdge(nodeNames[1], nodeNames[2], rEG, 1)
+rEG <- addEdge(nodeNames[1], nodeNames[3], rEG, 1)
+rEG <- addEdge(nodeNames[2], nodeNames[4], rEG, 1)
+rEG <- addEdge(nodeNames[2], nodeNames[5], rEG, 1)
+rEG <- addEdge(nodeNames[3], nodeNames[6], rEG, 1)
+rEG <- addEdge(nodeNames[3], nodeNames[7], rEG, 10)
+
+eAttrs <- list()
+nAttrs<-list()
+q<-edgeNames(rEG)
+nAttrs$fillcolor=c("white","white","white","pink","light green","pink","light green")
+names(nAttrs$fillcolor) <- nodeNames
+nAttrs$label=c("_","Malato","Sano","-","+","+","-")
+names(nAttrs$label) <- nodeNames
+# Add the probability values to the the branch lines
+
+eAttrs$label <- c(toString(a1),toString(a2),
+                  toString(a11), toString(a12),
+                  toString(a21), toString(a22))
+names(eAttrs$label) <- c(q[1],q[2], q[3], q[4], q[5], q[6])
+edgeAttrs<-eAttrs
+nodeAttrs<-nAttrs
+# Set the color, etc, of the tree
+attributes<-list(node=list(label="foo", fontsize="15"),
+                 edge=list(color="red"),graph=list(rankdir="TD"))
+@
+<<echo=FALSE>>=
+plot(rEG, edgeAttrs=eAttrs, nodeAttrs=nAttrs,attrs=attributes)
+text(44,-4,"Falso Negativo")
+text(401,-13,"Falso Positivo")
+@
+
+\begin{align*}P(+) &= P(+ \mid  \textrm{sano})P(\textrm{sano}) + P( + \mid \textrm{malato})P(\textrm{malato}) \\
+&=0.05\times 0.999 + 0.97\times  0.001=\Sexpr{ 0.05*0.999 + 0.97*0.001}
+\end{align*}
+ 
+
+$$ P(\textrm{sano} \mid   +) = \dfrac{P( +\mid  \textrm{sano}) P(\textrm{sano})}{P(+)}=\dfrac{0.05*0.999}{\Sexpr{ 0.05*0.999 + 0.97*0.001}}=\Sexpr{ 0.05*0.999/(0.05*0.999 + 0.97*0.001)}$$
+
+
+ 
+
+
+In genere
+$$P(+) = \hbox{(1-specificità)(1-prevalenza) + sensitività prevalenza}$$
+
+
+
+<<echo=FALSE>>=   
+f<-function(prevalence) sens*prevalence/((1-spec)*(1-prevalence) + sens*prevalence)
+curve(f,0,1,xlab="Prevalenza",ylab="P(Malato|+)",main="Dipendenza dalla prevalenza")
+@
+
+
+
+\subsection{Approccio frequentista}
+Immaginando $10^6$ soggetti
+
+<<echo=FALSE>>=
+sens=0.97
+spec=0.95
+prevalence=0.001
+malattia=data.frame(c("","-",""),rep("-",3),c("","-", 1000000))
+colnames(malattia)=c(  "Test -", "Test +", "Totali")
+rownames(malattia)=c("Affetti", "Sani", "Totali")
+library(knitr) 
+
+malattia1=data.frame(c("-","-","-"),rep("-",3),c(10^6*prevalence,10^6*(1-prevalence), 1000000))
+colnames(malattia1)=c(  "Test -", "Test +", "Totali")
+rownames(malattia1)=c("Affetti", "Sani", "Totali")
+
+malattia2=data.frame(c(1000*(1-sens),"",""),c(1000*sens,"",""),c(10^6*prevalence,10^6*(1-prevalence),10^6))
+colnames(malattia2)=c(  "Test -", "Test +", "Totali")
+rownames(malattia2)=c("Affetti", "Sani", "Totali")
+
+malattia3=data.frame(c(1000*(1-sens),949050,""),c(1000*sens,49950,""),c(10^6*prevalence,10^6*(1-prevalence),10^6))
+colnames(malattia3)=c(  "Test -", "Test +", "Totali")
+rownames(malattia3)=c("Affetti", "Sani", "Totali")
+
+malattia4=data.frame(c(1000*(1-sens),949050,949080),c(1000*sens,49950,50920),c(10^6*prevalence,10^6*(1-prevalence),10^6))
+colnames(malattia4)=c(  "Test -", "Test +", "Totali")
+rownames(malattia4)=c("Affetti", "Sani", "Totali")
+
+
+malattia
+cat("Usando la prevalenza")
+malattia1
+cat("Usando la sensitivita'")
+malattia2
+cat("Usando la specificita'")
+malattia3
+cat("Calcolando i totali")
+malattia4
+@ 
+
+
+$$P (\textrm{affetti | test negativo}) = 30/949080=\Sexpr{ 30/949080}$$
+        
+        
+        
+        
+\subsubsection{Terminologia}
+        
+Il \emph{valore predittivo positivo} è  (D sta per disease)
+
+$$P (D \mid +)$$
+        
+Il \emph{valore predittivo negativo} è 
+
+$$P (D^c \mid  -)$$
+        
+probabilità di non avere la malattia assunto un esito   negativo del test. 
+
+La \emph{prevalenza} di una malattia è
+
+$$P(D)$$
+        
+Il \emph{rapporto di verosimiglianza diagnostico di un test positivo} $DLR_+$ è
+
+$$\frac{P (+\mid D)}{P(+\mid D^c)}=\frac{\textrm{sensitivita}}{1-\textrm{specificità}}$$
+        
+Il \emph{rapporto di  verosimiglianza diagnostico di un test negativo}   $DLR_-$  è
+
+$$ \frac{P (-\mid D)}{P(-\mid D^c)}=\frac{1-\textrm{sensitivita}}{\textrm{specificita}}$$
+        
+\subsection{HIV}
+        
+Uno studio sull'efficacia dei test HIV riporta un test con sensitività 
+$P(+|\textrm{malato})=99.7\%$ e specificità $P(-|\textrm{sano})= 98.5\%$ .
+Supponiamo  che la prevalenza dell'HIV sia dello 0.1\%. 
+Determinare la probabilità  $P(D|+)$, che un soggetto (positivo al test) abbia l'HIV.
+
+Calcolare inoltre 
+$P(D^c|-)$ e $P(D)$
+
+$$P (+) =  P (+| D) P (D) + P (+| S) P (S)  =0.997\times 0.001 + 0.015\times 0.999 = \Sexpr{ 0.997*0.001 + 0.015*0.999}$$
+
+$$P (D | +) = P (+| D) P (D)/P (+) = 0.997\times 0.001/0.015982 =\Sexpr{ 0.997*0.001/0.015982}$$
+
+\subsubsection{ Test di gravidanza}
+
+
+Un sito web \url{http://www.medicine.ox.ac.uk/bandolier/band64/b64-7.html} per test di gravidanza afferma:  
+
+
+"Quando i soggetti che hanno effettuato i test erano le donne che hanno raccolto e analizzato i loro campioni la sensitività  era del 75\%. La specificità era anche bassa, nel range dal 52\% al 75\%." 
+
+Consideriamo il valore inferiore della specificità.  Supponiamo che il risultato sia negativo e che il 30\%  delle donne che fanno il test  siano effettivamente pregnanti. Determinare la probabilità di essere incinte dato il risultato negativo del test?
+
+$$P (\textrm{Incinta }\mid -) = \dfrac{P (-\mid \textrm{Incinta}) P (\textrm{Incinta})}{P (-)} =$$
+$$\dfrac{ P (-\mid \textrm{Incinta}) P (\textrm{incinta})}{(P (-\mid \textrm{Incinta}) P (\textrm{Incinta}) + P (-\mid \textrm{Non Incinta}) P (\textrm{Non Incinta})}=$$
+
+$$0.250*0.3 /(0.250*0.3 + 0.52*0.7)=\Sexpr{ 0.250*0.3 /(0.250*0.3 + 0.52 *0.7)}$$
+
+
+
+\subsubsection{Fallacia del Pubblico Ministero}
+<<echo=FALSE>>=
+n=10
+vero=1/20
+@
+
+Supponiamo  che in una comunità di \Sexpr{ n} abitanti sia stato commesso un delitto. Il colpevole è un abitante della comunità (immediatamente isolata).
+
+
+Immaginiamo che da un test del sangue si trovi che un abitante individuato in modo casuale  (il sospettato) e il colpevole condividano una caratteristica comune allo \Sexpr{ vero*100}% della popolazione (match con probabilità  \Sexpr{ vero}). 
+
+Il pubblico ministero afferma che la probabilità di essere innocente del sospettato è dello \Sexpr{ vero*100}% (\Sexpr{ vero}).
+
+
+In realtà (indicando con G la colpevolezza e I l'innocenza)
+
+$$P (\textrm{G}\mid\textrm{test}) 
+= P (\textrm{test}\mid\textrm{ G})P (\textrm{G})/P (\textrm{test})$$
+        
+$$P (\textrm{test} \mid \textrm{G}) = 1\quad 
+P (\textrm{G}) = 1/\Sexpr{ n}$$
+        
+$$P (\textrm{test}) = P(\textrm{test}\mid  \textrm{G}) P(\textrm{G}) +
+P(\textrm{test}\mid\textrm{I})P(\textrm{I}) =
+1*1/\Sexpr{ n} + \Sexpr{ vero} *\Sexpr{ n-1}/\Sexpr{ n} = \Sexpr{ 1 / n  + vero *( n-1)/ n}$$
+        
+Quindi
+
+$$P (\textrm{G}\mid\textrm{test}) = \Sexpr{ 1/n}/\Sexpr{ 1*1/n + vero *(n-1)/n}=
+        \Sexpr{  1/n/(1*1/n + vero *(n-1)/n)}$$
+        
+       
+        
+        
+\subsubsection{Odds}
+        
+Si definiscono le <b>odds</b> di un evento
+
+$$\textrm{Odds}(E) = \frac{P(E)}{P(\textrm{not E})}= \frac{P(E)}{1 - P(E)}$$
+        
+Il logaritmo naturale delle odds è detto 
+<b>logit</b>. Il rapporto tra due odds è detto <b>odds ratio</b>.
+
+\subsubsection{Il  problema delle 3 porte (Monty Hall problem)}
+
+Ci sono 3 porte. Dietro a 2 delle 3 porte una capra. Dietro alla restante una Ferrari.  Il giocatore sceglie una porta (ma non la fa aprire). Il conduttore ne apre una delle altre 2 mostrando una capra  e chiede al giocatore se vuole cambiare la sua scelta originale.
+Conviene attenersi alla scelta originale o conviene cambiare? 
+
+Supponiamo per concretezza che che si sia deciso di aprire la porta 1  e che il presentatore apra la 3. Poniamo B="il presentatore apre la 3". Conviene scegliere al porta 2 (e cambiare la nostra scelta iniziale) o restare ostinati e scegliere la porta 1?
+
+
+$F_1$ è  l'evento "la Ferrari è dietro alla porta 1",  $F_2$ e $F_3$ sono definiti in modo uguale con le porte 2 e 3 rispettivamente.  Per esempio, abbiamo scelto la porta 1  
+
+
+<<>>=
+library(MASS)
+a1=fractions(1/3)
+a2=fractions(1/3)
+a3=fractions(1/3)
+a11=1/2
+a12=1/2
+a21=1
+a22=0
+a31=0
+a32=1
+p11=a1*a11
+p12=a1*a12
+p21=a2*a21
+p22=a2*a22
+p31=a3*a31
+p32=a3*a32
+node1<-"_"
+node2<-"F1"
+node3<-"F2"
+node4<-"F3"
+node5<-"RU1"
+node6<-"BU1"
+node7<-"RU2"
+node8<-"BU2"
+node9<-"RU3"
+node10<-"BU3"
+nodeNames<-c(node1,node2,node3,node4, node5,node6, node7,node8,node9,node10)
+
+rEG <- new("graphNEL", nodes=nodeNames, edgemode="directed")
+# Draw the "lines" or "branches" of the probability Tree
+rEG <- addEdge(nodeNames[1], nodeNames[2], rEG, 1)
+rEG <- addEdge(nodeNames[1], nodeNames[3], rEG, 1)
+rEG <- addEdge(nodeNames[1], nodeNames[4], rEG, 1)
+rEG <- addEdge(nodeNames[2], nodeNames[5], rEG, 1)
+rEG <- addEdge(nodeNames[2], nodeNames[6], rEG, 1)
+rEG <- addEdge(nodeNames[3], nodeNames[7], rEG, 10)
+rEG <- addEdge(nodeNames[3], nodeNames[8], rEG, 10)
+rEG <- addEdge(nodeNames[4], nodeNames[9], rEG, 10)
+rEG <- addEdge(nodeNames[4], nodeNames[10], rEG, 10)
+eAttrs <- list()
+nAttrs<-list()
+q<-edgeNames(rEG)
+nAttrs$fillcolor=rep("light green",10)
+names(nAttrs$fillcolor) <- nodeNames
+nAttrs$label=c("_","F1","F2","F3","B","non B","B","non B","B","non B")
+names(nAttrs$label) <- nodeNames
+# Add the probability values to the the branch lines
+
+eAttrs$label <- c(toString(a1),toString(a2),
+toString(a3), toString(a11),
+toString(a12), toString(a21), toString(a22), toString(a31), toString(a32))
+names(eAttrs$label) <- c(q[1],q[2], q[3], q[4], q[5], q[6],q[7],q[8],q[9])
+edgeAttrs<-eAttrs
+nodeAttrs<-nAttrs
+# Set the color, etc, of the tree
+attributes<-list(node=list(label="foo", fontsize="15"),
+edge=list(color="red"),graph=list(rankdir="TD"))
+@
+
+
+
+
+$$P(F_1)=P(F_2)=P(F_3) = 1/3$$
+$$P(B) = 1/2$$
+$$P(B \mid F_1) = 1/2$$
+$$P(B \mid  F_2) = 1$$
+$$P(B \mid  F_3) = 0$$
+
+Possiamo quindi calcolare
+
+$$P(F_1  \mid B) = \frac{P(B \mid F_1)P(F_1)}{P(B) }= \frac{1/2*1/3}{1/2} = 1/3$$
+$$P(F_2  \mid B) = \frac{P(B  \mid F_2)P(F_2)}{P(B)} =\frac{1*1/3}{1/2} = 2/3$$
+$$P(F_3  \mid B) = \frac{P(B \mid F_3)P(F_3)}{P(B)} = 0$$
+
+\subsubsection{Grafico}
+
+
+<<echo=FALSE>=
+plot(rEG, edgeAttrs=eAttrs, nodeAttrs=nAttrs,attrs=attributes)
+@
+
+
+\section{Recessione}
+
+Una agenzia economica ha creato un modello che predice recessione. Il modello predice recessione con probabilità del 80\% quando  la recessione sta effettivamente arrivando e con probabilità del 10\% quando la recessione non sta arrivando. La probabilità che la recessione sia in arrivo è del 20\%. Se il modello predice recessione quale è la probabilità che la recessione stia effettivamente arrivando?
+
+P(Prevista) = P(Prevista | Recessione)P(Recessione) + P(Prevista | No recessione) P(No Recessione) =$0.8\times 0.2 + 0.1\times 0.8$=\Sexpr{ 0.8*0.2 + 0.1*0.8}
+
+
+
+P(Recessione | Prevista) = P(Prevista | Recessione)*P(Recessione)/P(Prevista)=$0.8\times 0.2/0.24$=\Sexpr{ 0.8*0.2/0.24}
+
+
+
+\subsection{Esercizio} 
+
+Alice ha 2 monete nella borsa. La prima con 2 facce diverse e la seconda con 2 teste. Alice preleva a caso una moneta dalla borsa. La lancia e vede testa. Quale è la probabilità che abbia lanciato la moneta equa?
+
+
+ 
+ 
+\section{Simulazioni}
+
+
+Come possiamo simulare variabili aventi valore nell'alfabeto assegnato?
+In effetti qualunque comando di generazione su un computer non \`e perfettamente casuale; infatti la generazione avviene in effetti in modo pseudo-casuale e  secondo un meccanismo che dipende dallo stato interno del computer codificato in una variabile indicata con \texttt{.Random.seed}. Se il {\it seme} iniziale \`e lo stesso i numeri generati saranno uguali. Spesso conviene che i calcoli (ad esempio a fine didattico) siano riproducibili. Ad esempio mettendo in una variabile \texttt{seme} il valore corrente di \texttt{.Random.seed} e richiamandolo o generandolo all'occorrenza.  
+Un altro modo di procedere consiste nell'impostare il valore di 
+\texttt{.Random.seed} attraverso il comando 
+\texttt{set.seed}  la cui sintassi \`e 
+$\texttt{set.seed}(\varia{n})$ dove $n$ \`e un numero intero.
+ 
+<<echo=TRUE>>=
+set.seed(3)
+@
+ 
+A questo punto possiamo simulare le variabili richieste usando la struttura
+\begin{equation}\texttt{sample}(\varia{alfabeto},\varia{n})\end{equation}
+Se l'alfabeto consiste di tutte le lettere minuscole dell'alfabeto ordinario e ne vogliamo selezionare $n=8$  (in modo che ciascun uscita abbia la stessa probabilit\`a)  basta scrivere
+<<echo=TRUE>>=
+sample(letters,8)
+@
+Se invece l'alfabeto consiste delle basi del DNA
+<<echo=TRUE>>=
+alfabeto=c("A","C","G","T")
+sample(alfabeto,2)
+@
+Notiamo che
+<<echo=TRUE>>=
+ sample(alfabeto)
+@
+restituisce una permutazione dell'alfabeto, mentre chiedendo un campione di lunghezza superiore alla lunghezza dell'alfabeto otteniamo un messaggio di errore. Possiamo per\`o immaginare di re-immettere la lettera estratta nell'urna dopo ogni estrazione. In questo caso non c'\`e limite alla sequenza generata.
+Per esempio
+<<echo=TRUE>>=
+alfabeto=c("testa","croce")
+sample(alfabeto,5,replace=T)
+@
+ 
+
+Il precursore  del dado era chiamato \emph{astragalo} ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
+Gli  astragali sono dei piccoli ossicini di forma irregolare ed hanno 6 facce ma atterranno in  modo stabile solo su 4 di esse numerate 1, 3, 4 e 6  con probabilit\`a all'incirca 0.4 per il 3 e il 4  e di 0.1 per l'1 e il 6. In altre parole l'astragalo \`e descritto dalla tabella
+
+\begin{center}\begin{tabular}{|r|r |}
+\hline
+ valore&  probabilit\`a \\
+\hline
+1&0.1\\
+3 &0.4\\
+4& 0.4\\
+6&0.1\\
+ \hline
+\end{tabular}
+\end{center}
+Il tiro pi\`u gettonato all'epoca era l'uscita di 4 facce diverse nel lancio di 4 astragali e si chiamava {\it Venus}.
+Il lancio considerato peggiore sul singolo lancio era l'1 chiamato cane o avvoltoio.
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=6cm]{../grafici/astragals.jpeg}
+\caption{ Astragalo. }
+\label{fig:astragalo}
+\end{center}
+\end{figure}
+Per simulare un astragalo su un computer
+<<echo=TRUE>>=
+sample(c(1,3,4,6),4,replace=T,prob=c(0.1,0.4,0.4,0.1))
+@
+
+Torniamo ora ai classici dadi a 6 facce.
+Supponiamo di lanciare 100 volte un dado equo a 6 facce e di registrare in \texttt{x}
+le uscite rilevate
+<<echo=FALSE>>=
+options(width=62)
+<<echo=TRUE>>=
+set.seed(3)
+dadi100<-sample(1:6,100,replace=T)
+dadi100
+@
+Volendo invece simulare una combinazione da giocare al SuperEnalotto possiamo scrivere
+<<echo=FALSE>>=
+options(width=65)
+<<echo=TRUE>>=
+(x<-sample(1:90,6,replace=T))
+@
+I numeri usciti sono stati salvati  in una variabile \texttt{x}, per poter effettuare la ricerca di indicatori statistici.
+Il comando che consente di ordinare una lista o un vettore \`e \texttt{sort}, esso pu\`o essere usato in associazione al nome di una variabile o di una lista, ossia:
+\begin{equation}\texttt{sort}(\varia{variabile/lista})\end{equation}
+Volendo ordinare i numeri precedentemente ricavati scriveremo
+<<echo=TRUE>>=
+sort(x)
+@
+
+\end{document}
+
+\section{Statistica descrittiva: singola variabile}
+\subsection{Indicatori statistici}
+\begin{itemize}
+\item{}Media.\vskip0pt
+La varianza di un vettore di $n$ numeri
+\[x=(x_1,\ldots,\ldots,x_n)\] 
+\`e definita come
+\[ \bar{x}=\frac 1 n \sum_{i=1}^n x_i\]
+Si calcona in \rpr con la funzione \texttt{mean} scrivendo:
+$\texttt{mean}(\varia{variabile})$.
+Ad esempio, lavorando con la lunghezza del sepalo di 150 piante di iris
+<<echo=TRUE,cache=T>>=
+x=iris[,1]
+mean(x)
+@
+\item{}Varianza campionaria\vskip0pt
+La varianza di un vettore di $n$ numeri
+\[x=(x_1,\ldots,\ldots,x_n)\]
+\`e definita come
+\[  \mathrm{var}(x)=\dfrac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2\]
+Si ottiene con la funzione predefinita di espressione:
+\texttt{var}(\varia{variabile}).
+Possiamo calcolare la varianza come
+<<echo=TRUE>>=
+var(x)
+@
+\item{}Deviazione Standard campionaria.\vskip0pt
+Non \`e altro che la radice della varianza. Si ottiene con la funzione predefinita di espressione:
+$\texttt{sd}(\varia{variabile})$.
+Sempre basandosi sull'esempio precedente scriveremo
+<<echo=TRUE>>=
+sd(x)
+@
+
+\item{}Quantili. La notazione standard \`e semplicemente: \texttt{quantile}(\varia{variabile}) che determina i quartili e ci fornisce in uscita la statistica dei 5 numeri
+
+<<echo=TRUE>>=
+quantile(x)
+@
+Volendo ricavare i decili dovremo scrivere:
+$$\texttt{quantile}(\varia{variabile},\texttt{seq(0,1,by=0.1)})$$
+in quanto vogliamo dividere l'intervallo $[0,1]$ a passo $0.1$
+
+Nell'esempio:
+<<echo=TRUE>>=
+quantile(x,seq(0,1,by=0.1))
+@
+Si noti che \texttt{quantile} ammette 9 varianti specificabili con l'opzione $\texttt{type}=n$ dove $n$ va da 1 a 9.
+Per esempio
+<<echo=TRUE>>=
+quantile(x,type=2)
+@
+Sui dati in esame le 9 varianti coincidono. La convenzione da noi adottata corrisponde al numero 2
+\end{itemize}
+Per quanto riguarda gli indicatori statistici nel caso di dati ripetuti basta notare che se la lista $x$ contiene i valori e la lista $f$ le frequenze assolute il comando
+$$\varia{rep}(x,f)$$ costruisce un'unica lista dei dati inclusiva delle ripetizioni.
+Per esempio
+
+<<echo=TRUE>>=
+x=1:6
+f=c(9,7,9,7,8,10)
+(dati=rep(x,f))
+@
+Ovviamente senza bisogno di visualizzare \texttt{dati} possiamo calcolarne tutti gli indicatori statistici.
+Il comando
+<<echo=TRUE>>=
+cumsum(f)
+@
+restituisce le frequenze cumulate, dalle quali si possono ricavare facilmente la mediana
+i quantili.
+
+\subsection{Raggruppamenti in classi}
+<<echo=FALSE,eval=FALSE>>=
+mese=month(as.POSIXlt(date(),format="%a %b %d %H:%M:%S %Y"))
+mesit= c("Dicembre" ,"Gennaio" ,"Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settemnbre","Ottobre","Novembre")
+mesi=1:12
+names(mesi)=mesit
+m=names(mesi[mese])
+anno=year(as.POSIXlt(date(),format="%a %b %d %H:%M:%S %Y"))
+if(mese==1) anno=anno-1
+@
+<<echo=FALSE,eval=TRUE>>=
+m="Gennaio"
+anno=2016
+stringa=paste("Milano/", anno ,"/",m,"?format=csv",sep="")
+@
+Consideriamo la rilevazione della temperatura media giornaliera di Milano nel mese di \Sexpr{m} \Sexpr{anno}.
+Scegliamo il mese
+<<echo=FALSE>>=
+cat(paste("> stringa=\"",stringa,"\"",sep=""))
+<<echo=TRUE,eval=FALSE>>=
+sito="http://www.ilmeteo.it/portale/archivio-meteo/"
+indirizzo=paste(sito,stringa,sep="")
+meteo=read.table(indirizzo,sep=";",header=T)[,-1]
+<<echo=FALSE,eval=FALSE>>=
+write.table(meteo,file="../filedati/meteo.txt",sep=";")
+<<echo=FALSE,eval=TRUE>>=
+meteo=read.table("../filedati/meteo.txt",sep=";",header=T)
+<<tidy=TRUE>>=
+options(width=60)
+str(meteo)
+@
+A questo punto selezioniamo la colonna della temperatura media 
+<<echo=TRUE>>=
+meteo[,3]->Milano;
+Milano
+quantile(Milano)
+@
+L'ultimo comando in particolare ci fornisce minimo e massimo dei dati.
+Possiamo esaminare la serie temporale dei dati con i comandi
+<<echo=TRUE,fig.keep='none'>>=
+plot(Milano,type="l",xlab=paste(m,anno, "a milano"),ylab="temperatura media")
+@
+ottenendo la figura~\ref{fig:datiist}
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+plot(Milano,type="l",xlab=paste(m,anno, "a milano"),ylab="temperatura media")
+@
+\caption{ Andamento della temperatura a \Sexpr{paste(m,anno)}  a Milano. }
+\label{fig:datiist}
+\end{center}
+\end{figure}
+
+Raggruppiamo ora i dati in classi comprese  tra due estremi che comprendano certamente tutti i dati, per esempio \Sexpr{2*round(min(Milano)/2-0.1)} e \Sexpr{2*round(max(Milano)/2+0.1)}, decidendo di applicare un passo di 2 e vedere come si distribuiscono. Il comando \texttt{cut} associa a ciascun dato la classe di appartenenza selezionata in base ai punti di taglio.
+
+<<echo=TRUE>>=
+tagli=c(-2,0,2,4,6,10)
+cut(Milano,breaks=tagli)
+@
+
+Il comando \texttt{table} conta i dati di ciascuna classe
+
+<<echo=TRUE>>=
+table(cut(Milano,breaks=tagli))
+@
+Si noti che la suddivisione in classi prevede intervalli aperti a sinistra e chiusi a destra.
+Per suddividere in modo che gli intervalli siano chiusi a sinistra e aperti a destra si specifica il parametro \texttt{right=FALSE}.
+Possiamo anche usare il comando \texttt{seq} per specificare i tagli.
+ \begin{eqnarray*}
+\texttt{table(cut}( \varia{variabile},\texttt{breaks=seq}(\varia{estremo inf},\\
+\varia{estremo sup},\texttt{by}=\varia{passo}),\texttt{right=TRUE}))
+\end{eqnarray*}
+o in modo  pi\`u generale
+\begin{eqnarray*}
+&\texttt{table(cut}(\varia{ variabile},\\
+&\texttt{breaks=c}(\varia{estremo\; inferiore}, \ldots,\varia{estremo superiore}))
+\end{eqnarray*}
+estremamente utile in quanto consente di raggruppare i dati in classi non necessariamente di ugual ampiezza.
+<<echo=TRUE>>=
+table(cut(Milano,breaks=c(-3,1,3,4,5,6,8,10)))
+@
+Volendo raggruppare in classi i dati delle precedenti uscite del dado possiamo scrivere
+<<echo=TRUE>>=
+table(cut(dadi100,breaks=0:6))
+@
+Se scegliamo di chiudere a sinistra gli intervalli dobbiamo però includere il 7 altrimenti 
+il valore 6 non risutlerebbe incluso.
+<<echo=TRUE>>=
+table(cut(dadi100,breaks= 1:7,right=FALSE))
+@
+
+\subsection{Areogrammi}
+Il comando generico per generare un istogramma \`e:
+\begin{equation*}
+\texttt{hist}(\varia{variabile})\index{\texttt{hist}}
+\end{equation*}
+che segue per\`o la struttura del comando \texttt{cut}. L'ampiezza di ciascuna classe salvo diversamente indicato \`e costante e decisa da \textsf{R}.
+\`E  possibile variare tale condizione definendo una lista con i punti di taglio ({\it cutoff}) delle classi volute:
+\begin{equation} \texttt{hist}(\varia{variabile},\texttt{c}(\varia{valore}_1, \varia{valore}_2, \ldots))
+\end{equation}
+Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del dado, il comando
+<<echo=TRUE,fig.keep='none'>>=
+par(mfrow=c(1,2))
+hist(dadi100,breaks=seq(0.5,6.5,1),col="red")
+hist(dadi100,freq=FALSE,breaks=seq(0.5,6.5,1),col="blue")
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+par(mfrow=c(1,2))
+hist(dadi100,breaks=seq(0.5,6.5,1),col="red")
+hist(dadi100,freq=FALSE,breaks=seq(0.5,6.5,1),col="blue")
+@
+\caption{Diagramma a colonne e areogramma per il lancio di un dado.}
+\label{fig:datidado}
+\end{center}
+\end{figure}
+genera l'istogramma (in rosso, a sinistra Figura~\ref{fig:datiist}) con le frequenze assolute delle classi in ordinata. La sequenza dei punti di taglio \`e stata scelta in modo che i numeri interi da 1 a 6 siano al centro delle classi corrispondenti. Se invece volessimo creare un areogramma  (ossia avere un tracciato per cui le aree siano pari alle frequenze relative) a partire dalle stesse uscite dovremo imporre il parametro \texttt{freq=FALSE} otterremo il pannello a destra (in blu) della figura~(\ref{fig:datiist}). Avendo scelto classi di ampiezza costante i 2 grafici differiscono semplicemente per un cambio di scala sull'asse $y$.
+
+In modo simile possiamo tracciare un areogramma  dei dati nella variabile \texttt{milano}
+<<echo=TRUE,eval=FALSE>>=
+par(mfrow=c(1,2))
+hist(Milano, col="green",freq=FALSE,right=FALSE,
+main="Cutoff automatici")
+@
+lasciando \textsf{R} libero di scegliere i punti di taglio (pannelli a sinistra della figura \ref{fig:datiistmilano}) o scegliendoli a nostra volta (pannelli a destra della stessa figura  \ref{fig:datiistmilano})
+<<echo=FALSE>>=
+options(width=55)
+<<echo=TRUE>>=
+hist(Milano,col="red",freq=FALSE,
+breaks=unique(as.vector(quantile(Milano,seq(0,1,by=1/6)))),
+main="Cutoff personalizzati")
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+par(mfrow=c(1,2))
+hist(Milano, col="green",freq=FALSE,right=FALSE,main="Cutoff automatici")
+hist(Milano,col="red",freq=FALSE,breaks=unique(as.vector(quantile(Milano,seq(0,1,by=1/6)))),
+right=FALSE,main="Cutoff personalizzati")
+@
+\caption{ Areogramma dei dati della temperatura. Scelta automatica dei punti di taglio.}
+\label{fig:datiistmilano}
+\end{center}
+\end{figure}
+Si noti la stabilit\`a degli areogrammi rispetto ai cambi nella suddivisione.
+\subsection{Generazione di boxplot}
+
+Il \texttt{boxplot}  \`e una rappresentazione grafica immediata della statistica dei 5 numeri e simultaneamente ci  segnala eventuali punti discordanti o anomali, {\it outlier}.
+Il comando generico \`e: \begin{equation}\texttt{boxplot}(\varia{variabile})\end{equation}
+prendendo il vettore $x$ contenente i risultati di 100 lanci
+otteniamo la figura~\ref{fig:boxplotdado}
+\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE,fig.height=4,fig.width=4>>=
+boxplot(dadi100)
+@
+\caption{Boxplot dei risultati del lancio di un dado}
+\label{fig:boxplotdado}
+\end{center}
+\end{figure}
+da cui si evince che il valore massimo dei dati \`e 6, il minimo \`e 1 e non ci sono punti anomali, per cui non vi sono dati anomali, altrimenti evidenziati da un pallino. Si legge inoltre il valore di mediana (4) primo quartile (2) e terzo quartile (5).
+
+\subsection{Creazione di grafici a torta}
+
+Il comando \texttt{pie} consente, partendo da una tabella, di tracciare il diagramma a torta per una variabile nominale raggruppata in classi. Il comando \`e
+
+\begin{equation*}\texttt{pie(table}(\varia{variabile} ))
+\end{equation*}
+ad esempio (facendo riferimento ai precedenti dati):
+<<echo=TRUE,fig.keep='none'>>=
+pie(table(dadi100))
+@
+fornisce in uscita  la Figura~\ref{fig:pie}
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+pie(table(dadi100))
+@
+\caption{Diagramma a torta per il lancio di un dado equo.}
+\label{fig:pie}
+\end{center}
+\end{figure}
+\begin{shaded}{Costruire una matrice contenente le coordinate di 50 punti nel rettangolo $[0,4]\times [0,2]$ in due dimensioni (generate utilizzando il generatore di numeri pseudocasuali). Produrre un grafico con due pannelli, dove il primo pannello \`e uno scatter-plot}
+\end{shaded}
+\section{Variabili doppie e rette di regressione}
+Supponiamo di misurare la concentrazione di acido lattico muscolare durante uno sforzo di 10 minuti,
+<<echo=TRUE>>=
+x<-tempo<-c(1,2,3,4,5,6,7,8,9,10)
+y<-concentrazione<-c(0.3,0.65,0.7,0.8,0.95,1.05,1.3,1.7,1.9,
+2.5)
+@
+Per analizzare questi dati conviene preliminarmente tracciarne un diagramma a dispersione.
+\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE>>=
+plot(x,y)
+@
+\caption{Diagramma a dispersione tempo/concentrazione.}
+\label{fig:scatte}
+\end{center}
+\end{figure}
+Possiamo inoltre determinare il coefficiente di correlazione lineare
+<<echo=TRUE>>=
+cor(x,y)
+@
+Per definire un modello di relazione lineare occorre usare il comando \texttt{lm} (\varia{linear model}).
+Nella sua generica forma il comando \`e espresso come\footnote{ Per digitare la tilde  \mytilde\;  su Mac premere ALT 5 su PC invece il tasto Alt Gr (attivazione del codice ASCII) e sul tastierino numerico digitare il numero 126. Lavorando su un portatile il tastierino numerico \`e spesso incorporato nella tastiera con colorazione blu dei tasti.}
+$$\texttt{lm}(\varia{y} \sim  \varia{x})$$
+Otteniamo i valori di pendenza e intercetta.
+
+Possiamo tracciare la retta di regressione con il comando \texttt{abline}.
+<<echo=TRUE,fig.keep='none'>>=
+plot(x,y,pch=19,col="red")
+abline(lm(y~x),col="blue")
+@
+Per determinare  la retta di regressione sulle $y$ dobbiamo invertire $x$ e $y$.
+<<echo=TRUE,fig.keep='none'>>=
+(modellox=lm(x~y))
+coeff=modellox$coefficients
+(a=1/coeff[2])
+(b=-coeff[1]/coeff[2])
+abline(b,a,col="green")
+@
+In tal modo otteniamo il grafico~\ref{fig:duerettex}.
+\begin{center}
+\begin{figure}[htbp]
+<<echo=FALSE>>=
+plot(x,y,col="red")
+abline(lm(y~x),col="blue")
+abline(b,a,col="green")
+@
+\caption{Rette di regressione. In blu $R_x$, in verde $R_y$.}
+\label{fig:duerettex}
+\end{figure}
+\end{center}
+
+\subsubsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
+Da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui i ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
+<<echo=TRUE>>=
+age=18:29
+height=c(76.1,77,78.1,78.2,78.8,79.7,79.9,81.1,81.2,81.8,82.8,83.5)
+@
+Possiamo quindi costruire il \texttt{data.frame}
+<<echo=TRUE>>=
+village=data.frame(age=age,height=height)
+@
+Ora diamo una prima occhiata ai dati:
+ %code chunk
+\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE>>=
+plot(age,height)
+@
+\caption{Crescita dei bambini di Kalama}
+\label{kalama}
+\end{center}
+\end{figure}
+L'andamento \`e lineare. Determiniamo la retta di regressione
+per predire l'altezza media nota l'et\`a in mesi.
+%code chunk
+<<echo=TRUE>>=
+(modello=lm(height~age))
+@
+La retta di regressione cercata ha formula:
+$$h(\texttt{age})=\Sexpr{1/100*round(100*modello$coefficients[1])}+ \Sexpr{1/100*round(100*modello$coefficients[2])}\, \texttt{age}$$
+
+Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l'altezza a 27.5 mesi di et\`a:
+oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione
+\texttt{predict}:
+%codechunk
+<<echo=TRUE>>=
+predict(modello,data.frame(age=27.5))
+@
+fornendo in input i parametri della retta ed un preciso valore della variabile indipendente (richiamata col proprio nome).
+Molti comandi di \textsf{R} sono in grado di manipolare \emph{dataframe}  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
+Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt{village} direttamente al comando:
+<<echo=TRUE>>=
+modello=lm(height~age,data=village)
+modello
+@
+con la formula \texttt{lm(y \mytilde x,data=dataset)}.
+%Inoltre possiamo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
+%<<fig=TRUE,echo=FALSE>>=
+%oldpar<-par(mfrow=c(2,2))
+%par(ask=FALSE)
+%plot(lm(height~age))
+%oldpar
+%@
+\section{Modelli potenza}
+Consideriamo ora il seguente \emph{dataset} di mammiferi  in cui le 2 variabili rappresentano  le dimensioni del corpo e del cervello.
+<<echo=TRUE>>=
+library(MASS)
+mammals
+@
+Per prima cosa tracciamo il grafico dei punti  in scala non trasformata e, visto la compresenza di dati molto prossimi all'origine e di dati molto distanti in scala logaritmica (sia le $x$ che le $y$ vengono trasformate prendendone i logaritmi)
+<<echo=TRUE,fig.keep='none'>>=
+par(mfrow=c(1,2))
+plot(mammals)
+plot(mammals,log="xy")
+@
+come in Figura~\ref{fig:duemammals}.\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+par(mfrow=c(1,2))
+plot(mammals)
+plot(mammals,log="xy")
+@
+\caption{Diagramma a dispersione massa corporea/massa del cervello in scala normale ed in scala logaritmica. }
+\label{fig:duemammals}
+\end{center}
+\end{figure}
+Visti i  risultati ottenuti usando la scala logaritmica tracciamo anche la corrispondente retta di regressione
+<<echo=TRUE,fig.keep='none'>>=
+plot(log(mammals$brain)~log(mammals$body),col="BLUE",pch=19,type="p")
+abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3);
+uomo=which(rownames(mammals)=="Human")
+text(log(mammals[uomo ,1]),log(mammals[uomo ,2]),rownames(mammals)[uomo])
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+plot(log(mammals$brain)~log(mammals$body),col="BLUE",pch=19,type="p")
+abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3 );
+uomo=which(rownames(mammals)=="Human")
+text( log(mammals[uomo ,1]),log(mammals[uomo ,2]),rownames(mammals)[uomo])
+@
+\caption{ Retta di regressione. Dimensione del corpo e del cervello. Si noti la posizione dell'uomo.}
+\label{duerette}
+\end{center}
+\end{figure}
+Si noti il comando \texttt{text(\varia{x},\varia{y}, \varia{testo})}
+dove    $\varia{x}$ e $\varia{y}$  e $\varia{testo}$ sono vettori di arbitraria lunghezza contenenti ascisse, ordinate e testo da inserire.
+\section{Distribuzioni in \textsf{R}}
+I nomi delle principali distribuzioni in \textsf{R} sono\vskip10pt
+\begin{tabular}{|r|c |}
+\hline
+\texttt{norm}&normale\\
+\texttt{t}  &Student\\
+\texttt{chisq}& chi quadro\\
+\texttt{f}&Fisher\\
+\texttt{binom }&binomiale\\
+\hline
+\end{tabular}\vskip10pt
+A questi nomi possiamo aggiungere diversi prefissi\vskip10pt
+\begin{tabular}{|r|c |}
+\hline
+\texttt{d}&densit\`a\\
+\texttt{p}  &primitiva\\
+\texttt{q}& quantile\\
+\texttt{r}&random\\
+  \hline
+\end{tabular}
+\vskip10pt
+per caratterizzare diversi aspetti.
+\begin{comment}
+<<echo=FALSE, results='hide'>>=
+library(exams)
+## DATA GENERATION
+r <- sample(1:10)
+if(runif(1) < 1/3) {
+  mx <- my <- 0
+  sx <- sy <- 1
+} else {
+  mx <- sample(10 * -5:5, 1)
+  my <- sample(20 * 0:5, 1)
+  sx <- sample(c(1, 10, 20), 1)
+  sy <- sample(c(1, 10, 20), 1)
+}
+
+b <- r * sy/sx
+a <- my - b*mx
+x <- rnorm(200, mx, sx)
+y <- b * x + rnorm(200, a, sy * sqrt(1- r^2))
+
+## QUESTION/ANSWER GENERATION
+questions <- character(5)
+solutions <- logical(5)
+explanations <- character(5)
+
+if (runif(1) < 0.5) {
+  questions[1] <- "The scatterplot is standardized."
+  solutions[1] <- mx == 0 & my == 0 & sx == 1 & sy == 1
+  explanations[1] <- if (solutions[1]) "$X$ and $Y$ have both mean $0$ and variance $1$." else
+  "The scatterplot is not standardized, because $X$ and $Y$ do not both have mean $0$ and variance $1$."
+} else {
+  questions[1] <- "La pendenza della retta di regressione ? circa $1$."
+  solutions[1] <- abs(b - 1) < 0.1
+  explanations[1] <- paste("The slope of the regression line is given by $r \\\\cdot s_y/s_x$ and hence",
+                           ifelse(abs(b - 1) < 0.1, "", "not"), "about equal to $1$.")
+}
+
+if (runif(1) < 0.5) {
+  questions[2] <- "The absolute value of the correlation coefficient is at least $0.8$."
+  solutions[2] <- abs(r) >= 0.8
+} else {
+  questions[2] <- "The absolute value of the correlation coefficient is at most $0.8$."
+  solutions[2] <- abs(r) <= 0.8
+}
+explanations[2] <- if(abs(r) >= 0.9) {
+  paste("A strong association between the variables is given in the scatterplot.",
+        "Hence the absolute value of the correlation coefficient is close to $1$",
+        "and therefore larger than $0.8$.")
+  } else if (abs(r) == 0) {
+    paste("No association between the variables is observed in the scatterplot.",
+          "This implies a correlation coefficient close to $0$.")
+  } else paste("Only a slightly positive association between the variables is observable in the scatterplot.",
+               "This implies a correlation coefficient with an absolute value smaller than $0.8$.")
+
+if (runif(1) < 0.5) {
+  questions[3] <- "The standard deviation of $X$ is at least $6$."
+  solutions[3] <- sx >= 6
+  explanations[3] <- paste("The standard deviation of $X$ is about equal to $", sx, "$ and is therefore",
+                           ifelse(sx < 6, "smaller", "larger"), "than $6$.")
+} else {
+  questions[3] <- "The standard deviation of $Y$ is at least $6$."
+  solutions[3] <- sy >= 6
+  explanations[3] <- paste("The standard deviation of $Y$ is about equal to $", sy, "$ and is therefore",
+                           ifelse(sy < 6, "smaller", "larger"), "than $6$.")
+}
+
+if (runif(1) < 0.5) {
+  questions[4] <- "The mean of $X$ is at most $5$."
+  solutions[4] <- mx <= 5
+  explanations[4] <- paste("The mean of $X$ is about equal to $", mx,
+                           "$ and hence is", ifelse(mx < 5, "smaller", "larger"), "than $5$.")
+} else {
+  questions[4] <- "The mean of $Y$ is at least $30$."
+  solutions[4] <- my >= 30
+  explanations[4] <- paste("The mean of $Y$ is about equal to $", my,
+                           "$ and hence is", ifelse(my < 30, "smaller", "larger"), "than $30$.")
+}
+
+xh <- round(runif(1, -1, 1)*sx + mx, 1)
+yhr <- round(a + b*xh, 1)
+alpha <- if (abs(r) > 0 & abs(mx - xh) > 0) sign(mx - xh) * sign(r) else 1
+yhf <- round(yhr + 2 * sy * alpha, 1)
+yh <- sample(c(yhr, yhf), 1)
+questions[5] <- paste("For $X = ", as.character(xh), "$, $Y$ can be expected to be about ",
+                      as.character(yh), ".", collapse="")
+solutions[5] <- abs(yh - yhr) < 0.01 * sy
+explanations[5] <- paste("The regression line at $X=", xh,
+                         "$ implies a value of about $Y = ", yhr, "$.", sep="")
+
+## permute order of solutions/questions
+o <- sample(1:5)
+questions <- questions[o]
+solutions <- solutions[o]
+explanations <- explanations[o]
+@
+\begin{itemize}
+\begin{question}
+  Figure~\ref{fig:scatterplot} shows a scatterplot. Which of the
+  following statements are correct?
+
+
+\begin{figure}[htb!]
+\begin{center}
+<<fig.height=5, fig.width=6, echo=FALSE, results='hide'>>=
+plot(x, y)
+@
+\caption{ Scatterplot}\label{fig:scatterplot}
+\end{center}
+\end{figure}
+
+\begin{answerlist}
+  \item \Sexpr{questions[1]}
+  \item \Sexpr{questions[2]}
+  \item \Sexpr{questions[3]}
+  \item \Sexpr{questions[4]}
+  \item \Sexpr{questions[5]}
+\end{answerlist}
+\end{question}
+
+%% SOLUTIONS
+\begin{solution}
+\begin{answerlist}
+  \item \Sexpr{mchoice2text(solutions[1])}: \Sexpr{explanations[1]}
+  \item \Sexpr{mchoice2text(solutions[2])}: \Sexpr{explanations[2]}
+  \item \Sexpr{mchoice2text(solutions[3])}: \Sexpr{explanations[3]}
+  \item \Sexpr{mchoice2text(solutions[4])}: \Sexpr{explanations[4]}
+  \item \Sexpr{mchoice2text(solutions[5])}: \Sexpr{explanations[5]}
+\end{answerlist}
+\end{solution}
+\end{itemize}
+%% META-INFORMATION
+%% \extype{mchoice}
+%% \exsolution{\Sexpr{mchoice2string(solutions)}}
+%% \exname{Multiple choice}
+
+\end{comment}
+
+ \subsection{Distribuzione normale}
+<<echo=FALSE>>=
+shadearea<-function(a,b,mu=0,sigma=1) 
+        {
+        curve(dnorm(x,mu,sigma),lwd=4,main="normale standard",xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n")
+        axis(1,at=c(a,b),labels=paste(letters[1:2],c(a,b),sep="="))
+        x1 <- a  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x,mu,sigma), 0), col="light green")
+text(a/2+b/2,dnorm(a/2+b/2,mu,sigma)/3,bquote(integral(dnorm(x,.(mu),.(sigma))*dx, .(a),.(b)) ~"="~ .(signif(pnorm(b,mu,sigma)-pnorm(a,mu,sigma),4))) ,cex=1)
+abline(v=0)
+abline(h=0)
+     } 
+@
+
+Spesso  i dati sperimentali presentano una distribuzione a  campana del tipo che segue
+
+<<echo=FALSE>>=
+a=rnorm(100000,100,3)
+hist(a,freq=F,breaks=seq(min(a)-0.3,max(a)+0.3,0.3),col="light green",main="Areogramma",xlab="x",ylab="densità")
+#lines(density(a),add=T)
+@
+
+Sovrapponiamo ora all'areogramma una curva che sembra approssimare molto bene l'areogramma. 
+
+
+<<echo=FALSE>>=
+hist(a,freq=F,breaks=seq(min(a)-0.3,max(a)+0.3,0.3),col="light green",main="Areogramma e curva normale",xlab="x",ylab="densità")
+curve(dnorm(x,100,3),add=T,col="red",lwd=4)
+@
+
+La curva sovraimpressa al grafico si chiama **gaussiana** o curva a campana o *funzione di densità normale*. Tale curva è una densità di probabilità e descrive un tipo particolare di variabili aleatorie continue.
+
+L'espressione analitica  dipende da due parametri $\mu$ e $\sigma$,  che coincidono con la media e la deviazione standard della variabile corrispondente:
+
+
+$$\textrm{dnorm}(x,\mu,\sigma)=\frac{1}{\sigma\sqrt{2 \pi} } \textrm{e}^{-\frac{(x - \mu)^2}{2 \sigma^2}}$$
+
+Abbiamo scritto qui direttamente l'espressione $\textrm{dnorm}(x,\mu,\sigma)$ senza preoccuparci di verificare che
+
+Verifica 1:  l'integrale è 1 [ossia la funzione è una densità di probabilità]
+
+Verifica 2: il valore atteso è $\mu$
+ 
+Verifica 3: la varianza è $\sigma^2$
+
+La conoscenza di $\mu$ e $\sigma$ caratterizza completamente una variabile gaussiana.  La probabilità che una variabile gaussiana assuma il valore nell'intervallo $[a,b]$ è uguale all'area sottesa alla corrispondente curva normale nell'intervallo $[a,b]$.
+
+
+Riportiamo in figura  il grafico di alcune gaussiane riportando i valori dei parametri  $\mu$ e $\sigma$
+
+<<echo=FALSE>>=
+mu=c(0,0,5)
+sigma=c(2,4,3)
+i=1
+curve(dnorm(x,mu[i],sigma[i]),xlim=c(-10,10),col=4,ylab="densit\u{E0}")
+for (i in 2:3)
+curve(dnorm(x,mu[i],sigma[i]),xlim=c(-10,10),col=i,add=T)
+#xlab1= bquote(mu~"="    ~ .(mu[1]) ~  sigma ~"="~.(sigma[1]))
+xlab2= bquote(mu~"="    ~ .(mu[2]) *"," ~  sigma ~"="~.(sigma[2]))
+xlab3= bquote(mu~"="    ~ .(mu[3]) *"," ~  sigma ~"="~.(sigma[3]))
+legend("topleft",legend=c(expression(paste(mu," = 0",",",sigma," = 2")),xlab2,xlab3),col=c(4,2,3),lty=1,lwd=5)
+
+@
+
+\subsubsection{La funzione \texttt{dnorm}}
+
+Come appena visto \textsf{R }indica con il nome \texttt{dnorm}, la densit\`a normale o gaussiana. Essa accetta come parametri sia la media $\mu$ che la deviazione standard $\sigma$ come \`e possibile verificare con il comando \texttt{formals} che ci fornisce gli argomenti di una funzione e gli eventuali valori preassegnati.
+<<echo=TRUE>>=
+formals(dnorm)
+@
+Se i parametri sono omessi \texttt{dnorm} rappresenta la densit\`a normale standard con $\mu=0$ e $\sigma=1$.
+Il grafico~(\ref{fig:normalesta}) della gaussiana
+ tra due estremi, ad esempio -2.5 e 2.5 si ottiene con il solito comando
+<<echo=TRUE,fig.keep='none'>>=
+curve(dnorm,-2.5,2.5)
+@
+
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+curve(dnorm,-2.5,2.5)
+@
+\caption{ Grafico della normale standard nell'intervallo $[-2.5,2.5]$. }
+\label{fig:normalesta}
+\end{center}
+\end{figure}
+Per  visualizzare una gaussiana non standard, ad esempio una gaussiana con media $\mu=1$ e  deviazione standard $\sigma=1.5$, tra -3 e 3. scriveremo invece
+<<echo=TRUE>>=
+curve(dnorm(x,mean=1,sd=1.5),-3,3)
+@
+\subsection{La funzione \texttt{pnorm}}
+La funzione \texttt{pnorm}(\varia{x})   \`e la antiderivata di \texttt{dnorm} calcolata come segue
+\begin{equation*}\texttt{pnorm}(\varia{x}) =\int_{-\infty}^x  \texttt{dnorm}(s)ds
+\end{equation*}
+Ovviamente
+$$\int_a^b \texttt{dnorm}(x)dx=\texttt{pnorm}(b)-\texttt{pnorm}(a)$$
+e per avere l'area sottesa tra $3$ e $5$  basta scrivere:
+<<echo=TRUE>>=
+pnorm(5)-pnorm(3)
+@
+
+Per ottenere il valore dell'area tra 0 e $x$ bisogna allora sottrarre \texttt{pnorm}(0)=0.5 all'area fornita dalla funzione.
+Per cui possiamo scrivere:
+<<echo=TRUE>>=
+pnorm(1)-0.5
+@
+
+
+\subsection{La funzione \texttt{qnorm} e la tabella della densit\`a di Gauss}
+<<echo=FALSE>>=
+s2<-function(a,b) 
+        {sigma=1;mu=0
+        curve(dnorm(x),lwd=4,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n",ylab="")
+        axis(1,at=c(a,b),labels=c("-x",expression("x")))
+        x1 <- a  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+text(-0,0.15,expression("A")  ,cex=1)
+}
+s3<-function(a,b) 
+        {sigma=1;mu=0
+        curve(dnorm(x,mu,sigma),lwd=4,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n",ylab="")
+        axis(1,at=c(a,b),labels=c("-x","x"))
+        x1 <- 0  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+        x1 <- -4  
+        x2 <- 0
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light blue")
+text(-1,0.15,bquote("1/2")  ,cex=1)
+text(0.5,0.15,expression("A"/2)  ,cex=1)
+}
+@
+
+La funzione \texttt{qnorm} rappresenta la funzione inversa di \texttt{pnorm}.
+\[\texttt{qnorm}(A)=x\Leftrightarrow A=\int_{-\infty}^x \texttt{dnorm}(s)ds\] 
+come illustrato nella figura~\ref{fig:fig2code}.
+\begin{center}
+\begin{figure}[H]
+<<echo=FALSE>>=
+s4<-function(a,b) 
+        {
+        sigma=1;mu=0
+        curve(dnorm(x,mu,sigma),lwd=4,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n")
+        axis(1,at=c(2*a,b),labels=c("-x","x"))
+        x1 <- 0  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+        x1 <- -4  
+        x2 <- 0
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+ 
+text(0.4,0.15,expression("A")  ,cex=1) 
+}
+par(mfrow=c(1,1))
+s4(-2,2)
+@
+\caption{$x=\texttt{qnorm}(A)$}
+\label{fig:fig2code}
+\end{figure}
+\end{center}
+Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di area $A$   fornisca l'ascissa $x=U(A)$ come in figura~\ref{fig:fig12code} in modo che l'area tra - $x$ e $x$ sia esattamente pari ad $A$.  
+
+\begin{figure}[H]
+<<echo=FALSE>>=
+par(mfrow=c(1,2))
+s2(-1.96,1.96)
+s3(-4,1.96)
+@
+\caption{$x=U(A)=\texttt{qnorm}(1/2+A/2)$}
+\label{fig:fig12code}
+\end{figure}
+Dalla stessa figura  si evince che la funzione che riproduce la tabella è
+<<>>=
+U <-function (A) qnorm (1/2 + A/2)
+@
+Questa funzione fornisce fissato il livello di fiducia l'ascissa $x$  tale che l'intervallo simmetrico $[-x,x]$ racchiuda un'area pari al lvello di fiducia. Per esempio
+<<echo=TRUE>>=
+U(0.95)
+@
+\begin{figure}[H]
+\begin{center}
+<<echo=FALSE>>=
+f=dnorm
+
+xmin<-1;xmax<-3; npunti<-200
+vals<-seq(xmin,xmax,length=npunti)
+x<-c(xmin,vals,xmax,xmin)
+y<-c(0,f(vals),0,0);
+<<echo=FALSE>>=
+curve(f,-3,3,axes=FALSE,ylab="",xlab="",ylim=c(0,0.5))
+axis(1,c(-3,-1,0,1,3),c("",expression(-u[1-epsilon]),0,expression(u[1-epsilon]),""))
+points(x,y,pch=20,col="red",cex=0.2)
+polygon(x,y,density=20,angle=45,col="RED")
+ x<--x
+ y<-c(0,dnorm(-vals),0,0)
+polygon(x,y,density=20,angle=45,col="RED")
+abline(h=min(y))
+text(0,0.45,expression("code della gaussiana"))
+ text(-1.6,0.03,expression(epsilon/2))
+ text(1.6,0.03,expression(epsilon/2))
+ lines(c(0,0),c(0,dnorm(0)))
+@
+\caption{Code della distribuzione normale}
+\label{fig:normaletratto}
+\end{center}
+\end{figure}
+
+ \subsection{La funzione \texttt{rnorm}}
+\`E possibile generare dei valori standardizzati casuali (media uguale a 0, deviazione standard pari a 1) che seguono la distribuzione normale standard. Basta semplicemente definire il numero di valori desiderati.
+Il comando nella sua espressione generale \`e:
+\begin{equation}\texttt{rnorm}(n,\texttt{mean}=\varia{valore}_1,\texttt{sd}=\varia{valore}_2)\end{equation}
+Nel caso in cui volessimo una lista di 20 valori di una variabile normale con media assegnata 5 e deviazione standard 1 scriveremo
+<<echo=TRUE,eval=TRUE>>=
+rnorm(20,mean=5,sd=1)
+@
+\subsection{La distribuzione $t$ di Student}
+In \textsf{R} la distribuzione di Student \`e indicata con la lettera  \texttt{t}.  Come per le altre distribuzioni  si possono considerare le funzioni\vskip5pt
+\begin{tabular}{|r|r |}
+\hline
+dt  &densit\`a\\
+pt  &primitiva\\
+qt & quantili\\
+rt  &generatore random\\
+\hline
+\end{tabular}
+\vskip10pt
+Il grafico della distribuzione di Student ad un certo numero \texttt{df} di gradi di libert\`a  si ottiene con il comando
+\begin{equation*}
+\texttt{curve(dt(x},\texttt{df}),\varia{a},\varia{b})
+\end{equation*}
+Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di libert\`a (vedi figura ~(\ref{fig:graficostudent1})):
+
+\begin{figure}[H]
+\begin{center}
+<<echo=TRUE>>=
+curve(dt(x,10),-2,2)
+@
+\caption{Grafico della distribuzione di Student a 10 gradi di libert\`a. }
+\label{fig:graficostudent1}
+\end{center}
+\end{figure}
+Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cui la deviazione standard della popolazione $\sigma$  non \`e conosciuta e viene rimpiazzata  dalla deviazione standard campionaria  $S$, calcolata con un numero $N$ di dati e quindi con $N-1$ gradi di libert\`a. Quando per\`o il numero di dati si avvicina a 30 la curva di Student \`e praticamente sovrapposta a quella della distribuzione normale, come mostra il grafico~(\ref{fig:graficostudent}):
+
+\begin{figure}[H]
+\begin{center}
+<<echo=TRUE>>=
+curve(dnorm(x),-2,2,col=3)
+curve(dt(x,2),-2,2,col=1,add=T)
+curve(dt(x,25),-2,2,col=2,add=T)
+legend("topleft", c("df=2","df=25","normale"),pch=15,col=1:3);
+@
+\caption{Grafico della distribuzione di Student a 10 gradi di libert\`a. }
+\label{fig:graficostudent}
+\end{center}
+\end{figure}
+Come nel caso della distribuzione normale se vogliamo una funzione diciamo \texttt{student}  tale che assegnato un valore di area $A$   fornisca l'ascissa $x=student(A)$  in modo che l'area tra - $x$ e $x$ sia esattamente pari ad $A$ dobbiamo scrivere la funzione
+<<>>=
+student<-function (A,..) qt (1/2 + A/2,..)
+@
+dove i puntini stanno per le variabili omesse o pi\`u esplicitamente
+<<>>=
+student<-function (A,df) qt (1/2 + A/2,df)
+@
+dove \texttt{df} sono i gradi di libert\`a. 
+\subsection
+{Regione di accettazione, intervalli di confidenza e test di Student}
+
+Consideriamo ora una variabile normale $X$. Se ipotizziamo che il valore atteso di $X$ sia   $\mu$ (ipotesi nulla) allora il consuntivo 
+\[T=\dfrac{M_N(X)-\mu}{S_X}\sqrt {N}\]
+\`e distribuito secondo la distribuzione di Student a $N-1$ gradi di libert\`a. 
+Se consideriamo una variabile distribuita secondo la distribuzione di Student, esattamente come nel caso della normale, possiamo determinare un valore $x$ dipendente dal livello di fiducia \texttt{f} e dai gradi di libert\`a 
+$x=x(\texttt {f},df)$ tale che nell'intervallo $[-x,x]$ si concentri una probabilit\`a pari a \texttt{f}.
+
+Applicando quanto detto a $T$ possiamo scrivere
+\[ P(-x(\texttt {f},df)<T<x(\texttt {f},df))=\ \texttt {f}\]
+
+Questo fatto consente di procedere in due direzioni.
+\begin{itemize}
+\item Test di ipotesi sul valore di $\mu$.
+\item Intervallo di confidenza per $\mu$. 
+\end{itemize}
+ 
+Mostriamo come si può procedere:  
+ 
+La funzione di
+\textsf{R} che esegue il test di Student nelle sue diverse forme \`e  \texttt{t.test}.   Nella sua forma pi\`u semplice
+
+<<echo=TRUE>>=
+x=1:20;  t.test(x)
+@
+Possiamo anche eseguire specificare l'ipotesi sul valore di $\mu$:
+<<echo=TRUE>>=
+t.test(x,mu=7)
+@
+Possiamo infine specificare l'ipotesi alternativa. Per esempio se l'ipotesi alternativa \`e
+\texttt{\virgolette less\virgolette}  il risultato del test cambia completamente.
+<<echo=TRUE>>=
+t.test(x,mu=7, alternative="less")
+@
+
+In pratica ci viene fornito come $p$-value il valore dell'area sottesa dalla distribuzione di Student da $-\infty$ al valore di $t$ se l'ipotesi alternativa \`e  \texttt{\virgolette less\virgolette} e il valore dell'area sottesa dalla distribuzione di Student dal valore di $t$ a $+\infty$ se l'ipotesi alternativa \`e     \texttt{\virgolette greater\virgolette}  \subsection{Test di Student per dati appaiati}
+Il test di Student per dati appaiati non \`e altro che un test di Student sulla differenza di 2 liste di dati di ugual lunghezza. Consideriamo ad esempio il confronto di 2 tecniche di misura applicate agli stessi campioni
+<<echo=TRUE>>=
+x<-c(1.46,2.22,2.84,1.97,1.13,2.35)
+y<-c(1.42,2.38,2.67,1.8,1.09,2.25)
+@
+
+Possiamo calcolare la differenza \texttt{x-y} ed applicare il test di Student oppure ottenere lo stesso risultato specificando l'opzione \texttt{paired=TRUE}
+<<echo=TRUE>>=
+ t.test(x,y,paired=TRUE)
+@
+
+Il consuntivo   \texttt{t} cade entro la regione di accettazione del test.
+\`E  possibile specificare il livello di fiducia da utilizzare per il test di Student come:
+
+$$\texttt{conf.level}=\varia{numero}$$
+
+Il comando completo di tutti i parametri  \`e quindi:
+\begin{eqnarray*}
+\texttt{t.test}(\varia{dati}_1,\varia{dati}_2,
+\\
+\texttt{paired=TRUE,conf.level}=\varia{valore})
+\end{eqnarray*}
+Ad esempio eseguiamo un $t$-test per dati appaiati, tra $x=(1,2,3,4)$ e $y=(3,2,4,5)$ con {\it confidence level} di 0.85. Scriveremo
+<<echo=TRUE,eval=FALSE>>=
+t.test(1:4,5:2,paired=TRUE,conf.level=0.85)
+@
+ Il consuntivo $t$ cade fuori dalla regione di accettazione proposta.
+
+
+\subsection{t-test: caso ad egual varianza}
+<<echo=FALSE>>=
+R=c(11.4,16.5,21.1,29.9,25.3)
+B=c(23.7,24.3,28.5,26.6, 17.9,14.2)
+n_R=length(R)
+n_B=length(B)
+m_R=mean(R)
+m_B=mean(B)
+s_R=sd(R)
+s_B=sd(B)
+sigma=sqrt(((n_R-1)*s_R^2+ (n_B-1) *s_B^2)/(n_R+n_B-2) *(1/n_R  +1/n_B))
+@
+Si considerino i seguenti dati relativi alla misura di una grandezza fisica.
+
+
+\[(
+\color{red}{11.4},\color{blue}{23.7},\color{blue}{24.3},\color{red}{16.5},\color{blue}{28.5},
+\color{blue}{26.6},\color{red}{21.1},\color{red}{29.9},\color{blue}{17.9},\color{red}{25.3},\color{blue}{14.2})\]
+
+
+I colori rosso e blu si riferiscono all'utilizzo di due diversi strumenti di misura. Si noti che il numero di esperimenti in rosso (esperimenti 1,4, 7,8,10) non é uguale al numero di esperimenti in blu (esperimenti 2,3,5,6,9,11): non si tratta di misure ripetute sugli stessi campioni, ma di misure effettuate su campioni diversi.
+
+Si dica, con fiducia al 95\% se esiste una differenza fra i due strumenti.
+\begin{itemize}
+\item I dati sono
+<<echo=FALSE>>=
+cat(R)
+cat(B)
+@
+\item Ipotesi di lavoro \[\mu_R= \mu_B\]
+  \item Calcoliamo i valori dei parametri statistici per il campione rosso e per il campione blu.
+\item Indicatori:
+\[m_R=\Sexpr{mean(R)}\]
+\[m_B=\Sexpr{mean(B)}\]
+ \[s_R=\Sexpr{sd(R)}\]
+\[s_B=\Sexpr{sd(B)}\]
+\end{itemize}
+
+Dobbiamo valutare il valore del consuntivo
+\[ t_{ R, B} =\frac{ (M_R-M_B) -(\mu_R-\mu_B)}{\Sigma }\]
+nell'ipotesi di lavoro 
+\[\mu_R-\mu_B= 0\Leftrightarrow \mu_R=\mu_B\]
+
+dove
+\[
+\begin{aligned}
+\Sigma =& \sqrt{\dfrac{(n_R-1) S_R^2+(n_B-1) S_B^2 }{n_R+n_B-2}  \left(\frac{1}{n_R} +\frac{1}{n_B}\right)}\rightarrow  \\
+&\sqrt{\dfrac{\Sexpr{ (n_R-1)* s_R^2}+\Sexpr{ (n_B-1) *s_B^2} }{\Sexpr{ n_R+n_B-2}}   \left(\frac{1}{\Sexpr{ n_R}} +\frac{1}{\Sexpr{ n_B}}\right)}= 
+\sqrt{\Sexpr{ ((n_R-1)*s_R^2+ (n_B-1) *s_B^2)/(n_R+n_B-2) *(1/n_R  +1/n_B)}} = \Sexpr{ sigma}
+\end{aligned}
+\] 
+
+Il valore osservato di $t_{R,B}$ è
+
+\[t_{ R,B} = \frac{m_R-m_B}{\Sigma}  =\Sexpr{ (m_R-m_B)/sigma} \]
+
+
+La regione di accettazione \`e
+
+\[[-t_{ 0.95, 9} , t_{0.95, 9} ] = [-2.262, 2.262]\]
+
+Visto che il consuntivo  cade ampiamente in tale intervallo accettiamo l'ipotesi di lavoro.
+
+con \rpr basta scrivere:
+<<>>=
+R=c(11.4,16.5,21.1,29.9,25.3)
+B=c(23.7,24.3,28.5,26.6, 17.9,14.2)
+t.test(R,B,var.equal=T)
+@
+Se non potessimo ipotizzare la provenienza dei due campioni da popolazioni con ugual varianza potremmo scrivere
+
+\subsection{Caso generale (test di Welch)}
+
+Qualora non si possa affermare l'eguaglianza delle varianze l'errore standard della differenza delle medie si può stimare come
+
+\[ \Sigma= \sqrt{\frac{s_X^2}{n_X}+\frac{s_Y^2}{n_Y}}\]
+\[ df =\dfrac
+{ \left(\frac{s_X^2}{n_X}+\frac{s_Y^2}{n_Y}\right)^2}
+{
+\frac{(s_X^2/n_X)^2}{n_X-1}+
+\frac{(s_Y^2/n_Y)^2}{n_Y-1}
+}\]
+
+Il consuntivo diviene
+
+\[\frac{M_X-M_Y-(\mu_X-\mu_Y)}{\Sigma}  \]
+
+e la regione di accettazione si calcola come
+
+\[ [-t_{1-\epsilon,df},t_{1-\epsilon,df}]\]
+
+
+\subsubsection{Esempio}
+Con gli stessi dati di prima si ipotizzi $\mu_X=\mu_Y$ (fiducia al 95\%)
+<<echo=FALSE>>=
+X=c(11.4,16.5,21.1,29.9,25.3)
+Y=c(23.7,24.3,28.5,26.6, 17.9,14.2)
+s_X=sd(X)
+n_X=length(X)
+m_X=mean(X)
+s_Y=sd(Y)
+n_Y=length(Y)
+m_Y=mean(Y)
+df= (( s_X^2/n_X +   s_Y^2/n_Y)^2)/
+( 
+((s_X^2/n_X)^2/( n_X-1)) +
+((s_Y^2/n_Y)^2/( n_Y-1))
+)
+Sigma=sqrt(s_X^2/n_X + s_Y^2/n_Y)
+@
+\[ X=(\Sexpr{X})\quad Y=(\Sexpr{Y})\]
+
+
+\[ \Sigma= \sqrt{\Sexpr{s_X^2/n_X + s_Y^2/n_Y}}\]
+e i gradi di libertà  
+\[ df =\dfrac
+{  (\Sexpr{s_X^2/n_X + s_Y^2/n_Y})^2}
+{
+(\Sexpr{(s_X^2/n_X)^2}/\Sexpr{n_X-1}+
+\Sexpr{(s_Y^2/n_Y)^2}/\Sexpr{n_Y-1})
+}= \]
+\[
+  \Sexpr{((s_X^2/n_X + s_Y^2/n_Y)^2)/( ((s_X^2/n_X)^2/( n_X-1)) +((s_Y^2/n_Y)^2/( n_Y-1)))}
+\]
+
+Se si usa  \rpr basta scrivere
+
+<<echo=TRUE>>=
+t.test(X,Y) 
+@
+
+\subsection{Test $\chi^2$  di indipendenza}
+
+%code chunk
+Consideriamo il seguente \emph{dataframe} che riporta le ambizioni di un gruppo di scolari americani
+<<eval=TRUE,tidy=FALSE>>=
+data(bambini)
+str(bambini)
+@
+
+Nella tabella le colonne che ci interessano al momento sono quelle che riguardano il sesso, gli obiettivi (scelti tra successo scolastico, capacit\`a sportiva e popolarit\`a) e la provenienza (colonne 1, 5  e 7). Nelle colonne dalla 8 alla 11 sono messi in ordine di importanza per il conseguimento della popolarit\`a  voti, sport, aspetto esteriore e denaro.
+%codechunk
+ 
+Consideriamo per esempio le variabili provenienza e traguardi
+<<>>=
+interessi2=bambini[,c(5,7)]
+tabella=table(interessi2)
+tabella
+@
+ 
+Il test $\chi^2$  di indipendenza consente di  verificare se  due variabili sono indipendenti.
+Se consideriamo le due variabili precedenti sesso e interessi.
+\textsf{R}  dispone del comando \texttt{chisq.test},\index{\texttt{chisq.tst},test $\chi^2$}
+dalla sintassi generale:$$\texttt{chisq.test}(\varia{tabella})$$
+<<>>=
+chisq.test(tabella)
+@
+Nell'esempio degli studenti
+%code chunk
+<<echo=TRUE>>=
+data(studenti)
+str(studenti)
+tabellaEH=table(studenti$Eyes,studenti$Hair)
+chisq.test(tabellaEH)
+@
+L'intervallo di accettazione dell'ipotesi (che ricordiamo \`e l'indipendenza) al 95\% di fiducia e 1 gradi di libert\`a \`e  $[0, 3.841]$, il consuntivo cade dentro, per cui l'ipotesi \`e accettata.
+ 
+Se le celle in una tabella 2x2 contengono numeri bassi \rpr  utilizza la correzione di Yates. Se la si vuole eliminare  si utilizza il parametro  \texttt{correct=FALSE}.
+Ad esempio scriveremo:
+%code chunk
+<<echo=TRUE>>=
+chisq.test(matrix(c(12,3,4,5),nc=2))
+chisq.test(matrix(c(12,3,4,5),nc=2),correct=F)
+@
+\subsection{Test $\chi^2$  di adeguamento}
+Consideriamo una variabile aleatoria discreta con frequenza assoluta delle uscite racchiuse in una lista \texttt{data}. Ci si pone il problema di stabilire se tali frequenze sono compatibili con le probabilit\`a (riportate nella lista $p$).
+<<echo=TRUE,eval=FALSE>>=
+data<-c(2,3,4,5,6,7,8,9,10,11)
+prob<-c(5,20,5,10,5,15,5,10,10,15)
+sum(prob)
+chisq.test(data,p=prob,rescale.p=TRUE)
+@
+Si \`e usata qui la scelta \texttt{rescale.p=TRUE} in quanto la somma delle  probabilit\`a non era 1.
+L'uscita del test riporta il valore del consuntivo $\chi^2$ i gradi di libert\`a ed il valore $p$.
+
+\section{Distribuzione Binomiale}
+Il coefficiente binomiale \`e definito come
+\begin{equation*} \texttt{choose}(\varia{n},\varia{m})={n \choose m}=\dfrac{n!}{m!\times (n-m)!}\end{equation*}
+Ad esempio
+<<echo=TRUE>>=
+choose(6,3)
+@
+La distribuzione binomiale in \textsf{R} ha la sintassi $$\texttt{dbinom}(\varia{successi},\varia{prove},
+\varia{probabilit\`a successo})$$ e fornisce la  probabilit\`a di ottenere nel corso di un certo numero di prove  il numero di successi indicato.\index{\texttt{dbinom}}
+Ad esempio, nel lancio di un dado 10 volte, vogliamo determinare la  probabilit\`a che esca  \emph{esattamente} due volte il numero 4:
+%codechunk
+<<echo=TRUE>>=
+dbinom(2,10,1/6)
+@
+
+La  probabilit\`a \`e circa del 29\%.
+\begin{comment}
+
+\begin{shaded}
+\begin{description}
+ \item{}conta i caratteri del tuo nome
+\item{} vettore che contenga il quadrato dei primi 8 numeri pari
+\item{}vettore che contenga la radice cubica dei primi 10 numeri naturali.
+\item{}inserire in una matrice le coordinate 2D dei punti di un pentagono. Plot dei punti, come punti, come linee e come linee tratteggiate. Pi\`u arduo: riempimento della superficie
+\item{}derivata di $x^3+x^2+2x+1$, plot della funzione e plot della derivata come due pannelli distinti in un grafico unico. hint: par(mfrow)
+\end{description}
+\end{shaded}
+\end{comment}
+\begin{comment}
+
+\section{Operatori condizionali e cicli}
+with(rainforest, table(complete.cases(root), species))
+
+Gli operatori condizionali valutano una condizione e in base alle risultanze assegnano valore ad una espressione
+
+<<echo=TRUE, eval=TRUE>>=
+b=1
+if (b==1) {print ("b vale 1");b=b+1}  else print(b);
+@
+
+Abbiamo poi i cicli \texttt{for} con la struttura
+\begin{equation*}
+\texttt{for} (i \texttt{it} \varia{sequenza}) \varia{esegui} B
+\end{equation*}
+
+<<echo=TRUE,eval=FALSE,tidy=FALSE>>=
+for (i in 1:10) print(i)#Somma di interi
+somma<-0
+for (i in  1:10) somma<-somma+i;somma
+#o anche come funzione
+somma<-function(n)
+{somma<-0
+for (i in  1:n) somma<-somma+i;somma
+return(somma)}
+@
+
+
+\section{Funzioni di pi\`u variabili}
+Finora abbiamo considerato funzioni di singola variabile. Una generalizzazione estremamente naturale consiste nel considerare funzioni di due o pi\`u variabili. Diamo alcuni esempi
+\begin{enumerate}
+\item{}
+Calcolare la lunghezza del segmento che congiunge  due punti nel piano (distanza euclidea). Possiamo procedere con  una funzione di 4 numeri (le 2 coordinate dei 2 punti)
+<<echo=TRUE,eval=TRUE>>=
+dist<-function(x1,y1,x2,y2)
+{dx<-(x2-x1)^2;dy<-(y2-y1)^2;return (sqrt(dx+dy))}
+dist(0,0,3,4)
+@
+oppure possiamo generalizzare con una funzione che dipenda dai 2 vettori (e non direttamente dalle loro coordinate)
+<<echo=TRUE,eval=FALSE>>=
+dist<-function(x,y)
+{return (sqrt(sum((x-y)^2)))}
+@
+\item{}: il massimo di due numeri
+<<echo=TRUE,eval=FALSE>>=
+massimo<-function(a,b)
+if (a>b) return(a) else return(b)
+@
+Si noti che la condizione viene messa tra parentesi tonde.
+\item{}: Il valore assoluto
+<<echo=TRUE>>=
+valoreassoluto<-function(a) if (a>0) return(a)  else return(-a)
+@
+
+
+\item{} Somma sino a $n$
+
+<<echo=TRUE,eval=FALSE>>=
+n=0;while (somma(n)<10000)
+n=n+1
+sommasinoa<-function(b) {i<-1;somma<-i;while (somma<=b)
+{i=i+1;somma=somma+i}; return(i)}
+@
+\end{enumerate}
+
+
+Generazione ricorsiva di successioni (successione di Fibonacci)
+%code chunk
+<<echo=TRUE>>=
+fibonacci<-function(n)
+{f=0;f[1]<-1;f[2]<-1;for (i in 3:n) {f[i]<-f[i-1]+f[i-2]};return(f[n])}
+@
+
+\section{R  Output su file}
+
+<<echo=TRUE,eval=FALSE>>=
+cat("TITLE extra line", "2 4 5 7", "11 13 17", file="ex.data", sep="\n",append=T)
+cat("TITLE extra line", "2 4 5 7", "11 13 17", sep="\n")
+@
+<<eval=FALSE>>=
+print()
+read.delim
+ aggregate
+
+@
+
+\chapter{Statistica II parte}
+%\section{Simulazioni e statistica Bayesiana}
+Uno degli usi rilevanti a fini statistici dei computer  \`e la possibilit\`a di stimare attraverso simulazioni probabilit\`a difficili da calcolare teoricamente.
+\begin{shaded}\begin{description}
+\item{\bf Estrazioni da un'urna. }Supponiamo 2 palle siano estratte da un'urna contenente 6 palle rosse e 2 verdi.
+Simuliamo due estrazioni e consideriamo gli eventi:
+\begin{itemize}
+\item{}$A$ = {la prima palla  \`e rossa}
+\item{}$B$ = {la seconda palla \`e rossa}
+\end{itemize}
+Determinare le probabilit\`a
+$P(A)$, $P(B)$,
+$P(A\wedge B)$, $P(A \mid B)$,
+$P(B \mid A)$.
+Eseguire poi la simulazione 1000 volte e verificare che le stime frequentiste si avvicinano ai valori teorici. Si usi la funzione \texttt{replicates}.\index{\texttt{replicates}}
+Gli ultimi due punti richiedono opportuni accorgimenti.
+\item{\bf Simulazione del problema di  Monthy Hall.}
+Il problema di Monthy Hall ricalca una trasmissione televisiva americana. Immaginate di avere tre porte chiuse dietro alle quali si nascondono 2 capre e un premio, una Ferrari per esempio. L'ospite deve scegliere una porta; effettuata tale scelta il presentatore (che conosce cosa si nasconde dietro alle 3 porte) apre una porta mostrando una capra e d\`a all'ospite la scelta se attenersi alla scelta originale o cambiare porta. Cosa fareste se foste voi l'ospite?
+\end{description}
+\end{shaded}
+Come si pu\`o simulare il problema di Monthy Hall?
+Iniziamo a disporre gli oggetti e a fare la nostra scelta
+%code chunk
+<<ECHO=TRUE,tidy=FALSE>>=
+set.seed(12)
+(sample(c("capra","capra","ferrari"))->posizione)
+(scelta<-sample(1:3,1))
+@
+A questo punto  il presentatore deve aprire una porta,
+<<>>=
+(ammessa<-(1:3)[-unique(c(scelta,which(posizione=="ferrari")))])
+if(length(ammessa)==1)
+presentatore<-ammessa else presentatore=sample(ammessa,1)
+@
+Ripetiamolo ora 1000 volte
+<<ECHO=TRUE,results='hide'>>=
+replicate(1000,{
+sample(c("capra","capra","ferrari"))->dietro;
+scelta=sample(1:3,1);
+ammessi=(1:3)[-unique(c(scelta,which(
+dietro=="ferrari")))];
+if(length(ammessi)==1) {presentatore=ammessi} else {presentatore=sample(ammessi,1)};
+c(dietro[scelta],dietro[-c(scelta,presentatore)])})->risultato
+table(risultato[1,]);table(risultato[2,]);
+@
+
+\section{Analisi della Varianza (ANOVA)}
+L'analisi della varianza diviene estremamente semplice da eseguire con \textsf{R}  a patto di \emph{preparare} i dati in modo opportuno.
+Consideriamo il seguente esempio tratto dal libro di Snedecor \cite{snedecor} in cui si considera l'assorbimento di grasso durante la cottura di 24 \emph{donuts}. Si esaminano 4 tipi di grasso di cottura 4 e la cottura di 6 \emph{donuts} per ciascun tipo. Inseriamo nella lista  $x$ il gruppo di appartenenza e nella lista $y$ le quantit\`a di grasso assorbito.
+<<echo=TRUE>>=
+x<-rep(1:4,each=6)
+factor(x)->x
+x<-gl(4,6);x
+y<-c(15,20,22,23,25,26,80,90,76,56,5,
+43,23,45,67,89,87,65,43,23,45,10,11,23)
+tabelladati=data.frame(y,x)
+tabelladati
+@
+Il comando  \texttt{tapply} consente di applicare una funzione (in questo caso la media) alla lista  $y$ in base alla ripartizione indicata da $x$.
+$$\texttt{tapply}(y,x,\texttt{mean})$$
+In questo caso
+<<echo=TRUE>>=
+tapply(y,x,mean)
+@
+In modo simile all'uso del simbolo $\sim$ visto nei comandi per la regressione lineare il comando
+$$\texttt{boxplot}(y\sim x,data=tabella)$$
+consente il tracciamento di un \emph{boxplot} comparativo.
+<<echo=TRUE,fig.keep='none',eval=FALSE>>=
+boxplot(y~x,data=tabelladati)
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+boxplot(y~x,data=tabelladati)
+@
+\caption{Boxplot comparativo di 4 tipi di grasso di cottura.}
+\label{datiist}
+\end{center}
+\end{figure}
+In modo analogo
+ <<echo=TRUE>>=
+anova(lm(y~x))
+@
+
+fornisce il risultato dell'analisi della varianza.
+
+
+
+\subsection{Test $\chi^2$  di indipendenza}
+
+%code chunk
+<<>>=
+read.table("../filedati/PopularKids.html",skip=39,header=T,nrow=478,sep="\t")->kidinterest
+@
+Il test $\chi^2$  di indipendenza consente di  verificare se  due variabili sono indipendenti.
+Se consideriamo le due variabili precedenti sesso e interessi.
+\textsf{R}  dispone del comando \texttt{chisq.test},\index{\texttt{chisq.tst},test $\chi^2$} dalla sintassi generale:$$\texttt{chisq.test}(\varia{tabella})$$
+
+Nell'esempio
+%code chunk
+<<echo=TRUE>>=
+tabellaEH=table(studenti$Eyes,studenti$Hair)
+chisq.test(tabellaEH)
+@
+L'intervallo di accettazione dell'ipotesi (che ricordiamo \`e l'indipendenza) al 95\% di fiducia e 1 gradi di libert\`a \`e  $[0, 3.841]$, il consuntivo cade dentro, per cui l'ipotesi \`e accettata.
+Per eliminare la correzione di Pearson si utilizza il parametro  \texttt{correct=FALSE}.
+Ad esempio scriveremo:
+%code chunk
+<<echo=TRUE,eval=FALSE>>=
+chisq.test(tabellaEH,correct=FALSE)
+@
+
+\subsection{Test $\chi^2$  di adeguamento}
+Consideriamo una variabile aleatoria discreta con frequenza assoluta delle uscite racchiuse in una lista \texttt{data}. Ci si pone il problema di stabilire se tali frequenze sono compatibili con le probabilit\`a (riportate nella lista $p$).
+<<echo=TRUE,eval=FALSE>>=
+data<-c(2,3,4,5,6,7,8,9,10,11)
+prob<-c(5,20,5,10,5,15,5,10,10,15)
+sum(prob)
+chisq.test(data,p=prob,rescale.p=TRUE)
+@
+Si \`e usata qui la scelta \texttt{rescale.p=TRUE} in quanto la somma delle  probabilit\`a non era 1.
+L'uscita del test riporta il valore del consuntivo $\chi^2$ i gradi di libert\`a ed il valore $p$.
+
+\section{Distribuzione Binomiale}
+Il coefficiente binomiale \`e definito come
+\begin{equation*} \texttt{choose}(\varia{n},\varia{m})={n \choose m}=\dfrac{n!}{m!\times (n-m)!}\end{equation*}
+Ad esempio
+<<echo=TRUE>>=
+choose(6,3)
+@
+La distribuzione binomiale in \textsf{R} ha la sintassi $$\texttt{dbinom}(\varia{successi},\varia{prove},
+\varia{probabilit\`a successo})$$ e fornisce la  probabilit\`a di ottenere nel corso di un certo numero di prove  il numero di successi indicato.\index{\texttt{dbinom}}
+Ad esempio, nel lancio di un dado 10 volte, vogliamo determinare la  probabilit\`a che esca  \emph{esattamente} due volte il numero 4:
+%codechunk
+<<echo=TRUE>>=
+dbinom(2,10,1/6)
+@
+
+La  probabilit\`a \`e circa del 29\%.
+
+
+\section{Distribuzione di Fisher}
+
+La distribuzione di Fisher \`e indicata in \textsf{R} con la lettera \texttt{f}. Per tracciare il grafico della densit\`a con gradi di libert\`a $\nu_1$ e $\nu_2$ basta scrivere
+<<echo=TRUE>>=
+curve(df(x,3,10),0,5)
+@
+ottenendo il grafico
+\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE,fig.width=6,fig.height=5>>=
+curve(df(x,3,10),0,5)
+@
+\caption{Distribuzione di Fisher.}
+\label{fig:fisher}
+\end{center}
+\end{figure}.
+
+Dobbiamo solo definire $x$, $df1$ e $df2$, gradi di libert\`a per poi applicare \texttt{df},\texttt{qf}, \texttt{rf} come visto per le distribuzioni precedenti.
+Per esempio per ottenere il valore della funzione inversa  per $x=0.9$ e $df1=3$ e $df2=4$ scriveremo:
+<<echo=TRUE>>=
+qf(0.9,3,4)
+@
+
+
+\section{Tabelle di contingenza}
+<<echo=FALSE>>=
+tabellaEH=table(studenti$Eyes,studenti$Hair)
+@
+Il comando
+$\texttt{table}$ applicato ad un lista contenente valori di una singola variabile nominale conta le frequenze di ciascuna livello, se applicato ad un \emph{dataframe} di $n$  variabili conta le occorrenze di  ciascuna combinazione di livelli possibile ($2^n$ se le variabili sono dicotomiche). Per esempio se consideriamo il \emph{dataframe}  \texttt{studenti}  possiamo creare una tabella dei colori degli occhi e dei capelli
+%code chunk
+<<echo=TRUE>>=
+tabellaEH=table(studenti$Eyes,studenti$Hair)
+@
+
+
+
+
+
+ 
+\vfill\eject
+\thispagestyle{empty}\cleardoublepage
+ 
+ 
+
+
+ 
+

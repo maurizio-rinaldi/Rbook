@@ -1,0 +1,36 @@
+\begin{theindex}
+
+  \item \emph{escape}, \hyperpage{6}
+  \item \texttt{LETTERS}, \hyperpage{7}
+  \item \texttt{\%*\%}, prodotto di matrici, \hyperpage{13}
+  \item \texttt{abbreviate}, \hyperpage{7}
+  \item \texttt{cbind}, \hyperpage{18}
+  \item \texttt{colnames}, \hyperpage{11}
+  \item \texttt{letters}, \hyperpage{7}
+  \item \texttt{level}, \hyperpage{16}
+  \item \texttt{list}, \hyperpage{22}
+  \item \texttt{month.abb}, \hyperpage{7}
+  \item \texttt{nchar}, \hyperpage{6}
+  \item \texttt{paste}, \hyperpage{7}
+  \item \texttt{rbind}, \hyperpage{18}
+  \item \texttt{rownames}, \hyperpage{11}
+  \item \texttt{str}, \hyperpage{15}
+  \item \texttt{t}, trasposto, \hyperpage{13}
+
+  \indexspace
+
+  \item autovalore, \hyperpage{14}
+
+  \indexspace
+
+  \item detach, \hyperpage{17}
+
+  \indexspace
+
+  \item stringa, \hyperpage{5}
+
+  \indexspace
+
+  \item trasposto, \hyperpage{13}
+
+\end{theindex}

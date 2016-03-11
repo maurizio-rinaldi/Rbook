@@ -1,0 +1,293 @@
+% Created by tikzDevice version 0.10.1 on 2016-03-11 15:44:24
+% !TEX encoding = UTF-8 Unicode
+\documentclass[onecolumn,12pt]{book}
+\nonstopmode
+
+\usepackage{tikz}
+
+\usepackage[active,tightpage,psfixbb]{preview}
+
+\PreviewEnvironment{pgfpicture}
+
+\setlength\PreviewBorder{0pt}
+
+\newcommand{\SweaveOpts}[1]{}  % do not interfere with LaTeX
+\newcommand{\SweaveInput}[1]{} % because they are not real TeX commands
+\newcommand{\Sexpr}[1]{}       % will only be parsed by R
+
+
+\usepackage[english,italian]{babel}
+\usepackage{inconsolata}
+%\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+\usepackage[T1]{fontenc}
+\usepackage[buttonsize=1em]{animate}
+\usepackage{a4wide,Sweave,url}
+\usepackage{verbatim}
+\usepackage{makeidx}
+\usepackage{babelbib}
+\usepackage{float}
+%\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{framed}
+\usepackage{lipsum}
+\usepackage[]{color}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+
+\usepackage{hyperref}
+\newenvironment{question}{\item \textbf{Esercizio}\newline}{}
+\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+\newenvironment{answerlist}{\renewcommand{\labelenumi}{(\alph{enumi})}\begin{enumerate}}{\end{enumerate}}
+\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
+ 
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
+\lhead[\thepage]{\today}
+%\usepackage{draftwatermark}
+\usepackage{wrapfig}
+\usepackage{listings}
+\pagestyle{fancy}
+\newcounter{fnotes}\setcounter{fnotes}{1}
+\newcounter{Raction}\setcounter{Raction}{1}
+\newcommand{\varia}[1]{\textsl{\textsf{#1}}}
+\newcommand{\mytilde}{$\sim$}
+\newcommand{\maurizio}[1]{\color{red}#1 \color{black}}
+\newcommand{\federico}[1]{\color{green}#1 \color{black}}
+ %\newenvironment{question}{\item \textbf{Problema}\newline}{}
+%\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+%\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em,
+                                            %  frame=single}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em,   frame=single}
+ \newenvironment{ese} [1]{\vskip10pt
+%\begin{center}
+%\begin{minipage}{12cm}
+ \markright{\today}
+\colorbox{grigetto}{\parbox{\linewidth}{#1}}}
+                          {
+                
+                          \medskip}
+ \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
+ \frontmatter\title{Matematica e Statistica con \textsf{R}}
+\author{Federico Comoglio e  Maurizio Rinaldi}
+\markright{\today}
+\lhead{\today}
+\renewcommand{\chaptermark}[1]{%
+ \markboth{\chaptername
+ \ \thechapter.\ #1}{}}
+\newcommand{\rst}{\textsf{RStudio}~}
+\newcommand{\rpr}{\textsf{R}~}
+\makeindex
+
+\begin{document}
+
+\begin{tikzpicture}[x=1pt,y=1pt]
+\definecolor{fillColor}{RGB}{255,255,255}
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,289.08);
+\begin{scope}
+\path[clip] ( 57.60, 57.60) rectangle (359.91,287.64);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80,154.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 71.62,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 74.45, 66.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 77.28,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 80.11, 66.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 82.93,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 85.76,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 88.59,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 91.42,172.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 94.24, 83.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 97.07,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 99.90, 83.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (102.73,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (105.55, 83.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (108.38,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (111.21,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (114.04,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (116.86,154.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (119.69,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (122.52,137.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (125.35,137.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (128.17, 66.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (131.00,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (133.83,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (136.66,190.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (139.48,279.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (142.31,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (145.14,243.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (147.97,225.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (150.79,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (153.62,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (156.45,190.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (159.27,190.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (162.10,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (164.93,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (167.76,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (170.58,172.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (173.41,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (176.24,137.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (179.07,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (181.89,154.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (184.72,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (187.55,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (190.38,137.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (193.20, 66.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (196.03,137.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (198.86,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (201.69,154.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (204.51,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (207.34,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (210.17,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (213.00,172.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (215.82,154.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (218.65,208.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (221.48,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (224.31,172.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (227.13,172.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (229.96, 66.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (232.79,154.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (235.62,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (238.44,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (241.27,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (244.10,172.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (246.93,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (249.75,137.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (252.58,137.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (255.41,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (258.24,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (261.06,137.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (263.89,190.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (266.72,154.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (269.54,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (272.37,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (275.20, 66.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (278.03,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (280.85,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (283.68,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (286.51, 83.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (289.34,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (292.16,137.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (294.99,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (297.82,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (300.65, 83.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (303.47, 83.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (306.30, 83.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (309.13,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (311.96, 83.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (314.78,137.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (317.61,137.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (320.44,119.37) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (323.27,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (326.09, 83.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (328.92,137.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (331.75, 83.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (334.58, 83.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (337.40, 83.87) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (340.23, 66.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (343.06, 66.12) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (345.89,101.62) circle (  2.70);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (348.71, 66.12) circle (  2.70);
+\end{scope}
+\end{tikzpicture}
+
+\end{document}

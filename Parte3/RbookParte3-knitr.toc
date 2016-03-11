@@ -1,0 +1,40 @@
+\select@language {italian}
+\select@language {italian}
+\contentsline {chapter}{\numberline {1}Statistica e probabilit\`a con \textsf {R}}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Lo spazio campionario}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Gli eventi}{1}{section.1.2}
+\contentsline {subsubsection}{Costruzione di eventi}{1}{section*.2}
+\contentsline {section}{\numberline {1.3}La probabilit\IeC {\`a}}{2}{section.1.3}
+\contentsline {subsubsection}{ Assiomi}{3}{section*.3}
+\contentsline {subsection}{\numberline {1.3.1}Conseguenze}{3}{subsection.1.3.1}
+\contentsline {section}{\numberline {1.4}Variabili aleatorie}{4}{section.1.4}
+\contentsline {section}{\numberline {1.5}Variabili aleatorie discrete}{4}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}Sistema completo di eventi}{5}{subsection.1.5.1}
+\contentsline {section}{\numberline {1.6}Lancio di 2 dadi}{5}{section.1.6}
+\contentsline {section}{\numberline {1.7}Probabilit\IeC {\`a} condizionata}{7}{section.1.7}
+\contentsline {section}{\numberline {1.8}Esempio 1}{9}{section.1.8}
+\contentsline {section}{\numberline {1.9}Esempio 2}{11}{section.1.9}
+\contentsline {section}{\numberline {1.10}Regola di Bayes}{14}{section.1.10}
+\contentsline {section}{\numberline {1.11}Legge della probabilit\IeC {\`a} totale}{14}{section.1.11}
+\contentsline {subsection}{\numberline {1.11.1}Esempio}{15}{subsection.1.11.1}
+\contentsline {section}{\numberline {1.12}Teorema di Bayes [forma estesa]}{16}{section.1.12}
+\contentsline {section}{\numberline {1.13}La concezione frequentista}{16}{section.1.13}
+\contentsline {subsection}{\numberline {1.13.1}Lancio di una coppia di dadi}{16}{subsection.1.13.1}
+\contentsline {subsection}{\numberline {1.13.2}Esercizio 1 }{18}{subsection.1.13.2}
+\contentsline {subsection}{\numberline {1.13.3}Albero di probabilit\IeC {\`a}}{18}{subsection.1.13.3}
+\contentsline {subsection}{\numberline {1.13.4}Esempio 2}{19}{subsection.1.13.4}
+\contentsline {subsection}{\numberline {1.13.5}Esempio 3: specificit\IeC {\`a} e sensitivit\IeC {\`a} di un test diagnostico }{22}{subsection.1.13.5}
+\contentsline {subsubsection}{Sensitivit\IeC {\`a} }{22}{section*.4}
+\contentsline {subsubsection}{Specificit\IeC {\`a} }{22}{section*.5}
+\contentsline {subsection}{\numberline {1.13.6}Albero sensitivit\IeC {\`a}/specificit\IeC {\`a}}{22}{subsection.1.13.6}
+\contentsline {subsection}{\numberline {1.13.7}Approccio frequentista}{24}{subsection.1.13.7}
+\contentsline {subsubsection}{Terminologia}{25}{section*.6}
+\contentsline {subsection}{\numberline {1.13.8}HIV}{26}{subsection.1.13.8}
+\contentsline {subsubsection}{ Test di gravidanza}{26}{section*.7}
+\contentsline {subsubsection}{Fallacia del Pubblico Ministero}{26}{section*.8}
+\contentsline {subsubsection}{Odds}{27}{section*.9}
+\contentsline {subsubsection}{Il problema delle 3 porte (Monty Hall problem)}{27}{section*.10}
+\contentsline {subsubsection}{Grafico}{29}{section*.11}
+\contentsline {section}{\numberline {1.14}Recessione}{29}{section.1.14}
+\contentsline {subsection}{\numberline {1.14.1}Esercizio}{29}{subsection.1.14.1}
+\contentsline {section}{\numberline {1.15}Simulazioni}{30}{section.1.15}

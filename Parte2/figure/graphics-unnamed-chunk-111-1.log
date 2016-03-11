@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.9)  21 FEB 2016 20:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.5)  11 MAR 2016 15:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -380,7 +380,7 @@ Language: italian 2015/03/26 v1.3n Italian support from the babel system
 Package: etoolbox 2015/05/04 v2.2 e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count113
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/inconsolata/inconsolata.sty
+(/usr/local/texlive/texmf-local/tex/latex/inconsolata/inconsolata.sty
 Package: inconsolata 2014/06/22 v1.05
 
 `inconsolata-zi4' v1.05, 2014/06/22 Text macros for Inconsolata (msharpe)
@@ -607,7 +607,7 @@ Package: a4wide 1994/08/30
 (/usr/local/texlive/2015/texmf-dist/tex/latex/ntgclass/a4.sty
 Package: a4 2004/04/15 v1.2g A4 based page layout
 ))
-(/Users/mauriziorinaldi/Library/texmf/tex/latex/Sweave/tex/latex/Sweave.sty
+(/Users/mauriziorinaldi/Library/texmf/tex/latex/Sweave/Sweave.sty
 Package: Sweave 
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
@@ -621,6 +621,10 @@ Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix
 \c@FancyVerbLine=\count147
 \FV@StepNumber=\count148
 \FV@OutFile=\write4
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
 )
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
@@ -1323,12 +1327,7 @@ italian.ldf    The AE font collection does not contain the guillemets
 italian.ldf    Use the Latin Modern font collection instead 
 italian.ldf   on input line 82.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/upquote/upquote.sty
-Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
-tim
-)
 \AtBeginShipoutBox=\box50
-
 babelbib: Use citation-dependent languages in bibliography
 babelbib: Set bibliography fall-back language to italian
 (/usr/local/texlive/2015/texmf-dist/tex/latex/babelbib/english.bdf
@@ -1365,42 +1364,28 @@ Preview: Tightpage 0 0 0 0
 [1
 Non-PDF special ignored!
 Non-PDF special ignored!]
-
-LaTeX Warning: Reference `LastPage' on page i undefined on input line 109.
-
-[1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Package atenddvi Info: Last page = 1.
+ [1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 109.
 Package atveryend Info: Executing hook `AfterLastShipout' on input line 109.
-
-(./graphics-unnamed-chunk-111-1.aux
-
-Package atenddvi Warning: Rerun LaTeX, last page not yet found.
-
-)
+ (./graphics-unnamed-chunk-111-1.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 109.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 109.
 Package rerunfilecheck Info: File `graphics-unnamed-chunk-111-1.out' has not ch
 anged.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 20502 strings out of 493089
- 365167 string characters out of 6134842
- 556175 words of memory out of 5000000
- 23552 multiletter control sequences out of 15000+600000
+ 20498 strings out of 493089
+ 365046 string characters out of 6134842
+ 556136 words of memory out of 5000000
+ 23548 multiletter control sequences out of 15000+600000
  9703 words of font info for 24 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,5n,54p,818b,500s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb>
-Output written on graphics-unnamed-chunk-111-1.pdf (2 pages, 20185 bytes).
+Output written on graphics-unnamed-chunk-111-1.pdf (2 pages, 19669 bytes).
 PDF statistics:
  27 PDF objects out of 1000 (max. 8388607)
  20 compressed objects within 1 object stream

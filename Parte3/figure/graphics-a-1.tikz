@@ -1,0 +1,194 @@
+% Created by tikzDevice version 0.10.1 on 2016-03-11 15:53:58
+% !TEX encoding = UTF-8 Unicode
+\documentclass[onecolumn,12pt]{book}
+\nonstopmode
+
+\usepackage{tikz}
+
+\usepackage[active,tightpage,psfixbb]{preview}
+
+\PreviewEnvironment{pgfpicture}
+
+\setlength\PreviewBorder{0pt}
+
+\newcommand{\SweaveOpts}[1]{}  % do not interfere with LaTeX
+\newcommand{\SweaveInput}[1]{} % because they are not real TeX commands
+\newcommand{\Sexpr}[1]{}       % will only be parsed by R
+
+
+\usepackage[english,italian]{babel}
+\usepackage{inconsolata}
+%\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+\usepackage[T1]{fontenc}
+\usepackage[buttonsize=1em]{animate}
+\usepackage{a4wide,Sweave,url}
+\usepackage{verbatim}
+\usepackage{makeidx}
+\usepackage{babelbib}
+\usepackage{float}
+%\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{framed}
+\usepackage{lipsum}
+\usepackage[]{color}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\newenvironment{question}{\item \textbf{Esercizio}\newline}{}
+\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+\newenvironment{answerlist}{\renewcommand{\labelenumi}{(\alph{enumi})}\begin{enumerate}}{\end{enumerate}}
+\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
+ 
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
+\lhead[\thepage]{\today}
+%\usepackage{draftwatermark}
+\usepackage{wrapfig}
+\usepackage{listings}
+\pagestyle{fancy}
+\newcounter{fnotes}\setcounter{fnotes}{1}
+\newcounter{Raction}\setcounter{Raction}{1}
+\newcommand{\varia}[1]{\textsl{\textsf{#1}}}
+\newcommand{\mytilde}{$\sim$}
+\newcommand{\maurizio}[1]{\color{red}#1 \color{black}}
+\newcommand{\federico}[1]{\color{green}#1 \color{black}}
+ %\newenvironment{question}{\item \textbf{Problema}\newline}{}
+%\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+%\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em,
+                                            %  frame=single}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em,   frame=single}
+ \newenvironment{ese} [1]{\vskip10pt
+%\begin{center}
+%\begin{minipage}{12cm}
+ \markright{\today}
+\colorbox{grigetto}{\parbox{\linewidth}{#1}}}
+                          {
+                
+                          \medskip}
+ \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
+ \frontmatter\title{Matematica e Statistica con \textsf{R}}
+\author{Federico Comoglio e  Maurizio Rinaldi}
+\markright{\today}
+\lhead{\today}
+\renewcommand{\chaptermark}[1]{%
+ \markboth{\chaptername
+ \ \thechapter.\ #1}{}}
+\newcommand{\rst}{\textsf{RStudio}~}
+\newcommand{\rpr}{\textsf{R}~}
+\makeindex
+
+\begin{document}
+
+\begin{tikzpicture}[x=1pt,y=1pt]
+\definecolor{fillColor}{RGB}{255,255,255}
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,289.08);
+\begin{scope}
+\path[clip] ( 57.60, 57.60) rectangle (359.91,287.64);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80, 68.01) --
+	( 71.60, 68.38) --
+	( 74.40, 68.81) --
+	( 77.19, 69.31) --
+	( 79.99, 69.89) --
+	( 82.79, 70.56) --
+	( 85.59, 71.33) --
+	( 88.39, 72.21) --
+	( 91.19, 73.22) --
+	( 93.99, 74.37) --
+	( 96.79, 75.66) --
+	( 99.59, 77.12) --
+	(102.39, 78.75) --
+	(105.19, 80.58) --
+	(107.98, 82.61) --
+	(110.78, 84.86) --
+	(113.58, 87.33) --
+	(116.38, 90.05) --
+	(119.18, 93.02) --
+	(121.98, 96.26) --
+	(124.78, 99.75) --
+	(127.58,103.52) --
+	(130.38,107.56) --
+	(133.18,111.87) --
+	(135.98,116.46) --
+	(138.78,121.29) --
+	(141.57,126.38) --
+	(144.37,131.70) --
+	(147.17,137.24) --
+	(149.97,142.96) --
+	(152.77,148.84) --
+	(155.57,154.86) --
+	(158.37,160.97) --
+	(161.17,167.14) --
+	(163.97,173.32) --
+	(166.77,179.47) --
+	(169.57,185.55) --
+	(172.37,191.49) --
+	(175.16,197.26) --
+	(177.96,202.81) --
+	(180.76,208.07) --
+	(183.56,213.01) --
+	(186.36,217.58) --
+	(189.16,221.72) --
+	(191.96,225.41) --
+	(194.76,228.59) --
+	(197.56,231.24) --
+	(200.36,233.34) --
+	(203.16,234.85) --
+	(205.96,235.76) --
+	(208.75,236.07) --
+	(211.55,235.76) --
+	(214.35,234.85) --
+	(217.15,233.34) --
+	(219.95,231.24) --
+	(222.75,228.59) --
+	(225.55,225.41) --
+	(228.35,221.72) --
+	(231.15,217.58) --
+	(233.95,213.01) --
+	(236.75,208.07) --
+	(239.55,202.81) --
+	(242.34,197.26) --
+	(245.14,191.49) --
+	(247.94,185.55) --
+	(250.74,179.47) --
+	(253.54,173.32) --
+	(256.34,167.14) --
+	(259.14,160.97) --
+	(261.94,154.86) --
+	(264.74,148.84) --
+	(267.54,142.96) --
+	(270.34,137.24) --
+	(273.14,131.70) --
+	(275.94,126.38) --
+	(278.73,121.29) --
+	(281.53,116.46) --
+	(284.33,111.87) --
+	(287.13,107.56) --
+	(289.93,103.52) --
+	(292.73, 99.75) --
+	(295.53, 96.26) --
+	(298.33, 93.02) --
+	(301.13, 90.05) --
+	(303.93, 87.33) --
+	(306.73, 84.86) --
+	(309.52, 82.61) --
+	(312.32, 80.58) --
+	(315.12, 78.75) --
+	(317.92, 77.12) --
+	(320.72, 75.66) --
+	(323.52, 74.37) --
+	(326.32, 73.22) --
+	(329.12, 72.21) --
+	(331.92, 71.33) --
+	(334.72, 70.56) --
+	(337.52, 69.89) --
+	(340.32, 69.31) --
+	(343.12, 68.81) --
+	(345.91, 68.38) --
+	(348.71, 68.01);
+\end{scope}
+\end{tikzpicture}
+
+\end{document}
