@@ -1,0 +1,248 @@
+% Created by tikzDevice version 0.10 on 2016-03-13 19:29:13
+% !TEX encoding = UTF-8 Unicode
+\documentclass[onecolumn,12pt]{book}
+\nonstopmode
+
+\usepackage{tikz}
+
+\usepackage[active,tightpage,psfixbb]{preview}
+
+\PreviewEnvironment{pgfpicture}
+
+\setlength\PreviewBorder{0pt}
+
+\newcommand{\SweaveOpts}[1]{}  % do not interfere with LaTeX
+\newcommand{\SweaveInput}[1]{} % because they are not real TeX commands
+\newcommand{\Sexpr}[1]{}       % will only be parsed by R
+
+
+\usepackage[english,italian]{babel}
+\usepackage[utf8]{}%inputenc
+\usepackage{inconsolata}
+%\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+\usepackage[T1]{fontenc}
+\usepackage[buttonsize=1em]{animate}
+\usepackage{a4wide,Sweave,url}
+\usepackage{verbatim}
+\usepackage{makeidx}
+%\usepackage{babelbib}
+\usepackage{float}
+%\usepackage{fancyhdr}
+\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+\usepackage{framed}
+\usepackage{lipsum}
+\usepackage[]{color}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\newenvironment{question}{\item \textbf{Esercizio}\newline}{}
+\newenvironment{solution}{\textbf{Soluzione}\newline}{}
+\newenvironment{answerlist}{\renewcommand{\labelenumi}{(\alph{enumi})}\begin{enumerate}}{\end{enumerate}}
+\definecolor{grigetto}{rgb}{0.9,0.9,0.9}
+ 
+\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
+%\usepackage{draftwatermark}
+\usepackage{wrapfig}
+\usepackage{listings}
+\newcounter{fnotes}\setcounter{fnotes}{1}
+\newcounter{Raction}\setcounter{Raction}{1}
+\newcommand{\varia}[1]{\textsl{\textsf{#1}}}
+\newcommand{\mytilde}{$\sim$}
+\newcommand{\maurizio}[1]{\color{red}#1 \color{black}}
+\newcommand{\federico}[1]{\color{green}#1 \color{black}}
+ 
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em,   frame=single}
+ \newenvironment{ese} [1]{\vskip10pt
+ 
+ \markright{\today}
+\colorbox{grigetto}{\parbox{\linewidth}{#1}}}
+                          {
+                
+                          \medskip}
+ \newcommand{\virgolette}{\selectlanguage{english}\texttt{"}\selectlanguage{italian}}
+ \frontmatter\title{Matematica e Statistica con \textsf{R}}
+\author{Federico Comoglio e  Maurizio Rinaldi}
+\markright{\today}
+\renewcommand{\chaptermark}[1]{%
+ \markboth{\chaptername
+ \ \thechapter.\ #1}{}}
+\newcommand{\rst}{\textsf{RStudio}~}
+\newcommand{\rpr}{\textsf{R}~}
+\makeindex
+
+\begin{document}
+
+\begin{tikzpicture}[x=1pt,y=1pt]
+\definecolor{fillColor}{RGB}{255,255,255}
+\path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (361.35,289.08);
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (180.67,289.08);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.20] at (118.42,283.39) {\bfseries Histogram of dadi100};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at (118.42, 17.28) {dadi100};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at ( 25.92,172.62) {Frequency};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (361.35,289.08);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 71.49, 57.60) -- (165.34, 57.60);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 71.49, 57.60) -- ( 71.49, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 90.26, 57.60) -- ( 90.26, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (109.03, 57.60) -- (109.03, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (127.80, 57.60) -- (127.80, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (146.57, 57.60) -- (146.57, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (165.34, 57.60) -- (165.34, 53.28);
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 71.49, 36.00) {1};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 90.26, 36.00) {2};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (109.03, 36.00) {3};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (127.80, 36.00) {4};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (146.57, 36.00) {5};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (165.34, 36.00) {6};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 66.12) -- ( 57.60,279.12);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 66.12) -- ( 53.28, 66.12);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,108.72) -- ( 53.28,108.72);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,151.32) -- ( 53.28,151.32);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,193.92) -- ( 53.28,193.92);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,236.52) -- ( 53.28,236.52);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,279.12) -- ( 53.28,279.12);
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64, 66.12) {0};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,108.72) {5};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,151.32) {10};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,193.92) {15};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,236.52) {20};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,279.12) {25};
+\end{scope}
+\begin{scope}
+\path[clip] ( 57.60, 57.60) rectangle (179.23,287.64);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{255,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] ( 62.10, 66.12) rectangle ( 80.88,193.92);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] ( 80.88, 66.12) rectangle ( 99.65,279.12);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] ( 99.65, 66.12) rectangle (118.42,159.84);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (118.42, 66.12) rectangle (137.19,210.96);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (137.19, 66.12) rectangle (155.96,219.48);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (155.96, 66.12) rectangle (174.73,185.40);
+\end{scope}
+\begin{scope}
+\path[clip] (180.67,  0.00) rectangle (361.35,289.08);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.20] at (299.09,283.39) {\bfseries Histogram of dadi100};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at (299.09, 17.28) {dadi100};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at (206.59,172.62) {Density};
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (361.35,289.08);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (252.17, 57.60) -- (346.02, 57.60);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (252.17, 57.60) -- (252.17, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (270.94, 57.60) -- (270.94, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (289.71, 57.60) -- (289.71, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (308.48, 57.60) -- (308.48, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (327.25, 57.60) -- (327.25, 53.28);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (346.02, 57.60) -- (346.02, 53.28);
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (252.17, 36.00) {1};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (270.94, 36.00) {2};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (289.71, 36.00) {3};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (308.48, 36.00) {4};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (327.25, 36.00) {5};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (346.02, 36.00) {6};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (238.27, 66.12) -- (238.27,279.12);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (238.27, 66.12) -- (233.95, 66.12);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (238.27,108.72) -- (233.95,108.72);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (238.27,151.32) -- (233.95,151.32);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (238.27,193.92) -- (233.95,193.92);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (238.27,236.52) -- (233.95,236.52);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (238.27,279.12) -- (233.95,279.12);
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (225.31, 66.12) {0.00};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (225.31,108.72) {0.05};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (225.31,151.32) {0.10};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (225.31,193.92) {0.15};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (225.31,236.52) {0.20};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (225.31,279.12) {0.25};
+\end{scope}
+\begin{scope}
+\path[clip] (238.27, 57.60) rectangle (359.91,287.64);
+\definecolor{drawColor}{RGB}{0,0,0}
+\definecolor{fillColor}{RGB}{0,0,255}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (242.78, 66.12) rectangle (261.55,193.92);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (261.55, 66.12) rectangle (280.32,279.12);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (280.32, 66.12) rectangle (299.09,159.84);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (299.09, 66.12) rectangle (317.86,210.96);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (317.86, 66.12) rectangle (336.63,219.48);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (336.63, 66.12) rectangle (355.40,185.40);
+\end{scope}
+\end{tikzpicture}
+
+\end{document}

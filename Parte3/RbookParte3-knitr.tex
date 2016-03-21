@@ -50,7 +50,7 @@
 
 \usepackage{alltt}
 \usepackage[english,italian]{babel}
-\usepackage[utf8]{inputenc}
+\usepackage[utf8]{}%inputenc
 \usepackage{inconsolata}
 %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
 \usepackage[T1]{fontenc}
@@ -124,15 +124,15 @@
 
  
  
-\chapter{Statistica e probabilit\`a  con \textsf{R}}
+\chapter{Probabilit\`a}
 Riprendiamo qui sinteticamente alcune definizioni.
 \section{Lo spazio campionario}
 
-Lo spazio campionario $\Omega$  (\emph{sample space}) è l'insieme di tutte le uscite possibili di un esperimento. Per esempio 
+Lo spazio campionario $\Omega$  (\emph{sample space}) è l'insieme di tutte le uscite possibili di un esperimento. Per Esempioo 
 \begin{itemize}
 \item Dado: lo spazio campionario consiste nelle uscite dei numeri da 1 a 6. \item Moneta: lo spazio campionario consiste di 2 possibili  uscite "esce testa", "esce croce"
 \item Misure di lunghezza: lo spazio campionario è un intervallo del semiasse positivo della retta. 
-Come si vede lo spazio campionario pu\`o essere dscreto o continuo. Potrebbe essere anche una combinazione dei due.
+Come si vede lo spazio campionario pu\`o essere discreto o continuo. Potrebbe essere anche una combinazione dei due.
 \end{itemize}
 \section{Gli eventi}
 
@@ -147,7 +147,7 @@ Come si vede lo spazio campionario pu\`o essere dscreto o continuo. Potrebbe ess
 
 \subsubsection{Costruzione di eventi}
 
-Siano A e  B degli eventi che possono risultare da un esperimento. A partire da questi eventi possiamo costruire dei nuovi eventi
+Siano $A$ e  $B$ degli eventi che possono risultare da un esperimento. A partire da questi eventi possiamo costruire dei nuovi eventi
 \begin{itemize}
 \item $A\cup B$ ($A$ oppure $B$, evento unione) indica il verificarsi di A o di B (o di ambedue).
 \item $A \cap  B$  indica il verificarsi di A e di  B.
@@ -164,7 +164,7 @@ Siano A e  B degli eventi che possono risultare da un esperimento. A partire da 
 
 $P(A)$ indica la probabilità di un evento A. Questo è un numero nell'intervallo $[0,1]$ che possiamo associare a ciascun evento che soddisfa certe regole (assiomi).
 Eventi certi corrispondono a probabilità uguale ad 1=100\%, eventi impossibili corrispondono a fiducia uguale a 0=0\%.
-
+La probabilità può essere definita per via assiomatica. 
 \subsubsection{ Assiomi}
 \begin{enumerate}
 \item qualunque sia l'evento $E$, $P(E)\geq 0$
@@ -194,14 +194,15 @@ $B^C=$\texttt{esce 1 o 2 o 3}$=\{1,2,3\}$
 
    
 $A$ e $B$ sono \emph{incompatibili} se $A\cap B=\emptyset$.
-
+In particolare per eventi incompatibili
+$P(A\cup B)=P(A)+P(B)$.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/unnamed-chunk-4-1} 
 
 \end{knitrout}
 
-Abbiamo quindi
+Con riferimento alla figura abbiamo quindi
 \[A=X_1\cup X_3, \quad B=X_2\cup X_3\]
 da cui
 \begin{align*} P(A)=&P(X_1)+P(X_3),\quad P(B)=P(X_3)+P(X_2)\\
@@ -213,36 +214,12 @@ da cui
 e quindi 
 
 $$P(A\cup B)=P(A) +P(B)-P(A\cap B)$$
+
+\vskip20pt
+
 ESEMPIO: Il 60\% degli studenti in questa classe è geniale mentre il   70\% ama lo sport; il 40\%, oltre ad essere geniale, ama lo sport. Determinare la probabilità che uno studente scelto a caso non sia geniale e non ami lo sport.
 
-
- 
- 
-
-\section{Variabili aleatorie}
-Una variabile aleatoria (\emph{random variabile}) \`e
- una variabile i cui valori sono soggetti a variazioni casuali. Quando i valori possibili di una variabile aleatoria  possono essere elencati parliamo di variabile aleatoria discreta. Quando i valori non possono essere elencati parliamo di variabile aleatoria continua.
-
-\section{Variabili aleatorie discrete}
-Le variabili aleatorie  discrete che  assumono un numero limitato di valori si dicono anche \emph{finite}.  I valori di una variabile aleatoria discreta possono essere numerici o nominali.
- Supponiamo di avere una variabile aleatoria che possa assumere un insieme di valori in  un \emph{alfabeto} assegnato costituito da lettere, parole o numeri. Per esempio un alfabeto pu\`o essere del tipo che segue
-\begin{itemize}
-\item{}(Femmina, Maschio)
-\item{}(A,C,T,G)
-\item{} (0,1)
-\item{}(Ottimo, Buono, Discreto, Sufficiente, Insufficiente)
-\item{} (Testa, Croce).
-\item{} I numeri interi
-\end{itemize}
-Per caratterizzare completamente una variabile aleatoria discreta oltre ai valori che questa pu\`o  assumere occorre conoscere la probabilit\`a  di questi valori.
-Per semplicit\`a considereremo variabili aleatorie finite.\\
-
- 
-
-La probabilità $P(A)$ di un evento A è il grado di fiducia  che lo sperimentatore pone nella realizzazione dell'evento (Jacob Bernoulli, 1654-1705) 
-
- 
-\subsection{Sistema completo di eventi}
+ \subsection{Sistema completo di eventi}
 
 Diciamo sistema completo
 
@@ -266,83 +243,43 @@ Nel caso del dado equo
 $$P(\textrm{esce i}) = 1/6$$
 
 \section{Lancio di 2 dadi}
-
+Immaginimamo di lanciare simultaneamente 2 dadi a 6 facce.
+Per semplicità assumiamo che uno dei due dadi sia rosso e l'altro sia verde.
 Un  sistema completo di eventi i 36 eventi é 
 $$A_{i,j}=\textrm{esce i sul dado verde e j sul dado rosso}$$ 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{plot}\hlstd{(}\hlnum{0}\hlstd{,}\hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{6}\hlstd{),}\hlkwc{ylim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{12}\hlstd{),}\hlkwc{type}\hlstd{=}\hlstr{"n"}\hlstd{,}\hlkwc{axes}\hlstd{=F,}\hlkwc{xlab}\hlstd{=}\hlstr{""}\hlstd{,}\hlkwc{ylab}\hlstd{=}\hlstr{""}\hlstd{)}
-\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{0}\hlopt{:}\hlnum{5}\hlstd{)}
-\hlkwa{for} \hlstd{(j} \hlkwa{in} \hlnum{0}\hlopt{:}\hlnum{5}\hlstd{)}
-\hlstd{\{}
-\hlkwd{rect}\hlstd{(i,}\hlnum{2}\hlopt{*}\hlstd{j,}\hlnum{3}\hlopt{/}\hlnum{8}\hlopt{+}\hlstd{i,}\hlnum{2}\hlopt{*}\hlstd{j}\hlopt{+}\hlnum{1}\hlstd{,}\hlkwc{col}\hlstd{=}\hlstr{"red1"}\hlstd{)}
-\hlkwd{rect}\hlstd{(}\hlnum{3}\hlopt{/}\hlnum{8}\hlopt{+}\hlstd{i,}\hlnum{2}\hlopt{*}\hlstd{j,}\hlnum{6}\hlopt{/}\hlnum{8}\hlopt{+}\hlstd{i,}\hlnum{1}\hlopt{+}\hlnum{2}\hlopt{*}\hlstd{j,}\hlkwc{col}\hlstd{=}\hlstr{"green"}\hlstd{)}
-\hlkwd{text}\hlstd{(}\hlnum{3}\hlopt{/}\hlnum{16}\hlopt{+}\hlstd{i,}\hlnum{0.5}\hlopt{+}\hlnum{2}\hlopt{*}\hlstd{j,j}\hlopt{+}\hlnum{1}\hlstd{,}\hlkwc{cex}\hlstd{=}\hlnum{1}\hlstd{)}
-\hlkwd{text}\hlstd{(i}\hlopt{+}\hlnum{9}\hlopt{/}\hlnum{16}\hlstd{,}\hlnum{0.5}\hlopt{+}\hlnum{2}\hlopt{*}\hlstd{j,i}\hlopt{+}\hlnum{1}\hlstd{,}\hlkwc{cex}\hlstd{=}\hlnum{1}\hlstd{)\}}
-\end{alltt}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/unnamed-chunk-5-1} 
 
 \end{knitrout}
 Se i dadi sono equi ogni evento  $A_{i,j}$ ha probabilità  1/36. 
 Per esempio
-$$P(\textrm{la somma fa 8})$$
+$$P(\textrm{la somma fa 8})=5/36$$
  
  
 \section{Probabilità condizionata}
 
 La notazione 
-
-$$P(A\mid B)$$
-
+\[P(A\mid B)\]
 indica la probabilità  dell'evento $A$ condizionata al verificarsi dell'evento $B$.
 In altre parole quale é la probabilità che si verifichi $A$ quando anche $B$ é verificato. 
+ \begin{center}
+\begin{figure}
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{set.seed}\hlstd{(}\hlnum{2000}\hlstd{)}
-\hlkwd{par}\hlstd{(}\hlkwc{mai}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{))}
-\hlkwd{par}\hlstd{(}\hlkwc{mgp}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{))}
-\hlstd{n}\hlkwb{=}\hlnum{30}
-\hlkwd{library}\hlstd{(plotrix)}
-\hlkwd{plot}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{,}\hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{1}\hlstd{,}\hlnum{11}\hlstd{),}\hlkwc{ylim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{1}\hlstd{,}\hlnum{11}\hlstd{),}\hlkwc{type}\hlstd{=}\hlstr{"n"}\hlstd{,}\hlkwc{xlab}\hlstd{=}\hlstr{""}\hlstd{,}\hlkwc{ylab}\hlstd{=}\hlstr{""}\hlstd{,}\hlkwc{asp}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{axes}\hlstd{=F,}
-     \hlstd{)}
-\hlkwd{rect}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{10}\hlstd{,}\hlnum{10}\hlstd{,}\hlkwc{border}\hlstd{=}\hlstr{"green"}\hlstd{,}\hlkwc{lwd}\hlstd{=}\hlnum{2}\hlstd{)}
-\hlstd{centro1}\hlkwb{=}\hlkwd{c}\hlstd{(}\hlnum{4}\hlstd{,}\hlnum{4}\hlstd{)}
-\hlstd{centro2}\hlkwb{=}\hlkwd{c}\hlstd{(}\hlnum{5}\hlstd{,}\hlnum{5}\hlstd{)}
-\hlkwd{draw.circle}\hlstd{(centro1[}\hlnum{1}\hlstd{],centro1[}\hlnum{2}\hlstd{],}\hlnum{2}\hlstd{,}\hlkwc{border}\hlstd{=}\hlstr{"blue"}\hlstd{)}
-\hlkwd{draw.circle}\hlstd{(centro2[}\hlnum{1}\hlstd{],centro2[}\hlnum{2}\hlstd{],}\hlnum{2}\hlstd{,}\hlkwc{border}\hlstd{=}\hlstr{"red"}\hlstd{,}\hlkwc{lwd}\hlstd{=}\hlnum{3}\hlstd{,}\hlkwc{col}\hlstd{=}\hlstr{"light green"}\hlstd{)}
-\hlstd{punti}\hlkwb{=}\hlkwd{cbind}\hlstd{(}\hlkwd{runif}\hlstd{(n,}\hlnum{0}\hlstd{,}\hlnum{10}\hlstd{),}\hlkwd{runif}\hlstd{(n,}\hlnum{0}\hlstd{,}\hlnum{10}\hlstd{))}
-\hlkwd{points}\hlstd{(punti,}\hlkwc{cex}\hlstd{=}\hlnum{0.8}\hlstd{,}\hlkwc{pch}\hlstd{=}\hlnum{19}\hlstd{)}
-\hlkwd{draw.circle}\hlstd{(}\hlnum{4}\hlstd{,}\hlnum{4}\hlstd{,}\hlnum{2}\hlstd{,}\hlkwc{lwd}\hlstd{=}\hlnum{3}\hlstd{,}\hlkwc{border}\hlstd{=}\hlstr{"blue"}\hlstd{)}
-\hlkwd{text}\hlstd{(}\hlnum{3}\hlstd{,}\hlnum{3}\hlstd{,}\hlstr{"A"}\hlstd{,}\hlkwc{col}\hlstd{=}\hlstr{"blue"}\hlstd{)}
-\hlkwd{text}\hlstd{(}\hlnum{6}\hlstd{,}\hlnum{6}\hlstd{,}\hlstr{"B"}\hlstd{)}
-\hlkwd{text}\hlstd{(}\hlnum{4}\hlstd{,}\hlnum{4}\hlstd{,}\hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"A"}\hlstd{,}\hlkwd{intersect}\hlstd{(}\hlstr{"B"}\hlstd{))))}
-\hlkwd{title}\hlstd{(}\hlstr{"n=30"}\hlstd{,}\hlkwc{line}\hlstd{=}\hlopt{-}\hlnum{2}\hlstd{)}
-\end{alltt}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/unnamed-chunk-6-1} 
 
 \end{knitrout}
 
-
- 
+\end{figure}
+\end{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{library}\hlstd{(MASS)}
-\end{alltt}
 
 
 {\ttfamily\noindent\itshape\color{messagecolor}{\#\# \\\#\# Attaching package: 'MASS'}}
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# The following object is masked from 'package:EsamiR':\\\#\# \\\#\#\ \ \ \  crabs}}\begin{alltt}
-\hlstd{a}\hlkwb{=}\hlkwd{length}\hlstd{(}\hlkwd{which}\hlstd{(}\hlkwd{rowSums}\hlstd{((punti}\hlopt{-}\hlstd{centro1)}\hlopt{^}\hlnum{2}\hlstd{)}\hlopt{<}\hlnum{4}\hlstd{))}
-\hlstd{b}\hlkwb{=}\hlkwd{length}\hlstd{(}\hlkwd{which}\hlstd{(}\hlkwd{rowSums}\hlstd{((punti}\hlopt{-}\hlstd{centro2)}\hlopt{^}\hlnum{2}\hlstd{)}\hlopt{<}\hlnum{4}\hlstd{))}
-\hlstd{acapb}\hlkwb{=}\hlkwd{length}\hlstd{(}\hlkwd{which}\hlstd{(}\hlkwd{rowSums}\hlstd{((punti}\hlopt{-}\hlstd{centro1)}\hlopt{^}\hlnum{2}\hlstd{)}\hlopt{<}\hlnum{4} \hlopt{&} \hlkwd{rowSums}\hlstd{((punti}\hlopt{-}\hlstd{centro2)}\hlopt{^}\hlnum{2}\hlstd{)}\hlopt{<}\hlnum{4}\hlstd{))}
-\end{alltt}
-\end{kframe}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# The following object is masked from 'package:EsamiR':\\\#\# \\\#\#\ \ \ \  crabs}}\end{kframe}
 \end{knitrout}
 
 $$P(A| B)=\frac{n_{A\cap B}}{n_{B}}=\frac{n_{A\cap B}/n}{n_{B}/n}=\frac{P({A\cap B})}{P(B)}=3/4$$
@@ -353,37 +290,12 @@ $$P(A| B)=\frac{P({A\cap B})}{P(B)}\quad (\hbox{se } B\neq \emptyset)$$
 \section{Esempio  1}
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{set.seed}\hlstd{(}\hlnum{10}\hlstd{)}
-\hlkwd{load}\hlstd{(}\hlstr{"../cards.Rdata"}\hlstd{)}
-\hlkwd{library}\hlstd{(XML)}
-\hlkwd{library}\hlstd{(grid)}
-\hlkwd{library}\hlstd{(grImport)}
-\hlstd{mazzo}\hlkwb{=}\hlkwd{names}\hlstd{(cards)[}\hlnum{1}\hlopt{:}\hlnum{40}\hlstd{]}
-\hlkwd{sample}\hlstd{(mazzo,}\hlnum{10}\hlstd{)}\hlkwb{->}\hlstd{estratte}
-\hlkwd{plot}\hlstd{(}\hlkwd{numeric}\hlstd{(}\hlnum{0}\hlstd{),}\hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{7}\hlstd{),}\hlkwc{ylim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{2}\hlstd{),}\hlkwc{xlab}\hlstd{=}\hlstr{""}\hlstd{,}\hlkwc{ylab}\hlstd{=}\hlstr{""}\hlstd{,}\hlkwc{axes}\hlstd{=F)}
-\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{5}\hlstd{)}
-\hlkwd{picture}\hlstd{(cards[[estratte[i]]],i}\hlopt{*}\hlnum{1.2}\hlstd{,}\hlnum{1}\hlstd{,(i}\hlopt{+}\hlnum{1}\hlstd{)}\hlopt{*}\hlnum{1.2}\hlstd{,}\hlnum{2}\hlstd{)}
-\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{5}\hlstd{)}
-\hlkwd{picture}\hlstd{(cards[[estratte[i}\hlopt{+}\hlnum{5}\hlstd{]]],i}\hlopt{*}\hlnum{1.2}\hlstd{,}\hlnum{0}\hlstd{,(i}\hlopt{+}\hlnum{1}\hlstd{)}\hlopt{*}\hlnum{1.2}\hlstd{,}\hlnum{1}\hlstd{)}
-\end{alltt}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/unnamed-chunk-8-1} 
 
 \end{knitrout}
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{strsplit}\hlstd{(estratte,}\hlkwc{split}\hlstd{=}\hlstr{"[.]"}\hlstd{)}\hlkwb{->}\hlstd{temp}
-\hlkwd{as.numeric}\hlstd{(}\hlkwd{sapply}\hlstd{(temp,}\hlstr{"["}\hlstd{,}\hlnum{2}\hlstd{))}\hlkwb{->}\hlstd{valore}
-\hlstd{pari}\hlkwb{=}\hlkwd{which}\hlstd{(valore}\hlopt{%%}\hlnum{2}\hlopt{==}\hlnum{0}\hlstd{)}
-\hlstd{rosse}\hlkwb{=}\hlkwd{which}\hlstd{(}\hlkwd{sapply}\hlstd{(temp,}\hlstr{"["}\hlstd{,}\hlnum{1}\hlstd{)}\hlopt{==}\hlstr{"C"}\hlopt{|}\hlkwd{sapply}\hlstd{(temp,}\hlstr{"["}\hlstd{,}\hlnum{1}\hlstd{)}\hlopt{==}\hlstr{"Q"}\hlstd{)}
-\hlkwd{library}\hlstd{(MASS)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
+
 
 \(P(\textrm{Rosso})\)= 3/10
 
@@ -393,91 +305,49 @@ $$P(A| B)=\frac{P({A\cap B})}{P(B)}\quad (\hbox{se } B\neq \emptyset)$$
 
 > - 1/10
 
-\(P(\textrm{Rosso}\mid \textrm{Pari}) \)
-
-> - 1/4
+\(P(\textrm{Rosso}\mid \textrm{Pari}) \)= 1/4
 
 \(P(\textrm{Pari}\mid \textrm{Rosso}) \)
-
-> - 1/3
+= 1/3
 
 \(P(\textrm{Pari}\cup\textrm{Rossa})\)
+=6/10
 
-6/10
-
-\section{Esempio 2}
+\subsubsection{Esempio 2}
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{n}\hlkwb{=}\hlnum{7}
-\hlkwd{sample}\hlstd{(mazzo,}\hlnum{2}\hlopt{*}\hlstd{n)}\hlkwb{->}\hlstd{estratte}
-\hlkwd{plot}\hlstd{(}\hlkwd{numeric}\hlstd{(}\hlnum{0}\hlstd{),}\hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1.4}\hlopt{*}\hlstd{n),}\hlkwc{ylim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{2}\hlopt{*}\hlnum{5}\hlopt{/}\hlstd{n),}\hlkwc{xlab}\hlstd{=}\hlstr{""}\hlstd{,}\hlkwc{ylab}\hlstd{=}\hlstr{""}\hlstd{,}\hlkwc{axes}\hlstd{=F)}
-\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{n)}
-\hlkwd{picture}\hlstd{(cards[[estratte[i]]],i}\hlopt{*}\hlnum{1.2}\hlstd{,}\hlnum{5}\hlopt{/}\hlstd{n,(i}\hlopt{+}\hlnum{1}\hlstd{)}\hlopt{*}\hlnum{1.2}\hlstd{,}\hlnum{2}\hlopt{*}\hlnum{5}\hlopt{/}\hlstd{n)}
-\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlstd{n)}
-\hlkwd{picture}\hlstd{(cards[[estratte[i}\hlopt{+}\hlstd{n]]],i}\hlopt{*}\hlnum{1.2}\hlstd{,}\hlnum{0}\hlstd{,(i}\hlopt{+}\hlnum{1}\hlstd{)}\hlopt{*}\hlnum{1.2}\hlstd{,}\hlnum{1}\hlopt{*}\hlnum{5}\hlopt{/}\hlstd{n)}
-\end{alltt}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/unnamed-chunk-10-1} 
 
 \end{knitrout}
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{strsplit}\hlstd{(estratte,}\hlkwc{split}\hlstd{=}\hlstr{"[.]"}\hlstd{)}\hlkwb{->}\hlstd{temp}
-\hlkwd{as.numeric}\hlstd{(}\hlkwd{sapply}\hlstd{(temp,}\hlstr{"["}\hlstd{,}\hlnum{2}\hlstd{))}\hlkwb{->}\hlstd{valore}
-\hlstd{pari}\hlkwb{=}\hlkwd{which}\hlstd{(valore}\hlopt{%%}\hlnum{2}\hlopt{==}\hlnum{0}\hlstd{)}
-\hlstd{rosse}\hlkwb{=}\hlkwd{which}\hlstd{(}\hlkwd{sapply}\hlstd{(temp,}\hlstr{"["}\hlstd{,}\hlnum{1}\hlstd{)}\hlopt{==}\hlstr{"C"}\hlopt{|}\hlkwd{sapply}\hlstd{(temp,}\hlstr{"["}\hlstd{,}\hlnum{1}\hlstd{)}\hlopt{==}\hlstr{"Q"}\hlstd{)}
-\hlkwd{library}\hlstd{(MASS)}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
 
-\(P(\textrm{Rosso})\)
 
-> -  9/14
+\(P(\textrm{Rosso})\)=9/14
 
-\(P(\textrm{Pari})\)
-
-> -  7/14
+\(P(\textrm{Pari})= 7/14
  
-\(P(\textrm{Rosso}\cap \textrm{Pari})\)
+\(P(\textrm{Rosso}\cap \textrm{Pari})\)= 4/14
 
-> - 4/14
-
-\(P(\textrm{Rosso}\mid \textrm{Pari}) \)
-
-> - 4/7
+\(P(\textrm{Rosso}\mid \textrm{Pari}) \)=4/7
 
 \(P(\textrm{Pari}\mid \textrm{Rosso}) \)
-
-> - 4/9
+=4/9
 
 \(P(\textrm{Pari}\cup\textrm{Rossa})\)
-
-> -  12/14
+= 12/14
 
  
 
-Consideriamo una popolazione P di $N=10^6$ individui uomini o donne $(M/W)$ che possono essere mancini o destrorsi $(L/R)$. Sia
+\subsubsection{Tabelle di contingenza}
+Consideriamo una popolazione $P$ di $N=10^6$ individui uomini o donne $(M/W)$ che possono essere mancini o destrorsi $(L/R)$. Sia
 
 $$WL =\textrm{Donne Mancine}=60000$$
 $$L=\textrm{Mancini totali}= 110000$$
 $$W=\textrm{Donne}= 650000$$
-
+\begin{center}
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{options}\hlstd{(}\hlkwc{scipen}\hlstd{=}\hlnum{999}\hlstd{)}
-\hlstd{mancini}\hlkwb{=}\hlkwd{data.frame}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{60000}\hlstd{,}\hlstr{"-"}\hlstd{,}\hlnum{110000}\hlstd{),}\hlkwd{rep}\hlstd{(}\hlstr{"-"}\hlstd{,}\hlnum{3}\hlstd{),}\hlkwd{c}\hlstd{(}\hlnum{650000}\hlstd{,}\hlstr{"-"}\hlstd{,} \hlnum{1000000}\hlstd{))}
-\hlkwd{colnames}\hlstd{(mancini)}\hlkwb{=}\hlkwd{c}\hlstd{(}  \hlstr{"L"}\hlstd{,} \hlstr{"R"}\hlstd{,} \hlstr{"Totali"}\hlstd{)}
-\hlkwd{rownames}\hlstd{(mancini)}\hlkwb{=}\hlkwd{c}\hlstd{(}\hlstr{"W"}\hlstd{,} \hlstr{"M"}\hlstd{,} \hlstr{"Totali"}\hlstd{)}
- \hlkwd{library}\hlstd{(knitr)}
-\hlkwd{kable}\hlstd{(mancini)}
-\end{alltt}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \begin{tabular}{l|l|l|l}
 \hline
   & L & R & Totali\\
@@ -492,20 +362,12 @@ Totali & 110000 & - & 1000000\\
 
 
 \end{knitrout}
+\end{center}
+Completando la tabella con i dati a nostra disposizione
 
-Completando la tabella
-
-
+\begin{center}
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{mancini}\hlkwb{=}\hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{60000}\hlstd{,}\hlnum{590000}\hlstd{,}\hlnum{650000}\hlstd{,}\hlnum{50000}\hlstd{,} \hlnum{300000}\hlstd{,} \hlnum{350000}\hlstd{,}  \hlnum{110000}\hlstd{,} \hlnum{890000}\hlstd{,} \hlnum{1000000}\hlstd{),}\hlkwc{nrow}\hlstd{=}\hlnum{3}\hlstd{,}\hlkwc{byrow}\hlstd{=T)}
-\hlkwd{colnames}\hlstd{(mancini)}\hlkwb{=}\hlkwd{c}\hlstd{(}  \hlstr{"L"}\hlstd{,} \hlstr{"R"}\hlstd{,} \hlstr{"Totali"}\hlstd{)}
-\hlkwd{rownames}\hlstd{(mancini)}\hlkwb{=}\hlkwd{c}\hlstd{(}\hlstr{"W"}\hlstd{,} \hlstr{"M"}\hlstd{,} \hlstr{"Totali"}\hlstd{)}
- \hlkwd{library}\hlstd{(knitr)}
-\hlkwd{kable}\hlstd{(mancini)}
-\end{alltt}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \begin{tabular}{l|r|r|r}
 \hline
   & L & R & Totali\\
@@ -520,7 +382,7 @@ Totali & 110000 & 890000 & 1000000\\
 
 
 \end{knitrout}
-
+\end{center}
 
 Per calcolare $P(L \mid  W)$  occorre determinare la probabilità di essere mancini se si é donne. In altre parole la popolazione é quella delle donne e all'interno di quello determiniamo  la probabilità di essere mancini:
 
@@ -552,7 +414,7 @@ $$P(A \mid  B)P(B) = P(B | A) P(A)$$
 
 e
 
-<img src="bayesrule.png" height="200px" width="300px" />
+<ixmg src="bayesrule.png" height="200px" width="300px" />
 
  
 \section{Legge della probabilità totale}
@@ -886,10 +748,10 @@ $$P (D | +) = P (+| D) P (D)/P (+) = 0.997\times 0.001/0.015982 =0.0623827$$
 \subsubsection{ Test di gravidanza}
 
 
-Un sito web \url{http://www.medicine.ox.ac.uk/bandolier/band64/b64-7.html} per test di gravidanza afferma:  
+Un sito web \url{http://www.medicine.ox.ac.uk/bandolier/band64/b64-7.html} che esamina studi medici considera un test di gravidanza che afferma:  
 
 
-"Quando i soggetti che hanno effettuato i test erano le donne che hanno raccolto e analizzato i loro campioni la sensitività  era del 75\%. La specificità era anche bassa, nel range dal 52\% al 75\%." 
+``Quando i soggetti che hanno effettuato i test erano le donne che hanno raccolto e analizzato i loro campioni la sensitività  era del 75\%. La specificità era anche bassa, nel range dal 52\% al 75\%.'' 
 
 Consideriamo il valore inferiore della specificità.  Supponiamo che il risultato sia negativo e che il 30\%  delle donne che fanno il test  siano effettivamente pregnanti. Determinare la probabilità di essere incinte dato il risultato negativo del test?
 
@@ -951,69 +813,7 @@ Supponiamo per concretezza che che si sia deciso di aprire la porta 1  e che il 
 $F_1$ è  l'evento "la Ferrari è dietro alla porta 1",  $F_2$ e $F_3$ sono definiti in modo uguale con le porte 2 e 3 rispettivamente.  Per esempio, abbiamo scelto la porta 1  
 
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{library}\hlstd{(MASS)}
-\hlstd{a1}\hlkwb{=}\hlkwd{fractions}\hlstd{(}\hlnum{1}\hlopt{/}\hlnum{3}\hlstd{)}
-\hlstd{a2}\hlkwb{=}\hlkwd{fractions}\hlstd{(}\hlnum{1}\hlopt{/}\hlnum{3}\hlstd{)}
-\hlstd{a3}\hlkwb{=}\hlkwd{fractions}\hlstd{(}\hlnum{1}\hlopt{/}\hlnum{3}\hlstd{)}
-\hlstd{a11}\hlkwb{=}\hlnum{1}\hlopt{/}\hlnum{2}
-\hlstd{a12}\hlkwb{=}\hlnum{1}\hlopt{/}\hlnum{2}
-\hlstd{a21}\hlkwb{=}\hlnum{1}
-\hlstd{a22}\hlkwb{=}\hlnum{0}
-\hlstd{a31}\hlkwb{=}\hlnum{0}
-\hlstd{a32}\hlkwb{=}\hlnum{1}
-\hlstd{p11}\hlkwb{=}\hlstd{a1}\hlopt{*}\hlstd{a11}
-\hlstd{p12}\hlkwb{=}\hlstd{a1}\hlopt{*}\hlstd{a12}
-\hlstd{p21}\hlkwb{=}\hlstd{a2}\hlopt{*}\hlstd{a21}
-\hlstd{p22}\hlkwb{=}\hlstd{a2}\hlopt{*}\hlstd{a22}
-\hlstd{p31}\hlkwb{=}\hlstd{a3}\hlopt{*}\hlstd{a31}
-\hlstd{p32}\hlkwb{=}\hlstd{a3}\hlopt{*}\hlstd{a32}
-\hlstd{node1}\hlkwb{<-}\hlstr{"_"}
-\hlstd{node2}\hlkwb{<-}\hlstr{"F1"}
-\hlstd{node3}\hlkwb{<-}\hlstr{"F2"}
-\hlstd{node4}\hlkwb{<-}\hlstr{"F3"}
-\hlstd{node5}\hlkwb{<-}\hlstr{"RU1"}
-\hlstd{node6}\hlkwb{<-}\hlstr{"BU1"}
-\hlstd{node7}\hlkwb{<-}\hlstr{"RU2"}
-\hlstd{node8}\hlkwb{<-}\hlstr{"BU2"}
-\hlstd{node9}\hlkwb{<-}\hlstr{"RU3"}
-\hlstd{node10}\hlkwb{<-}\hlstr{"BU3"}
-\hlstd{nodeNames}\hlkwb{<-}\hlkwd{c}\hlstd{(node1,node2,node3,node4, node5,node6, node7,node8,node9,node10)}
 
-\hlstd{rEG} \hlkwb{<-} \hlkwd{new}\hlstd{(}\hlstr{"graphNEL"}\hlstd{,} \hlkwc{nodes}\hlstd{=nodeNames,} \hlkwc{edgemode}\hlstd{=}\hlstr{"directed"}\hlstd{)}
-\hlcom{# Draw the "lines" or "branches" of the probability Tree}
-\hlstd{rEG} \hlkwb{<-} \hlkwd{addEdge}\hlstd{(nodeNames[}\hlnum{1}\hlstd{], nodeNames[}\hlnum{2}\hlstd{], rEG,} \hlnum{1}\hlstd{)}
-\hlstd{rEG} \hlkwb{<-} \hlkwd{addEdge}\hlstd{(nodeNames[}\hlnum{1}\hlstd{], nodeNames[}\hlnum{3}\hlstd{], rEG,} \hlnum{1}\hlstd{)}
-\hlstd{rEG} \hlkwb{<-} \hlkwd{addEdge}\hlstd{(nodeNames[}\hlnum{1}\hlstd{], nodeNames[}\hlnum{4}\hlstd{], rEG,} \hlnum{1}\hlstd{)}
-\hlstd{rEG} \hlkwb{<-} \hlkwd{addEdge}\hlstd{(nodeNames[}\hlnum{2}\hlstd{], nodeNames[}\hlnum{5}\hlstd{], rEG,} \hlnum{1}\hlstd{)}
-\hlstd{rEG} \hlkwb{<-} \hlkwd{addEdge}\hlstd{(nodeNames[}\hlnum{2}\hlstd{], nodeNames[}\hlnum{6}\hlstd{], rEG,} \hlnum{1}\hlstd{)}
-\hlstd{rEG} \hlkwb{<-} \hlkwd{addEdge}\hlstd{(nodeNames[}\hlnum{3}\hlstd{], nodeNames[}\hlnum{7}\hlstd{], rEG,} \hlnum{10}\hlstd{)}
-\hlstd{rEG} \hlkwb{<-} \hlkwd{addEdge}\hlstd{(nodeNames[}\hlnum{3}\hlstd{], nodeNames[}\hlnum{8}\hlstd{], rEG,} \hlnum{10}\hlstd{)}
-\hlstd{rEG} \hlkwb{<-} \hlkwd{addEdge}\hlstd{(nodeNames[}\hlnum{4}\hlstd{], nodeNames[}\hlnum{9}\hlstd{], rEG,} \hlnum{10}\hlstd{)}
-\hlstd{rEG} \hlkwb{<-} \hlkwd{addEdge}\hlstd{(nodeNames[}\hlnum{4}\hlstd{], nodeNames[}\hlnum{10}\hlstd{], rEG,} \hlnum{10}\hlstd{)}
-\hlstd{eAttrs} \hlkwb{<-} \hlkwd{list}\hlstd{()}
-\hlstd{nAttrs}\hlkwb{<-}\hlkwd{list}\hlstd{()}
-\hlstd{q}\hlkwb{<-}\hlkwd{edgeNames}\hlstd{(rEG)}
-\hlstd{nAttrs}\hlopt{$}\hlstd{fillcolor}\hlkwb{=}\hlkwd{rep}\hlstd{(}\hlstr{"light green"}\hlstd{,}\hlnum{10}\hlstd{)}
-\hlkwd{names}\hlstd{(nAttrs}\hlopt{$}\hlstd{fillcolor)} \hlkwb{<-} \hlstd{nodeNames}
-\hlstd{nAttrs}\hlopt{$}\hlstd{label}\hlkwb{=}\hlkwd{c}\hlstd{(}\hlstr{"_"}\hlstd{,}\hlstr{"F1"}\hlstd{,}\hlstr{"F2"}\hlstd{,}\hlstr{"F3"}\hlstd{,}\hlstr{"B"}\hlstd{,}\hlstr{"non B"}\hlstd{,}\hlstr{"B"}\hlstd{,}\hlstr{"non B"}\hlstd{,}\hlstr{"B"}\hlstd{,}\hlstr{"non B"}\hlstd{)}
-\hlkwd{names}\hlstd{(nAttrs}\hlopt{$}\hlstd{label)} \hlkwb{<-} \hlstd{nodeNames}
-\hlcom{# Add the probability values to the the branch lines}
-
-\hlstd{eAttrs}\hlopt{$}\hlstd{label} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlkwd{toString}\hlstd{(a1),}\hlkwd{toString}\hlstd{(a2),}
-\hlkwd{toString}\hlstd{(a3),} \hlkwd{toString}\hlstd{(a11),}
-\hlkwd{toString}\hlstd{(a12),} \hlkwd{toString}\hlstd{(a21),} \hlkwd{toString}\hlstd{(a22),} \hlkwd{toString}\hlstd{(a31),} \hlkwd{toString}\hlstd{(a32))}
-\hlkwd{names}\hlstd{(eAttrs}\hlopt{$}\hlstd{label)} \hlkwb{<-} \hlkwd{c}\hlstd{(q[}\hlnum{1}\hlstd{],q[}\hlnum{2}\hlstd{], q[}\hlnum{3}\hlstd{], q[}\hlnum{4}\hlstd{], q[}\hlnum{5}\hlstd{], q[}\hlnum{6}\hlstd{],q[}\hlnum{7}\hlstd{],q[}\hlnum{8}\hlstd{],q[}\hlnum{9}\hlstd{])}
-\hlstd{edgeAttrs}\hlkwb{<-}\hlstd{eAttrs}
-\hlstd{nodeAttrs}\hlkwb{<-}\hlstd{nAttrs}
-\hlcom{# Set the color, etc, of the tree}
-\hlstd{attributes}\hlkwb{<-}\hlkwd{list}\hlstd{(}\hlkwc{node}\hlstd{=}\hlkwd{list}\hlstd{(}\hlkwc{label}\hlstd{=}\hlstr{"foo"}\hlstd{,} \hlkwc{fontsize}\hlstd{=}\hlstr{"15"}\hlstd{),}
-\hlkwc{edge}\hlstd{=}\hlkwd{list}\hlstd{(}\hlkwc{color}\hlstd{=}\hlstr{"red"}\hlstd{),}\hlkwc{graph}\hlstd{=}\hlkwd{list}\hlstd{(}\hlkwc{rankdir}\hlstd{=}\hlstr{"TD"}\hlstd{))}
-\end{alltt}
-\end{kframe}
-\end{knitrout}
 
 
 
@@ -1033,12 +833,14 @@ $$P(F_3  \mid B) = \frac{P(B \mid F_3)P(F_3)}{P(B)} = 0$$
 \subsubsection{Grafico}
 
 
-<<echo=FALSE>=
-plot(rEG, edgeAttrs=eAttrs, nodeAttrs=nAttrs,attrs=attributes)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-28-1} 
+
+\end{knitrout}
 
 
-\section{Recessione}
+\subsubsection{Recessione}
 
 Una agenzia economica ha creato un modello che predice recessione. Il modello predice recessione con probabilità del 80\% quando  la recessione sta effettivamente arrivando e con probabilità del 10\% quando la recessione non sta arrivando. La probabilità che la recessione sia in arrivo è del 20\%. Se il modello predice recessione quale è la probabilità che la recessione stia effettivamente arrivando?
 
@@ -1055,7 +857,29 @@ P(Recessione | Prevista) = P(Prevista | Recessione)*P(Recessione)/P(Prevista)=$0
 Alice ha 2 monete nella borsa. La prima con 2 facce diverse e la seconda con 2 teste. Alice preleva a caso una moneta dalla borsa. La lancia e vede testa. Quale è la probabilità che abbia lanciato la moneta equa?
 
 
+\section{Variabili aleatorie}
+Una variabile aleatoria (\emph{random variabile}) \`e
+ una variabile i cui valori sono soggetti a variazioni casuali. Quando i valori possibili di una variabile aleatoria  possono essere elencati parliamo di variabile aleatoria discreta. Quando i valori non possono essere elencati parliamo di variabile aleatoria continua.
+
+\section{Variabili aleatorie discrete}
+Le variabili aleatorie  discrete che  assumono un numero limitato di valori si dicono anche \emph{finite}.  I valori di una variabile aleatoria discreta possono essere numerici o nominali.
+ Supponiamo di avere una variabile aleatoria che possa assumere un insieme di valori in  un \emph{alfabeto} assegnato costituito da lettere, parole o numeri. Per esempio un alfabeto pu\`o essere del tipo che segue
+\begin{itemize}
+\item{}(Femmina, Maschio)
+\item{}(A,C,T,G)
+\item{} (0,1)
+\item{}(Ottimo, Buono, Discreto, Sufficiente, Insufficiente)
+\item{} (Testa, Croce).
+\item{} I numeri interi
+\end{itemize}
+Per caratterizzare completamente una variabile aleatoria discreta oltre ai valori che questa pu\`o  assumere occorre conoscere la probabilit\`a  di questi valori.
+Per semplicit\`a considereremo variabili aleatorie finite.\\
+
  
+
+La probabilità $P(A)$ di un evento A è il grado di fiducia  che lo sperimentatore pone nella realizzazione dell'evento (Jacob Bernoulli, 1654-1705) 
+
+  
  
 \section{Simulazioni}
 
@@ -1423,7 +1247,7 @@ ottenendo la figura~\ref{fig:datiist}
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-56-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-57-1} 
 
 \end{knitrout}
 \caption{ Andamento della temperatura a Gennaio 2016  a Milano. }
@@ -1539,7 +1363,7 @@ Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del 
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-63-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-64-1} 
 
 \end{knitrout}
 \caption{Diagramma a colonne e areogramma per il lancio di un dado.}
@@ -1568,14 +1392,14 @@ lasciando \textsf{R} libero di scegliere i punti di taglio (pannelli a sinistra 
 \hlkwc{main}\hlstd{=}\hlstr{"Cutoff personalizzati"}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-66-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-67-1} 
 
 \end{knitrout}
 \begin{figure}[htbp]
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-67-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-68-1} 
 
 \end{knitrout}
 \caption{ Areogramma dei dati della temperatura. Scelta automatica dei punti di taglio.}
@@ -1597,7 +1421,7 @@ otteniamo la figura~\ref{fig:boxplotdado}
 \hlkwd{boxplot}\hlstd{(dadi100)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-68-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-69-1} 
 
 \end{knitrout}
 \caption{Boxplot dei risultati del lancio di un dado}
@@ -1625,7 +1449,7 @@ fornisce in uscita  la Figura~\ref{fig:pie}
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-70-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-71-1} 
 
 \end{knitrout}
 \caption{Diagramma a torta per il lancio di un dado equo.}
@@ -1654,7 +1478,7 @@ Per analizzare questi dati conviene preliminarmente tracciarne un diagramma a di
 \hlkwd{plot}\hlstd{(x,y)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-72-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-73-1} 
 
 \end{knitrout}
 \caption{Diagramma a dispersione tempo/concentrazione.}
@@ -1728,7 +1552,7 @@ In tal modo otteniamo il grafico~\ref{fig:duerettex}.
 \begin{figure}[htbp]
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-76-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-77-1} 
 
 \end{knitrout}
 \caption{Rette di regressione. In blu $R_x$, in verde $R_y$.}
@@ -1764,7 +1588,7 @@ Ora diamo una prima occhiata ai dati:
 \hlkwd{plot}\hlstd{(age,height)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-79-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-80-1} 
 
 \end{knitrout}
 \caption{Crescita dei bambini di Kalama}
@@ -1925,7 +1749,7 @@ come in Figura~\ref{fig:duemammals}.\begin{figure}[htbp]
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-85-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-86-1} 
 
 \end{knitrout}
 \caption{Diagramma a dispersione massa corporea/massa del cervello in scala normale ed in scala logaritmica. }
@@ -1947,7 +1771,7 @@ Visti i  risultati ottenuti usando la scala logaritmica tracciamo anche la corri
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-87-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-88-1} 
 
 \end{knitrout}
 \caption{ Retta di regressione. Dimensione del corpo e del cervello. Si noti la posizione dell'uomo.}
@@ -2011,7 +1835,7 @@ per caratterizzare diversi aspetti.
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-89-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-90-1} 
 
 \end{knitrout}
 \caption{ Scatterplot}\label{fig:scatterplot}
@@ -2052,7 +1876,7 @@ Spesso  i dati sperimentali presentano una distribuzione a  campana del tipo che
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-91-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-92-1} 
 
 \end{knitrout}
 
@@ -2061,7 +1885,7 @@ Sovrapponiamo ora all'areogramma una curva che sembra approssimare molto bene l'
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-92-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-93-1} 
 
 \end{knitrout}
 
@@ -2087,7 +1911,7 @@ Riportiamo in figura  il grafico di alcune gaussiane riportando i valori dei par
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-93-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-94-1} 
 
 \end{knitrout}
 
@@ -2129,7 +1953,7 @@ Il grafico~(\ref{fig:normalesta}) della gaussiana
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-96-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-97-1} 
 
 \end{knitrout}
 \caption{ Grafico della normale standard nell'intervallo $[-2.5,2.5]$. }
@@ -2143,7 +1967,7 @@ Per  visualizzare una gaussiana non standard, ad esempio una gaussiana con media
 \hlkwd{curve}\hlstd{(}\hlkwd{dnorm}\hlstd{(x,}\hlkwc{mean}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{sd}\hlstd{=}\hlnum{1.5}\hlstd{),}\hlopt{-}\hlnum{3}\hlstd{,}\hlnum{3}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-97-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-98-1} 
 
 \end{knitrout}
 \subsection{La funzione \texttt{pnorm}}
@@ -2188,7 +2012,7 @@ come illustrato nella figura~\ref{fig:fig2code}.
 \begin{figure}[H]
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-101-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-102-1} 
 
 \end{knitrout}
 \caption{$x=\texttt{qnorm}(A)$}
@@ -2200,7 +2024,7 @@ Vogliamo costruire una funzione, diciamo $U$ tale che assegnato un valore di are
 \begin{figure}[H]
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-102-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-103-1} 
 
 \end{knitrout}
 \caption{$x=U(A)=\texttt{qnorm}(1/2+A/2)$}
@@ -2230,7 +2054,7 @@ Questa funzione fornisce fissato il livello di fiducia l'ascissa $x$  tale che l
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-106-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-107-1} 
 
 \end{knitrout}
 \caption{Code della distribuzione normale}
@@ -2281,7 +2105,7 @@ Tracciamo ad esempio un grafico tra -2 e 2 per una distribuzione a 10 gradi di l
 \hlkwd{curve}\hlstd{(}\hlkwd{dt}\hlstd{(x,}\hlnum{10}\hlstd{),}\hlopt{-}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-108-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-109-1} 
 
 \end{knitrout}
 \caption{Grafico della distribuzione di Student a 10 gradi di libert\`a. }
@@ -2301,7 +2125,7 @@ Ricordiamo che la distribuzione di Student si usa in  particolare nei casi in cu
 \hlkwd{legend}\hlstd{(}\hlstr{"topleft"}\hlstd{,} \hlkwd{c}\hlstd{(}\hlstr{"df=2"}\hlstd{,}\hlstr{"df=25"}\hlstd{,}\hlstr{"normale"}\hlstd{),}\hlkwc{pch}\hlstd{=}\hlnum{15}\hlstd{,}\hlkwc{col}\hlstd{=}\hlnum{1}\hlopt{:}\hlnum{3}\hlstd{);}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-109-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-110-1} 
 
 \end{knitrout}
 \caption{Grafico della distribuzione di Student a 10 gradi di libert\`a. }
@@ -3073,7 +2897,7 @@ consente il tracciamento di un \emph{boxplot} comparativo.
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-147-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-148-1} 
 
 \end{knitrout}
 \caption{Boxplot comparativo di 4 tipi di grasso di cottura.}
@@ -3205,7 +3029,7 @@ La distribuzione di Fisher \`e indicata in \textsf{R} con la lettera \texttt{f}.
 \hlkwd{curve}\hlstd{(}\hlkwd{df}\hlstd{(x,}\hlnum{3}\hlstd{,}\hlnum{10}\hlstd{),}\hlnum{0}\hlstd{,}\hlnum{5}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-155-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-156-1} 
 
 \end{knitrout}
 ottenendo il grafico
@@ -3217,7 +3041,7 @@ ottenendo il grafico
 \hlkwd{curve}\hlstd{(}\hlkwd{df}\hlstd{(x,}\hlnum{3}\hlstd{,}\hlnum{10}\hlstd{),}\hlnum{0}\hlstd{,}\hlnum{5}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-156-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-157-1} 
 
 \end{knitrout}
 \caption{Distribuzione di Fisher.}

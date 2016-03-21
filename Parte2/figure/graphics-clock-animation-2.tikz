@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.10 on 2016-02-15 17:57:07
+% Created by tikzDevice version 0.10 on 2016-03-13 18:26:53
 % !TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \nonstopmode
@@ -26,7 +26,6 @@
 \usepackage{makeidx}
 \usepackage{babelbib}
 \usepackage{float}
-\usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
@@ -35,7 +34,6 @@
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{amsmath}
-
 \usepackage{hyperref}
 \newenvironment{question}{\item \textbf{Esercizio}\newline}{}
 \newenvironment{solution}{\textbf{Soluzione}\newline}{}
@@ -43,11 +41,9 @@
 \definecolor{grigetto}{rgb}{0.9,0.9,0.9}
  
 \DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
-\lhead[\thepage]{\today}
 %\usepackage{draftwatermark}
 \usepackage{wrapfig}
 \usepackage{listings}
-\pagestyle{fancy}
 \newcounter{fnotes}\setcounter{fnotes}{1}
 \newcounter{Raction}\setcounter{Raction}{1}
 \newcommand{\varia}[1]{\textsl{\textsf{#1}}}
@@ -71,7 +67,6 @@
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
 \author{Federico Comoglio e  Maurizio Rinaldi}
 \markright{\today}
-\lhead{\today}
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}

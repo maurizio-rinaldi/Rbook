@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.10.1 on 2016-03-11 15:41:10
+% Created by tikzDevice version 0.10 on 2016-03-13 18:26:52
 % !TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \nonstopmode
@@ -26,7 +26,6 @@
 \usepackage{makeidx}
 \usepackage{babelbib}
 \usepackage{float}
-%\usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{framed}
@@ -35,7 +34,6 @@
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{amsmath}
-
 \usepackage{hyperref}
 \newenvironment{question}{\item \textbf{Esercizio}\newline}{}
 \newenvironment{solution}{\textbf{Soluzione}\newline}{}
@@ -43,11 +41,9 @@
 \definecolor{grigetto}{rgb}{0.9,0.9,0.9}
  
 \DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
-\lhead[\thepage]{\today}
 %\usepackage{draftwatermark}
 \usepackage{wrapfig}
 \usepackage{listings}
-\pagestyle{fancy}
 \newcounter{fnotes}\setcounter{fnotes}{1}
 \newcounter{Raction}\setcounter{Raction}{1}
 \newcommand{\varia}[1]{\textsl{\textsf{#1}}}
@@ -71,7 +67,6 @@
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
 \author{Federico Comoglio e  Maurizio Rinaldi}
 \markright{\today}
-\lhead{\today}
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}
@@ -96,6 +91,40 @@
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (117.44,153.13) --
 	(108.41,168.78) --
 	( 99.37,153.13);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (216.81,216.81);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (108.41, 43.20) -- (108.41, 43.20);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (108.41, 43.20) -- (108.41, 38.88);
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (108.41, 21.60) {VI};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 43.20,108.41) -- ( 43.20,108.41);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 43.20,108.41) -- ( 38.88,108.41);
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 30.24,108.41) {IX};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (108.41,173.61) -- (108.41,173.61);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (108.41,173.61) -- (108.41,177.93);
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (108.41,186.57) {XII};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (173.61,108.41) -- (173.61,108.41);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (173.61,108.41) -- (177.93,108.41);
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (195.21,108.41) {III};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 43.20, 43.20) --
+	(173.61, 43.20) --
+	(173.61,173.61) --
+	( 43.20,173.61) --
+	( 43.20, 43.20);
 \end{scope}
 \end{tikzpicture}
 

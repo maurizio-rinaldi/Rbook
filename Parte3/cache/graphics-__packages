@@ -8,3 +8,7 @@ MASS
 exams
 lattice
 RColorBrewer
+XML
+grImport
+graph
+Rgraphviz

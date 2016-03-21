@@ -1,7 +1,7 @@
 %!TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \usepackage[english,italian]{babel}
-\usepackage[utf8]{inputenc}
+\usepackage[utf8]{}%inputenc
 \usepackage{inconsolata}
 %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
 \usepackage[T1]{fontenc}
@@ -58,10 +58,11 @@
 \begin{document}
 \setkeys{Gin}{width=0.7\textwidth}
 
-<<setup, include=FALSE, cache=TRUE>>=
+<<setup, include=FALSE,cache=TRUE>>=
 library(knitr)
-options(formatR.arrow=TRUE,width=50)
-opts_chunk$set(fig.path='figure/graphics-', cache.path='cache/graphics-', fig.align='center', dev='tikz', fig.width=5, fig.height=4, fig.show='hold', cache=TRUE, par=TRUE,warning=F)
+opts_knit$set(progress = TRUE, verbose = TRUE,warning=F,message=F)
+options(formatR.arrow=TRUE,width=50,warning=F)
+opts_chunk$set(fig.path='figure/graphics-', cache.path='cache/graphics-', fig.align='center', dev='tikz', fig.width=5, fig.height=4, fig.show='hold', cache=TRUE, par=TRUE,warning=FALSE,message=FALSE)
 knit_hooks$set(par=function(before, options, envir){
 if (before && options$fig.show!='none') par(mar=c(4,4,.1,.1),cex.lab=.95,cex.axis=.9,mgp=c(2,.7,0),tcl=-.3)
 }, crop=hook_pdfcrop)
@@ -86,15 +87,15 @@ install.packages("../libroR_0.0.tgz", repos = NULL, type = .Platform$pkgType)
 @
  
  
-\chapter{Statistica e probabilit\`a  con \textsf{R}}
+\chapter{Probabilit\`a}
 Riprendiamo qui sinteticamente alcune definizioni.
 \section{Lo spazio campionario}
 
-Lo spazio campionario $\Omega$  (\emph{sample space}) è l'insieme di tutte le uscite possibili di un esperimento. Per esempio 
+Lo spazio campionario $\Omega$  (\emph{sample space}) è l'insieme di tutte le uscite possibili di un esperimento. Per Esempioo 
 \begin{itemize}
 \item Dado: lo spazio campionario consiste nelle uscite dei numeri da 1 a 6. \item Moneta: lo spazio campionario consiste di 2 possibili  uscite "esce testa", "esce croce"
 \item Misure di lunghezza: lo spazio campionario è un intervallo del semiasse positivo della retta. 
-Come si vede lo spazio campionario pu\`o essere dscreto o continuo. Potrebbe essere anche una combinazione dei due.
+Come si vede lo spazio campionario pu\`o essere discreto o continuo. Potrebbe essere anche una combinazione dei due.
 \end{itemize}
 \section{Gli eventi}
 
@@ -109,7 +110,7 @@ Come si vede lo spazio campionario pu\`o essere dscreto o continuo. Potrebbe ess
 
 \subsubsection{Costruzione di eventi}
 
-Siano A e  B degli eventi che possono risultare da un esperimento. A partire da questi eventi possiamo costruire dei nuovi eventi
+Siano $A$ e  $B$ degli eventi che possono risultare da un esperimento. A partire da questi eventi possiamo costruire dei nuovi eventi
 \begin{itemize}
 \item $A\cup B$ ($A$ oppure $B$, evento unione) indica il verificarsi di A o di B (o di ambedue).
 \item $A \cap  B$  indica il verificarsi di A e di  B.
@@ -130,7 +131,7 @@ text(3.5,4,expression(paste("A",intersect("B"))))
 
 $P(A)$ indica la probabilità di un evento A. Questo è un numero nell'intervallo $[0,1]$ che possiamo associare a ciascun evento che soddisfa certe regole (assiomi).
 Eventi certi corrispondono a probabilità uguale ad 1=100\%, eventi impossibili corrispondono a fiducia uguale a 0=0\%.
-
+La probabilità può essere definita per via assiomatica. 
 \subsubsection{ Assiomi}
 \begin{enumerate}
 \item qualunque sia l'evento $E$, $P(E)\geq 0$
@@ -160,7 +161,8 @@ $B^C=$\texttt{esce 1 o 2 o 3}$=\{1,2,3\}$
 
    
 $A$ e $B$ sono \emph{incompatibili} se $A\cap B=\emptyset$.
-
+In particolare per eventi incompatibili
+$P(A\cup B)=P(A)+P(B)$.
 <<echo =FALSE,fig.height=5>>=
 plot(0,xlim=c(0,10),ylim=c(0,8),type="n",axes=F,xlab="",ylab="")
 library(plotrix)
@@ -174,7 +176,7 @@ text(5,4,"B",col="red")
 text(3.5,4,expression(paste("X3=A",intersect("B")))) 
 @
 
-Abbiamo quindi
+Con riferimento alla figura abbiamo quindi
 \[A=X_1\cup X_3, \quad B=X_2\cup X_3\]
 da cui
 \begin{align*} P(A)=&P(X_1)+P(X_3),\quad P(B)=P(X_3)+P(X_2)\\
@@ -186,36 +188,12 @@ da cui
 e quindi 
 
 $$P(A\cup B)=P(A) +P(B)-P(A\cap B)$$
+
+\vskip20pt
+
 ESEMPIO: Il 60\% degli studenti in questa classe è geniale mentre il   70\% ama lo sport; il 40\%, oltre ad essere geniale, ama lo sport. Determinare la probabilità che uno studente scelto a caso non sia geniale e non ami lo sport.
 
-
- 
- 
-
-\section{Variabili aleatorie}
-Una variabile aleatoria (\emph{random variabile}) \`e
- una variabile i cui valori sono soggetti a variazioni casuali. Quando i valori possibili di una variabile aleatoria  possono essere elencati parliamo di variabile aleatoria discreta. Quando i valori non possono essere elencati parliamo di variabile aleatoria continua.
-
-\section{Variabili aleatorie discrete}
-Le variabili aleatorie  discrete che  assumono un numero limitato di valori si dicono anche \emph{finite}.  I valori di una variabile aleatoria discreta possono essere numerici o nominali.
- Supponiamo di avere una variabile aleatoria che possa assumere un insieme di valori in  un \emph{alfabeto} assegnato costituito da lettere, parole o numeri. Per esempio un alfabeto pu\`o essere del tipo che segue
-\begin{itemize}
-\item{}(Femmina, Maschio)
-\item{}(A,C,T,G)
-\item{} (0,1)
-\item{}(Ottimo, Buono, Discreto, Sufficiente, Insufficiente)
-\item{} (Testa, Croce).
-\item{} I numeri interi
-\end{itemize}
-Per caratterizzare completamente una variabile aleatoria discreta oltre ai valori che questa pu\`o  assumere occorre conoscere la probabilit\`a  di questi valori.
-Per semplicit\`a considereremo variabili aleatorie finite.\\
-
- 
-
-La probabilità $P(A)$ di un evento A è il grado di fiducia  che lo sperimentatore pone nella realizzazione dell'evento (Jacob Bernoulli, 1654-1705) 
-
- 
-\subsection{Sistema completo di eventi}
+ \subsection{Sistema completo di eventi}
 
 Diciamo sistema completo
 
@@ -239,10 +217,11 @@ Nel caso del dado equo
 $$P(\textrm{esce i}) = 1/6$$
 
 \section{Lancio di 2 dadi}
-
+Immaginimamo di lanciare simultaneamente 2 dadi a 6 facce.
+Per semplicità assumiamo che uno dei due dadi sia rosso e l'altro sia verde.
 Un  sistema completo di eventi i 36 eventi é 
 $$A_{i,j}=\textrm{esce i sul dado verde e j sul dado rosso}$$ 
-<<>>=
+<<echo=FALSE>>=
 plot(0,xlim=c(0,6),ylim=c(0,12),type="n",axes=F,xlab="",ylab="")
 for (i in 0:5)
 for (j in 0:5)
@@ -254,18 +233,18 @@ text(i+9/16,0.5+2*j,i+1,cex=1)}
 @
 Se i dadi sono equi ogni evento  $A_{i,j}$ ha probabilità  1/36. 
 Per esempio
-$$P(\textrm{la somma fa 8})$$
+$$P(\textrm{la somma fa 8})=5/36$$
  
  
 \section{Probabilità condizionata}
 
 La notazione 
-
-$$P(A\mid B)$$
-
+\[P(A\mid B)\]
 indica la probabilità  dell'evento $A$ condizionata al verificarsi dell'evento $B$.
 In altre parole quale é la probabilità che si verifichi $A$ quando anche $B$ é verificato. 
-<<>>=
+ \begin{center}
+\begin{figure}
+<<echo=FALSE,message=FALSE>>=
 set.seed(2000)
 par(mai=c(0,0,0,0))
 par(mgp=c(0,0,0))
@@ -287,9 +266,9 @@ text(4,4,expression(paste("A",intersect("B"))))
 title("n=30",line=-2)
 @
 
-
- 
-<<>>=
+\end{figure}
+\end{center}
+<<echo=F>>=
 library(MASS)
 a=length(which(rowSums((punti-centro1)^2)<4))
 b=length(which(rowSums((punti-centro2)^2)<4))
@@ -303,7 +282,7 @@ $$P(A| B)=\frac{P({A\cap B})}{P(B)}\quad (\hbox{se } B\neq \emptyset)$$
 
 \section{Esempio  1}
 
-<<>>=
+<<echo=FALSE,fig.height=5>>=
 set.seed(10)
 load("../cards.Rdata")
 library(XML)
@@ -318,7 +297,7 @@ for (i in 1:5)
 picture(cards[[estratte[i+5]]],i*1.2,0,(i+1)*1.2,1)
 @
 
-<<>>=
+<<echo=FALSE>>=
 strsplit(estratte,split="[.]")->temp
 as.numeric(sapply(temp,"[",2))->valore
 pari=which(valore%%2==0)
@@ -334,21 +313,17 @@ library(MASS)
 
 > - \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(temp)}
 
-\(P(\textrm{Rosso}\mid \textrm{Pari}) \)
-
-> - \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(pari)}
+\(P(\textrm{Rosso}\mid \textrm{Pari}) \)= \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(pari)}
 
 \(P(\textrm{Pari}\mid \textrm{Rosso}) \)
-
-> - \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(rosse)}
+= \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(rosse)}
 
 \(P(\textrm{Pari}\cup\textrm{Rossa})\)
+=\Sexpr{length(unique(c(pari,rosse)))}/\Sexpr{ length(temp)}
 
-\Sexpr{length(unique(c(pari,rosse)))}/\Sexpr{ length(temp)}
+\subsubsection{Esempio 2}
 
-\section{Esempio 2}
-
-<<>>=
+<<echo=FALSE>>=
 n=7
 sample(mazzo,2*n)->estratte
 plot(numeric(0),xlim=c(0,1.4*n),ylim=c(0,2*5/n),xlab="",ylab="",axes=F)
@@ -358,7 +333,7 @@ for (i in 1:n)
 picture(cards[[estratte[i+n]]],i*1.2,0,(i+1)*1.2,1*5/n)
 @
 
-<<>>=
+<<echo=FALSE>>=
 strsplit(estratte,split="[.]")->temp
 as.numeric(sapply(temp,"[",2))->valore
 pari=which(valore%%2==0)
@@ -366,39 +341,30 @@ rosse=which(sapply(temp,"[",1)=="C"|sapply(temp,"[",1)=="Q")
 library(MASS)
 @
 
-\(P(\textrm{Rosso})\)
+\(P(\textrm{Rosso})\)=\Sexpr{  length(rosse)}/\Sexpr{ length(temp)}
 
-> -  \Sexpr{  length(rosse)}/\Sexpr{ length(temp)}
-
-\(P(\textrm{Pari})\)
-
-> -  \Sexpr{  length(pari)}/\Sexpr{ length(temp)}
+\(P(\textrm{Pari})= \Sexpr{  length(pari)}/\Sexpr{ length(temp)}
  
-\(P(\textrm{Rosso}\cap \textrm{Pari})\)
+\(P(\textrm{Rosso}\cap \textrm{Pari})\)= \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(temp)}
 
-> - \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(temp)}
-
-\(P(\textrm{Rosso}\mid \textrm{Pari}) \)
-
-> - \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(pari)}
+\(P(\textrm{Rosso}\mid \textrm{Pari}) \)=\Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(pari)}
 
 \(P(\textrm{Pari}\mid \textrm{Rosso}) \)
-
-> - \Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(rosse)}
+=\Sexpr{  length(intersect(pari,rosse))}/\Sexpr{ length(rosse)}
 
 \(P(\textrm{Pari}\cup\textrm{Rossa})\)
-
-> -  \Sexpr{  length(unique(c(pari,rosse)))}/\Sexpr{ length(temp)}
+= \Sexpr{  length(unique(c(pari,rosse)))}/\Sexpr{ length(temp)}
 
  
 
-Consideriamo una popolazione P di $N=10^6$ individui uomini o donne $(M/W)$ che possono essere mancini o destrorsi $(L/R)$. Sia
+\subsubsection{Tabelle di contingenza}
+Consideriamo una popolazione $P$ di $N=10^6$ individui uomini o donne $(M/W)$ che possono essere mancini o destrorsi $(L/R)$. Sia
 
 $$WL =\textrm{Donne Mancine}=60000$$
 $$L=\textrm{Mancini totali}= 110000$$
 $$W=\textrm{Donne}= 650000$$
-
-<<>>=
+\begin{center}
+<<echo=FALSE>>=
 options(scipen=999)
 mancini=data.frame(c(60000,"-",110000),rep("-",3),c(650000,"-", 1000000))
 colnames(mancini)=c(  "L", "R", "Totali")
@@ -406,18 +372,18 @@ rownames(mancini)=c("W", "M", "Totali")
  library(knitr) 
 kable(mancini)
 @  
+\end{center}
+Completando la tabella con i dati a nostra disposizione
 
-Completando la tabella
-
-
-<<>>=
+\begin{center}
+<<echo=FALSE>>=
 mancini=matrix(c(60000,590000,650000,50000, 300000, 350000,  110000, 890000, 1000000),nrow=3,byrow=T)
 colnames(mancini)=c(  "L", "R", "Totali")
 rownames(mancini)=c("W", "M", "Totali")
  library(knitr) 
 kable(mancini)
 @
-
+\end{center}
 
 Per calcolare $P(L \mid  W)$  occorre determinare la probabilità di essere mancini se si é donne. In altre parole la popolazione é quella delle donne e all'interno di quello determiniamo  la probabilità di essere mancini:
 
@@ -449,7 +415,7 @@ $$P(A \mid  B)P(B) = P(B | A) P(A)$$
 
 e
 
-<img src="bayesrule.png" height="200px" width="300px" />
+<ixmg src="bayesrule.png" height="200px" width="300px" />
 
  
 \section{Legge della probabilità totale}
@@ -953,10 +919,10 @@ $$P (D | +) = P (+| D) P (D)/P (+) = 0.997\times 0.001/0.015982 =\Sexpr{ 0.997*0
 \subsubsection{ Test di gravidanza}
 
 
-Un sito web \url{http://www.medicine.ox.ac.uk/bandolier/band64/b64-7.html} per test di gravidanza afferma:  
+Un sito web \url{http://www.medicine.ox.ac.uk/bandolier/band64/b64-7.html} che esamina studi medici considera un test di gravidanza che afferma:  
 
 
-"Quando i soggetti che hanno effettuato i test erano le donne che hanno raccolto e analizzato i loro campioni la sensitività  era del 75\%. La specificità era anche bassa, nel range dal 52\% al 75\%." 
+``Quando i soggetti che hanno effettuato i test erano le donne che hanno raccolto e analizzato i loro campioni la sensitività  era del 75\%. La specificità era anche bassa, nel range dal 52\% al 75\%.'' 
 
 Consideriamo il valore inferiore della specificità.  Supponiamo che il risultato sia negativo e che il 30\%  delle donne che fanno il test  siano effettivamente pregnanti. Determinare la probabilità di essere incinte dato il risultato negativo del test?
 
@@ -1021,7 +987,7 @@ Supponiamo per concretezza che che si sia deciso di aprire la porta 1  e che il 
 $F_1$ è  l'evento "la Ferrari è dietro alla porta 1",  $F_2$ e $F_3$ sono definiti in modo uguale con le porte 2 e 3 rispettivamente.  Per esempio, abbiamo scelto la porta 1  
 
 
-<<>>=
+<<echo=FALSE>>=
 library(MASS)
 a1=fractions(1/3)
 a2=fractions(1/3)
@@ -1099,12 +1065,12 @@ $$P(F_3  \mid B) = \frac{P(B \mid F_3)P(F_3)}{P(B)} = 0$$
 \subsubsection{Grafico}
 
 
-<<echo=FALSE>=
+<<echo=FALSE>>=
 plot(rEG, edgeAttrs=eAttrs, nodeAttrs=nAttrs,attrs=attributes)
 @
 
 
-\section{Recessione}
+\subsubsection{Recessione}
 
 Una agenzia economica ha creato un modello che predice recessione. Il modello predice recessione con probabilità del 80\% quando  la recessione sta effettivamente arrivando e con probabilità del 10\% quando la recessione non sta arrivando. La probabilità che la recessione sia in arrivo è del 20\%. Se il modello predice recessione quale è la probabilità che la recessione stia effettivamente arrivando?
 
@@ -1121,7 +1087,29 @@ P(Recessione | Prevista) = P(Prevista | Recessione)*P(Recessione)/P(Prevista)=$0
 Alice ha 2 monete nella borsa. La prima con 2 facce diverse e la seconda con 2 teste. Alice preleva a caso una moneta dalla borsa. La lancia e vede testa. Quale è la probabilità che abbia lanciato la moneta equa?
 
 
+\section{Variabili aleatorie}
+Una variabile aleatoria (\emph{random variabile}) \`e
+ una variabile i cui valori sono soggetti a variazioni casuali. Quando i valori possibili di una variabile aleatoria  possono essere elencati parliamo di variabile aleatoria discreta. Quando i valori non possono essere elencati parliamo di variabile aleatoria continua.
+
+\section{Variabili aleatorie discrete}
+Le variabili aleatorie  discrete che  assumono un numero limitato di valori si dicono anche \emph{finite}.  I valori di una variabile aleatoria discreta possono essere numerici o nominali.
+ Supponiamo di avere una variabile aleatoria che possa assumere un insieme di valori in  un \emph{alfabeto} assegnato costituito da lettere, parole o numeri. Per esempio un alfabeto pu\`o essere del tipo che segue
+\begin{itemize}
+\item{}(Femmina, Maschio)
+\item{}(A,C,T,G)
+\item{} (0,1)
+\item{}(Ottimo, Buono, Discreto, Sufficiente, Insufficiente)
+\item{} (Testa, Croce).
+\item{} I numeri interi
+\end{itemize}
+Per caratterizzare completamente una variabile aleatoria discreta oltre ai valori che questa pu\`o  assumere occorre conoscere la probabilit\`a  di questi valori.
+Per semplicit\`a considereremo variabili aleatorie finite.\\
+
  
+
+La probabilità $P(A)$ di un evento A è il grado di fiducia  che lo sperimentatore pone nella realizzazione dell'evento (Jacob Bernoulli, 1654-1705) 
+
+  
  
 \section{Simulazioni}
 

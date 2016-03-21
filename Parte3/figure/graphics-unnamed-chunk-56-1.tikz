@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.10.1 on 2016-03-11 15:52:38
+% Created by tikzDevice version 0.10 on 2016-03-13 19:29:12
 % !TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \nonstopmode
@@ -17,6 +17,7 @@
 
 
 \usepackage[english,italian]{babel}
+\usepackage[utf8]{}%inputenc
 \usepackage{inconsolata}
 %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
 \usepackage[T1]{fontenc}
@@ -24,11 +25,11 @@
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
-\usepackage{babelbib}
+%\usepackage{babelbib}
 \usepackage{float}
 %\usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{inputenc}
 \usepackage{framed}
 \usepackage{lipsum}
 \usepackage[]{color}
@@ -42,25 +43,19 @@
 \definecolor{grigetto}{rgb}{0.9,0.9,0.9}
  
 \DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
-\lhead[\thepage]{\today}
 %\usepackage{draftwatermark}
 \usepackage{wrapfig}
 \usepackage{listings}
-\pagestyle{fancy}
 \newcounter{fnotes}\setcounter{fnotes}{1}
 \newcounter{Raction}\setcounter{Raction}{1}
 \newcommand{\varia}[1]{\textsl{\textsf{#1}}}
 \newcommand{\mytilde}{$\sim$}
 \newcommand{\maurizio}[1]{\color{red}#1 \color{black}}
 \newcommand{\federico}[1]{\color{green}#1 \color{black}}
- %\newenvironment{question}{\item \textbf{Problema}\newline}{}
-%\newenvironment{solution}{\textbf{Soluzione}\newline}{}
-%\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em,
-                                            %  frame=single}
+ 
 \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em,   frame=single}
  \newenvironment{ese} [1]{\vskip10pt
-%\begin{center}
-%\begin{minipage}{12cm}
+ 
  \markright{\today}
 \colorbox{grigetto}{\parbox{\linewidth}{#1}}}
                           {
@@ -70,7 +65,6 @@
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
 \author{Federico Comoglio e  Maurizio Rinaldi}
 \markright{\today}
-\lhead{\today}
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}
@@ -87,29 +81,111 @@
 \path[clip] ( 57.60, 57.60) rectangle (359.91,287.64);
 \definecolor{drawColor}{RGB}{0,0,0}
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80, 66.12) circle (  2.70);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 68.80,104.85) --
+	( 78.13,104.85) --
+	( 87.46,104.85) --
+	( 96.79,124.21) --
+	(106.12,143.57) --
+	(115.45,182.30) --
+	(124.78,143.57) --
+	(134.11,124.21) --
+	(143.44,182.30) --
+	(152.77,182.30) --
+	(162.10,201.67) --
+	(171.43,182.30) --
+	(180.76,221.03) --
+	(190.09,124.21) --
+	(199.42,182.30) --
+	(208.75,182.30) --
+	(218.09,201.67) --
+	(227.42, 85.48) --
+	(236.75, 66.12) --
+	(246.08, 85.48) --
+	(255.41, 85.48) --
+	(264.74, 85.48) --
+	(274.07,124.21) --
+	(283.40,124.21) --
+	(292.73,162.94) --
+	(302.06,221.03) --
+	(311.39,221.03) --
+	(320.72,259.76) --
+	(330.05,279.12) --
+	(339.38,240.39) --
+	(348.71,240.39);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (361.35,289.08);
+\definecolor{drawColor}{RGB}{0,0,0}
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 94.24, 92.03) circle (  2.70);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 59.47, 57.60) -- (339.38, 57.60);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (119.69,123.69) circle (  2.70);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 59.47, 57.60) -- ( 59.47, 53.28);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (145.14,126.57) circle (  2.70);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (106.12, 57.60) -- (106.12, 53.28);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (170.58,143.84) circle (  2.70);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (152.77, 57.60) -- (152.77, 53.28);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (196.03,169.74) circle (  2.70);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (199.42, 57.60) -- (199.42, 53.28);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (221.48,175.50) circle (  2.70);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (246.08, 57.60) -- (246.08, 53.28);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (246.93,210.04) circle (  2.70);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (292.73, 57.60) -- (292.73, 53.28);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (272.37,212.92) circle (  2.70);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (339.38, 57.60) -- (339.38, 53.28);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (297.82,230.19) circle (  2.70);
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 59.47, 36.00) {0};
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (323.27,258.97) circle (  2.70);
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (106.12, 36.00) {5};
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (348.71,279.12) circle (  2.70);
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (152.77, 36.00) {10};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (199.42, 36.00) {15};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (246.08, 36.00) {20};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (292.73, 36.00) {25};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at (339.38, 36.00) {30};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 85.48) -- ( 57.60,279.12);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 85.48) -- ( 53.28, 85.48);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,124.21) -- ( 53.28,124.21);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,162.94) -- ( 53.28,162.94);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,201.67) -- ( 53.28,201.67);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,240.39) -- ( 53.28,240.39);
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60,279.12) -- ( 53.28,279.12);
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64, 85.48) {0};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,124.21) {2};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,162.94) {4};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,201.67) {6};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,240.39) {8};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.90] at ( 44.64,279.12) {10};
+
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 57.60, 57.60) --
+	(359.91, 57.60) --
+	(359.91,287.64) --
+	( 57.60,287.64) --
+	( 57.60, 57.60);
+\end{scope}
+\begin{scope}
+\path[clip] (  0.00,  0.00) rectangle (361.35,289.08);
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at (208.75, 17.28) {Gennaio 2016 a milano};
+
+\node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.95] at ( 25.92,172.62) {temperatura media};
 \end{scope}
 \end{tikzpicture}
 

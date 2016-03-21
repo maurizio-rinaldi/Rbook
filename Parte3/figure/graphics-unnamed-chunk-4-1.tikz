@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.10.1 on 2016-03-11 15:52:18
+% Created by tikzDevice version 0.10 on 2016-03-13 19:28:51
 % !TEX encoding = UTF-8 Unicode
 \documentclass[onecolumn,12pt]{book}
 \nonstopmode
@@ -17,6 +17,7 @@
 
 
 \usepackage[english,italian]{babel}
+\usepackage[utf8]{}%inputenc
 \usepackage{inconsolata}
 %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
 \usepackage[T1]{fontenc}
@@ -24,11 +25,11 @@
 \usepackage{a4wide,Sweave,url}
 \usepackage{verbatim}
 \usepackage{makeidx}
-\usepackage{babelbib}
+%\usepackage{babelbib}
 \usepackage{float}
 %\usepackage{fancyhdr}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{inputenc}
 \usepackage{framed}
 \usepackage{lipsum}
 \usepackage[]{color}
@@ -42,25 +43,19 @@
 \definecolor{grigetto}{rgb}{0.9,0.9,0.9}
  
 \DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em} \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em} \DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em} \fvset{listparameters={\setlength{\topsep}{0pt}}} \renewenvironment{Schunk}{\small\vspace{\topsep}}{\vspace{\topsep}\normalsize}
-\lhead[\thepage]{\today}
 %\usepackage{draftwatermark}
 \usepackage{wrapfig}
 \usepackage{listings}
-\pagestyle{fancy}
 \newcounter{fnotes}\setcounter{fnotes}{1}
 \newcounter{Raction}\setcounter{Raction}{1}
 \newcommand{\varia}[1]{\textsl{\textsf{#1}}}
 \newcommand{\mytilde}{$\sim$}
 \newcommand{\maurizio}[1]{\color{red}#1 \color{black}}
 \newcommand{\federico}[1]{\color{green}#1 \color{black}}
- %\newenvironment{question}{\item \textbf{Problema}\newline}{}
-%\newenvironment{solution}{\textbf{Soluzione}\newline}{}
-%\DefineVerbatimEnvironment{Sinput}{Verbatim} {xleftmargin=2em,
-                                            %  frame=single}
+ 
 \DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em,   frame=single}
  \newenvironment{ese} [1]{\vskip10pt
-%\begin{center}
-%\begin{minipage}{12cm}
+ 
  \markright{\today}
 \colorbox{grigetto}{\parbox{\linewidth}{#1}}}
                           {
@@ -70,7 +65,6 @@
  \frontmatter\title{Matematica e Statistica con \textsf{R}}
 \author{Federico Comoglio e  Maurizio Rinaldi}
 \markright{\today}
-\lhead{\today}
 \renewcommand{\chaptermark}[1]{%
  \markboth{\chaptername
  \ \thechapter.\ #1}{}}
@@ -396,6 +390,23 @@
 	(180.32,201.74) --
 	(180.65,205.24) --
 	(180.76,208.75);
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.00] at ( 96.79,204.62) {A};
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.00] at (152.77,239.61) {X1};
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.00] at (180.76,239.61) {X2};
+\definecolor{drawColor}{RGB}{255,0,0}
+
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.00] at (208.75,204.62) {B};
+\definecolor{drawColor}{RGB}{0,0,0}
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (145.40,205.24) {X3=A};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.25] at (178.02,209.52) {Ç};
+
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (179.81,205.24) {B};
 \end{scope}
 \end{tikzpicture}
 
