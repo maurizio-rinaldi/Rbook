@@ -19,5 +19,5 @@ Collate: 'compareIntervals.R' 'data.R' 'funzioneCasuale.R'
         'prodottocopy.R' 'sceltarange.R' 'showMethod.R' 'support.lib.R'
         'uniforme.R'
 NeedsCompilation: no
-Packaged: 2016-02-02 11:32:46 UTC; mauriziorinaldi
-Built: R 3.2.3; ; 2016-02-02 11:32:47 UTC; unix
+Packaged: 2016-03-22 12:30:37 UTC; mauriziorinaldi
+Built: R 3.2.4; ; 2016-03-22 12:30:39 UTC; unix

@@ -1,8 +1,8 @@
 * using log directory ‘/Users/mauriziorinaldi/Documents/github/Rbook/EsamiR.Rcheck’
-* using R version 3.2.3 (2015-12-10)
+* using R version 3.2.4 (2016-03-10)
 * using platform: x86_64-apple-darwin13.4.0 (64-bit)
 * using session charset: UTF-8
-* using option ‘--as-cran’
+* using options ‘--run-donttest --as-cran’
 * checking for file ‘EsamiR/DESCRIPTION’ ... OK
 * checking extension type ... Package
 * this is package ‘EsamiR’ version ‘0.2’
@@ -14,7 +14,10 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘EsamiR’ can be installed ... OK
+* checking whether package ‘EsamiR’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: bad markup (extra space?) at bambini.Rd:19:15
+See ‘/Users/mauriziorinaldi/Documents/github/Rbook/EsamiR.Rcheck/00install.out’ for details.
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking DESCRIPTION meta-information ... OK
@@ -35,34 +38,18 @@ package 'methods' is used but not declared
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
 * checking R code for possible problems ... OK
-* checking Rd files ... OK
+* checking Rd files ... WARNING
+prepare_Rd: bad markup (extra space?) at bambini.Rd:19:15
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
 * checking Rd cross-references ... OK
-* checking for missing documentation entries ... WARNING
-Undocumented code objects:
-  ‘biotec’ ‘crabs’ ‘farmacia’ ‘meteo’ ‘mtcars’
-Undocumented data sets:
-  ‘biotec’ ‘crabs’ ‘farmacia’ ‘meteo’ ‘mtcars’
-All user-level objects in a package should have documentation entries.
-See chapter ‘Writing R documentation files’ in the ‘Writing R
-Extensions’ manual.
+* checking for missing documentation entries ... OK
 * checking for code/documentation mismatches ... WARNING
-Data codoc mismatches from documentation object 'gompertz':
-Variables in data frame 'gompertz'
-  Code: day living mort.rate
-  Docs: carat eta
-
-Data codoc mismatches from documentation object 'kidinterest':
-Variables in data frame 'kidinterest'
+Data codoc mismatches from documentation object 'bambini':
+Variables in data frame 'bambini'
   Code: Age Gender Goals Grade Grades Looks Money Race School Sports
         Urban.Rural
-  Docs: carat price
-
-Data codoc mismatches from documentation object 'studenti':
-Variables in data frame 'studenti'
-  Code: Eyes H Hair Sex Sh W X hF hM
-  Docs: Age Gender Goals Grades Looks Money Race School Sport
+  Docs: Age Gender Goals Grade Grades Looks Money Race School Sport
         Urban/Rural
 
 * checking Rd \usage sections ... WARNING
@@ -92,8 +79,7 @@ Extensions’ manual.
 * checking for unstated dependencies in examples ... OK
 * checking contents of ‘data’ directory ... OK
 * checking data for non-ASCII characters ... OK
-* checking data for ASCII and uncompressed saves ... WARNING
-  Warning: package needs dependence on R (>= 2.10)
+* checking data for ASCII and uncompressed saves ... OK
 * checking examples ... OK
 * checking PDF version of manual ... OK
 * DONE

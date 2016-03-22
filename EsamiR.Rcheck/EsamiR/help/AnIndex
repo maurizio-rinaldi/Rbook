@@ -1,4 +1,5 @@
 availableMethods	availableMethods
+bambini	bambini
 chooseF	chooseF
 compareIntervals	compareIntervals
 Funzione-class	Funzione-class
@@ -8,13 +9,16 @@ generaHyp	generaHyp
 generasin	generasin
 getR	getR
 getTex	getTex
-gompertz	gompertz
+granchi	granchi
 initialize	initialize
 inversecircolari	inversecircolari
-kidinterest	kidinterest
+meteo	meteo
+moscerini	moscerini
 nuovaFunzione	nuovaFunzione
 prodottoR	prodottoR
 prodottoTex	prodottoTex
 sceltarange	sceltarange
 studenti	studenti
+studentibiotec	studentibiotec
+studentifarmacia	studentifarmacia
 uniforme	uniforme

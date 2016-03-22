@@ -1079,4 +1079,137 @@ l.99 \end{kframe}
 ./RbookParte2.tex:100: LaTeX Error: \begin{document} ended by \end{knitrout}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.100 \end{knitrout}
+                    
+? 
+
+./RbookParte2.tex:103: LaTeX Error: Environment knitrout undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.103 \begin{knitrout}
+                      
+? 
+Package color Info: Redefining color shadecolor on input line 104.
+
+./RbookParte2.tex:104: LaTeX Error: Undefined color `fgcolor'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.104 ...{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+                                                  \begin{kframe}
+? 
+
+./RbookParte2.tex:104: LaTeX Error: Environment kframe undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.104 ....969, 0.969}\color{fgcolor}\begin{kframe}
+                                                  
+? 
+
+./RbookParte2.tex:105: LaTeX Error: Environment alltt undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.105 \begin{alltt}
+                   
+? 
+./RbookParte2.tex:106: Undefined control sequence.
+l.106 \hlkwd
+            {library}\hlstd{(}\hlstr{"libroR"}\hlstd{)}
+? 
+./RbookParte2.tex:106: Undefined control sequence.
+l.106 \hlkwd{library}\hlstd
+                           {(}\hlstr{"libroR"}\hlstd{)}
+? 
+./RbookParte2.tex:106: Undefined control sequence.
+l.106 \hlkwd{library}\hlstd{(}\hlstr
+                                    {"libroR"}\hlstd{)}
+? 
+./RbookParte2.tex:106: Undefined control sequence.
+l.106 ...d{library}\hlstd{(}\hlstr{"libroR"}\hlstd
+                                                  {)}
+? 
+
+./RbookParte2.tex:107: LaTeX Error: \begin{document} ended by \end{alltt}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.107 \end{alltt}
+                 
+? 
+
+./RbookParte2.tex:110: LaTeX Error: Undefined color `messagecolor'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.110 ...mily\noindent\itshape\color{messagecolor}
+                                                  {\#\# \\\#\# Attaching pac...
+
+? 
+
+./RbookParte2.tex:112: LaTeX Error: Undefined color `messagecolor'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.112 ...mily\noindent\itshape\color{messagecolor}
+                                                  {\#\# The following object...
+
+? 
+
+./RbookParte2.tex:112: LaTeX Error: \begin{document} ended by \end{kframe}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.112 ...#\#\ \ \ \  meteo, studenti}}\end{kframe}
+                                                  
+? 
+
+./RbookParte2.tex:113: LaTeX Error: \begin{document} ended by \end{knitrout}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.113 \end{knitrout}
+                    
+? 
+./RbookParte2.tex:113: Emergency stop.
+ ...                                              
+                                                  
+l.113 \end{knitrout}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+ 
+Here is how much of TeX's memory you used:
+ 10278 strings out of 493089
+ 146870 string characters out of 6134842
+ 344870 words of memory out of 5000000
+ 13546 multiletter control sequences out of 15000+600000
+ 28075 words of font info for 61 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 35i,11n,43p,800b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
+./RbookParte2.tex:113:  ==> Fatal error occurred, no output PDF file produced!

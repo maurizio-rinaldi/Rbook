@@ -43,7 +43,7 @@ switch(tipo,
                domain=sample(list(c(-Inf,-temp[3]/temp[4]),c( -temp[3]/temp[4],Inf)),1)[[1]]
        },###c(a x+b)/(c x+d)
        ax={
-               t=c(sceltarange(2,8,1),sceltarange(-5,5,1),sceltarange(1,5,1))
+               t=c(sceltarange(1,2,8),sceltarange(1,-5,5,1),sceltarange(1,5,1))
                ftex=paste(t[1],"^{",paste(t[2:3],c("","x"),collapse="+",sep=""),"}",sep="")
                fr1=paste(t[1],"^(",paste(t[2:3],c("","*x"),collapse="+",sep=""),")",sep="")
                body(fr)= parse(text=fr1)
@@ -115,8 +115,8 @@ switch(tipo,
                fr=temp[[2]]
                domain=temp[[3]]},
        poli= {
-               temp1=sceltarange(-9,9,5,0)
-               temp2=sceltarange(0,6,5,logica=F)
+               temp1=sceltarange(5,-9,9,0)
+               temp2=sceltarange(5,0,6,logica=F)
                 ftex=paste(temp1,"x^",temp2,sep="",collapse="+")###polinomio
                fr1=paste(temp1,"*x^",temp2,sep="",collapse="+") 
                body(fr)= parse(text=fr1)

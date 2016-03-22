@@ -2,6 +2,8 @@ Funzione-class          Class 'Funzione' definisce una classe di
                         funzioni
 availableMethods        Function that returns list of available
                         methods.
+bambini                 Attitudini e priorita' di bambini delle
+                        elementari
 chooseF                 Genera una funzione random
 compareIntervals        Definisce il dominio del prodotto in termini di
                         intervalli.
@@ -14,14 +16,18 @@ generasin               Genera una funzione seno random (oggetto di
                         classe Funzione).
 getR                    Ricava la formulaR
 getTex                  Ricava la formulaTex
-gompertz                Prices of 50,000 round cut diamonds.
+granchi                 Misure morfologiche di granchi Leptograpsus
+                        Variegatus
 initialize              Constructor della Class Funzione.
 inversecircolari        generazione di funzioni acos asin e atan
-kidinterest             Interesse dei bambini
+meteo                   Meteo a Milano
+moscerini               Sopravvivenza di una colonia di moscerini
 nuovaFunzione           Crea una nuova funzione
 prodottoR               Prodotto in R #' @author Maurizio Rinaldi
 prodottoTex             tex prodotto
 sceltarange             Genera m valori random nell'intervallo da:a
                         esclusi i valori. Con o senza ripetizioni
-studenti                Interesse dei bambini
+studenti                96 studenti
+studentibiotec          Studenti di Biotecnologie
+studentifarmacia        Studenti di Farmacia
 uniforme                Definizione della classe uniforme
