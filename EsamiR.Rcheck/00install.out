@@ -1,0 +1,13 @@
+* installing *source* package ‘EsamiR’ ...
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** preparing package for lazy loading
+Creating a generic function for ‘plot’ from package ‘graphics’ in package ‘EsamiR’
+** help
+Warning: bad markup (extra space?) at bambini.Rd:19:15
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (EsamiR)
