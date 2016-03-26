@@ -38,4 +38,16 @@
 \contentsline {subsection}{\numberline {1.10.9}Esercizio}{26}{subsection.1.10.9}
 \contentsline {section}{\numberline {1.11}Variabili aleatorie}{26}{section.1.11}
 \contentsline {section}{\numberline {1.12}Variabili aleatorie discrete}{26}{section.1.12}
-\contentsline {section}{\numberline {1.13}Simulazioni}{27}{section.1.13}
+\contentsline {section}{\numberline {1.13}Stima dei parametri statistici}{27}{section.1.13}
+\contentsline {subsection}{\numberline {1.13.1} Covarianza}{27}{subsection.1.13.1}
+\contentsline {subsection}{\numberline {1.13.2}Stima di $\\mu_X$}{27}{subsection.1.13.2}
+\contentsline {subsubsection}{Stima di Media e Varianze}{27}{section*.15}
+\contentsline {subsection}{\numberline {1.13.3}Stimatori}{28}{subsection.1.13.3}
+\contentsline {section}{\numberline {1.14}Varianza di $M_n$}{29}{section.1.14}
+\contentsline {subsubsection}{Soluzione}{30}{section*.16}
+\contentsline {subsection}{\numberline {1.14.1}I criteri di attendibilità}{30}{subsection.1.14.1}
+\contentsline {subsubsection}{Esempio}{30}{section*.17}
+\contentsline {subsection}{\numberline {1.14.2}Livello di fiducia}{31}{subsection.1.14.2}
+\contentsline {section}{\numberline {1.15}La tabella inversa}{32}{section.1.15}
+\contentsline {subsubsection}{Con \textsf {R}~}{35}{section*.18}
+\contentsline {section}{\numberline {1.16}Simulazioni}{40}{section.1.16}

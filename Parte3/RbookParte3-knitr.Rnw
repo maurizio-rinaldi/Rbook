@@ -85,7 +85,571 @@ library(EsamiR)
 <<eval=TRUE,echo=FALSE>>=
 install.packages("../libroR_0.0.tgz", repos = NULL, type = .Platform$pkgType)
 @
- 
+\chapter{Statistica descrittiva}
+I dataframe.....
+
+\section{Statistica descrittiva: singola variabile}
+Consideriamo una\subsection{Indicatori statistici}
+\begin{itemize}
+\item{}Media.\vskip0pt
+La varianza di un vettore di $n$ numeri
+\[x=(x_1,\ldots,\ldots,x_n)\] 
+\`e definita come
+\[ \bar{x}=\frac 1 n \sum_{i=1}^n x_i\]
+Si calcona in \rpr con la funzione \texttt{mean} scrivendo:
+$\texttt{mean}(\varia{variabile})$.
+Ad esempio, lavorando con la lunghezza del sepalo di 150 piante di iris
+<<echo=TRUE,cache=T>>=
+x=iris[,1]
+mean(x)
+@
+\item{}Varianza campionaria\vskip0pt
+La varianza di un vettore di $n$ numeri
+\[x=(x_1,\ldots,\ldots,x_n)\]
+\`e definita come
+\[  \mathrm{var}(x)=\dfrac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2\]
+Si ottiene con la funzione predefinita di espressione:
+\texttt{var}(\varia{variabile}).
+Possiamo calcolare la varianza come
+<<echo=TRUE>>=
+var(x)
+@
+\item{}Deviazione Standard campionaria.\vskip0pt
+Non \`e altro che la radice della varianza. Si ottiene con la funzione predefinita di espressione:
+$\texttt{sd}(\varia{variabile})$.
+Sempre basandosi sull'esempio precedente scriveremo
+<<echo=TRUE>>=
+sd(x)
+@
+
+\item{}Quantili. La notazione standard \`e semplicemente: \texttt{quantile}(\varia{variabile}) che determina i quartili e ci fornisce in uscita la statistica dei 5 numeri
+
+<<echo=TRUE>>=
+quantile(x)
+@
+Volendo ricavare i decili dovremo scrivere:
+$$\texttt{quantile}(\varia{variabile},\texttt{seq(0,1,by=0.1)})$$
+in quanto vogliamo dividere l'intervallo $[0,1]$ a passo $0.1$
+
+Nell'esempio:
+<<echo=TRUE>>=
+quantile(x,seq(0,1,by=0.1))
+@
+Si noti che \texttt{quantile} ammette 9 varianti specificabili con l'opzione $\texttt{type}=n$ dove $n$ va da 1 a 9.
+Per esempio
+<<echo=TRUE>>=
+quantile(x,type=2)
+@
+Sui dati in esame le 9 varianti coincidono. La convenzione da noi adottata corrisponde al numero 2
+\end{itemize}
+Per quanto riguarda gli indicatori statistici nel caso di dati ripetuti basta notare che se la lista $x$ contiene i valori e la lista $f$ le frequenze assolute il comando
+$$\varia{rep}(x,f)$$ costruisce un'unica lista dei dati inclusiva delle ripetizioni.
+Per esempio
+
+<<echo=TRUE>>=
+x=1:6
+f=c(9,7,9,7,8,10)
+(dati=rep(x,f))
+@
+Ovviamente senza bisogno di visualizzare \texttt{dati} possiamo calcolarne tutti gli indicatori statistici.
+Il comando
+<<echo=TRUE>>=
+cumsum(f)
+@
+restituisce le frequenze cumulate, dalle quali si possono ricavare facilmente la mediana
+i quantili.
+
+\subsection{Raggruppamenti in classi}
+<<echo=FALSE,eval=FALSE>>=
+mese=month(as.POSIXlt(date(),format="%a %b %d %H:%M:%S %Y"))
+mesit= c("Dicembre" ,"Gennaio" ,"Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settemnbre","Ottobre","Novembre")
+mesi=1:12
+names(mesi)=mesit
+m=names(mesi[mese])
+anno=year(as.POSIXlt(date(),format="%a %b %d %H:%M:%S %Y"))
+if(mese==1) anno=anno-1
+@
+<<echo=FALSE,eval=TRUE>>=
+m="Gennaio"
+anno=2016
+stringa=paste("Milano/", anno ,"/",m,"?format=csv",sep="")
+@
+Consideriamo la rilevazione della temperatura media giornaliera di Milano nel mese di \Sexpr{m} \Sexpr{anno}.
+Scegliamo il mese
+<<echo=FALSE>>=
+cat(paste("> stringa=\"",stringa,"\"",sep=""))
+<<echo=TRUE,eval=FALSE>>=
+sito="http://www.ilmeteo.it/portale/archivio-meteo/"
+indirizzo=paste(sito,stringa,sep="")
+meteo=read.table(indirizzo,sep=";",header=T)[,-1]
+<<echo=FALSE,eval=FALSE>>=
+write.table(meteo,file="../filedati/meteo.txt",sep=";")
+<<echo=FALSE,eval=TRUE>>=
+meteo=read.table("../filedati/meteo.txt",sep=";",header=T)
+<<tidy=TRUE>>=
+options(width=60)
+str(meteo)
+@
+A questo punto selezioniamo la colonna della temperatura media 
+<<echo=TRUE>>=
+meteo[,3]->Milano;
+Milano
+quantile(Milano)
+@
+L'ultimo comando in particolare ci fornisce minimo e massimo dei dati.
+Possiamo esaminare la serie temporale dei dati con i comandi
+<<echo=TRUE,fig.keep='none'>>=
+plot(Milano,type="l",xlab=paste(m,anno, "a milano"),ylab="temperatura media")
+@
+ottenendo la figura~\ref{fig:datiist}
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+plot(Milano,type="l",xlab=paste(m,anno, "a milano"),ylab="temperatura media")
+@
+\caption{ Andamento della temperatura a \Sexpr{paste(m,anno)}  a Milano. }
+\label{fig:datiist}
+\end{center}
+\end{figure}
+
+Raggruppiamo ora i dati in classi comprese  tra due estremi che comprendano certamente tutti i dati, per esempio \Sexpr{2*round(min(Milano)/2-0.1)} e \Sexpr{2*round(max(Milano)/2+0.1)}, decidendo di applicare un passo di 2 e vedere come si distribuiscono. Il comando \texttt{cut} associa a ciascun dato la classe di appartenenza selezionata in base ai punti di taglio.
+
+<<echo=TRUE>>=
+tagli=c(-2,0,2,4,6,10)
+cut(Milano,breaks=tagli)
+@
+
+Il comando \texttt{table} conta i dati di ciascuna classe
+
+<<echo=TRUE>>=
+table(cut(Milano,breaks=tagli))
+@
+Si noti che la suddivisione in classi prevede intervalli aperti a sinistra e chiusi a destra.
+Per suddividere in modo che gli intervalli siano chiusi a sinistra e aperti a destra si specifica il parametro \texttt{right=FALSE}.
+Possiamo anche usare il comando \texttt{seq} per specificare i tagli.
+ \begin{eqnarray*}
+\texttt{table(cut}( \varia{variabile},\texttt{breaks=seq}(\varia{estremo inf},\\
+\varia{estremo sup},\texttt{by}=\varia{passo}),\texttt{right=TRUE}))
+\end{eqnarray*}
+o in modo  pi\`u generale
+\begin{eqnarray*}
+&\texttt{table(cut}(\varia{ variabile},\\
+&\texttt{breaks=c}(\varia{estremo\; inferiore}, \ldots,\varia{estremo superiore}))
+\end{eqnarray*}
+estremamente utile in quanto consente di raggruppare i dati in classi non necessariamente di ugual ampiezza.
+<<echo=TRUE>>=
+table(cut(Milano,breaks=c(-3,1,3,4,5,6,8,10)))
+@
+Volendo raggruppare in classi i dati delle precedenti uscite del dado possiamo scrivere
+<<echo=TRUE>>=
+table(cut(dadi100,breaks=0:6))
+@
+Se scegliamo di chiudere a sinistra gli intervalli dobbiamo però includere il 7 altrimenti 
+il valore 6 non risutlerebbe incluso.
+<<echo=TRUE>>=
+table(cut(dadi100,breaks= 1:7,right=FALSE))
+@
+
+\subsection{Areogrammi}
+Il comando generico per generare un istogramma \`e:
+\begin{equation*}
+\texttt{hist}(\varia{variabile})\index{\texttt{hist}}
+\end{equation*}
+che segue per\`o la struttura del comando \texttt{cut}. L'ampiezza di ciascuna classe salvo diversamente indicato \`e costante e decisa da \textsf{R}.
+\`E  possibile variare tale condizione definendo una lista con i punti di taglio ({\it cutoff}) delle classi volute:
+\begin{equation} \texttt{hist}(\varia{variabile},\texttt{c}(\varia{valore}_1, \varia{valore}_2, \ldots))
+\end{equation}
+Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del dado, il comando
+<<echo=TRUE,fig.keep='none'>>=
+par(mfrow=c(1,2))
+hist(dadi100,breaks=seq(0.5,6.5,1),col="red")
+hist(dadi100,freq=FALSE,breaks=seq(0.5,6.5,1),col="blue")
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+par(mfrow=c(1,2))
+hist(dadi100,breaks=seq(0.5,6.5,1),col="red")
+hist(dadi100,freq=FALSE,breaks=seq(0.5,6.5,1),col="blue")
+@
+\caption{Diagramma a colonne e areogramma per il lancio di un dado.}
+\label{fig:datidado}
+\end{center}
+\end{figure}
+genera l'istogramma (in rosso, a sinistra Figura~\ref{fig:datiist}) con le frequenze assolute delle classi in ordinata. La sequenza dei punti di taglio \`e stata scelta in modo che i numeri interi da 1 a 6 siano al centro delle classi corrispondenti. Se invece volessimo creare un areogramma  (ossia avere un tracciato per cui le aree siano pari alle frequenze relative) a partire dalle stesse uscite dovremo imporre il parametro \texttt{freq=FALSE} otterremo il pannello a destra (in blu) della figura~(\ref{fig:datiist}). Avendo scelto classi di ampiezza costante i 2 grafici differiscono semplicemente per un cambio di scala sull'asse $y$.
+
+In modo simile possiamo tracciare un areogramma  dei dati nella variabile \texttt{milano}
+<<echo=TRUE,eval=FALSE>>=
+par(mfrow=c(1,2))
+hist(Milano, col="green",freq=FALSE,right=FALSE,
+main="Cutoff automatici")
+@
+lasciando \textsf{R} libero di scegliere i punti di taglio (pannelli a sinistra della figura \ref{fig:datiistmilano}) o scegliendoli a nostra volta (pannelli a destra della stessa figura  \ref{fig:datiistmilano})
+<<echo=FALSE>>=
+options(width=55)
+<<echo=TRUE>>=
+hist(Milano,col="red",freq=FALSE,
+breaks=unique(as.vector(quantile(Milano,seq(0,1,by=1/6)))),
+main="Cutoff personalizzati")
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+par(mfrow=c(1,2))
+hist(Milano, col="green",freq=FALSE,right=FALSE,main="Cutoff automatici")
+hist(Milano,col="red",freq=FALSE,breaks=unique(as.vector(quantile(Milano,seq(0,1,by=1/6)))),
+right=FALSE,main="Cutoff personalizzati")
+@
+\caption{ Areogramma dei dati della temperatura. Scelta automatica dei punti di taglio.}
+\label{fig:datiistmilano}
+\end{center}
+\end{figure}
+Si noti la stabilit\`a degli areogrammi rispetto ai cambi nella suddivisione.
+\subsection{Generazione di boxplot}
+
+Il \texttt{boxplot}  \`e una rappresentazione grafica immediata della statistica dei 5 numeri e simultaneamente ci  segnala eventuali punti discordanti o anomali, {\it outlier}.
+Il comando generico \`e: \begin{equation}\texttt{boxplot}(\varia{variabile})\end{equation}
+prendendo il vettore $x$ contenente i risultati di 100 lanci
+otteniamo la figura~\ref{fig:boxplotdado}
+\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE,fig.height=4,fig.width=4>>=
+boxplot(dadi100)
+@
+\caption{Boxplot dei risultati del lancio di un dado}
+\label{fig:boxplotdado}
+\end{center}
+\end{figure}
+da cui si evince che il valore massimo dei dati \`e 6, il minimo \`e 1 e non ci sono punti anomali, per cui non vi sono dati anomali, altrimenti evidenziati da un pallino. Si legge inoltre il valore di mediana (4) primo quartile (2) e terzo quartile (5).
+
+\subsection{Creazione di grafici a torta}
+
+Il comando \texttt{pie} consente, partendo da una tabella, di tracciare il diagramma a torta per una variabile nominale raggruppata in classi. Il comando \`e
+
+\begin{equation*}\texttt{pie(table}(\varia{variabile} ))
+\end{equation*}
+ad esempio (facendo riferimento ai precedenti dati):
+<<echo=TRUE,fig.keep='none'>>=
+pie(table(dadi100))
+@
+fornisce in uscita  la Figura~\ref{fig:pie}
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+pie(table(dadi100))
+@
+\caption{Diagramma a torta per il lancio di un dado equo.}
+\label{fig:pie}
+\end{center}
+\end{figure}
+\begin{shaded}{Costruire una matrice contenente le coordinate di 50 punti nel rettangolo $[0,4]\times [0,2]$ in due dimensioni (generate utilizzando il generatore di numeri pseudocasuali). Produrre un grafico con due pannelli, dove il primo pannello \`e uno scatter-plot}
+\end{shaded}
+\section{Variabili doppie e rette di regressione}
+Supponiamo di misurare la concentrazione di acido lattico muscolare durante uno sforzo di 10 minuti,
+<<echo=TRUE>>=
+x<-tempo<-c(1,2,3,4,5,6,7,8,9,10)
+y<-concentrazione<-c(0.3,0.65,0.7,0.8,0.95,1.05,1.3,1.7,1.9,
+2.5)
+@
+Per analizzare questi dati conviene preliminarmente tracciarne un diagramma a dispersione.
+\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE>>=
+plot(x,y)
+@
+\caption{Diagramma a dispersione tempo/concentrazione.}
+\label{fig:scatte}
+\end{center}
+\end{figure}
+Possiamo inoltre determinare il coefficiente di correlazione lineare
+<<echo=TRUE>>=
+cor(x,y)
+@
+Per definire un modello di relazione lineare occorre usare il comando \texttt{lm} (\varia{linear model}).
+Nella sua generica forma il comando \`e espresso come\footnote{ Per digitare la tilde  \mytilde\;  su Mac premere ALT 5 su PC invece il tasto Alt Gr (attivazione del codice ASCII) e sul tastierino numerico digitare il numero 126. Lavorando su un portatile il tastierino numerico \`e spesso incorporato nella tastiera con colorazione blu dei tasti.}
+$$\texttt{lm}(\varia{y} \sim  \varia{x})$$
+Otteniamo i valori di pendenza e intercetta.
+
+Possiamo tracciare la retta di regressione con il comando \texttt{abline}.
+<<echo=TRUE,fig.keep='none'>>=
+plot(x,y,pch=19,col="red")
+abline(lm(y~x),col="blue")
+@
+Per determinare  la retta di regressione sulle $y$ dobbiamo invertire $x$ e $y$.
+<<echo=TRUE,fig.keep='none'>>=
+(modellox=lm(x~y))
+coeff=modellox$coefficients
+(a=1/coeff[2])
+(b=-coeff[1]/coeff[2])
+abline(b,a,col="green")
+@
+In tal modo otteniamo il grafico~\ref{fig:duerettex}.
+\begin{center}
+\begin{figure}[htbp]
+<<echo=FALSE>>=
+plot(x,y,col="red")
+abline(lm(y~x),col="blue")
+abline(b,a,col="green")
+@
+\caption{Rette di regressione. In blu $R_x$, in verde $R_y$.}
+\label{fig:duerettex}
+\end{figure}
+\end{center}
+
+\subsubsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
+Da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui i ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
+<<echo=TRUE>>=
+age=18:29
+height=c(76.1,77,78.1,78.2,78.8,79.7,79.9,81.1,81.2,81.8,82.8,83.5)
+@
+Possiamo quindi costruire il \texttt{data.frame}
+<<echo=TRUE>>=
+village=data.frame(age=age,height=height)
+@
+Ora diamo una prima occhiata ai dati:
+ %code chunk
+\begin{figure}[htbp]
+\begin{center}
+<<echo=TRUE>>=
+plot(age,height)
+@
+\caption{Crescita dei bambini di Kalama}
+\label{kalama}
+\end{center}
+\end{figure}
+L'andamento \`e lineare. Determiniamo la retta di regressione
+per predire l'altezza media nota l'et\`a in mesi.
+%code chunk
+<<echo=TRUE>>=
+(modello=lm(height~age))
+@
+La retta di regressione cercata ha formula:
+$$h(\texttt{age})=\Sexpr{1/100*round(100*modello$coefficients[1])}+ \Sexpr{1/100*round(100*modello$coefficients[2])}\, \texttt{age}$$
+
+Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l'altezza a 27.5 mesi di et\`a:
+oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione
+\texttt{predict}:
+%codechunk
+<<echo=TRUE>>=
+predict(modello,data.frame(age=27.5))
+@
+fornendo in input i parametri della retta ed un preciso valore della variabile indipendente (richiamata col proprio nome).
+Molti comandi di \textsf{R} sono in grado di manipolare \emph{dataframe}  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
+Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt{village} direttamente al comando:
+<<echo=TRUE>>=
+modello=lm(height~age,data=village)
+modello
+@
+con la formula \texttt{lm(y \mytilde x,data=dataset)}.
+%Inoltre possiamo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
+%<<fig=TRUE,echo=FALSE>>=
+%oldpar<-par(mfrow=c(2,2))
+%par(ask=FALSE)
+%plot(lm(height~age))
+%oldpar
+%@
+\section{Modelli potenza}
+Consideriamo ora il seguente \emph{dataset} di mammiferi  in cui le 2 variabili rappresentano  le dimensioni del corpo e del cervello.
+<<echo=TRUE>>=
+library(MASS)
+mammals
+@
+Per prima cosa tracciamo il grafico dei punti  in scala non trasformata e, visto la compresenza di dati molto prossimi all'origine e di dati molto distanti in scala logaritmica (sia le $x$ che le $y$ vengono trasformate prendendone i logaritmi)
+<<echo=TRUE,fig.keep='none'>>=
+par(mfrow=c(1,2))
+plot(mammals)
+plot(mammals,log="xy")
+@
+come in Figura~\ref{fig:duemammals}.\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+par(mfrow=c(1,2))
+plot(mammals)
+plot(mammals,log="xy")
+@
+\caption{Diagramma a dispersione massa corporea/massa del cervello in scala normale ed in scala logaritmica. }
+\label{fig:duemammals}
+\end{center}
+\end{figure}
+Visti i  risultati ottenuti usando la scala logaritmica tracciamo anche la corrispondente retta di regressione
+<<echo=TRUE,fig.keep='none'>>=
+plot(log(mammals$brain)~log(mammals$body),col="BLUE",pch=19,type="p")
+abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3);
+uomo=which(rownames(mammals)=="Human")
+text(log(mammals[uomo ,1]),log(mammals[uomo ,2]),rownames(mammals)[uomo])
+@
+\begin{figure}[htbp]
+\begin{center}
+<<echo=FALSE>>=
+plot(log(mammals$brain)~log(mammals$body),col="BLUE",pch=19,type="p")
+abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3 );
+uomo=which(rownames(mammals)=="Human")
+text( log(mammals[uomo ,1]),log(mammals[uomo ,2]),rownames(mammals)[uomo])
+@
+\caption{ Retta di regressione. Dimensione del corpo e del cervello. Si noti la posizione dell'uomo.}
+\label{duerette}
+\end{center}
+\end{figure}
+Si noti il comando \texttt{text(\varia{x},\varia{y}, \varia{testo})}
+dove    $\varia{x}$ e $\varia{y}$  e $\varia{testo}$ sono vettori di arbitraria lunghezza contenenti ascisse, ordinate e testo da inserire.
+\section{Distribuzioni in \textsf{R}}
+I nomi delle principali distribuzioni in \textsf{R} sono\vskip10pt
+\begin{tabular}{|r|c |}
+\hline
+\texttt{norm}&normale\\
+\texttt{t}  &Student\\
+\texttt{chisq}& chi quadro\\
+\texttt{f}&Fisher\\
+\texttt{binom }&binomiale\\
+\hline
+\end{tabular}\vskip10pt
+A questi nomi possiamo aggiungere diversi prefissi\vskip10pt
+\begin{tabular}{|r|c |}
+\hline
+\texttt{d}&densit\`a\\
+\texttt{p}  &primitiva\\
+\texttt{q}& quantile\\
+\texttt{r}&random\\
+  \hline
+\end{tabular}
+\vskip10pt
+per caratterizzare diversi aspetti.
+\begin{comment}
+<<echo=FALSE, results='hide'>>=
+library(exams)
+## DATA GENERATION
+r <- sample(1:10)
+if(runif(1) < 1/3) {
+  mx <- my <- 0
+  sx <- sy <- 1
+} else {
+  mx <- sample(10 * -5:5, 1)
+  my <- sample(20 * 0:5, 1)
+  sx <- sample(c(1, 10, 20), 1)
+  sy <- sample(c(1, 10, 20), 1)
+}
+
+b <- r * sy/sx
+a <- my - b*mx
+x <- rnorm(200, mx, sx)
+y <- b * x + rnorm(200, a, sy * sqrt(1- r^2))
+
+## QUESTION/ANSWER GENERATION
+questions <- character(5)
+solutions <- logical(5)
+explanations <- character(5)
+
+if (runif(1) < 0.5) {
+  questions[1] <- "The scatterplot is standardized."
+  solutions[1] <- mx == 0 & my == 0 & sx == 1 & sy == 1
+  explanations[1] <- if (solutions[1]) "$X$ and $Y$ have both mean $0$ and variance $1$." else
+  "The scatterplot is not standardized, because $X$ and $Y$ do not both have mean $0$ and variance $1$."
+} else {
+  questions[1] <- "La pendenza della retta di regressione ? circa $1$."
+  solutions[1] <- abs(b - 1) < 0.1
+  explanations[1] <- paste("The slope of the regression line is given by $r \\\\cdot s_y/s_x$ and hence",
+                           ifelse(abs(b - 1) < 0.1, "", "not"), "about equal to $1$.")
+}
+
+if (runif(1) < 0.5) {
+  questions[2] <- "The absolute value of the correlation coefficient is at least $0.8$."
+  solutions[2] <- abs(r) >= 0.8
+} else {
+  questions[2] <- "The absolute value of the correlation coefficient is at most $0.8$."
+  solutions[2] <- abs(r) <= 0.8
+}
+explanations[2] <- if(abs(r) >= 0.9) {
+  paste("A strong association between the variables is given in the scatterplot.",
+        "Hence the absolute value of the correlation coefficient is close to $1$",
+        "and therefore larger than $0.8$.")
+  } else if (abs(r) == 0) {
+    paste("No association between the variables is observed in the scatterplot.",
+          "This implies a correlation coefficient close to $0$.")
+  } else paste("Only a slightly positive association between the variables is observable in the scatterplot.",
+               "This implies a correlation coefficient with an absolute value smaller than $0.8$.")
+
+if (runif(1) < 0.5) {
+  questions[3] <- "The standard deviation of $X$ is at least $6$."
+  solutions[3] <- sx >= 6
+  explanations[3] <- paste("The standard deviation of $X$ is about equal to $", sx, "$ and is therefore",
+                           ifelse(sx < 6, "smaller", "larger"), "than $6$.")
+} else {
+  questions[3] <- "The standard deviation of $Y$ is at least $6$."
+  solutions[3] <- sy >= 6
+  explanations[3] <- paste("The standard deviation of $Y$ is about equal to $", sy, "$ and is therefore",
+                           ifelse(sy < 6, "smaller", "larger"), "than $6$.")
+}
+
+if (runif(1) < 0.5) {
+  questions[4] <- "The mean of $X$ is at most $5$."
+  solutions[4] <- mx <= 5
+  explanations[4] <- paste("The mean of $X$ is about equal to $", mx,
+                           "$ and hence is", ifelse(mx < 5, "smaller", "larger"), "than $5$.")
+} else {
+  questions[4] <- "The mean of $Y$ is at least $30$."
+  solutions[4] <- my >= 30
+  explanations[4] <- paste("The mean of $Y$ is about equal to $", my,
+                           "$ and hence is", ifelse(my < 30, "smaller", "larger"), "than $30$.")
+}
+
+xh <- round(runif(1, -1, 1)*sx + mx, 1)
+yhr <- round(a + b*xh, 1)
+alpha <- if (abs(r) > 0 & abs(mx - xh) > 0) sign(mx - xh) * sign(r) else 1
+yhf <- round(yhr + 2 * sy * alpha, 1)
+yh <- sample(c(yhr, yhf), 1)
+questions[5] <- paste("For $X = ", as.character(xh), "$, $Y$ can be expected to be about ",
+                      as.character(yh), ".", collapse="")
+solutions[5] <- abs(yh - yhr) < 0.01 * sy
+explanations[5] <- paste("The regression line at $X=", xh,
+                         "$ implies a value of about $Y = ", yhr, "$.", sep="")
+
+## permute order of solutions/questions
+o <- sample(1:5)
+questions <- questions[o]
+solutions <- solutions[o]
+explanations <- explanations[o]
+@
+\begin{itemize}
+\begin{question}
+  Figure~\ref{fig:scatterplot} shows a scatterplot. Which of the
+  following statements are correct?
+
+
+\begin{figure}[htb!]
+\begin{center}
+<<fig.height=5, fig.width=6, echo=FALSE, results='hide'>>=
+plot(x, y)
+@
+\caption{ Scatterplot}\label{fig:scatterplot}
+\end{center}
+\end{figure}
+
+\begin{answerlist}
+  \item \Sexpr{questions[1]}
+  \item \Sexpr{questions[2]}
+  \item \Sexpr{questions[3]}
+  \item \Sexpr{questions[4]}
+  \item \Sexpr{questions[5]}
+\end{answerlist}
+\end{question}
+
+%% SOLUTIONS
+\begin{solution}
+\begin{answerlist}
+  \item \Sexpr{mchoice2text(solutions[1])}: \Sexpr{explanations[1]}
+  \item \Sexpr{mchoice2text(solutions[2])}: \Sexpr{explanations[2]}
+  \item \Sexpr{mchoice2text(solutions[3])}: \Sexpr{explanations[3]}
+  \item \Sexpr{mchoice2text(solutions[4])}: \Sexpr{explanations[4]}
+  \item \Sexpr{mchoice2text(solutions[5])}: \Sexpr{explanations[5]}
+\end{answerlist}
+\end{solution}
+\end{itemize}
+%% META-INFORMATION
+%% \extype{mchoice}
+%% \exsolution{\Sexpr{mchoice2string(solutions)}}
+%% \exname{Multiple choice}
+
+\end{comment}
  
 \chapter{Probabilit\`a}
 Riprendiamo qui sinteticamente alcune definizioni.
@@ -405,8 +969,8 @@ $$P(L\cap W)/P(W)=\dfrac{\Sexpr{ mancini["W","L"]}/\Sexpr{ 10^6}}{\Sexpr{ sum(ma
 
 
 Dalla  definizione di probabilità condizionata
-$$P(A \mid B)=\dfrac{P(A \cap  B)}{P(B)}$$  segue
-$$P(A \cap B)=P(A \mid  B) P(B)$$  e scambiando $A$ con $B$
+\[P(A \mid B)=\dfrac{P(A \cap  B)}{P(B)}\]  segue
+\[P(A \cap B)=P(A \mid  B) P(B)\]  e scambiando $A$ con $B$
 $$P(B \cap A)=P(A \mid  B) P(B)$$
  
 si ha quindi
@@ -426,7 +990,7 @@ $$E_1,\ldots,E_n$$
 $$\Omega=E_1\cup E_2\cup\ldots\cup E_n\quad E_i\cap E_j=\emptyset$$
 
 Ovviamente
-<<r,echo=FALSE>>=
+<<echo=FALSE>>=
 library(plotrix)
 plot(0,0,xlim=c(-6,6),ylim=c(-6,6),type="n",xlab="",ylab="",asp=1,axes=F)
 rect(-5,-5,5,5,border="green",lwd=2)
@@ -1108,6 +1672,374 @@ Per semplicit\`a considereremo variabili aleatorie finite.\\
  
 
 La probabilità $P(A)$ di un evento A è il grado di fiducia  che lo sperimentatore pone nella realizzazione dell'evento (Jacob Bernoulli, 1654-1705) 
+\section{Stima dei parametri statistici}
+\subsection{ Covarianza}
+
+
+In genere ae $X$ e $Y$  sono variabili aleatorie allora
+\[\mu_{a X+ bY}=E[a X + b Y] = a E[X] + b E[Y]\]
+mentre la relazione che segue vale se $X$ e $Y$ sono scorrelate ossia $\textrm{Cov}(X,Y)=0$ (o se sono indipendenti)
+
+\[\textrm{Var}[a X+b Y]=a^2 \textrm{Var}[X]+b^2 \textrm{Var}[Y]\]
+dove la covarianza di una coppia di variabili aleatorie  è definita come 
+\[\mathrm{Cov}[X, Y] = E\bigl[(X - E[X]) (Y - E[Y])\bigr]\]
+e nel caso discreto si può scrivere \[\mathrm{Cov}[X, Y] =\sum_{i,j} (x_i -\mu_X)(y_j-\mu_Y) p_{X=x_i,Y=y_j}\quad \hbox{caso discreto}\]
+mentre nel caso continuo servirebbe un integrale  doppio.
+per esempio la formula precedente per $a=1$ e $b=1$ diviene 
+\[\mathrm{Var}[X+Y]=E[(X+Y-E[XbY])^2]=E[(X-E[X]+ Y-E[Y])^2]=\mathrm{Var}[X]-2 \mathrm{Cov}[X,Y]+\mathrm{Var}[Y] \]
+
+\subsection{Stima di $\\mu_X$}
+
+Come stimare il valore di $\mu_X$ eseguendo $n$ misure di $X$? 
+
+Il problema più frequente nelle applicazioni statistiche è di dare una stima dei valori di parametri statistici di una popolazione una volta che siano noti i valori dei parametri di un campione.   
+
+\subsubsection{Stima di Media e Varianze}
+
+Consideriamo una serie di $n$ esperimenti in cui si misura una grandezza $X$ che ha valore atteso $\mu_X=E[X]$ e varianza $\sigma^2_X=\mathrm{Var}[X]$. 
+Il risultato  atteso nell'esperimento numero $i$ è indicato con $X_i$ (anche se gli esperimenti sono tutti uguali). Gli $n$ esperimenti che eseguiremo costituiscono un **campione aleatorio** di dimensione $n$. 
+
+Possiamo inoltre  considerare le due espressioni
+
+\[ M_n[X]=\frac{\sum_{i=1}^n  X_i}{n}\quad \hbox{media campionaria aleatoria}\]
+
+\[\mathrm{S}^2_n[X] = \frac{\sum_{i=1}^n  (X_i-M_n[X])^2}{n-1}\quad\hbox{varianza campionaria aleatoria}\]
+ 
+che dipendono dal campione aleatorio $X_i$  e come tali sono esempi di `consuntivi aleatori` (*statistiche campionarie*).
+
+Per osservare **un** valore di $M_n$ e di $S^2_n$ occorre eseguire $n$ misure di $X$.
+
+Indichiamo con le corrispondenti lettere minuscole i numeri in cui si traducono le variabili aleatorie ad esperimento eseguito. Il risultato dell'esperimento i-esimo è  $x_i$ mentre media e varianza del campione   sono
+
+ $$m_n=\frac{\sum_{i=1}^n x_i}{n}\quad\hbox{media osservata}$$
+ $$s^2_n=\frac{\sum_{i=1}^n (x_i-m_n)^2}{n-1}\hbox{varianza osservata}$$
+ 
+ 
+\subsection{Stimatori}
+
+Il valore osservato $m_n$ della media campionaria viene usato per stimare $\mu$. La media campionaria $M_n$   è dunque uno **stimatore** della media vera $\mu$.
+
+
+Se uno stimatore arbitrario $T_n$ viene usato per stimare il parametro incognito $\tau$, sono significative le due proprietà  che seguono:
+
+1.  Lo stimatore $T_n$ è   corretto (`unbiased`) se il suo valore atteso coincide con il valore del parametro che si vuole stimare: $$E[T_n] = \tau$$
+
+2. Lo stimatore corretto $T_n$ è  anche coerente, o consistente (`consistent`), se la sua
+varianza tende a zero quando il numero degli esperimenti cresce: 
+
+\[\lim_{n\to \infty}\mathrm{Var}[T_n] = 0.\]
+
+Media campionaria e varianza campionaria (effettuando gli esperimenti) ci forniscono buone stime per la media e la varianza della popolazione ($\mu_X$ e $\sigma^2[X]$). Infatti si può  mostrare  che
+
+* Proprietà  1
+
+$M_n$ e $S^2_N$ sono variabili aleatorie e hanno quindi valori attesi e varianze. Si ha 
+
+$$E[M_N[X]]= \mu_X$$
+
+\[E[S^2_n[X]]=\sigma^2_X \]
+
+per esempio
+
+\[\begin{align} 
+E[S^2_n[X]] &=\dfrac{1}{N-1}E[(X_i-M_N)^2]=\dfrac{1}{N-1}E[(X_i-\mu+\mu-M_N)^2]\\
+=&\dfrac{1}{N-1}\sum_i \left(E[(X_i-\mu)^2]+E[(\mu-M_N)^2]+2 E[(X_i-\mu)(\mu-M_n)]\right)=\\
+=&\dfrac{1}{N-1}\left(\sum_i E[(X_i-\mu)^2]+\sum_i E[(\mu-M_N)^2]+2 \sum_i E[(X_i-\mu)(\mu-M_n)]\right)=\\
+=&\dfrac{1}{N-1}  \left(N Var[X]+N E[(M_N-\mu)^2]+2 N E[(M_n-\mu)(\mu-M_n)] \right)= \\
+=&\dfrac{1}{N-1}  \left(N Var[X]- N E[(M_n-\mu)^2] \right)= \\
+=&\dfrac{1}{N-1}  \left(N Var[X]- N Var[M_N] \right)=\dfrac{1}{N-1}  \left(N Var[X]-  Var[X] \right)=Var[X] \\\end{align}
+\]
+
+* Proprietà  2
+
+Se 
+
+$n \rightarrow \infty$
+
+$$\mathrm{Var}[M_n[X]]\rightarrow 0 $$
+$$\mathrm{Var}[S^2_n[X]]\rightarrow 0$$
+
+In altre parole se eseguiamo un numero molto elevato di esperimenti la media campionaria approssima  $\mu_X$  e la varianza campionaria $\sigma^2_X$.
+ 
+
+Quindi eseguire  un numero elevato di esperimenti è un modo per stimare $\mu_X$ e $\sigma_X$.
+
+Mostreremo le proprietà per la media campionaria
+
+## Valore atteso di $M_n$
+Visto che
+\[ E[ a X + b Y] = a E[X] + b E[Y]\] 
+
+\[ E[M_n]=\sum_{i=1}^n  \frac{E[X_i]}{n}=\frac{1}{n}\sum_{i=1}^n E[X]=E[X]\]
+
+
+\section{Varianza di $M_n$}
+
+Ricordiamo che se $\mathrm{Cov}(X,Y)=0$
+
+$$Var[a X + b Y] = a^2 Var[X] + b^2 Var[Y]$$
+
+In particolare se $X_1,\ldots,X_n$ sono repliche **indipendenti** dello stesso esperimento $X$ 
+
+$$\mathrm{Var}[X_1+\ldots+ X_n]=
+n  \mathrm{Var}[X]$$
+e
+$$\mathrm{Var}(M_n)=\sum_{i=1}^n \dfrac{\mathrm{Var}[X_i]}{n^2}= \frac{\mathrm{Var[X]}}{n}\Rightarrow   \sigma^2_{M_n} =  \sigma_X^2/n$$
+
+## Esercizio 
+
+Nello studio di un fenomeno aleatorio $X$ ci chiediamo come stimare $\mu$  e $\sigma$: media e deviazione standard della popolazione. Per stimare il valore atteso $\mu$  ricorriamo alla media campionaria:
+
+
+<<r,echo=FALSE>>=
+set.seed(10)
+n=5
+mu=100
+sigma=2
+fiale=round(rnorm(n,mu,sigma))
+@
+Consideriamo i  seguenti dati ottenuti misurando le quantità  di farmaco (in mg) in 5 fialette 
+
+\[(\Sexpr{ fiale}\]
+
+Stimare il valore atteso (media) della popolazione.
+
+\subsubsection{Soluzione}
+
+Per valutare la media della popolazione X consideriamo la variabile aleatoria  $M_N$
+
+\[M_n(X)=\dfrac{\sum_{i=1}^n X_i}{n}\]
+ 
+La media del campione in esame è  
+
+\[ \bar x = `r mean(fiale)`\; \mathrm{ mg}\]
+
+e quindi  possiamo stimare  il valore atteso per il contenuto delle fialette come
+
+\[\mu\approx  `r mean(fiale)` \;\mathrm{ mg}\]
+
+\subsection{I criteri di attendibilità}  
+
+Iniziamo con un esempio che ci convinca del fatto che le stime puntuali non sono le migliori possibili. 
+
+
+\subsubsection{Esempio}
+
+Due extraterrestri sono appena sbarcati sulla Terra. 
+
+Non sapendo che altro fare lo statistico decide di misurarne l'altezza e di stimare il valore atteso dell'altezza $X$ degli extraterrestri.  Rileva una misura di 40 cm per il primo extraterrestre e di  200 cm per il secondo. 
+
+Calcola la media (purtroppo ha solo due extraterrestri a disposizione) e stima
+
+$$\mu   \approx \frac{40 + 200}{2}\; \mathrm{ cm} = 120\; \mathrm{ cm}$$
+
+La stima fatto dello statistico è  *ottimale* (meglio di così non poteva fare) ma non attendibile (affidabile).
+
+La stima puntuale (un punto sulla retta, un numero) risulta qui certamente priva di ogni significato. Introdurremo ora un altro tipo di stime: le stime intervallari in cui ha rilevanza l'attendibilità  di un risultato. 
+
+<<echo=FALSE>>=
+plot(0,type="n",xlab="",ylab="",xlim=c(0,1),axes=F)
+segments(0,0,1,0,lwd=1)
+points(0.5,0,col="red",pch=2)
+text(0.5,0.1,expression(mu),cex=2)
+ 
+segments(0,-0.5,1,-0.5,lwd=1)
+segments(0.4,-0.5,0.6,-0.5,lwd=4,col="blue")
+text(0.5,-.4,expression(mu),cex=2)
+text(0.4,-.5,"(",cex=2)
+text(0.6,-.5,")",cex=2)
+@
+
+
+\subsection{Livello di fiducia}
+
+Per determinare un criterio di attendibilità  occorre affidarsi ad un criterio soggettivo (lasciato allo sperimentatore). Se vogliamo  stimare una grandezza occorre prima precisare cosa significa per noi essere pressoché certi di una conclusione.  
+
+Dobbiamo rinunciare  alle certezze e affidarci alle probabilità  che una cosa sia vera. 
+Si fissa un numero $\epsilon$  tra 0 e 1
+
+1. Si escludono (si ritengono impossibili) eventi con probabilità  inferiore a $\epsilon$  ($\epsilon$  =  *significatività *)
+
+2. Si accettano (si ritengono certi) gli eventi con probabilità   $\geq  1-\epsilon$  ($1-\epsilon$, *livello di fiducia*  o confidence level). 
+
+Molto spesso nelle applicazioni sceglieremo $\epsilon  = 0.05$ o 0.01. Fissato quindi il nostro criterio di attendibilità  vedremo ad esempio come dare una stima intervallare della media vera di una **popolazione normale**, ossia come assegnare un intervallo entro il quale con la media della popolazione cada con una probabilità  pari al livello di fiducia scelto.
+
+\section{La tabella inversa}
+
+Scegliamo un livello di fiducia, per esempio il 95%. Sappiamo alllora che esiste un numero $u$ tale che l'area indicata valga 0.95.  Possiamo essere allora certi (nel senso appena spiegato) che la variabile standardizzata cada nell'intervallo $[-u,u]$.
+ 
+Possiamo allora chiederci per quale valore di $u$  l'intervallo $[-u,u]$ racchiude una probabilità  pari al livello di fiducia scelto 
+($1-\epsilon$).
+<<echo=FALSE>>= 
+shadeareastandard<-function(a,b) 
+        {sigma=1;mu=0
+        curve(dnorm(x),lwd=4,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n",ylab="")
+        axis(1,at=c(a,b),labels=c("-u","u"),)
+        x1 <- a  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+text(a/2 ,dnorm(a/2+b/2)/4,bquote("P(-u<X<0)=0.475")  ,cex=1)
+text(b/2 ,dnorm(a/2+b/2)/4,bquote("P(0<X<u)=0.475")  ,cex=1)
+abline(v=0)
+     }
+shadeareastandard(-1.96,1.96)
+@
+ 
+
+<<echo=FALSE>>=
+library(pander)
+start=0.10
+stop=3.00-0. 
+step=0.1;
+nc=3;
+cifre=4;
+correzione<-function(x)  round(10^cifre* (pnorm(x)-0.5))/10^cifre
+tabnormale<-cbind(
+matrix(seq(start,stop,by=step),ncol=nc),matrix(correzione(seq(start,stop,by=step)),ncol=nc))
+as.vector(t(matrix(c(nc+1:nc,1:nc),nc=2)))->ordinecol
+colnames( tabnormale)= rep(c( "x","Area"),each=nc) 
+normale=tabnormale[,c(1,4,2,5,3,6)] 
+pander(normale)
+@
+Guardando la tabella la soluzione non è  immediata. Se per esempio scegliamo un livello di fiducia del 95%, dobbiamo valutare per quale valore di $u$ l'area da 0 ad  $u$ è  $0.95/2=0.475$ (perché anche l'area da $-u$ a 0 sarà  uguale a 0.475). Dalla tabella si evince che tale valore è  compreso tra 1.9 e 2.0.  
+E' quindi utile una tabella in cui, assegnato il livello di fiducia $1-\epsilon$  (l'area) si vuole conoscere il numero  x tale che il grafico della normale da $-u$ ad $u$ sottenda un'area pari al livello di fiducia $1-\epsilon$. In altri termini, nota l'area, si deve determinare $u$:
+
+## Tabella inversa 
+
+Considerando solo valori della probabilità  prossimi a 1
+<<echo=FALSE,message=FALSE,warning=FALSE>>=
+start=0.8
+fine=1. 
+step=0.005;
+nc=3;
+cifre=4;
+proba=c(seq(start,fine-step,by=step),0.999,fine)
+correzione<-function(x)  format(round(10^cifre* (qnorm((1+x)/2)))/10^cifre,nsmall=4)
+normaleinversa<-cbind(
+matrix(format(proba,nsmall=3),ncol=nc),matrix(correzione(proba),ncol=nc))
+as.vector(t(matrix(c(nc+1:nc,1:nc),nc=2)))->ordinecol
+colnames( normaleinversa)= rep(c( "1-epsilon","u"),each=nc)
+#rownames( tabnormale)=rep("",nrow( tabnormale))
+normaleinversa=normaleinversa[,c(1,4,2,5,3,6)] 
+ 
+#normale
+
+pander(normaleinversa)
+shadeareastandar<-function(a,b) 
+        {sigma=1;mu=0
+        curve(dnorm(x),lwd=4,xlab="",ylab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n")
+        axis(1,at=c(a,b),labels=c("-u","u"),)
+        x1 <- a  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+text(0 ,dnorm(a/2)*0.7,expression(paste("1-",epsilon,sep=""))  ,cex=1)
+ 
+     }
+shadeareastandar(-1.96,1.96)
+@
+
+ 
+
+
+ 
+
+\subsubsection{Con \rpr}
+
+$\mathrm{pnorm}(u,\mu,\sigma)$ fornisce l'area da  $-\infty$ a $u$ sotto alla normale generica. Se non specifichiamo $\mu$ e $\sigma$ ci riferiamo alla normale standard.
+$$\mathrm{pnorm}(u)= \int_{-\infty}^u\, \mathrm{dnorm}(x)\mathrm{d} x $$
+$\mathrm{pnorm}$  è  quindi una primitiva di $\mathrm{dnorm}$. Per esempio
+$$ P(a<X<b)=\int_a^b \mathrm {dnorm}(x,\mu,\sigma)=\left.\mathrm {pnorm}(x,\mu,\sigma)\right]_a^b=\mathrm {pnorm}(b,\mu,\sigma)-\mathrm {pnorm}(a,\mu,\sigma)$$
+
+<<echo=FALSE>>=
+ 
+shadeareastandard<-function(a,b) 
+        {sigma=1;mu=0
+        curve(dnorm(x,mu,sigma),lwd=4,xlab="",ylab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n")
+        axis(1,at=c(a,b),labels=c("-u","u"),)
+        x1 <- a  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+text(-0,0.15,expression(paste("A"[1],"=pnorm(u)"))  ,cex=1)
+}
+shadeareastandard(-4,1.96)
+arrows(2,-0.015,0,0.12,lwd=2,col="tan1")
+@
+
+
+
+
+La funzione $\mathrm{qnorm}(x,\mu,\sigma)$ è  la funzione inversa di $\mathrm {pnorm}(x,\mu,\sigma)$.
+
+<<echo=FALSE>>=
+ 
+shadeareastandard<-function(a,b) 
+        {sigma=1;mu=0
+        curve(dnorm(x,mu,sigma),lwd=4,,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n",ylab="")
+        axis(1,at=c(a,b),labels=c("-u",expression(paste("u=qnorm(A"[1],")"))))
+        x1 <- a  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+text(-0,0.15,expression("A"[1])  ,cex=1)
+}
+shadeareastandard(-4,1.96)
+arrows(0,0.12,2,-0.015,lwd=2,col="tan4")
+@
+
+Vogliamo una funzione, diciamo `U` che assegnato un valore di  area $A_2 = 1 - \epsilon$   fornisca l'ascissa $u$ come in figura in modo che tra - $u$ e $u$ l'area sia $A_2$.  
+<<echo=FALSE>>= 
+ 
+s2<-function(a,b) 
+        {sigma=1;mu=0
+        curve(dnorm(x),lwd=4,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n",ylab="")
+        axis(1,at=c(a,b),labels=c("-u",expression(paste("u=U(A"[2],")=U(1-",epsilon,")"))))
+        x1 <- a  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+text(-0,0.15,expression(paste("A"[2],"=1-",epsilon))  ,cex=1)
+}
+s2(-1.96,1.96)
+@
+
+
+Il legame con il grafico precedente è 
+
+ 
+<<echo=FALSE>>= 
+s3<-function(a,b) 
+        {sigma=1;mu=0
+        curve(dnorm(x,mu,sigma),lwd=4,xlab="",xlim=c(-3*sigma+mu,max(b,3*sigma+mu)),ylim=c(0,1.2*dnorm(0,0,sigma)),axes=F,xaxt="n")
+        axis(1,at=c(a,b),labels=c("-u",expression(paste("u=qnorm(A"[1],"/2+1/2)"))))
+        x1 <- 0  
+        x2 <- b
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light green")
+        x1 <- -4  
+        x2 <- 0
+        x=seq(x1,x2,by=0.01)
+        polygon( c(x1,x,x2) , c(0, dnorm(x), 0), col="light blue")
+text(-1,0.15,bquote("1/2")  ,cex=1)
+text(1,0.15,expression("A"[2]/2)  ,cex=1)
+text(0,0.43,expression(paste("A"[1],"=1/2+A"[2]/2))  ,cex=2)
+}
+ 
+s3(-4,1.96)
+@
+
+Allora la funzione che riproduce la tabella è
+ 
+<<>>=
+U <-function (a) qnorm (1/2 + a/2)
+@
+E ad esempio
+
+<<>>=
+U(0.95)
+@
 
   
  
@@ -1147,7 +2079,6 @@ alfabeto=c("testa","croce")
 sample(alfabeto,5,replace=T)
 @
  
-
 Il precursore  del dado era chiamato \emph{astragalo} ed era giocato nell'antica Grecia e nell'antica Roma~\cite{david}.
 Gli  astragali sono dei piccoli ossicini di forma irregolare ed hanno 6 facce ma atterranno in  modo stabile solo su 4 di esse numerate 1, 3, 4 e 6  con probabilit\`a all'incirca 0.4 per il 3 e il 4  e di 0.1 per l'1 e il 6. In altre parole l'astragalo \`e descritto dalla tabella
 
@@ -1202,568 +2133,6 @@ sort(x)
 
 \end{document}
 
-\section{Statistica descrittiva: singola variabile}
-\subsection{Indicatori statistici}
-\begin{itemize}
-\item{}Media.\vskip0pt
-La varianza di un vettore di $n$ numeri
-\[x=(x_1,\ldots,\ldots,x_n)\] 
-\`e definita come
-\[ \bar{x}=\frac 1 n \sum_{i=1}^n x_i\]
-Si calcona in \rpr con la funzione \texttt{mean} scrivendo:
-$\texttt{mean}(\varia{variabile})$.
-Ad esempio, lavorando con la lunghezza del sepalo di 150 piante di iris
-<<echo=TRUE,cache=T>>=
-x=iris[,1]
-mean(x)
-@
-\item{}Varianza campionaria\vskip0pt
-La varianza di un vettore di $n$ numeri
-\[x=(x_1,\ldots,\ldots,x_n)\]
-\`e definita come
-\[  \mathrm{var}(x)=\dfrac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2\]
-Si ottiene con la funzione predefinita di espressione:
-\texttt{var}(\varia{variabile}).
-Possiamo calcolare la varianza come
-<<echo=TRUE>>=
-var(x)
-@
-\item{}Deviazione Standard campionaria.\vskip0pt
-Non \`e altro che la radice della varianza. Si ottiene con la funzione predefinita di espressione:
-$\texttt{sd}(\varia{variabile})$.
-Sempre basandosi sull'esempio precedente scriveremo
-<<echo=TRUE>>=
-sd(x)
-@
-
-\item{}Quantili. La notazione standard \`e semplicemente: \texttt{quantile}(\varia{variabile}) che determina i quartili e ci fornisce in uscita la statistica dei 5 numeri
-
-<<echo=TRUE>>=
-quantile(x)
-@
-Volendo ricavare i decili dovremo scrivere:
-$$\texttt{quantile}(\varia{variabile},\texttt{seq(0,1,by=0.1)})$$
-in quanto vogliamo dividere l'intervallo $[0,1]$ a passo $0.1$
-
-Nell'esempio:
-<<echo=TRUE>>=
-quantile(x,seq(0,1,by=0.1))
-@
-Si noti che \texttt{quantile} ammette 9 varianti specificabili con l'opzione $\texttt{type}=n$ dove $n$ va da 1 a 9.
-Per esempio
-<<echo=TRUE>>=
-quantile(x,type=2)
-@
-Sui dati in esame le 9 varianti coincidono. La convenzione da noi adottata corrisponde al numero 2
-\end{itemize}
-Per quanto riguarda gli indicatori statistici nel caso di dati ripetuti basta notare che se la lista $x$ contiene i valori e la lista $f$ le frequenze assolute il comando
-$$\varia{rep}(x,f)$$ costruisce un'unica lista dei dati inclusiva delle ripetizioni.
-Per esempio
-
-<<echo=TRUE>>=
-x=1:6
-f=c(9,7,9,7,8,10)
-(dati=rep(x,f))
-@
-Ovviamente senza bisogno di visualizzare \texttt{dati} possiamo calcolarne tutti gli indicatori statistici.
-Il comando
-<<echo=TRUE>>=
-cumsum(f)
-@
-restituisce le frequenze cumulate, dalle quali si possono ricavare facilmente la mediana
-i quantili.
-
-\subsection{Raggruppamenti in classi}
-<<echo=FALSE,eval=FALSE>>=
-mese=month(as.POSIXlt(date(),format="%a %b %d %H:%M:%S %Y"))
-mesit= c("Dicembre" ,"Gennaio" ,"Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settemnbre","Ottobre","Novembre")
-mesi=1:12
-names(mesi)=mesit
-m=names(mesi[mese])
-anno=year(as.POSIXlt(date(),format="%a %b %d %H:%M:%S %Y"))
-if(mese==1) anno=anno-1
-@
-<<echo=FALSE,eval=TRUE>>=
-m="Gennaio"
-anno=2016
-stringa=paste("Milano/", anno ,"/",m,"?format=csv",sep="")
-@
-Consideriamo la rilevazione della temperatura media giornaliera di Milano nel mese di \Sexpr{m} \Sexpr{anno}.
-Scegliamo il mese
-<<echo=FALSE>>=
-cat(paste("> stringa=\"",stringa,"\"",sep=""))
-<<echo=TRUE,eval=FALSE>>=
-sito="http://www.ilmeteo.it/portale/archivio-meteo/"
-indirizzo=paste(sito,stringa,sep="")
-meteo=read.table(indirizzo,sep=";",header=T)[,-1]
-<<echo=FALSE,eval=FALSE>>=
-write.table(meteo,file="../filedati/meteo.txt",sep=";")
-<<echo=FALSE,eval=TRUE>>=
-meteo=read.table("../filedati/meteo.txt",sep=";",header=T)
-<<tidy=TRUE>>=
-options(width=60)
-str(meteo)
-@
-A questo punto selezioniamo la colonna della temperatura media 
-<<echo=TRUE>>=
-meteo[,3]->Milano;
-Milano
-quantile(Milano)
-@
-L'ultimo comando in particolare ci fornisce minimo e massimo dei dati.
-Possiamo esaminare la serie temporale dei dati con i comandi
-<<echo=TRUE,fig.keep='none'>>=
-plot(Milano,type="l",xlab=paste(m,anno, "a milano"),ylab="temperatura media")
-@
-ottenendo la figura~\ref{fig:datiist}
-\begin{figure}[htbp]
-\begin{center}
-<<echo=FALSE>>=
-plot(Milano,type="l",xlab=paste(m,anno, "a milano"),ylab="temperatura media")
-@
-\caption{ Andamento della temperatura a \Sexpr{paste(m,anno)}  a Milano. }
-\label{fig:datiist}
-\end{center}
-\end{figure}
-
-Raggruppiamo ora i dati in classi comprese  tra due estremi che comprendano certamente tutti i dati, per esempio \Sexpr{2*round(min(Milano)/2-0.1)} e \Sexpr{2*round(max(Milano)/2+0.1)}, decidendo di applicare un passo di 2 e vedere come si distribuiscono. Il comando \texttt{cut} associa a ciascun dato la classe di appartenenza selezionata in base ai punti di taglio.
-
-<<echo=TRUE>>=
-tagli=c(-2,0,2,4,6,10)
-cut(Milano,breaks=tagli)
-@
-
-Il comando \texttt{table} conta i dati di ciascuna classe
-
-<<echo=TRUE>>=
-table(cut(Milano,breaks=tagli))
-@
-Si noti che la suddivisione in classi prevede intervalli aperti a sinistra e chiusi a destra.
-Per suddividere in modo che gli intervalli siano chiusi a sinistra e aperti a destra si specifica il parametro \texttt{right=FALSE}.
-Possiamo anche usare il comando \texttt{seq} per specificare i tagli.
- \begin{eqnarray*}
-\texttt{table(cut}( \varia{variabile},\texttt{breaks=seq}(\varia{estremo inf},\\
-\varia{estremo sup},\texttt{by}=\varia{passo}),\texttt{right=TRUE}))
-\end{eqnarray*}
-o in modo  pi\`u generale
-\begin{eqnarray*}
-&\texttt{table(cut}(\varia{ variabile},\\
-&\texttt{breaks=c}(\varia{estremo\; inferiore}, \ldots,\varia{estremo superiore}))
-\end{eqnarray*}
-estremamente utile in quanto consente di raggruppare i dati in classi non necessariamente di ugual ampiezza.
-<<echo=TRUE>>=
-table(cut(Milano,breaks=c(-3,1,3,4,5,6,8,10)))
-@
-Volendo raggruppare in classi i dati delle precedenti uscite del dado possiamo scrivere
-<<echo=TRUE>>=
-table(cut(dadi100,breaks=0:6))
-@
-Se scegliamo di chiudere a sinistra gli intervalli dobbiamo però includere il 7 altrimenti 
-il valore 6 non risutlerebbe incluso.
-<<echo=TRUE>>=
-table(cut(dadi100,breaks= 1:7,right=FALSE))
-@
-
-\subsection{Areogrammi}
-Il comando generico per generare un istogramma \`e:
-\begin{equation*}
-\texttt{hist}(\varia{variabile})\index{\texttt{hist}}
-\end{equation*}
-che segue per\`o la struttura del comando \texttt{cut}. L'ampiezza di ciascuna classe salvo diversamente indicato \`e costante e decisa da \textsf{R}.
-\`E  possibile variare tale condizione definendo una lista con i punti di taglio ({\it cutoff}) delle classi volute:
-\begin{equation} \texttt{hist}(\varia{variabile},\texttt{c}(\varia{valore}_1, \varia{valore}_2, \ldots))
-\end{equation}
-Per esempio se \texttt{dadi100} rappresenta le solite 100 uscite del lancio del dado, il comando
-<<echo=TRUE,fig.keep='none'>>=
-par(mfrow=c(1,2))
-hist(dadi100,breaks=seq(0.5,6.5,1),col="red")
-hist(dadi100,freq=FALSE,breaks=seq(0.5,6.5,1),col="blue")
-@
-\begin{figure}[htbp]
-\begin{center}
-<<echo=FALSE>>=
-par(mfrow=c(1,2))
-hist(dadi100,breaks=seq(0.5,6.5,1),col="red")
-hist(dadi100,freq=FALSE,breaks=seq(0.5,6.5,1),col="blue")
-@
-\caption{Diagramma a colonne e areogramma per il lancio di un dado.}
-\label{fig:datidado}
-\end{center}
-\end{figure}
-genera l'istogramma (in rosso, a sinistra Figura~\ref{fig:datiist}) con le frequenze assolute delle classi in ordinata. La sequenza dei punti di taglio \`e stata scelta in modo che i numeri interi da 1 a 6 siano al centro delle classi corrispondenti. Se invece volessimo creare un areogramma  (ossia avere un tracciato per cui le aree siano pari alle frequenze relative) a partire dalle stesse uscite dovremo imporre il parametro \texttt{freq=FALSE} otterremo il pannello a destra (in blu) della figura~(\ref{fig:datiist}). Avendo scelto classi di ampiezza costante i 2 grafici differiscono semplicemente per un cambio di scala sull'asse $y$.
-
-In modo simile possiamo tracciare un areogramma  dei dati nella variabile \texttt{milano}
-<<echo=TRUE,eval=FALSE>>=
-par(mfrow=c(1,2))
-hist(Milano, col="green",freq=FALSE,right=FALSE,
-main="Cutoff automatici")
-@
-lasciando \textsf{R} libero di scegliere i punti di taglio (pannelli a sinistra della figura \ref{fig:datiistmilano}) o scegliendoli a nostra volta (pannelli a destra della stessa figura  \ref{fig:datiistmilano})
-<<echo=FALSE>>=
-options(width=55)
-<<echo=TRUE>>=
-hist(Milano,col="red",freq=FALSE,
-breaks=unique(as.vector(quantile(Milano,seq(0,1,by=1/6)))),
-main="Cutoff personalizzati")
-@
-\begin{figure}[htbp]
-\begin{center}
-<<echo=FALSE>>=
-par(mfrow=c(1,2))
-hist(Milano, col="green",freq=FALSE,right=FALSE,main="Cutoff automatici")
-hist(Milano,col="red",freq=FALSE,breaks=unique(as.vector(quantile(Milano,seq(0,1,by=1/6)))),
-right=FALSE,main="Cutoff personalizzati")
-@
-\caption{ Areogramma dei dati della temperatura. Scelta automatica dei punti di taglio.}
-\label{fig:datiistmilano}
-\end{center}
-\end{figure}
-Si noti la stabilit\`a degli areogrammi rispetto ai cambi nella suddivisione.
-\subsection{Generazione di boxplot}
-
-Il \texttt{boxplot}  \`e una rappresentazione grafica immediata della statistica dei 5 numeri e simultaneamente ci  segnala eventuali punti discordanti o anomali, {\it outlier}.
-Il comando generico \`e: \begin{equation}\texttt{boxplot}(\varia{variabile})\end{equation}
-prendendo il vettore $x$ contenente i risultati di 100 lanci
-otteniamo la figura~\ref{fig:boxplotdado}
-\begin{figure}[htbp]
-\begin{center}
-<<echo=TRUE,fig.height=4,fig.width=4>>=
-boxplot(dadi100)
-@
-\caption{Boxplot dei risultati del lancio di un dado}
-\label{fig:boxplotdado}
-\end{center}
-\end{figure}
-da cui si evince che il valore massimo dei dati \`e 6, il minimo \`e 1 e non ci sono punti anomali, per cui non vi sono dati anomali, altrimenti evidenziati da un pallino. Si legge inoltre il valore di mediana (4) primo quartile (2) e terzo quartile (5).
-
-\subsection{Creazione di grafici a torta}
-
-Il comando \texttt{pie} consente, partendo da una tabella, di tracciare il diagramma a torta per una variabile nominale raggruppata in classi. Il comando \`e
-
-\begin{equation*}\texttt{pie(table}(\varia{variabile} ))
-\end{equation*}
-ad esempio (facendo riferimento ai precedenti dati):
-<<echo=TRUE,fig.keep='none'>>=
-pie(table(dadi100))
-@
-fornisce in uscita  la Figura~\ref{fig:pie}
-\begin{figure}[htbp]
-\begin{center}
-<<echo=FALSE>>=
-pie(table(dadi100))
-@
-\caption{Diagramma a torta per il lancio di un dado equo.}
-\label{fig:pie}
-\end{center}
-\end{figure}
-\begin{shaded}{Costruire una matrice contenente le coordinate di 50 punti nel rettangolo $[0,4]\times [0,2]$ in due dimensioni (generate utilizzando il generatore di numeri pseudocasuali). Produrre un grafico con due pannelli, dove il primo pannello \`e uno scatter-plot}
-\end{shaded}
-\section{Variabili doppie e rette di regressione}
-Supponiamo di misurare la concentrazione di acido lattico muscolare durante uno sforzo di 10 minuti,
-<<echo=TRUE>>=
-x<-tempo<-c(1,2,3,4,5,6,7,8,9,10)
-y<-concentrazione<-c(0.3,0.65,0.7,0.8,0.95,1.05,1.3,1.7,1.9,
-2.5)
-@
-Per analizzare questi dati conviene preliminarmente tracciarne un diagramma a dispersione.
-\begin{figure}[htbp]
-\begin{center}
-<<echo=TRUE>>=
-plot(x,y)
-@
-\caption{Diagramma a dispersione tempo/concentrazione.}
-\label{fig:scatte}
-\end{center}
-\end{figure}
-Possiamo inoltre determinare il coefficiente di correlazione lineare
-<<echo=TRUE>>=
-cor(x,y)
-@
-Per definire un modello di relazione lineare occorre usare il comando \texttt{lm} (\varia{linear model}).
-Nella sua generica forma il comando \`e espresso come\footnote{ Per digitare la tilde  \mytilde\;  su Mac premere ALT 5 su PC invece il tasto Alt Gr (attivazione del codice ASCII) e sul tastierino numerico digitare il numero 126. Lavorando su un portatile il tastierino numerico \`e spesso incorporato nella tastiera con colorazione blu dei tasti.}
-$$\texttt{lm}(\varia{y} \sim  \varia{x})$$
-Otteniamo i valori di pendenza e intercetta.
-
-Possiamo tracciare la retta di regressione con il comando \texttt{abline}.
-<<echo=TRUE,fig.keep='none'>>=
-plot(x,y,pch=19,col="red")
-abline(lm(y~x),col="blue")
-@
-Per determinare  la retta di regressione sulle $y$ dobbiamo invertire $x$ e $y$.
-<<echo=TRUE,fig.keep='none'>>=
-(modellox=lm(x~y))
-coeff=modellox$coefficients
-(a=1/coeff[2])
-(b=-coeff[1]/coeff[2])
-abline(b,a,col="green")
-@
-In tal modo otteniamo il grafico~\ref{fig:duerettex}.
-\begin{center}
-\begin{figure}[htbp]
-<<echo=FALSE>>=
-plot(x,y,col="red")
-abline(lm(y~x),col="blue")
-abline(b,a,col="green")
-@
-\caption{Rette di regressione. In blu $R_x$, in verde $R_y$.}
-\label{fig:duerettex}
-\end{figure}
-\end{center}
-
-\subsubsection{I bambini di Kalama (Egitto). Ancora retta di regressione}
-Da DASL \cite{DASL} possiamo scaricare un \emph{dataset} in cui i ricercatori hanno misurato le altezze (cm) dai 18 ai 29 mesi di vita, di 161 bambini di Kalama, un villaggio egiziano. Le altezze sono state mediate tra i bambini per fornire un singolo valore mese per mese.
-<<echo=TRUE>>=
-age=18:29
-height=c(76.1,77,78.1,78.2,78.8,79.7,79.9,81.1,81.2,81.8,82.8,83.5)
-@
-Possiamo quindi costruire il \texttt{data.frame}
-<<echo=TRUE>>=
-village=data.frame(age=age,height=height)
-@
-Ora diamo una prima occhiata ai dati:
- %code chunk
-\begin{figure}[htbp]
-\begin{center}
-<<echo=TRUE>>=
-plot(age,height)
-@
-\caption{Crescita dei bambini di Kalama}
-\label{kalama}
-\end{center}
-\end{figure}
-L'andamento \`e lineare. Determiniamo la retta di regressione
-per predire l'altezza media nota l'et\`a in mesi.
-%code chunk
-<<echo=TRUE>>=
-(modello=lm(height~age))
-@
-La retta di regressione cercata ha formula:
-$$h(\texttt{age})=\Sexpr{1/100*round(100*modello$coefficients[1])}+ \Sexpr{1/100*round(100*modello$coefficients[2])}\, \texttt{age}$$
-
-Possiamo ora utilizzare \textsf{R} come semplice calcolatore per predire l'altezza a 27.5 mesi di et\`a:
-oppure, \`e pi\`u  efficiente utilizzare direttamente il \emph{dataframe} e la funzione
-\texttt{predict}:
-%codechunk
-<<echo=TRUE>>=
-predict(modello,data.frame(age=27.5))
-@
-fornendo in input i parametri della retta ed un preciso valore della variabile indipendente (richiamata col proprio nome).
-Molti comandi di \textsf{R} sono in grado di manipolare \emph{dataframe}  lavorando direttamente sulla struttura. Per esempio, il comando plot di un \texttt{dataframe} in due colonne, esegue in automatico il grafico della seconda colonna (variabile dipendente) vs prima colonna (variabile indipendente).
-Possiamo ottenere il modello lineare visto nel caso precedente, passando \texttt{village} direttamente al comando:
-<<echo=TRUE>>=
-modello=lm(height~age,data=village)
-modello
-@
-con la formula \texttt{lm(y \mytilde x,data=dataset)}.
-%Inoltre possiamo considerare il plot di un oggetto \texttt{lm}  che fornisce una serie di rappresentazioni grafiche
-%<<fig=TRUE,echo=FALSE>>=
-%oldpar<-par(mfrow=c(2,2))
-%par(ask=FALSE)
-%plot(lm(height~age))
-%oldpar
-%@
-\section{Modelli potenza}
-Consideriamo ora il seguente \emph{dataset} di mammiferi  in cui le 2 variabili rappresentano  le dimensioni del corpo e del cervello.
-<<echo=TRUE>>=
-library(MASS)
-mammals
-@
-Per prima cosa tracciamo il grafico dei punti  in scala non trasformata e, visto la compresenza di dati molto prossimi all'origine e di dati molto distanti in scala logaritmica (sia le $x$ che le $y$ vengono trasformate prendendone i logaritmi)
-<<echo=TRUE,fig.keep='none'>>=
-par(mfrow=c(1,2))
-plot(mammals)
-plot(mammals,log="xy")
-@
-come in Figura~\ref{fig:duemammals}.\begin{figure}[htbp]
-\begin{center}
-<<echo=FALSE>>=
-par(mfrow=c(1,2))
-plot(mammals)
-plot(mammals,log="xy")
-@
-\caption{Diagramma a dispersione massa corporea/massa del cervello in scala normale ed in scala logaritmica. }
-\label{fig:duemammals}
-\end{center}
-\end{figure}
-Visti i  risultati ottenuti usando la scala logaritmica tracciamo anche la corrispondente retta di regressione
-<<echo=TRUE,fig.keep='none'>>=
-plot(log(mammals$brain)~log(mammals$body),col="BLUE",pch=19,type="p")
-abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3);
-uomo=which(rownames(mammals)=="Human")
-text(log(mammals[uomo ,1]),log(mammals[uomo ,2]),rownames(mammals)[uomo])
-@
-\begin{figure}[htbp]
-\begin{center}
-<<echo=FALSE>>=
-plot(log(mammals$brain)~log(mammals$body),col="BLUE",pch=19,type="p")
-abline(lm(log(mammals$brain)~ log(mammals$body)),col="red",lwd=3 );
-uomo=which(rownames(mammals)=="Human")
-text( log(mammals[uomo ,1]),log(mammals[uomo ,2]),rownames(mammals)[uomo])
-@
-\caption{ Retta di regressione. Dimensione del corpo e del cervello. Si noti la posizione dell'uomo.}
-\label{duerette}
-\end{center}
-\end{figure}
-Si noti il comando \texttt{text(\varia{x},\varia{y}, \varia{testo})}
-dove    $\varia{x}$ e $\varia{y}$  e $\varia{testo}$ sono vettori di arbitraria lunghezza contenenti ascisse, ordinate e testo da inserire.
-\section{Distribuzioni in \textsf{R}}
-I nomi delle principali distribuzioni in \textsf{R} sono\vskip10pt
-\begin{tabular}{|r|c |}
-\hline
-\texttt{norm}&normale\\
-\texttt{t}  &Student\\
-\texttt{chisq}& chi quadro\\
-\texttt{f}&Fisher\\
-\texttt{binom }&binomiale\\
-\hline
-\end{tabular}\vskip10pt
-A questi nomi possiamo aggiungere diversi prefissi\vskip10pt
-\begin{tabular}{|r|c |}
-\hline
-\texttt{d}&densit\`a\\
-\texttt{p}  &primitiva\\
-\texttt{q}& quantile\\
-\texttt{r}&random\\
-  \hline
-\end{tabular}
-\vskip10pt
-per caratterizzare diversi aspetti.
-\begin{comment}
-<<echo=FALSE, results='hide'>>=
-library(exams)
-## DATA GENERATION
-r <- sample(1:10)
-if(runif(1) < 1/3) {
-  mx <- my <- 0
-  sx <- sy <- 1
-} else {
-  mx <- sample(10 * -5:5, 1)
-  my <- sample(20 * 0:5, 1)
-  sx <- sample(c(1, 10, 20), 1)
-  sy <- sample(c(1, 10, 20), 1)
-}
-
-b <- r * sy/sx
-a <- my - b*mx
-x <- rnorm(200, mx, sx)
-y <- b * x + rnorm(200, a, sy * sqrt(1- r^2))
-
-## QUESTION/ANSWER GENERATION
-questions <- character(5)
-solutions <- logical(5)
-explanations <- character(5)
-
-if (runif(1) < 0.5) {
-  questions[1] <- "The scatterplot is standardized."
-  solutions[1] <- mx == 0 & my == 0 & sx == 1 & sy == 1
-  explanations[1] <- if (solutions[1]) "$X$ and $Y$ have both mean $0$ and variance $1$." else
-  "The scatterplot is not standardized, because $X$ and $Y$ do not both have mean $0$ and variance $1$."
-} else {
-  questions[1] <- "La pendenza della retta di regressione ? circa $1$."
-  solutions[1] <- abs(b - 1) < 0.1
-  explanations[1] <- paste("The slope of the regression line is given by $r \\\\cdot s_y/s_x$ and hence",
-                           ifelse(abs(b - 1) < 0.1, "", "not"), "about equal to $1$.")
-}
-
-if (runif(1) < 0.5) {
-  questions[2] <- "The absolute value of the correlation coefficient is at least $0.8$."
-  solutions[2] <- abs(r) >= 0.8
-} else {
-  questions[2] <- "The absolute value of the correlation coefficient is at most $0.8$."
-  solutions[2] <- abs(r) <= 0.8
-}
-explanations[2] <- if(abs(r) >= 0.9) {
-  paste("A strong association between the variables is given in the scatterplot.",
-        "Hence the absolute value of the correlation coefficient is close to $1$",
-        "and therefore larger than $0.8$.")
-  } else if (abs(r) == 0) {
-    paste("No association between the variables is observed in the scatterplot.",
-          "This implies a correlation coefficient close to $0$.")
-  } else paste("Only a slightly positive association between the variables is observable in the scatterplot.",
-               "This implies a correlation coefficient with an absolute value smaller than $0.8$.")
-
-if (runif(1) < 0.5) {
-  questions[3] <- "The standard deviation of $X$ is at least $6$."
-  solutions[3] <- sx >= 6
-  explanations[3] <- paste("The standard deviation of $X$ is about equal to $", sx, "$ and is therefore",
-                           ifelse(sx < 6, "smaller", "larger"), "than $6$.")
-} else {
-  questions[3] <- "The standard deviation of $Y$ is at least $6$."
-  solutions[3] <- sy >= 6
-  explanations[3] <- paste("The standard deviation of $Y$ is about equal to $", sy, "$ and is therefore",
-                           ifelse(sy < 6, "smaller", "larger"), "than $6$.")
-}
-
-if (runif(1) < 0.5) {
-  questions[4] <- "The mean of $X$ is at most $5$."
-  solutions[4] <- mx <= 5
-  explanations[4] <- paste("The mean of $X$ is about equal to $", mx,
-                           "$ and hence is", ifelse(mx < 5, "smaller", "larger"), "than $5$.")
-} else {
-  questions[4] <- "The mean of $Y$ is at least $30$."
-  solutions[4] <- my >= 30
-  explanations[4] <- paste("The mean of $Y$ is about equal to $", my,
-                           "$ and hence is", ifelse(my < 30, "smaller", "larger"), "than $30$.")
-}
-
-xh <- round(runif(1, -1, 1)*sx + mx, 1)
-yhr <- round(a + b*xh, 1)
-alpha <- if (abs(r) > 0 & abs(mx - xh) > 0) sign(mx - xh) * sign(r) else 1
-yhf <- round(yhr + 2 * sy * alpha, 1)
-yh <- sample(c(yhr, yhf), 1)
-questions[5] <- paste("For $X = ", as.character(xh), "$, $Y$ can be expected to be about ",
-                      as.character(yh), ".", collapse="")
-solutions[5] <- abs(yh - yhr) < 0.01 * sy
-explanations[5] <- paste("The regression line at $X=", xh,
-                         "$ implies a value of about $Y = ", yhr, "$.", sep="")
-
-## permute order of solutions/questions
-o <- sample(1:5)
-questions <- questions[o]
-solutions <- solutions[o]
-explanations <- explanations[o]
-@
-\begin{itemize}
-\begin{question}
-  Figure~\ref{fig:scatterplot} shows a scatterplot. Which of the
-  following statements are correct?
-
-
-\begin{figure}[htb!]
-\begin{center}
-<<fig.height=5, fig.width=6, echo=FALSE, results='hide'>>=
-plot(x, y)
-@
-\caption{ Scatterplot}\label{fig:scatterplot}
-\end{center}
-\end{figure}
-
-\begin{answerlist}
-  \item \Sexpr{questions[1]}
-  \item \Sexpr{questions[2]}
-  \item \Sexpr{questions[3]}
-  \item \Sexpr{questions[4]}
-  \item \Sexpr{questions[5]}
-\end{answerlist}
-\end{question}
-
-%% SOLUTIONS
-\begin{solution}
-\begin{answerlist}
-  \item \Sexpr{mchoice2text(solutions[1])}: \Sexpr{explanations[1]}
-  \item \Sexpr{mchoice2text(solutions[2])}: \Sexpr{explanations[2]}
-  \item \Sexpr{mchoice2text(solutions[3])}: \Sexpr{explanations[3]}
-  \item \Sexpr{mchoice2text(solutions[4])}: \Sexpr{explanations[4]}
-  \item \Sexpr{mchoice2text(solutions[5])}: \Sexpr{explanations[5]}
-\end{answerlist}
-\end{solution}
-\end{itemize}
-%% META-INFORMATION
-%% \extype{mchoice}
-%% \exsolution{\Sexpr{mchoice2string(solutions)}}
-%% \exname{Multiple choice}
-
-\end{comment}
 
  \subsection{Distribuzione normale}
 <<echo=FALSE>>=

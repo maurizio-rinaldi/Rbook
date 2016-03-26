@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.10.9)  21 MAR 2016 18:44
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.10.9)  24 MAR 2016 19:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -597,7 +597,7 @@ Writing index file RbookParte3-knitr.idx
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-(./RbookParte3-knitr.aux)
+No file RbookParte3-knitr.aux.
 \openout1 = `RbookParte3-knitr.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 108.
@@ -614,7 +614,6 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 108.
 LaTeX Font Info:    ... okay on input line 108.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 108.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 108.
-
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
@@ -649,9 +648,12 @@ LaTeX Info: Redefining \nameref on input line 108.
 \@outlinefile=\write5
 \openout5 = `RbookParte3-knitr.out'.
 
+
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
 \c@lstlisting=\count162
 LaTeX Font Info:    Try loading font information for T1+aess on input line 116.
-
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/ae/t1aess.fd
 File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
@@ -660,17 +662,23 @@ File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
 File: se-ascii-print.def 2011/12/02 v1.10 stringenc: Printable ASCII characters
 
 )
+
+LaTeX Warning: Reference `LastPage' on page i undefined on input line 116.
+
 [1
 
 
 
 ] [2
 
-] (./RbookParte3-knitr.toc)
+]
+
+Package hyperref Warning: old toc file detected, not used; run LaTeX again.
+
 \tf@toc=\write6
 \openout6 = `RbookParte3-knitr.toc'.
 
- [3] [4
+[3] [4
 
 ]
 Capitolo 1.
@@ -743,8 +751,8 @@ Package color Info: Redefining color shadecolor on input line 350.
 Package color Info: Redefining color shadecolor on input line 370.
  [10]
 Package color Info: Redefining color shadecolor on input line 429.
-File: figure/r-1.pdf Graphic file (type QTm)
- <use  "figure/r-1.pdf" >
+File: figure/unnamed-chunk-14-1.pdf Graphic file (type QTm)
+ <use  "figure/unnamed-chunk-14-1.pdf" >
 Overfull \hbox (84.4644pt too wide) in paragraph at lines 427--431
 []\T1/aer/m/n/12 Ovviamente  [][] 
  []
@@ -755,8 +763,8 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [11]
 [12]
 Package color Info: Redefining color shadecolor on input line 471.
-File: figure/unnamed-chunk-14-1.pdf Graphic file (type QTm)
- <use  "figure/unnamed-chunk-14-1.pdf" >
+File: figure/unnamed-chunk-15-1.pdf Graphic file (type QTm)
+ <use  "figure/unnamed-chunk-15-1.pdf" >
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 478--479
 [][] 
  []
@@ -768,15 +776,15 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [13]
 [14]
 Package color Info: Redefining color shadecolor on input line 544.
-File: figure/unnamed-chunk-18-1.pdf Graphic file (type QTm)
- <use  "figure/unnamed-chunk-18-1.pdf" >
+File: figure/unnamed-chunk-19-1.pdf Graphic file (type QTm)
+ <use  "figure/unnamed-chunk-19-1.pdf" >
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [15]
 [16]
 Package color Info: Redefining color shadecolor on input line 593.
-File: figure/unnamed-chunk-20-1.pdf Graphic file (type QTm)
- <use  "figure/unnamed-chunk-20-1.pdf" >
+File: figure/unnamed-chunk-21-1.pdf Graphic file (type QTm)
+ <use  "figure/unnamed-chunk-21-1.pdf" >
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 594--595
 [][] 
  []
@@ -787,15 +795,15 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [17]
 [18]
 Package color Info: Redefining color shadecolor on input line 641.
-File: figure/unnamed-chunk-23-1.pdf Graphic file (type QTm)
- <use  "figure/unnamed-chunk-23-1.pdf" >
+File: figure/unnamed-chunk-24-1.pdf Graphic file (type QTm)
+ <use  "figure/unnamed-chunk-24-1.pdf" >
 Underfull \vbox (badness 2213) has occurred while \output is active []
 
  [19]
 Package color Info: Redefining color shadecolor on input line 663.
-File: figure/unnamed-chunk-24-1.pdf Graphic file (type QTm)
+File: figure/unnamed-chunk-25-1.pdf Graphic file (type QTm)
 
-<use  "figure/unnamed-chunk-24-1.pdf" >
+<use  "figure/unnamed-chunk-25-1.pdf" >
 Overfull \hbox (17.62482pt too wide) in paragraph at lines 664--665
 [][] 
  []
@@ -820,45 +828,232 @@ LaTeX Font Info:    Font shape `TS1/aett/m/n' in size <12> not available
 [23]
 Package color Info: Redefining color shadecolor on input line 837.
  [24]
-File: figure/unnamed-chunk-28-1.pdf Graphic file (type QTm)
- <use  "figure/unnamed-chunk-28-1.pdf" > [25]
+File: figure/unnamed-chunk-29-1.pdf Graphic file (type QTm)
+ <use  "figure/unnamed-chunk-29-1.pdf" > [25]
 Underfull \hbox (badness 10000) in paragraph at lines 875--877
 
  []
 
 [26]
-Package color Info: Redefining color shadecolor on input line 895.
+Overfull \hbox (25.68219pt too wide) detected at line 895
+[]\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 X \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 Y\OT1/
+cmr/m/n/12 ] = \OML/cmm/m/it/12 E\OT1/cmr/m/n/12 [(\OML/cmm/m/it/12 X \OT1/cmr/
+m/n/12 + \OML/cmm/m/it/12 Y \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 E\OT1/cmr/m/n
+/12 [\OML/cmm/m/it/12 XbY\OT1/cmr/m/n/12 ])[]] = \OML/cmm/m/it/12 E\OT1/cmr/m/n
+/12 [(\OML/cmm/m/it/12 X \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 E\OT1/cmr/m/n/12
+ [\OML/cmm/m/it/12 X\OT1/cmr/m/n/12 ] + \OML/cmm/m/it/12 Y \OMS/cmsy/m/n/12 ^^@
+ \OML/cmm/m/it/12 E\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 Y\OT1/cmr/m/n/12 ])[]] = [
+][\OML/cmm/m/it/12 X\OT1/cmr/m/n/12 ] \OMS/cmsy/m/n/12 ^^@ \OT1/cmr/m/n/12 2[][
+\OML/cmm/m/it/12 X; Y\OT1/cmr/m/n/12 ] + [][\OML/cmm/m/it/12 Y\OT1/cmr/m/n/12 ]
+
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 897.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 897.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 897.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 897.
+
+[27]
+
+! Package amsmath Error: Erroneous nesting of equation structures;
+(amsmath)                trying to recover with `aligned'.
+
+See the amsmath package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.956 ...[X]-  Var[X] \right)=Var[X] \\\end{align}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[28]
+! You can't use `macro parameter character #' in vertical mode.
+l.975 #
+       # Valore atteso di $M_n$
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+l.975 ##
+         Valore atteso di $M_n$
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 982.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 982.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 982.
+
+[29]
+! You can't use `macro parameter character #' in vertical mode.
+l.995 #
+       # Esercizio
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+l.995 ##
+         Esercizio
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+[30]
+Package color Info: Redefining color shadecolor on input line 1041.
+File: figure/unnamed-chunk-30-1.pdf Graphic file (type QTm)
+ <use  "figure/unnamed-chunk-30-1.pdf" >
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 1042--1043
+[][] 
+ []
+
+[31]
+Package color Info: Redefining color shadecolor on input line 1067.
+File: figure/unnamed-chunk-31-1.pdf Graphic file (type QTm)
+ <use  "figure/unnamed-chunk-31-1.pdf" >
+Overfull \hbox (208.80753pt too wide) in paragraph at lines 1064--1069
+\T1/aer/m/n/12 li-tà pa-ri al li-vel-lo di fi-du-cia scel-to ($\OT1/cmr/m/n/12 
+1 \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^O$\T1/aer/m/n/12 ).  [][] 
+ []
+
+Package color Info: Redefining color shadecolor on input line 1074.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [32]
+[33]
+! You can't use `macro parameter character #' in vertical mode.
+l.1104 #
+        # Tabella inversa
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! You can't use `macro parameter character #' in vertical mode.
+l.1104 ##
+          Tabella inversa
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+Package color Info: Redefining color shadecolor on input line 1108.
+File: figure/unnamed-chunk-33-1.pdf Graphic file (type QTm)
+<use  "figure/unnamed-chunk-33-1.pdf" >
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 1142--1143
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [34]
+Package color Info: Redefining color shadecolor on input line 1159.
+
+[35]
+File: figure/unnamed-chunk-34-1.pdf Graphic file (type QTm)
+ <use  "figure/unnamed-chunk-34-1.pdf" >
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 1160--1161
+[][] 
+ []
+
+Package color Info: Redefining color shadecolor on input line 1170.
+File: figure/unnamed-chunk-35-1.pdf Graphic file (type QTm)
+<use  "figure/unnamed-chunk-35-1.pdf" >
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 1171--1172
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [36]
+Package color Info: Redefining color shadecolor on input line 1177.
+File: figure/unnamed-chunk-36-1.pdf Graphic file (type QTm)
+
+<use  "figure/unnamed-chunk-36-1.pdf" >
+Overfull \hbox (312.10353pt too wide) in paragraph at lines 1175--1179
+\T1/aer/m/n/12 l'a-scis-sa $\OML/cmm/m/it/12 u$ \T1/aer/m/n/12 co-me in fi-gu-r
+a in mo-do che tra - $\OML/cmm/m/it/12 u$ \T1/aer/m/n/12 e $\OML/cmm/m/it/12 u$
+ \T1/aer/m/n/12 l'a-rea sia $\OML/cmm/m/it/12 A[]$\T1/aer/m/n/12 .  [][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [37]
+Package color Info: Redefining color shadecolor on input line 1187.
+File: figure/unnamed-chunk-37-1.pdf Graphic file (type QTm)
+
+<use  "figure/unnamed-chunk-37-1.pdf" >
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 1188--1189
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [38]
+Package color Info: Redefining color shadecolor on input line 1195.
 
 
 LaTeX Font Warning: Font shape `T1/aett/bx/n' undefined
-(Font)              using `T1/aett/m/n' instead on input line 897.
+(Font)              using `T1/aett/m/n' instead on input line 1197.
 
-Package color Info: Redefining color shadecolor on input line 906.
-Package color Info: Redefining color shadecolor on input line 917.
-Package color Info: Redefining color shadecolor on input line 929.
-Package color Info: Redefining color shadecolor on input line 941.
-[27]
+Package color Info: Redefining color shadecolor on input line 1204.
+[39]
+Package color Info: Redefining color shadecolor on input line 1227.
+Package color Info: Redefining color shadecolor on input line 1238.
+Package color Info: Redefining color shadecolor on input line 1249.
+Package color Info: Redefining color shadecolor on input line 1261.
+Package color Info: Redefining color shadecolor on input line 1273.
+ [40]
 
-LaTeX Warning: Citation `david' on page 28 undefined on input line 953.
+LaTeX Warning: Citation `david' on page 41 undefined on input line 1285.
 
 File: ../grafici/astragals.jpeg Graphic file (type QTm)
 <use  "../grafici/astragals.jpeg" >
-Package color Info: Redefining color shadecolor on input line 978.
-Package color Info: Redefining color shadecolor on input line 993.
-Package atenddvi Info: Last page = 32.
- [28]
-Package color Info: Redefining color shadecolor on input line 1010.
-Package color Info: Redefining color shadecolor on input line 1024.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1034.
- [29]
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 1034.
+Package color Info: Redefining color shadecolor on input line 1310.
+Package color Info: Redefining color shadecolor on input line 1325.
+ [41]
+Package color Info: Redefining color shadecolor on input line 1342.
+Package color Info: Redefining color shadecolor on input line 1356.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1366.
+ [42]
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 1366.
  (./RbookParte3-knitr.aux
 
-Package atenddvi Warning: Rerun LaTeX, last page has changed.
+Package atenddvi Warning: Rerun LaTeX, last page not yet found.
 
 )
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1034.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1034.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1366.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1366.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -871,12 +1066,12 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 12980 strings out of 493706
- 186215 string characters out of 6145769
- 380330 words of memory out of 5000000
- 16077 multiletter control sequences out of 15000+600000
- 43536 words of font info for 60 fonts, out of 8000000 for 9000
+ 12998 strings out of 493706
+ 186618 string characters out of 6145769
+ 381151 words of memory out of 5000000
+ 16090 multiletter control sequences out of 15000+600000
+ 46033 words of font info for 65 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  48i,10n,45p,810b,450s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on RbookParte3-knitr.pdf (33 pages).
+Output written on RbookParte3-knitr.pdf (46 pages).

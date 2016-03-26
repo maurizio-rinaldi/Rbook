@@ -1,20 +1,21 @@
-\indexentry{stringa|hyperpage}{5}
-\indexentry{\texttt{nchar}|hyperpage}{6}
-\indexentry{\emph{escape}|hyperpage}{6}
-\indexentry{\texttt{abbreviate}|hyperpage}{7}
-\indexentry{\texttt{letters}|hyperpage}{7}
-\indexentry{\texttt{LETTERS}|hyperpage}{7}
-\indexentry{\texttt{month.abb}|hyperpage}{7}
-\indexentry{\texttt{paste}|hyperpage}{7}
-\indexentry{\texttt{colnames}|hyperpage}{11}
-\indexentry{\texttt{rownames}|hyperpage}{11}
-\indexentry{trasposto|hyperpage}{13}
-\indexentry{\texttt{t}, trasposto|hyperpage}{13}
-\indexentry{\texttt{\%*\%}, prodotto di matrici|hyperpage}{13}
-\indexentry{autovalore|hyperpage}{14}
-\indexentry{\texttt{str}|hyperpage}{15}
-\indexentry{\texttt{level}|hyperpage}{16}
-\indexentry{detach|hyperpage}{17}
-\indexentry{\texttt{rbind}|hyperpage}{18}
-\indexentry{\texttt{cbind}|hyperpage}{18}
-\indexentry{\texttt{list}|hyperpage}{22}
+\indexentry{stringa|hyperpage}{3}
+\indexentry{\texttt{nchar}|hyperpage}{4}
+\indexentry{\emph{escape}|hyperpage}{4}
+\indexentry{\texttt{abbreviate}|hyperpage}{5}
+\indexentry{\texttt{letters}|hyperpage}{5}
+\indexentry{\texttt{LETTERS}|hyperpage}{5}
+\indexentry{\texttt{month.abb}|hyperpage}{5}
+\indexentry{\texttt{paste}|hyperpage}{5}
+\indexentry{\texttt{colnames}|hyperpage}{9}
+\indexentry{\texttt{rownames}|hyperpage}{9}
+\indexentry{trasposto|hyperpage}{11}
+\indexentry{\texttt{t}, trasposto|hyperpage}{11}
+\indexentry{\texttt{\%*\%}, prodotto di matrici|hyperpage}{11}
+\indexentry{autovalore|hyperpage}{12}
+\indexentry{\texttt{str}|hyperpage}{13}
+\indexentry{\texttt{level}|hyperpage}{14}
+\indexentry{detach|hyperpage}{15}
+\indexentry{\texttt{rbind}|hyperpage}{16}
+\indexentry{\texttt{cbind}|hyperpage}{16}
+\indexentry{\texttt{list}|hyperpage}{20}
+\indexentry{\texttt{hist}|hyperpage}{38}
